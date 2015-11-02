@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<info>
+  <driver>oracle.jdbc.driver.OracleDriver</driver>  
+  <url>jdbc:oracle:thin:@192.168.1.16:1521:orcl</url>  
+  <user>tvprisdb</user>  
+  <pwd>tvprisdb</pwd>   
+  <urls>http://www.youku.com/v_olist/c_97_g__a__sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_25.html</urls>   
+  <solrUrl>http://10.70.25.101:8080/solr/mgnews</solrUrl>
+  
+  <driver>oracle.jdbc.driver.OracleDriver</driver>  
+  <url218>jdbc:oracle:thin:@192.168.1.218:1521:yibase</url218>  
+  <user218>dwetl</user218>  
+  <pwd218>ynkj666</pwd218>   
+  <ProxyPath>proxy.txt</ProxyPath>  
+  <ID>4723</ID>
+  <IDpeople>11636</IDpeople>
+  <IDwebopeople>0</IDwebopeople>
+   
+</info>
