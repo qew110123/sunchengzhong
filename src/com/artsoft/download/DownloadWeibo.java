@@ -30,7 +30,7 @@ public class DownloadWeibo {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ConfigManager.getInstance().setConfigValue("mainUrl", String.valueOf(mainUrl));
+//			ConfigManager.getInstance().setConfigValue("mainUrl", String.valueOf(mainUrl));
 			
 			if (strHtml != null && !"".equals(strHtml)) {
 				strHtml = DownloadUtil.decodeUnicode(strHtml);
