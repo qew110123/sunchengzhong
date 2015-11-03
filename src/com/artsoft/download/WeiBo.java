@@ -24,8 +24,8 @@ public class WeiBo {
 	public static Map WeiBoBranch(String url) {
 		Map mapreturn = new HashMap();
 		WebDriver webDriver;
-		System.setProperty("webdriver.chrome.driver", "D:\\Program Files\\git\\chromedrver\\chromedriver.exe");
-
+		System.setProperty("webdriver.chrome.driver",
+				"D:\\javac_eclipse\\TaoBaoDates\\chromedriver.exe");
 		webDriver = new ChromeDriver();
 		webDriver.get(url);
 		// 获取标题元素值
@@ -88,6 +88,7 @@ public class WeiBo {
 
 			// 退出
 			webDriver.quit();
+			seleepTime(7);
 		}
 
 		return mapreturn;
@@ -124,7 +125,7 @@ public class WeiBo {
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
 				String urlBranch = "";
 				try {
-					urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
+					urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode(listTemp.get(1), "utf-8")+"&Refer=STopic_box";
 
 					hunanBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
 				} catch (UnsupportedEncodingException e) {
@@ -138,11 +139,26 @@ public class WeiBo {
 
 		}
 	}
+	
+	public static void seleepTime(int t) {
+		t = (int) (t * Math.random());
+		t=t+3;
+		// t = 2;
+		try {
+			System.out.println("当前等待" + t + "秒");
+			// System.out.println("等待2秒,等待" + t + "秒");
+			Thread.sleep(t * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	private static void hunanBranch(String mainUrl, String tvplayId, String tyPlayName, String DataType) {
 		// TODO Auto-generated method stub
 		// new WeiBo(1, mainUrl);
 
+		try {
 			Map mapmore = WeiBoBranch(mainUrl);
 			String strhtmlurl = "";
 			
@@ -159,10 +175,10 @@ public class WeiBo {
 				OracleHaoSou.intoPeoPlewebo(tvplayId, strhtmlurl, fansCount, vCount, "", "", mainUrl, "1");
 
 			}
-			try {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("没有该人的数据");
+			seleepTime(10);
 		}
 		// Integer.parseInt( );
 		// Integer.parseInt( )
