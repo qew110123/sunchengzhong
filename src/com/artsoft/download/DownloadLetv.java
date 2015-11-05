@@ -21,7 +21,7 @@ public class DownloadLetv {
 				bb = false;
 			}
 		}
-		System.out.println(strHtml);
+//		System.out.println(strHtml);
 		String str = strHtml;
 		String[] strarray = str.split("},\"ispay");
 		for (int i = 0; i < strarray.length; i++) {
@@ -29,7 +29,7 @@ public class DownloadLetv {
 			String Amount = "";
 			String name = "";
 			String score = "";
-			System.out.println(strarray[i]);
+//			System.out.println(strarray[i]);
 			System.out.println(Amount = HtmlAnalyze.getTagText(strarray[i], "playCount\":\"", "\""));
 			System.out.println(score = HtmlAnalyze.getTagText(strarray[i], "rating\":\"", "\""));
 			System.out.println(name = HtmlAnalyze.getTagText(strarray[i], "name\":\"", "\""));
