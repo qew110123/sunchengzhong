@@ -38,7 +38,7 @@ public class OracleHaoSou {
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
-//		List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 
 	}
@@ -80,7 +80,8 @@ public class OracleHaoSou {
 	}
 
 	/**
-	 *  人的添加
+	 * 人的添加
+	 * 
 	 * @param personId
 	 * @param searchIndex
 	 * @param updateDate
@@ -91,8 +92,7 @@ public class OracleHaoSou {
 	public static void intoPeoPle(String personId, String searchIndex, String updateDate, String createDate,
 			String dataUrl, String dateType) {
 		Connection conn = DBOperate218.getInstance().getConnection();
-		System.out.println(
-				personId + searchIndex + updateDate + createDate + dataUrl + dateType );
+		System.out.println(personId + searchIndex + updateDate + createDate + dataUrl + dateType);
 
 		String strSql = "insert into ods.person_network_popularity t (t.person_id,t.search_index,t.update_date,t.create_date,t.data_url,t.date_type) "
 				+ "values(?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
@@ -107,31 +107,22 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
-	
-	
 
-	
 	/**
-	 * 添加人相关的微博信息
-	 * PERSON_ID	NUMBER(18)	Y			演职人员id
-	WEIBO_UID	VARCHAR2(200)	Y			微博的uid
-	FANS_COUNT	NUMBER(18)	Y			粉丝量
-	V_COUNT	NUMBER(18)	Y			微博总数
-	SEARCH_INDEX	NUMBER(18)	Y			搜索指数/媒体关注度
-	UPDATE_DATE	TIMESTAMP(6)	Y			数据抓取时间
-	CREATE_DATE	TIMESTAMP(6)	Y			数据入库时间
-	DATA_URL	VARCHAR2(600)	Y			数据采取url
-	DATE_TYPE	NUMBER(2)	Y			数据类型，1 微博数据(搜索指数为空) 2 搜索指数 (微博相关数据为空)  3 媒体关注度
+	 * 添加人相关的微博信息 PERSON_ID NUMBER(18) Y 演职人员id WEIBO_UID VARCHAR2(200) Y 微博的uid
+	 * FANS_COUNT NUMBER(18) Y 粉丝量 V_COUNT NUMBER(18) Y 微博总数 SEARCH_INDEX
+	 * NUMBER(18) Y 搜索指数/媒体关注度 UPDATE_DATE TIMESTAMP(6) Y 数据抓取时间 CREATE_DATE
+	 * TIMESTAMP(6) Y 数据入库时间 DATA_URL VARCHAR2(600) Y 数据采取url DATE_TYPE
+	 * NUMBER(2) Y 数据类型，1 微博数据(搜索指数为空) 2 搜索指数 (微博相关数据为空) 3 媒体关注度
+	 * 
 	 * @return
 	 */
-	
-	
 
-	public static void intoPeoPlewebo(String personId,String weiboUid,int fansCount,int vCountNumber, String updateDate, String createDate,
-			String dataUrl, String dateType) {
+	public static void intoPeoPlewebo(String personId, String weiboUid, int fansCount, int vCountNumber,
+			String updateDate, String createDate, String dataUrl, String dateType) {
 		Connection conn = DBOperate218.getInstance().getConnection();
-		System.out.println(
-				personId + weiboUid+fansCount +vCountNumber + updateDate + createDate + dataUrl + dateType );
+		System.out
+				.println(personId + weiboUid + fansCount + vCountNumber + updateDate + createDate + dataUrl + dateType);
 
 		String strSql = "insert into ods.person_network_popularity t (t.person_id,t.WEIBO_UID,t.FANS_COUNT ,t.V_COUNT,t.update_date,t.create_date,t.data_url,t.date_type) "
 				+ "values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
@@ -149,6 +140,45 @@ public class OracleHaoSou {
 		System.out.println(bb);
 	}
 
+	/**
+	 * 
+	 * @param personName
+	 *            名字
+	 * @param personUrl
+	 *            该用户的详细链接
+	 * @param photoUrl
+	 *            图片地址
+	 */
+	public static void intoBaiDuPopularity(String personName, String personUrl, String photoUrl) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		System.out.println(personName + personUrl + photoUrl);
+
+		String strSql = "insert into ODS.DIM_PERSON_PHOTO t(t.PERSON_NAME, t.PERSON_URL ,t.PHOTO_URL) values(?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		list.add(personName);// 这里是将对象加入到list中
+		list.add(personUrl);
+		list.add(photoUrl);
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	/**
+	 * 查询图片数据
+	 * @return
+	 */
+	public static ArrayList<String> selectphoto() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.person_name,t.photo_url from ODS.DIM_PERSON_PHOTO t";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+
+	}
+
 	public static void main(String[] args) {
 		// List<String> listArray = select("1", "10000");
 		// for (Object Objstring : listArray) {
@@ -159,9 +189,18 @@ public class OracleHaoSou {
 
 		// intoPlayAmont("0", "电视剧", "222", "0", "2014-10-15 23:10:10",
 		// "baidu.com", "0", "3", "2014-10-15 23:10:10");
-		
-//		intoPeoPle("10","1000","2014-10-15","2014-10-15 23:10:10","www.baiud.com","2");
-		intoPeoPlewebo("10","http://weibo.com/yanyuankonglin",2005,666,"2014-10-15","2014-10-15 23:10:10","www.baiud.com","2");
+
+		// intoPeoPle("10","1000","2014-10-15","2014-10-15
+		// 23:10:10","www.baiud.com","2");
+		// intoPeoPlewebo("10", "http://weibo.com/yanyuankonglin", 2005, 666,
+		// "2014-10-15", "2014-10-15 23:10:10",
+		// "www.baiud.com", "2");
+
+		// intoBaiDuPopularity("韩东君", "http://baike.baidu.com/view/6923013.htm",
+		// "http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
+		selectphoto();
+//		intoBaiDuPopularity("王俊凯", "http://baike.baidu.com/view/6923013.htm",
+//				"http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
 	}
 
 }

@@ -77,16 +77,19 @@ public class Downloadqq {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-//		downMain("http://v.qq.com/list/2_-1_-1_-1_1_0_0_20_-1_-1_0_-1.html");
-		       // http://v.qq.com/list/2_-1_-1_-1_1_0_1_20_-1_-1_0_-1.html
-	 //  http://v.qq.com/list/2_-1_-1_-1_1_0_188_20_-1_-1_0_-1.html
-		//http://v.qq.com/list/2_-1_-1_-1_1_0_188_20_-1_-1_0_-1.html
-		
-		for (int i = 120; i <= 188; i++) {
-			String url="http://v.qq.com/list/2_-1_-1_-1_1_0_"+i+"_20_-1_-1_0_-1.html";
-			System.out.println(url);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
-			downMain(url);
+		// downMain("http://v.qq.com/list/2_-1_-1_-1_1_0_0_20_-1_-1_0_-1.html");
+		// http://v.qq.com/list/2_-1_-1_-1_1_0_1_20_-1_-1_0_-1.html
+		// http://v.qq.com/list/2_-1_-1_-1_1_0_188_20_-1_-1_0_-1.html
+		// http://v.qq.com/list/2_-1_-1_-1_1_0_188_20_-1_-1_0_-1.html
+		while (true) {
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ªÊ¼");
+			for (int i = 0; i <= 188; i++) {
+				String url = "http://v.qq.com/list/2_-1_-1_-1_1_0_" + i + "_20_-1_-1_0_-1.html";
+				System.out.println(url);
+				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
+				downMain(url);
+			}
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½áÊø");
 		}
 
 	}

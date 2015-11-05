@@ -28,7 +28,7 @@ public class DownloadSohu {
 		// 进行评分的采集
 		try {
 			OracleOpreater.intoReputation(name, "4", score, "0", "", urlBranch, "0", "1");
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -45,7 +45,7 @@ public class DownloadSohu {
 			System.out.println(strmainurl = link.select("div.pic a").attr("href"));
 			System.out.println(strmaintitle = link.select("div.pic a").attr("title").replaceAll(name, ""));
 			sohuDetailed(strmainurl, strmaintitle);
-			
+
 		}
 
 	}
@@ -146,9 +146,13 @@ public class DownloadSohu {
 
 		// sohuMain("http://so.tv.sohu.com/list_p1101_p2_p3_p4-1_p5_p6_p77_p80_p9_p10_p11_p12_p13.html");
 
-		for (int i = 4; i <= 72; i++) {
-			sohuMain("http://so.tv.sohu.com/list_p1101_p2_p3_p4-1_p5_p6_p77_p80_p9_p10" + i + "_p11_p12_p13.html");
+		while (true) {
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+			for (int i = 1; i <= 72; i++) {
+				sohuMain("http://so.tv.sohu.com/list_p1101_p2_p3_p4-1_p5_p6_p77_p80_p9_p10" + i + "_p11_p12_p13.html");
 
+			}
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 		}
 	}
 

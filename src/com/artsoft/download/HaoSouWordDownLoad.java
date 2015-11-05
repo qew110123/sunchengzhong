@@ -98,7 +98,7 @@ public class HaoSouWordDownLoad {
 					// urlBranch =
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
 					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&area=%E5%85%A8%E5%9B%BD";
+							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8") + "&area=%E5%85%A8%E5%9B%BD";
 					HaosouBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -184,21 +184,21 @@ public class HaoSouWordDownLoad {
 		/**
 		 * 进行电视剧数据的下载
 		 */
-		//// ConfigManager config = ConfigManager.getInstance();
-		//// driver = config.getConfigValue("driver");
-		// String xx=ConfigManager.getInstance().getConfigValue("ID");
-		//
-		// int xxnum=Integer.parseInt(xx);
-		// System.out.println(xxnum);
-		// for (int i = xxnum; i < 15780; i=i+1000) {
-		//// i=15780;
-		// mainProgram(i,i+1000);
-		// }
+		// ConfigManager config = ConfigManager.getInstance();
+		// driver = config.getConfigValue("driver");
+//		 String xx=ConfigManager.getInstance().getConfigValue("ID");
+//		
+//		 int xxnum=Integer.parseInt(xx);
+//		 System.out.println(xxnum);
+//		 for (int i = xxnum; i < 15780; i=i+1000) {
+//		// i=15780;
+//		 mainProgram(i,i+1000);
+//		 }
 
 		/**
 		 * 进行人的运行
 		 */
-		// mainPeoPle();
+//		// mainPeoPle();
 		ConfigManager config = ConfigManager.getInstance();
 		// driver = config.getConfigValue("driver");
 		String xx = ConfigManager.getInstance().getConfigValue("IDpeople");

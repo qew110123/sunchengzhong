@@ -94,7 +94,7 @@ public class Demo {
 		//
 		// }
 		// System.out.println(str2);
-		System.out.println(Integer.valueOf("118898"));
+		// System.out.println(Integer.valueOf("118898"));
 		// CommonUtil.setLog("32232323");
 		// ConfigManager config = ConfigManager.getInstance();
 		// String url=config.setConfigValue(strKey, strVal);
@@ -113,13 +113,29 @@ public class Demo {
 		// }
 		// System.out.println(keys.toString());
 		// System.out.println(getKeyWordFromFile("keyword.txt"));
-		Proxy proxy = null;
-		proxy = DealProxy.getInstance().getPoxxy();
-		System.out.println(proxy);
+		// Proxy proxy = null;
+		// proxy = DealProxy.getInstance().getPoxxy();
+		// System.out.println(proxy);
+		//
+		// String url =
+		// "http://index.haosou.com/index.php?a=soIndexJson&q=%E8%B5%B5%E4%B8%BD%E9%A2%96&area=%E5%85%A8%E5%9B%BD";
+		// String strHtml = DownloadUtil.readHtml(url, 1000 * 30, "UTF-8", null,
+		// proxy);
+		// System.out.println(strHtml);
 
-		String url = "http://index.haosou.com/index.php?a=soIndexJson&q=%E8%B5%B5%E4%B8%BD%E9%A2%96&area=%E5%85%A8%E5%9B%BD";
-		String strHtml = DownloadUtil.readHtml(url, 1000 * 30, "UTF-8", null, proxy);
-		System.out.println(strHtml);
+		String path = "D:\\image\\";
+		File file = new File(path);
+		File[] tempList = file.listFiles();
+		System.out.println("该目录下对象个数：" + tempList.length);
+		for (int i = 0; i < tempList.length; i++) {
+			if (tempList[i].isFile()) {
+				System.out.println(tempList[i].toString().replaceAll("image", "").replaceAll("D:", "")
+						.replaceAll("\\\\", "").replaceAll(".jpg", ""));
+			}
+			if (tempList[i].isDirectory()) {
+				System.out.println("文件夹：" + tempList[i]);
+			}
+		}
 
 	}
 

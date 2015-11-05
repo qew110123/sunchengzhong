@@ -1,5 +1,6 @@
 package com.artsoft.download;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.artsoft.config.ConfigManager;
 import com.artsoft.oracle.OracleHaoSou;
@@ -21,12 +23,52 @@ public class WeiBo {
 	 * 
 	 * @param i
 	 */
+	static int  i=0;
+	
+	static WebDriver webDriver;
+	public static void WebDriverBranch() {
+		if (webDriver==null) {
+			
+//			WebDriver webDriver;
+			System.setProperty("webdriver.chrome.driver", "D:\\chrome\\chromedriver.exe");
+			File file = new File ("C:\\Program Files (x86)\\Google\\Chrome\\Application\\39.0.2171.95\\default_apps\\youtube.crx");
+			ChromeOptions options = new ChromeOptions();
+//		options.addExtensions(file);
+			options.addArguments("–user-data-dir=C:/Users/Administrator/AppData/Local/Google/Chrome/User Data/Default");
+			//C:\Users\Administrator\AppData\Local\Google\Chrome\User Data
+			webDriver = new ChromeDriver(options);
+			
+//			return webDriver;
+		}else{
+			System.out.println(webDriver);
+			
+		}
+		
+	}
+	
+	
 	public static Map WeiBoBranch(String url) {
 		Map mapreturn = new HashMap();
-		WebDriver webDriver;
-		System.setProperty("webdriver.chrome.driver", "D:\\chrome\\chromedriver.exe");
-
-		webDriver = new ChromeDriver();
+//		if (i>=10) {
+//			
+//			WebDriver webDriver;
+//			System.setProperty("webdriver.chrome.driver", "D:\\chrome\\chromedriver.exe");
+//			File file = new File ("C:\\Program Files (x86)\\Google\\Chrome\\Application\\39.0.2171.95\\default_apps\\youtube.crx");
+//			ChromeOptions options = new ChromeOptions();
+//	//		options.addExtensions(file);
+//			options.addArguments("–user-data-dir=C:/Users/Administrator/AppData/Local/Google/Chrome/User Data/Default");
+//			                                   //C:\Users\Administrator\AppData\Local\Google\Chrome\User Data
+//			webDriver = new ChromeDriver(options);
+//		}
+		
+		WebDriverBranch();
+		
+//		ChromeOptions options = new ChromeOptions();
+//		options.addArguments(“–user-data-dir=C:/Users/xxx/AppData/Local/Google/Chrome/User Data/Default”);
+//		WebDriver driver = new ChromeDriver(options);
+		
+		
+		
 		webDriver.get(url);
 		// 获取标题元素值
 		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -87,7 +129,13 @@ public class WeiBo {
 		} finally {
 
 			// 退出
-			webDriver.quit();
+//			if (i>10) {
+////				webDriver.quit();
+////				i=0;
+//			}
+			System.out.println(i);
+			i+=1;
+			
 			seleepTime(7);
 		}
 
@@ -142,7 +190,7 @@ public class WeiBo {
 	
 	public static void seleepTime(int t) {
 		t = (int) (t * Math.random());
-		t=t+3;
+		t=t+10;
 		// t = 2;
 		try {
 			System.out.println("当前等待" + t + "秒");

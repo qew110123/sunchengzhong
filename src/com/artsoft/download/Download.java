@@ -9,6 +9,8 @@ import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
+import com.artsoft.util.ReadTxtFile;
+import com.artsoft.util.TimeTest;
 
 public class Download {
 	static int i = 0;
@@ -153,9 +155,10 @@ public class Download {
 			}
 			Element link = links.first();
 			String urlDetailedfirst = "";
-//			String nameDetailedfirst = "";
+			// String nameDetailedfirst = "";
 			System.out.println(urlDetailedfirst = link.select("a").attr("href"));
-//			System.out.println(nameDetailedfirst = link.select("a").attr("title"));
+			// System.out.println(nameDetailedfirst =
+			// link.select("a").attr("title"));
 
 			youkuOneDetailed(urlDetailedfirst);
 		} catch (Exception e) {
@@ -328,15 +331,15 @@ public class Download {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String url = "http://www.youku.com/v_olist/c_97_g__a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_3.html";
-		if (true) {
-			String strurl = Download.youkuMaim(url);
-			if (strurl != null && !"".equals(strurl)) {
-				url = strurl;
-			}
-			;
-
-		}
+//		String url = "http://www.youku.com/v_olist/c_97_g__a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_3.html";
+//		if (true) {
+//			String strurl = Download.youkuMaim(url);
+//			if (strurl != null && !"".equals(strurl)) {
+//				url = strurl;
+//			}
+//			;
+//
+//		}
 		// Download.youkuMaim("http://www.youku.com/v_olist/c_97_g__a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_2.html");
 		// Download.youkuBranch("http://www.youku.com/show_page/id_zd56886dc86fc11e3a705.html");
 
@@ -348,6 +351,33 @@ public class Download {
 		// Download.youkuBranch("http://www.youku.com/show_page/id_zd56886dc86fc11e3a705.html");
 
 		// http://v.youku.com/v_show/id_XOTQyMzYxMDY0.html?from=y1.2-2.4.50
+		while (true) {
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":¿ªÊ¼");
+			String strkey=ReadTxtFile.getKeyWordFromFile("keyword.txt");
+			String[] keys=strkey.split("\n");
+			for (int i = 0; i < keys.length; i++) {
+				System.out.println(i);
+				System.out.println(keys[i]);
+				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+keys[i]);
+//				ConfigManager config = ConfigManager.getInstance();
+				String url=keys[i];
+				System.out.println(url);
+				boolean bb=true;
+				while (bb) {
+					String strurl=Download.youkuMaim(url);
+					System.out.println("strurl"+strurl);
+//					System.out.println(strurl!=null&&!"".equals(strurl));
+					if (strurl!=null&&!"".equals(strurl)) {
+						CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+strurl);
+						url=strurl;
+					}else{
+						bb=false;
+					}
+					
+				}
+			}
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":½áÊø");
+		}
 	}
 
 }

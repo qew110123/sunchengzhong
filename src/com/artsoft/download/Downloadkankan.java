@@ -12,9 +12,7 @@ import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
 public class Downloadkankan {
-	
-	
-	
+
 	public static void mainurl(String mainUrl) {
 
 		// String
@@ -28,10 +26,11 @@ public class Downloadkankan {
 				bb = false;
 			}
 		}
-//		String tyPlayName = "";
-//		System.out.println(tyPlayName = HtmlAnalyze.getTagText(strHtml, "cname: \"", "\""));
+		// String tyPlayName = "";
+		// System.out.println(tyPlayName = HtmlAnalyze.getTagText(strHtml,
+		// "cname: \"", "\""));
 		try {
-			
+
 			// System.out.println(strHtml);
 			Document doc = Jsoup.parse(strHtml);
 			Element linkmain = doc.getElementById("movie_list");
@@ -42,24 +41,23 @@ public class Downloadkankan {
 			for (Element link : links) {
 				String url = "";
 				String title = "";
-//				System.out.println(strVolumes = link.select("a.pic").text());
+				// System.out.println(strVolumes = link.select("a.pic").text());
 				System.out.println(url = link.select("a.pic").attr("href"));
 				System.out.println(title = link.select("a.pic").attr("title"));
 				hunanBranch(url, title);
-				
+
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-//			/程序报错
+			// /程序报错
 			System.out.println("出错");
 		}
 
 	}
-	
 
 	private static void hunanBranch(String mainUrl, String title) {
 		// TODO Auto-generated method stub
-		
+
 		String strHtml = "";
 		boolean bb = true;
 		while (bb) {
@@ -76,18 +74,21 @@ public class Downloadkankan {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-	}
 
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		for (int i = 1; i <= 36 ; i++) {
-			String url="http://movie.kankan.com/type,order/teleplay,update/page"+i+"/";
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+url);
-			mainurl(url);
+		while (true) {
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+			for (int i = 1; i <= 36; i++) {
+				String url = "http://movie.kankan.com/type,order/teleplay,update/page" + i + "/";
+				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
+				mainurl(url);
+			}
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 		}
-		
+
 	}
 
 }

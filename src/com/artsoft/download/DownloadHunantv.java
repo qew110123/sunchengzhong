@@ -29,7 +29,7 @@ public class DownloadHunantv {
 		String tyPlayName = "";
 		System.out.println(tyPlayName = HtmlAnalyze.getTagText(strHtml, "cname: \"", "\""));
 		try {
-			
+
 			// System.out.println(strHtml);
 			Document doc = Jsoup.parse(strHtml);
 			Element linkmain = doc.getElementById("fluxes_static");
@@ -48,7 +48,7 @@ public class DownloadHunantv {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-//			/程序报错
+			// /程序报错
 			System.out.println("出错");
 		}
 
@@ -81,7 +81,7 @@ public class DownloadHunantv {
 		System.out.println(playAmount = HtmlAnalyze.getTagText(strHtml, "all\":", ",\""));
 		// playAmount = playAmount.replaceAll(",", "");
 		try {
-			
+
 			OracleOpreater.intoPlayAmont(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, urlnew, tvType,
 					playUrl);
 		} catch (Exception e) {
@@ -109,8 +109,8 @@ public class DownloadHunantv {
 		System.out.println(links.size());
 		for (Element link : links) {
 			// System.out.println(link.select("a").text());
-			String urlstr="";
-			System.out.println(urlstr=link.select("a").attr("href"));
+			String urlstr = "";
+			System.out.println(urlstr = link.select("a").attr("href"));
 			mainurl(urlstr);
 		}
 	}
@@ -124,12 +124,16 @@ public class DownloadHunantv {
 		// }
 		// String mainUrl = "http://www.hunantv.com/v/2/104822/f/1821553.html";
 		// mainurl(mainUrl);
+		while (true) {
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
 
-		for (int i = 1; i <= 18; i++) {
-			String url = "http://list.hunantv.com/2/----------"+i+"---.html";
-			System.out.println(url);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+url);
-			mainmore(url);
+			for (int i = 1; i <= 18; i++) {
+				String url = "http://list.hunantv.com/2/----------" + i + "---.html";
+				System.out.println(url);
+				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
+				mainmore(url);
+			}
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 		}
 	}
 
