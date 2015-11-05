@@ -107,8 +107,8 @@ public class DownloadIqiyi {
 				// }
 
 				// }
-				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½áÊø");
 			}
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½áÊø");
 		}
 
 	}
