@@ -511,4 +511,24 @@ public class TimeTest {
 
 		return new java.sql.Date(cal.getTimeInMillis());
 	}
+	
+	/**
+	 * 等待时间
+	 * @param statime 最基本等待时间
+	 * @param t  上下时间
+	 */
+	public static void seleepTime(int statime ,int t) {
+		t = (int) (t * Math.random());
+		t = t + statime;
+		// t = 2;
+		try {
+			System.out.println("当前等待" + t + "秒");
+			// System.out.println("等待2秒,等待" + t + "秒");
+			Thread.sleep(t * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

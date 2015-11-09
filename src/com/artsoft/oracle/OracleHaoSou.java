@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.artsoft.bean.Persion;
 import com.artsoft.util.TimeTest;
 
 public class OracleHaoSou {
@@ -162,10 +163,52 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
-	
-	
+
+	public static void InsertTemDimPerson(Persion persion) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ODS.TEM_DIM_PERSON t (t.person_id, t.person_name,t.img_url,t.person_url ,"
+				+ "t.gender ,t.NATIONALITY,t.bloodtype ,t.height,t.weight,t.occupation ,t.constellation ,t.birthday,"
+				+ "t.deathday,t.alias_en,t.alias_cn,t.homeplace,t.nation,t.major_awards,t.shcool,t.brokerage_firm,"
+				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list =new ArrayList();
+		list.add(persion.getId());
+		list.add(persion.getName());
+		list.add(persion.getImg_url());
+		list.add(persion.getUrl());
+		list.add(persion.getGender());
+		list.add(persion.getNationality());
+		list.add(persion.getBloodtype());
+		list.add(persion.getHeight());
+		list.add(persion.getWeight());
+		list.add(persion.getOccupation());
+		list.add(persion.getConstellation());
+		list.add(persion.getBirthday());
+		list.add(persion.getDeathday());
+		list.add(persion.getAlias_en());
+		list.add(persion.getAlias_cn());
+		list.add(persion.getHomeplace());
+		list.add(persion.getNation());
+		list.add(persion.getMajor_awards());
+		list.add(persion.getShcool());
+		list.add(persion.getBrokerage_firm());
+		list.add(persion.getOpus());
+		list.add(persion.getSub_path());
+		list.add(persion.getEvaluation());
+		list.add(persion.getBirthday_place());
+		list.add(persion.getSocial_activities());
+		list.add(persion.getFlowers());
+		list.add(persion.getVolk());
+		list.add(persion.getBrokers());
+//		list.add(persion.getPersonSocialActivitiesList());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+
 	/**
 	 * 查询图片数据
+	 * 
 	 * @return
 	 */
 	public static ArrayList<String> selectphoto() {
@@ -199,8 +242,8 @@ public class OracleHaoSou {
 		// intoBaiDuPopularity("韩东君", "http://baike.baidu.com/view/6923013.htm",
 		// "http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
 		selectphoto();
-//		intoBaiDuPopularity("王俊凯", "http://baike.baidu.com/view/6923013.htm",
-//				"http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
+		// intoBaiDuPopularity("王俊凯", "http://baike.baidu.com/view/6923013.htm",
+		// "http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
 	}
 
 }

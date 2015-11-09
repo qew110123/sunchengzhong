@@ -23,52 +23,55 @@ public class WeiBo {
 	 * 
 	 * @param i
 	 */
-	static int  i=0;
-	
+	static int i = 0;
+
 	static WebDriver webDriver;
+
 	public static void WebDriverBranch() {
-		if (webDriver==null) {
-			
-//			WebDriver webDriver;
+		if (webDriver == null) {
+
+			// WebDriver webDriver;
 			System.setProperty("webdriver.chrome.driver", "D:\\chrome\\chromedriver.exe");
-			File file = new File ("C:\\Program Files (x86)\\Google\\Chrome\\Application\\39.0.2171.95\\default_apps\\youtube.crx");
+			File file = new File(
+					"C:\\Program Files (x86)\\Google\\Chrome\\Application\\39.0.2171.95\\default_apps\\youtube.crx");
 			ChromeOptions options = new ChromeOptions();
-//		options.addExtensions(file);
+			// options.addExtensions(file);
 			options.addArguments("–user-data-dir=C:/Users/Administrator/AppData/Local/Google/Chrome/User Data/Default");
-			//C:\Users\Administrator\AppData\Local\Google\Chrome\User Data
+			// C:\Users\Administrator\AppData\Local\Google\Chrome\User Data
 			webDriver = new ChromeDriver(options);
-			
-//			return webDriver;
-		}else{
+
+			// return webDriver;
+		} else {
 			System.out.println(webDriver);
-			
+
 		}
-		
+
 	}
-	
-	
+
 	public static Map WeiBoBranch(String url) {
 		Map mapreturn = new HashMap();
-//		if (i>=10) {
-//			
-//			WebDriver webDriver;
-//			System.setProperty("webdriver.chrome.driver", "D:\\chrome\\chromedriver.exe");
-//			File file = new File ("C:\\Program Files (x86)\\Google\\Chrome\\Application\\39.0.2171.95\\default_apps\\youtube.crx");
-//			ChromeOptions options = new ChromeOptions();
-//	//		options.addExtensions(file);
-//			options.addArguments("–user-data-dir=C:/Users/Administrator/AppData/Local/Google/Chrome/User Data/Default");
-//			                                   //C:\Users\Administrator\AppData\Local\Google\Chrome\User Data
-//			webDriver = new ChromeDriver(options);
-//		}
-		
+		// if (i>=10) {
+		//
+		// WebDriver webDriver;
+		// System.setProperty("webdriver.chrome.driver",
+		// "D:\\chrome\\chromedriver.exe");
+		// File file = new File ("C:\\Program Files
+		// (x86)\\Google\\Chrome\\Application\\39.0.2171.95\\default_apps\\youtube.crx");
+		// ChromeOptions options = new ChromeOptions();
+		// // options.addExtensions(file);
+		// options.addArguments("–user-data-dir=C:/Users/Administrator/AppData/Local/Google/Chrome/User
+		// Data/Default");
+		// //C:\Users\Administrator\AppData\Local\Google\Chrome\User Data
+		// webDriver = new ChromeDriver(options);
+		// }
+
 		WebDriverBranch();
-		
-//		ChromeOptions options = new ChromeOptions();
-//		options.addArguments(“–user-data-dir=C:/Users/xxx/AppData/Local/Google/Chrome/User Data/Default”);
-//		WebDriver driver = new ChromeDriver(options);
-		
-		
-		
+
+		// ChromeOptions options = new ChromeOptions();
+		// options.addArguments(“–user-data-dir=C:/Users/xxx/AppData/Local/Google/Chrome/User
+		// Data/Default”);
+		// WebDriver driver = new ChromeDriver(options);
+
 		webDriver.get(url);
 		// 获取标题元素值
 		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -129,34 +132,17 @@ public class WeiBo {
 		} finally {
 
 			// 退出
-//			if (i>10) {
-////				webDriver.quit();
-////				i=0;
-//			}
+			// if (i>10) {
+			//// webDriver.quit();
+			//// i=0;
+			// }
 			System.out.println(i);
-			i+=1;
-			
+			i += 1;
+
 			seleepTime(7);
 		}
 
 		return mapreturn;
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// new
-		// WeiBo(1,"http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
-		// WeiBoBranch("http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
-
-		ConfigManager config = ConfigManager.getInstance();
-		// driver = config.getConfigValue("driver");
-		String xx = ConfigManager.getInstance().getConfigValue("IDwebopeople");
-		int xxnum = Integer.parseInt(xx);
-		for (int i = xxnum; i < 16871; i = i + 1000) {
-			// i=15780;
-			mainweboPeoPle(i, i + 1000);
-
-		}
 	}
 
 	private static void mainweboPeoPle(int statnum, int endnum) {
@@ -173,7 +159,8 @@ public class WeiBo {
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
 				String urlBranch = "";
 				try {
-					urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode(listTemp.get(1), "utf-8")+"&Refer=STopic_box";
+					urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode(listTemp.get(1), "utf-8")
+							+ "&Refer=STopic_box";
 
 					hunanBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
 				} catch (UnsupportedEncodingException e) {
@@ -187,10 +174,10 @@ public class WeiBo {
 
 		}
 	}
-	
+
 	public static void seleepTime(int t) {
 		t = (int) (t * Math.random());
-		t=t+10;
+		t = t + 10;
 		// t = 2;
 		try {
 			System.out.println("当前等待" + t + "秒");
@@ -209,10 +196,10 @@ public class WeiBo {
 		try {
 			Map mapmore = WeiBoBranch(mainUrl);
 			String strhtmlurl = "";
-			
+
 			strhtmlurl = mapmore.get("urlBranch").toString();
-			String strfansCount = mapmore.get("fansCount")+"";
-			String strvCount =  mapmore.get("vCount")+"";
+			String strfansCount = mapmore.get("fansCount") + "";
+			String strvCount = mapmore.get("vCount") + "";
 			int fansCount = 0;
 			int vCount = 0;
 			if (strfansCount != null && !"".equals(strfansCount) && strvCount != null && !"".equals(strvCount)) {
@@ -237,4 +224,20 @@ public class WeiBo {
 
 	}
 
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// new
+		// WeiBo(1,"http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
+		// WeiBoBranch("http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
+
+		ConfigManager config = ConfigManager.getInstance();
+		// driver = config.getConfigValue("driver");
+		String xx = ConfigManager.getInstance().getConfigValue("IDwebopeople");
+		int xxnum = Integer.parseInt(xx);
+		for (int i = xxnum; i < 16871; i = i + 1000) {
+			// i=15780;
+			mainweboPeoPle(i, i + 1000);
+
+		}
+	}
 }

@@ -133,6 +133,12 @@ public class DownloadHunantv {
 				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
 				mainmore(url);
 			}
+			try {
+				Thread.sleep(1000*60*60*22);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½áÊø");
 		}
 	}

@@ -109,6 +109,12 @@ public class DownloadIqiyi {
 				// }
 			}
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½áÊø");
+			try {
+				Thread.sleep(1000*60*60*21);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -132,8 +138,8 @@ public class DownloadIqiyi {
 		url = url.replaceAll("1-1-iqiyi--.html", "");
 		for (int i = 1; i < 30; i++) {
 			mainurl(url + i + "-1-iqiyi--.html");
-
 		}
+		
 		return null;
 	}
 }

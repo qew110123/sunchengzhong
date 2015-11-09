@@ -22,16 +22,17 @@ public class DownloadWeibo {
 			proxy = DealProxy.getInstance().getPoxxy();
 			System.out.println(proxy);
 			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "utf-8", null, null);
-			
+
 			try {
-				int t=(int) (10*Math.random());
-				Thread.sleep((t+3)*1000);
+				int t = (int) (10 * Math.random());
+				Thread.sleep((t + 3) * 1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//			ConfigManager.getInstance().setConfigValue("mainUrl", String.valueOf(mainUrl));
-			
+			// ConfigManager.getInstance().setConfigValue("mainUrl",
+			// String.valueOf(mainUrl));
+
 			if (strHtml != null && !"".equals(strHtml)) {
 				strHtml = DownloadUtil.decodeUnicode(strHtml);
 				System.out.println(strHtml);
@@ -71,8 +72,7 @@ public class DownloadWeibo {
 		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+);
 
 		for (Object Objstring : listArray) {
-			
-			
+
 			System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
 			System.out.println(listTemp.get(0));
@@ -81,7 +81,7 @@ public class DownloadWeibo {
 				String urlBranch = "";
 				try {
 					urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
-					
+
 					hunanBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -105,7 +105,7 @@ public class DownloadWeibo {
 		for (int i = xxnum; i < 16871; i = i + 1000) {
 			// i=15780;
 			mainweboPeoPle(i, i + 1000);
-			
+
 		}
 
 		// hunanBranch("http://s.weibo.com/weibo/%E5%AD%94%E7%90%B3");

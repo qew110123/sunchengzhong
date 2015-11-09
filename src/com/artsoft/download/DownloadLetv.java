@@ -55,6 +55,12 @@ public class DownloadLetv {
 				mainurl(mainUrl);
 			}
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½áÊø");
+			try {
+				Thread.sleep(1000*60*60*23);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
