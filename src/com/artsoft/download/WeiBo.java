@@ -25,7 +25,7 @@ public class WeiBo {
 		Map mapreturn = new HashMap();
 		WebDriver webDriver;
 		System.setProperty("webdriver.chrome.driver",
-				"D:\\javac_eclipse\\TaoBaoDates\\chromedriver.exe");
+				"D:\\chrome\\chromedriver.exe");
 		webDriver = new ChromeDriver();
 		webDriver.get(url);
 		// 获取标题元素值
