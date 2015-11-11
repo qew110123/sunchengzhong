@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.Proxy;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadUtil;
@@ -123,19 +125,31 @@ public class Demo {
 		// proxy);
 		// System.out.println(strHtml);
 
-		String path = "D:\\image\\";
-		File file = new File(path);
-		File[] tempList = file.listFiles();
-		System.out.println("该目录下对象个数：" + tempList.length);
-		for (int i = 0; i < tempList.length; i++) {
-			if (tempList[i].isFile()) {
-				System.out.println(tempList[i].toString().replaceAll("image", "").replaceAll("D:", "")
-						.replaceAll("\\\\", "").replaceAll(".jpg", ""));
-			}
-			if (tempList[i].isDirectory()) {
-				System.out.println("文件夹：" + tempList[i]);
-			}
-		}
+//		String path = "D:\\image\\";
+//		File file = new File(path);
+//		File[] tempList = file.listFiles();
+//		System.out.println("该目录下对象个数：" + tempList.length);
+//		for (int i = 0; i < tempList.length; i++) {
+//			if (tempList[i].isFile()) {
+//				System.out.println(tempList[i].toString().replaceAll("image", "").replaceAll("D:", "")
+//						.replaceAll("\\\\", "").replaceAll(".jpg", ""));
+//			}
+//			if (tempList[i].isDirectory()) {
+//				System.out.println("文件夹：" + tempList[i]);
+//			}
+//		}
+		
+		
+		 List<String> list = new ArrayList<String>();
+		  list.add("草莓");         //向列表中添加数据
+		  list.add("香蕉");        //向列表中添加数据
+		  list.add("菠萝");        //向列表中添加数据
+		  for (int i = 0; i < list.size(); i++) {    //通过循环输出列表中的内容
+		  System.out.println(i + ":" + list.get(i));
+		  }
+		  String o = "苹果";
+		System.out.println("list对象中是否包含元素" + o + ":" + list.contains(o));
+		//判断字符串中是否包含指定字符串对象
 
 	}
 

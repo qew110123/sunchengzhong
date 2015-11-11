@@ -1,7 +1,5 @@
 package com.artsoft.bean;
 
-import java.util.List;
-
 public class Persion {
 
 	public Integer getId() {

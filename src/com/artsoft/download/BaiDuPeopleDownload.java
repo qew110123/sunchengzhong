@@ -205,10 +205,20 @@ public class BaiDuPeopleDownload {
 		// System.out.println(strVolumes = link.text());
 		// System.out.println(idnum = link.attr("href"));
 		// }
-		String strUrl = "";
-		System.out.println(links.first().text());
-		System.out.println(strUrl = links.attr("href"));
-		mainmore(id, strUrl);
+		if (links.size() == 10) {
+			String strUrl = "";
+			System.out.println(links.first().text());
+			System.out.println(strUrl = links.attr("href"));
+			// strUrl.contains("http://baike.baidu.com");
+			if (strUrl != null && !"".equals(strUrl)) {
+
+				if (!strUrl.contains("http://baike.baidu.com")) {
+					strUrl = "http://baike.baidu.com" + strUrl;
+				}
+				System.out.println(strUrl);
+				mainmore(id, strUrl);
+			}
+		}
 	}
 
 	private static void mainweboPeoPle(int statnum, int endnum) {
@@ -229,13 +239,13 @@ public class BaiDuPeopleDownload {
 							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&pn=0&rn=0&enc=utf8";
 
 					mainUrlall(urlBranch, listTemp.get(0), listTemp.get(1));
-					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0)+","+listTemp.get(1));
+					CommonUtil.setLog(
+							TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0) + "," + listTemp.get(1));
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				TimeTest.seleepTime(5, 5);
-				
 
 			}
 			// intoPlayAmont("0", "µÁ ”æÁ", "222", "0", "2014-10-15 23:10:10",

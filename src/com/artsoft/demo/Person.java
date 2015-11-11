@@ -1,4 +1,4 @@
-package us.codecraft.jobhunter.model;
+package com.artsoft.demo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

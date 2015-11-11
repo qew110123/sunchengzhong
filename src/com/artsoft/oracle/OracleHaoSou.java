@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.artsoft.bean.Persion;
+import com.artsoft.bean.TvPlay;
 import com.artsoft.util.TimeTest;
 
 public class OracleHaoSou {
@@ -205,6 +206,113 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
+	/**
+	 * 进行电视剧数据 的
+	 * @param tvplay
+	 */
+	public static void InsertTVplay(TvPlay tvplay) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.tem_tvplay t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
+				+ "t.major_actors,t.major_awards,t.director,t.screenwriTer,t.producer,t.production_company,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.produced_company,"
+				+ "t.production_area,t.premiere_time,t.pages,t.time_length,t.play_platform ,t.premiere_platform,"
+				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
+				+ "t.before_teleplay,t.next_teleplay,t.open_time,t.close_time,t.total_planning,t.film_time,t.box_office,"
+				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
+				+ "t.recording_place,t.stills_url) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list =new ArrayList();
+		list.add(tvplay.getTvplay_id());
+		list.add(tvplay.getTvplay_name());
+		list.add(tvplay.getTvplay_url());
+		list.add(tvplay.getAlias_en());
+		list.add(tvplay.getAlias_cn());
+		list.add(tvplay.getMajor_actors());
+		list.add(tvplay.getMajor_awards());
+		list.add(tvplay.getDirector());
+		list.add(tvplay.getScreenwriter());
+		list.add(tvplay.getProducer());
+		list.add(tvplay.getProduction_company());
+		list.add(tvplay.getIssuing_company());
+		list.add(tvplay.getShoot_time());
+		list.add(tvplay.getShoot_place());
+		list.add(tvplay.getSubject());
+		list.add(tvplay.getProduced_time());
+		list.add(tvplay.getProduced_company());
+		list.add(tvplay.getProduction_area());
+		list.add(tvplay.getPremiere_time());
+		list.add(tvplay.getPages());
+		list.add(tvplay.getTime_length());
+		list.add(tvplay.getPlay_platform());
+		list.add(tvplay.getPremiere_platform());
+		list.add(tvplay.getPhorogrphy_director());
+		list.add(tvplay.getTotal_production());
+		list.add(tvplay.getProduction_chairman());
+		list.add(tvplay.getProduction_cost());
+		list.add(tvplay.getPlay_theater());
+		list.add(tvplay.getBefore_eleplay());
+		list.add(tvplay.getNext_teleplay());
+		list.add(tvplay.getOpen_time());
+		list.add(tvplay.getClose_time());
+		list.add(tvplay.getTotal_planning());
+		list.add(tvplay.getFilm_time());
+		list.add(tvplay.getBox_office());
+//		list.add(tvplay.getType());
+		list.add(tvplay.getCompere());
+		list.add(tvplay.getTotal_sponsor());
+		list.add(tvplay.getPartners());
+		list.add(tvplay.getSpecial_support());
+		list.add(tvplay.getSocial_platform());
+		list.add(tvplay.getGuest_program());
+		list.add(tvplay.getSeason_numbver());
+		list.add(tvplay.getRecording_place());
+		list.add(tvplay.getStills_url());
+//		list.add(persion.getPersonSocialActivitiesList());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+
+	/**
+	 * 進入数据进行角色介绍添加
+	 * @param tvplayid
+	 * @param tvplayname
+	 * @param tvplayurl
+	 * @param personid
+	 * @param personname
+	 * @param personurl
+	 * @param rolename
+	 * @param personstillsurl
+	 * @param dubbingname
+	 * @param dubbingurl
+	 * @param roleintro
+	 */
+	public static void intotemtvplay(String tvplayid, String tvplayname, 
+			String tvplayurl, String personid, String personname, String personurl,
+			String rolename,String personstillsurl,String dubbingname,String dubbingurl,String roleintro) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.tem_tvplay_person t(t.tvplay_id,t.tvplay_name,t.tvplay_url,"
+				+ "t.person_name,t.person_url,t.role_name,t.person_stills_url,t.dubbing_name,t.dubbing_url,"
+				+ "t.role_intro)values(?,?,?,?,?,?,?,?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(tvplayname);
+		list.add(tvplayurl);
+		list.add(personname);
+		list.add(personurl);
+		list.add(rolename);
+		list.add(personstillsurl);
+		list.add(dubbingname);
+		list.add(dubbingurl);
+		list.add(roleintro);
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
 
 	/**
 	 * 查询图片数据
