@@ -62,10 +62,10 @@ public class OracleHaoSou {
 			String palydate, String playUrl, String tvType, String DataType, String createTime) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		System.out.println(
-				tvplayId + tyPlayName + dataAmount + videoType + palydate + playUrl + tvType + DataType + createTime);
+				tvplayId +"tyPlayName"+ tyPlayName +"dataAmount"+ dataAmount +"videoType"+ videoType +"palydate"+ palydate +"playUrl"+ playUrl + tvType + DataType + createTime);
 
-		String strSql = "insert into ods.TEM_NETWORK_REPUTATION t (t.tvplay_id,t.tvplay_name,t.data_Amount ,t.video_type,t.Update_Date ,t.play_url, t.tv_type ,t.Data_type,t.CREATE_DATE) "
-				+ "VALUES (?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
+		String strSql = "insert into ods.TEM_NETWORK_REPUTATION t (t.tvplay_id,t.tvplay_name,t.data_Amount ,t.video_type,t.date_Date ,t.play_url, t.tv_type ,t.Data_type,t.CREATE_DATE) "
+				+ "VALUES (?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
 
 		List<Comparable> list = new ArrayList();
 		list.add(Integer.parseInt(tvplayId));// 这里是将对象加入到list中
@@ -169,7 +169,7 @@ public class OracleHaoSou {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
 		String strSql = "insert into ODS.TEM_DIM_PERSON t (t.person_id, t.person_name,t.img_url,t.person_url ,"
-				+ "t.gender ,t.NATIONALITY,t.bloodtype ,t.height,t.weight,t.occupation ,t.constellation ,t.birthday,"
+				+ "t.SEX ,t.NATIONALITY,t.bloodtype ,t.height,t.weight,t.occupation ,t.constellation ,t.birthday,"
 				+ "t.deathday,t.alias_en,t.alias_cn,t.homeplace,t.nation,t.major_awards,t.shcool,t.brokerage_firm,"
 				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers) "
 				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";

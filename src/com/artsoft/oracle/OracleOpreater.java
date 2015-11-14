@@ -26,15 +26,16 @@ public class OracleOpreater {
 		 Connection conn = DBOperate218.getInstance().getConnection();
 
 		System.out.println(tyPlayName + source + dataAmount + vodeoType + upDatedate + playUrl + tvType + dataType);
-		String strSql = "INSERT INTO ODS.TEM_NETWORK_REPUTATION t (t.TVPLAY_NAME,t.SOURCE ,t.DATA_AMOUNT,t.VIDEO_TYPE,t.UPDATE_DATE"
-				+ ",t.PLAY_URL,t.TV_TYPE,t.DATA_TYPE) VALUES (?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss') ,?,?,?)";
+		String strSql = "INSERT INTO ODS.TEM_NETWORK_REPUTATION t (t.TVPLAY_NAME,t.SOURCE ,t.DATA_AMOUNT,t.VIDEO_TYPE,t.DATE_DATE"
+				+ ",t.PLAY_URL,t.TV_TYPE,t.DATA_TYPE) VALUES (?,?,?,?,?,?,?,?)";
 
 		List<Comparable> list = new ArrayList();
 		list.add(tyPlayName);// 这里是将对象加入到list中
 		list.add(Integer.parseInt(source));
 		list.add(Double.parseDouble(dataAmount));
 		list.add(Integer.parseInt(vodeoType));
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+//		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
 		list.add(playUrl);
 		list.add(Integer.parseInt(tvType));
 		list.add(Integer.parseInt(dataType));
@@ -62,8 +63,8 @@ public class OracleOpreater {
 				tyPlayName + serNumber + source + playAmount + vodeoType + palydate + playUrl + tvType + realUrl);
 		
 		String strSql = "INSERT INTO ODS.TEM_NETWORK_PLAY_AMOUNT t (t.TVPLAY_NAME,t.SET_NUMBER "
-				+ ",t.SOURCE,t.PLAY_AMOUNT,t.VIDEO_TYPE,t.PLAY_DATE,t.PLAY_URL,t.TV_TYPE,t.REAL_URL) "
-				+ "VALUES (?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss') "
+				+ ",t.SOURCE,t.PLAY_AMOUNT,t.VIDEO_TYPE,t.DATE_DATE,t.PLAY_URL,t.TV_TYPE,t.REAL_URL) "
+				+ "VALUES (?,?,?,?,?,?"
 				+ ",?,?,?)";
 
 		List<Comparable> list = new ArrayList();
@@ -72,7 +73,8 @@ public class OracleOpreater {
 		list.add(Integer.parseInt(source));
 		list.add(Double.parseDouble(playAmount));
 		list.add(Integer.parseInt(vodeoType));
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+//		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
 		list.add(playUrl);
 		list.add(Integer.parseInt(tvType));
 		list.add(realUrl);

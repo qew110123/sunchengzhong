@@ -13,10 +13,11 @@
   <user218>dwetl</user218>  
   <pwd218>ynkj666</pwd218>   
   <ProxyPath>proxy.txt</ProxyPath>  
-  <ID>13895</ID>
+  <!-- ÕâÀïÐ´×¢ÊÍ-->
+  <ID>0</ID>
   <IDpeople>11636</IDpeople>
   <IDwebopeople>295</IDwebopeople>
-  <IDBaiDupeople>3402</IDBaiDupeople>
+  <IDBaiDupeople>16441</IDBaiDupeople>
   <numBaidu>57</numBaidu>
    
 </info>

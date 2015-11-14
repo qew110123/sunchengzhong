@@ -269,15 +269,23 @@ public class BaiDuPeopleDownload {
 		// WeiBo(1,"http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
 		// WeiBoBranch("http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
 
-		ConfigManager config = ConfigManager.getInstance();
-		// driver = config.getConfigValue("driver");
-		String xx = ConfigManager.getInstance().getConfigValue("IDBaiDupeople");
-		int xxnum = Integer.parseInt(xx);
-		for (int i = xxnum; i < 16871; i = i + 1000) {
-			// i=15780;
-			mainweboPeoPle(i, i + 1000);
-
-		}
+		
+		
+		/*
+		 * 进行基本信息的采集，井行
+		 */
+//		ConfigManager config = ConfigManager.getInstance();
+//		// driver = config.getConfigValue("driver");
+//		String xx = ConfigManager.getInstance().getConfigValue("IDBaiDupeople");
+//		int xxnum = Integer.parseInt(xx);
+//		for (int i = xxnum; i < 16871; i = i + 1000) {
+//			// i=15780;
+//			mainweboPeoPle(i, i + 1000);
+//
+//		}
+		//********************************************************
+		
+		
 
 	}
 }

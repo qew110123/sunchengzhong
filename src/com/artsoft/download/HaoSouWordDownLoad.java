@@ -36,9 +36,9 @@ public class HaoSouWordDownLoad {
 		if (starttime != null && !"".equals(starttime)) {
 
 			for (int i = 0; i < sourceStrArray.length; i++) {
-				System.out.println(sourceStrArray[i] + DemoTime.getBeforeAfterDate(starttime, i));
+				System.out.println(sourceStrArray[i] + DemoTime.getBeforeAfterDate(starttime, i).toString().replaceAll("-", ""));
 				OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[i], "0",
-						DemoTime.getBeforeAfterDate(starttime, i).toString(), urlBranch, "0", DataType, "");
+						DemoTime.getBeforeAfterDate(starttime, i).toString().replaceAll("-", ""), urlBranch, "0", DataType, "");
 
 			}
 		}
@@ -107,7 +107,7 @@ public class HaoSouWordDownLoad {
 				// 媒体关注度
 				try {
 					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
+							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
 					HaosouBranch(urlBranch, listTemp.get(0), listTemp.get(1), "4");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -184,30 +184,29 @@ public class HaoSouWordDownLoad {
 		/**
 		 * 进行电视剧数据的下载
 		 */
-		// ConfigManager config = ConfigManager.getInstance();
-		// driver = config.getConfigValue("driver");
-//		 String xx=ConfigManager.getInstance().getConfigValue("ID");
-//		
-//		 int xxnum=Integer.parseInt(xx);
-//		 System.out.println(xxnum);
-//		 for (int i = xxnum; i < 15780; i=i+1000) {
-//		// i=15780;
-//		 mainProgram(i,i+1000);
-//		 }
+//		 ConfigManager config = ConfigManager.getInstance();
+//		 driver = config.getConfigValue("driver");
+		 String xx=ConfigManager.getInstance().getConfigValue("ID");
+		
+		 int xxnum=Integer.parseInt(xx);
+		 System.out.println(xxnum);
+		 for (int i = xxnum; i < 15780; i=i+1000) {
+		// i=15780;
+		 mainProgram(i,i+1000);
+		 }
 
 		/**
 		 * 进行人的运行
 		 */
-//		// mainPeoPle();
-		ConfigManager config = ConfigManager.getInstance();
-		// driver = config.getConfigValue("driver");
-		String xx = ConfigManager.getInstance().getConfigValue("IDpeople");
-//		mainPeoPle();
-		int xxnum=Integer.parseInt(xx);
-		for (int i = xxnum; i < 16871; i = i + 1000) {
-			// i=15780;
-			mainPeoPle(i, i + 1000);
-		}
+//		ConfigManager config = ConfigManager.getInstance();
+//		// driver = config.getConfigValue("driver");
+//		String xx = ConfigManager.getInstance().getConfigValue("IDpeople");
+////		mainPeoPle();
+//		int xxnum=Integer.parseInt(xx);
+//		for (int i = xxnum; i < 16871; i = i + 1000) {
+//			// i=15780;
+//			mainPeoPle(i, i + 1000);
+//		}
 	}
 
 }

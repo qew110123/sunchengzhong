@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadUtil;
+import com.artsoft.util.TimeTest;
 
 public class Demo {
 	public static String getKeyWordFromFile(String FileName) {
@@ -140,16 +141,18 @@ public class Demo {
 //		}
 		
 		
-		 List<String> list = new ArrayList<String>();
-		  list.add("草莓");         //向列表中添加数据
-		  list.add("香蕉");        //向列表中添加数据
-		  list.add("菠萝");        //向列表中添加数据
-		  for (int i = 0; i < list.size(); i++) {    //通过循环输出列表中的内容
-		  System.out.println(i + ":" + list.get(i));
-		  }
-		  String o = "苹果";
-		System.out.println("list对象中是否包含元素" + o + ":" + list.contains(o));
+//		 List<String> list = new ArrayList<String>();
+//		  list.add("草莓");         //向列表中添加数据
+//		  list.add("香蕉");        //向列表中添加数据
+//		  list.add("菠萝");        //向列表中添加数据
+//		  for (int i = 0; i < list.size(); i++) {    //通过循环输出列表中的内容
+//		  System.out.println(i + ":" + list.get(i));
+//		  }
+//		  String o = "苹果";
+//		System.out.println("list对象中是否包含元素" + o + ":" + list.contains(o));
 		//判断字符串中是否包含指定字符串对象
+		
+		System.out.println(TimeTest.getNowTime("yyyyMMdd"));
 
 	}
 
