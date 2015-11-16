@@ -254,6 +254,69 @@ public class BaiDuPeopleDownload {
 		}
 	}
 
+	/**
+	 * 基本信息数据的抓取
+	 * 
+	 * @param mainUrl
+	 */
+	private static void maininformation(String id, String mainUrl, String sex) {
+		// TODO Auto-generated method stub
+		String strHtml = "";
+		boolean bb = true;
+		while (bb) {
+			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "UTF-8", null, null);
+			if (strHtml != null && !"".equals(strHtml)) {
+				bb = false;
+			}
+		}
+
+		// System.out.println(strHtml);
+		Document doc = Jsoup.parse(strHtml);
+		// Element linkmain = doc.getElementById("fluxes_static");
+		Elements links = doc.select("div.lemma-summary");
+		String information = "";
+		for (Element element : links) {
+			System.out.println(information = element.text());
+		}
+		String strsex = "";
+		if (information != null && !"".equals(information)) {
+			if (sex == null||"".equals(sex)) {
+				if (information.contains("女配角") || information.contains("女演员") || information.contains("女主角")) {
+					strsex = "女";
+				}
+				if (information.contains("男配角") || information.contains("男演员") || information.contains("男主角")) {
+					strsex = "男";
+				}
+			}
+			OracleHaoSou.updateiInformation(Integer.parseInt(id), information, strsex);
+		}
+	}
+
+	/**
+	 * 进行数据的开始和结束数据的分开
+	 * 
+	 * @param statnum
+	 * @param endnum
+	 */
+	private static void mainbaiduPeoPle(int statnum, int endnum) {
+		// TODO Auto-generated method stub
+		List<String> listArray = OracleHaoSou.selectBaiduiInformation(Integer.toString(statnum),
+				Integer.toString(endnum));
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+);
+
+		for (Object Objstring : listArray) {
+
+			System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			System.out.println(listTemp.get(0));
+			System.out.println(listTemp.get(1));
+			System.out.println(listTemp.get(2));
+			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
+				maininformation(listTemp.get(0), listTemp.get(1), listTemp.get(2));
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -269,23 +332,39 @@ public class BaiDuPeopleDownload {
 		// WeiBo(1,"http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
 		// WeiBoBranch("http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
 
-		
-		
 		/*
 		 * 进行基本信息的采集，井行
 		 */
-//		ConfigManager config = ConfigManager.getInstance();
-//		// driver = config.getConfigValue("driver");
-//		String xx = ConfigManager.getInstance().getConfigValue("IDBaiDupeople");
-//		int xxnum = Integer.parseInt(xx);
-//		for (int i = xxnum; i < 16871; i = i + 1000) {
-//			// i=15780;
-//			mainweboPeoPle(i, i + 1000);
-//
-//		}
-		//********************************************************
+		// ConfigManager config = ConfigManager.getInstance();
+		// // driver = config.getConfigValue("driver");
+		// String xx =
+		// ConfigManager.getInstance().getConfigValue("IDBaiDupeople");
+		// int xxnum = Integer.parseInt(xx);
+		// for (int i = xxnum; i < 16871; i = i + 1000) {
+		// // i=15780;
+		// mainweboPeoPle(i, i + 1000);
+		//
+		// }
+		// ********************************************************
+		/**
+		 * 2015年11月14日16:36:11 进行补全数据的基本信息
+		 */
+
+		// String mainUrl =
+		// "http://baike.baidu.com/link?url=vTl6gw_pNQg686aYCY_VIpUZD40EcKMcPDQzSjOW742q55xp_88_EcLK6CUXoK9w4BrqyWqRH9pnI3ReUegoNq";
+		// maininformation(mainUrl);
+
+		// mainbaiduPeoPle(0, 2);
+//		System.out.println("abcdefghijklmnabc".contains("jklmn"));
 		
-		
+		String xx =ConfigManager.getInstance().getConfigValue("numBaidunum");
+		int xxnum = Integer.parseInt(xx);
+		for (int i = xxnum; i < 11503; i = i + 1000) {
+			// i=15780;
+			mainbaiduPeoPle(i, i + 1000);
+
+		}
 
 	}
+
 }

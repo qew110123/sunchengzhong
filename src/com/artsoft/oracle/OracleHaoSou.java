@@ -61,8 +61,8 @@ public class OracleHaoSou {
 	public static void intoPlayAmont(String tvplayId, String tyPlayName, String dataAmount, String videoType,
 			String palydate, String playUrl, String tvType, String DataType, String createTime) {
 		Connection conn = DBOperate218.getInstance().getConnection();
-		System.out.println(
-				tvplayId +"tyPlayName"+ tyPlayName +"dataAmount"+ dataAmount +"videoType"+ videoType +"palydate"+ palydate +"playUrl"+ playUrl + tvType + DataType + createTime);
+		System.out.println(tvplayId + "tyPlayName" + tyPlayName + "dataAmount" + dataAmount + "videoType" + videoType
+				+ "palydate" + palydate + "playUrl" + playUrl + tvType + DataType + createTime);
 
 		String strSql = "insert into ods.TEM_NETWORK_REPUTATION t (t.tvplay_id,t.tvplay_name,t.data_Amount ,t.video_type,t.date_Date ,t.play_url, t.tv_type ,t.Data_type,t.CREATE_DATE) "
 				+ "VALUES (?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
@@ -173,7 +173,7 @@ public class OracleHaoSou {
 				+ "t.deathday,t.alias_en,t.alias_cn,t.homeplace,t.nation,t.major_awards,t.shcool,t.brokerage_firm,"
 				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers) "
 				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		List<Comparable> list =new ArrayList();
+		List<Comparable> list = new ArrayList();
 		list.add(persion.getId());
 		list.add(persion.getName());
 		list.add(persion.getImg_url());
@@ -202,13 +202,14 @@ public class OracleHaoSou {
 		list.add(persion.getFlowers());
 		list.add(persion.getVolk());
 		list.add(persion.getBrokers());
-//		list.add(persion.getPersonSocialActivitiesList());
+		// list.add(persion.getPersonSocialActivitiesList());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
-	
+
 	/**
 	 * 进行电视剧数据 的
+	 * 
 	 * @param tvplay
 	 */
 	public static void InsertTVplay(TvPlay tvplay) {
@@ -223,7 +224,7 @@ public class OracleHaoSou {
 				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
 				+ "t.recording_place,t.stills_url) values"
 				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?)";
-		List<Comparable> list =new ArrayList();
+		List<Comparable> list = new ArrayList();
 		list.add(tvplay.getTvplay_id());
 		list.add(tvplay.getTvplay_name());
 		list.add(tvplay.getTvplay_url());
@@ -259,7 +260,7 @@ public class OracleHaoSou {
 		list.add(tvplay.getTotal_planning());
 		list.add(tvplay.getFilm_time());
 		list.add(tvplay.getBox_office());
-//		list.add(tvplay.getType());
+		// list.add(tvplay.getType());
 		list.add(tvplay.getCompere());
 		list.add(tvplay.getTotal_sponsor());
 		list.add(tvplay.getPartners());
@@ -269,14 +270,14 @@ public class OracleHaoSou {
 		list.add(tvplay.getSeason_numbver());
 		list.add(tvplay.getRecording_place());
 		list.add(tvplay.getStills_url());
-//		list.add(persion.getPersonSocialActivitiesList());
+		// list.add(persion.getPersonSocialActivitiesList());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
-	
 
 	/**
 	 * 進入数据进行角色介绍添加
+	 * 
 	 * @param tvplayid
 	 * @param tvplayname
 	 * @param tvplayurl
@@ -289,9 +290,9 @@ public class OracleHaoSou {
 	 * @param dubbingurl
 	 * @param roleintro
 	 */
-	public static void intotemtvplay(String tvplayid, String tvplayname, 
-			String tvplayurl, String personid, String personname, String personurl,
-			String rolename,String personstillsurl,String dubbingname,String dubbingurl,String roleintro) {
+	public static void intotemtvplay(String tvplayid, String tvplayname, String tvplayurl, String personid,
+			String personname, String personurl, String rolename, String personstillsurl, String dubbingname,
+			String dubbingurl, String roleintro) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
 		String strSql = "insert into ods.tem_tvplay_person t(t.tvplay_id,t.tvplay_name,t.tvplay_url,"
@@ -312,7 +313,28 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
-	
+
+	/**
+	 * 添加ods.TEM_PERSON_STYLE 进行数据的添加
+	 * 进行百度演员风格标签添加
+	 * @param words
+	 * @param wordsurl
+	 * @param name
+	 * 2015年11月14日12:27:19
+	 */
+	public static void intotempersonstyle(String words, String wordsurl, String name) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.TEM_PERSON_STYLE t VALUES(null,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		list.add(words);// 这里是将对象加入到list中
+		list.add(wordsurl);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(name);
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
 
 	/**
 	 * 查询图片数据
@@ -329,8 +351,50 @@ public class OracleHaoSou {
 		return (ArrayList<String>) list;
 
 	}
+	
+	
+	/**
+	 * sql语句并获取开始和结束 dao用户列表中
+	 * 
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectBaiduiInformation(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.person_id,t.person_url,t.sex from  ODS.TEM_DIM_PERSON t order by t.person_id";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	/**
+	 * 进行百度基本信息数据的更新
+	 * @param id
+	 * @param basicInfo
+	 * @param sex
+	 */
+	public static void updateiInformation(int id, String basicInfo, String sex) {
+		System.out.println(id+basicInfo+sex);
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "update ods.TEM_DIM_PERSON t set t.basic_info=?,t.sex=? where t.person_id=?";
+
+		List<Comparable> list = new ArrayList();
+		list.add(basicInfo);// 这里是将对象加入到list中
+		list.add(sex);
+		list.add(id);
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	
 
 	public static void main(String[] args) {
+		updateiInformation(2, "", null);
 		// List<String> listArray = select("1", "10000");
 		// for (Object Objstring : listArray) {
 		// System.out.println(Objstring);
@@ -349,7 +413,7 @@ public class OracleHaoSou {
 
 		// intoBaiDuPopularity("韩东君", "http://baike.baidu.com/view/6923013.htm",
 		// "http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
-		selectphoto();
+//		selectphoto();
 		// intoBaiDuPopularity("王俊凯", "http://baike.baidu.com/view/6923013.htm",
 		// "http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
 	}
