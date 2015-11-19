@@ -1,6 +1,7 @@
 package com.artsoft.download;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Time;
 import java.util.List;
 
 import com.artsoft.config.ConfigManager;
@@ -35,10 +36,21 @@ public class HaoSouWordDownLoad {
 		System.out.println(sourceStrArray.length);
 		if (starttime != null && !"".equals(starttime)) {
 
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			for (int i = 0; i < sourceStrArray.length; i++) {
-				System.out.println(sourceStrArray[i] + DemoTime.getBeforeAfterDate(starttime, i).toString().replaceAll("-", ""));
-				OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[i], "0",
-						DemoTime.getBeforeAfterDate(starttime, i).toString().replaceAll("-", ""), urlBranch, "0", DataType, "");
+				// System.out.println(sourceStrArray[i] +
+				// DemoTime.getBeforeAfterDate(starttime,
+				// i).toString().replaceAll("-", ""));
+				// OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName,
+				// sourceStrArray[i], "0",
+				// DemoTime.getBeforeAfterDate(starttime,
+				// i).toString().replaceAll("-", ""), urlBranch, "0", DataType,
+				// "");
 
 			}
 		}
@@ -65,16 +77,19 @@ public class HaoSouWordDownLoad {
 		String[] sourceStrArray = strtext.toString().split("\\|");
 		System.out.println(sourceStrArray.length);
 		if (starttime != null && !"".equals(starttime)) {
-
-			for (int i = 0; i < sourceStrArray.length; i++) {
-				System.out.println(sourceStrArray[i] + DemoTime.getBeforeAfterDate(starttime, i));
-				// OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName,
-				// sourceStrArray[i], "0",
-				// DemoTime.getBeforeAfterDate(starttime, i).toString(),
-				// urlBranch, "0", DataType,"");
-				OracleHaoSou.intoPeoPle(tvplayId, sourceStrArray[i],
-						DemoTime.getBeforeAfterDate(starttime, i).toString(), "", urlBranch, DataType);
+			
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+
+//			for (int i = 0; i < sourceStrArray.length; i++) {
+//				System.out.println(sourceStrArray[i] + DemoTime.getBeforeAfterDate(starttime, i));
+//				OracleHaoSou.intoPeoPle(tvplayId, sourceStrArray[i],
+//						DemoTime.getBeforeAfterDate(starttime, i).toString(), "", urlBranch, DataType);
+//			}
 		}
 
 	}
@@ -98,7 +113,8 @@ public class HaoSouWordDownLoad {
 					// urlBranch =
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
 					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8") + "&area=%E5%85%A8%E5%9B%BD";
+							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
+							+ "&area=%E5%85%A8%E5%9B%BD";
 					HaosouBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -184,29 +200,36 @@ public class HaoSouWordDownLoad {
 		/**
 		 * 进行电视剧数据的下载
 		 */
-//		 ConfigManager config = ConfigManager.getInstance();
-//		 driver = config.getConfigValue("driver");
-		 String xx=ConfigManager.getInstance().getConfigValue("ID");
-		
-		 int xxnum=Integer.parseInt(xx);
-		 System.out.println(xxnum);
-		 for (int i = xxnum; i < 15780; i=i+1000) {
-		// i=15780;
-		 mainProgram(i,i+1000);
-		 }
+		// ConfigManager config = ConfigManager.getInstance();
+		// driver = config.getConfigValue("driver");
+
+//		while (true) {
+//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+//			String xx = ConfigManager.getInstance().getConfigValue("ID");
+//
+//			int xxnum = Integer.parseInt(xx);
+//			System.out.println(xxnum);
+//			for (int i = xxnum; i < 15780; i = i + 1000) {
+//				// i=15780;
+//				mainProgram(i, i + 1000);
+//			}
+//		}
 
 		/**
 		 * 进行人的运行
 		 */
-//		ConfigManager config = ConfigManager.getInstance();
-//		// driver = config.getConfigValue("driver");
-//		String xx = ConfigManager.getInstance().getConfigValue("IDpeople");
-////		mainPeoPle();
-//		int xxnum=Integer.parseInt(xx);
-//		for (int i = xxnum; i < 16871; i = i + 1000) {
-//			// i=15780;
-//			mainPeoPle(i, i + 1000);
-//		}
+		while (true) {
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+	//		 ConfigManager config = ConfigManager.getInstance();
+			 // driver = config.getConfigValue("driver");
+			 String xx = ConfigManager.getInstance().getConfigValue("IDpeople");
+			// mainPeoPle();
+			 int xxnum=Integer.parseInt(xx);
+			 for (int i = xxnum; i < 16871; i = i + 1000) {
+			 // i=15780;
+			 mainPeoPle(i, i + 1000);
+			 }
+		}
 	}
 
 }

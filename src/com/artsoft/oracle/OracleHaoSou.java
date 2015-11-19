@@ -67,18 +67,23 @@ public class OracleHaoSou {
 		String strSql = "insert into ods.TEM_NETWORK_REPUTATION t (t.tvplay_id,t.tvplay_name,t.data_Amount ,t.video_type,t.date_Date ,t.play_url, t.tv_type ,t.Data_type,t.CREATE_DATE) "
 				+ "VALUES (?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
 
-		List<Comparable> list = new ArrayList();
-		list.add(Integer.parseInt(tvplayId));// 这里是将对象加入到list中
-		list.add(tyPlayName);
-		list.add(Double.parseDouble(dataAmount));
-		list.add(Integer.parseInt(videoType));
-		list.add(palydate);
-		list.add(playUrl);
-		list.add(Integer.parseInt(tvType));
-		list.add(Integer.parseInt(DataType));
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
-		System.out.println(bb);
+		try {
+			
+			List<Comparable> list = new ArrayList();
+			list.add(Integer.parseInt(tvplayId));// 这里是将对象加入到list中
+			list.add(tyPlayName);
+			list.add(Double.parseDouble(dataAmount));
+			list.add(Integer.parseInt(videoType));
+			list.add(palydate);
+			list.add(playUrl);
+			list.add(Integer.parseInt(tvType));
+			list.add(Integer.parseInt(DataType));
+			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+			System.out.println(bb);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	/**
@@ -389,6 +394,9 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
+	
+	
 	
 	
 	

@@ -11,6 +11,11 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Downloadqq {
 	public static void downMain(String urlMain) {
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
@@ -74,6 +79,36 @@ public class Downloadqq {
 		}
 	}
 
+
+	// 判断数据开始时间
+	public static void TimingTime(int hh, int mm, int ss) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+		calendar.set(Calendar.MINUTE, mm); // 控制分
+		calendar.set(Calendar.SECOND, ss); // 控制秒
+
+		Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			public void run() {
+				System.out.println("-------设定要指定任务--------");
+				runstatic();
+			}
+		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+	}
+
+	public static void runstatic() {
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+		for (int i = 0; i <= 188; i++) {
+			String url = "http://v.qq.com/list/2_-1_-1_-1_1_0_" + i + "_20_-1_-1_0_-1.html";
+			System.out.println(url);
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
+			downMain(url);
+		}
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -81,22 +116,28 @@ public class Downloadqq {
 		// http://v.qq.com/list/2_-1_-1_-1_1_0_1_20_-1_-1_0_-1.html
 		// http://v.qq.com/list/2_-1_-1_-1_1_0_188_20_-1_-1_0_-1.html
 		// http://v.qq.com/list/2_-1_-1_-1_1_0_188_20_-1_-1_0_-1.html
-		while (true) {
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-			for (int i = 0; i <= 188; i++) {
-				String url = "http://v.qq.com/list/2_-1_-1_-1_1_0_" + i + "_20_-1_-1_0_-1.html";
-				System.out.println(url);
-				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
-				downMain(url);
-			}
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
-			try {
-				Thread.sleep(1000 * 60 * 60 * 23);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		// while (true) {
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") +
+		// ":开始");
+		// for (int i = 0; i <= 188; i++) {
+		// String url = "http://v.qq.com/list/2_-1_-1_-1_1_0_" + i +
+		// "_20_-1_-1_0_-1.html";
+		// System.out.println(url);
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" +
+		// url);
+		// downMain(url);
+		// }
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") +
+		// ":结束");
+		// try {
+		// Thread.sleep(1000 * 60 * 60 * 23);
+		// } catch (InterruptedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
+
+		TimingTime(23, 59, 59);
 
 	}
 

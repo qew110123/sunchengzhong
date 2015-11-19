@@ -9,6 +9,10 @@ import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.TimeTest;
+import java.util.Calendar;  
+import java.util.Date;  
+import java.util.Timer;  
+import java.util.TimerTask;
 
 public class Downloadpptv {
 
@@ -46,6 +50,34 @@ public class Downloadpptv {
 
 	}
 
+
+public static void runstatic(){
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+
+		for (int i = 1; i < 70; i++) {
+			String mainUrl = "http://list.pptv.com/channel_list.html?page=" + i + "&type=2&sort=1";
+			mainurl(mainUrl);
+		}
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
+	}
+
+//判断数据开始时间
+	public static void TimingTime(int hh , int mm ,int ss) {  
+        Calendar calendar = Calendar.getInstance();  
+        calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时  
+        calendar.set(Calendar.MINUTE, mm);       // 控制分  
+        calendar.set(Calendar.SECOND, ss);       // 控制秒  
+  
+        Date time = calendar.getTime();         // 得出执行任务的时间,此处为今天的12：00：00  
+  
+        Timer timer = new Timer();  
+        timer.scheduleAtFixedRate(new TimerTask() {  
+            public void run() {  
+                System.out.println("-------设定要指定任务--------");  
+                runstatic();
+            } 
+        }, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行  
+    } 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// for (int i = 0; i < 25; i++) {
@@ -56,20 +88,25 @@ public class Downloadpptv {
 		// String
 		// mainUrl="http://list.pptv.com/channel_list.html?page=1&type=2&sort=1";
 		// mainurl(mainUrl);
-		while (true) {
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-			for (int i = 1; i < 70; i++) {
-				String mainUrl = "http://list.pptv.com/channel_list.html?page=" + i + "&type=2&sort=1";
-				mainurl(mainUrl);
-			}
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
-			try {
-				Thread.sleep(1000*60*60*23);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		// while (true) {
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") +
+		// ":开始");
+		// for (int i = 1; i < 70; i++) {
+		// String mainUrl = "http://list.pptv.com/channel_list.html?page=" + i +
+		// "&type=2&sort=1";
+		// mainurl(mainUrl);
+		// }
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") +
+		// ":结束");
+		// try {
+		// Thread.sleep(1000*60*60*23);
+		// } catch (InterruptedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
+		
+		TimingTime(23, 59, 59);
 	}
 
 }
