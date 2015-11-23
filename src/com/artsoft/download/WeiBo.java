@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,6 +37,12 @@ public class WeiBo {
 					"C:\\Program Files (x86)\\Google\\Chrome\\Application\\39.0.2171.95\\default_apps\\youtube.crx");
 			ChromeOptions options = new ChromeOptions();
 			// options.addExtensions(file);
+			
+//			Cookie cookie = new Cookie("gsid", "4u9x26191nWvvJwthqgaobLTkeU");
+//
+//			((WebDriver) options).manage().addCookie(cookie);
+			
+			
 			options.addArguments("–user-data-dir=C:/Users/Administrator/AppData/Local/Google/Chrome/User Data/Default");
 			// C:\Users\Administrator\AppData\Local\Google\Chrome\User Data
 			webDriver = new ChromeDriver(options);

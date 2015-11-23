@@ -81,5 +81,41 @@ public class OracleOpreater {
 		boolean bb=DBOperate.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
+	
+	/**
+	 * 每个电视剧
+	 * 主演 和类型
+	 * @param TVPLAY_NAME
+	 * @param SOURCE
+	 * @param PLAY_AMOUNT
+	 * @param DATA_DATE
+	 * @param PLAY_URL
+	 * @param PLAY_SUBJECT
+	 * @param PLAY_ACTOR
+	 * @param PLAY_COMMENT
+	 */
+	public static void intoTEM_NETWORK_TVPLAY_AMOUNT(String TVPLAY_NAME, int SOURCE, int PLAY_AMOUNT, String DATA_DATE,
+			String PLAY_URL, String PLAY_SUBJECT, String PLAY_ACTOR, int PLAY_COMMENT) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		System.out.println(
+				TVPLAY_NAME + DATA_DATE + PLAY_AMOUNT + PLAY_URL + PLAY_SUBJECT + PLAY_ACTOR + PLAY_COMMENT );
+		
+		String strSql = "insert into ods.TEM_NETWORK_TVPLAY_AMOUNT t values(null,?,?,?,?,?,?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		list.add(TVPLAY_NAME);// 这里是将对象加入到list中
+		list.add(SOURCE);
+		list.add(PLAY_AMOUNT);
+		list.add(DATA_DATE);
+		list.add(PLAY_URL);
+//		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+//		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(PLAY_SUBJECT);
+		list.add(PLAY_ACTOR);
+		list.add(PLAY_COMMENT);
+		boolean bb=DBOperate.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
 
 }
