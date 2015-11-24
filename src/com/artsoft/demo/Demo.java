@@ -43,6 +43,12 @@ public class Demo {
 		}
 		return strTemp.toString();
 	}
+	
+	
+	public boolean convertHtmlToPdf(String inputFile, String outputFile)  
+		    throws Exception {  
+		        return true;  
+		    }  
 
 	/**
 	 * @param args
@@ -126,19 +132,19 @@ public class Demo {
 		// proxy);
 		// System.out.println(strHtml);
 
-//		String path = "D:\\image\\";
-//		File file = new File(path);
-//		File[] tempList = file.listFiles();
-//		System.out.println("该目录下对象个数：" + tempList.length);
-//		for (int i = 0; i < tempList.length; i++) {
-//			if (tempList[i].isFile()) {
-//				System.out.println(tempList[i].toString().replaceAll("image", "").replaceAll("D:", "")
-//						.replaceAll("\\\\", "").replaceAll(".jpg", ""));
-//			}
-//			if (tempList[i].isDirectory()) {
-//				System.out.println("文件夹：" + tempList[i]);
-//			}
-//		}
+		String path = "D:\\image\\";
+		File file = new File(path);
+		File[] tempList = file.listFiles();
+		System.out.println("该目录下对象个数：" + tempList.length);
+		for (int i = 0; i < tempList.length; i++) {
+			if (tempList[i].isFile()) {
+				System.out.println(tempList[i].toString().replaceAll("image", "").replaceAll("D:", "")
+						.replaceAll("\\\\", "").replaceAll(".jpg", ""));
+			}
+			if (tempList[i].isDirectory()) {
+				System.out.println("文件夹：" + tempList[i]);
+			}
+		}
 		
 		
 //		 List<String> list = new ArrayList<String>();
@@ -152,7 +158,9 @@ public class Demo {
 //		System.out.println("list对象中是否包含元素" + o + ":" + list.contains(o));
 		//判断字符串中是否包含指定字符串对象
 		
-		System.out.println(TimeTest.getNowTime("yyyyMMdd"));
+//		System.out.println(TimeTest.getNowTime("yyyyMMdd"));
+		
+		
 
 	}
 

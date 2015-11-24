@@ -36,6 +36,15 @@ public class DownloadImage {
         // 完毕，关闭所有链接  
         os.close();  
         is.close();  
-    }   
+    }  
+	
+	public static void main(String[] args) {
+		try {
+			download("http://www.cmsjournal.net/qxxb_cn/ch/reader/create_pdf.aspx?file_no=2015011&flag=1&journal_id=qxxb_cn&year_id=2015", "1.pdf", "D:\\image1\\");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
