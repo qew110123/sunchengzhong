@@ -1,4 +1,4 @@
-package com.artsoft.download;
+package com.artsoft.download.BaiDu;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -25,7 +25,7 @@ import com.artsoft.util.TimeTest;
 
 public class BaiDuPeopleDownload {
 
-	private static void mainmore(String strId, String url) {
+	public static void mainmore(String strId, String url) {
 		Persion person = new Persion();
 		// TODO Auto-generated method stub
 		String strHtml = "";
@@ -67,7 +67,14 @@ public class BaiDuPeopleDownload {
 				String baseInfoName = "";
 				String baseInfoValue = "";
 				baseInfoName = HtmlAnalyze.getTagText(sourceStrArray[i].toString(), "basicInfo-item name\">", "</");
-				baseInfoValue = HtmlAnalyze.getTagText(sourceStrArray[i].toString(), "basicInfo-item value\">", "</d");
+				if ("主要成就".equals(baseInfoName)) {
+//					System.out.println(sourceStrArray[i].toString());
+					baseInfoValue = HtmlAnalyze.getTagText(sourceStrArray[i].toString() + "#",
+							"basicInfo-item value\">", "</d#", true, 0);
+				} else {
+					baseInfoValue = HtmlAnalyze.getTagText(sourceStrArray[i].toString(), "basicInfo-item value\">",
+							"</d");
+				}
 				if (baseInfoName != null && baseInfoValue != null) {
 					baseInfoName = baseInfoName.replace("&nbsp;", "");
 					// System.out.println(baseInfoValue =
@@ -76,13 +83,47 @@ public class BaiDuPeopleDownload {
 					baseInfoValue = baseInfoValue.replace(" ", "").replace("\n", "").replace("展开", "");
 					// System.out.println(baseInfoValue.replace("&nbsp;",
 					// ""));##展开##
+					if ("主要成就".equals(baseInfoName)) {
+						// System.out.println(baseInfoValue=);
+						String[] strlist = baseInfoValue.split("<br/>");
+						for (int j = 0; j < strlist.length; j++) {
+							baseInfoValue = baseInfoValue
+									+ HtmlAnalyze.getTagText("##" + strlist[j].toString() + ";**", "##", "**");
+							if (baseInfoValue.contains("主要成就")) {
+								// baseInfoValue="";
+								baseInfoValue = HtmlAnalyze.getTagText("##" + strlist[j].toString() + ";**", "主要成就",
+										"**");
+							}
 
+						}
+					}
+
+//					System.out.println(baseInfoValue);
 					person = buildPerson(baseInfoName, baseInfoValue, person);
 				}
 			}
+			
+			Elements linksss = doc.select("div.lemma-summary div.para");
+			String information = "";
+			int u = 0;
+			for (Element element : linksss) {
+				// System.out.println("111"+element);
+				if (u == 0) {
+					information = element.text();
+					u+=1;
+				} else {
+					information = information + "||" + element.text();
+				}
+			}
+			if (information!=null&&!"".equals(information)) {
+				person.setDescription_text(information);
+			}
+			person.print();
 			person.setId(Integer.parseInt(strId));
 			person.setUrl(url);
-			OracleHaoSou.InsertTemDimPerson(person);
+			//进行数据的添加 操作
+//			OracleHaoSou.InsertTemDimPerson(person);
+			
 
 			// System.out.println();
 			// String name="";
@@ -150,9 +191,9 @@ public class BaiDuPeopleDownload {
 		if ("死亡日期".equals(baseInfoName) || "逝世日期".equals(baseInfoName)) {
 			person.setDeathday(baseInfoValue);
 		}
-		// if("职业".equals(baseInfoName)){
-		// person.setOccupation(baseInfoValue);
-		// }
+		if ("职业".equals(baseInfoName)) {
+			person.setOccupation(baseInfoValue);
+		}
 		if ("毕业院校".equals(baseInfoName)) {
 			person.setShcool(baseInfoValue);
 		}
@@ -259,7 +300,7 @@ public class BaiDuPeopleDownload {
 	 * 
 	 * @param mainUrl
 	 */
-	private static void maininformation(String id, String mainUrl, String sex) {
+	public static void maininformation(String id, String mainUrl, String sex) {
 		// TODO Auto-generated method stub
 		String strHtml = "";
 		boolean bb = true;
@@ -273,14 +314,21 @@ public class BaiDuPeopleDownload {
 		// System.out.println(strHtml);
 		Document doc = Jsoup.parse(strHtml);
 		// Element linkmain = doc.getElementById("fluxes_static");
-		Elements links = doc.select("div.lemma-summary");
+		Elements links = doc.select("div.lemma-summary div.para");
 		String information = "";
+		int u = 0;
 		for (Element element : links) {
-			System.out.println(information = element.text());
+			// System.out.println("111"+element);
+			if (u == 0) {
+				information = element.text();
+				u+=1;
+			} else {
+				System.out.println(information = information + "||" + element.text());
+			}
 		}
 		String strsex = "";
 		if (information != null && !"".equals(information)) {
-			if (sex == null||"".equals(sex)) {
+			if (sex == null || "".equals(sex)) {
 				if (information.contains("女配角") || information.contains("女演员") || information.contains("女主角")) {
 					strsex = "女";
 				}
@@ -288,7 +336,8 @@ public class BaiDuPeopleDownload {
 					strsex = "男";
 				}
 			}
-			OracleHaoSou.updateiInformation(Integer.parseInt(id), information, strsex);
+			// OracleHaoSou.updateiInformation(Integer.parseInt(id),
+			// information, strsex);
 		}
 	}
 
@@ -350,20 +399,14 @@ public class BaiDuPeopleDownload {
 		 * 2015年11月14日16:36:11 进行补全数据的基本信息
 		 */
 
-		// String mainUrl =
-		// "http://baike.baidu.com/link?url=vTl6gw_pNQg686aYCY_VIpUZD40EcKMcPDQzSjOW742q55xp_88_EcLK6CUXoK9w4BrqyWqRH9pnI3ReUegoNq";
-		// maininformation(mainUrl);
-
-		// mainbaiduPeoPle(0, 2);
-//		System.out.println("abcdefghijklmnabc".contains("jklmn"));
-		
-		String xx =ConfigManager.getInstance().getConfigValue("numBaidunum");
-		int xxnum = Integer.parseInt(xx);
-		for (int i = xxnum; i < 11503; i = i + 1000) {
-			// i=15780;
-			mainbaiduPeoPle(i, i + 1000);
-
-		}
+		// String xx =
+		// ConfigManager.getInstance().getConfigValue("numBaidunum");
+		// int xxnum = Integer.parseInt(xx);
+		// for (int i = xxnum; i < 11503; i = i + 1000) {
+		// // i=15780;
+		// mainbaiduPeoPle(i, i + 1000);
+		//
+		// }
 
 	}
 

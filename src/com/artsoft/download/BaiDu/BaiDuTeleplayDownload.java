@@ -1,4 +1,4 @@
-package com.artsoft.download;
+package com.artsoft.download.BaiDu;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

@@ -169,7 +169,14 @@ public class HaoSouWordDownLoad {
 					HaosouPeoPleBranch(urlBranch, listTemp.get(0), listTemp.get(1), "2");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
+					try {
+						Thread.sleep(1000*60*5);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					e.printStackTrace();
+					
 				}
 				// 媒体关注度
 				try {
@@ -178,6 +185,12 @@ public class HaoSouWordDownLoad {
 					HaosouPeoPleBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
+					try {
+						Thread.sleep(1000*60*5);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					e.printStackTrace();
 				}
 
@@ -209,34 +222,34 @@ public class HaoSouWordDownLoad {
 		// ConfigManager config = ConfigManager.getInstance();
 		// driver = config.getConfigValue("driver");
 
-		 while (true) {
-		 CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") +
-		 ":开始");
-		 String xx = ConfigManager.getInstance().getConfigValue("ID");
-		
-		 int xxnum = Integer.parseInt(xx);
-		 System.out.println(xxnum);
-		 for (int i = xxnum; i < 15780; i = i + 1000) {
-		 // i=15780;
-		 mainProgram(i, i + 1000);
-		 }
-		 }
+//		 while (true) {
+//		 CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") +
+//		 ":开始");
+//		 String xx = ConfigManager.getInstance().getConfigValue("ID");
+//		
+//		 int xxnum = Integer.parseInt(xx);
+//		 System.out.println(xxnum);
+//		 for (int i = xxnum; i < 15780; i = i + 1000) {
+//		 // i=15780;
+//		 mainProgram(i, i + 1000);
+//		 }
+//		 }
 
 		/**
 		 * 进行人的运行
 		 */
-//		while (true) {
-//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-//			// ConfigManager config = ConfigManager.getInstance();
-//			// driver = config.getConfigValue("driver");
-//			String xx = ConfigManager.getInstance().getConfigValue("IDpeople");
-//			// mainPeoPle();
-//			int xxnum = Integer.parseInt(xx);
-//			for (int i = xxnum; i < 16871; i = i + 1000) {
-//				// i=15780;
-//				mainPeoPle(i, i + 1000);
-//			}
-//		}
+		while (true) {
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+			// ConfigManager config = ConfigManager.getInstance();
+			// driver = config.getConfigValue("driver");
+			String xx = ConfigManager.getInstance().getConfigValue("IDpeople");
+			// mainPeoPle();
+			int xxnum = Integer.parseInt(xx);
+			for (int i = xxnum; i < 16871; i = i + 1000) {
+				// i=15780;
+				mainPeoPle(i, i + 1000);
+			}
+		}
 	}
 
 }

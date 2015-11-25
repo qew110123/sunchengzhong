@@ -211,6 +211,24 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
+	
+	/**
+	 * 进行百度数据的数据的 修改操作
+	 * @param persion
+	 */
+	public static void upTemDimPerson(Persion persion) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "update ods.tem_dim_person t set t.occupation=?,t.major_awards=?,t.basic_info=? where t.person_id=?";
+		List<Comparable> list = new ArrayList();
+		list.add(persion.getOccupation());
+		list.add(persion.getMajor_awards());
+		list.add(persion.getDescription_text());
+		list.add(persion.getId());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
 
 	/**
 	 * 进行电视剧数据 的

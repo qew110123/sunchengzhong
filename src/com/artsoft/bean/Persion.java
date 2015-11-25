@@ -299,7 +299,7 @@ public class Persion {
 	// 经纪人
 	private String brokers = "";
 	// 基本信息大字段
-	// private String description_text="";
+	 private String description_text="";
 	// 获奖信息
 	// private List<PersonAward> personAwardList;
 	// // 职业生涯
@@ -318,6 +318,14 @@ public class Persion {
 	// private List<PersonImg> personImgList;
 	// 社会活动
 	// private List personSocialActivitiesList;
+
+	public String getDescription_text() {
+		return description_text;
+	}
+
+	public void setDescription_text(String description_text) {
+		this.description_text = description_text;
+	}
 
 	public void print() {
 		System.out.println("id:				" + id);
@@ -348,6 +356,8 @@ public class Persion {
 		System.out.println("volk: 		    " + volk);
 		System.out.println("brokers: 		" + brokers);
 		System.out.println("social_activities:   " + social_activities);
+		System.out.println("description_text:   " + description_text);
+		
 	}
 
 }
