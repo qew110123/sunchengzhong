@@ -58,7 +58,14 @@ public class HaoSouWordDownLoad {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("好搜电视剧分析数据日期 ，入库报错");
+			System.out.println("好搜电视剧分析数据日期 ，入库报错,运行报错，等待5分钟");
+			try {
+				Thread.sleep(1000 * 60 * 5);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		}
 
 	}
@@ -101,7 +108,13 @@ public class HaoSouWordDownLoad {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("人分析数据和入库报错");
+			System.out.println("人分析数据和入库报错,运行报错，等待5分钟");
+			try {
+				Thread.sleep(1000 * 60 * 5);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 	}
@@ -129,7 +142,7 @@ public class HaoSouWordDownLoad {
 							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
 							+ "&area=%E5%85%A8%E5%9B%BD";
 					HaosouBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
-				} catch (UnsupportedEncodingException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，等待5分钟" + urlBranch);
 					try {
@@ -145,7 +158,7 @@ public class HaoSouWordDownLoad {
 					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
 							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
 					HaosouBranch(urlBranch, listTemp.get(0), listTemp.get(1), "4");
-				} catch (UnsupportedEncodingException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，等待5分钟" + urlBranch);
 					try {
@@ -188,7 +201,7 @@ public class HaoSouWordDownLoad {
 					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
 							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&area=%E5%85%A8%E5%9B%BD";
 					HaosouPeoPleBranch(urlBranch, listTemp.get(0), listTemp.get(1), "2");
-				} catch (UnsupportedEncodingException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，等待5分钟" + urlBranch);
 					try {
@@ -205,7 +218,7 @@ public class HaoSouWordDownLoad {
 					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
 							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
 					HaosouPeoPleBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
-				} catch (UnsupportedEncodingException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，等待5分钟" + urlBranch);
 					try {
