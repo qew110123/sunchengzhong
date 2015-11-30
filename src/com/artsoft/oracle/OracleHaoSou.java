@@ -42,7 +42,6 @@ public class OracleHaoSou {
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
 		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
-
 	}
 
 	/**
@@ -101,8 +100,8 @@ public class OracleHaoSou {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		System.out.println(personId + searchIndex + updateDate + createDate + dataUrl + dateType);
 
-		String strSql = "insert into ods.person_network_popularity t (t.person_id,t.search_index,t.update_date,t.create_date,t.data_url,t.date_type) "
-				+ "values(?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
+		String strSql = "insert into ods.person_network_popularity t (t.person_id,t.search_index,t.date_date,t.create_date,t.data_url,t.date_type) "
+				+ "values(?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 
 		List<Comparable> list = new ArrayList();
 		list.add(Integer.parseInt(personId));// 这里是将对象加入到list中
@@ -414,13 +413,31 @@ public class OracleHaoSou {
 	}
 	
 	
-	
-	
-	
-	
-
+	/**
+	 * 获取当360人的指数数据
+	 * @return
+	 */
+	public static String returnMaxdata() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "select max(t.date_date) from ods.person_network_popularity t";
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
+	/**
+	 * 获取当360电视剧的指数数据
+	 * @return
+	 */
+	public static String returnMaxdianshijudata() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "select max(t.date_date) from ods.person_network_popularity t";
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
 	public static void main(String[] args) {
-		updateiInformation(2, "", null);
+		returnMaxdata();
+//		updateiInformation(2, "", null);
 		// List<String> listArray = select("1", "10000");
 		// for (Object Objstring : listArray) {
 		// System.out.println(Objstring);

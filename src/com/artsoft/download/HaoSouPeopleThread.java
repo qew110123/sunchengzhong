@@ -8,7 +8,9 @@ import java.util.Scanner;
 
 import com.artsoft.config.ConfigManager;
 import com.artsoft.demo.DemoTime;
+import com.artsoft.mythread.MyThread;
 import com.artsoft.oracle.OracleHaoSou;
+import com.artsoft.pool.ThreadPool;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
@@ -16,8 +18,19 @@ import com.artsoft.util.Stirngstr;
 import com.artsoft.util.TimeTest;
 import com.artsoft.util.DealProxy;
 
-public class HaoSouWordDownLoad {
+public class HaoSouPeopleThread implements Runnable {
+	
+//	static ThreadPool pool = new ThreadPool(10);
+	@Override
+	public void run() {
+		System.out.println(Thread.currentThread().getName());
+		String [] sstre=Thread.currentThread().getName().split("##");
+		System.out.println(sstre[0]+sstre[1]+"*******"+sstre[2]+sstre[3]);
+		HaosouPeoPleBranch(sstre[0], sstre[1], sstre[2], sstre[3]);
+		
+	}
 	private static Proxy proxy = null;
+	
 
 	// 行电视剧数据
 	public static void HaosouBranch(String urlBranch, String tvplayId, String tyPlayName, String DataType) {
@@ -49,7 +62,7 @@ public class HaoSouWordDownLoad {
 			if (starttime != null && !"".equals(starttime)) {
 
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -121,12 +134,12 @@ public class HaoSouWordDownLoad {
 			System.out.println(sourceStrArray.length);
 			if (starttime != null && !"".equals(starttime)) {
 
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(2000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 
 				// for (int i = 0; i < sourceStrArray.length; i++) {
 				// // System.out.println(sourceStrArray[i] +
@@ -235,7 +248,11 @@ public class HaoSouWordDownLoad {
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
 					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
 							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&area=%E5%85%A8%E5%9B%BD";
-					HaosouPeoPleBranch(urlBranch, listTemp.get(0), listTemp.get(1), "2");
+//					HaosouPeoPleBranch(urlBranch, listTemp.get(0), listTemp.get(1), "2");
+					HaoSouPeopleThread mt = new HaoSouPeopleThread();
+					Thread thread1 = new Thread(mt, urlBranch+"##"+listTemp.get(0)+"##"+listTemp.get(1)+"##2");
+					thread1.start();
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，等待5分钟" + urlBranch);
@@ -251,7 +268,10 @@ public class HaoSouWordDownLoad {
 				try {
 					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
 							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
-					HaosouPeoPleBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
+//					HaosouPeoPleBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
+					HaoSouPeopleThread mt = new HaoSouPeopleThread();
+					Thread thread1 = new Thread(mt, urlBranch+"##"+listTemp.get(0)+"##"+listTemp.get(1)+"##3");
+					thread1.start();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，等待5分钟" + urlBranch);
@@ -279,7 +299,7 @@ public class HaoSouWordDownLoad {
 		int i = 0;
 		while (bb) {
 			proxy = DealProxy.getInstance().getPoxxy();
-			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
+			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, proxy);
 			if (strHtml != null && !"".equals(strHtml)) {
 				bb = false;
 			}
@@ -291,94 +311,25 @@ public class HaoSouWordDownLoad {
 		return strHtml;
 
 	}
-	
-	/**
-	 * 两个放到了一起
-	 */
-	public static void staticopen() {
-		while (true) {
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-			for (int i = 0; i < 15780; i = i + 1000) {
-				// i=15780;
-				mainProgram(i, i + 1000);
-			}
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":第一阶段电视剧结束");
-			
-			for (int i = 0; i < 16871; i = i + 1000) {
-				// i=15780;
-				mainPeoPle(i, i + 1000);
-			}
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
-			
-		}
-
-	}
-	/**
-	 * 分别运行数据
-	 */
-	public static void staticopentwo() {
-		Scanner in = new Scanner(System.in);
-		System.out.println("请输入1:进行电视剧的运行  ,2:进行人的运行");
-		String numi = in.next();
-		/**
-		 * 进行电视剧数据的下载
-		 */
-		// ConfigManager config = ConfigManager.getInstance();
-		// driver = config.getConfigValue("driver");
-		if ("1".equals(numi)) {
-			while (true) {
-				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-				String xx = ConfigManager.getInstance().getConfigValue("ID");
-				int xxnum = Integer.parseInt(xx);
-				System.out.println(xxnum);
-				for (int i = xxnum; i < 15780; i = i + 1000) {
-					// i=15780;
-					mainProgram(i, i + 1000);
-				}
-				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
-			}
-		}
-
-		/**
-		 * 进行人的运行
-		 */
-		if ("2".equals(numi)) {
-			while (true) {
-				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-				// ConfigManager config = ConfigManager.getInstance();
-				// driver = config.getConfigValue("driver");
-				String xx = ConfigManager.getInstance().getConfigValue("IDpeople");
-				// mainPeoPle();
-				int xxnum = Integer.parseInt(xx);
-				for (int i = xxnum; i < 16871; i = i + 1000) {
-					// i=15780;
-					mainPeoPle(i, i + 1000);
-				}
-				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
-			}
-		}
-
-	}
-	
-	
-	
 
 	public static void main(String[] args) {
-		staticopen();
 		// TODO Auto-generated method stub
-		// try {
-		// String message = java.net.URLEncoder.encode("赵丽颖","utf-8");
-		// System.out.println(message);
-		// } catch (UnsupportedEncodingException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		//
-		// HaosouBranch("http://index.haosou.com/index.php?a=soMediaJson&q=%E8%B5%B5%E4%B8%BD%E9%A2%96");
-		// mainProgram(0,1);
-		// HaosouPeoPleBranch("http://index.haosou.com/index.php?a=soIndexJson&q=%E8%8C%83%E5%86%B0%E5%86%B0&area=%E5%85%A8%E5%9B%BD",
-		// "", "", "");
+
+//		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+//		// ConfigManager config = ConfigManager.getInstance();
+//		// driver = config.getConfigValue("driver");
+//		String xx = ConfigManager.getInstance().getConfigValue("IDpeople");
+//		// mainPeoPle();
+//		int xxnum = Integer.parseInt(xx);
+//		for (int i = xxnum; i < 16871; i = i + 1000) {
+//			// i=15780;
+//			mainPeoPle(i, i + 1000);
+//		}
+//		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
+//		System.out.println(urlreturnHtml("http://index.haosou.com/"));
 		
+		
+
 	}
 
 }

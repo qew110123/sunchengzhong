@@ -74,7 +74,7 @@ public class DBOperate218 {
 	/**
 	 * ÷¥––≤È—Ø”Ôæ‰
 	 */
-	public String getResultValue(Connection conn,String strSql) {
+	public static String getResultValue(Connection conn,String strSql) {
 		PreparedStatement select_stm = null;
 		ResultSet result = null;
 		try {
