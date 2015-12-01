@@ -279,7 +279,7 @@ public class HaoSouWordDownLoad {
 		int i = 0;
 		while (bb) {
 			proxy = DealProxy.getInstance().getPoxxy();
-			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
+			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, proxy);
 			if (strHtml != null && !"".equals(strHtml)) {
 				bb = false;
 			}

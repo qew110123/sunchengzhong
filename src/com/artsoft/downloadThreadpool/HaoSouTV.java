@@ -17,7 +17,7 @@ import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
 public class HaoSouTV {
-	static ThreadPool pool = new ThreadPool(10);
+	static ThreadPool pool = new ThreadPool(5);
 	private static Proxy proxy = null;
 
 	public static void mainProgram(int statnum, int endnum) {
@@ -151,9 +151,9 @@ public class HaoSouTV {
 
 	private static void HaosouBranch1(String urlBranch, String string, String string2, String string3) {
 		// TODO Auto-generated method stub
-		while (pool.getPoolNum() > 10) {
+		while (pool.getPoolNum() > 5) {
 			try {
-				System.out.println("线程数量大于10，等待5s");
+				System.out.println("线程数量大于5，等待5s");
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -176,10 +176,19 @@ public class HaoSouTV {
 			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, proxy);
 			if (strHtml != null && !"".equals(strHtml)) {
 				bb = false;
+				if (strHtml.contains("360指数_访问异常出错")) {
+					bb = true;
+					System.out.println(Thread.currentThread().getName());
+					System.out.println("ip 代理出错");
+				}
+			}else{
+				System.out.println("打开出错"+i+"次,链接："+urlBranch);
+				
 			}
 			if (i > 10) {
 				bb = false;
 			}
+			
 			i += 1;
 		}
 		return strHtml;
@@ -216,9 +225,13 @@ public class HaoSouTV {
 	}
 
 	public static void main(String[] args) {
+		
 		// TODO Auto-generated method stub
-		TimingTime(23, 59, 59);
-
+//		TimingTime(23, 59, 59);
+		for (int i = 0; i < 15780; i = i + 1000) {
+			// i=15780;
+			mainProgram(i, i + 1000);
+		}
 	}
 
 }
