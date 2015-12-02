@@ -169,14 +169,24 @@ public class OracleHaoSou {
 		System.out.println(bb);
 	}
 
+	/**
+	 * 进行百度人物的添加
+	 * @param persion
+	 */
 	public static void InsertTemDimPerson(Persion persion) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
 		String strSql = "insert into ODS.TEM_DIM_PERSON t (t.person_id, t.person_name,t.img_url,t.person_url ,"
 				+ "t.SEX ,t.NATIONALITY,t.bloodtype ,t.height,t.weight,t.occupation ,t.constellation ,t.birthday,"
 				+ "t.deathday,t.alias_en,t.alias_cn,t.homeplace,t.nation,t.major_awards,t.shcool,t.brokerage_firm,"
-				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers) "
-				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers,t.hobby) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		strSql = "insert into ODS.TEM_DIM_PERSON t (t.person_id, t.person_name,t.img_url,t.person_url ,"
+				+ "t.SEX ,t.NATIONALITY,t.bloodtype ,t.height,t.weight,t.occupation ,t.constellation ,t.birthday,"
+				+ "t.deathday,t.alias_en,t.alias_cn,t.homeplace,t.major_awards,t.shcool,t.brokerage_firm,"
+				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers,t.hobby，t.basic_info) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(persion.getId());
 		list.add(persion.getName());
@@ -194,7 +204,7 @@ public class OracleHaoSou {
 		list.add(persion.getAlias_en());
 		list.add(persion.getAlias_cn());
 		list.add(persion.getHomeplace());
-		list.add(persion.getNation());
+//		list.add(persion.getNation());
 		list.add(persion.getMajor_awards());
 		list.add(persion.getShcool());
 		list.add(persion.getBrokerage_firm());
@@ -206,6 +216,8 @@ public class OracleHaoSou {
 		list.add(persion.getFlowers());
 		list.add(persion.getVolk());
 		list.add(persion.getBrokers());
+		list.add(persion.getHobby());
+		list.add(persion.getDescription_text());
 		// list.add(persion.getPersonSocialActivitiesList());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
@@ -244,8 +256,8 @@ public class OracleHaoSou {
 				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
 				+ "t.before_teleplay,t.next_teleplay,t.open_time,t.close_time,t.total_planning,t.film_time,t.box_office,"
 				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
-				+ "t.recording_place,t.stills_url) values"
-				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?)";
+				+ "t.recording_place,t.stills_url,t.BEFORE_TELEPLAY,t.NEXT_TELEPLAY,t.MAJOR_AWARDS) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(tvplay.getTvplay_id());
 		list.add(tvplay.getTvplay_name());
@@ -292,6 +304,9 @@ public class OracleHaoSou {
 		list.add(tvplay.getSeason_numbver());
 		list.add(tvplay.getRecording_place());
 		list.add(tvplay.getStills_url());
+		list.add(tvplay.getBefore_eleplay());
+		list.add(tvplay.getNext_teleplay());
+		list.add(tvplay.getMajor_awards());
 		// list.add(persion.getPersonSocialActivitiesList());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
@@ -429,6 +444,18 @@ public class OracleHaoSou {
 	 * @return
 	 */
 	public static String returnMaxdianshijudata() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "select max(t.date_date) from ods.person_network_popularity t";
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
+	
+	/**
+	 * 获取当360人的指数数据
+	 * @return
+	 */
+	public static String returnMaxdianpeople() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String strSql = "select max(t.date_date) from ods.person_network_popularity t";
 		String strMax = DBOperate218.getResultValue(conn, strSql);

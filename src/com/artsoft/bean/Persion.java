@@ -300,6 +300,9 @@ public class Persion {
 	private String brokers = "";
 	// 基本信息大字段
 	 private String description_text="";
+	 
+	// 爱好
+	 private String hobby="";
 	// 获奖信息
 	// private List<PersonAward> personAwardList;
 	// // 职业生涯
@@ -318,6 +321,14 @@ public class Persion {
 	// private List<PersonImg> personImgList;
 	// 社会活动
 	// private List personSocialActivitiesList;
+
+	public String getHobby() {
+		return hobby;
+	}
+
+	public void setHobby(String hobby) {
+		this.hobby = hobby;
+	}
 
 	public String getDescription_text() {
 		return description_text;

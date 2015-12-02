@@ -219,6 +219,19 @@ public class BaiDuTeleplayDownload {
 		if ("首播平台".equals(baseInfoName)) {
 			tvplay.setPremiere_platform(baseInfoValue);
 		}
+		if ("首播平台".equals(baseInfoName)) {
+			tvplay.setPremiere_platform(baseInfoValue);
+		}
+		if ("接档".equals(baseInfoName)) {
+			tvplay.setBefore_eleplay(baseInfoValue);
+		}
+		if ("被接档".equals(baseInfoName)) {
+			tvplay.setNext_teleplay(baseInfoValue);
+		}
+		if ("主要奖项".equals(baseInfoName)) {
+			tvplay.setMajor_awards(baseInfoValue);
+		}
+		
 		return tvplay;
 	}
 
@@ -228,7 +241,7 @@ public class BaiDuTeleplayDownload {
 	 * @param id
 	 * @param strname
 	 */
-	private static void mainUrlall(String urlmain, String id, String strname) {
+	public static void mainUrlall(String urlmain, String id, String strname) {
 		// TODO Auto-generated method stub
 		String strHtml = "";
 		boolean bb = true;

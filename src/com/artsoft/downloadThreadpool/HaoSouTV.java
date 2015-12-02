@@ -151,9 +151,9 @@ public class HaoSouTV {
 
 	private static void HaosouBranch1(String urlBranch, String string, String string2, String string3) {
 		// TODO Auto-generated method stub
-		while (pool.getPoolNum() > 5) {
+		while (pool.getPoolNum() > 10) {
 			try {
-				System.out.println("线程数量大于5，等待5s");
+				System.out.println("线程数量大于10，等待5s");
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -179,7 +179,7 @@ public class HaoSouTV {
 				if (strHtml.contains("360指数_访问异常出错")) {
 					bb = true;
 					System.out.println(Thread.currentThread().getName());
-					System.out.println("ip 代理出错");
+					System.out.println("ip 代理出错"+proxy);
 				}
 			}else{
 				System.out.println("打开出错"+i+"次,链接："+urlBranch);

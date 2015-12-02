@@ -185,10 +185,19 @@ public class HaoSouWordAdmin {
 			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, proxy);
 			if (strHtml != null && !"".equals(strHtml)) {
 				bb = false;
+				if (strHtml.contains("360指数_访问异常出错")) {
+					bb = true;
+					System.out.println(Thread.currentThread().getName());
+					System.out.println("ip 代理出错");
+				}
+			}else{
+				System.out.println("打开出错"+i+"次,链接："+urlBranch);
+				
 			}
 			if (i > 10) {
 				bb = false;
 			}
+			
 			i += 1;
 		}
 		return strHtml;

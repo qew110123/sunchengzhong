@@ -27,6 +27,7 @@ public class BaiDuPeopleDownload {
 
 	public static void mainmore(String strId, String url) {
 		Persion person = new Persion();
+		person.setId(Integer.valueOf(strId));
 		// TODO Auto-generated method stub
 		String strHtml = "";
 		boolean bb = true;
@@ -45,21 +46,8 @@ public class BaiDuPeopleDownload {
 		// "anchor-list"));
 
 		Document doc = Jsoup.parse(strHtml);
-		// Element linkmain = doc.getElementById("fluxes_static");
 		Elements links = doc.select("div.basic-info");
-		// Element content = doc.getElementById("content");
-		// Elements links = content.getElementsByTag("a");
-		// System.out.println(links.size());
 		for (Element link : links) {
-			// String idnum = "";
-			// String strVolumes = "";
-			// System.out.println(strVolumes =
-			// link.select("span.inner-title").text());
-			// System.out.println(idnum = link.select("a.video").attr("href"));
-			// System.out.println(idnum = HtmlAnalyze.getTagText(idnum, "/f/",
-			// ".html"));
-			// System.out.println(link);
-			// System.out.println(link);
 
 			String[] sourceStrArray = link.toString().split("d>");
 
@@ -68,7 +56,6 @@ public class BaiDuPeopleDownload {
 				String baseInfoValue = "";
 				baseInfoName = HtmlAnalyze.getTagText(sourceStrArray[i].toString(), "basicInfo-item name\">", "</");
 				if ("主要成就".equals(baseInfoName)) {
-//					System.out.println(sourceStrArray[i].toString());
 					baseInfoValue = HtmlAnalyze.getTagText(sourceStrArray[i].toString() + "#",
 							"basicInfo-item value\">", "</d#", true, 0);
 				} else {
@@ -77,24 +64,29 @@ public class BaiDuPeopleDownload {
 				}
 				if (baseInfoName != null && baseInfoValue != null) {
 					baseInfoName = baseInfoName.replace("&nbsp;", "");
-					// System.out.println(baseInfoValue =
-					// baseInfoValue.replace(" ", "").replace("\n", "##")
-					// .replace("##展开##", "").replace("####", ""));
-					baseInfoValue = baseInfoValue.replace(" ", "").replace("\n", "").replace("展开", "");
-					// System.out.println(baseInfoValue.replace("&nbsp;",
-					// ""));##展开##
+					baseInfoValue = baseInfoValue.replace(" ", "").replace("\n", "");
+					
 					if ("主要成就".equals(baseInfoName)) {
-						// System.out.println(baseInfoValue=);
-						String[] strlist = baseInfoValue.split("<br/>");
-						for (int j = 0; j < strlist.length; j++) {
-							baseInfoValue = baseInfoValue
-									+ HtmlAnalyze.getTagText("##" + strlist[j].toString() + ";**", "##", "**");
-							if (baseInfoValue.contains("主要成就")) {
-								// baseInfoValue="";
-								baseInfoValue = HtmlAnalyze.getTagText("##" + strlist[j].toString() + ";**", "主要成就",
-										"**");
+						if (!"".equals(baseInfoValue)) {
+							// System.out.println(baseInfoValue=);
+							String[] strlist = baseInfoValue.replace("展开", "").split("<br/>");
+							for (int j = 0; j < strlist.length; j++) {
+								if (baseInfoValue==null||baseInfoValue.equals("")||baseInfoValue.equals("null")) {
+									baseInfoValue="";
+								}
+								System.out.println((HtmlAnalyze.getTagText("##" + baseInfoValue + ";**", "##", "**").replaceAll(";", "")).equals(HtmlAnalyze.getTagText("##" + strlist[j].toString() + ";**", "##", "**").replaceAll(";", "")));
+								if (!(HtmlAnalyze.getTagText("##" + baseInfoValue + ";**", "##", "**").replaceAll(";", "")).equals(HtmlAnalyze.getTagText("##" + strlist[j].toString() + ";**", "##", "**").replaceAll(";", ""))) {
+									
+									baseInfoValue = baseInfoValue
+											+ HtmlAnalyze.getTagText("##" + strlist[j].toString() + ";**", "##", "**");
+									if (baseInfoValue.contains("主要成就")) {
+										// baseInfoValue="";
+										baseInfoValue = HtmlAnalyze.getTagText("##" + strlist[j].toString() + ";**", "主要成就",
+												"**");
+									}
+								}
+								
 							}
-
 						}
 					}
 
@@ -122,7 +114,7 @@ public class BaiDuPeopleDownload {
 			person.setId(Integer.parseInt(strId));
 			person.setUrl(url);
 			//进行数据的添加 操作
-//			OracleHaoSou.InsertTemDimPerson(person);
+			OracleHaoSou.InsertTemDimPerson(person);
 			
 
 			// System.out.println();
@@ -155,10 +147,16 @@ public class BaiDuPeopleDownload {
 	}
 
 	public static Persion buildPerson(String baseInfoName, String baseInfoValue, Persion person) {
+		baseInfoValue=baseInfoValue.replaceAll("&nbsp;", "");
+		baseInfoValue=baseInfoValue.replaceAll("&middot;", "·");
 		if ("中文名".equals(baseInfoName)) {
+			baseInfoValue=delectbiaoqian(baseInfoValue);
+			baseInfoValue=baseInfoValue.replaceAll("&middot;", "·");
 			person.setName(baseInfoValue);
 		}
 		if ("外文名".equals(baseInfoName)) {
+			baseInfoValue=delectbiaoqian(baseInfoValue);
+			baseInfoValue=baseInfoValue.replaceAll("&middot;", "·");
 			person.setAlias_en(baseInfoValue);
 		}
 		if ("别名".equals(baseInfoName)) {
@@ -171,6 +169,7 @@ public class BaiDuPeopleDownload {
 			person.setVolk(baseInfoValue);
 		}
 		if ("星座".equals(baseInfoName)) {
+			baseInfoValue=baseInfoValue.replaceAll("&nbsp;", "");
 			person.setConstellation(baseInfoValue);
 		}
 		if ("血型".equals(baseInfoName)) {
@@ -201,9 +200,11 @@ public class BaiDuPeopleDownload {
 			person.setBrokerage_firm(baseInfoValue);
 		}
 		if ("代表作品".equals(baseInfoName)) {
+			baseInfoName=delectbiaoqian(baseInfoName);
 			person.setOpus(baseInfoValue);
 		}
 		if ("主要成就".equals(baseInfoName)) {
+			baseInfoValue=delectbiaoqian(baseInfoValue);
 			person.setMajor_awards(baseInfoValue);
 		}
 		if ("籍贯".equals(baseInfoName)) {
@@ -213,7 +214,11 @@ public class BaiDuPeopleDownload {
 			person.setBrokers(baseInfoValue);
 		}
 		if ("性别".equals(baseInfoName)) {
+			baseInfoValue=baseInfoValue.replace("&nbsp;", "");
 			person.setGender(baseInfoValue);
+		}
+		if ("爱好".equals(baseInfoName)) {
+			person.setHobby(baseInfoValue);
 		}
 		// if("恋人".equals(baseInfoName)){
 		//
@@ -365,6 +370,19 @@ public class BaiDuPeopleDownload {
 			}
 		}
 	}
+	public static String delectbiaoqian(String major_awards){
+		major_awards = major_awards.replaceAll("<[^>]+>", "");
+		if(major_awards.indexOf("、") !=- -1){
+			major_awards = major_awards.replaceAll("、", ";");
+		}
+		if(major_awards.indexOf("&nbsp;") !=- -1){
+			major_awards = major_awards.replaceAll("&nbsp;", ";");
+		}
+		major_awards = major_awards.replaceAll("\\[\\d+\\]", "");
+		major_awards = major_awards.replaceAll("'", "[单引号]");
+		return major_awards;
+		
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -407,6 +425,7 @@ public class BaiDuPeopleDownload {
 		// mainbaiduPeoPle(i, i + 1000);
 		//
 		// }
+//		mainmore("", "http://baike.baidu.com/view/1269111.htm?qq-pf-to=pcqq.c2c");
 
 	}
 
