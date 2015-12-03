@@ -45,7 +45,7 @@ public class TimeTest {
 		System.out.println("获取明年第一天日期:"+tt.getNextYearFirst());
 		System.out.println("获取明年最后一天日期:"+tt.getNextYearEnd());
 		System.out.println("获取本季度第一天到最后一天:"+tt.getThisSeasonTime(11));
-		System.out.println("获取两个日期之间间隔天数2008-12-1~2008-9.29:"+TimeTest.getTwoDay("2008-12-1","2008-9-29"));
+		System.out.println("获取两个日期之间间隔天数2008-12-1~2008-9.29:"+TimeTest.getTwoDay("2008-12-01","2008-11-29"));
 		System.out.println("指定日期字符串n天之前或者之后的日期  2013-01-11:" + TimeTest.getBeforeAfterDate("2013-01-11", 1019));
 	}
 	

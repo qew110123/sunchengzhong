@@ -459,8 +459,24 @@ public class OracleHaoSou {
 		System.out.println(strMax);
 		return strMax;
 	}
+	
+	
+	/**
+	 * 获取当360字数总需要采集的人数的个数
+	 * @return
+	 */
+	public static String returnNumPeople(String strdbname) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+//		String strSql = "select count(*) from ods.person_network_popularity";
+		String strSql = "select count(*) from "+strdbname;
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
 	public static void main(String[] args) {
+//		returnNumPeople("edw.dim_tvplay");
 		returnMaxdata();
+//		returnMaxdata();
 //		updateiInformation(2, "", null);
 		// List<String> listArray = select("1", "10000");
 		// for (Object Objstring : listArray) {

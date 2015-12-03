@@ -34,5 +34,8 @@ public class OracleBaidu {
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 	}
+	
+	
+	
 
 }

@@ -1,6 +1,7 @@
 package com.artsoft.downloadThreadpool;
 
 import java.net.Proxy;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -204,11 +205,32 @@ public class HaoSouWordAdmin {
 		return strHtml;
 
 	}
+	
+	
+	/**
+	    * 得到二个日期间的间隔天数
+	    */
+	public static String getTwoDay(String sj1, String sj2) {
+	    SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
+	    long day = 0;
+	    try {
+	     java.util.Date date = myFormatter.parse(sj1);
+	     java.util.Date mydate = myFormatter.parse(sj2);
+	     day = (date.getTime() - mydate.getTime()) / (24 * 60 * 60 * 1000);
+	    } catch (Exception e) {
+	     return "";
+	    }
+	    return day + "";
+	}
 
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-
-		for (int i = 0; i < 16871; i = i + 1000) {
+//		IpFilter.mainip("http://index.haosou.com/");
+		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		String returnNumPeople=OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
+		System.out.println("需要采集的人名字数为"+returnNumPeople);
+		
+		for (int i = 0; i < Integer.parseInt(returnNumPeople); i = i + 1000) {
 			mainPeoPle(i, i + 1000);
 		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
@@ -231,15 +253,23 @@ public class HaoSouWordAdmin {
 			}
 		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
 	}
+	
+	
+	
+	
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		// TimingTime(23, 59, 59);
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-		IpFilter.mainip("http://index.haosou.com/");
+//		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		for (int i = 0; i < 20232; i = i + 1000) {
+		String returnNumPeople=OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
+		System.out.println("需要采集的人名字数为"+returnNumPeople);
+		
+		for (int i = 0; i < Integer.parseInt(returnNumPeople); i = i + 1000) {
 			mainPeoPle(i, i + 1000);
 		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");

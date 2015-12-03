@@ -1,6 +1,7 @@
 package com.artsoft.downloadThreadpool;
 
 import java.net.Proxy;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -120,6 +121,7 @@ public class HaoSouTV {
 				//
 				// }
 				// System.out.println(OracleHaoSou.returnMaxdianshijudata());
+				
 				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
 					System.out.println(sourceStrArray[i - 1]);
 					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
@@ -193,11 +195,30 @@ public class HaoSouTV {
 		return strHtml;
 
 	}
+	
+	/**
+	    * 得到二个日期间的间隔天数
+	    */
+	public static String getTwoDay(String sj1, String sj2) {
+	    SimpleDateFormat myFormatter = new SimpleDateFormat("yyyyMMdd");
+	    long day = 0;
+	    try {
+	     java.util.Date date = myFormatter.parse(sj1);
+	     java.util.Date mydate = myFormatter.parse(sj2);
+	     day = (date.getTime() - mydate.getTime()) / (24 * 60 * 60 * 1000);
+	    } catch (Exception e) {
+	     return "";
+	    }
+	    return day + "";
+	}
 
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-
-		for (int i = 0; i < 15780; i = i + 1000) {
+		IpFilter.mainip("http://index.haosou.com/");
+		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		String returnNumTVle=OracleHaoSou.returnNumPeople("edw.dim_tvplay");
+		System.out.println("需要采集的人名字数为"+returnNumTVle);
+		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
 			// i=15780;
 			mainProgram(i, i + 1000);
 		}
@@ -232,7 +253,9 @@ public class HaoSouTV {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		for (int i = 0; i < 15780; i = i + 1000) {
+		String returnNumTVle=OracleHaoSou.returnNumPeople("edw.dim_tvplay");
+		System.out.println("需要采集的人名字数为"+returnNumTVle);
+		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
 			// i=15780;
 			mainProgram(i, i + 1000);
 		}
