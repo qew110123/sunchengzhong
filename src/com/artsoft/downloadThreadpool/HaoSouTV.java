@@ -119,15 +119,14 @@ public class HaoSouTV {
 				// DataType, "");
 				//
 				// }
-
+				// System.out.println(OracleHaoSou.returnMaxdianshijudata());
 				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
 					System.out.println(sourceStrArray[i - 1]);
 					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
 					System.out.println(palydate = palydate.replaceAll("-", ""));
 
-					// OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName,
-					// sourceStrArray[i - 1], "0", palydate, urlBranch,
-					// "0", DataType, "");
+					OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[i - 1], "0", palydate, urlBranch,
+							"0", DataType, "");
 					if (palydate.equals("20151111")) {
 						return;
 					}
@@ -179,22 +178,22 @@ public class HaoSouTV {
 				if (strHtml.contains("360指数_访问异常出错")) {
 					bb = true;
 					System.out.println(Thread.currentThread().getName());
-					System.out.println("ip 代理出错"+proxy);
+					System.out.println("ip 代理出错" + proxy);
 				}
-			}else{
-				System.out.println("打开出错"+i+"次,链接："+urlBranch);
-				
+			} else {
+				System.out.println("打开出错" + i + "次,链接：" + urlBranch);
+
 			}
 			if (i > 10) {
 				bb = false;
 			}
-			
+
 			i += 1;
 		}
 		return strHtml;
 
 	}
-	
+
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
@@ -202,7 +201,7 @@ public class HaoSouTV {
 			// i=15780;
 			mainProgram(i, i + 1000);
 		}
-		
+
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
@@ -225,13 +224,20 @@ public class HaoSouTV {
 	}
 
 	public static void main(String[] args) {
-		
+
 		// TODO Auto-generated method stub
-//		TimingTime(23, 59, 59);
+		// TimingTime(23, 59, 59);
+		// IpFilter ipxi=new IpFilter;
+
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+		IpFilter.mainip("http://index.haosou.com/");
+		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		for (int i = 0; i < 15780; i = i + 1000) {
 			// i=15780;
 			mainProgram(i, i + 1000);
 		}
+
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
 }

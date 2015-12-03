@@ -64,13 +64,14 @@ public class HaoSouWordAdmin {
 				// DataType);
 				// }
 
+				// OracleHaoSou.returnMaxdianpeople();
 				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
 					System.out.println(sourceStrArray[i - 1]);
 					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
 					System.out.println(palydate = palydate.replaceAll("-", ""));
 					// System.out.println(sourceStrArray[i-1] +
 					// DemoTime.getBeforeAfterDate(starttime, i-1));
-//					OracleHaoSou.intoPeoPle(tvplayId, sourceStrArray[i - 1], palydate, "", urlBranch, DataType);
+					OracleHaoSou.intoPeoPle(tvplayId, sourceStrArray[i - 1], palydate, "", urlBranch, DataType);
 					if (palydate.equals("20151027")) {
 						return;
 					}
@@ -120,7 +121,7 @@ public class HaoSouWordAdmin {
 							e.printStackTrace();
 						}
 					}
-					System.out.println("当前启动线程thread:"+pool.getPoolNum());
+					System.out.println("当前启动线程thread:" + pool.getPoolNum());
 					pool.performTask(new MyHaoSoutask(urlBranch, listTemp.get(0), listTemp.get(1), "2"));
 
 				} catch (Exception e) {
@@ -153,7 +154,7 @@ public class HaoSouWordAdmin {
 							e.printStackTrace();
 						}
 					}
-					System.out.println("当前启动线程thread:"+pool.getPoolNum());
+					System.out.println("当前启动线程thread:" + pool.getPoolNum());
 					pool.performTask(new MyHaoSoutask(urlBranch, listTemp.get(0), listTemp.get(1), "3"));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -190,20 +191,20 @@ public class HaoSouWordAdmin {
 					System.out.println(Thread.currentThread().getName());
 					System.out.println("ip 代理出错");
 				}
-			}else{
-				System.out.println("打开出错"+i+"次,链接："+urlBranch);
-				
+			} else {
+				System.out.println("打开出错" + i + "次,链接：" + urlBranch);
+
 			}
 			if (i > 10) {
 				bb = false;
 			}
-			
+
 			i += 1;
 		}
 		return strHtml;
 
 	}
-	
+
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
@@ -213,30 +214,35 @@ public class HaoSouWordAdmin {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
-	
-
 	// 判断数据开始时间
-		public static void TimingTime(int hh, int mm, int ss) {
-			Calendar calendar = Calendar.getInstance();
-			calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
-			calendar.set(Calendar.MINUTE, mm); // 控制分
-			calendar.set(Calendar.SECOND, ss); // 控制秒
+	public static void TimingTime(int hh, int mm, int ss) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+		calendar.set(Calendar.MINUTE, mm); // 控制分
+		calendar.set(Calendar.SECOND, ss); // 控制秒
 
-			Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+		Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
 
-			Timer timer = new Timer();
-			timer.scheduleAtFixedRate(new TimerTask() {
-				public void run() {
-					System.out.println("-------设定要指定任务--------");
-					runstatic();
-				}
-			}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
-		}
-	
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			public void run() {
+				System.out.println("-------设定要指定任务--------");
+				runstatic();
+			}
+		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		TimingTime(23, 59, 59);
+
+		// TimingTime(23, 59, 59);
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+		IpFilter.mainip("http://index.haosou.com/");
+		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		for (int i = 0; i < 20232; i = i + 1000) {
+			mainPeoPle(i, i + 1000);
+		}
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 
 	}
 

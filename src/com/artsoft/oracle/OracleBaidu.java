@@ -33,7 +33,6 @@ public class OracleBaidu {
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
-
 	}
 
 }

@@ -256,8 +256,8 @@ public class OracleHaoSou {
 				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
 				+ "t.before_teleplay,t.next_teleplay,t.open_time,t.close_time,t.total_planning,t.film_time,t.box_office,"
 				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
-				+ "t.recording_place,t.stills_url,t.BEFORE_TELEPLAY,t.NEXT_TELEPLAY,t.MAJOR_AWARDS) values"
-				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "t.recording_place,t.stills_url) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(tvplay.getTvplay_id());
 		list.add(tvplay.getTvplay_name());
@@ -304,9 +304,6 @@ public class OracleHaoSou {
 		list.add(tvplay.getSeason_numbver());
 		list.add(tvplay.getRecording_place());
 		list.add(tvplay.getStills_url());
-		list.add(tvplay.getBefore_eleplay());
-		list.add(tvplay.getNext_teleplay());
-		list.add(tvplay.getMajor_awards());
 		// list.add(persion.getPersonSocialActivitiesList());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
