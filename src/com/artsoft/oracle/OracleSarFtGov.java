@@ -113,6 +113,45 @@ public class OracleSarFtGov {
 		boolean bb = DBOperate.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
+	
+	/**
+	 * 添加动漫
+	 * @param ANIMATION_NAME
+	 * @param ANIMATION_URL
+	 * @param AUTHOR
+	 * @param AREA
+	 * @param STATE
+	 * @param POPULARITY
+	 * @param SUBJECT_NAME
+	 * @param ANIMATION_CATEGORY
+	 * @param IN_DATE
+	 * @param SOURCE
+	 */
+	public static void intotem_animation(String ANIMATION_NAME, String ANIMATION_URL, String AUTHOR, String AREA,
+			String STATE, String POPULARITY, String SUBJECT_NAME, String ANIMATION_CATEGORY, String IN_DATE,
+			String SOURCE) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		// System.out.println(old_value + new_value + tvplay_name +
+		// produce_company + set_number + type);
+		String strSql = "insert into ods.tem_animation t (ANIMATION_NAME,ANIMATION_URL,AUTHOR,AREA,STATE,POPULARITY,SUBJECT_NAME,ANIMATION_CATEGORY,IN_DATE,SOURCE)values(?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		// list.add(null);// 这里是将对象加入到list中
+		list.add(ANIMATION_NAME);
+		list.add(ANIMATION_URL);
+		list.add(AUTHOR);
+		list.add(AREA);
+		list.add(STATE);
+		list.add(Integer.parseInt(POPULARITY));
+		list.add(SUBJECT_NAME);
+		list.add(ANIMATION_CATEGORY);
+		list.add(IN_DATE);
+		list.add(SOURCE);
+
+//		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
 
 	public static void main(String[] args) {
 		intosubjectproject("你好", "你好", "33", "你好", "你好", "你好", "你好", "你好", "你好", "你好", "", "1", "你好", "你好");

@@ -386,6 +386,22 @@ public class OracleHaoSou {
 
 	}
 	
+	/**
+	 * 查询图片数据
+	 * 
+	 * @return
+	 */
+	public static ArrayList<String> selectphoto1() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.img_name，t.img_url  from ods.TEM_DIM_PERSON_ONTHER t";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
 	
 	/**
 	 * sql语句并获取开始和结束 dao用户列表中

@@ -40,7 +40,8 @@ public class Dajiewang {
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpResponse response = null;
 		System.out.println("******************************Ò³Ãæ×ªÏò******************************");
-//		String newUrl = "http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=1091324464527";
+		// String newUrl =
+		// "http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=1091324464527";
 		HttpGet get = new HttpGet(newUrl);
 		// get.addHeader("Content-Type", "text/html;charset=UTF-8");
 		// get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64;
@@ -50,10 +51,11 @@ public class Dajiewang {
 		// "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 		get.addHeader("Accept-Encoding", "gzip, deflate, sdch");
 		get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
+		get.addHeader("Cache-Control", "max-age=0");
 		get.addHeader("Connection", "keep-alive");
 		get.addHeader("Content-Type", "application/x-www-form-urlencoded");
 		get.addHeader(new BasicHeader("Cookie",
-				"SINAGLOBAL=8549726845230.907.1445398578667; SUHB=0sqQ0pK3WBV2gN; DATA=usrmdinst_5; _s_tentry=-; Apache=7532238222192.973.1448331434936; ULV=1448331434952:13:8:1:7532238222192.973.1448331434936:1447378860051; SUB=_2AkMhD0eLdcNhrAFZmP0SzG3rbolXzQ7wu9_0M03fZ2JCMnoQgT5nqiRotBF_DN7Dt0e6al7NzPhNs71jebD5Fh4XHuaWFWw.; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; login_sid_t=19644dacc1b9296d1e5bcfad125de02c; WBStore=062485857e03170e|undefined; PHPSESSID=ffiim2vvu63quisbpkga00pap3; UOR=picture.youth.cn,widget.weibo.com,static.xiaomi.cn"));
+				"SINAGLOBAL=8549726845230.907.1445398578667; SUHB=0sqQ0pK3WBV2gN; SUB=_2AkMhD0eLdcNhrAFZmP0SzG3rbolXzQ7wu9_0M03fZ2JCMnoQgT5nqiRotBF_DN7Dt0e6al7NzPhNs71jebD5Fh4XHuaWFWw.; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; _s_tentry=www.china.com.cn; Apache=1754437831696.1228.1449036929163; ULV=1449036929207:14:1:1:1754437831696.1228.1449036929163:1448331434952; DATA=usrmdinst_16; WBStore=5955be0e3d5411da|undefined; open_div=close; UOR=picture.youth.cn,widget.weibo.com,www.baidu.com; PHPSESSID=luoft8me2rj25ejpsdf0nv9u94"));
 
 		get.addHeader("Host", "data.weibo.com");
 		get.addHeader("Referer", "http://data.weibo.com/index/hotword");
@@ -100,21 +102,23 @@ public class Dajiewang {
 		// //µÇÂ¼ºóÊ×Ò³µÄÄÚÈÝ
 		// System.out.println(responseString);
 		// get.releaseConnection();
-		String strHtml = DownloadUtil.getHtmlText("http://data.weibo.com/index/hotword?wid=1091324464527&wname=·¶±ù±ù",
+		String strHtml = DownloadUtil.getHtmlText("http://data.weibo.com/index/hotword?wname=·¶±ù±ù",
 				1000 * 30, "UTF-8", null, null);
+		
 		String timeDiff = HtmlAnalyze.getTagText(strHtml, "server_time': '", "'");
 		System.out.println(new Date());
 		System.out.println(timeDiff);
-		
-		   Date date = new Date(System.currentTimeMillis());
-		   int s=0;
-	        System.out.println(s=(int) (date.getTime()-Integer.parseInt(timeDiff)));
 
-//		System.out.println(Integer.parseInt(timeDiff));
-//		System.out.println(new Date()- new Date(Integer.parseInt(timeDiff));
-		Weibo("http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd="+s);
+		Date date = new Date(System.currentTimeMillis());
+		int s = 0;
+		System.out.println(s = (int) (date.getTime() - Integer.parseInt(timeDiff)));
 
-//		System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date(1446912627104l)));
+		// System.out.println(Integer.parseInt(timeDiff));
+		// System.out.println(new Date()- new Date(Integer.parseInt(timeDiff));
+		Weibo("http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=" + s);
+		Weibo("http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=1449471097626");
+		// System.out.println(new SimpleDateFormat("yyyy-MM-dd
+		// hh:mm:ss").format(new Date(1446912627104l)));
 
 	}
 

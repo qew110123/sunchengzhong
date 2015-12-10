@@ -18,7 +18,7 @@ import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
 public class HaoSouTV {
-	static ThreadPool pool = new ThreadPool(5);
+	static ThreadPool pool = new ThreadPool(10);
 	private static Proxy proxy = null;
 
 	public static void mainProgram(int statnum, int endnum) {
@@ -42,13 +42,13 @@ public class HaoSouTV {
 					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "3");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					System.out.println("运行报错，等待5分钟" + urlBranch);
-					try {
-						Thread.sleep(1000 * 60 * 5);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					System.out.println("运行报错，url:" + urlBranch);
+//					try {
+//						Thread.sleep(1000 * 60 * 5);
+//					} catch (InterruptedException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
 					e.printStackTrace();
 				}
 				// 媒体关注度
@@ -58,13 +58,13 @@ public class HaoSouTV {
 					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "4");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					System.out.println("运行报错，等待5分钟" + urlBranch);
-					try {
-						Thread.sleep(1000 * 60 * 5);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					System.out.println("运行报错，url:" + urlBranch);
+//					try {
+//						Thread.sleep(1000 * 60 * 5);
+//					} catch (InterruptedException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
 					e.printStackTrace();
 				}
 
@@ -103,12 +103,12 @@ public class HaoSouTV {
 			System.out.println(sourceStrArray.length);
 			if (starttime != null && !"".equals(starttime)) {
 
-				// try {
-				// Thread.sleep(1000);
-				// } catch (InterruptedException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
+				 try {
+				 Thread.sleep(1000);
+				 } catch (InterruptedException e) {
+				 // TODO Auto-generated catch block
+				 e.printStackTrace();
+				 }
 
 				// for (int i = 0; i < sourceStrArray.length; i++) {
 				// // System.out.println(sourceStrArray[i]
@@ -138,9 +138,10 @@ public class HaoSouTV {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("好搜电视剧分析数据日期 ，入库报错,运行报错，等待5分钟");
+			System.out.println("好搜电视剧分析数据日期 ，入库报错,运行报错");
+//			System.out.println("运行报错，url:" + urlBranch);
 			try {
-				Thread.sleep(1000 * 60 * 5);
+				Thread.sleep(1000 );
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -174,7 +175,7 @@ public class HaoSouTV {
 		int i = 0;
 		while (bb) {
 			proxy = DealProxy.getInstance().getPoxxy();
-			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, proxy);
+			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 10, "UTF-8", null, proxy);
 			if (strHtml != null && !"".equals(strHtml)) {
 				bb = false;
 				if (strHtml.contains("360指数_访问异常出错")) {
@@ -191,6 +192,12 @@ public class HaoSouTV {
 			}
 
 			i += 1;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return strHtml;
 
@@ -247,20 +254,20 @@ public class HaoSouTV {
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
-		// TimingTime(23, 59, 59);
+		 TimingTime(1, 00, 00);
 		// IpFilter ipxi=new IpFilter;
 
-		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-		IpFilter.mainip("http://index.haosou.com/");
-		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		String returnNumTVle=OracleHaoSou.returnNumPeople("edw.dim_tvplay");
-		System.out.println("需要采集的人名字数为"+returnNumTVle);
-		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
-			// i=15780;
-			mainProgram(i, i + 1000);
-		}
-
-		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
+//		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+//		IpFilter.mainip("http://index.haosou.com/");
+//		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+//		String returnNumTVle=OracleHaoSou.returnNumPeople("edw.dim_tvplay");
+//		System.out.println("需要采集的人名字数为"+returnNumTVle);
+//		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
+//			// i=15780;
+//			mainProgram(i, i + 1000);
+//		}
+//
+//		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
 }

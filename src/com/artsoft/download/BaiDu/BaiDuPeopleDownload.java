@@ -229,7 +229,7 @@ public class BaiDuPeopleDownload {
 		return person;
 	}
 
-	private static void mainUrlall(String urlmain, String id, String strname) {
+	public static void mainUrlall(String urlmain, String id, String strname) {
 		// TODO Auto-generated method stub
 		String strHtml = "";
 		boolean bb = true;

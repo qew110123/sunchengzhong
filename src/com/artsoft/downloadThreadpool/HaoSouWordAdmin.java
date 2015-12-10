@@ -49,12 +49,12 @@ public class HaoSouWordAdmin {
 			System.out.println(sourceStrArray.length);
 			if (starttime != null && !"".equals(starttime)) {
 
-				// try {
-				// Thread.sleep(2000);
-				// } catch (InterruptedException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
+				 try {
+				 Thread.sleep(1000);
+				 } catch (InterruptedException e) {
+				 // TODO Auto-generated catch block
+				 e.printStackTrace();
+				 }
 
 				// for (int i = 0; i < sourceStrArray.length; i++) {
 				// // System.out.println(sourceStrArray[i] +
@@ -81,13 +81,14 @@ public class HaoSouWordAdmin {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("人分析数据和入库报错,运行报错，等待5分钟");
-			try {
-				Thread.sleep(1000 * 60 * 5);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			System.out.println("人分析数据和入库报错,");
+			System.out.println("运行报错，url:" + urlBranch);
+//			try {
+//				Thread.sleep(1000 * 60 * 5);
+//			} catch (InterruptedException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
 		}
 
 	}
@@ -127,13 +128,14 @@ public class HaoSouWordAdmin {
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					System.out.println("运行报错，等待5分钟" + urlBranch);
-					try {
-						Thread.sleep(1000 * 60 * 5);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+//					System.out.println("运行报错，等待5分钟" + urlBranch);
+					System.out.println("运行报错，url:" + urlBranch);
+//					try {
+//						Thread.sleep(1000 * 60 * 5);
+//					} catch (InterruptedException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
 					e.printStackTrace();
 				}
 				// 媒体关注度
@@ -159,13 +161,14 @@ public class HaoSouWordAdmin {
 					pool.performTask(new MyHaoSoutask(urlBranch, listTemp.get(0), listTemp.get(1), "3"));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					System.out.println("运行报错，等待5分钟" + urlBranch);
-					try {
-						Thread.sleep(1000 * 60 * 5);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+//					System.out.println("运行报错，等待5分钟" + urlBranch);
+					System.out.println("运行报错，url:" + urlBranch);
+//					try {
+//						Thread.sleep(1000 * 60 * 5);
+//					} catch (InterruptedException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
 					e.printStackTrace();
 				}
 
@@ -184,7 +187,7 @@ public class HaoSouWordAdmin {
 		int i = 0;
 		while (bb) {
 			proxy = DealProxy.getInstance().getPoxxy();
-			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, proxy);
+			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 10, "UTF-8", null, proxy);
 			if (strHtml != null && !"".equals(strHtml)) {
 				bb = false;
 				if (strHtml.contains("360指数_访问异常出错")) {
@@ -201,6 +204,12 @@ public class HaoSouWordAdmin {
 			}
 
 			i += 1;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return strHtml;
 
@@ -264,7 +273,7 @@ public class HaoSouWordAdmin {
 
 		// TimingTime(23, 59, 59);
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-//		IpFilter.mainip("http://index.haosou.com/");
+		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		String returnNumPeople=OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
 		System.out.println("需要采集的人名字数为"+returnNumPeople);

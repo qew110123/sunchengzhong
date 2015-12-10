@@ -7,7 +7,7 @@ import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadImage;
 import com.artsoft.util.TimeTest;
 
-public class Image {
+public class Imageimage3 {
 
 	public static void main(String[] args) {
 
@@ -20,8 +20,8 @@ public class Image {
 		// e.printStackTrace();
 		// }
 		//
-
-		List<String> listArray = OracleHaoSou.selectphoto();
+		int i=0;
+		List<String> listArray = OracleHaoSou.selectphoto1();
 		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+);
 		for (Object Objstring : listArray) {
 
@@ -31,7 +31,8 @@ public class Image {
 			System.out.println(listTemp.get(1));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
 				try {
-					DownloadImage.download(listTemp.get(1), listTemp.get(0) + ".jpg", "D:\\image2\\");
+					System.out.println(++i);
+					DownloadImage.download(listTemp.get(1), listTemp.get(0) + ".jpg", "D:\\image3\\");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
