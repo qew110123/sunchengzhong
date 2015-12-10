@@ -210,7 +210,7 @@ public class Demo {
 		try {
 			download(
 					"http://img2.imgtn.bdimg.com/it/u=954023560,3150965806&fm=21&gp=0.jpg",
-					"11.jpg", "D:\\image1\\");
+					"u=3935255986,3954096083&fm=15&gp=0.jpg", "D:\\image1\\");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

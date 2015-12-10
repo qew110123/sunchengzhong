@@ -37,6 +37,10 @@ public class BaiDuPeopleDownload {
 				bb = false;
 			}
 		}
+		if (!strHtml.contains("ÑÝÔ±")) {
+			System.out.println();
+			return;
+		}
 		// String strHtmlMore = "";
 		// System.out.println(strHtmlMore = HtmlAnalyze.getTagText(strHtml,
 		// "basic-info", "anchor-list"));
@@ -251,20 +255,25 @@ public class BaiDuPeopleDownload {
 		// System.out.println(strVolumes = link.text());
 		// System.out.println(idnum = link.attr("href"));
 		// }
-		if (links.size() == 10) {
-			String strUrl = "";
-			System.out.println(links.first().text());
-			System.out.println(strUrl = links.attr("href"));
-			// strUrl.contains("http://baike.baidu.com");
-			if (strUrl != null && !"".equals(strUrl)) {
+//		if (links.size() == 10) {
+			try {
+				String strUrl = "";
+				System.out.println(links.first().text());
+				System.out.println(strUrl = links.attr("href"));
+				// strUrl.contains("http://baike.baidu.com");
+				if (strUrl != null && !"".equals(strUrl)) {
 
-				if (!strUrl.contains("http://baike.baidu.com")) {
-					strUrl = "http://baike.baidu.com" + strUrl;
+					if (!strUrl.contains("http://baike.baidu.com")) {
+						strUrl = "http://baike.baidu.com" + strUrl;
+					}
+					System.out.println(strUrl);
+					mainmore(id, strUrl);
 				}
-				System.out.println(strUrl);
-				mainmore(id, strUrl);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		}
+//		}
 	}
 
 	private static void mainweboPeoPle(int statnum, int endnum) {
