@@ -43,12 +43,12 @@ public class HaoSouTV {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，url:" + urlBranch);
-//					try {
-//						Thread.sleep(1000 * 60 * 5);
-//					} catch (InterruptedException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
+					try {
+						Thread.sleep(1000 * 60 * 5);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					e.printStackTrace();
 				}
 				// 媒体关注度
@@ -59,12 +59,12 @@ public class HaoSouTV {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，url:" + urlBranch);
-//					try {
-//						Thread.sleep(1000 * 60 * 5);
-//					} catch (InterruptedException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
+					try {
+						Thread.sleep(1000 * 60 * 5);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					e.printStackTrace();
 				}
 

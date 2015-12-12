@@ -46,6 +46,11 @@ public class OracleBaidu {
 	public static List selectbaidudianshiju() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select * from ods.dim_tvplay_tmp s where s.tvplay_id >=23342 ";
+		/**
+		 * 2015年12月11日14:23:27
+		 * 需要补充网络剧信息的
+		 */
+		sql = "select * from edw.dim_tvplay t   where  t.years is null ";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -124,7 +129,7 @@ public class OracleBaidu {
 	 */
 	public static ArrayList<String> selectBaiduitupian(String startRow, String endRow) {
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String sql = "select p.person_id,p.person_name from ods.dim_person p where p.photo_name_small is null";
+		String sql = "select p.person_id,p.person_name from ods.dim_person p where p.photo_name_small is null order by p.person_id";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -141,6 +146,12 @@ public class OracleBaidu {
 	public static ArrayList<String> selectImage() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select distinct img_url from ODS.TEM_PERSON_IMG t ";
+		sql="select distinct img_url from ODS.TEM_PERSON_IMG t where t.source='百度图片'";
+		//演员招聘网
+		sql="select t.img_url from ODS.TEM_DIM_PERSON_ONTHER t where t.source='演员招聘网网'";
+		
+		//演员招聘网大图片
+//		sql="select t.big_img_url from ODS.TEM_DIM_PERSON_ONTHER t where t.source='演员招聘网网'";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 1;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -148,6 +159,9 @@ public class OracleBaidu {
 		return (ArrayList<String>) list;
 
 	}
+	
+	
+	
 	
 	
 

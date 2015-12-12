@@ -130,11 +130,11 @@ public class OracleSarFtGov {
 	 */
 	public static void intotem_animation(String ANIMATION_NAME, String ANIMATION_URL, String AUTHOR, String AREA,
 			String STATE, String POPULARITY, String SUBJECT_NAME, String ANIMATION_CATEGORY, String IN_DATE,
-			String SOURCE) {
+			String SOURCE,String CLICK_NUM,String SCORE) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		// System.out.println(old_value + new_value + tvplay_name +
 		// produce_company + set_number + type);
-		String strSql = "insert into ods.tem_animation t (ANIMATION_NAME,ANIMATION_URL,AUTHOR,AREA,STATE,POPULARITY,SUBJECT_NAME,ANIMATION_CATEGORY,IN_DATE,SOURCE)values(?,?,?,?,?,?,?,?,?,?)";
+		String strSql = "insert into ods.tem_animation t (ANIMATION_NAME,ANIMATION_URL,AUTHOR,AREA,STATE,POPULARITY,SUBJECT_NAME,ANIMATION_CATEGORY,IN_DATE,SOURCE,CLICK_NUM,SCORE)values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		// list.add(null);// 这里是将对象加入到list中
 		list.add(ANIMATION_NAME);
@@ -147,6 +147,8 @@ public class OracleSarFtGov {
 		list.add(ANIMATION_CATEGORY);
 		list.add(IN_DATE);
 		list.add(SOURCE);
+		list.add(CLICK_NUM);
+		list.add(SCORE);
 
 //		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate.insertRecord(conn, strSql, list);

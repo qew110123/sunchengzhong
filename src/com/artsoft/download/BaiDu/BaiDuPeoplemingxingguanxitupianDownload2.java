@@ -195,21 +195,24 @@ public class BaiDuPeoplemingxingguanxitupianDownload2 {
 		for (Object Objstring : listArray) {
 			System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
-			if (listTemp.get(0) != null&&listTemp.get(1) != null) {
-				// mainmore(listTemp.get(0), listTemp.get(1));
-				System.out.println(listTemp.get(0));
-				System.out.println(listTemp.get(1));
+			if (Integer.parseInt(listTemp.get(0))>12981 ) {
+				
+				if (listTemp.get(0) != null&&listTemp.get(1) != null) {
+					// mainmore(listTemp.get(0), listTemp.get(1));
+					System.out.println(listTemp.get(0));
+					System.out.println(listTemp.get(1));
 //				peopleurl(listTemp.get(0));
-				String name=listTemp.get(1)+"Í·Ïñ";
-				try {
-					name=java.net.URLEncoder.encode(name, "utf-8");
+					String name=listTemp.get(1)+"Í·Ïñ";
+					try {
+						name=java.net.URLEncoder.encode(name, "utf-8");
 //					System.out.println("http://image.baidu.com/search/acjson?tn=resultjson_com&ipn=rj&ct=201326592&is=&fp=result&queryWord="+name+"&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=-1&z=&ic=0&word="+name+"&s=&se=&tab=&width=&height=&face=0&istype=2&qc=&nc=1&fr=&pn=0&rn=60&gsm=3c&1449630567582=");
-					String urls="http://image.baidu.com/search/acjson?tn=resultjson_com&ipn=rj&ct=201326592&is=&fp=result&queryWord="+name+"&cl=2&lm=0&ie=utf-8&oe=utf-8&adpicid=&st=-1&z=1&ic=&word="+name+"&s=3&se=&tab=&width=0&height=0&face=0&istype=&qc=&nc=&fr=ala&pn=0&rn=10&gsm=3c&1449631513444=";
-					System.out.println(urls);
-					peopleurl(urls,listTemp.get(0),listTemp.get(1));
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+						String urls="http://image.baidu.com/search/acjson?tn=resultjson_com&ipn=rj&ct=201326592&is=&fp=result&queryWord="+name+"&cl=2&lm=0&ie=utf-8&oe=utf-8&adpicid=&st=-1&z=1&ic=&word="+name+"&s=3&se=&tab=&width=0&height=0&face=0&istype=&qc=&nc=&fr=ala&pn=0&rn=10&gsm=3c&1449631513444=";
+						System.out.println(urls);
+						peopleurl(urls,listTemp.get(0),listTemp.get(1));
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}

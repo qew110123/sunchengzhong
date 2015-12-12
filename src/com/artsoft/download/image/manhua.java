@@ -88,7 +88,7 @@ public class manhua {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			OracleSarFtGov.intotem_animation(ANIMATION_NAME, ANIMATION_URL, AUTHOR, AREA, STATE, POPULARITY, SUBJECT_NAME, ANIMATION_CATEGORY, IN_DATE, SOURCE);
+			OracleSarFtGov.intotem_animation(ANIMATION_NAME, ANIMATION_URL, AUTHOR, AREA, STATE, POPULARITY, SUBJECT_NAME, ANIMATION_CATEGORY, IN_DATE, SOURCE,"","");
 			
 //			AREA=
 		}
