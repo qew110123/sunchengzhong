@@ -234,7 +234,7 @@ public class HaoSouWordAdmin {
 
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-//		IpFilter.mainip("http://index.haosou.com/");
+		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		String returnNumPeople=OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
 		System.out.println("需要采集的人名字数为"+returnNumPeople);
@@ -255,7 +255,7 @@ public class HaoSouWordAdmin {
 		Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
 
 		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask() {
+		timer.schedule(new TimerTask() {
 			public void run() {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
@@ -271,7 +271,7 @@ public class HaoSouWordAdmin {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		 TimingTime(23, 59, 59);
+		 TimingTime(00, 00, 00);
 //		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 //		IpFilter.mainip("http://index.haosou.com/");
 //		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
