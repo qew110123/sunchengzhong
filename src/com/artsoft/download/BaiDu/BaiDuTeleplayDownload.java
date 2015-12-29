@@ -93,6 +93,9 @@ public class BaiDuTeleplayDownload {
 			Elements linkstills_url = doc.select("div.summary-pic img");
 //			stills_url=HtmlAnalyze.getTagText(strHtml.toString(), " target=\"_blank\">\n<img src=\"", "\"");
 			System.out.println(stills_url=HtmlAnalyze.getTagText(linkstills_url.toString(), "src=\"", "\""));
+			if (stills_url==null||stills_url.equals(null)) {
+				stills_url="";
+			}
 			tvplay.setStills_url(stills_url);
 			tvplay.print();
 			OracleHaoSou.InsertTVplay(tvplay);
@@ -263,7 +266,7 @@ public class BaiDuTeleplayDownload {
 		// System.out.println(strVolumes = link.text());
 		// System.out.println(idnum = link.attr("href"));
 		// }
-		if (links.size() == 10) {
+		if (links.size()  >0) {
 			String strUrl = "";
 			String strUrlname = "";
 			System.out.println(strUrlname=links.first().text());

@@ -234,7 +234,7 @@ public class HaoSouWordAdmin {
 
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-		IpFilter.mainip("http://index.haosou.com/");
+//		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		String returnNumPeople=OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
 		System.out.println("需要采集的人名字数为"+returnNumPeople);
@@ -271,7 +271,7 @@ public class HaoSouWordAdmin {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		 TimingTime(00, 00, 00);
+		 TimingTime(00, 00, 01);
 //		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 //		IpFilter.mainip("http://index.haosou.com/");
 //		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));

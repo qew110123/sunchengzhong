@@ -151,18 +151,182 @@ public class Dajiewang {
 		
 		keywordzone = DownloadUtil.decodeUnicode(keywordzone);
 		
+//		JSONArray authors = new JSONArray();
+//		authors = (JSONArray) objectobject.get("data");
+		JSONObject objectkeywordzones = JSONObject.fromObject(keywordzone);
 		
-		Weibo("http://data.weibo.com/index/ajax/getdefaultattributealldata?__rnd=" + s);
+//		System.out.println(objectkeywordzones.get("zone"));
+		JSONObject objectkeywordzone=JSONObject.fromObject(objectkeywordzones.get("zone"));
+//		System.out.println(objectkeywordzone.get("jiangsu"));
+		keywordzone(objectkeywordzone);
 		
-
+		JSONObject objectkeyworduser=JSONObject.fromObject(objectkeywordzones.get("user"));
+		keywordzoneuser(objectkeyworduser);
+		String getdefaultattributealldata=Weibo("http://data.weibo.com/index/ajax/getdefaultattributealldata?__rnd=" + s);
+		getdefaultattributealldata = DownloadUtil.decodeUnicode(getdefaultattributealldata);
+		System.out.println(getdefaultattributealldata);
+		
+		JSONObject objectkeyworduserda=JSONObject.fromObject(getdefaultattributealldata);
+		JSONObject objectkeyworduserdata=JSONObject.fromObject(objectkeyworduserda.get("data"));
+		String sexMan="";
+		String sexwoman="";
+		JSONObject objectkeyworduserdatasex=JSONObject.fromObject(objectkeyworduserdata.get("sex"));
+		JSONObject objectkeyworduserdatasexkey2=JSONObject.fromObject(objectkeyworduserdatasex.get("key2"));
+		System.out.println(objectkeyworduserdatasexkey2.get("man"));
+//		JSONObject objectkeyworduserdatasexkey2man=JSONObject.fromObject(objectkeyworduserdatasexkey2.get("man"));
+//		JSONObject objectkeyworduserdatasexkey2woman=JSONObject.fromObject(objectkeyworduserdatasexkey2.get("woman"));
+//		JSONObject objectkeyworduserdatasexkey2word=JSONObject.fromObject(objectkeyworduserdatasexkey2.get("word"));
+		sexMan=(String) objectkeyworduserdatasexkey2.get("man");
+		sexwoman=(String) objectkeyworduserdatasexkey2.get("woman");
+		String age0_12="";
+		String age12_18="";
+		String age19_24="";
+		String age25_34="";
+		String age35_50="";
+		String ageother="";
+		JSONObject objectkeyworduserdataage=JSONObject.fromObject(objectkeyworduserdata.get("age"));
+		JSONObject objectkeyworduserdataagekey2=JSONObject.fromObject(objectkeyworduserdataage.get("key2"));
+		JSONObject objectkeyworduserdataagekey2_0=JSONObject.fromObject(objectkeyworduserdataagekey2.get("0"));
+//		JSONObject objectkeyworduserdataagekey2_0_0_12=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("0-12"));
+//		JSONObject objectkeyworduserdataagekey2_0_12_18=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("12-18"));
+//		JSONObject objectkeyworduserdataagekey2_0_19_24=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("19-24"));
+//		JSONObject objectkeyworduserdataagekey2_0_25_34=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("25-34"));
+//		JSONObject objectkeyworduserdataagekey2_0_35_50=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("35-50"));
+//		JSONObject objectkeyworduserdataagekey2_0_ageother=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("other"));
+		 age0_12=objectkeyworduserdataagekey2_0.get("0-12").toString();
+		 age12_18=objectkeyworduserdataagekey2_0.get("12-18").toString();
+		 age19_24=objectkeyworduserdataagekey2_0.get("19-24").toString();
+		 age25_34=objectkeyworduserdataagekey2_0.get("25-34").toString();
+		 age35_50=objectkeyworduserdataagekey2_0.get("35-50").toString();
+		 ageother=objectkeyworduserdataagekey2_0.get("other").toString();
+//		JSONObject objectkeyworduserdataagekey2_0_0_12=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("0-12"));
+		 
+		String meishi="";
+		String luyou="";
+		String mingrenmingxing="";
+		String lule="";
+		String gaoxiaoyoumo="";
+		JSONObject objectkeyworduserdatatag=JSONObject.fromObject(objectkeyworduserdata.get("tag"));
+		JSONObject objectkeyworduserdatatagkey2=JSONObject.fromObject(objectkeyworduserdatatag.get("key2"));
+		JSONObject objectkeyworduserdatatagkey2_0=JSONObject.fromObject(objectkeyworduserdatatagkey2.get("0"));
+//		JSONObject objectkeyworduserdatatagkey2_0meishi=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("美食"));
+//		JSONObject objectkeyworduserdatatagkey2_0luyou=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("旅游"));
+//		JSONObject objectkeyworduserdatatagkey2_0mingrenmingxing=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("名人明星"));
+//		JSONObject objectkeyworduserdatatagkey2_0lule=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("娱乐"));
+//		JSONObject objectkeyworduserdatatagkey2_0gaoxiaoyoumo=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("搞笑幽默"));
+		 meishi=(String) objectkeyworduserdatatagkey2_0.get("美食");
+		 luyou=(String) objectkeyworduserdatatagkey2_0.get("旅游");
+		 mingrenmingxing=(String) objectkeyworduserdatatagkey2_0.get("名人明星");
+		 lule=(String) objectkeyworduserdatatagkey2_0.get("娱乐");
+		 gaoxiaoyoumo=(String) objectkeyworduserdatatagkey2_0.get("搞笑幽默");
+		String moxie="";
+		String shuiping="";
+		String shuangyu="";
+		String baiyang="";
+		String jinniu="";
+		String shuangzi="";
+		String juxie="";
+		String shizi="";
+		String chunv="";
+		String tianping="";
+		String 	tianxie="";
+		String sheshou="";
+		JSONObject objectkeyworduserdatastar=JSONObject.fromObject(objectkeyworduserdata.get("star"));
+		JSONObject objectkeyworduserdatastarkey2=JSONObject.fromObject(objectkeyworduserdatastar.get("key2"));
+		JSONObject objectkeyworduserdatastarkey2_0=JSONObject.fromObject(objectkeyworduserdatastarkey2.get("0"));
+//		JSONObject objectkeyworduserdatastarkey2_0moxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("摩羯座"));
+//		JSONObject objectkeyworduserdatastarkey2_0shuiping=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("水瓶座"));
+//		JSONObject objectkeyworduserdatastarkey2_0shuangyu=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("双鱼座"));
+//		JSONObject objectkeyworduserdatastarkey2_0baiyang=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("白羊座"));
+//		JSONObject objectkeyworduserdatastarkey2_0jinniu=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("金牛座"));
+//		JSONObject objectkeyworduserdatastarkey2_0shuangzi=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("双子座"));
+//		JSONObject objectkeyworduserdatastarkey2_0juxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("巨蟹座"));
+//		JSONObject objectkeyworduserdatastarkey2_0shizi=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("狮子座"));
+//		JSONObject objectkeyworduserdatastarkey2_0chunv=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("处女座"));
+//		JSONObject objectkeyworduserdatastarkey2_0tianping=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("天秤座"));
+//		JSONObject objectkeyworduserdatastarkey2_0tianxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("天蝎座"));
+//		JSONObject objectkeyworduserdatastarkey2_0sheshou=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("射手座"));
+//		JSONObject objectkeyworduserdatastarkey2_0moxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("摩羯座"));
+		
+		 moxie=objectkeyworduserdatastarkey2_0.get("摩羯座").toString();
+		 shuiping=objectkeyworduserdatastarkey2_0.get("水瓶座").toString();
+		 shuangyu=objectkeyworduserdatastarkey2_0.get("双鱼座").toString();
+		 baiyang=objectkeyworduserdatastarkey2_0.get("白羊座").toString();
+		 jinniu=objectkeyworduserdatastarkey2_0.get("金牛座").toString();
+		 shuangzi=objectkeyworduserdatastarkey2_0.get("双子座").toString();
+		 juxie=objectkeyworduserdatastarkey2_0.get("巨蟹座").toString();
+		 shizi=objectkeyworduserdatastarkey2_0.get("狮子座").toString();
+		 chunv=objectkeyworduserdatastarkey2_0.get("处女座").toString();
+		 tianping=objectkeyworduserdatastarkey2_0.get("天秤座").toString();
+		 tianxie=objectkeyworduserdatastarkey2_0.get("天蝎座").toString();
+		 sheshou=objectkeyworduserdatastarkey2_0.get("射手座").toString();
+		
+		
+		
 	}
+	
+	public static void keywordzone(JSONObject objectkeywordzone){
+		String pingyin="";
+		String address="";
+		String value="";
+		String ct="";
+		String index="";
+		String wname="";
+		String stateInitColor="";
+		
+		String[][] numsix={{"chongqing","重庆"},{"zhejiang","浙江"},{"yunnan","云南"},{"xinjiang","新疆"},{"hongkong","香港"},{"xizang","西藏"},{"tianjin","天津"},{"taiwan","台湾"},{"sichuan","四川"},{"shanghai","上海"},{"shaanxi","陕西"},{"shanxi","山西"},{"shandong","山东"},{"qinghai","青海"},{"ningxia","宁夏"},{"neimongol","内蒙古"},{"liaoning","辽宁"},{"jiangxi","江西"},{"jiangsu","江苏"},{"jilin","吉林"},{"hunan","湖南"},{"hubei","湖北"},{"heilongjiang","黑龙江"},{"henan","河南"},{"hebei","河北"},{"hainan","海南"},{"guizhou","贵州"},{"guangxi","广西"},{"guangdong","广东"},{"gansu","甘肃"},{"fujian","福建"},{"beijing","北京"},{"macau","澳门"},{"anhui","安徽"}};
+//		System.out.println(objectkeywordzone.get("jiangsu"));
+		for (int i = 0; i < numsix.length; i++) {
+			pingyin=numsix[i][0];
+			address=numsix[i][1];
+			JSONObject objectkeywordzones=JSONObject.fromObject(objectkeywordzone.get(pingyin));
+			//{"value":"9.16%","ct":"7055","index":"2","wname":"邓超","stateInitColor":"61B6FD"}
+			value=(String) objectkeywordzones.get("value");
+			ct=(String) objectkeywordzones.get("ct");
+			index=(String) objectkeywordzones.get("index");
+			wname=(String) objectkeywordzones.get("wname");
+			stateInitColor=(String) objectkeywordzones.get("stateInitColor");
+			System.out.println(value+ct+index+wname+stateInitColor);
+		}
+		
+	}
+	
+	
+	public static void keywordzoneuser(JSONObject objectkeywordzone){
+		String pingyin="";
+		String address="";
+		String value="";
+		String num="";
+		String index="";
+		String wname="";
+		String stateInitColor="";
+		
+		String[][] numsix={{"chongqing","重庆"},{"zhejiang","浙江"},{"yunnan","云南"},{"xinjiang","新疆"},{"hongkong","香港"},{"xizang","西藏"},{"tianjin","天津"},{"taiwan","台湾"},{"sichuan","四川"},{"shanghai","上海"},{"shaanxi","陕西"},{"shanxi","山西"},{"shandong","山东"},{"qinghai","青海"},{"ningxia","宁夏"},{"neimongol","内蒙古"},{"liaoning","辽宁"},{"jiangxi","江西"},{"jiangsu","江苏"},{"jilin","吉林"},{"hunan","湖南"},{"hubei","湖北"},{"heilongjiang","黑龙江"},{"henan","河南"},{"hebei","河北"},{"hainan","海南"},{"guizhou","贵州"},{"guangxi","广西"},{"guangdong","广东"},{"gansu","甘肃"},{"fujian","福建"},{"beijing","北京"},{"macau","澳门"},{"anhui","安徽"}};
+//		System.out.println(objectkeywordzone.get("jiangsu"));
+		for (int i = 0; i < numsix.length; i++) {
+			pingyin=numsix[i][0];
+			address=numsix[i][1];
+			JSONObject objectkeywordzones=JSONObject.fromObject(objectkeywordzone.get(pingyin));
+			//{"value":"9.16%","ct":"7055","index":"2","wname":"邓超","stateInitColor":"61B6FD"}
+			value=(String) objectkeywordzones.get("value");
+			num=(String) objectkeywordzones.get("num");
+			index=(String) objectkeywordzones.get("index");
+			wname=(String) objectkeywordzones.get("wname");
+			stateInitColor=(String) objectkeywordzones.get("stateInitColor");
+			System.out.println(pingyin+pingyin+value+num+index+wname+stateInitColor);
+		}
+		
+	}
+	
+	
+	
 
 	/**
 	 * 人的处理
 	 */
 
 	public static void main(String[] args) throws Exception {
-		String name = "邓超";
+		String name = "王凯";
 		String URLEncodername = "";
 		System.out.println(
 				URLEncodername = java.net.URLEncoder.encode(java.net.URLEncoder.encode(name, "utf-8"), "utf-8"));
