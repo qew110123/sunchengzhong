@@ -240,6 +240,66 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
+	
+	/**
+	 * 进行百度人物的添加
+	 * @param persion
+	 */
+	public static void UpdatePerson(Persion persion) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ODS.TEM_DIM_PERSON t (t.person_id, t.person_name,t.img_url,t.person_url ,"
+				+ "t.SEX ,t.NATIONALITY,t.bloodtype ,t.height,t.weight,t.occupation ,t.constellation ,t.birthday,"
+				+ "t.deathday,t.alias_en,t.alias_cn,t.homeplace,t.nation,t.major_awards,t.shcool,t.brokerage_firm,"
+				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers,t.hobby) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		/**
+		 * 修改操作，整体修改
+		 */
+		strSql = "UPDATE ODS.TEM_DIM_PERSON t SET t.person_name =?, t.img_url = ?, t.person_url = ?,"
+				+ " t.SEX = ?, t.NATIONALITY = ?, t.bloodtype = ?, t.height = ?, t.weight = ?,"
+				+ " t.occupation = ?, t.constellation = ?, t.birthday = ?, t.deathday = ?,"
+				+ " t.alias_en = ?, t.alias_cn = ?, t.homeplace = ?, t.major_awards = ?, t.shcool = ?,"
+				+ " t.brokerage_firm = ?, t.opus = ?, t.sub_path = ?, t.evaluation = ?, t.birthday_place = ?,"
+				+ " t.social_activities = ?, t.flowers = ?, t.volk = ?, t.brokers = ?, t.hobby = ?,"
+				+ " t.basic_info = ? WHERE t.person_id = ?";
+		List<Comparable> list = new ArrayList();
+		list.add(persion.getName());
+		list.add(persion.getImg_url());
+		list.add(persion.getUrl());
+		list.add(persion.getGender());
+		list.add(persion.getNationality());
+		list.add(persion.getBloodtype());
+		list.add(persion.getHeight());
+		list.add(persion.getWeight());
+		list.add(persion.getOccupation());
+		list.add(persion.getConstellation());
+		list.add(persion.getBirthday());
+		list.add(persion.getDeathday());
+		list.add(persion.getAlias_en());
+		list.add(persion.getAlias_cn());
+		list.add(persion.getHomeplace());
+//		list.add(persion.getNation());
+		list.add(persion.getMajor_awards());
+		list.add(persion.getShcool());
+		list.add(persion.getBrokerage_firm());
+		list.add(persion.getOpus());
+		list.add(persion.getSub_path());
+		list.add(persion.getEvaluation());
+		list.add(persion.getBirthday_place());
+		list.add(persion.getSocial_activities());
+		list.add(persion.getFlowers());
+		list.add(persion.getVolk());
+		list.add(persion.getBrokers());
+		list.add(persion.getHobby());
+		list.add(persion.getDescription_text());
+		// list.add(persion.getPersonSocialActivitiesList());
+		list.add(persion.getId());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
 
 	/**
 	 * 进行电视剧数据 的

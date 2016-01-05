@@ -140,6 +140,10 @@ public class BaiduShouSuoImage {
 		}
 	}
 
+	/**
+	 * 百度图片数据的查询
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String name="黄晓明"+"头像";

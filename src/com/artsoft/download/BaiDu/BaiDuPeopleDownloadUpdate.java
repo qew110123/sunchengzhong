@@ -113,6 +113,11 @@ public class BaiDuPeopleDownloadUpdate {
 		}
 	}
 
+	
+	/**
+	 * 进行百度数据的部分数据的更新操作
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub

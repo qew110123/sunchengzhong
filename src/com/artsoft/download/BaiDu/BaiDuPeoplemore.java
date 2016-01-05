@@ -14,11 +14,9 @@ public class BaiDuPeoplemore {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
 //		BaiDuPeopleDownload.mainmore("", "http://baike.baidu.com/view/3919236.htm");
 		List<String> listArray = OracleBaidu.selecthuoqu();
 		for (Object Objstring : listArray) {
-//			System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
 				System.out.println(listTemp.get(0));

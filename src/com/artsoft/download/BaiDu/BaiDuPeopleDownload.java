@@ -25,7 +25,7 @@ import com.artsoft.util.TimeTest;
 
 public class BaiDuPeopleDownload {
 
-	public static void mainmore(String strId, String url) {
+	public static Persion mainmore(String strId, String url) {
 		Persion person = new Persion();
 		person.setId(Integer.valueOf(strId));
 		// TODO Auto-generated method stub
@@ -39,15 +39,8 @@ public class BaiDuPeopleDownload {
 		}
 		if (!strHtml.contains("演员")) {
 			System.out.println();
-			return;
+			return null;
 		}
-		// String strHtmlMore = "";
-		// System.out.println(strHtmlMore = HtmlAnalyze.getTagText(strHtml,
-		// "basic-info", "anchor-list"));
-		//// System.out.println(strHtmlMore =
-		// DownloadUtil.decodeUnicode(strHtmlMore));
-		// System.out.println(HtmlAnalyze.getTagText(strHtmlMore, "中文名",
-		// "anchor-list"));
 
 		Document doc = Jsoup.parse(strHtml);
 		Elements links = doc.select("div.basic-info");
@@ -117,37 +110,11 @@ public class BaiDuPeopleDownload {
 			person.print();
 			person.setId(Integer.parseInt(strId));
 			person.setUrl(url);
-			//进行数据的添加 操作
-			OracleHaoSou.InsertTemDimPerson(person);
-			
-
-			// System.out.println();
-			// String name="";
-			// System.out.println(name=HtmlAnalyze.getTagText(link.toString(),
-			// "中文名", "</dd>"));
-			// String nationality="";
-			// System.out.println(nationality=HtmlAnalyze.getTagText(link.toString(),
-			// "国 籍", "</dd>"));
-			// String blood="";
-			// System.out.println(blood=HtmlAnalyze.getTagText(link.toString(),
-			// "血 型", "</dd>"));
-			// String height="";
-			// System.out.println(height=HtmlAnalyze.getTagText(link.toString(),
-			// "身 高", "</dd>"));
-			// String weight="";
-			// System.out.println(weight=HtmlAnalyze.getTagText(link.toString(),
-			// "体 重", "</dd>"));
-			// String occupation="";
-			// System.out.println(occupation=HtmlAnalyze.getTagText(link.toString(),
-			// "职 业", "</dd>"));
-			// String coustellation="";
-			// System.out.println(coustellation=HtmlAnalyze.getTagText(link.toString(),
-			// "星 座", "</dd>"));
-			// String birthday="";
-			// System.out.println(birthday=HtmlAnalyze.getTagText(link.toString(),
-			// "出生日期", "</dd>"));
 
 		}
+		//进行数据的添加 操作
+		//OracleHaoSou.InsertTemDimPerson(person);
+		return person;
 	}
 
 	public static Persion buildPerson(String baseInfoName, String baseInfoValue, Persion person) {

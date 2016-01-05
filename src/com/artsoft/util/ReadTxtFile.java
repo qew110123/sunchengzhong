@@ -54,13 +54,13 @@ public class ReadTxtFile {
 	
 	
 	public static void main(String[] args) {
-//		String[] keys=getKeyWordFromFile("keyword.txt").split("\n");
-//		for (int i = 0; i < keys.length; i++) {
-//			System.out.println(i);
-//			System.out.println(keys[i]);
-//		}
-		wirterfile("111.txt", "txtString");
-		wirterfile("111.txt", "txtString1111");
+		String[] keys=getKeyWordFromFile("proxy.txt").split("\n");
+		for (int i = 0; i < keys.length; i++) {
+			System.out.println(i);
+			System.out.println(keys[i]);
+		}
+//		wirterfile("111.txt", "txtString");
+//		wirterfile("111.txt", "txtString1111");
 	}
 	
 	

@@ -14,10 +14,6 @@ import com.artsoft.util.DownloadUtil;
 public class BaiDuPeoplemingxingguanxitupianDownload {
 	public static void peopleurl(String urlMain){
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		// String strHtml = DownloadUtil.readHtml(strUrl, 1000 * 30,"UTF-8",
-		// cookstr, null);
-		// StringBuffer strHtml = DownloadUtil.getContent(urlstr);
-		// System.out.println(strHtml);
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
 		}
