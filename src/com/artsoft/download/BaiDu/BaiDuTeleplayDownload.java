@@ -26,7 +26,7 @@ import com.artsoft.util.TimeTest;
 
 public class BaiDuTeleplayDownload {
 
-	private static void mainmore(String strId, String url ,String strUrlname) {
+	public static TvPlay mainmore(String strId, String url ,String strUrlname) {
 		TvPlay tvplay = new TvPlay();
 		// TODO Auto-generated method stub
 		String strHtml = "";
@@ -97,39 +97,72 @@ public class BaiDuTeleplayDownload {
 				stills_url="";
 			}
 			tvplay.setStills_url(stills_url);
+			
+			
+			Elements linksss = doc.select("div.lemma-summary div.para");
+			String information = "";
+			int u = 0;
+			for (Element element : linksss) {
+				// System.out.println("111"+element);
+				if (u == 0) {
+					information = element.text();
+					u+=1;
+				} else {
+					information = information + "||" + element.text();
+				}
+			}
+			if (information!=null&&!"".equals(information)) {
+				tvplay.setBasic_info(information);
+			}
+			
+			
+			
+//			tvplay.setBasic_info("");
 			tvplay.print();
-			OracleHaoSou.InsertTVplay(tvplay);
+//			OracleHaoSou.InsertTVplay(tvplay);
 			
 			
 		}
-		//进行数据的另一个表数据 的添加
-		Elements linkli = doc.select("li.roleIntroduction-item");
-		String personname="";
-		String personurl="";
-		String rolename="";
-		String personstillsurl="";
-		String dubbingname="";
-		String dubbingurl="";
-		String roleintro=""; 
-		for (Element elementli : linkli) {
-			System.out.println(personstillsurl=HtmlAnalyze.getTagText(elementli.toString(), "<img src=\"", "\""));
-			System.out.println(rolename=HtmlAnalyze.getTagText(elementli.toString(), "class=\"item-value\">", "</span>"));
-			System.out.println(personname=elementli.select("div.role-actor span.item-value").text());
-			System.out.println(personurl=elementli.select("div.role-actor span.item-value a ").attr("href"));
-//			System.out.println(HtmlAnalyze.getTagText(elementli.select("div.role-actor span.item-value").toString(), "href=\"", "\""));
-			System.out.println(dubbingname=elementli.select("div.role-voice span.item-value").text());
-			System.out.println(dubbingurl=elementli.select("div.role-voice span.item-value a").attr("href"));
-//			System.out.println(HtmlAnalyze.getTagText(elementli.select("div.role-voice span.item-value").toString(), "href=\"", "\""));
-			System.out.println(roleintro=HtmlAnalyze.getTagText(elementli.toString(), "role-description\">", "</dd>"));
-			if (personurl!="") {
-				personurl="http://baike.baidu.com"+personurl;
-			}
-			if (dubbingurl!="") {
-				dubbingurl="http://baike.baidu.com"+dubbingurl;
-			}
-			OracleHaoSou.intotemtvplay(strId, strUrlname, url, "", personname, personurl, rolename, personstillsurl, dubbingname, dubbingurl, roleintro);
+		try {
 			
+		
+			// 进行数据的另一个表数据 的添加
+			Elements linkli = doc.select("li.roleIntroduction-item");
+			String personname = "";
+			String personurl = "";
+			String rolename = "";
+			String personstillsurl = "";
+			String dubbingname = "";
+			String dubbingurl = "";
+			String roleintro = "";
+			for (Element elementli : linkli) {
+				System.out.println(personstillsurl = HtmlAnalyze.getTagText(elementli.toString(), "<img src=\"", "\""));
+				System.out.println(
+						rolename = HtmlAnalyze.getTagText(elementli.toString(), "class=\"item-value\">", "</span>"));
+				System.out.println(personname = elementli.select("div.role-actor span.item-value").text());
+				System.out.println(personurl = elementli.select("div.role-actor span.item-value a ").attr("href"));
+				// System.out.println(HtmlAnalyze.getTagText(elementli.select("div.role-actor
+				// span.item-value").toString(), "href=\"", "\""));
+				System.out.println(dubbingname = elementli.select("div.role-voice span.item-value").text());
+				System.out.println(dubbingurl = elementli.select("div.role-voice span.item-value a").attr("href"));
+				// System.out.println(HtmlAnalyze.getTagText(elementli.select("div.role-voice
+				// span.item-value").toString(), "href=\"", "\""));
+				System.out.println(
+						roleintro = HtmlAnalyze.getTagText(elementli.toString(), "role-description\">", "</dd>"));
+				if (personurl != "") {
+					personurl = "http://baike.baidu.com" + personurl;
+				}
+				if (dubbingurl != "") {
+					dubbingurl = "http://baike.baidu.com" + dubbingurl;
+				}
+				OracleHaoSou.intotemtvplay(strId, strUrlname, url, "", personname, personurl, rolename, personstillsurl,
+						dubbingname, dubbingurl, roleintro);
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
+		return tvplay;
 		
 		
 		
@@ -162,6 +195,10 @@ public class BaiDuTeleplayDownload {
 	 * @return
 	 */
 	public static TvPlay buildTvPlay(String baseInfoName, String baseInfoValue, TvPlay tvplay) {
+		if (baseInfoValue!=null&&!baseInfoValue.equals("")) {
+			baseInfoValue=baseInfoValue.replace("	", "");
+		}
+		//	
 		if ("中文名".equals(baseInfoName)) {
 			tvplay.setTvplay_name(baseInfoValue);
 		}
@@ -202,7 +239,7 @@ public class BaiDuTeleplayDownload {
 			tvplay.setPages(baseInfoValue);
 		}
 		if ("每集长度".equals(baseInfoName)) {
-			tvplay.setPages(baseInfoValue);
+			tvplay.setTime_length(baseInfoValue);
 		}
 		if ("类型".equals(baseInfoName)) {
 			tvplay.setSubject(baseInfoValue);
@@ -233,6 +270,10 @@ public class BaiDuTeleplayDownload {
 		}
 		if ("主要奖项".equals(baseInfoName)) {
 			tvplay.setMajor_awards(baseInfoValue);
+		}
+		
+		if ("上映日期".equals(baseInfoName)|| "上映时间".equals(baseInfoName)) {
+			tvplay.setShow_date(baseInfoValue);
 		}
 		
 		return tvplay;
@@ -279,7 +320,9 @@ public class BaiDuTeleplayDownload {
 				}
 				System.out.println(strUrl);
 //				mainmore(id, strUrl);
-				mainmore(id, strUrl,strUrlname);
+				TvPlay tvplay =mainmore(id, strUrl,strUrlname);
+				OracleHaoSou.InsertTVplay(tvplay);//添加操作
+//				OracleHaoSou.UpdateTVplay(tvplay);//修改操作
 			}
 		}
 	}

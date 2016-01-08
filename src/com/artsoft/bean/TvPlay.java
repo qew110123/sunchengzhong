@@ -91,7 +91,10 @@ public class TvPlay {
 	private String recording_place = "";
 	// 电视剧剧照
 	private String stills_url = "";
-
+	//基本介绍 不能包含html标签 每段之间用||隔开
+	private String basic_info = "";
+	//上映日期
+	private String show_date = "";
 	public void print() {
 		System.out.println("tvplay_id:		" + tvplay_id);
 		System.out.println("tvplay_name:	" + tvplay_name);
@@ -138,6 +141,8 @@ public class TvPlay {
 		System.out.println("season_numbver:	" + season_numbver);
 		System.out.println("recording_place:" + recording_place);
 		System.out.println("stills_url:		" + stills_url);
+		System.out.println("basic_info:		" + basic_info);
+		
 	}
 
 	public Integer getTvplay_id() {
@@ -498,5 +503,21 @@ public class TvPlay {
 
 	public void setStills_url(String stills_url) {
 		this.stills_url = stills_url;
+	}
+
+	public String getBasic_info() {
+		return basic_info;
+	}
+
+	public void setBasic_info(String basic_info) {
+		this.basic_info = basic_info;
+	}
+
+	public String getShow_date() {
+		return show_date;
+	}
+
+	public void setShow_date(String show_date) {
+		this.show_date = show_date;
 	}
 }

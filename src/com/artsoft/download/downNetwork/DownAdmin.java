@@ -17,6 +17,7 @@ public class DownAdmin {
 		DownkankanNetwork.main(null);
 		DownIqiyiNetword.main(null);
 		DownDoubanNetword.main(null);
+		DownDoubanChaXunNetword.main(null);
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
 	

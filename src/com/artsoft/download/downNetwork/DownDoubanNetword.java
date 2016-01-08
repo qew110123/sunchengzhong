@@ -98,7 +98,7 @@ public class DownDoubanNetword {
 				e.printStackTrace();
 			}
 			try {
-				OracleOpreater.intoReputation(name, "9", feishu, "0", "", urls, "1", "2");
+				OracleOpreater.intoReputation(name, "9", pinglun, "0", "", urls, "1", "2");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -166,10 +166,16 @@ public class DownDoubanNetword {
 //			
 //			DownDoubanNetword.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
 //		}
-		for (int i = 0; i <=500; i=i+20) {
-//			System.out.println(i);
-			DownDoubanNetword.mainurl("http://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
-		}
+		
+		
+		
+//		for (int i = 0; i <=500; i=i+20) {
+////			System.out.println(i);
+//			DownDoubanNetword.mainurl("http://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
+//		}
+		
+		
+		
 
 	}
 }

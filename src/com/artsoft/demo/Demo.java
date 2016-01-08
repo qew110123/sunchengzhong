@@ -207,14 +207,17 @@ public class Demo {
 //		ReadTxtFile.wirterfile("IpFilter.txt", "111111");
 //		ReadTxtFile.wirterfile("IpFilter.txt", "22222");
 		//http://img5.imgtn.bdimg.com/it/u=3839833749,319426364&fm=21&gp=0.jpg
-		try {
-			download(
-					"http://img2.imgtn.bdimg.com/it/u=954023560,3150965806&fm=21&gp=0.jpg",
-					"u=3935255986,3954096083&fm=15&gp=0.jpg", "D:\\image1\\");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			download(
+//					"http://img2.imgtn.bdimg.com/it/u=954023560,3150965806&fm=21&gp=0.jpg",
+//					"u=3935255986,3954096083&fm=15&gp=0.jpg", "D:\\image1\\");
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		String sss = "abc12jlskdf4a";
+		System.out.println(sss.replaceAll("\\D+", ""));
 	}
 
 }

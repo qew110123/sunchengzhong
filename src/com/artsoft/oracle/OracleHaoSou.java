@@ -67,7 +67,7 @@ public class OracleHaoSou {
 				+ "VALUES (?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
 
 		try {
-			
+
 			List<Comparable> list = new ArrayList();
 			list.add(Integer.parseInt(tvplayId));// 这里是将对象加入到list中
 			list.add(tyPlayName);
@@ -171,6 +171,7 @@ public class OracleHaoSou {
 
 	/**
 	 * 进行百度人物的添加
+	 * 
 	 * @param persion
 	 */
 	public static void InsertTemDimPerson(Persion persion) {
@@ -181,7 +182,7 @@ public class OracleHaoSou {
 				+ "t.deathday,t.alias_en,t.alias_cn,t.homeplace,t.nation,t.major_awards,t.shcool,t.brokerage_firm,"
 				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers,t.hobby) "
 				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		
+
 		strSql = "insert into ODS.TEM_DIM_PERSON t (t.person_id, t.person_name,t.img_url,t.person_url ,"
 				+ "t.SEX ,t.NATIONALITY,t.bloodtype ,t.height,t.weight,t.occupation ,t.constellation ,t.birthday,"
 				+ "t.deathday,t.alias_en,t.alias_cn,t.homeplace,t.major_awards,t.shcool,t.brokerage_firm,"
@@ -204,7 +205,7 @@ public class OracleHaoSou {
 		list.add(persion.getAlias_en());
 		list.add(persion.getAlias_cn());
 		list.add(persion.getHomeplace());
-//		list.add(persion.getNation());
+		// list.add(persion.getNation());
 		list.add(persion.getMajor_awards());
 		list.add(persion.getShcool());
 		list.add(persion.getBrokerage_firm());
@@ -222,10 +223,10 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
-	
-	
+
 	/**
 	 * 进行百度数据的数据的 修改操作
+	 * 
 	 * @param persion
 	 */
 	public static void upTemDimPerson(Persion persion) {
@@ -240,10 +241,10 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
-	
-	
+
 	/**
 	 * 进行百度人物的添加
+	 * 
 	 * @param persion
 	 */
 	public static void UpdatePerson(Persion persion) {
@@ -254,7 +255,7 @@ public class OracleHaoSou {
 				+ "t.deathday,t.alias_en,t.alias_cn,t.homeplace,t.nation,t.major_awards,t.shcool,t.brokerage_firm,"
 				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers,t.hobby) "
 				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		
+
 		/**
 		 * 修改操作，整体修改
 		 */
@@ -281,7 +282,7 @@ public class OracleHaoSou {
 		list.add(persion.getAlias_en());
 		list.add(persion.getAlias_cn());
 		list.add(persion.getHomeplace());
-//		list.add(persion.getNation());
+		// list.add(persion.getNation());
 		list.add(persion.getMajor_awards());
 		list.add(persion.getShcool());
 		list.add(persion.getBrokerage_firm());
@@ -302,7 +303,7 @@ public class OracleHaoSou {
 	}
 
 	/**
-	 * 进行电视剧数据 的
+	 * 进行电视剧数据 的添加
 	 * 
 	 * @param tvplay
 	 */
@@ -370,6 +371,161 @@ public class OracleHaoSou {
 	}
 
 	/**
+	 * 进行电视剧数据 的添加
+	 * 
+	 * @param tvplay
+	 */
+	public static void UpdateTVplay(TvPlay tvplay) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		//
+		String strSql = "update ods.tem_tvplay t set t.tvplay_name=?,t.tvplay_url=?,t.alias_en=?,t.alias_cn=?,"
+				+ "t.major_actors=?,t.major_awards=?,t.director=?,t.screenwriTer=?,t.producer=?,t.production_company=?,"
+				+ "t.issuing_company=?,t.shoot_time=?,t.shoot_place=?,t.subject=?,t.produced_time=?,t.produced_company=?,"
+				+ "t.production_area=?,t.premiere_time=?,t.pages=?,t.time_length=?,t.play_platform =?,t.premiere_platform=?,"
+				+ "t.photography_director=?,t.total_production=?,t.production_chairman=?,t.production_cost=?,"
+				+ "t.play_theater=?,t.before_teleplay=?,t.next_teleplay=?,t.open_time=?,t.close_time=?,t.total_planning=?,"
+				+ "t.film_time=?,t.box_office=?,t.type=1,t.compere=?,t.total_sponsor=?,t.partners=?,t.special_support=?,"
+				+ "t.social_platform=?,t.guest_program=?,t.season_number=?,t.recording_place=?,t.stills_url=?"
+				+ "where t.tvplay_id=?";
+		List<Comparable> list = new ArrayList();
+		list.add(tvplay.getTvplay_name());
+		list.add(tvplay.getTvplay_url());
+		list.add(tvplay.getAlias_en());
+		list.add(tvplay.getAlias_cn());
+		list.add(tvplay.getMajor_actors());
+		list.add(tvplay.getMajor_awards());
+		list.add(tvplay.getDirector());
+		list.add(tvplay.getScreenwriter());
+		list.add(tvplay.getProducer());
+		list.add(tvplay.getProduction_company());
+		list.add(tvplay.getIssuing_company());
+		list.add(tvplay.getShoot_time());
+		list.add(tvplay.getShoot_place());
+		list.add(tvplay.getSubject());
+		list.add(tvplay.getProduced_time());
+		list.add(tvplay.getProduced_company());
+		list.add(tvplay.getProduction_area());
+		list.add(tvplay.getPremiere_time());
+		list.add(tvplay.getPages());
+		list.add(tvplay.getTime_length());
+		list.add(tvplay.getPlay_platform());
+		list.add(tvplay.getPremiere_platform());
+		list.add(tvplay.getPhorogrphy_director());
+		list.add(tvplay.getTotal_production());
+		list.add(tvplay.getProduction_chairman());
+		list.add(tvplay.getProduction_cost());
+		list.add(tvplay.getPlay_theater());
+		list.add(tvplay.getBefore_eleplay());
+		list.add(tvplay.getNext_teleplay());
+		list.add(tvplay.getOpen_time());
+		list.add(tvplay.getClose_time());
+		list.add(tvplay.getTotal_planning());
+		list.add(tvplay.getFilm_time());
+		list.add(tvplay.getBox_office());
+		// list.add(tvplay.getType());
+		list.add(tvplay.getCompere());
+		list.add(tvplay.getTotal_sponsor());
+		list.add(tvplay.getPartners());
+		list.add(tvplay.getSpecial_support());
+		list.add(tvplay.getSocial_platform());
+		list.add(tvplay.getGuest_program());
+		list.add(tvplay.getSeason_numbver());
+		list.add(tvplay.getRecording_place());
+		list.add(tvplay.getStills_url());
+		list.add(tvplay.getTvplay_id());
+		// list.add(persion.getPersonSocialActivitiesList());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+
+	/**
+	 * 进行电视剧数据 的添加
+	 * 
+	 * @param tvplay
+	 */
+	public static void InWangLuoTVplay(TvPlay tvplay) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ODS.tem_NETWORK_TVPLAY t "
+				+ "(t.netplay_name,t.english_name,t.alias_name,t.set_num,t.producer,t.produce_company,"
+				+ "t.produce_area,t.produce_date,t.show_date, t.premiere_date,t.shot_start_date,t.SHOT_END_DATE,"
+				+ "t.create_time,t.issue_organization,t.play_platform, t.netplay_subject,t.time_long,"
+				+ "t.actors,t.director,t.screenwriter,t.basic_info,t.stills_url,t.NETPLAY_URL) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		// list.add(tvplay.getTvplay_id());
+		list.add(tvplay.getTvplay_name());
+		// list.add(tvplay.getTvplay_url());
+		list.add(tvplay.getAlias_en());
+		list.add(tvplay.getAlias_cn());
+		if (tvplay.getPages() != null && !"".equals(tvplay.getPages())) {
+			String jishu = tvplay.getPages().replace("集", "").replaceAll("\\D+", "");
+			if (jishu != null && !"".equals(jishu)) {
+				list.add(Integer.parseInt(jishu));
+			}else{
+				list.add(0);
+			}
+		} else {
+			list.add(0);
+		}
+		//////////// 制片人
+		list.add(tvplay.getProducer());
+		// list.add(tvplay.getProduced_company());
+		list.add(tvplay.getProduced_company());
+		list.add(tvplay.getProduction_area());
+		list.add(tvplay.getProduced_time());
+		/////// 上映日期
+		list.add(tvplay.getShow_date());
+		list.add(tvplay.getPremiere_time());
+		list.add(tvplay.getOpen_time());
+		list.add(tvplay.getClose_time());
+		////// 创建时间
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+
+		///// 修改时间
+		// list.add("");
+		list.add(tvplay.getIssuing_company());
+		list.add(tvplay.getPlay_platform());
+		list.add(tvplay.getSubject());
+		list.add(tvplay.getTime_length());
+		list.add(tvplay.getMajor_actors());
+		list.add(tvplay.getDirector());
+		list.add(tvplay.getScreenwriter());
+		list.add(tvplay.getBasic_info());
+		list.add(tvplay.getStills_url());
+		list.add(tvplay.getTvplay_url());
+
+		// list.add(tvplay.getMajor_awards());
+		// list.add(tvplay.getProducer());
+		// list.add(tvplay.getProduction_company());
+		// list.add(tvplay.getShoot_time());
+		// list.add(tvplay.getShoot_place());
+		// list.add(tvplay.getPremiere_platform());
+		// list.add(tvplay.getPhorogrphy_director());
+		// list.add(tvplay.getTotal_production());
+		// list.add(tvplay.getProduction_chairman());
+		// list.add(tvplay.getProduction_cost());
+		// list.add(tvplay.getPlay_theater());
+		// list.add(tvplay.getBefore_eleplay());
+		// list.add(tvplay.getNext_teleplay());
+		// list.add(tvplay.getTotal_planning());
+		// list.add(tvplay.getFilm_time());
+		// list.add(tvplay.getBox_office());
+		// // list.add(tvplay.getType());
+		// list.add(tvplay.getCompere());
+		// list.add(tvplay.getTotal_sponsor());
+		// list.add(tvplay.getPartners());
+		// list.add(tvplay.getSpecial_support());
+		// list.add(tvplay.getSocial_platform());
+		// list.add(tvplay.getGuest_program());
+		// list.add(tvplay.getSeason_numbver());
+		// list.add(tvplay.getRecording_place());
+		// // list.add(persion.getPersonSocialActivitiesList());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+
+	/**
 	 * 進入数据进行角色介绍添加
 	 * 
 	 * @param tvplayid
@@ -409,12 +565,12 @@ public class OracleHaoSou {
 	}
 
 	/**
-	 * 添加ods.TEM_PERSON_STYLE 进行数据的添加
-	 * 进行百度演员风格标签添加
+	 * 添加ods.TEM_PERSON_STYLE 进行数据的添加 进行百度演员风格标签添加
+	 * 
 	 * @param words
 	 * @param wordsurl
 	 * @param name
-	 * 2015年11月14日12:27:19
+	 *            2015年11月14日12:27:19
 	 */
 	public static void intotempersonstyle(String words, String wordsurl, String name) {
 		Connection conn = DBOperate218.getInstance().getConnection();
@@ -445,7 +601,7 @@ public class OracleHaoSou {
 		return (ArrayList<String>) list;
 
 	}
-	
+
 	/**
 	 * 查询图片数据
 	 * 
@@ -461,8 +617,7 @@ public class OracleHaoSou {
 		return (ArrayList<String>) list;
 
 	}
-	
-	
+
 	/**
 	 * sql语句并获取开始和结束 dao用户列表中
 	 * 
@@ -480,15 +635,16 @@ public class OracleHaoSou {
 		return (ArrayList<String>) list;
 
 	}
-	
+
 	/**
 	 * 进行百度基本信息数据的更新
+	 * 
 	 * @param id
 	 * @param basicInfo
 	 * @param sex
 	 */
 	public static void updateiInformation(int id, String basicInfo, String sex) {
-		System.out.println(id+basicInfo+sex);
+		System.out.println(id + basicInfo + sex);
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String strSql = "update ods.TEM_DIM_PERSON t set t.basic_info=?,t.sex=? where t.person_id=?";
 
@@ -499,10 +655,10 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
-	
-	
+
 	/**
 	 * 获取当360人的指数数据
+	 * 
 	 * @return
 	 */
 	public static String returnMaxdata() {
@@ -512,8 +668,10 @@ public class OracleHaoSou {
 		System.out.println(strMax);
 		return strMax;
 	}
+
 	/**
 	 * 获取当360电视剧的指数数据
+	 * 
 	 * @return
 	 */
 	public static String returnMaxdianshijudata() {
@@ -523,9 +681,10 @@ public class OracleHaoSou {
 		System.out.println(strMax);
 		return strMax;
 	}
-	
+
 	/**
 	 * 获取当360人的指数数据
+	 * 
 	 * @return
 	 */
 	public static String returnMaxdianpeople() {
@@ -535,25 +694,26 @@ public class OracleHaoSou {
 		System.out.println(strMax);
 		return strMax;
 	}
-	
-	
+
 	/**
 	 * 获取当360字数总需要采集的人数的个数
+	 * 
 	 * @return
 	 */
 	public static String returnNumPeople(String strdbname) {
 		Connection conn = DBOperate218.getInstance().getConnection();
-//		String strSql = "select count(*) from ods.person_network_popularity";
-		String strSql = "select count(*) from "+strdbname;
+		// String strSql = "select count(*) from ods.person_network_popularity";
+		String strSql = "select count(*) from " + strdbname;
 		String strMax = DBOperate218.getResultValue(conn, strSql);
 		System.out.println(strMax);
 		return strMax;
 	}
+
 	public static void main(String[] args) {
-//		returnNumPeople("edw.dim_tvplay");
+		// returnNumPeople("edw.dim_tvplay");
 		returnMaxdata();
-//		returnMaxdata();
-//		updateiInformation(2, "", null);
+		// returnMaxdata();
+		// updateiInformation(2, "", null);
 		// List<String> listArray = select("1", "10000");
 		// for (Object Objstring : listArray) {
 		// System.out.println(Objstring);
@@ -572,7 +732,7 @@ public class OracleHaoSou {
 
 		// intoBaiDuPopularity("韩东君", "http://baike.baidu.com/view/6923013.htm",
 		// "http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
-//		selectphoto();
+		// selectphoto();
 		// intoBaiDuPopularity("王俊凯", "http://baike.baidu.com/view/6923013.htm",
 		// "http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
 	}
