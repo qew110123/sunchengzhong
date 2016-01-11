@@ -119,7 +119,7 @@ public class ConfigWip{
     }
 	
 	public static void main(String[] args){
-		String str = ConfigWip.getInstance().getConfigValue("URL");
+		String str = ConfigWip.getInstance().getConfigValue("ProxyPath");
 		System.out.println(str);
 	}
 }

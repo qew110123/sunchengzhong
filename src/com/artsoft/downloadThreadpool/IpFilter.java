@@ -115,6 +115,7 @@ public class IpFilter implements TaskInterface {
 	}
 
 	public static void mainip(String urlma) {
+		strproxy="";
 		ipfiler(urlma);
 		ReadTxtFile.wirterfile("proxy.txt", strproxy);
 	}
