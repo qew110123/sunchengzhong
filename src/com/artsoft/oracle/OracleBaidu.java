@@ -68,6 +68,12 @@ public class OracleBaidu {
 		 */
 		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.dim_tvplay t where t.tvplay_url is not null and t.tvplay_url !='无'";
 		
+		/**
+		 * 2016年1月11日14:51:10
+		 * 数据补充
+		 * select * from edw.dim_tvplay t  where t.years is null;
+		 */
+		sql="select * from edw.dim_tvplay t  where t.years is null";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;

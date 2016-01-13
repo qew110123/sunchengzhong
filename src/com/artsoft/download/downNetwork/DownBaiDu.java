@@ -70,7 +70,10 @@ public class DownBaiDu {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		List<String> listArray = OracleNetwork.selectbaidudianshiju();
+		
+		TimeTest tt = new TimeTest();
+		String timesday=tt.getNowTime("yyyyMMdd");
+		List<String> listArray = OracleNetwork.selectbaidudianshiju(timesday);
 
 		for (Object Objstring : listArray) {
 			// System.out.println(Objstring);

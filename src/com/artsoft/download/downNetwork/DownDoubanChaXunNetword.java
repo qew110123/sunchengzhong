@@ -17,7 +17,6 @@ import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
-import com.artsoft.util.ReadTxtFile;
 import com.artsoft.util.TimeTest;
 
 public class DownDoubanChaXunNetword {
@@ -71,16 +70,33 @@ public class DownDoubanChaXunNetword {
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
-		String strkey = ReadTxtFile.getKeyWordFromFile("keywordiqiyi.txt");
-		String[] keys = strkey.split("\n");
-		for (int i = 0; i < keys.length; i++) {
-			System.out.println(keys[i]);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
-			String url = keys[i];
-			System.out.println(url);
-			boolean bb = true;
-			// DownDoubanChaXunNetword.youkuMaim(url);
+		TimeTest tt = new TimeTest();
+		String timesday=tt.getNowTime("yyyyMMdd");
+		List<String> listArray = OracleNetwork.selectbaidudianshiju(timesday);
+//
+		for (Object Objstring : listArray) {
+			// System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			System.out.println(listTemp.get(0));
+			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
+				String urlBranch = "";
+				try {
+					urlBranch = "http://www.douban.com/search?cat=1002&q="
+							+ java.net.URLEncoder.encode(listTemp.get(0), "utf-8") + "";
+					mainUrlall(urlBranch, listTemp.get(0));
+
+					CommonUtil.setLog(
+							TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0) + "," + listTemp.get(0));
+
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 		}
+		
+		
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
@@ -104,29 +120,34 @@ public class DownDoubanChaXunNetword {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		List<String> listArray = OracleNetwork.selectbaidudianshiju();
+		//20160111
+		//	TimeTest tt = new TimeTest();
+//		System.out.println("获取当天日期:"+tt.getNowTime("yyyy-MM-dd"));
+		TimeTest tt = new TimeTest();
+		String timesday=tt.getNowTime("yyyyMMdd");
+		List<String> listArray = OracleNetwork.selectbaidudianshiju(timesday);
 //
-//		for (Object Objstring : listArray) {
-//			// System.out.println(Objstring);
-//			List<String> listTemp = (List<String>) Objstring;
-//			System.out.println(listTemp.get(0));
-//			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
-//				String urlBranch = "";
-//				try {
-//					urlBranch = "http://www.douban.com/search?cat=1002&q="
-//							+ java.net.URLEncoder.encode(listTemp.get(0), "utf-8") + "";
-//					mainUrlall(urlBranch, listTemp.get(0));
-//
-//					CommonUtil.setLog(
-//							TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0) + "," + listTemp.get(0));
-//
-//				} catch (UnsupportedEncodingException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//
-//		}
+		for (Object Objstring : listArray) {
+			// System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			System.out.println(listTemp.get(0));
+			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
+				String urlBranch = "";
+				try {
+					urlBranch = "http://www.douban.com/search?cat=1002&q="
+							+ java.net.URLEncoder.encode(listTemp.get(0), "utf-8") + "";
+					mainUrlall(urlBranch, listTemp.get(0));
+
+					CommonUtil.setLog(
+							TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0) + "," + listTemp.get(0));
+
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
 		
 	}
 }

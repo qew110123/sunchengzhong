@@ -10,9 +10,9 @@ public class OracleNetwork {
 	 * 2016Äê1ÔÂ6ÈÕ16:55:51
 	 * @return
 	 */
-	public static List selectbaidudianshiju() {
+	public static List selectbaidudianshiju(String timesday) {
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String sql = "select t.tvplay_name  from ODS.TEM_NETWORK_REPUTATION t where  t.tv_type=1 and t.date_date='20160108'  group by t.tvplay_name";
+		String sql = "select t.tvplay_name  from ODS.TEM_NETWORK_REPUTATION t where  t.tv_type=1 and t.date_date='"+timesday+"'  group by t.tvplay_name";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 1;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);

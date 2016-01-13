@@ -18,6 +18,7 @@ public class DownAdmin {
 		DownIqiyiNetword.main(null);
 		DownDoubanNetword.main(null);
 		DownDoubanChaXunNetword.main(null);
+		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
 	
