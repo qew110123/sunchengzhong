@@ -62,11 +62,6 @@ public class OracleBaidu {
 		 */
 		sql="select * from  edw.dim_tvplay t where t.years  is null";
 		
-		/**
-		 *2016年1月7日11:15:30
-		 * 数据的补充 
-		 */
-		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.dim_tvplay t where t.tvplay_url is not null and t.tvplay_url !='无'";
 		
 		/**
 		 * 2016年1月11日14:51:10
@@ -74,6 +69,21 @@ public class OracleBaidu {
 		 * select * from edw.dim_tvplay t  where t.years is null;
 		 */
 		sql="select * from edw.dim_tvplay t  where t.years is null";
+		
+		/**
+		 *2016年1月7日11:15:30
+		 *2016年1月14日18:39:31
+		 * 数据的补充 
+		 */
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.dim_tvplay t where t.tvplay_url is not null and t.tvplay_url !='无'";
+		
+		
+		/**
+		 * url数据补充
+		 * 2016年1月14日18:47:35
+		 * 
+		 */
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.dim_tvplay t where t.tvplay_id not in (select t.tvplay_id from ods.tem_tvplay t where t.tvplay_id in (select t.tvplay_id from edw.dim_tvplay t where t.tvplay_url is not null and t.tvplay_url !='无')) and t.tvplay_url is not null and t.tvplay_url !='无'";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;

@@ -1,6 +1,6 @@
 package com.artsoft.admin;
 
-import com.artsoft.download.Download;
+import com.artsoft.download.TVPlay.Download;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.ReadTxtFile;
 import com.artsoft.util.TimeTest;

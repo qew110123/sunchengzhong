@@ -29,6 +29,8 @@ public class BaiDuTeleplayDownload {
 	public static TvPlay mainmore(String strId, String url ,String strUrlname) {
 		TvPlay tvplay = new TvPlay();
 		// TODO Auto-generated method stub
+		tvplay.setTvplay_id(Integer.parseInt(strId));
+		tvplay.setTvplay_url(url);
 		String strHtml = "";
 		boolean bb = true;
 		while (bb) {
@@ -86,8 +88,7 @@ public class BaiDuTeleplayDownload {
 
 				}
 				tvplay = buildTvPlay(baseInfoName, baseInfoValue, tvplay);
-				tvplay.setTvplay_id(Integer.parseInt(strId));
-				tvplay.setTvplay_url(url);
+				
 			}
 			String stills_url="";
 			Elements linkstills_url = doc.select("div.summary-pic img");
@@ -422,19 +423,24 @@ public class BaiDuTeleplayDownload {
 		//
 		// }
 		
+//		/**
+//		 * 进行电视剧数据的下载
+//		 */
+////		 ConfigManager config = ConfigManager.getInstance();
+////		 String driver = config.getConfigValue("driver");
+//		 String xx=ConfigManager.getInstance().getConfigValue("numBaidu");
+//		
+//		 int xxnum=Integer.parseInt(xx);
+//		 System.out.println(xxnum);
+//		 for (int i = xxnum; i < 15780; i=i+1000) {
+//		// i=15780;
+//		 mainProgram(i,i+1000);
+//		 }
 		/**
-		 * 进行电视剧数据的下载
+		 * 测试
 		 */
-//		 ConfigManager config = ConfigManager.getInstance();
-//		 String driver = config.getConfigValue("driver");
-		 String xx=ConfigManager.getInstance().getConfigValue("numBaidu");
-		
-		 int xxnum=Integer.parseInt(xx);
-		 System.out.println(xxnum);
-		 for (int i = xxnum; i < 15780; i=i+1000) {
-		// i=15780;
-		 mainProgram(i,i+1000);
-		 }
+		TvPlay tvplay =mainmore("0", "http://baike.baidu.com/subview/117297/5771342.htm","封神榜");
+		OracleHaoSou.InsertTVplay(tvplay);//添加操作
 
 	}
 

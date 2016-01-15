@@ -1,4 +1,4 @@
-package com.artsoft.download;
+package com.artsoft.download.TVPlay;
 
 import java.io.UnsupportedEncodingException;
 import java.net.Proxy;

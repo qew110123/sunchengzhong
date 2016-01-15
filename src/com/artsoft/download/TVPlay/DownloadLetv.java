@@ -1,4 +1,4 @@
-package com.artsoft.download;
+package com.artsoft.download.TVPlay;
 
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;

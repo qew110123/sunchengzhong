@@ -41,8 +41,8 @@ public class BaiDuTeleplaynextUrl {
 //					BaiDuTeleplayDownload.mainUrlall(urlBranch, listTemp.get(0), listTemp.get(1));
 ////					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0)+","+listTemp.get(1));
 					TvPlay tvplay =BaiDuTeleplayDownload.mainmore(id, url,url);
-//					OracleHaoSou.InsertTVplay(tvplay);
-					OracleHaoSou.UpdateTVplay(tvplay);
+					OracleHaoSou.InsertTVplay(tvplay);
+//					OracleHaoSou.UpdateTVplay(tvplay);
 //					
 //				} catch (UnsupportedEncodingException e) {
 //					// TODO Auto-generated catch block
@@ -53,6 +53,7 @@ public class BaiDuTeleplaynextUrl {
 			}
 
 		}
+		System.out.println(listArray.size());
 
 	}
 

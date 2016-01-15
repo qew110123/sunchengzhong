@@ -27,7 +27,9 @@ public class BaiDuPeopleDownload {
 
 	public static Persion mainmore(String strId, String url) {
 		Persion person = new Persion();
-		person.setId(Integer.valueOf(strId));
+//		person.setId(Integer.valueOf(strId));
+		person.setId(Integer.parseInt(strId));
+		person.setUrl(url);
 		// TODO Auto-generated method stub
 		String strHtml = "";
 		boolean bb = true;
@@ -108,8 +110,7 @@ public class BaiDuPeopleDownload {
 				person.setDescription_text(information);
 			}
 			person.print();
-			person.setId(Integer.parseInt(strId));
-			person.setUrl(url);
+			
 
 		}
 		//进行数据的添加 操作
@@ -402,6 +403,7 @@ public class BaiDuPeopleDownload {
 		//
 		// }
 //		mainmore("", "http://baike.baidu.com/view/1269111.htm?qq-pf-to=pcqq.c2c");
+		
 
 	}
 
