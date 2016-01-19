@@ -12,14 +12,23 @@ import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.ReadTxtFile;
 import com.artsoft.util.TimeTest;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;  
 import java.util.Date;  
 import java.util.Timer;  
 import java.util.TimerTask; 
 
-public class DownIqiyiNetword {
+public class DownIqiyiMovie {
 
-	public static void iQiYiBranch(String urlBranch) {
+	public static void iQiYiBranch(String urlBranch,String name,String score) {
+		
+		try {
+			
+			OracleOpreater.intoReputation(name, "2", score, "0", "", urlBranch, "3", "1");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
@@ -28,26 +37,16 @@ public class DownIqiyiNetword {
 			return;
 		}
 
-		String name = HtmlAnalyze.getTagText(strHtml, "<meta name=\"keywords\" content=\"", "\" /> ");
+//		String name = HtmlAnalyze.getTagText(strHtml, "<meta name=\"keywords\" content=\"", "\" /> ");
 
 		System.out.println(name);
-		String videoId = HtmlAnalyze.getTagText(strHtml, "albumId: ", ",");
+		String videoId = HtmlAnalyze.getTagText(strHtml, "albumId:", ",");
 
-		String albumurl = "http://cache.video.qiyi.com/jp/pc/" + videoId + "/?callback=window.Q.__callbacks__.cbrymman";
+		String albumurl = "http://cache.video.qiyi.com/jp/pc/" + videoId + "/";
 		String numhtml = DownloadUtil.getHtmlText(albumurl, 1000 * 30, "UTF-8", null, null);
-		System.out.println(numhtml = HtmlAnalyze.getTagText(numhtml, "\":", "}"));
+		System.out.println(numhtml = HtmlAnalyze.getTagText(numhtml, ":", "}"));
 		try {
-
-			OracleOpreater.intoReputation(name, "2", numhtml, "0", "", urlBranch, "1", "0");
-
-			String videourl = "http://up.video.iqiyi.com/ugc-updown/quud.do?dataid=" + videoId
-					+ "&type=1&userid=&flashuid=e42dc42f8825edf5580806cde99606ce&appID=21&callback=window.Q.__callbacks__.cb1953yg";
-
-			String feishuhtml = DownloadUtil.getHtmlText(videourl, 1000 * 30, "UTF-8", null, null);
-			String feishu = "";
-			System.out.println(feishu = HtmlAnalyze.getTagText(feishuhtml, "score\":", ",\""));
-
-			OracleOpreater.intoReputation(name, "2", feishu, "0", "", urlBranch, "1", "1");
+			OracleOpreater.intoReputation(name, "2", numhtml, "0", "", urlBranch, "3", "0");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -74,12 +73,15 @@ public class DownIqiyiNetword {
 		}
 
 		Document doc = Jsoup.parse(strHtml);
-		Elements links = doc.select("div.site-piclist_pic");
+		Elements links = doc.select("div.mod-listTitle_left");
 		for (Element link : links) {
 			String strmainurl = "";
-			System.out.println(strmainurl = link.select("a.site-piclist_pic_link").attr("href"));
-			System.out.println(link.select("a.site-piclist_pic_link").attr("title"));
-			iQiYiBranch(strmainurl);
+			String name="";
+			String score="";
+			System.out.println(strmainurl = link.select("a").attr("href"));
+			System.out.println(name=link.select("a").attr("title"));
+			System.out.println(score=link.select("span.score").text());
+			iQiYiBranch(strmainurl,name,score);
 		}
 	}
 
@@ -107,6 +109,38 @@ public class DownIqiyiNetword {
 		return null;
 	}
 	
+	
+	public static void openstatic() {
+		String url = "";
+		String[] diqu = { "1", "2", "3", "4", "308", "1115", "5" };
+		String[] leixing = { "8", "13", "6", "11", "131", "291", "128", "10", "289", "12",
+				"27356", "1284", "129", "9", "7",
+				"27362", "130", "27375", "14", "27376", "296", "311"};
+		for (String diqutxt : diqu) {
+			for (String leixingtxt : leixing) {
+				System.out.println(diqutxt + leixingtxt);
+				
+				try {
+					for (int i = 1; i < 30; i++) {
+						url = "http://list.iqiyi.com/www/1/" + diqutxt
+								+ "-" + leixingtxt + "------------4-" + i + "-1-iqiyi--.html";
+						System.out.println(url);
+//						String urlnext = DownYoukuMovie.youkuMaim(url);
+						mainurl(url);
+//						if (urlnext.equals("") || urlnext == "" || urlnext == null) {
+//							break;
+//						}
+					}
+
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+			}
+
+		}
+	}
+	
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
 
@@ -118,7 +152,7 @@ public class DownIqiyiNetword {
 			String url = keys[i];
 			System.out.println(url);
 			boolean bb = true;
-			DownIqiyiNetword.youkuMaim(url);
+			DownIqiyiMovie.youkuMaim(url);
 		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
@@ -146,10 +180,7 @@ public class DownIqiyiNetword {
 		
 		
 //		TimingTime(23, 59, 59);
-		for (int j = 0; j < 4; j++) {
-			
-			DownIqiyiNetword.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
-		}
+		openstatic();
 
 	}
 }

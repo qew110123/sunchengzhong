@@ -321,7 +321,7 @@ public class DownloadYouku2 {
 	}
 	
 	public static void runstatic(){
-		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+		CommonUtil.setLog("优酷总数"+TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
 		String strkey = ReadTxtFile.getKeyWordFromFile("keyword.txt");
 		String[] keys = strkey.split("\n");
 		for (int i = 0; i < keys.length; i++) {

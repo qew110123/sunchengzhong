@@ -1,6 +1,12 @@
 package com.artsoft.download.Movies;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -127,25 +133,75 @@ public class DownYoukuMovie {
 		String answer = ""; // 顶
 		System.out.println(answer = doc.select("span.increm").text());
 		answer = answer.replaceAll("顶:", "").replaceAll(",", "");
+		
+		
 
 		String score = ""; // 评分
+		
 		score = HtmlAnalyze.getTagText(strHtml, "<label>评分:</label>", "<style type=\"text/css\">");
+//		Pattern pattern = Pattern.compile("[0-9]*");
+//		Matcher isNum = pattern.matcher(score);
+		//score=doc.select("span.ratingstar").text();
+		if (score.contains("\r")) {
+			score=HtmlAnalyze.getTagText("#"+score, "#", "\r");
+		}
+//		if (!isNum.matches()) {
+//			score=doc.select("span.ratingstar").text().replace("评分:", "");
+//		}
 		System.out.println(score);
 
 		// String score = ""; // 集数
 		// score = HtmlAnalyze.getTagText(strHtml, "<label>评分:</label>", "<style
 		// type=\"text/css\">");
 		// System.out.println(score);
-
-		OracleOpreater.intoReputation(name, "1", Amount, "0", "", urlBranch, "2", "0");
-		OracleOpreater.intoReputation(name, "1", score, "0", "", urlBranch, "2", "1");
-		OracleOpreater.intoReputation(name, "1", comment, "0", "", urlBranch, "2", "2");
+		//播放量
+		try {
+			
+			OracleOpreater.intoReputation(name, "1", Amount, "0", "", urlBranch, "3", "0");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		//打分
+		try {
+			
+			OracleOpreater.intoReputation(name, "1", score, "0", "", urlBranch, "3", "1");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		//评论
+		try {
+			OracleOpreater.intoReputation(name, "1", comment, "0", "", urlBranch, "3", "2");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 	}
+	
+	// 判断数据开始时间
+			public static void TimingTime(int hh, int mm, int ss) {
+				Calendar calendar = Calendar.getInstance();
+				calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+				calendar.set(Calendar.MINUTE, mm); // 控制分
+				calendar.set(Calendar.SECOND, ss); // 控制秒
+
+				Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+
+				Timer timer = new Timer();
+				timer.scheduleAtFixedRate(new TimerTask() {
+					public void run() {
+						System.out.println("-------设定要指定任务--------");
+						runstatic();
+					}
+				}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+			}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		runstatic();
+//		runstatic();
+		
+		
+		TimingTime(23, 59, 59);
 
 	}
 

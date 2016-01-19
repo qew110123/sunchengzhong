@@ -215,9 +215,11 @@ public class Demo {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+//		
+//		String sss = "abc12jlskdf4a";
+//		System.out.println(sss.replaceAll("\\D+", ""));
 		
-		String sss = "abc12jlskdf4a";
-		System.out.println(sss.replaceAll("\\D+", ""));
+		System.out.println(Double.parseDouble("0"));
 	}
 
 }

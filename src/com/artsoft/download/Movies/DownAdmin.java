@@ -13,9 +13,9 @@ public class DownAdmin {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
 		DownYoukuMovie.main(null);
 		DownSohuNwtword.main(null);
-		DownqqNetword.main(null);
+		DownqqMovie.main(null);
 		DownkankanNetwork.main(null);
-		DownIqiyiNetword.main(null);
+		DownIqiyiMovie.main(null);
 		DownDoubanNetword.main(null);
 		DownDoubanChaXunNetword.main(null);
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
