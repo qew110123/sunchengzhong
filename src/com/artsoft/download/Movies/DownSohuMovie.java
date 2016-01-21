@@ -15,31 +15,31 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DownSohuNwtword {
+public class DownSohuMovie {
 
 	public static void sohuBranch(String urlBranch) {
 
-		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
+		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "GBK", null, null);
 		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
+			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "GBK", null, null);
 		}
 		if (strHtml == null || strHtml.equals("")) {
 			return;
 		}
 		// <h2>电视剧：<span class="vname">
-		String name = HtmlAnalyze.getTagText(strHtml, "<span class=\"vname\">", "</span></h2>");
-		String score = HtmlAnalyze.getTagText(strHtml, "</em><strong class=\"score\">", "</strong> 分");
+		String name = HtmlAnalyze.getTagText(strHtml, "name=\"album\" content=\"", "\"");
+//		String score = HtmlAnalyze.getTagText(strHtml, "</em><strong class=\"score\">", "</strong> 分");
 		// 进行评分的采集
-		try {
-			OracleOpreater.intoReputation(name, "4", score, "0", "", urlBranch, "1", "1");
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		try {
+//			OracleOpreater.intoReputation(name, "4", score, "0", "", urlBranch, "3", "1");
+//
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 		Document doc = Jsoup.parse(strHtml);
 		Elements links = doc.select("div.general li");
 
-		sohuDetailedfirst(links.first().select("div.pic a").attr("href"), name);
+		sohuDetailedfirst(urlBranch, name);
 
 //		System.out.println(links.size());
 //		for (Element link : links) {
@@ -74,7 +74,7 @@ public class DownSohuNwtword {
 		String strHtml = DownloadUtil.getHtmlText(urlnew, 1000 * 30, "UTF-8", null, null);
 		String Amount = HtmlAnalyze.getTagText(strHtml, "{\"" + strvid + "\":{\"total\":", ",\"");
 		try {
-			OracleOpreater.intoReputation(name, "4", Amount, "0", "", urlerer, "1", "0");
+			OracleOpreater.intoReputation(name, "4", Amount, "0", "", urlerer, "3", "0");
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -150,8 +150,8 @@ public class DownSohuNwtword {
 
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-		for (int i = 1; i <= 72; i++) {
-			sohuMain("http://so.tv.sohu.com/list_p1101_p2_p3_p4-1_p5_p6_p77_p80_p9_p10" + i + "_p11_p12_p13.html");
+		for (int i = 1; i <= 56; i++) {
+			sohuMain("http://so.tv.sohu.com/list_p1100_p20_p3_p40_p5_p6_p77_p80_p9_2d1_p10" + i + "_p11_p12_p13.html");
 
 		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
@@ -196,8 +196,11 @@ public class DownSohuNwtword {
 //			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 //		}
 		
-			sohuMain("http://so.tv.sohu.com/list_p1101_p20_p3_p40_p5_p6_p77_p80_p9_2d1_p10_p11_p122_p13.html");
+		
+//			sohuMain("http://so.tv.sohu.com/list_p1101_p20_p3_p40_p5_p6_p77_p80_p9_2d1_p10_p11_p122_p13.html");
 //		 TimingTime(23, 59, 59);
+		
+		runstatic();
 	}
 
 }

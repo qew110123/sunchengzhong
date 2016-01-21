@@ -17,7 +17,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class DownqqMovie {
-	public static boolean downMain(String urlMain) {
+	public static boolean downMain(String urlMain ,int xxx) {
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
@@ -41,20 +41,27 @@ public class DownqqMovie {
 			// System.out.println(link.text());
 			System.out.println(score = link.select("span.mod_score").text());
 			try {
-//				OracleOpreater.intoReputation(name, "3", score, "0", "", urlMain, "3", "1");
+				OracleOpreater.intoReputation(name, "3", score, "0", "", urlMain, "3", "1");
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 			downBranch(strmainurl, name, urlMain);
 		}
-		Element linksnext = doc.select("a.page_next").first();
+		String tt = doc.select("span.txt_01").select("em.strong").first().text();
 		
-		if (linksnext.attr("href")=="javascript:;") {
-			return true;
+		
+		try {
+			if (xxx>Integer.parseInt(tt)) {
+				return true;
+			}
+			else{
+				return false;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		else{
-			return false;
-		}
+		
+		return true;
 		
 
 	}
@@ -109,12 +116,7 @@ public class DownqqMovie {
 
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
-		for (int i = 0; i <= 188; i++) {
-			String url = "http://v.qq.com/list/2_-1_-1_-1_1_0_" + i + "_20_-1_-1_0_-1.html";
-			System.out.println(url);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
-			downMain(url);
-		}
+		openstatic();
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
 	
@@ -128,11 +130,11 @@ public class DownqqMovie {
 				System.out.println(diqutxt + nianfentxt);
 				
 				try {
-					for (int i = 20; i < 5000; i=i+20) {
+					for (int i = 0; i < 5000; i=i+20) {
 						url = "http://v.qq.com/x/movielist/?cate=-1&offset="+i+"&sort=5&pay=-1&area=" + diqutxt
 								+ "&year=" + nianfentxt + "";
 						System.out.println(url);
-						boolean bb=downMain(url);
+						boolean bb=downMain(url,i);
 //						String urlnext = DownYoukuMovie.youkuMaim(url);
 						if (!bb) {
 							break;

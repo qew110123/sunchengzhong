@@ -92,13 +92,13 @@ public class DownDoubanNetword {
 			String strHtmlurl = DownloadUtil.getHtmlText(urls, 1000 * 30, "UTF-8", null, null);
 			System.out.println(pinglun = HtmlAnalyze.getTagText(strHtmlurl, "votes\">", "</span"));
 			try {
-				OracleOpreater.intoReputation(name, "9", feishu, "0", "", urls, "1", "1");
+				OracleOpreater.intoReputation(name, "9", feishu, "0", "", urls, "3", "1");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			try {
-				OracleOpreater.intoReputation(name, "9", pinglun, "0", "", urls, "1", "2");
+				OracleOpreater.intoReputation(name, "9", pinglun, "0", "", urls, "3", "2");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -174,8 +174,13 @@ public class DownDoubanNetword {
 //			DownDoubanNetword.mainurl("http://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
 //		}
 		
+		//http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=20
 		
 		
+		for (int i = 0; i <=500; i=i+20) {
+//	System.out.println(i);
+			DownDoubanNetword.mainurl("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
+		}
 
 	}
 }

@@ -16,7 +16,7 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest; 
 
-public class DownkankanNetwork {
+public class DownkankanMovie {
 
 	public static void mainurl(String mainUrl) {
 
@@ -46,9 +46,16 @@ public class DownkankanNetwork {
 			for (Element link : links) {
 				String url = "";
 				String title = "";
+				String score="";
 				// System.out.println(strVolumes = link.select("a.pic").text());
 				System.out.println(url = link.select("a.pic").attr("href"));
 				System.out.println(title = link.select("a.pic").attr("title"));
+				System.out.println(score=link.select("em.score").text());
+				try {
+					OracleOpreater.intoReputation(title, "8", score, "0", "", url, "3", "1");
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				hunanBranch(url, title);
 
 			}
@@ -75,7 +82,7 @@ public class DownkankanNetwork {
 		System.out.println(comment = HtmlAnalyze.getTagText(strHtml, " total:\"", "\""));
 		System.out.println(comment = comment.replaceAll(",", ""));
 		try {
-			OracleOpreater.intoReputation(title, "8", comment, "0", "", mainUrl, "1", "0");
+			OracleOpreater.intoReputation(title, "8", comment, "0", "", mainUrl, "3", "0");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -86,8 +93,8 @@ public class DownkankanNetwork {
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
 
-		for (int i = 1; i <= 37; i++) {
-			String url = "http://movie.kankan.com/type,order/teleplay,update/page" + i + "/";
+		for (int i = 1; i <= 90; i++) {
+			String url = "http://movie.kankan.com/type,order,status/movie,hits,zp/page" + i + "/";
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
 			mainurl(url);
 		}
@@ -135,11 +142,8 @@ public class DownkankanNetwork {
 //			}
 //		}
 //		TimingTime(23, 59, 59);
-		for (int i = 1; i <= 5; i++) {
-			String url = "http://movie.kankan.com/type,order,genre/teleplay,update,wlj/page" + i + "/";
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
-			mainurl(url);
-		}
+		runstatic();
+		
 	}
 
 }

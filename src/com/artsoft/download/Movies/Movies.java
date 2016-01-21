@@ -1,5 +1,4 @@
-package com.artsoft.download.TVPlay;
-
+package com.artsoft.download.Movies;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -8,18 +7,21 @@ import java.util.TimerTask;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.TimeTest;
 
-public class AdminTVplay {
+public class Movies {
+	
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
-		DownloadYouku2.runstatic();
-		DownloadIqiyi.runstatic();
-		Downloadqq.runstatic();
-		DownloadSohu.runstatic();
-		DownloadLetv.runstatic();
-		Downloadpptv.runstatic();
-		DownloadHunantv.runstatic();
-//		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		Downloadkankan.runstatic();
+		DownYoukuMovie.main(null);
+		DownIqiyiMovie.main(null);
+		DownqqMovie.main(null);
+		DownSohuMovie.main(null);
+		DownLetvMovie.runstatic();
+		DownpptvMovie.runstatic();
+		DownHunantvMovie.runstatic();
+		DownkankanMovie.main(null);
+		DownHunantvMovie.main(null);
+//		DownDoubanChaXunNetword.main(null);
+		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
 	
@@ -43,7 +45,7 @@ public class AdminTVplay {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(04, 00, 00);
+		TimingTime(05, 00, 00);
 	}
 
 }

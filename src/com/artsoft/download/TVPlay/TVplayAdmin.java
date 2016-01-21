@@ -1,4 +1,5 @@
-package com.artsoft.download.Movies;
+package com.artsoft.download.TVPlay;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -7,18 +8,18 @@ import java.util.TimerTask;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.TimeTest;
 
-public class DownAdmin {
-	
+public class TVplayAdmin {
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
-		DownYoukuMovie.main(null);
-		DownSohuNwtword.main(null);
-		DownqqMovie.main(null);
-		DownkankanNetwork.main(null);
-		DownIqiyiMovie.main(null);
-		DownDoubanNetword.main(null);
-		DownDoubanChaXunNetword.main(null);
-		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		DownloadYouku2.runstatic();
+		DownloadIqiyi.runstatic();
+		Downloadqq.runstatic();
+		DownloadSohu.runstatic();
+		DownloadLetv.runstatic();
+		Downloadpptv.runstatic();
+		DownloadHunantv.runstatic();
+//		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		Downloadkankan.runstatic();
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
 	
@@ -42,7 +43,7 @@ public class DownAdmin {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(05, 00, 00);
+		TimingTime(04, 00, 00);
 	}
 
 }
