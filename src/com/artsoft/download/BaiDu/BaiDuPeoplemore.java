@@ -3,7 +3,6 @@ package com.artsoft.download.BaiDu;
 import java.util.List;
 
 import com.artsoft.oracle.OracleBaidu;
-import com.artsoft.oracle.OracleHaoSou;
 
 public class BaiDuPeoplemore {
 

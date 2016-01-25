@@ -198,9 +198,9 @@ public class DownSohuMovie {
 		
 		
 //			sohuMain("http://so.tv.sohu.com/list_p1101_p20_p3_p40_p5_p6_p77_p80_p9_2d1_p10_p11_p122_p13.html");
-//		 TimingTime(23, 59, 59);
+		 TimingTime(23, 59, 59);
 		
-		runstatic();
+//		runstatic();
 	}
 
 }

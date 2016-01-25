@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Timer;  
 import java.util.TimerTask; 
 
-public class DownDoubanNetword {
+public class DownDoubanMovie {
 
 	public static void iQiYiBranch(String urlBranch) {
 		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
@@ -126,16 +126,10 @@ public class DownDoubanNetword {
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
 
-		String strkey = ReadTxtFile.getKeyWordFromFile("keywordiqiyi.txt");
-		String[] keys = strkey.split("\n");
-		for (int i = 0; i < keys.length; i++) {
-			System.out.println(keys[i]);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
-			String url = keys[i];
-			System.out.println(url);
-			boolean bb = true;
-			DownDoubanNetword.youkuMaim(url);
-		}
+		for (int i = 0; i <=500; i=i+20) {
+//			System.out.println(i);
+					DownDoubanMovie.mainurl("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
+				}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
 
@@ -177,10 +171,11 @@ public class DownDoubanNetword {
 		//http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=20
 		
 		
-		for (int i = 0; i <=500; i=i+20) {
-//	System.out.println(i);
-			DownDoubanNetword.mainurl("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
-		}
+//		for (int i = 0; i <=500; i=i+20) {
+////	System.out.println(i);
+//			DownDoubanMovie.mainurl("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
+//		}
+		TimingTime(23, 59, 59);
 
 	}
 }

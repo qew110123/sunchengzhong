@@ -30,6 +30,12 @@ public class OracleBaidu {
 	public static List selecthuoqumingcheng() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.person_id,t.person_name from ODS.DIM_PERSON t where t.profile is null and t.birth_date is null and t.birth_place is null and t.typical_works is null order by t.person_id";
+		/**
+		 * 名称数据的搜索进行添加
+		 * 2016年1月21日16:59:32
+		 * 
+		 */
+		//sql="select *  from edw.dim_tvplay t where t.years is null   and t.tvplay_name not in ('我在锡林郭勒等你', 'HEAVENS GARDEN天上花园','秀才遇到兵','GIRL MEETS WORLD蕾蕾看世界','无尽的爱第二部','无尽的爱第一部','守住你的秘密')";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -84,6 +90,13 @@ public class OracleBaidu {
 		 * 
 		 */
 		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.dim_tvplay t where t.tvplay_id not in (select t.tvplay_id from ods.tem_tvplay t where t.tvplay_id in (select t.tvplay_id from edw.dim_tvplay t where t.tvplay_url is not null and t.tvplay_url !='无')) and t.tvplay_url is not null and t.tvplay_url !='无'";
+		
+		
+		/**
+		 *2016年1月21日17:04:07
+		 * 数据的补充  （名称）
+		 */
+		sql="select * from edw.dim_tvplay t where t.years is null and t.tvplay_name not in ('我在锡林郭勒等你','HEAVENS GARDEN天上花园','秀才遇到兵', 'GIRL MEETS WORLD蕾蕾看世界','无尽的爱第二部','无尽的爱第一部','守住你的秘密')";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;

@@ -11,15 +11,15 @@ public class Movies {
 	
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
-		DownYoukuMovie.main(null);
-		DownIqiyiMovie.main(null);
-		DownqqMovie.main(null);
-		DownSohuMovie.main(null);
+		DownYoukuMovie.runstatic();
+		DownIqiyiMovie.runstatic();
+		DownqqMovie.runstatic();
+		DownSohuMovie.runstatic();
 		DownLetvMovie.runstatic();
 		DownpptvMovie.runstatic();
-		DownHunantvMovie.runstatic();
-		DownkankanMovie.main(null);
-		DownHunantvMovie.main(null);
+//		DownHunantvMovie.runstatic();
+		DownkankanMovie.runstatic();
+		DownDoubanMovie.runstatic();
 //		DownDoubanChaXunNetword.main(null);
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");

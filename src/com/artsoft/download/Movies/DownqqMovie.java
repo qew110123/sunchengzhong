@@ -153,8 +153,8 @@ public class DownqqMovie {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-//		TimingTime(23, 59, 59);
-		openstatic();
+		TimingTime(23, 59, 59);
+//		openstatic();
 
 	}
 

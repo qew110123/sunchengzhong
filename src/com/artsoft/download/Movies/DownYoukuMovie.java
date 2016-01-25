@@ -198,10 +198,10 @@ public class DownYoukuMovie {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		runstatic();
+//		runstatic();
 		
 		
-//		TimingTime(23, 59, 59);
+		TimingTime(23, 59, 59);
 
 	}
 

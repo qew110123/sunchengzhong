@@ -235,7 +235,8 @@ public class BaiDuPeopleDownload {
 						strUrl = "http://baike.baidu.com" + strUrl;
 					}
 					System.out.println(strUrl);
-					mainmore(id, strUrl);
+					Persion person=mainmore(id, strUrl);
+					OracleHaoSou.InsertTemDimPerson(person);
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
