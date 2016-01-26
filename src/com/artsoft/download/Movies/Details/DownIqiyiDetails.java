@@ -1,10 +1,11 @@
-package com.artsoft.download.Movies;
+package com.artsoft.download.Movies.Details;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.bean.TvPlay;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
@@ -18,17 +19,11 @@ import java.util.Date;
 import java.util.Timer;  
 import java.util.TimerTask; 
 
-public class DownIqiyiMovie {
+public class DownIqiyiDetails {
 
 	public static void iQiYiBranch(String urlBranch,String name,String score) {
-		
-		try {
-			
-			OracleOpreater.intoReputation(name, "2", score, "0", "", urlBranch, "3", "1");
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
+		TvPlay playtv=new TvPlay();
+		playtv.setTvplay_url(urlBranch);
 		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
@@ -40,16 +35,73 @@ public class DownIqiyiMovie {
 //		String name = HtmlAnalyze.getTagText(strHtml, "<meta name=\"keywords\" content=\"", "\" /> ");
 
 		System.out.println(name);
-		String videoId = HtmlAnalyze.getTagText(strHtml, "albumId:", ",");
-
-		String albumurl = "http://cache.video.qiyi.com/jp/pc/" + videoId + "/";
-		String numhtml = DownloadUtil.getHtmlText(albumurl, 1000 * 30, "UTF-8", null, null);
-		System.out.println(numhtml = HtmlAnalyze.getTagText(numhtml, ":", "}"));
-		try {
-			OracleOpreater.intoReputation(name, "2", numhtml, "0", "", urlBranch, "3", "0");
-		} catch (Exception e) {
-			// TODO: handle exception
+		playtv.setTvplay_name(name);
+		
+		
+		String daoyan="";// µ¼ÑÝ
+		String daoyanAll= HtmlAnalyze.getTagText(strHtml, "id=\"datainfo-director-list\">", "</p>",true,0);
+		String[] daoyanlist=daoyanAll.split("</span>/");
+		int i=0;
+		for (String stringtext : daoyanlist) {
+			String urlss=HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
+			String textss=HtmlAnalyze.getTagText(stringtext, ">", "<");
+//			daoyan=daoyan+textss+"|"+urlss;
+			if (!(urlss.equals("")&&textss.equals(""))) {
+				daoyan=daoyan+textss+"|"+urlss;
+			}
+			if (daoyanlist.length!=1&&i+1<daoyanlist.length) {
+				daoyan=daoyan+",";
+			}
+			
+			i+=1;
 		}
+		System.out.println(daoyan);
+		playtv.setDirector(daoyan);
+		
+		
+		String yanyuan="";// ÑÝÔ±
+		String yanyuanAll= HtmlAnalyze.getTagText(strHtml, "id=\"datainfo-actor-list\">", "</p>",true,0);
+		String[] yanyuanlist=yanyuanAll.split("</span>/");
+		i=0;
+		for (String stringtext : yanyuanlist) {
+			String urlss=HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
+			String textss=HtmlAnalyze.getTagText(stringtext, ">", "<");
+			if (!(urlss.equals("")&&textss.equals(""))) {
+				yanyuan=yanyuan+textss+"|"+urlss;
+			}
+			if (yanyuanlist.length!=1&&i+1<yanyuanlist.length) {
+				yanyuan=yanyuan+",";
+			}
+			
+			i+=1;
+		}
+		System.out.println(yanyuan);
+		playtv.setMajor_actors(yanyuan);
+		
+//		String videoId = HtmlAnalyze.getTagText(strHtml, "albumId:", ",");
+//
+//		String albumurl = "http://cache.video.qiyi.com/jp/pc/" + videoId + "/";
+//		String numhtml = DownloadUtil.getHtmlText(albumurl, 1000 * 30, "UTF-8", null, null);
+//		System.out.println(numhtml = HtmlAnalyze.getTagText(numhtml, ":", "}"));
+//		try {
+//			OracleOpreater.intoReputation(name, "2", numhtml, "0", "", urlBranch, "3", "0");
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+		
+		
+		String detail="";
+		detail=HtmlAnalyze.getTagText(strHtml, "data-desc-origin='", "'>");
+		System.out.println(detail);
+		if (detail==null||detail.equals("")||detail.equals("null")) {
+			detail=HtmlAnalyze.getTagText(strHtml, "<span class=\"short\" style=\"display:none;\">", "</span>");
+		}
+		playtv.setBasic_info(detail);
+		
+		playtv.setClassnum(2);
+		OracleOpreater.intoTEM_DIM_FILM_PLATFORM(playtv);
+		
+		
 	}
 
 	private static void mainurl(String urlMain) {
@@ -152,7 +204,7 @@ public class DownIqiyiMovie {
 			String url = keys[i];
 			System.out.println(url);
 			boolean bb = true;
-			DownIqiyiMovie.youkuMaim(url);
+			DownIqiyiDetails.youkuMaim(url);
 		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
@@ -179,8 +231,11 @@ public class DownIqiyiMovie {
 		// TODO Auto-generated method stub
 		
 		
-		TimingTime(23, 59, 59);
-//		openstatic();
+//		TimingTime(23, 59, 59);
+		openstatic();
+		
+		
+//			iQiYiBranch("http://vip.iqiyi.com/20110909/be75da8a5f37a04c.html#vfrm=2-4-0-1","","");
 
 	}
 }

@@ -82,7 +82,7 @@ public class HtmlAnalyze {
      */
     public static String getTagText(String strHtml, String strStart, String strEnd, boolean bFlag, int pos) {
     	if (strHtml == null || strHtml.length() == 0 || strStart == null || strStart.length() == 0 || strEnd == null || strEnd.length() == 0) {
-    		return null;
+    		return "";
     	}
     	String strTempHtml = strHtml.toLowerCase();
     	strStart = strStart.toLowerCase();
@@ -101,7 +101,7 @@ public class HtmlAnalyze {
     			return strTemp;
     		} 
     	}
-    	return null;
+    	return "";
     }
     
     /**
@@ -279,12 +279,14 @@ public class HtmlAnalyze {
 		String strEnd = endSign;
 		
 		if (strStart == null || strEnd == null)
-			return null;
+//			return null;
+			return "";
 		StringBuffer strRet = new StringBuffer();
 		getTagText(strText, strStart, strEnd, strRet, 0);
 		
 		if (strRet.length() == 0) {
-			return null;
+//			return null;
+			return "";
 		}
 		String strVal = StringTool.getStrVal(strRet.toString());
 		return strVal;

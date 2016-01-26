@@ -95,6 +95,9 @@ public class TvPlay {
 	private String basic_info = "";
 	//…œ”≥»’∆⁄
 	private String show_date = "";
+	
+	private int classnum = 0;
+	
 	public void print() {
 		System.out.println("tvplay_id:		" + tvplay_id);
 		System.out.println("tvplay_name:	" + tvplay_name);
@@ -519,5 +522,13 @@ public class TvPlay {
 
 	public void setShow_date(String show_date) {
 		this.show_date = show_date;
+	}
+
+	public int getClassnum() {
+		return classnum;
+	}
+
+	public void setClassnum(int classnum) {
+		this.classnum = classnum;
 	}
 }
