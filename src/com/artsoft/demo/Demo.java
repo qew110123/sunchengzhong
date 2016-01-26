@@ -10,7 +10,9 @@ import java.io.OutputStream;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.artsoft.util.DealProxy;
@@ -219,7 +221,14 @@ public class Demo {
 //		String sss = "abc12jlskdf4a";
 //		System.out.println(sss.replaceAll("\\D+", ""));
 		
-		System.out.println(Double.parseDouble("0"));
+//		System.out.println(Double.parseDouble("0"));
+//		System.out.println(new Date(1453125367));
+//		
+		Date   now   =   new   Date((long) Double.parseDouble("1443542400000"));   
+		SimpleDateFormat   dateFormat   =   new   SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式   
+		String  hehe  = dateFormat.format(now);   
+		System.out.println(hehe);
+		
 	}
 
 }

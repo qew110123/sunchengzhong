@@ -96,7 +96,11 @@ public class TvPlay {
 	//上映日期
 	private String show_date = "";
 	
+	//2016年1月26日16:48:46
 	private int classnum = 0;
+	//语言
+	private String lgName="";
+	
 	
 	public void print() {
 		System.out.println("tvplay_id:		" + tvplay_id);
@@ -530,5 +534,13 @@ public class TvPlay {
 
 	public void setClassnum(int classnum) {
 		this.classnum = classnum;
+	}
+
+	public String getLgName() {
+		return lgName;
+	}
+
+	public void setLgName(String lgName) {
+		this.lgName = lgName;
 	}
 }
