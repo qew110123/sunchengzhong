@@ -244,3 +244,201 @@
 2016-01-26 18:42:42:http://list.hunantv.com/3/----------8---.html
 2016-01-26 18:42:54:http://list.hunantv.com/3/----------9---.html
 2016-01-26 18:43:08:http://list.hunantv.com/3/----------10---.html
+2016-01-26 18:43:20:http://list.hunantv.com/3/----------11---.html
+2016-01-26 18:43:31:http://list.hunantv.com/3/----------12---.html
+2016-01-26 18:43:41:http://list.hunantv.com/3/----------13---.html
+2016-01-26 18:43:52:http://list.hunantv.com/3/----------14---.html
+2016-01-26 18:44:03:http://list.hunantv.com/3/----------15---.html
+2016-01-26 18:44:15:http://list.hunantv.com/3/----------16---.html
+2016-01-26 18:44:28:http://list.hunantv.com/3/----------17---.html
+2016-01-26 18:44:40:http://list.hunantv.com/3/----------18---.html
+2016-01-26 18:44:52:http://list.hunantv.com/3/----------19---.html
+2016-01-26 18:45:05:http://list.hunantv.com/3/----------20---.html
+2016-01-26 18:45:18:http://list.hunantv.com/3/----------21---.html
+2016-01-26 18:45:31:http://list.hunantv.com/3/----------22---.html
+2016-01-26 18:45:43:http://list.hunantv.com/3/----------23---.html
+2016-01-26 18:45:56:http://list.hunantv.com/3/----------24---.html
+2016-01-26 18:46:05:http://list.hunantv.com/3/----------25---.html
+2016-01-26 18:46:13:http://list.hunantv.com/3/----------26---.html
+2016-01-26 18:46:22:http://list.hunantv.com/3/----------27---.html
+2016-01-26 18:46:29:http://list.hunantv.com/3/----------28---.html
+2016-01-26 18:46:37:http://list.hunantv.com/3/----------29---.html
+2016-01-26 18:46:45:http://list.hunantv.com/3/----------30---.html
+2016-01-26 18:46:52:http://list.hunantv.com/3/----------31---.html
+2016-01-26 18:47:02:http://list.hunantv.com/3/----------32---.html
+2016-01-26 18:47:09:http://list.hunantv.com/3/----------33---.html
+2016-01-26 18:47:18:http://list.hunantv.com/3/----------34---.html
+2016-01-26 18:47:27:http://list.hunantv.com/3/----------35---.html
+2016-01-26 18:47:34:http://list.hunantv.com/3/----------36---.html
+2016-01-26 18:47:42:http://list.hunantv.com/3/----------37---.html
+2016-01-26 18:47:50:http://list.hunantv.com/3/----------38---.html
+2016-01-26 18:47:58:http://list.hunantv.com/3/----------39---.html
+2016-01-26 18:48:07:http://list.hunantv.com/3/----------40---.html
+2016-01-26 18:48:15:http://list.hunantv.com/3/----------41---.html
+2016-01-26 18:48:18:开 始
+2016-01-26 18:48:18:http://movie.kankan.com/type,order,status/movie,hits,zp/page1/
+2016-01-26 18:51:53:结 束
+2016-01-26 19:01:26:开 始
+2016-01-26 19:01:26:http://movie.kankan.com/type,order,status/movie,hits,zp/page1/
+2016-01-26 19:02:12:开 始
+2016-01-26 19:02:12:http://movie.kankan.com/type,order,status/movie,hits,zp/page1/
+2016-01-26 19:02:43:开 始
+2016-01-26 19:02:43:http://movie.kankan.com/type,order,status/movie,hits,zp/page1/
+2016-01-26 19:03:05:http://movie.kankan.com/type,order,status/movie,hits,zp/page2/
+2016-01-26 19:03:18:http://movie.kankan.com/type,order,status/movie,hits,zp/page3/
+2016-01-26 19:03:32:http://movie.kankan.com/type,order,status/movie,hits,zp/page4/
+2016-01-26 19:03:45:http://movie.kankan.com/type,order,status/movie,hits,zp/page5/
+2016-01-26 19:03:57:http://movie.kankan.com/type,order,status/movie,hits,zp/page6/
+2016-01-26 19:04:09:http://movie.kankan.com/type,order,status/movie,hits,zp/page7/
+2016-01-26 19:04:24:http://movie.kankan.com/type,order,status/movie,hits,zp/page8/
+2016-01-26 19:04:36:http://movie.kankan.com/type,order,status/movie,hits,zp/page9/
+2016-01-26 19:04:50:http://movie.kankan.com/type,order,status/movie,hits,zp/page10/
+2016-01-26 19:05:02:http://movie.kankan.com/type,order,status/movie,hits,zp/page11/
+2016-01-26 19:05:18:http://movie.kankan.com/type,order,status/movie,hits,zp/page12/
+2016-01-26 19:05:35:http://movie.kankan.com/type,order,status/movie,hits,zp/page13/
+2016-01-26 19:05:51:http://movie.kankan.com/type,order,status/movie,hits,zp/page14/
+2016-01-26 19:06:04:http://movie.kankan.com/type,order,status/movie,hits,zp/page15/
+2016-01-26 19:06:17:http://movie.kankan.com/type,order,status/movie,hits,zp/page16/
+2016-01-26 19:06:37:http://movie.kankan.com/type,order,status/movie,hits,zp/page17/
+2016-01-26 19:07:00:http://movie.kankan.com/type,order,status/movie,hits,zp/page18/
+2016-01-26 19:07:22:http://movie.kankan.com/type,order,status/movie,hits,zp/page19/
+2016-01-26 19:07:45:http://movie.kankan.com/type,order,status/movie,hits,zp/page20/
+2016-01-26 19:08:09:http://movie.kankan.com/type,order,status/movie,hits,zp/page21/
+2016-01-26 19:08:34:http://movie.kankan.com/type,order,status/movie,hits,zp/page22/
+2016-01-26 19:08:56:http://movie.kankan.com/type,order,status/movie,hits,zp/page23/
+2016-01-26 19:09:23:http://movie.kankan.com/type,order,status/movie,hits,zp/page24/
+2016-01-26 19:09:46:http://movie.kankan.com/type,order,status/movie,hits,zp/page25/
+2016-01-26 19:10:07:http://movie.kankan.com/type,order,status/movie,hits,zp/page26/
+2016-01-26 19:10:30:http://movie.kankan.com/type,order,status/movie,hits,zp/page27/
+2016-01-26 19:10:51:http://movie.kankan.com/type,order,status/movie,hits,zp/page28/
+2016-01-26 19:11:17:http://movie.kankan.com/type,order,status/movie,hits,zp/page29/
+2016-01-26 19:11:32:http://movie.kankan.com/type,order,status/movie,hits,zp/page30/
+2016-01-26 19:11:53:http://movie.kankan.com/type,order,status/movie,hits,zp/page31/
+2016-01-26 19:12:15:http://movie.kankan.com/type,order,status/movie,hits,zp/page32/
+2016-01-26 19:12:36:http://movie.kankan.com/type,order,status/movie,hits,zp/page33/
+2016-01-26 19:13:01:http://movie.kankan.com/type,order,status/movie,hits,zp/page34/
+2016-01-26 19:13:22:http://movie.kankan.com/type,order,status/movie,hits,zp/page35/
+2016-01-26 19:13:44:http://movie.kankan.com/type,order,status/movie,hits,zp/page36/
+2016-01-26 19:14:06:http://movie.kankan.com/type,order,status/movie,hits,zp/page37/
+2016-01-26 19:14:28:http://movie.kankan.com/type,order,status/movie,hits,zp/page38/
+2016-01-26 19:14:49:http://movie.kankan.com/type,order,status/movie,hits,zp/page39/
+2016-01-26 19:15:09:http://movie.kankan.com/type,order,status/movie,hits,zp/page40/
+2016-01-26 19:15:29:http://movie.kankan.com/type,order,status/movie,hits,zp/page41/
+2016-01-26 19:15:52:http://movie.kankan.com/type,order,status/movie,hits,zp/page42/
+2016-01-26 19:16:12:http://movie.kankan.com/type,order,status/movie,hits,zp/page43/
+2016-01-26 19:16:30:http://movie.kankan.com/type,order,status/movie,hits,zp/page44/
+2016-01-26 19:16:45:http://movie.kankan.com/type,order,status/movie,hits,zp/page45/
+2016-01-26 19:16:59:http://movie.kankan.com/type,order,status/movie,hits,zp/page46/
+2016-01-26 19:17:12:http://movie.kankan.com/type,order,status/movie,hits,zp/page47/
+2016-01-26 19:17:25:http://movie.kankan.com/type,order,status/movie,hits,zp/page48/
+2016-01-26 19:17:38:http://movie.kankan.com/type,order,status/movie,hits,zp/page49/
+2016-01-26 19:17:54:http://movie.kankan.com/type,order,status/movie,hits,zp/page50/
+2016-01-26 19:18:07:http://movie.kankan.com/type,order,status/movie,hits,zp/page51/
+2016-01-26 19:18:19:http://movie.kankan.com/type,order,status/movie,hits,zp/page52/
+2016-01-26 19:18:34:http://movie.kankan.com/type,order,status/movie,hits,zp/page53/
+2016-01-26 19:18:44:http://movie.kankan.com/type,order,status/movie,hits,zp/page54/
+2016-01-26 19:18:54:http://movie.kankan.com/type,order,status/movie,hits,zp/page55/
+2016-01-26 19:19:05:http://movie.kankan.com/type,order,status/movie,hits,zp/page56/
+2016-01-26 19:19:16:http://movie.kankan.com/type,order,status/movie,hits,zp/page57/
+2016-01-26 19:19:27:http://movie.kankan.com/type,order,status/movie,hits,zp/page58/
+2016-01-26 19:19:40:http://movie.kankan.com/type,order,status/movie,hits,zp/page59/
+2016-01-26 19:19:50:http://movie.kankan.com/type,order,status/movie,hits,zp/page60/
+2016-01-26 19:20:02:http://movie.kankan.com/type,order,status/movie,hits,zp/page61/
+2016-01-26 19:20:12:http://movie.kankan.com/type,order,status/movie,hits,zp/page62/
+2016-01-26 19:20:21:http://movie.kankan.com/type,order,status/movie,hits,zp/page63/
+2016-01-26 19:20:31:http://movie.kankan.com/type,order,status/movie,hits,zp/page64/
+2016-01-26 19:20:43:http://movie.kankan.com/type,order,status/movie,hits,zp/page65/
+2016-01-26 19:20:54:http://movie.kankan.com/type,order,status/movie,hits,zp/page66/
+2016-01-26 19:21:05:http://movie.kankan.com/type,order,status/movie,hits,zp/page67/
+2016-01-26 19:21:16:http://movie.kankan.com/type,order,status/movie,hits,zp/page68/
+2016-01-26 19:21:28:http://movie.kankan.com/type,order,status/movie,hits,zp/page69/
+2016-01-26 19:21:38:http://movie.kankan.com/type,order,status/movie,hits,zp/page70/
+2016-01-26 19:21:57:http://movie.kankan.com/type,order,status/movie,hits,zp/page71/
+2016-01-26 19:22:15:http://movie.kankan.com/type,order,status/movie,hits,zp/page72/
+2016-01-26 19:22:22:http://movie.kankan.com/type,order,status/movie,hits,zp/page73/
+2016-01-26 19:22:31:http://movie.kankan.com/type,order,status/movie,hits,zp/page74/
+2016-01-26 19:22:39:http://movie.kankan.com/type,order,status/movie,hits,zp/page75/
+2016-01-26 19:22:48:http://movie.kankan.com/type,order,status/movie,hits,zp/page76/
+2016-01-26 19:22:58:http://movie.kankan.com/type,order,status/movie,hits,zp/page77/
+2016-01-26 19:23:07:http://movie.kankan.com/type,order,status/movie,hits,zp/page78/
+2016-01-26 19:23:14:http://movie.kankan.com/type,order,status/movie,hits,zp/page79/
+2016-01-26 19:23:21:http://movie.kankan.com/type,order,status/movie,hits,zp/page80/
+2016-01-26 19:23:29:http://movie.kankan.com/type,order,status/movie,hits,zp/page81/
+2016-01-26 19:23:37:http://movie.kankan.com/type,order,status/movie,hits,zp/page82/
+2016-01-26 19:23:45:http://movie.kankan.com/type,order,status/movie,hits,zp/page83/
+2016-01-26 19:23:53:http://movie.kankan.com/type,order,status/movie,hits,zp/page84/
+2016-01-26 19:24:01:http://movie.kankan.com/type,order,status/movie,hits,zp/page85/
+2016-01-26 19:24:09:http://movie.kankan.com/type,order,status/movie,hits,zp/page86/
+2016-01-26 19:24:16:http://movie.kankan.com/type,order,status/movie,hits,zp/page87/
+2016-01-26 19:24:25:http://movie.kankan.com/type,order,status/movie,hits,zp/page88/
+2016-01-26 19:24:31:http://movie.kankan.com/type,order,status/movie,hits,zp/page89/
+2016-01-26 19:24:37:http://movie.kankan.com/type,order,status/movie,hits,zp/page90/
+2016-01-26 19:24:43:结 束
+2016-01-26 20:22:01:开 始
+2016-01-26 20:22:49:开 始
+2016-01-26 20:23:46:开 始
+2016-01-26 20:39:58:开 始
+2016-01-26 20:40:34:开 始
+2016-01-26 20:41:36:开 始
+2016-01-26 20:41:55:开 始
+2016-01-26 20:43:36:开 始
+2016-01-26 20:44:41:开 始
+2016-01-26 20:45:27:开 始
+2016-01-26 20:45:27:http://list.hunantv.com/3/----------1---.html
+2016-01-26 20:45:44:http://list.hunantv.com/3/----------2---.html
+2016-01-26 20:46:05:开 始
+2016-01-26 20:46:05:http://list.hunantv.com/3/----------1---.html
+2016-01-26 20:46:16:http://list.hunantv.com/3/----------2---.html
+2016-01-26 20:46:24:http://list.hunantv.com/3/----------3---.html
+2016-01-26 20:46:37:http://list.hunantv.com/3/----------4---.html
+2016-01-26 20:46:48:http://list.hunantv.com/3/----------5---.html
+2016-01-26 20:46:56:http://list.hunantv.com/3/----------6---.html
+2016-01-26 20:47:08:开 始
+2016-01-26 20:47:08:http://list.hunantv.com/3/----------1---.html
+2016-01-26 20:48:26:开 始
+2016-01-26 20:48:26:http://list.hunantv.com/3/----------1---.html
+2016-01-26 20:48:30:开 始
+2016-01-26 20:48:36:http://list.hunantv.com/3/----------2---.html
+2016-01-26 20:48:46:http://list.hunantv.com/3/----------3---.html
+2016-01-26 20:48:58:http://list.hunantv.com/3/----------4---.html
+2016-01-26 20:49:06:http://list.hunantv.com/3/----------5---.html
+2016-01-26 20:49:12:http://list.hunantv.com/3/----------6---.html
+2016-01-26 20:49:19:http://list.hunantv.com/3/----------7---.html
+2016-01-26 20:49:27:http://list.hunantv.com/3/----------8---.html
+2016-01-26 20:49:34:http://list.hunantv.com/3/----------9---.html
+2016-01-26 20:49:43:http://list.hunantv.com/3/----------10---.html
+2016-01-26 20:49:51:http://list.hunantv.com/3/----------11---.html
+2016-01-26 20:49:58:http://list.hunantv.com/3/----------12---.html
+2016-01-26 20:50:06:http://list.hunantv.com/3/----------13---.html
+2016-01-26 20:50:14:http://list.hunantv.com/3/----------14---.html
+2016-01-26 20:50:21:http://list.hunantv.com/3/----------15---.html
+2016-01-26 20:50:28:http://list.hunantv.com/3/----------16---.html
+2016-01-26 20:50:36:http://list.hunantv.com/3/----------17---.html
+2016-01-26 20:50:43:http://list.hunantv.com/3/----------18---.html
+2016-01-26 20:50:51:http://list.hunantv.com/3/----------19---.html
+2016-01-26 20:50:58:http://list.hunantv.com/3/----------20---.html
+2016-01-26 20:51:02:开 始
+2016-01-26 20:51:05:http://list.hunantv.com/3/----------21---.html
+2016-01-26 20:51:13:http://list.hunantv.com/3/----------22---.html
+2016-01-26 20:51:21:http://list.hunantv.com/3/----------23---.html
+2016-01-26 20:51:29:http://list.hunantv.com/3/----------24---.html
+2016-01-26 20:51:35:开 始
+2016-01-26 20:51:38:http://list.hunantv.com/3/----------25---.html
+2016-01-26 20:51:49:http://list.hunantv.com/3/----------26---.html
+2016-01-26 20:51:57:http://list.hunantv.com/3/----------27---.html
+2016-01-26 20:52:04:http://list.hunantv.com/3/----------28---.html
+2016-01-26 20:52:13:http://list.hunantv.com/3/----------29---.html
+2016-01-26 20:52:21:http://list.hunantv.com/3/----------30---.html
+2016-01-26 20:52:22:开 始
+2016-01-26 20:52:30:http://list.hunantv.com/3/----------31---.html
+2016-01-26 20:52:38:http://list.hunantv.com/3/----------32---.html
+2016-01-26 20:52:46:http://list.hunantv.com/3/----------33---.html
+2016-01-26 20:52:54:http://list.hunantv.com/3/----------34---.html
+2016-01-26 20:53:02:http://list.hunantv.com/3/----------35---.html
+2016-01-26 20:53:10:http://list.hunantv.com/3/----------36---.html
+2016-01-26 20:53:19:http://list.hunantv.com/3/----------37---.html
+2016-01-26 20:53:28:http://list.hunantv.com/3/----------38---.html
+2016-01-26 20:53:37:http://list.hunantv.com/3/----------39---.html
+2016-01-26 20:53:46:http://list.hunantv.com/3/----------40---.html
+2016-01-26 20:53:54:http://list.hunantv.com/3/----------41---.html
+2016-01-26 20:57:23:结 束

@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DownHunantvMovie {
+public class DownHunantvDetails {
 
 	public static void mainurl(String mainUrl) {
 

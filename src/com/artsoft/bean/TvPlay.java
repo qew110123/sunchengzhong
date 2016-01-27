@@ -100,8 +100,19 @@ public class TvPlay {
 	private int classnum = 0;
 	//”Ô—‘
 	private String lgName="";
+	//IMDb±‡¬Î
+	private String IMDb="";
 	
 	
+	
+	public String getIMDb() {
+		return IMDb;
+	}
+
+	public void setIMDb(String iMDb) {
+		IMDb = iMDb;
+	}
+
 	public void print() {
 		System.out.println("tvplay_id:		" + tvplay_id);
 		System.out.println("tvplay_name:	" + tvplay_name);

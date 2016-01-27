@@ -149,7 +149,7 @@ public class OracleOpreater {
 		list.add("");
 		list.add(playtv.getTime_length());
 		list.add(playtv.getLgName());
-		list.add("");
+		list.add(playtv.getIMDb());
 		list.add("");
 		list.add("");
 //		list.add(playtv.get)
