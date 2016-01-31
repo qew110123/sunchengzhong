@@ -41,7 +41,7 @@ public class DownqqMovie {
 			// System.out.println(link.text());
 			System.out.println(score = link.select("span.mod_score").text());
 			try {
-				OracleOpreater.intoReputation(name, "3", score, "0", "", urlMain, "3", "1");
+				OracleOpreater.intoReputationAndDETAIL_URL(name, "3", score, "0", "", urlMain, "3", "1",strmainurl);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -68,6 +68,7 @@ public class DownqqMovie {
 
 	public static void downBranch(String urlBranch, String nameBranch, String urlMain) {
 		// http: // v.qq.com/cover/e/e7hi6lep1yc51ca.html
+		String DETAIL_URL=urlBranch;
 
 		urlBranch = urlBranch.replaceAll("http://v.qq.com/cover/", "").replaceAll("html", "");
 		urlBranch = HtmlAnalyze.getTagText(urlBranch, "/", ".");
@@ -89,7 +90,7 @@ public class DownqqMovie {
 		String numstring = HtmlAnalyze.getTagText(strHtml, "{\"all\":", ",\"");
 		System.out.println(numstring);
 		try {
-			OracleOpreater.intoReputation(nameBranch, "3", numstring, "0", "", urlMain, "3", "0");
+			OracleOpreater.intoReputationAndDETAIL_URL(nameBranch, "3", numstring, "0", "", urlMain, "3", "0",DETAIL_URL);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -153,8 +154,8 @@ public class DownqqMovie {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		TimingTime(23, 59, 59);
-//		openstatic();
+//		TimingTime(23, 59, 59);
+		openstatic();
 
 	}
 

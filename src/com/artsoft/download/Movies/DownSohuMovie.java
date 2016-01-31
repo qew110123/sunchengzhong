@@ -74,7 +74,7 @@ public class DownSohuMovie {
 		String strHtml = DownloadUtil.getHtmlText(urlnew, 1000 * 30, "UTF-8", null, null);
 		String Amount = HtmlAnalyze.getTagText(strHtml, "{\"" + strvid + "\":{\"total\":", ",\"");
 		try {
-			OracleOpreater.intoReputation(name, "4", Amount, "0", "", urlerer, "3", "0");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "4", Amount, "0", "", urlerer, "3", "0",urlerer);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -198,9 +198,9 @@ public class DownSohuMovie {
 		
 		
 //			sohuMain("http://so.tv.sohu.com/list_p1101_p20_p3_p40_p5_p6_p77_p80_p9_2d1_p10_p11_p122_p13.html");
-		 TimingTime(23, 59, 59);
+//		 TimingTime(23, 59, 59);
 		
-//		runstatic();
+		runstatic();
 	}
 
 }

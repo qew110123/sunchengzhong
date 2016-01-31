@@ -44,6 +44,46 @@ public class OracleOpreater {
 		System.out.println(bb);
 
 	}
+	
+	
+	/**
+	 * 每一个电视剧的数据
+	 * @param tyPlayName
+	 * @param source
+	 * @param dataAmount
+	 * @param vodeoType
+	 * @param upDatedate
+	 * @param playUrl
+	 * @param tvType
+	 * @param dataType
+	 * DETAIL_URL 电影详情基本信息url
+	 * 2016年1月27日17:11:58
+	 * sunchengzhong
+	 */
+	public static void intoReputationAndDETAIL_URL(String tyPlayName, String source, String dataAmount, String vodeoType,
+			String upDatedate, String playUrl, String tvType, String dataType,String DETAIL_URL) {
+		 Connection conn = DBOperate218.getInstance().getConnection();
+
+		System.out.println(tyPlayName + source + dataAmount + vodeoType + upDatedate + playUrl + tvType + dataType);
+		String strSql = "INSERT INTO ODS.TEM_NETWORK_REPUTATION t (t.TVPLAY_NAME,t.SOURCE ,t.DATA_AMOUNT,t.VIDEO_TYPE,t.DATE_DATE"
+				+ ",t.PLAY_URL,t.TV_TYPE,t.DATA_TYPE,t.DETAIL_URL) VALUES (?,?,?,?,?,?,?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		list.add(tyPlayName);// 这里是将对象加入到list中
+		list.add(Integer.parseInt(source));
+		list.add(Double.parseDouble(dataAmount));
+		list.add(Integer.parseInt(vodeoType));
+//		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(playUrl);
+		list.add(Integer.parseInt(tvType));
+		list.add(Integer.parseInt(dataType));
+		list.add(DETAIL_URL);
+		boolean bb=DBOperate.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+
+	}
+	
 
 	/**
 	 * 每一集的数据读
@@ -122,11 +162,11 @@ public class OracleOpreater {
 	public static void intoTEM_DIM_FILM_PLATFORM(TvPlay playtv){
 		Connection conn = DBOperate218.getInstance().getConnection();
 		
-		String strSql = "insert into ods.TEM_DIM_FILM_PLATFORM t(t.film_id,t.film_name,t.film_url,t.english_name,"
+		String strSql = "insert into ods.TEM_DIM_FILM_PLATFORM t(t.B_FILM_ID,t.film_name,t.film_url,t.english_name,"
 				+ "t.alias_name,t.years,t.produce_area,t.show_date,t.create_time,t.update_time,t.source,t.description,"
 				+ "t.subject_name_one,t.director,t.actors,t.screenwriter,t.subject_name_two,t.subject_id_one,t.subject_id_two,"
-				+ "t.time_long,t.languages,t.imdb_code,t.film_level,t.original)values(null,?,?,?,?,?,?,?,to_date(?,"
-				+ "'yyyy-mm-dd hh24:mi:ss'),null,?,?,?,?,?,?,?,null,null,?,?,?,?,?)";
+				+ "t.time_long,t.languages,t.imdb_code,t.film_level,t.original,t.BOX_OFFICES)values(TEM_DIM_FILM_PLATFORM_SEQ.nextval,?,?,?,?,?,?,?,to_date(?,"
+				+ "'yyyy-mm-dd hh24:mi:ss'),null,?,?,?,?,?,?,?,null,null,?,?,?,?,?,?)";
 
 		List<Comparable> list = new ArrayList();
 		// 这里是将对象加入到list中
@@ -152,6 +192,7 @@ public class OracleOpreater {
 		list.add(playtv.getIMDb());
 		list.add("");
 		list.add("");
+		list.add(playtv.getBox_office());//票房
 //		list.add(playtv.get)
 //		list.add(TimeTest.getNowTime("yyyyMMdd"));
 		

@@ -31,17 +31,19 @@ public class DownpptvMovie {
 		}
 		// System.out.println(strHtml);
 		Document doc = Jsoup.parse(strHtml);
-		Elements links = doc.select("p.ui-txt");
+		Elements links = doc.select("li.tips");
 		// Element content = doc.getElementById("content");
 		// Elements links = content.getElementsByTag("a");
 		for (Element link : links) {
 			String name = "";
 			String score = "";
-			System.out.println(name = link.select("span").text());
-			System.out.println(score = link.select("em").text());
+			String DETAIL_URL="";
+			System.out.println(DETAIL_URL=link.select("a.detailbtn").attr("href"));
+			System.out.println(name = link.select("p.ui-txt span").text());
+			System.out.println(score = link.select("p.ui-txt em").text());
 			// Download.youkuBranch(strmainurl);
 			try {
-				OracleOpreater.intoReputation(name, "6", score, "0", "", mainUrl, "3", "1");
+				OracleOpreater.intoReputationAndDETAIL_URL(name, "6", score, "0", "", mainUrl, "3", "1",DETAIL_URL);
 
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -107,8 +109,8 @@ public static void runstatic(){
 		// }
 		// }
 		
-		TimingTime(23, 59, 59);
-//		  runstatic();
+//		TimingTime(23, 59, 59);
+		  runstatic();
 	}
 
 }

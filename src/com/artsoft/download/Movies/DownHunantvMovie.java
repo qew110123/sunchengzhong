@@ -82,7 +82,7 @@ public class DownHunantvMovie {
 
 //			OracleOpreater.intoPlayAmont(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, urlnew, tvType,
 //					playUrl);
-			OracleOpreater.intoReputation(tyPlayName, "7", playAmount, "0", "", playUrl, "3", "0");
+			OracleOpreater.intoReputationAndDETAIL_URL(tyPlayName, "7", playAmount, "0", "", playUrl, "3", "0",playUrl);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

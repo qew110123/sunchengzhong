@@ -24,7 +24,7 @@ public class DownIqiyiMovie {
 		
 		try {
 			
-			OracleOpreater.intoReputation(name, "2", score, "0", "", urlBranch, "3", "1");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "2", score, "0", "", urlBranch, "3", "1",urlBranch);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -46,7 +46,7 @@ public class DownIqiyiMovie {
 		String numhtml = DownloadUtil.getHtmlText(albumurl, 1000 * 30, "UTF-8", null, null);
 		System.out.println(numhtml = HtmlAnalyze.getTagText(numhtml, ":", "}"));
 		try {
-			OracleOpreater.intoReputation(name, "2", numhtml, "0", "", urlBranch, "3", "0");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "2", numhtml, "0", "", urlBranch, "3", "0",urlBranch);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -179,8 +179,8 @@ public class DownIqiyiMovie {
 		// TODO Auto-generated method stub
 		
 		
-		TimingTime(23, 59, 59);
-//		openstatic();
+//		TimingTime(23, 59, 59);
+		openstatic();
 
 	}
 }

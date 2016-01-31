@@ -157,20 +157,20 @@ public class DownYoukuMovie {
 		//播放量
 		try {
 			
-			OracleOpreater.intoReputation(name, "1", Amount, "0", "", urlBranch, "3", "0");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "1", Amount, "0", "", urlBranch, "3", "0",urlBranch);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		//打分
 		try {
 			
-			OracleOpreater.intoReputation(name, "1", score, "0", "", urlBranch, "3", "1");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "1", score, "0", "", urlBranch, "3", "1",urlBranch);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		//评论
 		try {
-			OracleOpreater.intoReputation(name, "1", comment, "0", "", urlBranch, "3", "2");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "1", comment, "0", "", urlBranch, "3", "2",urlBranch);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -198,10 +198,10 @@ public class DownYoukuMovie {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		runstatic();
+		runstatic();
 		
 		
-		TimingTime(23, 59, 59);
+//		TimingTime(23, 59, 59);
 
 	}
 

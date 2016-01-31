@@ -24,7 +24,10 @@ public class IpFilter implements TaskInterface {
 
 	private static void ipfiler(String urlMain) {
 		// TODO Auto-generated method stub
-		String strHtml = DownloadUtil.getHtmlText("http://dev.kuaidaili.com/api/getproxy?orderid=915195947631121&num=999&area=&area_ex=&port=&port_ex=&ipstart=&carrier=0&an_ha=1&an_an=1&protocol=1&method=2&quality=0&sort=0&b_pcchrome=1&b_pcie=1&b_pcff=1&showtype=1",
+//		String strHtml = DownloadUtil.getHtmlText("http://dev.kuaidaili.com/api/getproxy?orderid=915195947631121&num=999&area=&area_ex=&port=&port_ex=&ipstart=&carrier=0&an_ha=1&an_an=1&protocol=1&method=2&quality=0&sort=0&b_pcchrome=1&b_pcie=1&b_pcff=1&showtype=1",
+//				1000 * 30, "UTF-8", null, null);
+		
+		String strHtml = DownloadUtil.getHtmlText("http://qsdrk.daili666api.com/ip/?tid=559375659838998&num=1000",
 				1000 * 30, "UTF-8", null, null);
 		// System.out.println(strHtml);
 		String[] iplist = strHtml.split("\r\n");
@@ -88,7 +91,8 @@ public class IpFilter implements TaskInterface {
 	public static boolean returnboolean(String urlBranch, Proxy proxy, String stringip) {
 		String strHtml = "";
 		strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, proxy);
-		if (strHtml != null && !"".equals(strHtml) && strHtml.contains("好搜指数-搜索大数据分享平台")) {
+//		if (strHtml != null && !"".equals(strHtml) && strHtml.contains("好搜指数-搜索大数据分享平台")) {
+			if (strHtml != null && !"".equals(strHtml)) {
 			return true;
 		} else {
 			return false;
@@ -168,7 +172,7 @@ public class IpFilter implements TaskInterface {
 ////		strproxy
 ////		System.out.println(strproxy);
 //		ReadTxtFile.wirterfile("proxy1.txt", strproxy);
-		mainip("");
+		mainip("http://www.baidu.com/");
 	}
 
 }
