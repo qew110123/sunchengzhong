@@ -220,6 +220,8 @@ public class DownHunantvDetails {
 
 //		TimingTime(00, 59, 59);
 		runstatic();
+		
+//		TimingTime(21, 59, 59);
 	}
 
 }

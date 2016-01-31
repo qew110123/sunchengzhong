@@ -233,6 +233,7 @@ public class DownIqiyiDetails {
 		
 //		TimingTime(23, 59, 59);
 		openstatic();
+//		TimingTime(21, 59, 59); 
 		
 		
 //			iQiYiBranch("http://vip.iqiyi.com/20110909/be75da8a5f37a04c.html#vfrm=2-4-0-1","","");
