@@ -1,14 +1,6 @@
 package com.artsoft.download.Movies;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+
 
 import com.artsoft.downloadThreadpool.IpFilter;
 import com.artsoft.oracle.OracleOpreater;
@@ -16,21 +8,17 @@ import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
-import com.artsoft.util.ReadTxtFile;
 import com.artsoft.util.TimeTest;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.Proxy;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.print.Doc;
 
 public class DownDoubanMovie {
 
@@ -213,7 +201,8 @@ public class DownDoubanMovie {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				System.out.println("-------设定要指定任务--------");
-				runstatic();
+				 IpFilter.mainip("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=20");
+				 runstatic();
 			}
 		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
 	}
@@ -238,9 +227,14 @@ public class DownDoubanMovie {
 		//// System.out.println(i);
 		// DownDoubanMovie.mainurl("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
 		// }
-		// TimingTime(23, 59, 59);
-		 IpFilter.mainip("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=20");
-		runstatic();
+		// TimingTime(, 59, 59);
+		
+		
+//		 IpFilter.mainip("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=20");
+//		runstatic();
+		
+		
+		TimingTime(21, 59, 59);
 
 		// String
 		// url="http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=0";

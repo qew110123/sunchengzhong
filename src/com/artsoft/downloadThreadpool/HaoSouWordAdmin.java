@@ -66,7 +66,7 @@ public class HaoSouWordAdmin {
 				// }
 
 				// OracleHaoSou.returnMaxdianpeople();
-				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
+				for (int i = sourceStrArray.length; i > sourceStrArray.length - 100; i--) {
 					System.out.println(sourceStrArray[i - 1]);
 					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
 					System.out.println(palydate = palydate.replaceAll("-", ""));

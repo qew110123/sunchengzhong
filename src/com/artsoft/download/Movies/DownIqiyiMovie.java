@@ -144,16 +144,18 @@ public class DownIqiyiMovie {
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
 
-		String strkey = ReadTxtFile.getKeyWordFromFile("keywordiqiyi.txt");
-		String[] keys = strkey.split("\n");
-		for (int i = 0; i < keys.length; i++) {
-			System.out.println(keys[i]);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
-			String url = keys[i];
-			System.out.println(url);
-			boolean bb = true;
-			DownIqiyiMovie.youkuMaim(url);
-		}
+//		String strkey = ReadTxtFile.getKeyWordFromFile("keywordiqiyi.txt");
+//		String[] keys = strkey.split("\n");
+//		for (int i = 0; i < keys.length; i++) {
+//			System.out.println(keys[i]);
+//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
+//			String url = keys[i];
+//			System.out.println(url);
+//			boolean bb = true;
+//			DownIqiyiMovie.youkuMaim(url);
+//		}
+		
+		openstatic();
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
 
@@ -180,7 +182,8 @@ public class DownIqiyiMovie {
 		
 		
 //		TimingTime(23, 59, 59);
-		openstatic();
+//		openstatic();
+		TimingTime(21, 59, 59);
 
 	}
 }

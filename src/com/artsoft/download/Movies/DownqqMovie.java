@@ -155,7 +155,8 @@ public class DownqqMovie {
 		// TODO Auto-generated method stub
 
 //		TimingTime(23, 59, 59);
-		openstatic();
+//		openstatic();
+		TimingTime(21, 59, 59);
 
 	}
 

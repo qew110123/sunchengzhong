@@ -174,7 +174,8 @@ public class DownHunantvMovie {
 		// ":½áÊø");
 		// }
 
-		TimingTime(00, 59, 59);
+//		TimingTime(00, 59, 59);
+		TimingTime(21, 59, 59);
 //		runstatic();
 	}
 
