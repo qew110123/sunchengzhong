@@ -11,15 +11,15 @@ import com.artsoft.util.TimeTest;
 public class TVplayAdmin {
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
-		DownloadYouku2.runstatic();
+//		DownloadYouku2.runstatic();
 		DownloadIqiyi.runstatic();
 		Downloadqq.runstatic();
 		DownloadSohu.runstatic();
 		DownloadLetv.runstatic();
 		Downloadpptv.runstatic();
 		DownloadHunantv.runstatic();
-//		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		Downloadkankan.runstatic();
+		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
 	
@@ -43,7 +43,8 @@ public class TVplayAdmin {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(04, 00, 00);
+//		TimingTime(04, 00, 00);
+		runstatic();
 	}
 
 }
