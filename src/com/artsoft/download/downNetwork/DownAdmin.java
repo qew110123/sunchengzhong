@@ -16,8 +16,8 @@ public class DownAdmin {
 		DownqqNetword.main(null);
 		DownkankanNetwork.main(null);
 		DownIqiyiNetword.main(null);
-		DownDoubanNetword.main(null);runstatic();
-		DownDoubanChaXunNetword.main(null);
+		DownDoubanNetword.main(null);//runstatic();
+//		DownDoubanChaXunNetword.main(null);
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
@@ -42,9 +42,9 @@ public class DownAdmin {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		TimingTime(05, 00, 00);
+		TimingTime(05, 00, 00);
 		
-		runstatic();
+//		runstatic();
 	}
 
 }

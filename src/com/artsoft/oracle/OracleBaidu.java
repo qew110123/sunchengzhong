@@ -98,6 +98,17 @@ public class OracleBaidu {
 		 */
 		sql="select * from edw.dim_tvplay t where t.years is null and t.tvplay_name not in ('我在锡林郭勒等你','HEAVENS GARDEN天上花园','秀才遇到兵', 'GIRL MEETS WORLD蕾蕾看世界','无尽的爱第二部','无尽的爱第一部','守住你的秘密')";
 		
+		/**
+		 * 2016年2月26日16：:2：:0
+		 * 数据的补充
+		 */
+		sql="select *  from edw.dim_tvplay t where t.years is null ";
+		
+		/**
+		 * 2016年3月10日10:19:48
+		 * 电视剧补充
+		 */
+		sql="select * from edw.dim_tvplay t where t.years is null";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);

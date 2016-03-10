@@ -91,6 +91,11 @@ public class DownDoubanNetword {
 //			OracleOpreater.intoReputation(name, "2", numhtml, "0", "", urlBranch, "1", "0");
 			String strHtmlurl = DownloadUtil.getHtmlText(urls, 1000 * 30, "UTF-8", null, null);
 			System.out.println(pinglun = HtmlAnalyze.getTagText(strHtmlurl, "votes\">", "</span"));
+			if (pinglun.equals("")) {
+				urls=urls.replace("http", "https");
+				strHtmlurl = DownloadUtil.getHtmlText(urls, 1000 * 30, "UTF-8", null, null);
+				System.out.println(pinglun = HtmlAnalyze.getTagText(strHtmlurl, "votes\">", "</span"));
+			}
 			try {
 				OracleOpreater.intoReputation(name, "9", feishu, "0", "", urls, "1", "1");
 			} catch (Exception e) {
@@ -168,12 +173,20 @@ public class DownDoubanNetword {
 //		}
 		
 		
-		
-//		for (int i = 0; i <=500; i=i+20) {
-////			System.out.println(i);
-//			DownDoubanNetword.mainurl("http://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
-//		}
-		
+		/**
+		 * 豆瓣数据
+		 * 2016年3月7日10：:2：:1
+		 */
+		for (int i = 0; i <=500; i=i+20) {
+//			System.out.println(i);
+			try {
+				
+				DownDoubanNetword.mainurl("https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+
 		
 		
 

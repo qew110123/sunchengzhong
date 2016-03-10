@@ -147,8 +147,12 @@ public class DownIqiyiNetword {
 		
 //		TimingTime(23, 59, 59);
 		for (int j = 0; j < 4; j++) {
-			
-			DownIqiyiNetword.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
+			try {
+				
+				DownIqiyiNetword.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 
 	}
