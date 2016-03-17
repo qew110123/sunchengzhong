@@ -1,7 +1,5 @@
 package com.artsoft.download.Movies;
 
-
-
 import com.artsoft.downloadThreadpool.IpFilter;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
@@ -18,7 +16,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-
 
 public class DownDoubanMovie {
 
@@ -83,7 +80,9 @@ public class DownDoubanMovie {
 				String name = "";
 				System.out.println(name = (String) jsonsubject.get("title"));
 				String urls = "";
-				System.out.println(urls = (String) jsonsubject.get("url"));
+				urls = (String) jsonsubject.get("url");
+				urls=urls.replace("http:", "https:");
+				System.out.println(urls);
 				String feishu = "";
 				System.out.println(feishu = (String) jsonsubject.get("rate"));
 				String pinglun = "";
@@ -174,8 +173,7 @@ public class DownDoubanMovie {
 				// e.printStackTrace();
 				// }
 				try {
-
-					DownDoubanMovie.mainurl("http://movie.douban.com/j/search_subjects?type=movie&tag=" + stringtext
+					DownDoubanMovie.mainurl("https://movie.douban.com/j/search_subjects?type=movie&tag=" + stringtext
 							+ "&page_limit=20&page_start=" + i);
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -209,115 +207,12 @@ public class DownDoubanMovie {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		// TimingTime(23, 59, 59);
-		// for (int j = 0; j < 4; j++) {
-		//
-		// DownDoubanNetword.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
-		// }
-
-		// for (int i = 0; i <=500; i=i+20) {
-		//// System.out.println(i);
-		// DownDoubanNetword.mainurl("http://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
-		// }
-
-		// http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=20
-
-		// for (int i = 0; i <=500; i=i+20) {
-		//// System.out.println(i);
-		// DownDoubanMovie.mainurl("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
-		// }
-		// TimingTime(, 59, 59);
-		
 		
 //		 IpFilter.mainip("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=20");
 //		runstatic();
 		
-		
 		TimingTime(21, 59, 59);
-
-		// String
-		// url="http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=0";
-		//
-		//// String strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8",
-		// null, null);
-		// String strHtml ="";
-		//// Proxy proxy = DealProxy.getInstance().getPoxxy();
-		//// System.out.println(proxy);
-		//
-		//
-		// Proxy proxy = DealProxy.getInstance().getPoxxy();
-		// strHtml = DownloadUtil.getHtmlText(url, 1000 * 10, "UTF-8", null,
-		// proxy);
-		//// strHtml=DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null,
-		// proxy);
-		// try {
-		//// String strHtml =htmlstring(url);
-		// System.out.println(strHtml);
-		// } catch (Exception e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		//// try {
-		//// Document texthtml = Jsoup.connect(url).get();
-		//// System.out.println(texthtml.toString());
-		//// } catch (IOException e) {
-		//// // TODO Auto-generated catch block
-		//// e.printStackTrace();
-		//// }
 
 	}
 
-	// public static String htmlstring(String newUrl) throws Exception {
-	// // TODO Auto-generated method stub
-	// DefaultHttpClient client = new DefaultHttpClient();
-	// HttpResponse response = null;
-	// System.out.println("******************************页面转向******************************");
-	// // String newUrl =
-	// //
-	// "http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=1091324464527";
-	// HttpGet get = new HttpGet(newUrl);
-	// // get.addHeader("Content-Type", "text/html;charset=UTF-8");
-	// // get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64;
-	// // rv:26.0) Gecko/20100101 Firefox/26.0");
-	// // get.addHeader("Host", "data.weibo.com");
-	// // get.addHeader("Accept",
-	// // "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-	// get.addHeader("Accept:",
-	// "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-	// get.addHeader("Accept-Encoding", "gzip, deflate, sdch");
-	// get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
-	// get.addHeader("Cache-Control", "max-age=0");
-	// get.addHeader("Connection", "keep-alive");
-	//// get.addHeader("Content-Type", "application/x-www-form-urlencoded");
-	// get.addHeader(new BasicHeader("Cookie",
-	// "bid=\"C0m6kfvGtWg\"; ll=\"108288\";
-	// gr_user_id=a9310766-95d9-441c-9bc9-72779eee8448; ct=y; ps=y;
-	// _pk_ref.100001.4cf6=%5B%22%22%2C%22%22%2C1453888640%2C%22http%3A%2F%2Fwww.douban.com%2F%22%5D;
-	// ap=1; __utma=30149280.2012357565.1446608496.1453811528.1453888640.29;
-	// __utmb=30149280.0.10.1453888640; __utmc=30149280;
-	// __utmz=30149280.1453806305.27.17.utmcsr=baidu|utmccn=(organic)|utmcmd=organic;
-	// __utma=223695111.1543114860.1451274290.1453888640.1453890115.16;
-	// __utmb=223695111.5.10.1453890115; __utmc=223695111;
-	// __utmz=223695111.1453890115.16.7.utmcsr=baidu|utmccn=(organic)|utmcmd=organic|utmctr=%E8%B1%86%E7%93%A3;
-	// _pk_id.100001.4cf6=d86ff6aae8c2d873.1451274289.14.1453891711.1453811528.;
-	// _pk_ses.100001.4cf6=*"));
-	//
-	// get.addHeader("Host", "movie.douban.com");
-	//// get.addHeader("Referer", "http://movie.douban.com/");
-	// get.addHeader("Upgrade-Insecure-Requests", "1");
-	// get.addHeader("User-Agent",
-	// "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-	// Gecko) Chrome/46.0.2490.86 Safari/537.36");
-	//// get.addHeader("X-Requested-With", "XMLHttpRequest");
-	// // get.addHeader("Accept-Language",
-	// // "zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3");
-	//
-	// HttpResponse httpResponse = client.execute(get);
-	// String responseString = EntityUtils.toString(httpResponse.getEntity());
-	// // 登录后首页的内容
-	// System.out.println(responseString);
-	// get.releaseConnection();
-	// return responseString;
-	// }
 }

@@ -271,7 +271,9 @@ public class HaoSouWordAdmin {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		 TimingTime(00, 00, 01);
+//		 TimingTime(00, 00, 01);
+		 runstatic();
+		 System.out.println("运行网吧");
 //		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 //		IpFilter.mainip("http://index.haosou.com/");
 //		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));

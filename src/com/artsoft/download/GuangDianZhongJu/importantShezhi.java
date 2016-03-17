@@ -177,8 +177,13 @@ public class importantShezhi {
 				System.out.println("111" + element.toString());
 				adminopinion = HtmlAnalyze.getTagText(element.toString(), "总局意见</td>", "</td>");
 				tvplaycontent = HtmlAnalyze.getTagText(element.toString(), "内容提要：", "省级");
-				OracleSarFtGov.intosubjectproject(tvplayname, gdsubjectname, setnumber, reportcompany, projectdate,
-						shootinglicense, provinceopinion, adminopinion, tvplaycontent, "", "", "2", producedate, producecycle);
+				try {
+					
+					OracleSarFtGov.intosubjectproject(tvplayname, gdsubjectname, setnumber, reportcompany, projectdate,
+							shootinglicense, provinceopinion, adminopinion, tvplaycontent, "", "", "2", producedate, producecycle);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 
 			}
 

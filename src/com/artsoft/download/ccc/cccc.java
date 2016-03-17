@@ -134,7 +134,8 @@ public class cccc {
 	       {  
 //	           FileOutputStream fout = new FileOutputStream("D:/students.xls");  
 	           //TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")
-	           FileOutputStream fout = new FileOutputStream("D:/ccc/"+TimeTest.getNowTime("yyyy-MM-dd")+".xls");  
+	    	   //C:\wamp\www\ccc
+	           FileOutputStream fout = new FileOutputStream("C:/wamp/www/ccc/"+TimeTest.getNowTime("yyyy-MM-dd")+".xls");  
 	           wb.write(fout);  
 	           fout.close();  
 	       }  
@@ -176,8 +177,13 @@ public class cccc {
 			
 //			}
 //			TimingTime(23, 59, 59);
-			TimingTime(11, 59, 59);
-//			runstatic();
+//			TimingTime(11, 59, 59);
+			try {
+				runstatic();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 }

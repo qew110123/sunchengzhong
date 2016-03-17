@@ -29,7 +29,7 @@ public class GuangDianZhongJuBeiAnGongShi {
 		// urlmain(urlxiangxi);
 
 		String urls = "http://dsj.sarft.gov.cn/tims/site/views/applications.shanty?appName=note&pageIndex=1";
-		for (int i = 2; i < 9; i++) {
+		for (int i = 1; i < 9; i++) {
 			urls = "http://dsj.sarft.gov.cn/tims/site/views/applications.shanty?appName=note&pageIndex="+i;
 			urlmainall(urls);
 		}
@@ -106,8 +106,11 @@ public class GuangDianZhongJuBeiAnGongShi {
 				System.out.println(gdsubjectname = linktd.get(2).text());
 				System.out.println(prduucecompany = linktd.get(3).text());
 				if (mainUrl != null || !"".equals(mainUrl)) {
-					mainUrl = "http://dsj.sarft.gov.cn" + mainUrl;
-					mainurl(mainUrl, tvplayname, gdsubjectname, prduucecompany, tvpalyarea);
+					if (!"".equals(mainUrl)) {
+						
+						mainUrl = "http://dsj.sarft.gov.cn" + mainUrl;
+						mainurl(mainUrl, tvplayname, gdsubjectname, prduucecompany, tvpalyarea);
+					}
 				}
 			}
 		}
@@ -171,8 +174,7 @@ public class GuangDianZhongJuBeiAnGongShi {
 						break;
 					}
 				}
-			}
-			if (i == 5) {
+			}			if (i == 5) {
 				setnumber = strtext.replaceAll("&nbsp;", "");
 
 			}

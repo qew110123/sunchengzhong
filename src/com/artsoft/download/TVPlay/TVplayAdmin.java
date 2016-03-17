@@ -43,8 +43,8 @@ public class TVplayAdmin {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		TimingTime(04, 00, 00);
-		runstatic();
+		TimingTime(04, 00, 00);
+//		runstatic();
 	}
 
 }
