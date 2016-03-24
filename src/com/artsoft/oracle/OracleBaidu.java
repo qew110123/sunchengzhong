@@ -116,6 +116,12 @@ public class OracleBaidu {
 		 * 电视剧补充
 		 */
 		sql="select *  from edw.dim_tvplay t where t.years is null order by t.tvplay_name";
+		
+		/**
+		 * 2016年3月23日13:14:11
+		 * 电视剧补充
+		 */
+		sql="select *  from edw.dim_tvplay t where t.years is null order by t.tvplay_name";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);

@@ -66,7 +66,7 @@ public class HaoSouWordAdmin {
 				// }
 
 				// OracleHaoSou.returnMaxdianpeople();
-				for (int i = sourceStrArray.length; i > sourceStrArray.length - 100; i--) {
+				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
 					System.out.println(sourceStrArray[i - 1]);
 					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
 					System.out.println(palydate = palydate.replaceAll("-", ""));
@@ -271,8 +271,8 @@ public class HaoSouWordAdmin {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-//		 TimingTime(00, 00, 01);
-		 runstatic();
+		 TimingTime(00, 00, 01);
+//		 runstatic();
 		 System.out.println("运行网吧");
 //		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 //		IpFilter.mainip("http://index.haosou.com/");

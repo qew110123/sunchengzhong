@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
@@ -95,11 +96,35 @@ public class Demo {
         os.close();  
         is.close();  
     } 
+	
+	private static Proxy proxy(String strIp, String strPort) {
+		InetSocketAddress addr = new InetSocketAddress(strIp, Integer.valueOf(strPort));
+		Proxy proxydata = new Proxy(Proxy.Type.HTTP, addr);
+		return proxydata;
+	}
+	
+	public static int getvalue(int i){
+		int result=0;
+		switch (i) {
+		case 1:
+			result=result+i;
+		case 2:
+			result=result+i*2;
+		case 3:
+			result=result+i*3;
+//			break;
+
+//		default:
+//			break;
+		}
+		return result;
+	}
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println(getvalue(2));
 		// TODO Auto-generated method stub
 		//// String cookstr="BAIDUID=3AADC6F35D3F3088991AA4460A697FE2:FG=1;
 		//// BIDUPSID=3AADC6F35D3F3088991AA4460A697FE2; PSTM=1445389865;
@@ -168,15 +193,34 @@ public class Demo {
 		// }
 		// System.out.println(keys.toString());
 		// System.out.println(getKeyWordFromFile("keyword.txt"));
-		// Proxy proxy = null;
-		// proxy = DealProxy.getInstance().getPoxxy();
-		// System.out.println(proxy);
-		//
-		// String url =
-		// "http://index.haosou.com/index.php?a=soIndexJson&q=%E8%B5%B5%E4%B8%BD%E9%A2%96&area=%E5%85%A8%E5%9B%BD";
-		// String strHtml = DownloadUtil.readHtml(url, 1000 * 30, "UTF-8", null,
-		// proxy);
-		// System.out.println(strHtml);
+//		for (int i = 0; i < 100; i++) {
+			
+////			Proxy proxy = null;
+//			Proxy proxy = proxy("107.167.111.36", "80");
+////			proxy = DealProxy.getInstance().getPoxxy();
+//			System.out.println(proxy);
+//			//
+//			
+//			System.out.println(proxy);
+//			String url =
+//					"http://ip.cn/";
+//			String strHtml = DownloadUtil.getHtmlText(url, 1000 * 1, "utf-8", null,
+//					proxy);
+//			
+//			System.out.println(strHtml);
+		
+//		String str=null;
+//		if (str==null||(str+="123").equals(str)) {
+//			System.out.println(str);
+//		}
+//		if (str==null&&(str+="123").equals(str)) {
+//			System.out.println(str);
+//		}
+//		System.out.println(str);
+//		String s;
+//		System.out.println("s="+s);
+		
+//		}
 
 //		String path = "D:\\image\\";
 //		File file = new File(path);
@@ -224,10 +268,10 @@ public class Demo {
 //		System.out.println(Double.parseDouble("0"));
 //		System.out.println(new Date(1453125367));
 //		
-		Date   now   =   new   Date((long) Double.parseDouble("1443542400000"));   
-		SimpleDateFormat   dateFormat   =   new   SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式   
-		String  hehe  = dateFormat.format(now);   
-		System.out.println(hehe);
+//		Date   now   =   new   Date((long) Double.parseDouble("1443542400000"));   
+//		SimpleDateFormat   dateFormat   =   new   SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式   
+//		String  hehe  = dateFormat.format(now);   
+//		System.out.println(hehe);
 		
 	}
 
