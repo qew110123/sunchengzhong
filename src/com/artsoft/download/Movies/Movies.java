@@ -19,7 +19,9 @@ public class Movies {
 		DownpptvMovie.runstatic();
 //		DownHunantvMovie.runstatic();
 		DownkankanMovie.runstatic();
+		
 		DownDoubanMovie.runstatic();
+		
 //		DownDoubanChaXunNetword.main(null);
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");

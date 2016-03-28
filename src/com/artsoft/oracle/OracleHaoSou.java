@@ -366,7 +366,7 @@ public class OracleHaoSou {
 		list.add(tvplay.getRecording_place());
 		list.add(tvplay.getStills_url());
 		// list.add(persion.getPersonSocialActivitiesList());
-		//增加添加时间 、、2016年2月26日17：:4：:1
+		// 增加添加时间 、、2016年2月26日17：:4：:1
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
@@ -464,7 +464,7 @@ public class OracleHaoSou {
 			String jishu = tvplay.getPages().replace("集", "").replaceAll("\\D+", "");
 			if (jishu != null && !"".equals(jishu)) {
 				list.add(Integer.parseInt(jishu));
-			}else{
+			} else {
 				list.add(0);
 			}
 		} else {
@@ -711,32 +711,146 @@ public class OracleHaoSou {
 		return strMax;
 	}
 
+	/**
+	 * tem_person_keyword_distrib 人物需求分布 2016年3月25日18:37:55
+	 * 
+	 * @return
+	 */
+	public static void intotem_person_keyword_distrib(String data_date, String person_id, String keyword,
+			int search_index, String trend, String url) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.tem_person_keyword_distrib t ( t.data_date,t.person_id,t.keyword ,t.search_index,t.trend,"
+				+ "t.into_date,t.url)values(?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(data_date);
+		list.add(person_id);
+		list.add(keyword);
+		list.add(search_index);
+		list.add(trend);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(url);
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+
+	/**
+	 * tem_person_relevant_keyword 人物相关搜索 2016年3月28日11:13:37
+	 * 
+	 * @return
+	 */
+	public static void intotem_person_relevant_keyword(String data_date, String person_id, String keyword,
+			String keyword_url, String recreason, String trend, String url) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.tem_person_relevant_keyword t ( t.data_date,t.person_id,t.keyword ,t.keyword_url,t.recreason,t.trend,"
+				+ "t.into_date,t.url)values(?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(data_date);
+		list.add(person_id);
+		list.add(keyword);
+		list.add(keyword_url);
+		list.add(recreason);
+		list.add(trend);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(url);
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+
+	/**
+	 * tem_person_relevant_news 人物相关新闻 
+	 * 2016年3月28日11:18:43
+	 * @return
+	 */
+	public static void intotem_person_relevant_news(String data_date, String person_id, String news_date,
+			String news_sitename, String news_title, String news_url, String url) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.tem_person_relevant_news t ( t.data_date,t.person_id,t.news_date ,t.news_sitename,t.news_title,t.news_url,"
+				+ "t.into_date,t.url)values(?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(data_date);
+		list.add(person_id);
+		list.add(news_date);
+		list.add(news_sitename);
+		list.add(news_title);
+		list.add(news_url);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(url);
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	/**
+	 * tem_person_relevant_weibo 人物相关微博
+	 * 2016年3月28日11:21:22
+	 * @return
+	 */
+	public static void intotem_person_relevant_weibo(String data_date, String person_id, String comments_num,
+			String forwards_num, String comments_url, String forwards_url, String text, String timestamp, String weibo_url, String url) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.tem_person_relevant_weibo t ( t.data_date,t.person_id,t.comments_num ,t.forwards_num,t.comments_url,t.forwards_url,"
+				+ "t.text,t.timestamp,t。weibo_url,t.into_date,t.url)values(?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(data_date);
+		list.add(person_id);
+		list.add(comments_num);
+		list.add(forwards_num);
+		list.add(comments_url);
+		list.add(forwards_url);
+		list.add(text);
+		list.add(timestamp);
+		list.add(weibo_url);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(url);
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	/**
+	 * tem_person_keyword_up 人物需求分布 2016年3月25日18:37:55
+	 * 
+	 * @return
+	 */
+	public static void intotem_person_keyword_up(String data_date, String person_id, String keyword,
+			String up_rate, String url) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.tem_person_keyword_up t ( t.data_date,t.person_id,t.keyword ,t.up_rate,"
+				+ "t.into_date,t.url)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(data_date);
+		list.add(person_id);
+		list.add(keyword);
+		list.add(up_rate);
+//		list.add(trend);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(url);
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+
 	public static void main(String[] args) {
 		// returnNumPeople("edw.dim_tvplay");
 		returnMaxdata();
-		// returnMaxdata();
-		// updateiInformation(2, "", null);
-		// List<String> listArray = select("1", "10000");
-		// for (Object Objstring : listArray) {
-		// System.out.println(Objstring);
-		// List<String> listTemp = (List<String>) Objstring;
-		// System.out.println(listTemp.get(1));
-		// }
-
-		// intoPlayAmont("0", "电视剧", "222", "0", "2014-10-15 23:10:10",
-		// "baidu.com", "0", "3", "2014-10-15 23:10:10");
-
-		// intoPeoPle("10","1000","2014-10-15","2014-10-15
-		// 23:10:10","www.baiud.com","2");
-		// intoPeoPlewebo("10", "http://weibo.com/yanyuankonglin", 2005, 666,
-		// "2014-10-15", "2014-10-15 23:10:10",
-		// "www.baiud.com", "2");
-
-		// intoBaiDuPopularity("韩东君", "http://baike.baidu.com/view/6923013.htm",
-		// "http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
-		// selectphoto();
-		// intoBaiDuPopularity("王俊凯", "http://baike.baidu.com/view/6923013.htm",
-		// "http://hiphotos.baidu.com/zhixin/abpic/item/d1e312f431adcbef60ef7675aeaf2edda2cc9fae.jpg");
 	}
 
 }
