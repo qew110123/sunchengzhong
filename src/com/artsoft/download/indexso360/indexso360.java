@@ -13,6 +13,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.artsoft.downloadThreadpool.HaoSouWordAdmin;
+import com.artsoft.downloadThreadpool.IpFilter;
 import com.artsoft.downloadThreadpool.MyHaoSoutask;
 import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.oracle.OracleMovePiaoFang;
@@ -25,19 +26,34 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class indexso360 {
+	public static String Htmlurl(String urlMain){
+//		 String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+		 
+		 String strHtml = HaoSouWordAdmin.urlreturnHtml(urlMain);
+		 try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		return strHtml;
+		
+	}
 	
 	
 	public static void tem_person_keyword_distrib(String person_id,String data_date,String keyword ,String urlMain){
-		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
-		if (strHtml == null || strHtml.equals("")) {
-			// return;
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
+//		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		if (strHtml == null || strHtml.equals("")) {
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+//		if (strHtml == null || strHtml.equals("")) {
+//			// return;
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
 		
-//		strHtml = DownloadUtil.decodeUnicode(strHtml);
+		
+		String strHtml = Htmlurl(urlMain);
 		
 		JSONObject people = new JSONObject();
 		JSONArray list = new JSONArray();
@@ -60,16 +76,17 @@ public class indexso360 {
 	}
 	
 	private static void tem_person_relevant_keyword(String person_id,String data_date,String keyword ,String urlMain){
-		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
-		if (strHtml == null || strHtml.equals("")) {
-			// return;
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
+//		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		if (strHtml == null || strHtml.equals("")) {
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+//		if (strHtml == null || strHtml.equals("")) {
+//			// return;
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
 		
-//		strHtml = DownloadUtil.decodeUnicode(strHtml);
+		
+		String strHtml = Htmlurl(urlMain);
 		
 		JSONObject people = new JSONObject();
 		JSONArray list = new JSONArray();
@@ -102,7 +119,7 @@ public class indexso360 {
 				}
 				String keyword_url="http://www.so.com/s?ie=utf-8&src=360zhishu&q="+utf8keyword+"&from=360zhishu";
 //				http://www.so.com/s?ie=utf-8&src=360zhishu&q=%E5%94%90%E5%AB%A3&from=360zhishu
-				OracleHaoSou.intotem_person_relevant_keyword(data_date, person_id, utf8keyword, keyword_url, recreason, trend, urlMain);
+				OracleHaoSou.intotem_person_relevant_keyword(data_date, person_id, keyword, keyword_url, recreason, trend, urlMain);
 			}
 			
 		}
@@ -110,13 +127,17 @@ public class indexso360 {
 	
 	
 	private static void tem_person_relevant_news(String person_id,String data_date,String keyword ,String urlMain){
-		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
+//		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		if (strHtml == null || strHtml.equals("")) {
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+//		if (strHtml == null || strHtml.equals("")) {
+//			// return;
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+		
+		
+		String strHtml = Htmlurl(urlMain);
 		
 		JSONObject people = new JSONObject();
 		JSONArray list = new JSONArray();
@@ -143,13 +164,17 @@ public class indexso360 {
 	}
 	
 	private static void tem_person_relevant_weibo(String person_id,String data_date,String keyword ,String urlMain){
-		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
+//		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		if (strHtml == null || strHtml.equals("")) {
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+//		if (strHtml == null || strHtml.equals("")) {
+//			// return;
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+		
+		
+		String strHtml = Htmlurl(urlMain);
 		
 		JSONObject people = new JSONObject();
 		JSONArray list = new JSONArray();
@@ -180,13 +205,17 @@ public class indexso360 {
 	}
 	
 	private static void tem_person_keyword_up(String person_id,String data_date,String keyword ,String urlMain){
-		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
+//		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		if (strHtml == null || strHtml.equals("")) {
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+//		if (strHtml == null || strHtml.equals("")) {
+//			// return;
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+		
+		
+		String strHtml = Htmlurl(urlMain);
 		
 		JSONObject people = new JSONObject();
 		JSONArray list = new JSONArray();
@@ -210,7 +239,10 @@ public class indexso360 {
 	
 	public static void openstatic() {
 		
+		
 		String returnNumPeople=OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
+//		IpFilter.mainip("http://index.haosou.com/");
+		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		System.out.println("需要采集的人名字数为"+returnNumPeople);
 		
 		for (int i = 0; i < Integer.parseInt(returnNumPeople); i = i + 1000) {
@@ -221,43 +253,47 @@ public class indexso360 {
 				System.out.println(listTemp.get(0));
 				System.out.println(listTemp.get(1));
 				if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
-					String person_id=listTemp.get(0);
-					String keyword=listTemp.get(1);
-					String data_date=TimeTest.getNowTime("yyyyMMdd");
-					String krywordutf8="";
-					try {
-						krywordutf8=java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
-					} catch (UnsupportedEncodingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					try {
-						tem_person_keyword_distrib(person_id, data_date, keyword, "http://index.so.com/index.php?a=radarJson&t=30&q="+krywordutf8);
+					if (Integer.parseInt(listTemp.get(0))>461) {
+						String person_id=listTemp.get(0);
+						String keyword=listTemp.get(1);
+						String data_date=TimeTest.getNowTime("yyyyMMdd");
+						String krywordutf8="";
+						try {
+							krywordutf8=java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
+						} catch (UnsupportedEncodingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						try {
+							tem_person_keyword_distrib(person_id, data_date, keyword, "http://index.so.com/index.php?a=radarJson&t=30&q="+krywordutf8);
+							
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						try {
+						tem_person_relevant_keyword(person_id, data_date, keyword, "http://index.so.com/index.php?a=nlpJson&t=30&q="+krywordutf8);
 						
-					} catch (Exception e) {
-						// TODO: handle exception
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						try {
+						tem_person_relevant_news(person_id, data_date, keyword, "http://index.so.com/index.php?a=relNewsJson&q="+krywordutf8);
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						try {
+						tem_person_relevant_weibo(person_id, data_date, keyword, "http://index.so.com/index.php?a=relWeiboJson&q="+krywordutf8);
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						try {
+						tem_person_keyword_up(person_id, data_date, keyword, "http://index.so.com/index.php?a=surgeWordsJson&t=7&q="+krywordutf8);
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						
 					}
-					try {
-					tem_person_relevant_keyword(person_id, data_date, keyword, "http://index.so.com/index.php?a=nlpJson&t=30&q="+krywordutf8);
 					
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-					try {
-					tem_person_relevant_news(person_id, data_date, keyword, "http://index.so.com/index.php?a=relNewsJson&q="+krywordutf8);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-					try {
-					tem_person_relevant_weibo(person_id, data_date, keyword, "http://index.so.com/index.php?a=relWeiboJson&q="+krywordutf8);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-					try {
-					tem_person_keyword_up(person_id, data_date, keyword, "http://index.so.com/index.php?a=surgeWordsJson&t=7&q="+krywordutf8);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
 				}
 			}
 		}

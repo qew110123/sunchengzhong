@@ -31,22 +31,30 @@ public class Downloadpptv {
 		}
 		// System.out.println(strHtml);
 		Document doc = Jsoup.parse(strHtml);
-		Elements links = doc.select("p.ui-txt");
-		// Element content = doc.getElementById("content");
-		// Elements links = content.getElementsByTag("a");
-		for (Element link : links) {
-			String name = "";
-			String score = "";
-			System.out.println(name = link.select("span").text());
-			System.out.println(score = link.select("em").text());
-			// Download.youkuBranch(strmainurl);
-			try {
-				OracleOpreater.intoReputation(name, "6", score, "0", "", mainUrl, "0", "1");
-
-			} catch (Exception e) {
-				// TODO: handle exception
+		String DETAIL_URL="";
+		Elements linksa = doc.select("a.ui-list-ct");
+		for (Element elementa : linksa) {
+			System.out.println(DETAIL_URL=elementa.attr("href"));
+			Elements links = elementa.select("p.ui-txt");
+			// Element content = doc.getElementById("content");
+			// Elements links = content.getElementsByTag("a");
+			for (Element link : links) {
+				String name = "";
+				String score = "";
+				System.out.println(name = link.select("span").text());
+				System.out.println(score = link.select("em").text());
+//				System.out.println(DETAIL_URL= link.select("em").text());
+				// Download.youkuBranch(strmainurl);
+				try {
+					OracleOpreater.intoReputationAndDETAIL_URL(name, "6", score, "0", "", mainUrl, "0", "1",DETAIL_URL);
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
+			
 		}
+		
 
 	}
 
@@ -106,7 +114,8 @@ public static void runstatic(){
 		// }
 		// }
 		
-		TimingTime(23, 59, 59);
+//		TimingTime(23, 59, 59);
+		runstatic();
 	}
 
 }

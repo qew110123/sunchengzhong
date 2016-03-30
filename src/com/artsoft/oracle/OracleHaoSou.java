@@ -802,7 +802,7 @@ public class OracleHaoSou {
 
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String strSql = "insert into ods.tem_person_relevant_weibo t ( t.data_date,t.person_id,t.comments_num ,t.forwards_num,t.comments_url,t.forwards_url,"
-				+ "t.text,t.timestamp,t。weibo_url,t.into_date,t.url)values(?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+				+ "t.text,t.timestamp,t.weibo_url,t.into_date,t.url)values(?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
 
 		List<Comparable> list = new ArrayList();
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中

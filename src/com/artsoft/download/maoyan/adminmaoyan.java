@@ -547,6 +547,7 @@ public class adminmaoyan {
 		// 0).toString();
 		String datetext=TimeTest.getNowTime("yyyy-MM-dd");
 		 String urlMain = "http://piaofang.maoyan.com/?date="+datetext;
+		 urlMain="";
 		 openstaticLiShiShuJu(urlMain,datetext);
 	}
 
@@ -557,16 +558,12 @@ public class adminmaoyan {
 	public static void openstaticLiShiShuJu(String urlMain, String datetext) {
 		// http://piaofang.maoyan.com/?date=2016-03-15
 		// String urlMain = "http://piaofang.maoyan.com/?date="+timeText;
-		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
-		if (strHtml == null || strHtml.equals("")) {
-			// return;
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
-		if (strHtml == null || strHtml.equals("")) {
+		String strHtml="";
+		if (urlMain == null || urlMain.equals("")) {
 			urlMain = "http://piaofang.maoyan.com/";
+			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+		}
+		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
 		}
 

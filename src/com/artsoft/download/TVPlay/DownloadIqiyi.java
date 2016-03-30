@@ -38,7 +38,7 @@ public class DownloadIqiyi {
 		System.out.println(numhtml = HtmlAnalyze.getTagText(numhtml, "\":", "}"));
 		try {
 
-			OracleOpreater.intoReputation(name, "2", numhtml, "0", "", urlBranch, "0", "0");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "2", numhtml, "0", "", urlBranch, "0", "0",urlBranch);
 
 			String videourl = "http://up.video.iqiyi.com/ugc-updown/quud.do?dataid=" + videoId
 					+ "&type=1&userid=&flashuid=e42dc42f8825edf5580806cde99606ce&appID=21&callback=window.Q.__callbacks__.cb1953yg";
@@ -47,7 +47,7 @@ public class DownloadIqiyi {
 			String feishu = "";
 			System.out.println(feishu = HtmlAnalyze.getTagText(feishuhtml, "score\":", ",\""));
 
-			OracleOpreater.intoReputation(name, "2", feishu, "0", "", urlBranch, "0", "1");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "2", feishu, "0", "", urlBranch, "0", "1",urlBranch);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -169,7 +169,8 @@ public class DownloadIqiyi {
 		// }
 		// }
 		
-		TimingTime(23, 59, 59);
+//		TimingTime(23, 59, 59);
+		 runstatic();
 
 	}
 }

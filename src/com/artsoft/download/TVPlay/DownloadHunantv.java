@@ -69,6 +69,7 @@ public class DownloadHunantv {
 		String tvType = "0";
 		// String realUrl = "";
 
+		//http://videocenter-2039197532.cn-north-1.elb.amazonaws.com.cn//dynamicinfo?callback=jQuery18205857753134332597_1459236897033&vid=3088548&_=1459236897317
 		String urlnew = "http://videocenter-2039197532.cn-north-1.elb.amazonaws.com.cn//dynamicinfo?callback=jQuery182025981585565023124_1445935554595&vid="
 				+ idnum + "&_=1445935555113";
 		System.out.println(urlnew);
@@ -122,7 +123,7 @@ public class DownloadHunantv {
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
-		for (int i = 1; i <= 18; i++) {
+		for (int i = 1; i <= 22; i++) {
 			String url = "http://list.hunantv.com/2/----------" + i + "---.html";
 			System.out.println(url);
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
@@ -151,35 +152,10 @@ public class DownloadHunantv {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// for (int i = 0; i < 25; i++) {
-		// String
-		// mainUrl="http://list.letv.com/apin/chandata.json?c=2&d=1&md=&o=20&p="+i+"&s=1";
-		// mainurl(mainUrl);
-		// }
-		// String mainUrl = "http://www.hunantv.com/v/2/104822/f/1821553.html";
-		// mainurl(mainUrl);
-		// while (true) {
-		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") +
-		// ":开始");
-		//
-		// for (int i = 1; i <= 18; i++) {
-		// String url = "http://list.hunantv.com/2/----------" + i + "---.html";
-		// System.out.println(url);
-		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" +
-		// url);
-		// mainmore(url);
-		// }
-		// try {
-		// Thread.sleep(1000 * 60 * 60 * 22);
-		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") +
-		// ":结束");
-		// }
 
-		TimingTime(23, 59, 59);
+		//惊醒详细信息暂时不管
+//		TimingTime(23, 59, 59);
+		runstatic();
 	}
 
 }

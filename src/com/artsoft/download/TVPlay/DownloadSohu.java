@@ -31,7 +31,7 @@ public class DownloadSohu {
 		String score = HtmlAnalyze.getTagText(strHtml, "</em><strong class=\"score\">", "</strong> 分");
 		// 进行评分的采集
 		try {
-			OracleOpreater.intoReputation(name, "4", score, "0", "", urlBranch, "0", "1");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "4", score, "0", "", urlBranch, "0", "1",urlBranch);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -74,7 +74,7 @@ public class DownloadSohu {
 		String strHtml = DownloadUtil.getHtmlText(urlnew, 1000 * 30, "UTF-8", null, null);
 		String Amount = HtmlAnalyze.getTagText(strHtml, "{\"" + strvid + "\":{\"total\":", ",\"");
 		try {
-			OracleOpreater.intoReputation(name, "4", Amount, "0", "", urlerer, "0", "0");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "4", Amount, "0", "", urlerer, "0", "0",urlerer);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -109,8 +109,8 @@ public class DownloadSohu {
 				playAmount = HtmlAnalyze.getTagText(strHtml, "{\"" + strvplaylistId + "\":{\"total\":", ",\""));
 		try {
 
-			OracleOpreater.intoPlayAmont(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, playUrl,
-					tvType, realUrl);
+			OracleOpreater.intoReputationAndDETAIL_URL(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, playUrl,
+					tvType, urlerer);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -181,21 +181,22 @@ public class DownloadSohu {
 
 		// sohuMain("http://so.tv.sohu.com/list_p1101_p2_p3_p4-1_p5_p6_p77_p80_p9_p10_p11_p12_p13.html");
 
-		while (true) {
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-			for (int i = 1; i <= 72; i++) {
-				sohuMain("http://so.tv.sohu.com/list_p1101_p2_p3_p4-1_p5_p6_p77_p80_p9_p10" + i + "_p11_p12_p13.html");
-
-			}
-			try {
-				Thread.sleep(1000 * 60 * 60 * 22);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
-		}
+//		while (true) {
+//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+//			for (int i = 1; i <= 72; i++) {
+//				sohuMain("http://so.tv.sohu.com/list_p1101_p2_p3_p4-1_p5_p6_p77_p80_p9_p10" + i + "_p11_p12_p13.html");
+//
+//			}
+//			try {
+//				Thread.sleep(1000 * 60 * 60 * 22);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
+//		}
 //		 TimingTime(23, 59, 59);
+		 runstatic();
 	}
 
 }

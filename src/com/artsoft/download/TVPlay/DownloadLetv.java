@@ -33,18 +33,24 @@ public class DownloadLetv {
 			String Amount = "";
 			String name = "";
 			String score = "";
+			String aid="";
+			String DETAIL_URL="";
 			// System.out.println(strarray[i]);
 			System.out.println(Amount = HtmlAnalyze.getTagText(strarray[i], "playCount\":\"", "\""));
 			System.out.println(score = HtmlAnalyze.getTagText(strarray[i], "rating\":\"", "\""));
 			System.out.println(name = HtmlAnalyze.getTagText(strarray[i], "\"name\":\"", "\""));
+			System.out.println(aid = HtmlAnalyze.getTagText(strarray[i], "\"aid\":\"", "\""));
+			if (aid != "") {
+				DETAIL_URL="http://www.le.com/tv/"+aid+".html";
+			}
 			if (urlBranch != null || Amount != null || name != null || score != null || urlBranch != "" || Amount != ""
 					|| name != "" || score != "") {
 				try {
 					if (name != null && Amount != null && mainUrl != null) {
-						OracleOpreater.intoReputation(name, "5", Amount, "0", "", mainUrl, "0", "0");
+						OracleOpreater.intoReputationAndDETAIL_URL(name, "5", Amount, "0", "", mainUrl, "0", "0",DETAIL_URL);
 					}
 					if (name != null && score != null && mainUrl != null) {
-						OracleOpreater.intoReputation(name, "5", score, "0", "", mainUrl, "0", "1");
+						OracleOpreater.intoReputationAndDETAIL_URL(name, "5", score, "0", "", mainUrl, "0", "1",DETAIL_URL);
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -89,7 +95,8 @@ public class DownloadLetv {
 //			mainurl(mainUrl);
 		
 //		}
-		TimingTime(23, 59, 59);
+//		TimingTime(23, 59, 59);
+		runstatic();
 	}
 	
 

@@ -17,7 +17,7 @@ import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.ReadTxtFile;
 import com.artsoft.util.TimeTest;
 
-public class DownloadYouku2 {
+public class DownloadYouku_always {
 	static int i = 0;
 
 	/**
@@ -65,7 +65,7 @@ public class DownloadYouku2 {
 				System.out.println(link.select("div.p-meta-title a").attr("title"));
 				System.out.println(link.select("span.p-actor").text());
 				System.out.println(link.select("span.p-num").text());
-				DownloadYouku2.youkuBranch(strmainurl);
+				DownloadYouku_always.youkuBranch(strmainurl);
 			}
 
 			// 进行下一页数据的判断
@@ -125,37 +125,57 @@ public class DownloadYouku2 {
 		// answer=answer.replaceAll(",","");
 
 		// Double.parseDouble(answer)
-
-		OracleOpreater.intoReputation(name, "1", Amount, "0", "", urlBranch, "0", "0");
 		// OracleOpreater.intoReputation(name, "1", Amount, "0",
 		// "2015年10月23日10:43:46",urlBranch, "0", "1");
-		OracleOpreater.intoReputation(name, "1", score, "0", "", urlBranch, "0", "1");
-		OracleOpreater.intoReputation(name, "1", comment, "0", "", urlBranch, "0", "2");
 		// OracleOpreater.intoDemo(tyPlayName, source, dataAmount, vodeoType,
 		// upDatedate, playUrl, tvType, dataType);
+		
+		
+		
+		
+
+//		OracleOpreater.intoReputationAndDETAIL_URL(name, "1", Amount, "0", "", urlBranch, "0", "0",urlBranch);
+//		OracleOpreater.intoReputationAndDETAIL_URL(name, "1", score, "0", "", urlBranch, "0", "1",urlBranch);
+//		OracleOpreater.intoReputationAndDETAIL_URL(name, "1", comment, "0", "", urlBranch, "0", "2",urlBranch);
+		
+		
 
 		//
 		/**
 		 * 详细每集列表的数据
-		 * 
-		 * 时间2015年11月16日16:52:33
-		 * 进行详细数据决的采集
 		 */
 
-//		try {
-//			Element content = doc.getElementById("zy_bd");
-//			Elements links = null;
-//			links = content.getElementsByTag("li");
-//			if (links == null) {
-//				return;
-//			}
-//			Element link = links.first();
-//			String urlDetailedfirst = "";
-//			System.out.println(urlDetailedfirst = link.select("a").attr("href"));
-//			youkuOneDetailed(urlDetailedfirst);
-//		} catch (Exception e) {
-//		}
+		try {
+			Element content = doc.getElementById("zy_bd");
+			// Elements links = content.getElementsByTag("li");
+			// for (Element link : links) {
+			//// System.out.println(link.select("div.p-meta-title
+			// a").attr("href"));
+			//// System.out.println(link.select("div.p-meta-title
+			// a").attr("title"));
+			//// System.out.println(link.select("span.p-actor").text());
+			//
+			// System.out.println(link.select("a").attr("href"));
+			// System.out.println(link.select("a").attr("title"));
+			// }
+			Elements links = null;
+			links = content.getElementsByTag("li");
 
+			if (links == null) {
+				return;
+			}
+			Element link = links.first();
+			String urlDetailedfirst = "";
+			// String nameDetailedfirst = "";
+			System.out.println(urlDetailedfirst = link.select("a").attr("href"));
+			// System.out.println(nameDetailedfirst =
+			// link.select("a").attr("title"));
+
+			youkuOneDetailed(urlDetailedfirst);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		//
 		//
 		// /**
 		// * 在预告片 花絮 饭子制作品 mv 独家 共5个 一共20个
@@ -320,103 +340,58 @@ public class DownloadYouku2 {
 		}
 	}
 	
-	public static void runstatic(){
-		CommonUtil.setLog("优酷总数"+TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-		String strkey = ReadTxtFile.getKeyWordFromFile("keyword.txt");
-		String[] keys = strkey.split("\n");
+	public static void runstatic() {
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+		
+		String strkey=ReadTxtFile.getKeyWordFromFile("keyword.txt");
+		String[] keys=strkey.split("\n");
 		for (int i = 0; i < keys.length; i++) {
-			System.out.println(i);
-			System.out.println(keys[i]);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
-			// ConfigManager config = ConfigManager.getInstance();
-			String url = keys[i];
+//			System.out.println(i);
+//			System.out.println(keys[i]);
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+keys[i]);
+//			ConfigManager config = ConfigManager.getInstance();
+			String url=keys[i];
 			System.out.println(url);
-			boolean bb = true;
+			boolean bb=true;
 			while (bb) {
-				String strurl = DownloadYouku2.youkuMaim(url);
-				System.out.println("strurl" + strurl);
-				// System.out.println(strurl!=null&&!"".equals(strurl));
-				if (strurl != null && !"".equals(strurl)) {
-					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + strurl);
-					url = strurl;
-				} else {
-					bb = false;
+				String strurl=DownloadYouku_always.youkuMaim(url);
+				System.out.println("strurl"+strurl);
+//				System.out.println(strurl!=null&&!"".equals(strurl));
+				if (strurl!=null&&!"".equals(strurl)) {
+//					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+strurl);
+					url=strurl;
+				}else{
+					bb=false;
 				}
-
+				
 			}
 		}
-		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
+		
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 	
-	//判断数据开始时间
-	public static void TimingTime(int hh , int mm ,int ss) {  
-        Calendar calendar = Calendar.getInstance();  
-        calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时  
-        calendar.set(Calendar.MINUTE, mm);       // 控制分  
-        calendar.set(Calendar.SECOND, ss);       // 控制秒  
-  
-        Date time = calendar.getTime();         // 得出执行任务的时间,此处为今天的12：00：00  
-  
-        Timer timer = new Timer();  
-        timer.scheduleAtFixedRate(new TimerTask() {  
-            public void run() {  
-                System.out.println("-------设定要指定任务--------");  
-                runstatic();
-            } 
-        }, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行  
-    } 
+	// 判断数据开始时间
+		public static void TimingTime(int hh, int mm, int ss) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+			calendar.set(Calendar.MINUTE, mm); // 控制分
+			calendar.set(Calendar.SECOND, ss); // 控制秒
+
+			Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+
+			Timer timer = new Timer();
+			timer.scheduleAtFixedRate(new TimerTask() {
+				public void run() {
+					System.out.println("-------设定要指定任务--------");
+					runstatic();
+				}
+			}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+		}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// String url =
-		// "http://www.youku.com/v_olist/c_97_g__a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_3.html";
-		// if (true) {
-		// String strurl = Download.youkuMaim(url);
-		// if (strurl != null && !"".equals(strurl)) {
-		// url = strurl;
-		// }
-		// ;
-		//
-		// }
-		// Download.youkuMaim("http://www.youku.com/v_olist/c_97_g__a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_2.html");
-		// Download.youkuBranch("http://www.youku.com/show_page/id_zd56886dc86fc11e3a705.html");
-
-		// Download.youkuBranch("http://www.youku.com/show_page/id_ze1c378f4b91811e2be40.html?from=y1.12-97");
-		// Download.youkuBranchAsynchronous("http://www.youku.com/show_episode/id_zd56886dc86fc11e3a705.html?dt=json&divid=reload_41&__rt=1&__ro=reload_41");
-		// Download.youkuOneDetailed("http://v.youku.com/v_show/id_XMTM0MDY0MzA3Ng==.html?from=y1.2-2.4.4");
-
-		// Download.youkuMaim("http://www.youku.com/v_olist/c_97_a_%E5%A4%A7%E9%99%86_s_1_d_1.html");
-		// Download.youkuBranch("http://www.youku.com/show_page/id_zd56886dc86fc11e3a705.html");
-
-		// http://v.youku.com/v_show/id_XOTQyMzYxMDY0.html?from=y1.2-2.4.50
-//		while (true) {
-//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-//			String strkey = ReadTxtFile.getKeyWordFromFile("keyword.txt");
-//			String[] keys = strkey.split("\n");
-//			for (int i = 0; i < keys.length; i++) {
-//				System.out.println(i);
-//				System.out.println(keys[i]);
-//				CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
-//				// ConfigManager config = ConfigManager.getInstance();
-//				String url = keys[i];
-//				System.out.println(url);
-//				boolean bb = true;
-//				while (bb) {
-//					String strurl = DownloadYouku2.youkuMaim(url);
-//					System.out.println("strurl" + strurl);
-//					// System.out.println(strurl!=null&&!"".equals(strurl));
-//					if (strurl != null && !"".equals(strurl)) {
-//						CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + strurl);
-//						url = strurl;
-//					} else {
-//						bb = false;
-//					}
-//
-//				}
-//			}
-//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
-//		}
 		TimingTime(23, 59, 59);
+//		runstatic();
 	}
 
 }

@@ -11,13 +11,13 @@ import com.artsoft.util.TimeTest;
 public class TVplayAdmin {
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
-//		DownloadYouku2.runstatic();
+		DownloadYouku.runstatic();
 		DownloadIqiyi.runstatic();
 		Downloadqq.runstatic();
 		DownloadSohu.runstatic();
 		DownloadLetv.runstatic();
 		Downloadpptv.runstatic();
-		DownloadHunantv.runstatic();
+//		DownloadHunantv.runstatic();
 		Downloadkankan.runstatic();
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");

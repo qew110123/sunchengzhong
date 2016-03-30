@@ -1,6 +1,6 @@
 package com.artsoft.admin;
 
-import com.artsoft.download.TVPlay.Download;
+import com.artsoft.download.TVPlay.DownloadYouku_always;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.ReadTxtFile;
 import com.artsoft.util.TimeTest;
@@ -33,7 +33,7 @@ public class admin {
 			System.out.println(url);
 			boolean bb=true;
 			while (bb) {
-				String strurl=Download.youkuMaim(url);
+				String strurl=DownloadYouku_always.youkuMaim(url);
 				System.out.println("strurl"+strurl);
 //				System.out.println(strurl!=null&&!"".equals(strurl));
 				if (strurl!=null&&!"".equals(strurl)) {

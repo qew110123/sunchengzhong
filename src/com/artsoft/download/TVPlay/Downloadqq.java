@@ -40,8 +40,9 @@ public class Downloadqq {
 			// System.out.println(link.select("a").text());
 			// System.out.println(link.text());
 			System.out.println(score = link.select("strong.c_txt3").text());
+			
 			try {
-				OracleOpreater.intoReputation(name, "3", score, "0", "", urlMain, "0", "1");
+				OracleOpreater.intoReputationAndDETAIL_URL(name, "3", score, "0", "", urlMain, "0", "1",strmainurl);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -73,7 +74,7 @@ public class Downloadqq {
 		String numstring = HtmlAnalyze.getTagText(strHtml, "{\"all\":", ",\"");
 		System.out.println(numstring);
 		try {
-			OracleOpreater.intoReputation(nameBranch, "3", numstring, "0", "", urlMain, "0", "0");
+			OracleOpreater.intoReputationAndDETAIL_URL(nameBranch, "3", numstring, "0", "", urlMain, "0", "0",urlBranch);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -137,8 +138,8 @@ public class Downloadqq {
 		// }
 		// }
 
-		TimingTime(23, 59, 59);
-
+//		TimingTime(23, 59, 59);
+		runstatic();
 	}
 
 }

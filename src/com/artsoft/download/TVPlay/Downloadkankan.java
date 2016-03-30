@@ -75,7 +75,7 @@ public class Downloadkankan {
 		System.out.println(comment = HtmlAnalyze.getTagText(strHtml, " total:\"", "\""));
 		System.out.println(comment = comment.replaceAll(",", ""));
 		try {
-			OracleOpreater.intoReputation(title, "8", comment, "0", "", mainUrl, "0", "0");
+			OracleOpreater.intoReputationAndDETAIL_URL(title, "8", comment, "0", "", mainUrl, "0", "0",mainUrl);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -134,8 +134,8 @@ public class Downloadkankan {
 //				e.printStackTrace();
 //			}
 //		}
-		TimingTime(23, 59, 59);
-
+//		TimingTime(23, 59, 59);
+		runstatic();
 	}
 
 }
