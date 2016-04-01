@@ -1,4 +1,4 @@
-package com.artsoft.download.TVPlay.platform;
+package com.artsoft.download.TVPlay.A123;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

@@ -72,7 +72,7 @@ public class DownloadYouku_always {
 
 			String strnexturl = HtmlAnalyze.getTagText(strHtml, "<li class=\"next\" title=\"下一页\"><a href=\"",
 					"\"  charset=");
-			if (strnexturl != null || "".equals(strnexturl)) {
+			if (strnexturl != null && !"".equals(strnexturl) && !"http://www.youku.com".equals(strnexturl)) {
 				strnexturl = "http://www.youku.com" + strnexturl;
 				return strnexturl;
 			}
@@ -129,16 +129,13 @@ public class DownloadYouku_always {
 		// "2015年10月23日10:43:46",urlBranch, "0", "1");
 		// OracleOpreater.intoDemo(tyPlayName, source, dataAmount, vodeoType,
 		// upDatedate, playUrl, tvType, dataType);
-		
-		
-		
-		
 
-//		OracleOpreater.intoReputationAndDETAIL_URL(name, "1", Amount, "0", "", urlBranch, "0", "0",urlBranch);
-//		OracleOpreater.intoReputationAndDETAIL_URL(name, "1", score, "0", "", urlBranch, "0", "1",urlBranch);
-//		OracleOpreater.intoReputationAndDETAIL_URL(name, "1", comment, "0", "", urlBranch, "0", "2",urlBranch);
-		
-		
+		// OracleOpreater.intoReputationAndDETAIL_URL(name, "1", Amount, "0",
+		// "", urlBranch, "0", "0",urlBranch);
+		// OracleOpreater.intoReputationAndDETAIL_URL(name, "1", score, "0", "",
+		// urlBranch, "0", "1",urlBranch);
+		// OracleOpreater.intoReputationAndDETAIL_URL(name, "1", comment, "0",
+		// "", urlBranch, "0", "2",urlBranch);
 
 		//
 		/**
@@ -339,59 +336,59 @@ public class DownloadYouku_always {
 			}
 		}
 	}
-	
+
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-		
-		String strkey=ReadTxtFile.getKeyWordFromFile("keyword.txt");
-		String[] keys=strkey.split("\n");
+
+		String strkey = ReadTxtFile.getKeyWordFromFile("keyword.txt");
+		String[] keys = strkey.split("\n");
 		for (int i = 0; i < keys.length; i++) {
-//			System.out.println(i);
-//			System.out.println(keys[i]);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+keys[i]);
-//			ConfigManager config = ConfigManager.getInstance();
-			String url=keys[i];
+			// System.out.println(i);
+			// System.out.println(keys[i]);
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
+			// ConfigManager config = ConfigManager.getInstance();
+			String url = keys[i];
 			System.out.println(url);
-			boolean bb=true;
+			boolean bb = true;
 			while (bb) {
-				String strurl=DownloadYouku_always.youkuMaim(url);
-				System.out.println("strurl"+strurl);
-//				System.out.println(strurl!=null&&!"".equals(strurl));
-				if (strurl!=null&&!"".equals(strurl)) {
-//					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+strurl);
-					url=strurl;
-				}else{
-					bb=false;
+				String strurl = DownloadYouku_always.youkuMaim(url);
+				System.out.println("strurl" + strurl);
+				// System.out.println(strurl!=null&&!"".equals(strurl));
+				if (strurl != null && !"".equals(strurl) && !"".equals("http://www.youku.com")) {
+					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + strurl);
+					url = strurl;
+				} else {
+					bb = false;
 				}
-				
+
 			}
 		}
-		
+
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
-	
+
 	// 判断数据开始时间
-		public static void TimingTime(int hh, int mm, int ss) {
-			Calendar calendar = Calendar.getInstance();
-			calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
-			calendar.set(Calendar.MINUTE, mm); // 控制分
-			calendar.set(Calendar.SECOND, ss); // 控制秒
+	public static void TimingTime(int hh, int mm, int ss) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+		calendar.set(Calendar.MINUTE, mm); // 控制分
+		calendar.set(Calendar.SECOND, ss); // 控制秒
 
-			Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+		Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
 
-			Timer timer = new Timer();
-			timer.scheduleAtFixedRate(new TimerTask() {
-				public void run() {
-					System.out.println("-------设定要指定任务--------");
-					runstatic();
-				}
-			}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
-		}
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			public void run() {
+				System.out.println("-------设定要指定任务--------");
+				runstatic();
+			}
+		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TimingTime(23, 59, 59);
-//		runstatic();
+		// runstatic();
 	}
 
 }
