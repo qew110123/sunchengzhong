@@ -11,6 +11,10 @@ import com.artsoft.util.HtmlAnalyze;
 
 public class Changing {
 
+	/**
+	 * 	变更通告列表
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String mainUrl = "http://dsj.sarft.gov.cn/tims/site/views/applications/importantLixiang/view.shanty?appName=importantLixiang&id=0143d2a261a65a344028819a43aeb279";

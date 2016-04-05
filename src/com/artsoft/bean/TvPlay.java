@@ -103,6 +103,8 @@ public class TvPlay {
 	//IMDb编码
 	private String IMDb="";
 	
+	// 1优酷 2 爱奇艺 3 腾讯 4 搜狐 5 乐视 6 ppTV 7芒果TV 8 迅雷看看  9豆瓣 10艺恩票房
+	private int SOURCE = 0;
 	
 	
 	public String getIMDb() {
@@ -553,5 +555,13 @@ public class TvPlay {
 
 	public void setLgName(String lgName) {
 		this.lgName = lgName;
+	}
+
+	public int getSOURCE() {
+		return SOURCE;
+	}
+
+	public void setSOURCE(int sOURCE) {
+		SOURCE = sOURCE;
 	}
 }

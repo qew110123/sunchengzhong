@@ -18,7 +18,7 @@ public class MyHaoSoutask implements TaskInterface {
 	@Override
 	public void perform() {
 		// TODO Auto-generated method stub
-		HaoSouWordAdmin.HaosouPeoPleBranch(urlBranch, tvplayId, tyPlayName, DataType);
+		HaoSouWordAdmin.runadminpool(urlBranch, tvplayId, tyPlayName, DataType);
 
 	}
 

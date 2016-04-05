@@ -12,6 +12,7 @@ import com.artsoft.util.HtmlAnalyze;
 public class importantShezhi {
 
 	/**
+	 * 重大题材摄制公示
 	 * 
 	 * @param args
 	 */

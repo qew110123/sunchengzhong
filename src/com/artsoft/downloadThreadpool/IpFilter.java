@@ -27,7 +27,7 @@ public class IpFilter implements TaskInterface {
 //		String strHtml = DownloadUtil.getHtmlText("http://dev.kuaidaili.com/api/getproxy?orderid=915195947631121&num=999&area=&area_ex=&port=&port_ex=&ipstart=&carrier=0&an_ha=1&an_an=1&protocol=1&method=2&quality=0&sort=0&b_pcchrome=1&b_pcie=1&b_pcff=1&showtype=1",
 //				1000 * 30, "UTF-8", null, null);
 		
-		String strHtml = DownloadUtil.getHtmlText("http://qsdrk.daili666api.com/ip/?tid=559375659838998&num=1000",
+		String strHtml = DownloadUtil.getHtmlText("http://qsrdk.daili666api.com/ip/?tid=559375659838998&num=1000&delay=5&category=2&foreign=none",
 				1000 * 30, "UTF-8", null, null);
 		// System.out.println(strHtml);
 		String[] iplist = strHtml.split("\r\n");

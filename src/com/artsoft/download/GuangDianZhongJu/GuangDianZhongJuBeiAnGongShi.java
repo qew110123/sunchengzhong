@@ -13,6 +13,7 @@ public class GuangDianZhongJuBeiAnGongShi {
 
 	/**
 	 * 广电总局备案公示
+	 * 备案公示列表
 	 * 
 	 * @param args
 	 */

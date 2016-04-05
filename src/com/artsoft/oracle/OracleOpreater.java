@@ -206,45 +206,62 @@ public class OracleOpreater {
 	 * 添加电视剧数据
 	 * TEM_DIM_TVPLAY_PLATFORM
 	 * 2016年3月30日18:13:06
+	 * 2016年4月1日16:23:54
 	 * @param playtv
 	 */
 	public static void intoTEM_DIM_TVPLAY_PLATFORM(TvPlay playtv){
 		Connection conn = DBOperate218.getInstance().getConnection();
 		
-		String strSql = "insert into ods.TEM_DIM_FILM_PLATFORM t(t.B_FILM_ID,t.film_name,t.film_url,t.english_name,"
-				+ "t.alias_name,t.years,t.produce_area,t.show_date,t.create_time,t.update_time,t.source,t.description,"
-				+ "t.subject_name_one,t.director,t.actors,t.screenwriter,t.subject_name_two,t.subject_id_one,t.subject_id_two,"
-				+ "t.time_long,t.languages,t.imdb_code,t.film_level,t.original,t.BOX_OFFICES)values(TEM_DIM_FILM_PLATFORM_SEQ.nextval,?,?,?,?,?,?,?,to_date(?,"
-				+ "'yyyy-mm-dd hh24:mi:ss'),null,?,?,?,?,?,?,?,null,null,?,?,?,?,?,?)";
+		String strSql = "insert into ods.TEM_DIM_TVPLAY_PLATFORM t ( t.tvplay_name,t.tvplay_url ,"
+				+ "t.alias_en ,t.alias_cn,t.major_actors ,t.director,t.screenwriter,t.producer ,t.production_company ,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.PRODUCED_COMPANY,"
+				+ "t.production_area,t.premiere_time,t.pages,t.photography_director,t.total_production,t.basic_info,"
+				+ "t.update_time,t.source)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		List<Comparable> list = new ArrayList();
 		// 这里是将对象加入到list中
 		
 		list.add(playtv.getTvplay_name());
 		list.add(playtv.getTvplay_url());
-		list.add("");
 		list.add(playtv.getAlias_en());
-		list.add(playtv.getShoot_time());
-		list.add(playtv.getProduction_area());
-		list.add(playtv.getShow_date());
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-//		list.add(playtv.getSubject());
-		list.add(playtv.getClassnum());
-		list.add(playtv.getBasic_info());
-		list.add(playtv.getSubject());
-		list.add(playtv.getDirector());
+		list.add(playtv.getAlias_cn());
 		list.add(playtv.getMajor_actors());
+//		list.add(playtv.getProduction_area());
+		list.add(playtv.getDirector());
 		list.add(playtv.getScreenwriter());
-		list.add("");
-		list.add(playtv.getTime_length());
-		list.add(playtv.getLgName());
-		list.add(playtv.getIMDb());
-		list.add("");
-		list.add("");
-		list.add(playtv.getBox_office());//票房
-//		list.add(playtv.get)
-//		list.add(TimeTest.getNowTime("yyyyMMdd"));
 		
+		list.add(playtv.getProducer());
+		
+		list.add(playtv.getProduction_company());
+		
+		list.add(playtv.getIssuing_company());
+		
+		list.add(playtv.getShoot_time());
+		
+		list.add(playtv.getShoot_place());
+		
+		list.add(playtv.getSubject());
+		
+//		list.add("");
+		list.add(playtv.getProduced_time());
+		
+		list.add(playtv.getProduced_company());
+		
+		list.add(playtv.getProduction_area());
+		
+		list.add(playtv.getPremiere_time());
+		
+		list.add(playtv.getPages());
+		
+		list.add(playtv.getPhorogrphy_director());
+		
+		list.add(playtv.getTotal_production());
+		
+		list.add(playtv.getBasic_info());
+		
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		
+		list.add(playtv.getSOURCE());
 
 		boolean bb=DBOperate.insertRecord(conn, strSql, list);
 		System.out.println(bb);

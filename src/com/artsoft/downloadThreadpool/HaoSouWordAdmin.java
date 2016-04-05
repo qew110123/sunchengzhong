@@ -49,12 +49,12 @@ public class HaoSouWordAdmin {
 			System.out.println(sourceStrArray.length);
 			if (starttime != null && !"".equals(starttime)) {
 
-				 try {
-				 Thread.sleep(1000);
-				 } catch (InterruptedException e) {
-				 // TODO Auto-generated catch block
-				 e.printStackTrace();
-				 }
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// for (int i = 0; i < sourceStrArray.length; i++) {
 				// // System.out.println(sourceStrArray[i] +
@@ -92,6 +92,31 @@ public class HaoSouWordAdmin {
 		}
 
 	}
+	
+	public static void runadminpool(String urlBranch, String tvplayId, String tyPlayName, String DataType) {
+//		System.out.println("当前启动线程thread:" + pool.getPoolNum());
+		try {
+
+			urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
+					+ java.net.URLEncoder.encode(tyPlayName, "utf-8") + "&area=%E5%85%A8%E5%9B%BD";
+//			pool.performTask(new MyHaoSoutask(urlBranch, tvplayId, tyPlayName, "2"));
+			HaosouPeoPleBranch(urlBranch, tvplayId, tyPlayName, "2");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		// 媒体关注度
+		try {
+			urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
+					+ java.net.URLEncoder.encode(tyPlayName, "utf-8");
+
+//			System.out.println("当前启动线程thread:" + pool.getPoolNum());
+//			pool.performTask(new MyHaoSoutask(urlBranch, tvplayId, tyPlayName, "3"));
+			HaosouPeoPleBranch(urlBranch, tvplayId, tyPlayName, "3");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 	/**
 	 * 人的数据的采集
@@ -110,25 +135,43 @@ public class HaoSouWordAdmin {
 				try {
 					// urlBranch =
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
-					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&area=%E5%85%A8%E5%9B%BD";
 					// HaosouPeoPleBranch(urlBranch, listTemp.get(0),
 					// listTemp.get(1), "2");
-					while (pool.getPoolNum() > 10) {
+					while (pool.getPoolNum() > 15) {
 						try {
-							System.out.println("线程数量大于10，等待5s");
+							System.out.println("线程数量大于15，等待5s");
 							Thread.sleep(5000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
-					System.out.println("当前启动线程thread:" + pool.getPoolNum());
-					pool.performTask(new MyHaoSoutask(urlBranch, listTemp.get(0), listTemp.get(1), "2"));
+					//将两个整合到一起
+					//2016年4月5日14:00:55
+					try {
+
+//						urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
+//								+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&area=%E5%85%A8%E5%9B%BD";
+						System.out.println("当前启动线程thread:" + pool.getPoolNum());
+						pool.performTask(new MyHaoSoutask("", listTemp.get(0), listTemp.get(1), ""));
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+//
+//					// 媒体关注度
+//					try {
+//						urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
+//								+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
+//
+//						System.out.println("当前启动线程thread:" + pool.getPoolNum());
+//						pool.performTask(new MyHaoSoutask(urlBranch, listTemp.get(0), listTemp.get(1), "3"));
+//					} catch (Exception e) {
+//						// TODO: handle exception
+//					}
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-//					System.out.println("运行报错，等待5分钟" + urlBranch);
+					// System.out.println("运行报错，等待5分钟" + urlBranch);
 					System.out.println("运行报错，url:" + urlBranch);
 					try {
 						Thread.sleep(1000 * 60 * 5);
@@ -139,38 +182,41 @@ public class HaoSouWordAdmin {
 					e.printStackTrace();
 				}
 				// 媒体关注度
-				try {
-					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
-					// HaosouPeoPleBranch(urlBranch, listTemp.get(0),
-					// listTemp.get(1), "3");
-					// HaoSouPeopleThread mt = new HaoSouPeopleThread();
-					// Thread thread1 = new Thread(mt,
-					// urlBranch+"##"+listTemp.get(0)+"##"+listTemp.get(1)+"##3");
-					// thread1.start();
-					while (pool.getPoolNum() > 10) {
-						try {
-							System.out.println("线程数量大于10，等待5s");
-							Thread.sleep(5000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					System.out.println("当前启动线程thread:" + pool.getPoolNum());
-					pool.performTask(new MyHaoSoutask(urlBranch, listTemp.get(0), listTemp.get(1), "3"));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-//					System.out.println("运行报错，等待5分钟" + urlBranch);
-					System.out.println("运行报错，url:" + urlBranch);
-					try {
-						Thread.sleep(1000 * 60 * 5);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					e.printStackTrace();
-				}
+				// try {
+				// urlBranch =
+				// "http://index.haosou.com/index.php?a=soMediaJson&q="
+				// + java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
+				// // HaosouPeoPleBranch(urlBranch, listTemp.get(0),
+				// // listTemp.get(1), "3");
+				// // HaoSouPeopleThread mt = new HaoSouPeopleThread();
+				// // Thread thread1 = new Thread(mt,
+				// //
+				// urlBranch+"##"+listTemp.get(0)+"##"+listTemp.get(1)+"##3");
+				// // thread1.start();
+				// while (pool.getPoolNum() > 10) {
+				// try {
+				// System.out.println("线程数量大于10，等待5s");
+				// Thread.sleep(5000);
+				// } catch (InterruptedException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
+				// }
+				// System.out.println("当前启动线程thread:" + pool.getPoolNum());
+				// pool.performTask(new MyHaoSoutask(urlBranch, listTemp.get(0),
+				// listTemp.get(1), "3"));
+				// } catch (Exception e) {
+				// // TODO Auto-generated catch block
+				//// System.out.println("运行报错，等待5分钟" + urlBranch);
+				// System.out.println("运行报错，url:" + urlBranch);
+				// try {
+				// Thread.sleep(1000 * 60 * 5);
+				// } catch (InterruptedException e1) {
+				// // TODO Auto-generated catch block
+				// e1.printStackTrace();
+				// }
+				// e.printStackTrace();
+				// }
 
 			}
 			// intoPlayAmont("0", "电视剧", "222", "0", "2014-10-15 23:10:10",
@@ -214,31 +260,30 @@ public class HaoSouWordAdmin {
 		return strHtml;
 
 	}
-	
-	
+
 	/**
-	    * 得到二个日期间的间隔天数
-	    */
+	 * 得到二个日期间的间隔天数
+	 */
 	public static String getTwoDay(String sj1, String sj2) {
-	    SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
-	    long day = 0;
-	    try {
-	     java.util.Date date = myFormatter.parse(sj1);
-	     java.util.Date mydate = myFormatter.parse(sj2);
-	     day = (date.getTime() - mydate.getTime()) / (24 * 60 * 60 * 1000);
-	    } catch (Exception e) {
-	     return "";
-	    }
-	    return day + "";
+		SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		long day = 0;
+		try {
+			java.util.Date date = myFormatter.parse(sj1);
+			java.util.Date mydate = myFormatter.parse(sj2);
+			day = (date.getTime() - mydate.getTime()) / (24 * 60 * 60 * 1000);
+		} catch (Exception e) {
+			return "";
+		}
+		return day + "";
 	}
 
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		String returnNumPeople=OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
-		System.out.println("需要采集的人名字数为"+returnNumPeople);
-		
+		String returnNumPeople = OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
+		System.out.println("需要采集的人名字数为" + returnNumPeople);
+
 		for (int i = 0; i < Integer.parseInt(returnNumPeople); i = i + 1000) {
 			mainPeoPle(i, i + 1000);
 		}
@@ -262,28 +307,28 @@ public class HaoSouWordAdmin {
 			}
 		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
 	}
-	
-	
-	
-	
-	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		 TimingTime(00, 00, 01);
-//		 runstatic();
-		 System.out.println("运行网吧");
-//		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-//		IpFilter.mainip("http://index.haosou.com/");
-//		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-//		String returnNumPeople=OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
-//		System.out.println("需要采集的人名字数为"+returnNumPeople);
-//		
-//		for (int i = 0; i < Integer.parseInt(returnNumPeople); i = i + 1000) {
-//			mainPeoPle(i, i + 1000);
-//		}
-//		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
+		TimingTime(9, 00, 01);
+		// runstatic();
+		System.out.println("运行网吧");
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开
+		// 始");
+		// IpFilter.mainip("http://index.haosou.com/");
+		// CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd
+		// HH:mm:ss"));
+		// String
+		// returnNumPeople=OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
+		// System.out.println("需要采集的人名字数为"+returnNumPeople);
+		//
+		// for (int i = 0; i < Integer.parseInt(returnNumPeople); i = i + 1000)
+		// {
+		// mainPeoPle(i, i + 1000);
+		// }
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结
+		// 束");
 
 	}
 
