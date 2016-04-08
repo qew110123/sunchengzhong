@@ -19,7 +19,7 @@ import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
 public class HaoSouWordAdmin {
-	static ThreadPool pool = new ThreadPool(10);
+	static ThreadPool pool = new ThreadPool(40);
 	private static Proxy proxy = null;
 
 	public static void HaosouPeoPleBranch(String urlBranch, String tvplayId, String tyPlayName, String DataType) {
@@ -137,9 +137,9 @@ public class HaoSouWordAdmin {
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
 					// HaosouPeoPleBranch(urlBranch, listTemp.get(0),
 					// listTemp.get(1), "2");
-					while (pool.getPoolNum() > 15) {
+					while (pool.getPoolNum() > 40) {
 						try {
-							System.out.println("线程数量大于15，等待5s");
+							System.out.println("线程数量大于40，等待5s");
 							Thread.sleep(5000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
@@ -219,8 +219,6 @@ public class HaoSouWordAdmin {
 				// }
 
 			}
-			// intoPlayAmont("0", "电视剧", "222", "0", "2014-10-15 23:10:10",
-			// "baidu.com", "0", "3", "2014-10-15 23:10:10");
 		}
 
 	}
@@ -300,7 +298,7 @@ public class HaoSouWordAdmin {
 		Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
 
 		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
+		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
@@ -311,24 +309,9 @@ public class HaoSouWordAdmin {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		TimingTime(9, 00, 01);
+		TimingTime(8, 00, 01);
 		// runstatic();
 		System.out.println("运行网吧");
-		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开
-		// 始");
-		// IpFilter.mainip("http://index.haosou.com/");
-		// CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd
-		// HH:mm:ss"));
-		// String
-		// returnNumPeople=OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
-		// System.out.println("需要采集的人名字数为"+returnNumPeople);
-		//
-		// for (int i = 0; i < Integer.parseInt(returnNumPeople); i = i + 1000)
-		// {
-		// mainPeoPle(i, i + 1000);
-		// }
-		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结
-		// 束");
 
 	}
 

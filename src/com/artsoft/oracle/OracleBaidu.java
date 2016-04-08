@@ -236,4 +236,30 @@ public class OracleBaidu {
 		return (ArrayList<String>) list;
 		
 	}
+	
+	
+	/**
+	 * 数据进行搜索量数
+	 * 2016年4月7日15:04:53
+	 * @return
+	 */
+	
+	public static void intotem_news_num(String data_date,String bid, int news_num,String url, int data_type ,int  source) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.tem_news_num t(t.data_date ,t.bid ,t.news_num,t.into_date,t.url,"
+				+ "t.data_type,t.source)values(?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		list.add(data_date);// 这里是将对象加入到list中
+		list.add(bid);
+		list.add(news_num);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(url);
+		list.add(data_type);
+		list.add(source);
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
 }

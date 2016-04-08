@@ -28,7 +28,7 @@ import net.sf.json.JSONObject;
 
 public class indexso360 {
 
-	static ThreadPool pool = new ThreadPool(15);
+	static ThreadPool pool = new ThreadPool(30);
 
 	public static String Htmlurl(String urlMain) {
 		// String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
@@ -313,9 +313,9 @@ public class indexso360 {
 						e.printStackTrace();
 					}
 
-					while (pool.getPoolNum() > 15) {
+					while (pool.getPoolNum() > 30) {
 						try {
-							System.out.println("线程数量大于15，等待5s");
+							System.out.println("线程数量大于30，等待5s");
 							Thread.sleep(5000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
