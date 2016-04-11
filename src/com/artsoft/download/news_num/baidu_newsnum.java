@@ -16,7 +16,7 @@ import com.artsoft.util.TimeTest;
 
 public class baidu_newsnum {
 
-	public static void baidunews(String id, String url,int data_type,int source) {
+	public static void baidunews(String id, String url, int data_type, int source) {
 		System.out.println(url);
 		String strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
 		int news_num = 0;
@@ -25,8 +25,8 @@ public class baidu_newsnum {
 		if (!newsnumstring.equals("")) {
 			news_num = Integer.parseInt(newsnumstring.replace(",", "").replace("Լ", ""));
 			String data_date = TimeTest.getNowTime("yyyyMMdd");
-			OracleBaidu.intotem_news_num(data_date, id, news_num, url,data_type,source);
-			
+			OracleBaidu.intotem_news_num(data_date, id, news_num, url, data_type, source);
+
 		}
 	}
 
@@ -54,7 +54,7 @@ public class baidu_newsnum {
 					String url = "http://news.baidu.com/ns?ct=1&rn=20&ie=utf-8&bs=" + krywordutf8
 							+ "&rsv_bp=1&sr=0&cl=2&f=8&prevct=no&tn=newstitle&word=" + krywordutf8
 							+ "&qq-pf-to=pcqq.c2c";
-					baidunews(person_id, url,1,1);
+					baidunews(person_id, url, 1, 1);
 
 				}
 			}
@@ -88,7 +88,7 @@ public class baidu_newsnum {
 					String url = "http://news.baidu.com/ns?ct=1&rn=20&ie=utf-8&bs=" + krywordutf8
 							+ "&rsv_bp=1&sr=0&cl=2&f=8&prevct=no&tn=newstitle&word=" + krywordutf8
 							+ "&qq-pf-to=pcqq.c2c";
-					baidunews(person_id, url,2,1);
+					baidunews(person_id, url, 2, 1);
 
 				}
 			}
@@ -130,9 +130,10 @@ public class baidu_newsnum {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// openstatic();
+//		 openstatic();
 		TimingTime(23, 59, 59);
-//		baidunews("", "http://news.baidu.com/ns?ct=1&rn=20&ie=utf-8&bs=%E5%94%90%E5%AB%A3&rsv_bp=1&sr=0&cl=2&f=8&prevct=no&tn=newstitle&word=%E5%94%90%E5%AB%A3&qq-pf-to=pcqq.c2c");
+		// baidunews("",
+		// "http://news.baidu.com/ns?ct=1&rn=20&ie=utf-8&bs=%E5%94%90%E5%AB%A3&rsv_bp=1&sr=0&cl=2&f=8&prevct=no&tn=newstitle&word=%E5%94%90%E5%AB%A3&qq-pf-to=pcqq.c2c");
 	}
 
 }
