@@ -150,7 +150,7 @@ public class DownloadSohu {
 
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ªÊ¼");
-		for (int i = 1; i <= 72; i++) {
+		for (int i = 1; i <= 83; i++) {
 			sohuMain("http://so.tv.sohu.com/list_p1101_p2_p3_p4-1_p5_p6_p77_p80_p9_p10" + i + "_p11_p12_p13.html");
 
 		}
