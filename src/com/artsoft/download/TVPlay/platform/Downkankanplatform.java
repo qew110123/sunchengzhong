@@ -1,4 +1,4 @@
-package com.artsoft.download.TVPlay;
+package com.artsoft.download.TVPlay.platform;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -10,13 +10,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.bean.TvPlay;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest; 
 
-public class Downloadkankan {
+public class Downkankanplatform {
 
 	public static void mainurl(String mainUrl) {
 
@@ -66,19 +67,86 @@ public class Downloadkankan {
 		String strHtml = "";
 		boolean bb = true;
 		while (bb) {
-			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "UTF-8", null, null);
+			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "GBK", null, null);
 			if (strHtml != null && !"".equals(strHtml)) {
 				bb = false;
 			}
 		}
-		String comment = "";
-		System.out.println(comment = HtmlAnalyze.getTagText(strHtml, " total:\"", "\""));
-		System.out.println(comment = comment.replaceAll(",", ""));
-		try {
-			OracleOpreater.intoReputationAndDETAIL_URL(title, "8", comment, "0", "", mainUrl, "0", "0",mainUrl);
-		} catch (Exception e) {
-			// TODO: handle exception
+		
+		TvPlay playtv=new TvPlay();
+		playtv.setTvplay_url(mainUrl);
+		
+		playtv.setTvplay_name(title);
+		
+		String yanyuan="";// 演员
+		String yanyuanAll= HtmlAnalyze.getTagText(strHtml, "主演:", "</li>",true,0);
+		String[] yanyuanlist=yanyuanAll.split("a><a");
+		int i=0;
+		for (String stringtext : yanyuanlist) {
+			String urlss=HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
+			String textss=HtmlAnalyze.getTagText(stringtext, ">", "<");
+			yanyuan=yanyuan+textss+"|"+urlss;
+			if (yanyuanlist.length!=1&&i+1<yanyuanlist.length) {
+				yanyuan=yanyuan+",";
+			}
+			
+			i+=1;
 		}
+		System.out.println(yanyuan);
+		playtv.setMajor_actors(yanyuan);
+		
+		String daoyan="";// 导演
+		String daoyanAll= HtmlAnalyze.getTagText(strHtml, "导演:", "</li>",true,0);
+		String[] daoyanlist=daoyanAll.split("a><a");
+		 i=0;
+		for (String stringtext : daoyanlist) {
+			String urlss=HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
+			String textss=HtmlAnalyze.getTagText(stringtext, ">", "<");
+			daoyan=daoyan+textss+"|"+urlss;
+			if (daoyanlist.length!=1&&i+1<daoyanlist.length) {
+				daoyan=daoyan+",";
+			}
+			
+			i+=1;
+		}
+		System.out.println(daoyan);
+		playtv.setDirector(daoyan);
+		
+		String diqu=""; //地区
+		diqu =HtmlAnalyze.getTagText(strHtml, "地区：", "</li>");
+		playtv.setProduction_area(diqu);
+		
+		String classstr = ""; // 类型:
+		classstr = HtmlAnalyze.getTagText(strHtml, "类型:", "</li>");
+		System.out.println(classstr=classstr.replaceAll(" 					", ""));
+		playtv.setSubject(classstr);
+		
+		String detail="";
+		detail=HtmlAnalyze.getTagText(strHtml, "id=\"movie_info_intro_l\" style=\"display:none\">", "<span class=\"closeinfo_tigger\">");
+		System.out.println(detail);
+		if (detail==null||detail.equals("")||detail.equals("null")) {
+			detail=HtmlAnalyze.getTagText(strHtml, "id=\"movie_info_intro_s\">", "<span class=\"closeinfo_tigger\">");
+		}
+		playtv.setBasic_info(detail);
+		
+		playtv.setClassnum(8);
+		
+		playtv.setSOURCE(8);
+		
+		
+		OracleOpreater.intoTEM_DIM_TVPLAY_PLATFORM(playtv);
+//		OracleOpreater.intoTEM_DIM_FILM_PLATFORM(playtv);
+		
+		
+		
+//		String comment = "";
+//		System.out.println(comment = HtmlAnalyze.getTagText(strHtml, " total:\"", "\""));
+//		System.out.println(comment = comment.replaceAll(",", ""));
+//		try {
+//			OracleOpreater.intoReputation(title, "8", comment, "0", "", mainUrl, "3", "0");
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 
 	}
 	
@@ -134,8 +202,8 @@ public class Downloadkankan {
 //				e.printStackTrace();
 //			}
 //		}
-//		TimingTime(23, 59, 59);
-		runstatic();
+		TimingTime(23, 59, 59);
+//		runstatic();
 	}
 
 }

@@ -62,7 +62,7 @@ public class Downloadpptv {
 public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
 
-		for (int i = 1; i < 70; i++) {
+		for (int i = 1; i < 80; i++) {
 			String mainUrl = "http://list.pptv.com/channel_list.html?page=" + i + "&type=2&sort=1";
 			mainurl(mainUrl);
 		}

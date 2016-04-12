@@ -1,10 +1,16 @@
 package com.artsoft.download.TVPlay.platform;
 
+import com.artsoft.bean.TvPlay;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -26,36 +32,86 @@ public class DownLetvplatform {
 			}
 		}
 		// System.out.println(strHtml);
-		String str = strHtml;
-		String[] strarray = str.split("\"actor\":");
-		for (int i = 0; i < strarray.length; i++) {
-			String urlBranch = "";
-			String Amount = "";
-			String name = "";
-			String score = "";
-			String aid="";
-			String DETAIL_URL="";
-			// System.out.println(strarray[i]);
-			System.out.println(Amount = HtmlAnalyze.getTagText(strarray[i], "playCount\":\"", "\""));
-			System.out.println(score = HtmlAnalyze.getTagText(strarray[i], "rating\":\"", "\""));
-			System.out.println(name = HtmlAnalyze.getTagText(strarray[i], "\"name\":\"", "\""));
-			System.out.println(aid = HtmlAnalyze.getTagText(strarray[i], "\"aid\":\"", "\""));
-			if (aid != "") {
-				DETAIL_URL="http://www.le.com/tv/"+aid+".html";
-			}
-			if (urlBranch != null || Amount != null || name != null || score != null || urlBranch != "" || Amount != ""
-					|| name != "" || score != "") {
-				try {
-					if (name != null && Amount != null && mainUrl != null) {
-						OracleOpreater.intoReputationAndDETAIL_URL(name, "5", Amount, "0", "", mainUrl, "0", "0",DETAIL_URL);
-					}
-					if (name != null && score != null && mainUrl != null) {
-						OracleOpreater.intoReputationAndDETAIL_URL(name, "5", score, "0", "", mainUrl, "0", "1",DETAIL_URL);
-					}
-				} catch (Exception e) {
-					// TODO: handle exception
+		JSONObject objectobjectmain = JSONObject.fromObject(strHtml);
+		JSONArray album_lists = new JSONArray();
+		album_lists=(JSONArray) objectobjectmain.get("album_list");
+		for (Object object : album_lists) {
+			TvPlay playtv=new TvPlay();
+			JSONObject objectobject = JSONObject.fromObject(object);
+			
+			String url=(String) objectobject.get("vids");
+			System.out.println(url="http://www.letv.com/ptv/vplay/"+url.split(",")[0]+".html");
+			playtv.setTvplay_url(url);
+			
+			String name = (String) objectobject.get("name");
+			System.out.println(name);
+			playtv.setTvplay_name(name);
+			
+			String diqu=""; //地区
+			diqu = (String) objectobject.get("areaName");
+			playtv.setProduction_area(diqu);
+			
+			String niandai=""; //年代
+			niandai=(String) objectobject.get("releaseDate");
+			Date   now   =   new   Date((long) Double.parseDouble(niandai));   
+			SimpleDateFormat   dateFormat   =   new   SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式   
+			String  hehe  = dateFormat.format(now);   
+			System.out.println(hehe);
+			playtv.setShoot_time(hehe);
+			
+			String classstr = ""; // 类型:
+			classstr = (String) objectobject.get("subCategoryName");
+			System.out.println(classstr=classstr.replaceAll(",", "/"));
+			playtv.setSubject(classstr);
+			
+			String yanyuan="";// 演员
+			Object yanyuanAll= (Object) objectobject.get("starring");
+			String[] yanyuanlist=yanyuanAll.toString().split(",");
+			int i=0;
+			for (String stringtext : yanyuanlist) {
+				String urlss="";
+				String textss=HtmlAnalyze.getTagText(stringtext, "\":\"", "\"");
+				yanyuan=yanyuan+textss+"|"+urlss;
+				if (yanyuanlist.length!=1&&i+1<yanyuanlist.length) {
+					yanyuan=yanyuan+",";
 				}
+				
+				i+=1;
 			}
+			System.out.println(yanyuan);
+			playtv.setMajor_actors(yanyuan);
+
+			
+			
+			String yuyan="";
+			Object objectyuyan=objectobject.get("lgName");
+			if (!objectyuyan.equals(null)) {
+				yuyan= (String) objectyuyan;
+				playtv.setLgName(yuyan);
+				
+			}
+			
+			String daoyan="";// 导演
+			Object daoyanAll= (Object) objectobject.get("directory");
+			daoyan=HtmlAnalyze.getTagText(daoyanAll.toString(), "\":\"", "\"");
+			System.out.println(daoyan);
+			playtv.setDirector(daoyan);
+			
+			
+			String detail="";
+			detail=(String) objectobject.get("description");
+			if (detail==null||detail.equals("")||detail.equals("null")) {
+				detail=HtmlAnalyze.getTagText(strHtml, "<span class=\"short\" style=\"display:none;\">", "</span>");
+			}
+			System.out.println(detail);
+			playtv.setBasic_info(detail);
+			
+			playtv.setClassnum(5);
+			
+			playtv.setSOURCE(5);
+			
+//			OracleOpreater.intoTEM_DIM_FILM_PLATFORM(playtv);
+			OracleOpreater.intoTEM_DIM_TVPLAY_PLATFORM(playtv);
 		}
 	}
 
@@ -95,8 +151,8 @@ public class DownLetvplatform {
 //			mainurl(mainUrl);
 		
 //		}
-//		TimingTime(23, 59, 59);
-		runstatic();
+		TimingTime(23, 59, 59);
+//		runstatic();
 	}
 	
 
