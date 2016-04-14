@@ -131,15 +131,29 @@ public class DownDoubanNetword {
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
-		String strkey = ReadTxtFile.getKeyWordFromFile("keywordiqiyi.txt");
-		String[] keys = strkey.split("\n");
-		for (int i = 0; i < keys.length; i++) {
-			System.out.println(keys[i]);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
-			String url = keys[i];
-			System.out.println(url);
-			boolean bb = true;
-			DownDoubanNetword.youkuMaim(url);
+//		String strkey = ReadTxtFile.getKeyWordFromFile("keywordiqiyi.txt");
+//		String[] keys = strkey.split("\n");
+//		for (int i = 0; i < keys.length; i++) {
+//			System.out.println(keys[i]);
+//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
+//			String url = keys[i];
+//			System.out.println(url);
+//			boolean bb = true;
+//			DownDoubanNetword.youkuMaim(url);
+//		}
+		
+		/**
+		 * 豆瓣数据
+		 * 2016年3月7日10：:2：:1
+		 */
+		for (int i = 0; i <=500; i=i+20) {
+//			System.out.println(i);
+			try {
+				
+				DownDoubanNetword.mainurl("https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}

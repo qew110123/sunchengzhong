@@ -387,7 +387,7 @@ public class DownloadYouku_always {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(23, 59, 59);
+		TimingTime(3, 59, 59);
 		// runstatic();
 	}
 

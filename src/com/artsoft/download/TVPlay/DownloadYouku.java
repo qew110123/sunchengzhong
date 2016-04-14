@@ -1,5 +1,6 @@
 package com.artsoft.download.TVPlay;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -10,6 +11,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.download.TVPlay.platform.DownYouKuplatform;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
@@ -299,30 +301,67 @@ public class DownloadYouku {
 
 	public static void runstatic() {
 		CommonUtil.setLog("优酷总数" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-		String strkey = ReadTxtFile.getKeyWordFromFile("keyword.txt");
-		String[] keys = strkey.split("\n");
-		for (int i = 0; i < keys.length; i++) {
-			System.out.println(i);
-			System.out.println(keys[i]);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
-			// ConfigManager config = ConfigManager.getInstance();
-			String url = keys[i];
-			System.out.println(url);
-			boolean bb = true;
-			while (bb) {
-				String strurl = DownloadYouku.youkuMaim(url);
-				System.out.println("strurl" + strurl);
-				// System.out.println(strurl!=null&&!"".equals(strurl));
-				if (strurl != null && !"".equals(strurl) && !"".equals("http://www.youku.com")) {
-					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + strurl);
-					url = strurl;
-				} else {
-					bb = false;
+//		String strkey = ReadTxtFile.getKeyWordFromFile("keyword.txt");
+//		String[] keys = strkey.split("\n");
+//		for (int i = 0; i < keys.length; i++) {
+//			System.out.println(i);
+//			System.out.println(keys[i]);
+//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
+//			// ConfigManager config = ConfigManager.getInstance();
+//			String url = keys[i];
+//			System.out.println(url);
+//			boolean bb = true;
+//			while (bb) {
+//				String strurl = DownloadYouku.youkuMaim(url);
+//				System.out.println("strurl" + strurl);
+//				// System.out.println(strurl!=null&&!"".equals(strurl));
+//				if (strurl != null && !"".equals(strurl) && !"".equals("http://www.youku.com")) {
+//					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + strurl);
+//					url = strurl;
+//				} else {
+//					bb = false;
+//				}
+//
+//			}
+//		}
+		
+		openstatic();
+		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
+	}
+
+	private static void openstatic() {
+		// TODO Auto-generated method stub
+			String url = "";
+			String[] diqu = { "大陆", "香港", "台湾", "韩国", "美国", "法国", "英国", "德国", "意大利", "加拿大", "印度", "俄罗斯", "泰国", "其他" };
+			String[] leixing = { "武侠", "警匪", "犯罪", "科幻", "战争", "恐怖", "惊悚", "纪录片", "西部", "戏曲", "歌舞", "奇幻", "冒险", "悬疑", "历史",
+					"动作", "传记", "动画", "儿童", "喜剧", "爱情", "剧情", "运动", "短片", "优酷出品" };
+			for (String diqutxt : diqu) {
+				for (String leixingtxt : leixing) {
+					System.out.println(diqutxt + leixingtxt);
+					// http://www.youku.com/v_olist/c_96_g_%E6%81%90%E6%80%96_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_4.html
+					// http://www.youku.com/v_olist/c_96_g_%E6%AD%A6%E4%BE%A0_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_3.html
+					// http://www.youku.com/v_olist/c_96_g_%E6%AD%A6%E4%BE%A0_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_1.html
+					try {
+						for (int i = 1; i < 30; i++) {
+							url = "http://www.youku.com/v_olist/c_97_g_" + java.net.URLEncoder.encode(leixingtxt, "utf-8")
+									+ "_a_" + java.net.URLEncoder.encode(diqutxt, "utf-8") + "_s_1_d_1_p_" + i + ".html";
+							System.out.println(url);
+							String urlnext = DownloadYouku.youkuMaim(url);;
+							if (urlnext.equals("") || urlnext == "" || urlnext == null) {
+								break;
+							}
+						}
+
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 
 			}
-		}
-		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
+		
 	}
 
 	// 判断数据开始时间

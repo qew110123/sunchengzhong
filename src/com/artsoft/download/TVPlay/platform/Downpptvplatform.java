@@ -190,8 +190,8 @@ public class Downpptvplatform {
 		// }
 		// }
 
-		// TimingTime(23, 59, 59);
-		runstatic();
+		 TimingTime(23, 59, 59);
+//		runstatic();
 	}
 
 }

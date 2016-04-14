@@ -86,7 +86,7 @@ public class Dajiewang {
 		// DownloadUtil.getHtmlText("http://data.weibo.com/index/ajax/contrast?key2=%25E8%258C%2583%25E5%2586%25B0%25E5%2586%25B0&key3=&key4=&key5=&key6=&_t=0&__rnd=1450261523108",
 		// 1000 * 30, "UTF-8",
 		// null, null);
-		String strHtml = DownloadUtil.getHtmlText("http://data.weibo.com/index/hotword", 1000 * 30, "UTF-8", null,
+		String strHtml = DownloadUtil.getHtmlText("http://data.weibo.com/index/hotword?wid=4s998OjkejaL&wname=1119%E9%87%8A%E6%94%BE%E5%B0%91%E5%A5%B3%E5%BF%83", 1000 * 30, "UTF-8", null,
 				null);
 		String timeDiff = HtmlAnalyze.getTagText(strHtml, "server_time': '", "'");
 		System.out.println(new Date());
