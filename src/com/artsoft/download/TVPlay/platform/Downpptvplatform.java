@@ -138,8 +138,12 @@ public class Downpptvplatform {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
 
 		for (int i = 1; i < 80; i++) {
-			String mainUrl = "http://list.pptv.com/channel_list.html?page=" + i + "&type=2&sort=1";
-			mainurl(mainUrl);
+			try {
+				String mainUrl = "http://list.pptv.com/channel_list.html?page=" + i + "&type=2&sort=1";
+				mainurl(mainUrl);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
@@ -190,8 +194,8 @@ public class Downpptvplatform {
 		// }
 		// }
 
-		 TimingTime(23, 59, 59);
-//		runstatic();
+//		TimingTime(23, 59, 59);
+		 runstatic();
 	}
 
 }

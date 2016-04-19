@@ -139,13 +139,14 @@ public class DownqqNetword {
 
 //		TimingTime(23, 59, 59);
 		
-		for (int i = 0; i <= 16; i++) {
-			            //http://v.qq.com/list/2_24_-1_-1_1_0_0_20_-1_-1_0_-1.html
-			String url = "http://v.qq.com/list/2_24_-1_-1_1_0_" + i + "_20_-1_-1_0_-1.html";
-			System.out.println(url);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
-			downMain(url);
-		}
+//		for (int i = 0; i <= 16; i++) {
+//			            //http://v.qq.com/list/2_24_-1_-1_1_0_0_20_-1_-1_0_-1.html
+//			String url = "http://v.qq.com/list/2_24_-1_-1_1_0_" + i + "_20_-1_-1_0_-1.html";
+//			System.out.println(url);
+//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
+//			downMain(url);
+//		}
+		runstatic();
 
 	}
 

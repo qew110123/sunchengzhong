@@ -1,6 +1,11 @@
 package com.artsoft.download.webo;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -8,13 +13,22 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
 
+import com.artsoft.downloadThreadpool.IpFilter;
+import com.artsoft.downloadThreadpool.MyHaoSoutask;
+import com.artsoft.oracle.OracleHaoSou;
+import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
+import com.artsoft.util.TimeTest;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class Dajiewang {
+public class WeBoDajiewang {
+	
+	/**
+	 * 微博基本数据
+	 * **/
 
 	public static void daJeWang() throws Exception {
 		// TODO Auto-generated method stub
@@ -279,14 +293,20 @@ public class Dajiewang {
 		for (int i = 0; i < numsix.length; i++) {
 			pingyin=numsix[i][0];
 			address=numsix[i][1];
-			JSONObject objectkeywordzones=JSONObject.fromObject(objectkeywordzone.get(pingyin));
-			//{"value":"9.16%","ct":"7055","index":"2","wname":"邓超","stateInitColor":"61B6FD"}
-			value=(String) objectkeywordzones.get("value");
-			ct=(String) objectkeywordzones.get("ct");
-			index=(String) objectkeywordzones.get("index");
-			wname=(String) objectkeywordzones.get("wname");
-			stateInitColor=(String) objectkeywordzones.get("stateInitColor");
-			System.out.println(value+ct+index+wname+stateInitColor);
+			System.out.println(pingyin+address);
+			try {
+				JSONObject objectkeywordzones=JSONObject.fromObject(objectkeywordzone.get(pingyin));
+				//{"value":"9.16%","ct":"7055","index":"2","wname":"邓超","stateInitColor":"61B6FD"}
+				value=(String) objectkeywordzones.get("value");
+				ct=(String) objectkeywordzones.get("ct");
+				index=(String) objectkeywordzones.get("index");
+				wname=(String) objectkeywordzones.get("wname");
+				stateInitColor=(String) objectkeywordzones.get("stateInitColor");
+				System.out.println(value+ct+index+wname+stateInitColor);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 		
 	}
@@ -306,32 +326,110 @@ public class Dajiewang {
 		for (int i = 0; i < numsix.length; i++) {
 			pingyin=numsix[i][0];
 			address=numsix[i][1];
-			JSONObject objectkeywordzones=JSONObject.fromObject(objectkeywordzone.get(pingyin));
-			//{"value":"9.16%","ct":"7055","index":"2","wname":"邓超","stateInitColor":"61B6FD"}
-			value=(String) objectkeywordzones.get("value");
-			num=(String) objectkeywordzones.get("num");
-			index=(String) objectkeywordzones.get("index");
-			wname=(String) objectkeywordzones.get("wname");
-			stateInitColor=(String) objectkeywordzones.get("stateInitColor");
-			System.out.println(pingyin+pingyin+value+num+index+wname+stateInitColor);
+			System.out.println(pingyin+address);
+			try {
+				
+				JSONObject objectkeywordzones=JSONObject.fromObject(objectkeywordzone.get(pingyin));
+				//{"value":"9.16%","ct":"7055","index":"2","wname":"邓超","stateInitColor":"61B6FD"}
+				value=(String) objectkeywordzones.get("value");
+				num=(String) objectkeywordzones.get("num");
+				index=(String) objectkeywordzones.get("index");
+				wname=(String) objectkeywordzones.get("wname");
+				stateInitColor=(String) objectkeywordzones.get("stateInitColor");
+				System.out.println(pingyin+pingyin+value+num+index+wname+stateInitColor);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 		
 	}
 	
 	
+	public static void webopeople(String name){
+//		String name = "范冰冰";
+		String URLEncodername = "";
+		try {
+			System.out.println(
+					URLEncodername = java.net.URLEncoder.encode(java.net.URLEncoder.encode(name, "utf-8"), "utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			System.out.println(Weibo("http://data.weibo.com/index/ajax/contrast?key2=" + URLEncodername
+					+ "&key3=&key4=&key5=&key6=&_t=0&__rnd=1450262484071"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			people(name);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
-
+	
+	
 	/**
-	 * 人的处理
+	 * 人的数据的采集
 	 */
 
+	private static void mainPeoPle(int statnum, int endnum) {
+		List<String> listArray = OracleHaoSou.selectname(Integer.toString(statnum), Integer.toString(endnum));
+		for (Object Objstring : listArray) {
+			System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			System.out.println(listTemp.get(0));
+			System.out.println(listTemp.get(1));
+			
+			webopeople(listTemp.get(1));
+		}
+
+	}
+	
+	
+	public static void runstatic() {
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+		String returnNumPeople = OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
+		System.out.println("需要采集的人名字数为" + returnNumPeople);
+		for (int i = 0; i < Integer.parseInt(returnNumPeople); i = i + 1000) {
+			mainPeoPle(i, i + 1000);
+		}
+		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
+	}
+	
+	
+	// 判断数据开始时间
+		public static void TimingTime(int hh, int mm, int ss) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+			calendar.set(Calendar.MINUTE, mm); // 控制分
+			calendar.set(Calendar.SECOND, ss); // 控制秒
+
+			Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+
+			Timer timer = new Timer();
+			timer.scheduleAtFixedRate(new TimerTask() {
+				public void run() {
+					System.out.println("-------设定要指定任务--------");
+					runstatic();
+				}
+			}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+		}
+	
+
 	public static void main(String[] args) throws Exception {
-		String name = "王凯";
-		String URLEncodername = "";
-		System.out.println(
-				URLEncodername = java.net.URLEncoder.encode(java.net.URLEncoder.encode(name, "utf-8"), "utf-8"));
-		System.out.println(Weibo("http://data.weibo.com/index/ajax/contrast?key2=" + URLEncodername
-				+ "&key3=&key4=&key5=&key6=&_t=0&__rnd=1450262484071"));
-		people(name);
+		
+		
+		
+//		TimingTime(8, 00, 01);
+		// runstatic();.
+		
+		webopeople("范冰冰");
+		System.out.println("运行网吧");
+		
 	}
 }

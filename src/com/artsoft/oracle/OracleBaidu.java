@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.artsoft.bean.Company;
+import com.artsoft.bean.TvPlay;
 import com.artsoft.util.TimeTest;
 
 public class OracleBaidu {
@@ -258,6 +260,56 @@ public class OracleBaidu {
 		list.add(url);
 		list.add(data_type);
 		list.add(source);
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	/**
+	 * 百度数据的中的创作公司
+	 * 2016年4月15日15:07:59
+	 * @return
+	 */
+	public static List selectDIM_PRODUCE() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.produce_id,t.company_name from ODS.DIM_PRODUCE t ";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	/**
+	 * 进行百度电视剧 进步信息 的抓取
+	 * 2016年4月15日14:42:41
+	 * 
+	 * @param company
+	 */
+	public static void InsertCompany(Company company) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.tem_dim_produce t (t.produce_id,t.company_name,t.english_name,t.alias_name,t.founded_date,t.headquarters,"
+				+ "t.business_scope,t.company_nature,t.description,t.works_description,t.logo_url,t.service_area,t.year_money,t.staff_num,"
+				+ "t.ceo_name,t.is_ipo,t.create_time,t.DATA_URL)values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+		List<Comparable> list = new ArrayList();
+		list.add(company.getPRODUCE_ID());
+		list.add(company.getCOMPANY_NAME());
+		list.add(company.getENGLISH_NAME());
+		list.add(company.getALIAS_NAME());
+		list.add(company.getFOUNDED_DATE());
+		list.add(company.getHEADQUARTERS());
+		list.add(company.getBUSINESS_SCOPE());
+		list.add(company.getCOMPANY_NATURE());
+		list.add(company.getDESCRIPTION());
+		list.add(company.getWORKS_DESCRIPTION());
+		list.add(company.getLOGO_URL());
+		list.add(company.getSERVICE_AREA());
+		list.add(company.getYEAR_MONEY());
+		list.add(company.getSTAFF_NUM());
+		list.add(company.getCEO_NAME());
+		list.add(company.getIS_IPO());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(company.getUrl());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}

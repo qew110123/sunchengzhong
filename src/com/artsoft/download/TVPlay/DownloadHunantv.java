@@ -152,7 +152,6 @@ public class DownloadHunantv {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 		//惊醒详细信息暂时不管
 //		TimingTime(23, 59, 59);
 		runstatic();

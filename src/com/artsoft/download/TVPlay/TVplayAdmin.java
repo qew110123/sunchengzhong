@@ -16,7 +16,7 @@ public class TVplayAdmin {
 		Downloadqq.runstatic();
 		DownloadSohu.runstatic();
 		DownloadLetv.runstatic();
-		Downloadpptv.runstatic();
+//		Downloadpptv.runstatic();
 //		DownloadHunantv.runstatic();
 		Downloadkankan.runstatic();
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
@@ -38,7 +38,7 @@ public class TVplayAdmin {
 	                System.out.println("-------设定要指定任务--------");  
 	                runstatic();
 	            } 
-	        }, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行  
+	        }, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行  
 	    }
 
 	public static void main(String[] args) {
