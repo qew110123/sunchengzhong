@@ -8,9 +8,9 @@ import com.artsoft.util.CommonUtil;
 import com.artsoft.util.TimeTest;
 
 public class BaiDuTeleplaynext {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
+	
+	public static void runnewMain(){
 		List<String> listArray = OracleBaidu.selectbaidudianshiju();
 //		for (Object Objstring : listArray) {
 ////			System.out.println(Objstring);
@@ -41,6 +41,11 @@ public class BaiDuTeleplaynext {
 				}
 			}
 		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		runnewMain();
 	}
 
 }

@@ -130,6 +130,21 @@ public class OracleBaidu {
 		 * 电视剧补充
 		 */
 		sql="select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
+		
+		
+		/**
+		 * 2016年4月20日11:16:01
+		 * 电视剧补充
+		 */
+		
+		sql="select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
+		
+		
+		/**
+		 * 2016年4月21日11:36:45
+		 * 数据的补充 
+		 */
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from ods.tem_tvplay t";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -273,6 +288,11 @@ public class OracleBaidu {
 	public static List selectDIM_PRODUCE() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.produce_id,t.company_name from ODS.DIM_PRODUCE t ";
+		
+		/**
+		 * 2016年4月20日10:13:14
+		 */
+		sql=" select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);

@@ -51,7 +51,7 @@ public class DownqqMovie {
 		
 		
 		try {
-			if (xxx>Integer.parseInt(tt)) {
+			if (xxx<Integer.parseInt(tt)) {
 				return true;
 			}
 			else{
@@ -72,6 +72,7 @@ public class DownqqMovie {
 
 		urlBranch = urlBranch.replaceAll("http://v.qq.com/cover/", "").replaceAll("html", "");
 		urlBranch = HtmlAnalyze.getTagText(urlBranch, "/", ".");
+		String idlist="";
 		// http://sns.video.qq.com/tvideo/fcgi-bin/batchgetplaymount?callback=jQuery191043746947194449604_1445913614627&low_login=1&id=e7hi6lep1yc51ca&otype=json&_=1445913614628
 		System.out.println(urlBranch);
 		if (urlBranch == null || "".equals(urlBranch)) {
@@ -88,6 +89,16 @@ public class DownqqMovie {
 		}
 
 		String numstring = HtmlAnalyze.getTagText(strHtml, "{\"all\":", ",\"");
+		
+		if (numstring.equals("")) {
+//			System.out.println("ЮЊПе");
+			urlBranch="http://data.video.qq.com/fcgi-bin/data?tid=70&&appid=10001007&appkey=e075742beb866145&callback=jQuery19102410269394301756_1461233515175&low_login=1&idlist="+idlist+"&otype=json&_=1461233515181";
+			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
+			if (strHtml == null || strHtml.equals("")) {
+				strHtml = DownloadUtil.getHtmlText(strHtml, 1000 * 30, "UTF-8", null, null);
+			}
+			numstring = HtmlAnalyze.getTagText(strHtml, "\"allnumc\":",",");
+		}
 		System.out.println(numstring);
 		try {
 			OracleOpreater.intoReputationAndDETAIL_URL(nameBranch, "3", numstring, "0", "", urlMain, "3", "0",DETAIL_URL);
@@ -155,8 +166,8 @@ public class DownqqMovie {
 		// TODO Auto-generated method stub
 
 //		TimingTime(23, 59, 59);
-//		openstatic();
-		TimingTime(21, 59, 59);
+		openstatic();
+//		TimingTime(21, 59, 59);
 
 	}
 

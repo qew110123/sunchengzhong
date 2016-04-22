@@ -124,7 +124,8 @@ public class Demo {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(getvalue(2));
+//		System.out.println(getvalue(2));
+		System.out.println(Double.parseDouble("-1"));
 		// TODO Auto-generated method stub
 		//// String cookstr="BAIDUID=3AADC6F35D3F3088991AA4460A697FE2:FG=1;
 		//// BIDUPSID=3AADC6F35D3F3088991AA4460A697FE2; PSTM=1445389865;

@@ -373,7 +373,7 @@ public class OracleHaoSou {
 	}
 
 	/**
-	 * 进行电视剧数据 的添加
+	 * 进行电视剧数据 的修改
 	 * 
 	 * @param tvplay
 	 */
@@ -434,6 +434,30 @@ public class OracleHaoSou {
 		list.add(tvplay.getSeason_numbver());
 		list.add(tvplay.getRecording_place());
 		list.add(tvplay.getStills_url());
+		list.add(tvplay.getTvplay_id());
+		// list.add(persion.getPersonSocialActivitiesList());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	
+	/**
+	 * 进行电视剧数据 的部分修改修改
+	 * 2016年4月21日11:32:36
+	 * 
+	 * @param tvplay
+	 */
+	public static void UpdatPpartTVplay(TvPlay tvplay) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		//
+		String strSql = "update ods.tem_tvplay t set t.screenwriTer=?,t.producer=?"
+				+ "where t.tvplay_id=?";
+		List<Comparable> list = new ArrayList();
+
+		list.add(tvplay.getScreenwriter());
+		list.add(tvplay.getProducer());
+		
 		list.add(tvplay.getTvplay_id());
 		// list.add(persion.getPersonSocialActivitiesList());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);

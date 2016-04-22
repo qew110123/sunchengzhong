@@ -248,7 +248,7 @@ public class HaoSouTV {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
 			}
-		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行
 	}
 
 	public static void main(String[] args) {

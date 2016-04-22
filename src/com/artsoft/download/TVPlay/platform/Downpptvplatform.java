@@ -90,10 +90,17 @@ public class Downpptvplatform {
 
 		String detail = "";
 		detail = HtmlAnalyze.getTagText(strHtml, "class=\"intro j_intro\">", "</div>");
-		System.out.println(detail);
 		if (detail == null || detail.equals("") || detail.equals("null")) {
 			detail = HtmlAnalyze.getTagText(strHtml, "<span class=\"short\" style=\"display:none;\">", "</span>");
 		}
+		if (detail.contains("&gt")) {
+			detail = HtmlAnalyze.getTagText("###"+detail, "###", "&gt");
+			detail=detail.replace("ÊÕÆð&gt", "");
+		}
+		
+		
+		System.out.println(detail);
+		
 		playtv.setBasic_info(detail);
 
 		playtv.setClassnum(6);
@@ -194,8 +201,10 @@ public class Downpptvplatform {
 		// }
 		// }
 
-//		TimingTime(23, 59, 59);
-		 runstatic();
+		TimingTime(23, 59, 59);
+//		 runstatic();
+//		 urlBranch("http://v.pptv.com/page/mbGbGYHnV5X4dt4.html");
+		 
 	}
 
 }

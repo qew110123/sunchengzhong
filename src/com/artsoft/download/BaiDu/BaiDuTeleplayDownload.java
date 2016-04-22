@@ -26,7 +26,7 @@ import com.artsoft.util.TimeTest;
 
 public class BaiDuTeleplayDownload {
 
-	public static TvPlay mainmore(String strId, String url ,String strUrlname) {
+	public static TvPlay mainmore(String strId, String url, String strUrlname) {
 		TvPlay tvplay = new TvPlay();
 		// TODO Auto-generated method stub
 		tvplay.setTvplay_id(Integer.parseInt(strId));
@@ -54,10 +54,7 @@ public class BaiDuTeleplayDownload {
 				if (baseInfoName != null && baseInfoValue != null) {
 					baseInfoName = baseInfoName.replace("&nbsp;", "");
 					System.out.println(baseInfoName);
-					// System.out.println(baseInfoValue);
-					// System.out.println(baseInfoValue =
-					// baseInfoValue.replace(" ", "").replace("\n", "##")
-					// .replace("##展开##", "").replace("####", ""));
+					
 					if (contains(baseInfoName)) {
 						Document doclite = Jsoup.parse(sourceStrArray[i].toString());
 						Elements linkss = doclite.select("a");
@@ -69,37 +66,61 @@ public class BaiDuTeleplayDownload {
 						// System.out.println(linkss);
 						// System.out.println(linkss.size()==0);
 						if (linkss.size() == 0) {
-							baseInfoValue = baseInfoValue.replace(" ", "").replace("\n", "").replace("展开", "");
+							// baseInfoValue = baseInfoValue.replace(" ",
+							// "").replace("\n", "").replace("展开", "");
+							/**
+							 * 2016年4月21日11:26:14 因发现没有链接时出现 空格 顿号则进行数据的整体up
+							 */
+							baseInfoValue = baseInfoValue.replace("展开", "");
 							System.out.println(baseInfoValue);
 						} else {
 							baseInfoValue = "";
 							for (Element element : linkss) {
 								// System.out.println(linkss.attr("href"));
 								// System.out.println(linkss.text());
-								baseInfoValue = baseInfoValue + element.text() + "|http://baike.baidu.com"
-										+ element.attr("href") + ",";
+								if (!element.attr("class").equals("sup-anchor")) {
+									baseInfoValue = baseInfoValue + element.text() + "|http://baike.baidu.com"
+											+ element.attr("href") + ",";
+								}
+
 							}
+							
+							
 							System.out.println(baseInfoValue);
 						}
 					} else {
-						baseInfoValue = baseInfoValue.replace(" ", "").replace("\n", "").replace("展开", "");
-						System.out.println(baseInfoValue);
+						/**
+						 * 2016年4月21日14:03:39
+						 * 进行制片人单独拿出，进行数据的替换
+						 */
+						if (baseInfoName.equals("制片人")) {
+							
+//							baseInfoValue = baseInfoValue.replace("展开", "");
+							System.out.println(baseInfoValue);
+							
+						}else{
+							baseInfoValue = baseInfoValue.replace(" ", "").replace("\n", "").replace("展开", "");
+							System.out.println(baseInfoValue);
+						}
 					}
+					
+					
+					
 
 				}
 				tvplay = buildTvPlay(baseInfoName, baseInfoValue, tvplay);
-				
+
 			}
-			String stills_url="";
+			String stills_url = "";
 			Elements linkstills_url = doc.select("div.summary-pic img");
-//			stills_url=HtmlAnalyze.getTagText(strHtml.toString(), " target=\"_blank\">\n<img src=\"", "\"");
-			System.out.println(stills_url=HtmlAnalyze.getTagText(linkstills_url.toString(), "src=\"", "\""));
-			if (stills_url==null||stills_url.equals(null)) {
-				stills_url="";
+			// stills_url=HtmlAnalyze.getTagText(strHtml.toString(), "
+			// target=\"_blank\">\n<img src=\"", "\"");
+			System.out.println(stills_url = HtmlAnalyze.getTagText(linkstills_url.toString(), "src=\"", "\""));
+			if (stills_url == null || stills_url.equals(null)) {
+				stills_url = "";
 			}
 			tvplay.setStills_url(stills_url);
-			
-			
+
 			Elements linksss = doc.select("div.lemma-summary div.para");
 			String information = "";
 			int u = 0;
@@ -107,26 +128,22 @@ public class BaiDuTeleplayDownload {
 				// System.out.println("111"+element);
 				if (u == 0) {
 					information = element.text();
-					u+=1;
+					u += 1;
 				} else {
 					information = information + "||" + element.text();
 				}
 			}
-			if (information!=null&&!"".equals(information)) {
+			if (information != null && !"".equals(information)) {
 				tvplay.setBasic_info(information);
 			}
-			
-			
-			
-//			tvplay.setBasic_info("");
+
+			// tvplay.setBasic_info("");
 			tvplay.print();
-//			OracleHaoSou.InsertTVplay(tvplay);
-			
-			
+			// OracleHaoSou.InsertTVplay(tvplay);
+
 		}
 		try {
-			
-		
+
 			// 进行数据的另一个表数据 的添加
 			Elements linkli = doc.select("li.roleIntroduction-item");
 			String personname = "";
@@ -164,9 +181,7 @@ public class BaiDuTeleplayDownload {
 			// TODO: handle exception
 		}
 		return tvplay;
-		
-		
-		
+
 	}
 
 	/**
@@ -180,6 +195,7 @@ public class BaiDuTeleplayDownload {
 		list.add("主演"); // 向列表中添加数据
 		list.add("编剧"); // 向列表中添加数据
 		list.add("导演"); // 向列表中添加数据
+//		list.add("制片人");
 		if (list.contains(strtext)) {
 			return true;
 		}
@@ -196,10 +212,10 @@ public class BaiDuTeleplayDownload {
 	 * @return
 	 */
 	public static TvPlay buildTvPlay(String baseInfoName, String baseInfoValue, TvPlay tvplay) {
-		if (baseInfoValue!=null&&!baseInfoValue.equals("")) {
-			baseInfoValue=baseInfoValue.replace("	", "");
+		if (baseInfoValue != null && !baseInfoValue.equals("")) {
+			baseInfoValue = baseInfoValue.replace("	", "");
 		}
-		//	
+		//
 		if ("中文名".equals(baseInfoName)) {
 			tvplay.setTvplay_name(baseInfoValue);
 		}
@@ -272,16 +288,17 @@ public class BaiDuTeleplayDownload {
 		if ("主要奖项".equals(baseInfoName)) {
 			tvplay.setMajor_awards(baseInfoValue);
 		}
-		
-		if ("上映日期".equals(baseInfoName)|| "上映时间".equals(baseInfoName)) {
+
+		if ("上映日期".equals(baseInfoName) || "上映时间".equals(baseInfoName)) {
 			tvplay.setShow_date(baseInfoValue);
 		}
-		
+
 		return tvplay;
 	}
 
 	/**
 	 * 进行数据的搜索
+	 * 
 	 * @param urlmain
 	 * @param id
 	 * @param strname
@@ -308,28 +325,29 @@ public class BaiDuTeleplayDownload {
 		// System.out.println(strVolumes = link.text());
 		// System.out.println(idnum = link.attr("href"));
 		// }
-		if (links.size()  >0) {
+		if (links.size() > 0) {
 			String strUrl = "";
 			String strUrlname = "";
-			System.out.println(strUrlname=links.first().text());
+			System.out.println(strUrlname = links.first().text());
 			System.out.println(strUrl = links.attr("href"));
-//			mainmore(id, strUrl,strUrlname);
+			// mainmore(id, strUrl,strUrlname);
 			if (strUrl != null && !"".equals(strUrl)) {
 
 				if (!strUrl.contains("http://baike.baidu.com")) {
 					strUrl = "http://baike.baidu.com" + strUrl;
 				}
 				System.out.println(strUrl);
-//				mainmore(id, strUrl);
-				TvPlay tvplay =mainmore(id, strUrl,strUrlname);
-				OracleHaoSou.InsertTVplay(tvplay);//添加操作
-//				OracleHaoSou.UpdateTVplay(tvplay);//修改操作
+				// mainmore(id, strUrl);
+				TvPlay tvplay = mainmore(id, strUrl, strUrlname);
+				OracleHaoSou.InsertTVplay(tvplay);// 添加操作
+				// OracleHaoSou.UpdateTVplay(tvplay);//修改操作
 			}
 		}
 	}
 
 	/**
 	 * 进行数据开始和结束数据的采集
+	 * 
 	 * @param statnum
 	 * @param endnum
 	 */
@@ -366,7 +384,6 @@ public class BaiDuTeleplayDownload {
 		}
 	}
 
-	
 	public static void mainProgram(int statnum, int endnum) {
 
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + statnum);
@@ -385,23 +402,24 @@ public class BaiDuTeleplayDownload {
 					urlBranch = "http://baike.baidu.com/search?word="
 							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&pn=0&rn=0&enc=utf8";
 					mainUrlall(urlBranch, listTemp.get(0), listTemp.get(1));
-					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0)+","+listTemp.get(1));
-					
+					CommonUtil.setLog(
+							TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0) + "," + listTemp.get(1));
+
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
 
 			}
 
 		}
 	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-//		String url = "http://baike.baidu.com/subview/24151/7972045.htm";
-//		mainmore("1", url,"你好");
+		// String url = "http://baike.baidu.com/subview/24151/7972045.htm";
+		// mainmore("1", url,"你好");
 
 		// String urlmain =
 		// "http://baike.baidu.com/search?word=%E8%8C%83%E5%86%B0%E5%86%B0&pn=0&rn=0&enc=utf8";
@@ -422,27 +440,26 @@ public class BaiDuTeleplayDownload {
 		// mainweboPeoPle(i, i + 1000);
 		//
 		// }
-		
-//		/**
-//		 * 进行电视剧数据的下载
-//		 */
-////		 ConfigManager config = ConfigManager.getInstance();
-////		 String driver = config.getConfigValue("driver");
-//		 String xx=ConfigManager.getInstance().getConfigValue("numBaidu");
-//		
-//		 int xxnum=Integer.parseInt(xx);
-//		 System.out.println(xxnum);
-//		 for (int i = xxnum; i < 15780; i=i+1000) {
-//		// i=15780;
-//		 mainProgram(i,i+1000);
-//		 }
+
+		// /**
+		// * 进行电视剧数据的下载
+		// */
+		//// ConfigManager config = ConfigManager.getInstance();
+		//// String driver = config.getConfigValue("driver");
+		// String xx=ConfigManager.getInstance().getConfigValue("numBaidu");
+		//
+		// int xxnum=Integer.parseInt(xx);
+		// System.out.println(xxnum);
+		// for (int i = xxnum; i < 15780; i=i+1000) {
+		// // i=15780;
+		// mainProgram(i,i+1000);
+		// }
 		/**
 		 * 测试
 		 */
-		TvPlay tvplay =mainmore("0", "http://baike.baidu.com/subview/117297/5771342.htm","封神榜");
-		OracleHaoSou.InsertTVplay(tvplay);//添加操作
-
+		TvPlay tvplay = mainmore("40", "http://baike.baidu.com/view/13097674.htm", "大都市小爱情");
+//		OracleHaoSou.InsertTVplay(tvplay);// 添加操作
+		OracleHaoSou.UpdatPpartTVplay(tvplay);//整体表修改操作
 	}
-
 
 }
