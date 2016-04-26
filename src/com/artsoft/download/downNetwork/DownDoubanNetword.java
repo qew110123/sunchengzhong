@@ -15,10 +15,10 @@ import com.artsoft.util.TimeTest;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import java.util.Calendar;  
-import java.util.Date;  
-import java.util.Timer;  
-import java.util.TimerTask; 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DownDoubanNetword {
 
@@ -69,30 +69,35 @@ public class DownDoubanNetword {
 		if (strHtml == null || strHtml.equals("")) {
 			return;
 		}
-		
+
 		JSONObject htmljson = new JSONObject();
 		JSONArray htmljsonArray = new JSONArray();
 		htmljson = JSONObject.fromObject(strHtml);
-		
-		htmljsonArray=(JSONArray) htmljson.get("subjects");
+
+		htmljsonArray = (JSONArray) htmljson.get("subjects");
 		for (Object objecthtml : htmljsonArray) {
-			JSONObject jsonsubject=(JSONObject) objecthtml;
+			JSONObject jsonsubject = (JSONObject) objecthtml;
 			String name = "";
-			System.out.println(name=(String) jsonsubject.get("title"));
-			String urls="";
-			System.out.println(urls=(String) jsonsubject.get("url"));
-			String feishu="";
-			System.out.println(feishu=(String) jsonsubject.get("rate"));
-			String pinglun="";
-//			OracleOpreater.intoReputation(name, "1", Amount, "0", "", urlBranch, "1", "0");
-//			OracleOpreater.intoReputation(name, "1", score, "0", "", urlBranch, "1", "1");
-//			OracleOpreater.intoReputation(name, "1", comment, "0", "", urlBranch, "1", "2");
-//			OracleOpreater.intoReputation(name, "2", feishu, "0", "", urlBranch, "1", "1");
-//			OracleOpreater.intoReputation(name, "2", numhtml, "0", "", urlBranch, "1", "0");
+			System.out.println(name = (String) jsonsubject.get("title"));
+			String urls = "";
+			System.out.println(urls = (String) jsonsubject.get("url"));
+			String feishu = "";
+			System.out.println(feishu = (String) jsonsubject.get("rate"));
+			String pinglun = "";
+			// OracleOpreater.intoReputation(name, "1", Amount, "0", "",
+			// urlBranch, "1", "0");
+			// OracleOpreater.intoReputation(name, "1", score, "0", "",
+			// urlBranch, "1", "1");
+			// OracleOpreater.intoReputation(name, "1", comment, "0", "",
+			// urlBranch, "1", "2");
+			// OracleOpreater.intoReputation(name, "2", feishu, "0", "",
+			// urlBranch, "1", "1");
+			// OracleOpreater.intoReputation(name, "2", numhtml, "0", "",
+			// urlBranch, "1", "0");
 			String strHtmlurl = DownloadUtil.getHtmlText(urls, 1000 * 30, "UTF-8", null, null);
 			System.out.println(pinglun = HtmlAnalyze.getTagText(strHtmlurl, "votes\">", "</span"));
 			if (pinglun.equals("")) {
-				urls=urls.replace("http", "https");
+				urls = urls.replace("http", "https");
 				strHtmlurl = DownloadUtil.getHtmlText(urls, 1000 * 30, "UTF-8", null, null);
 				System.out.println(pinglun = HtmlAnalyze.getTagText(strHtmlurl, "votes\">", "</span"));
 			}
@@ -109,7 +114,7 @@ public class DownDoubanNetword {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	/**
@@ -127,82 +132,91 @@ public class DownDoubanNetword {
 
 		return null;
 	}
-	
-	public static void runstatic(){
+
+	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
-//		String strkey = ReadTxtFile.getKeyWordFromFile("keywordiqiyi.txt");
-//		String[] keys = strkey.split("\n");
-//		for (int i = 0; i < keys.length; i++) {
-//			System.out.println(keys[i]);
-//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
-//			String url = keys[i];
-//			System.out.println(url);
-//			boolean bb = true;
-//			DownDoubanNetword.youkuMaim(url);
-//		}
-		
-		/**
-		 * 豆瓣数据
-		 * 2016年3月7日10：:2：:1
-		 */
-		for (int i = 0; i <=500; i=i+20) {
-//			System.out.println(i);
-			try {
-				
-				DownDoubanNetword.mainurl("https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
+		// String strkey = ReadTxtFile.getKeyWordFromFile("keywordiqiyi.txt");
+		// String[] keys = strkey.split("\n");
+		// for (int i = 0; i < keys.length; i++) {
+		// System.out.println(keys[i]);
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" +
+		// keys[i]);
+		// String url = keys[i];
+		// System.out.println(url);
+		// boolean bb = true;
+		// DownDoubanNetword.youkuMaim(url);
+		// }
+
+		// /**
+		// * 豆瓣数据 2016年3月7日10：:2：:1
+		// */
+		// for (int i = 0; i <= 500; i = i + 20) {
+		// // System.out.println(i);
+		// try {
+		//
+		// DownDoubanNetword.mainurl(
+		// "https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="
+		// + i);
+		// } catch (Exception e) {
+		// // TODO: handle exception
+		// }
+		// }
+		mainyunxing();
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
-//判断数据开始时间
-	public static void TimingTime(int hh , int mm ,int ss) {  
-        Calendar calendar = Calendar.getInstance();  
-        calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时  
-        calendar.set(Calendar.MINUTE, mm);       // 控制分  
-        calendar.set(Calendar.SECOND, ss);       // 控制秒  
-  
-        Date time = calendar.getTime();         // 得出执行任务的时间,此处为今天的12：00：00  
-  
-        Timer timer = new Timer();  
-        timer.scheduleAtFixedRate(new TimerTask() {  
-            public void run() {  
-                System.out.println("-------设定要指定任务--------");  
-                runstatic();
-            } 
-        }, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行  
-    } 
+	// 判断数据开始时间
+	public static void TimingTime(int hh, int mm, int ss) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+		calendar.set(Calendar.MINUTE, mm); // 控制分
+		calendar.set(Calendar.SECOND, ss); // 控制秒
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		
-//		TimingTime(23, 59, 59);
-//		for (int j = 0; j < 4; j++) {
-//			
-//			DownDoubanNetword.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
-//		}
-		
-		
-		/**
-		 * 豆瓣数据
-		 * 2016年3月7日10：:2：:1
-		 */
-		for (int i = 0; i <=500; i=i+20) {
-//			System.out.println(i);
-			try {
-				
-				DownDoubanNetword.mainurl("https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="+i);
-			} catch (Exception e) {
-				// TODO: handle exception
+		Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			public void run() {
+				System.out.println("-------设定要指定任务--------");
+				runstatic();
+			}
+		}, time, 1000 * 60 * 60 * 1);// 这里设定将延时每天固定执行
+	}
+
+	public static void mainyunxing() {
+
+		// TimingTime(23, 59, 59);
+		// for (int j = 0; j < 4; j++) {
+		//
+		// DownDoubanNetword.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
+		// }
+		String strMax = OracleOpreater.returndouban(TimeTest.getNowTime("yyyyMMdd"));
+
+		if (Integer.parseInt(strMax) == 0) {
+
+			/**
+			 * 豆瓣数据 2016年3月7日10：:2：:1
+			 */
+			for (int i = 0; i <= 500; i = i + 20) {
+				// System.out.println(i);
+				try {
+
+					DownDoubanNetword.mainurl(
+							"https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="
+									+ i);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
 		}
 
-		
-		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// mainyunxing();
+		TimingTime(1, 59, 59);
 
 	}
 }

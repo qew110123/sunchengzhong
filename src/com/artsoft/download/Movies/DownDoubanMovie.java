@@ -108,18 +108,28 @@ public class DownDoubanMovie {
 					i += 1;
 				}
 				System.out.println(pinglun = HtmlAnalyze.getTagText(strHtmlurl, "votes\">", "</span"));
-				try {
+//				try {
+				if (!feishu.equals("")) {
+					
 					OracleOpreater.intoReputationAndDETAIL_URL(name, "9", feishu, "0", "", urls, "3", "1", urls);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				}else{
+					OracleOpreater.intoReputationAndDETAIL_URL(name, "9", "-1", "0", "", urls, "3", "1", urls);
 				}
-				try {
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				try {
+				if (!pinglun.equals("")) {
 					OracleOpreater.intoReputationAndDETAIL_URL(name, "9", pinglun, "0", "", urls, "3", "2", urls);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				}else{
+					OracleOpreater.intoReputationAndDETAIL_URL(name, "9", "-1", "0", "", urls, "3", "2", urls);
 				}
+					
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

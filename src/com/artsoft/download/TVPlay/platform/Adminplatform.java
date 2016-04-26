@@ -16,7 +16,7 @@ public class Adminplatform {
 		Downqqplatform.runstatic();
 		DownSohuplatform.runstatic();
 		DownLetvplatform.runstatic();
-		Downpptvplatform.runstatic();
+//		Downpptvplatform.runstatic();
 //		DownloadHunantv.runstatic();
 		Downkankanplatform.runstatic();
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
@@ -38,12 +38,12 @@ public class Adminplatform {
 	                System.out.println("-------设定要指定任务--------");  
 	                runstatic();
 	            } 
-	        }, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行  
+	        }, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行  
 	    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(04, 00, 00);
+		TimingTime(01, 00, 00);
 //		runstatic();
 	}
 

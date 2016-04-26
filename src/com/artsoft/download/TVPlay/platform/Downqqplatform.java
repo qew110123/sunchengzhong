@@ -394,8 +394,8 @@ public class Downqqplatform {
 		// TODO Auto-generated method stub
 
 //		TimingTime(23, 59, 59);
-		 openstatic();
-
+//		 openstatic();
+		 TimingTime(3, 59, 59);
 		// TvPlay playtv = new TvPlay();
 		// playtv.setTvplay_url("http://film.qq.com/cover/z/zagd2l04q320z04.html");
 		// playtv.setTvplay_name("°®µÄ½×ÌÝ");

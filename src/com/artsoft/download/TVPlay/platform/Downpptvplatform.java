@@ -120,12 +120,12 @@ public class Downpptvplatform {
 		// ParseJson(BuildJson());
 		String strHtml = "";
 		boolean bb = true;
-		while (bb) {
+//		while (bb) {
 			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "UTF-8", null, null);
-			if (strHtml != null && !"".equals(strHtml)) {
-				bb = false;
-			}
-		}
+//			if (strHtml != null && !"".equals(strHtml)) {
+//				bb = false;
+//			}
+//		}
 		// System.out.println(strHtml);
 		Document doc = Jsoup.parse(strHtml);
 		Elements links = doc.select("a.detailbtn");
@@ -201,7 +201,7 @@ public class Downpptvplatform {
 		// }
 		// }
 
-		TimingTime(23, 59, 59);
+		TimingTime(2, 59, 59);
 //		 runstatic();
 //		 urlBranch("http://v.pptv.com/page/mbGbGYHnV5X4dt4.html");
 		 

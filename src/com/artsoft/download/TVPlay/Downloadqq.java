@@ -209,7 +209,7 @@ public class Downloadqq {
 		// TODO Auto-generated method stub
 
 		// TimingTime(23, 59, 59);
-//		runstatic();
+		runstatic();
 		Again();
 		
 //		downBranch("http://v.qq.com/cover/g/gglfv6h7b1xvkf7.html", "ÀÏÂèÓëÄÌ°Ö", "http://v.qq.com/x/teleplaylist/?sort=4&offset=840&itype=-1&iarea=815&iyear=-1&ipay=-1");

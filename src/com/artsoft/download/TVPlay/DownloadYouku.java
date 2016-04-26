@@ -326,6 +326,11 @@ public class DownloadYouku {
 			Thread.sleep(1000 * 60 * 60 * 2);
 			openstatic();
 			CommonUtil.setLog("优酷等待2小时" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") );
+			System.out.println("等待2小时");
+			CommonUtil.setLog("当前时间:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") );
+			Thread.sleep(1000 * 60 * 60 * 3);
+			openstatic();
+			CommonUtil.setLog("优酷等待3小时" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") );
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
