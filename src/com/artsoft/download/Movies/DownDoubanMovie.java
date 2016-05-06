@@ -221,7 +221,7 @@ public class DownDoubanMovie {
 //		 IpFilter.mainip("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=20");
 //		runstatic();
 		
-		TimingTime(6, 59, 59);
+		TimingTime(1, 59, 59);
 
 	}
 

@@ -21,7 +21,7 @@ import com.artsoft.util.TimeTest;
 
 public class DownloadYouku {
 
-	static ThreadPool pool = new ThreadPool(10);
+	static ThreadPool pool = new ThreadPool(20);
 	static int i = 0;
 
 	/**
@@ -54,7 +54,7 @@ public class DownloadYouku {
 				System.out.println(link.select("span.p-actor").text());
 				System.out.println(link.select("span.p-num").text());
 
-				while (pool.getPoolNum() > 10) {
+				while (pool.getPoolNum() > 20) {
 					try {
 						System.out.println("线程数量大于10，等待5s");
 						Thread.sleep(5000);

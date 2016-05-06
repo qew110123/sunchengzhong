@@ -19,7 +19,7 @@ import java.util.TimerTask;
 
 public class DownloadIqiyi {
 
-	public static void iQiYiBranch(String urlBranch) {
+	public static void iQiYiBranch(String names,String urlBranch) {
 		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
@@ -29,7 +29,14 @@ public class DownloadIqiyi {
 		}
 
 		String name = HtmlAnalyze.getTagText(strHtml, "<meta name=\"keywords\" content=\"", "\" /> ");
-
+		if (name.equals("")||name.equals("null")||name==null) {
+			//data-shareplattrigger-videoname="
+			name=HtmlAnalyze.getTagText(strHtml, "data-shareplattrigger-videoname=\"", "\"");
+		}
+		if (name.equals("")||name.equals("null")||name==null) {
+			//data-shareplattrigger-videoname="
+			name=names;
+		}
 		System.out.println(name);
 		String videoId = HtmlAnalyze.getTagText(strHtml, "albumId: ", ",");
 
@@ -77,9 +84,10 @@ public class DownloadIqiyi {
 		Elements links = doc.select("div.site-piclist_pic");
 		for (Element link : links) {
 			String strmainurl = "";
+			String names="";
 			System.out.println(strmainurl = link.select("a.site-piclist_pic_link").attr("href"));
 			System.out.println(link.select("a.site-piclist_pic_link").attr("title"));
-			iQiYiBranch(strmainurl);
+			iQiYiBranch(names,strmainurl);
 		}
 	}
 
@@ -171,6 +179,9 @@ public class DownloadIqiyi {
 		
 //		TimingTime(23, 59, 59);
 		 runstatic();
+		 
+		 
+//		 iQiYiBranch("http://www.iqiyi.com/a_19rrk30cd9.html#vfrm=2-4-0-1");
 
 	}
 }

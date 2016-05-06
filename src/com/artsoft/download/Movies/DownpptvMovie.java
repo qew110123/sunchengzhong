@@ -22,13 +22,13 @@ public class DownpptvMovie {
 		// mainUrl="http://list.letv.com/apin/chandata.json?c=2&d=1&md=&o=20&p=4&s=1";
 		// ParseJson(BuildJson());
 		String strHtml = "";
-		boolean bb = true;
-		while (bb) {
+//		boolean bb = true;
+//		while (bb) {
 			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "UTF-8", null, null);
-			if (strHtml != null && !"".equals(strHtml)) {
-				bb = false;
-			}
-		}
+//			if (strHtml != null && !"".equals(strHtml)) {
+//				bb = false;
+//			}
+//		}
 		// System.out.println(strHtml);
 		Document doc = Jsoup.parse(strHtml);
 		Elements links = doc.select("li.tips");

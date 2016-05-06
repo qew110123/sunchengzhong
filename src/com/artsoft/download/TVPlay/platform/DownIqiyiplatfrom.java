@@ -42,8 +42,30 @@ public class DownIqiyiplatfrom {
 		playtv.setProduction_area(PRODUCTION_AREA);
 		
 		String SUBJECT="";
-		SUBJECT=HtmlAnalyze.getTagText(strHtml, "类型：", "</p>").replace("\r\n", "").replace(" ", "");
+		SUBJECT=HtmlAnalyze.getTagText(strHtml, "类型：", "</p>").replace("\r\n", "");
 		SUBJECT=SUBJECT.replace("\r\n", "").replace(" ", "");
+		if (!SUBJECT.contains("/")) {
+			SUBJECT="";
+			String classstrall = HtmlAnalyze.getTagText(strHtml, "类型：", "</p>", true, 0);
+//			System.out.println(classstrall);
+			int i = 0;
+			String[] classstrlist = classstrall.replace(" ", "").split("\r\n\r\n");
+			for (String string : classstrlist) {
+				String textss = HtmlAnalyze.getTagText(string, ">", "<");
+				if (!textss.equals("null")&&!textss.equals("")) {
+					SUBJECT = SUBJECT + textss + "/";
+					if (classstrlist.length != 1 && i + 1 < classstrlist.length) {
+						SUBJECT = SUBJECT ;
+					}
+				}
+				
+
+				i += 1;
+			}
+		}
+		
+		
+		
 		playtv.setSubject(SUBJECT);
 		
 		
@@ -342,9 +364,12 @@ public class DownIqiyiplatfrom {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		 TimingTime(4, 59, 59);
+//		 TimingTime(4, 59, 59);
+		 
+		 
+//		 iQiYibigBranch("http://www.iqiyi.com/dianshiju/fmxqj2.html#vfrm=2-4-0-1", "肥猫寻亲记2", "");
 
-//		 runstatic();
+		 runstatic();
 		
 		
 //		iQiYiBranch("http://www.iqiyi.com/a_19rrhb0u3t.html#vfrm=2-4-0-1", "武神赵子龙", "8.5");

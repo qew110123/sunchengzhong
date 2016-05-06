@@ -16,7 +16,7 @@ public class Movies {
 		DownqqMovie.runstatic();
 		DownSohuMovie.runstatic();
 		DownLetvMovie.runstatic();
-//		DownpptvMovie.runstatic();
+		DownpptvMovie.runstatic();
 //		DownHunantvMovie.runstatic();
 		DownkankanMovie.runstatic();
 		

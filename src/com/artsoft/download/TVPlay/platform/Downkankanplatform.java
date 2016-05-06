@@ -117,16 +117,43 @@ public class Downkankanplatform {
 		playtv.setProduction_area(diqu);
 		
 		String classstr = ""; // 类型:
-		classstr = HtmlAnalyze.getTagText(strHtml, "类型:", "</li>");
-		System.out.println(classstr=classstr.replaceAll(" 					", ""));
+//		classstr = HtmlAnalyze.getTagText(strHtml, "类型:", "</li>");
+//		System.out.println(classstr=classstr.replaceAll(" 					", ""));
+		
+		
+		String classstrall = HtmlAnalyze.getTagText(strHtml, "类型:", "</li>", true, 0);
+//		System.out.println(classstr = classstr.replaceAll(" 					", ""));
+		i = 0;
+		String[] classstrlist = classstrall.split("a><a");
+		for (String string : classstrlist) {
+			String textss = HtmlAnalyze.getTagText(string, ">", "<");
+			classstr = classstr + textss + "/";
+			if (classstrlist.length != 1 && i + 1 < classstrlist.length) {
+				classstr = classstr ;
+			}
+
+			i += 1;
+		}
+		
+		
 		playtv.setSubject(classstr);
 		
 		String detail="";
 		detail=HtmlAnalyze.getTagText(strHtml, "id=\"movie_info_intro_l\" style=\"display:none\">", "<span class=\"closeinfo_tigger\">");
-		System.out.println(detail);
 		if (detail==null||detail.equals("")||detail.equals("null")) {
 			detail=HtmlAnalyze.getTagText(strHtml, "id=\"movie_info_intro_s\">", "<span class=\"closeinfo_tigger\">");
 		}
+		if (!detail.equals("")) {
+			detail=detail.replace("&ldquo;", "“");
+			detail=detail.replace("&rdquo;", "”");
+			if (detail.length()>1000) {
+				detail=detail.substring(0,1000);
+				
+			}
+		}
+		System.out.println(detail.length());
+//		detail=HtmlAnalyze.getTagText("&&&"+detail+"###", "决拒绝了她", "###");
+		System.out.println(detail);
 		playtv.setBasic_info(detail);
 		
 		playtv.setClassnum(8);
@@ -202,8 +229,9 @@ public class Downkankanplatform {
 //				e.printStackTrace();
 //			}
 //		}
-		TimingTime(23, 59, 59);
-//		runstatic();
+//		TimingTime(23, 59, 59);
+		runstatic();
+//		hunanBranch("http://vod.kankan.com/v/41/41961.shtml", "深度诱惑");
 	}
 
 }

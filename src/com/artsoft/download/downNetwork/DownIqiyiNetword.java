@@ -19,7 +19,7 @@ import java.util.TimerTask;
 
 public class DownIqiyiNetword {
 
-	public static void iQiYiBranch(String urlBranch) {
+	public static void iQiYiBranch(String names,String urlBranch) {
 		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
@@ -29,6 +29,14 @@ public class DownIqiyiNetword {
 		}
 
 		String name = HtmlAnalyze.getTagText(strHtml, "<meta name=\"keywords\" content=\"", "\" /> ");
+		if (name.equals("")||name.equals("null")||name==null) {
+			//data-shareplattrigger-videoname="
+			name=HtmlAnalyze.getTagText(strHtml, "data-shareplattrigger-videoname=\"", "\"");
+		}
+		if (name.equals("")||name.equals("null")||name==null) {
+			//data-shareplattrigger-videoname="
+			name=names;
+		}
 
 		System.out.println(name);
 		String videoId = HtmlAnalyze.getTagText(strHtml, "albumId: ", ",");
@@ -38,7 +46,8 @@ public class DownIqiyiNetword {
 		System.out.println(numhtml = HtmlAnalyze.getTagText(numhtml, "\":", "}"));
 		try {
 
-			OracleOpreater.intoReputation(name, "2", numhtml, "0", "", urlBranch, "1", "0");
+//			OracleOpreater.intoReputation(name, "2", numhtml, "0", "", urlBranch, "1", "0");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "2", numhtml, "0", "", urlBranch, "1", "0", urlBranch);
 
 			String videourl = "http://up.video.iqiyi.com/ugc-updown/quud.do?dataid=" + videoId
 					+ "&type=1&userid=&flashuid=e42dc42f8825edf5580806cde99606ce&appID=21&callback=window.Q.__callbacks__.cb1953yg";
@@ -47,7 +56,7 @@ public class DownIqiyiNetword {
 			String feishu = "";
 			System.out.println(feishu = HtmlAnalyze.getTagText(feishuhtml, "score\":", ",\""));
 
-			OracleOpreater.intoReputation(name, "2", feishu, "0", "", urlBranch, "1", "1");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "2", feishu, "0", "", urlBranch, "1", "1", urlBranch);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -76,10 +85,11 @@ public class DownIqiyiNetword {
 		Document doc = Jsoup.parse(strHtml);
 		Elements links = doc.select("div.site-piclist_pic");
 		for (Element link : links) {
+			String name="";
 			String strmainurl = "";
 			System.out.println(strmainurl = link.select("a.site-piclist_pic_link").attr("href"));
-			System.out.println(link.select("a.site-piclist_pic_link").attr("title"));
-			iQiYiBranch(strmainurl);
+			System.out.println(name=link.select("a.site-piclist_pic_link").attr("title"));
+			iQiYiBranch(name,strmainurl);
 		}
 	}
 

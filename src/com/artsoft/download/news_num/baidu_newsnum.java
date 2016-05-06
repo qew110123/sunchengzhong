@@ -131,7 +131,7 @@ public class baidu_newsnum {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		 openstatic();
-		TimingTime(23, 59, 59);
+		TimingTime(3, 59, 59);
 		// baidunews("",
 		// "http://news.baidu.com/ns?ct=1&rn=20&ie=utf-8&bs=%E5%94%90%E5%AB%A3&rsv_bp=1&sr=0&cl=2&f=8&prevct=no&tn=newstitle&word=%E5%94%90%E5%AB%A3&qq-pf-to=pcqq.c2c");
 	}

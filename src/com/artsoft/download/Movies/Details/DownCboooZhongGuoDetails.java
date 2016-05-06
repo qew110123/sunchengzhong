@@ -140,7 +140,7 @@ public class DownCboooZhongGuoDetails {
 
 	public static void openstatic() {
 		String url = "";
-		for (int i = 1; i < 250; i++) {
+		for (int i = 1; i < 255; i++) {
 			url = "http://www.cbooo.cn/Mdata/getMdata_movie?area=50&type=0&year=0&initial=%E5%85%A8%E9%83%A8&pIndex="
 					+ i + "";
 			System.out.println(url);

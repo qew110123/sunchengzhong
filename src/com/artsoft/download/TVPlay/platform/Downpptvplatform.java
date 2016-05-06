@@ -46,8 +46,20 @@ public class Downpptvplatform {
 		playtv.setShoot_time(times);
 
 		String classstr = ""; // 类型:
-		classstr = HtmlAnalyze.getTagText(strHtml, "类型：", "</li>");
-		System.out.println(classstr = classstr.replaceAll(" 					", ""));
+		String classstrall = HtmlAnalyze.getTagText(strHtml, "类型：", "</li>", true, 0);
+//		System.out.println(classstr = classstr.replaceAll(" 					", ""));
+		int i = 0;
+		String[] classstrlist = classstrall.split("a><a");
+		for (String string : classstrlist) {
+			String textss = HtmlAnalyze.getTagText(string, ">", "<");
+			classstr = classstr + textss + "/";
+			if (classstrlist.length != 1 && i + 1 < classstrlist.length) {
+				classstr = classstr ;
+			}
+
+			i += 1;
+		}
+		
 		playtv.setSubject(classstr);
 
 		String diqu = ""; // 地区
@@ -57,7 +69,7 @@ public class Downpptvplatform {
 		String daoyan = "";// 导演
 		String daoyanAll = HtmlAnalyze.getTagText(strHtml, "导演：", "</li>", true, 0);
 		String[] daoyanlist = daoyanAll.split("a><a");
-		int i = 0;
+		i = 0;
 		for (String stringtext : daoyanlist) {
 			String urlss = HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
 			String textss = HtmlAnalyze.getTagText(stringtext, ">", "<");

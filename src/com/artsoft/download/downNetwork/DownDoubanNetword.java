@@ -97,18 +97,28 @@ public class DownDoubanNetword {
 			String strHtmlurl = DownloadUtil.getHtmlText(urls, 1000 * 30, "UTF-8", null, null);
 			System.out.println(pinglun = HtmlAnalyze.getTagText(strHtmlurl, "votes\">", "</span"));
 			if (pinglun.equals("")) {
-				urls = urls.replace("http", "https");
+				urls = urls.replace("http:", "https:");
 				strHtmlurl = DownloadUtil.getHtmlText(urls, 1000 * 30, "UTF-8", null, null);
 				System.out.println(pinglun = HtmlAnalyze.getTagText(strHtmlurl, "votes\">", "</span"));
 			}
 			try {
-				OracleOpreater.intoReputation(name, "9", feishu, "0", "", urls, "1", "1");
+				if (!feishu.equals("")) {
+
+					OracleOpreater.intoReputation(name, "9", feishu, "0", "", urls, "1", "1");
+				} else {
+					OracleOpreater.intoReputation(name, "9", "-1", "0", "", urls, "1", "1");
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			try {
-				OracleOpreater.intoReputation(name, "9", pinglun, "0", "", urls, "1", "2");
+				if (!pinglun.equals("")) {
+					OracleOpreater.intoReputation(name, "9", pinglun, "0", "", urls, "1", "2");
+
+				} else {
+					OracleOpreater.intoReputation(name, "9", "-1", "0", "", urls, "1", "2");
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -217,6 +227,7 @@ public class DownDoubanNetword {
 		// TODO Auto-generated method stub
 		// mainyunxing();
 		TimingTime(1, 59, 59);
+		
 
 	}
 }

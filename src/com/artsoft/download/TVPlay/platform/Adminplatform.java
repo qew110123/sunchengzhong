@@ -16,7 +16,7 @@ public class Adminplatform {
 		Downqqplatform.runstatic();
 		DownSohuplatform.runstatic();
 		DownLetvplatform.runstatic();
-//		Downpptvplatform.runstatic();
+		Downpptvplatform.runstatic();
 //		DownloadHunantv.runstatic();
 		Downkankanplatform.runstatic();
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));

@@ -3,6 +3,7 @@ package com.artsoft.download.Movies;
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
@@ -13,6 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.oracle.OracleNetwork;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
@@ -26,7 +28,28 @@ public class DownYoukuMovie {
 		// String strurl = DownYoukuMovie
 		// .youkuMaim("http://www.youku.com/v_olist/c_97_s_1_d_1_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81.html");
 		openstatic();
+		
+		other();
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
+	}
+
+	private static void other() {
+		// TODO Auto-generated method stub
+		List<String> listArray =OracleNetwork.selectyoukumovie(TimeTest.getNowTime("yyyyMMdd"));
+		String strmainurl="";
+		String name="";
+		String urlMain="";
+		for (Object Objstring : listArray) {
+			System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			System.out.println(strmainurl=listTemp.get(0));
+			System.out.println(name=listTemp.get(1));
+			System.out.println(urlMain=listTemp.get(2));
+//			downBranch(strmainurl, name, urlMain);
+			DownYoukuMovie.youkuBranch(urlMain);
+		}
+		
+		
 	}
 
 	public static void openstatic() {
@@ -189,15 +212,16 @@ public class DownYoukuMovie {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
 			}
-		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		runstatic();
-
+//		DownYoukuMovie.youkuBranch("http://www.youku.com/show_page/id_zcc0b658c962411de83b1.html");
+//		runstatic();
+//		other();
 		// TimingTime(21, 59, 59);
-		// TimingTime(23, 59, 59);
+		 TimingTime(1, 59, 59);
 
 	}
 

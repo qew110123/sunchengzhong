@@ -79,49 +79,55 @@ public class DownloadLetv {
 		String score = "";
 		String aid = "";
 		String DETAIL_URL = "";
-		for (Object object : letvjsonArray) {
-			JSONObject objectobject = JSONObject.fromObject(object);
-			Amount = (String) objectobject.get("playCount");
-			score = (String) objectobject.get("rating");
-			name = (String) objectobject.get("name");
-			aid = (String) objectobject.get("aid");
-			// System.out.println(Amount = (String)
-			// objectobject.get("playCount"));
-			// System.out.println(score = (String) objectobject.get("rating"));
-			// System.out.println(name = (String) objectobject.get("name"));
-			// System.out.println(aid = (String) objectobject.get("aid"));
-			if (aid != "") {
-				DETAIL_URL = "http://www.le.com/tv/" + aid + ".html";
+		try {
+			
+		
+			for (Object object : letvjsonArray) {
+				JSONObject objectobject = JSONObject.fromObject(object);
+				Amount = (String) objectobject.get("playCount");
+				score = (String) objectobject.get("rating");
+				name = (String) objectobject.get("name");
+				aid = (String) objectobject.get("aid");
+				// System.out.println(Amount = (String)
+				// objectobject.get("playCount"));
+				// System.out.println(score = (String) objectobject.get("rating"));
+				// System.out.println(name = (String) objectobject.get("name"));
+				// System.out.println(aid = (String) objectobject.get("aid"));
+				if (aid != "") {
+					DETAIL_URL = "http://www.le.com/tv/" + aid + ".html";
+				}
+		
+				System.out.println(Amount + "score" + score);
+				// if (urlBranch != null || Amount != null || name != null || score
+				// != null || urlBranch != "" || Amount != ""
+				// || name != "" || score != "") {
+				// try {
+		//			if (name.equals("两个女人的战争")) {
+		//				System.out.println("1111");
+		//			}
+				if (name != null && Amount != null && mainUrl != null && !Amount.equals("")) {
+					OracleOpreater.intoReputationAndDETAIL_URL(name, "5", Amount, "0", "", mainUrl, "0", "0", DETAIL_URL);
+				} else {
+					OracleOpreater.intoReputationAndDETAIL_URL(name, "5", "-1", "0", "", mainUrl, "0", "0", DETAIL_URL);
+				}
+				// } catch (Exception e) {
+				// // TODO: handle exception
+				// }
+				// try {
+				if (name != null && score != null && mainUrl != null && !score.equals("")) {
+					OracleOpreater.intoReputationAndDETAIL_URL(name, "5", score, "0", "", mainUrl, "0", "1", DETAIL_URL);
+				} else {
+					OracleOpreater.intoReputationAndDETAIL_URL(name, "5", "-1", "0", "", mainUrl, "0", "1", DETAIL_URL);
+		
+				}
+				// } catch (Exception e) {
+				// // TODO: handle exception
+				// }
+		
+				// }
 			}
-
-			System.out.println(Amount + "score" + score);
-			// if (urlBranch != null || Amount != null || name != null || score
-			// != null || urlBranch != "" || Amount != ""
-			// || name != "" || score != "") {
-			// try {
-			if (name.equals("两个女人的战争")) {
-				System.out.println("1111");
-			}
-			if (name != null && Amount != null && mainUrl != null && !Amount.equals("")) {
-				OracleOpreater.intoReputationAndDETAIL_URL(name, "5", Amount, "0", "", mainUrl, "0", "0", DETAIL_URL);
-			} else {
-				OracleOpreater.intoReputationAndDETAIL_URL(name, "5", "-1", "0", "", mainUrl, "0", "0", DETAIL_URL);
-			}
-			// } catch (Exception e) {
-			// // TODO: handle exception
-			// }
-			// try {
-			if (name != null && score != null && mainUrl != null && !score.equals("")) {
-				OracleOpreater.intoReputationAndDETAIL_URL(name, "5", score, "0", "", mainUrl, "0", "1", DETAIL_URL);
-			} else {
-				OracleOpreater.intoReputationAndDETAIL_URL(name, "5", "-1", "0", "", mainUrl, "0", "1", DETAIL_URL);
-
-			}
-			// } catch (Exception e) {
-			// // TODO: handle exception
-			// }
-
-			// }
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 
