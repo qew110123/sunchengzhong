@@ -188,9 +188,24 @@ public class OracleOpreater {
 				+ "t.subject_name_one,t.director,t.actors,t.screenwriter,t.subject_name_two,t.subject_id_one,t.subject_id_two,"
 				+ "t.time_long,t.languages,t.imdb_code,t.film_level,t.original,t.BOX_OFFICES)values(TEM_DIM_FILM_PLATFORM_SEQ.nextval,?,?,?,?,?,?,?,to_date(?,"
 				+ "'yyyy-mm-dd hh24:mi:ss'),null,?,?,?,?,?,?,?,null,null,?,?,?,?,?,?)";
+		
+		
+		strSql = "insert into ods.TEM_DIM_FILM_PLATFORM t(t.B_FILM_ID,t.film_name,t.film_url,t.english_name,"
+				+ "t.alias_name,t.years,t.produce_area,t.show_date,t.create_time,t.update_time,t.source,t.description,"
+				+ "t.subject_name_one,t.director,t.actors,t.screenwriter,t.subject_name_two,t.subject_id_one,t.subject_id_two,"
+				+ "t.time_long,t.languages,t.imdb_code,t.film_level,t.original,t.BOX_OFFICES,t.PRODUCE_COMPANY,t.ISSUE_ORGANIZATION,t.PRODUCE_FORMAT)values(?,?,?,?,?,?,?,?,to_date(?,"
+				+ "'yyyy-mm-dd hh24:mi:ss'),null,?,?,?,?,?,?,?,null,null,?,?,?,?,?,?,?,?,?)";
+		
+		
 
 		List<Comparable> list = new ArrayList();
 		// 这里是将对象加入到list中
+		
+//		if (!playtv.getTvplay_id().equals("")) {
+			list.add(playtv.getTvplay_id());
+//		}else{
+//			list.add("");
+//		}
 
 		list.add(playtv.getTvplay_name());
 		list.add(playtv.getTvplay_url());
@@ -216,6 +231,10 @@ public class OracleOpreater {
 		list.add(playtv.getBox_office());// 票房
 		// list.add(playtv.get)
 		// list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(playtv.getPRODUCE_COMPANY());
+		list.add(playtv.getIssuing_company());// 票房
+		list.add(playtv.getPRODUCE_FORMAT());// 票房
+		
 
 		boolean bb = DBOperate.insertRecord(conn, strSql, list);
 		System.out.println(bb);

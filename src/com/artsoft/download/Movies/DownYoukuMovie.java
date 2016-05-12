@@ -221,7 +221,8 @@ public class DownYoukuMovie {
 //		runstatic();
 //		other();
 		// TimingTime(21, 59, 59);
-		 TimingTime(1, 59, 59);
+//		 TimingTime(1, 59, 59);
+		 runstatic();
 
 	}
 

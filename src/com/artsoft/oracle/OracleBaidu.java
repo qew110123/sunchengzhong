@@ -163,6 +163,24 @@ public class OracleBaidu {
 	}
 	
 	/**
+	 * 百度数据的中的电视剧补充
+	 * 2015年12月2日18:11:49
+	 * @return
+	 */
+	public static List selectpeople() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.person_id,t.person_url,PERSON_NAME from ODS.DIM_PERSON t  where t.person_url is not null";
+		/**
+		 * 2016年5月10日11:33:58
+		 */
+		sql = "select t.person_id,t.person_url,PERSON_NAME from edw.dim_person t  where t.person_url is not null order by t.person_id";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	/**
 	 * 百度数据获取好友链接名称，和图片，主要是图片
 	 * 2015年12月8日11:41:09
 	 * @return
@@ -302,6 +320,7 @@ public class OracleBaidu {
 		
 		/**
 		 * 2016年4月20日10:13:14
+		 * 更改表结构
 		 */
 		sql=" select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
 		ArrayList<String> listname = new ArrayList<String>();
@@ -344,5 +363,6 @@ public class OracleBaidu {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
 	
 }

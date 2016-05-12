@@ -17,6 +17,143 @@ import net.sf.json.JSONObject;
 
 public class DownCboooZhongGuoDetails {
 	static int i = 0;
+	
+	public static void xiangxiurl(TvPlay playtv,String url ){
+		boolean bb = true;
+		String strHtmllittle = "";
+		while (bb) {
+			strHtmllittle = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
+			if (strHtmllittle != null && !"".equals(strHtmllittle)) {
+				bb = false;
+			}
+		}
+		String classstr = ""; // 类型:
+		classstr = HtmlAnalyze.getTagText(strHtmllittle, "类型：", "</p>");
+		System.out.println(classstr = classstr.replaceAll(",", "/"));
+		playtv.setSubject(classstr);
+
+		String shichang = ""; // 时长
+		shichang = HtmlAnalyze.getTagText(strHtmllittle, "片长", "</p>");
+		shichang = shichang.replaceAll("：", "");
+		playtv.setTime_length(shichang);
+
+		String times = ""; // 上映:
+		times = HtmlAnalyze.getTagText(strHtmllittle, "上映时间：", "</p>");
+		// System.out.println(times=times.replaceAll("-", ""));
+		playtv.setShow_date(times);
+
+		String diqu = ""; // 地区
+		diqu = HtmlAnalyze.getTagText(strHtmllittle, "地区：", "</p>");
+		playtv.setProduction_area(diqu);
+		
+		String PRODUCE_FORMAT = ""; // 制作
+		PRODUCE_FORMAT = HtmlAnalyze.getTagText(strHtmllittle, "制式：", "</p>");
+		playtv.setPRODUCE_FORMAT(PRODUCE_FORMAT);
+
+		String yanyuan = "";// 演员
+		Object yanyuanAll = HtmlAnalyze.getTagText(strHtmllittle, "<dt>主演：</dt>", "</dd>", true, 0);
+		String[] yanyuanlist = yanyuanAll.toString().split("</p>");
+		int i = 0;
+		for (String stringtext : yanyuanlist) {
+			String urlss = HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
+			String textss = HtmlAnalyze.getTagText(stringtext, "title=\"", "\"");
+			if (textss.equals("null")||textss.equals("")||textss==null) {
+				textss = HtmlAnalyze.getTagText(stringtext, ">", "<");
+			}
+			if (textss != "") {
+				yanyuan = yanyuan + textss + "|" + urlss;
+				if (yanyuanlist.length != 1 && i + 2 < yanyuanlist.length) {
+					yanyuan = yanyuan + ",";
+				}
+			}
+
+			i += 1;
+		}
+		System.out.println(yanyuan);
+		playtv.setMajor_actors(yanyuan);
+
+		String daoyan = "";// 导演
+		String daoyanAll = HtmlAnalyze.getTagText(strHtmllittle, "<dt>导演：</dt>", "</dd>", true, 0);
+		String[] daoyanlist = daoyanAll.split("</p>");
+		i = 0;
+		for (String stringtext : daoyanlist) {
+			String urlss = HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
+			String textss = HtmlAnalyze.getTagText(stringtext, "title=\"", "\"");
+			if (textss.equals("null")||textss.equals("")||textss==null) {
+				textss = HtmlAnalyze.getTagText(stringtext, ">", "<");
+			}
+			if (textss != "") {
+				daoyan = daoyan + textss + "|" + urlss;
+				if (daoyanlist.length != 1 && i + 2 < daoyanlist.length) {
+					daoyan = daoyan + ",";
+				}
+			}
+
+			i += 1;
+		}
+		System.out.println(daoyan);
+		if (daoyan.length()>2000) {
+			daoyan=daoyan.substring(0, 2000);
+		}
+		playtv.setDirector(daoyan);
+		
+		
+		String PRODUCE_COMPANY = "";// 制作公司
+		String PRODUCE_COMPANYAll = HtmlAnalyze.getTagText(strHtmllittle, "<dt>制作公司：</dt>", "</dd>", true, 0);
+		String[] PRODUCElist = PRODUCE_COMPANYAll.split("</p>");
+		i = 0;
+		for (String stringtext : PRODUCElist) {
+			String urlss = HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
+			String textss = HtmlAnalyze.getTagText(stringtext, "title=\"", "\"");
+			if (textss.equals("null")||textss.equals("")||textss==null) {
+				textss = HtmlAnalyze.getTagText(stringtext, "title=\"\">", "<");
+			}
+			if (textss != "") {
+				PRODUCE_COMPANY = PRODUCE_COMPANY + textss + "|" + urlss;
+				if (PRODUCElist.length != 1 && i + 2 < PRODUCElist.length) {
+					PRODUCE_COMPANY = PRODUCE_COMPANY + ",";
+				}
+			}
+
+			i += 1;
+		}
+		System.out.println(PRODUCE_COMPANY);
+		playtv.setPRODUCE_COMPANY(PRODUCE_COMPANY);
+		
+		
+		String issuing_company = "";// 发行公司
+		String issuing_companyAll = HtmlAnalyze.getTagText(strHtmllittle, "<dt>发行公司：</dt>", "</dd>", true, 0);
+		String[] issuing_companylist = issuing_companyAll.split("</p>");
+		i = 0;
+		for (String stringtext : issuing_companylist) {
+			String urlss = HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
+			String textss = HtmlAnalyze.getTagText(stringtext, "title=\"", "\"");
+			if (textss.equals("null")||textss.equals("")||textss==null) {
+				textss = HtmlAnalyze.getTagText(stringtext, "title=\"\">", "<");
+			}
+			if (textss != "") {
+				issuing_company = issuing_company + textss + "|" + urlss;
+				if (daoyanlist.length != 1 && i + 2 < issuing_companylist.length) {
+					issuing_company = issuing_company + ",";
+				}
+			}
+
+			i += 1;
+		}
+		System.out.println(issuing_company);
+		playtv.setIssuing_company(issuing_company);
+		
+		
+		
+		
+
+		// String yuyan="";
+		// yuyan= (String) objectobject.get("lgName");
+		// playtv.setLgName(yuyan);
+
+		playtv.setClassnum(10);
+		OracleOpreater.intoTEM_DIM_FILM_PLATFORM(playtv);
+	}
 
 	private static String cboooMaim(String mainUrl) {
 		// TODO Auto-generated method stub
@@ -37,7 +174,7 @@ public class DownCboooZhongGuoDetails {
 			for (Object object : album_lists) {
 				TvPlay playtv = new TvPlay();
 				JSONObject objectobject = JSONObject.fromObject(object);
-
+				playtv.setTvplay_id( Integer.parseInt((String) objectobject.get("ID")));
 				String url = (String) objectobject.get("ID");
 				System.out.println(url = "http://www.cbooo.cn/m/" + url);
 				playtv.setTvplay_url(url);
@@ -59,78 +196,10 @@ public class DownCboooZhongGuoDetails {
 				String BoxOffice = ""; // 票房
 				BoxOffice = (String) objectobject.get("BoxOffice");
 				playtv.setBox_office(BoxOffice);
+				
+				xiangxiurl(playtv, url);
 
-				bb = true;
-				String strHtmllittle = "";
-				while (bb) {
-					strHtmllittle = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
-					if (strHtmllittle != null && !"".equals(strHtmllittle)) {
-						bb = false;
-					}
-				}
-				String classstr = ""; // 类型:
-				classstr = HtmlAnalyze.getTagText(strHtmllittle, "类型：", "</p>");
-				System.out.println(classstr = classstr.replaceAll(",", "/"));
-				playtv.setSubject(classstr);
-
-				String shichang = ""; // 时长
-				shichang = HtmlAnalyze.getTagText(strHtmllittle, "片长", "</p>");
-				shichang = shichang.replaceAll("：", "");
-				playtv.setTime_length(shichang);
-
-				String times = ""; // 上映:
-				times = HtmlAnalyze.getTagText(strHtmllittle, "上映时间：", "</p>");
-				// System.out.println(times=times.replaceAll("-", ""));
-				playtv.setShow_date(times);
-
-				String diqu = ""; // 地区
-				diqu = HtmlAnalyze.getTagText(strHtmllittle, "地区：", "</p>");
-				playtv.setProduction_area(diqu);
-
-				String yanyuan = "";// 演员
-				Object yanyuanAll = HtmlAnalyze.getTagText(strHtmllittle, "<dt>主演：</dt>", "</dd>", true, 0);
-				String[] yanyuanlist = yanyuanAll.toString().split("</p>");
-				int i = 0;
-				for (String stringtext : yanyuanlist) {
-					String urlss = HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
-					String textss = HtmlAnalyze.getTagText(stringtext, "title=\"", "\"");
-					if (textss != "") {
-						yanyuan = yanyuan + textss + "|" + urlss;
-						if (yanyuanlist.length != 1 && i + 2 < yanyuanlist.length) {
-							yanyuan = yanyuan + ",";
-						}
-					}
-
-					i += 1;
-				}
-				System.out.println(yanyuan);
-				playtv.setMajor_actors(yanyuan);
-
-				String daoyan = "";// 导演
-				String daoyanAll = HtmlAnalyze.getTagText(strHtmllittle, "<dt>导演：</dt>", "</dd>", true, 0);
-				String[] daoyanlist = daoyanAll.split("</p>");
-				i = 0;
-				for (String stringtext : daoyanlist) {
-					String urlss = HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
-					String textss = HtmlAnalyze.getTagText(stringtext, "title=\"", "\"");
-					if (textss != "") {
-						daoyan = daoyan + textss + "|" + urlss;
-						if (daoyanlist.length != 1 && i + 2 < daoyanlist.length) {
-							daoyan = daoyan + ",";
-						}
-					}
-
-					i += 1;
-				}
-				System.out.println(daoyan);
-				playtv.setDirector(daoyan);
-
-				// String yuyan="";
-				// yuyan= (String) objectobject.get("lgName");
-				// playtv.setLgName(yuyan);
-
-				playtv.setClassnum(10);
-				OracleOpreater.intoTEM_DIM_FILM_PLATFORM(playtv);
+				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -190,6 +259,8 @@ public class DownCboooZhongGuoDetails {
 		openstatic();
 //		TimingTime(hh, mm, ss);
 //		 TimingTime(21, 59, 59);
+//		TvPlay playtv = new TvPlay();
+//			DownCboooZhongGuoDetails.xiangxiurl(playtv,"http://www.cbooo.cn/m/1008");
 	}
 
 }

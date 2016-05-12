@@ -2,7 +2,7 @@ package com.artsoft.bean;
 
 public class TvPlay {
 	// id
-	private Integer tvplay_id;
+	private Integer tvplay_id=-1;
 	// 剧名称
 	private String tvplay_name = "";
 	// 百度百科url
@@ -25,6 +25,10 @@ public class TvPlay {
 	private String production_company = "";
 	// 发行公司包含url
 	private String issuing_company = "";
+	// 制作公司包含url
+	private String PRODUCE_COMPANY = "";
+	//制式
+	private String PRODUCE_FORMAT="";
 	// 拍摄日期
 	private String shoot_time = "";
 	// 拍摄地点
@@ -566,5 +570,21 @@ public class TvPlay {
 
 	public void setSOURCE(int sOURCE) {
 		SOURCE = sOURCE;
+	}
+
+	public String getPRODUCE_COMPANY() {
+		return PRODUCE_COMPANY;
+	}
+
+	public void setPRODUCE_COMPANY(String pRODUCE_COMPANY) {
+		PRODUCE_COMPANY = pRODUCE_COMPANY;
+	}
+
+	public String getPRODUCE_FORMAT() {
+		return PRODUCE_FORMAT;
+	}
+
+	public void setPRODUCE_FORMAT(String pRODUCE_FORMAT) {
+		PRODUCE_FORMAT = pRODUCE_FORMAT;
 	}
 }

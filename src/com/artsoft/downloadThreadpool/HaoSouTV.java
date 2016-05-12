@@ -26,7 +26,7 @@ public class HaoSouTV {
 		List<String> listArray = OracleHaoSou.select(Integer.toString(statnum), Integer.toString(endnum));
 		System.out.println(listArray.size());
 		for (Object Objstring : listArray) {
-			System.out.println(Objstring);
+//			System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
 			System.out.println(listTemp.get(0));
 			System.out.println(listTemp.get(1));
@@ -88,14 +88,14 @@ public class HaoSouTV {
 		// return;
 		// }
 		String strHtml = urlreturnHtml(urlBranch);
-		System.out.println(strHtml);
+//		System.out.println(strHtml);
 
 		String strtext = HtmlAnalyze.getTagText(strHtml, "\":\"", "\"}");
 		String starttime = HtmlAnalyze.getTagText(strHtml, "from\":\"", "\"}");
 		String endtime = HtmlAnalyze.getTagText(strHtml, "from\":\"", "\"}");
 
-		System.out.println(strtext);
-		System.out.println(starttime);
+//		System.out.println(strtext);
+//		System.out.println(starttime);
 
 		try {
 

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.artsoft.bean.Persion;
 import com.artsoft.bean.TvPlay;
+import com.artsoft.bean.tem_person_works;
 import com.artsoft.util.TimeTest;
 
 public class OracleHaoSou {
@@ -871,6 +872,45 @@ public class OracleHaoSou {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
+	
+	/**
+	 *tem_person_works 百度人物主要作品 
+	 *2016年5月6日18:10:50
+	 * 
+	 * @return
+	 */
+	public static void intotem_person_works( tem_person_works personwork ) {
+		if (personwork.getTextValue().equals("")||personwork.getTextValue()==null) {
+			return;
+		}
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.TEM_PERSON_WORKS t ( t.PERSON_ID,t.PERSON_URL,t.NAME ,t.PRODUCED_TIME,"
+				+ "t.ROLE_NAME,t.DIRECTOR,t.MAJOR_ACTORS, t.SINGER,t.REMARKS,t.TEXT_VALUE,t.DATA_TYPE,t.UPDATE_TIME ,t.NAME_URL"
+				+ ")values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(personwork.getPersonId());
+		list.add(personwork.getPersonUrl());
+		list.add(personwork.getName());
+		list.add(personwork.getProducedTime());
+		list.add(personwork.getRoleName());
+		list.add(personwork.getDirector());
+		list.add(personwork.getMajorActors());
+		list.add(personwork.getSinger());
+		list.add(personwork.getRemarks());
+		list.add(personwork.getTextValue());
+		list.add(personwork.getDataType());
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(personwork.getName_URL());
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
 
 	public static void main(String[] args) {
 		// returnNumPeople("edw.dim_tvplay");

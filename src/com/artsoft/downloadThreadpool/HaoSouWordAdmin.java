@@ -35,14 +35,14 @@ public class HaoSouWordAdmin {
 		// return;
 		// }
 		String strHtml = urlreturnHtml(urlBranch);
-		System.out.println(strHtml);
+//		System.out.println(strHtml);
 
 		String strtext = HtmlAnalyze.getTagText(strHtml, "\":\"", "\"}");
 		String starttime = HtmlAnalyze.getTagText(strHtml, "from\":\"", "\"}");
 		String endtime = HtmlAnalyze.getTagText(strHtml, "from\":\"", "\"}");
 
-		System.out.println(strtext);
-		System.out.println(starttime);
+//		System.out.println(strtext);
+//		System.out.println(starttime);
 
 		try {
 			String[] sourceStrArray = strtext.toString().split("\\|");
