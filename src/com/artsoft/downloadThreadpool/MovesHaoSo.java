@@ -17,20 +17,20 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
-public class HaoSouTV {
-	static ThreadPool pool = new ThreadPool(10);
+public class MovesHaoSo {
+	static ThreadPool pool = new ThreadPool(30);
 	private static Proxy proxy = null;
 
 	public static void mainProgram(int statnum, int endnum,int TV_TYPE) {
 		// TODO Auto-generated method stub
-		List<String> listArray = OracleHaoSou.select(Integer.toString(statnum), Integer.toString(endnum));
+		List<String> listArray = OracleHaoSou.selectdim_film(Integer.toString(statnum), Integer.toString(endnum));
 		System.out.println(listArray.size());
 		for (Object Objstring : listArray) {
 //			System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
 			System.out.println(listTemp.get(0));
 			System.out.println(listTemp.get(1));
-			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
+			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
 				String urlBranch = "";
 				// 指数
 				try {
@@ -153,7 +153,7 @@ public class HaoSouTV {
 
 	private static void HaosouBranch1(String urlBranch, String string, String string2, String string3,int TV_TYPE) {
 		// TODO Auto-generated method stub
-		while (pool.getPoolNum() > 10) {
+		while (pool.getPoolNum() > 30) {
 			try {
 				System.out.println("线程数量大于10，等待5s");
 				Thread.sleep(5000);
@@ -223,11 +223,12 @@ public class HaoSouTV {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		String returnNumTVle=OracleHaoSou.returnNumPeople("edw.dim_tvplay");
+		//select t.film_id,t.film_name from ods.dim_film t
+		String returnNumTVle=OracleHaoSou.returnNumPeople("ods.dim_film");
 		System.out.println("需要采集的人名字数为"+returnNumTVle);
 		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
 			// i=15780;
-			int TV_TYPE=0;
+			int TV_TYPE=3;
 			mainProgram(i, i + 1000,TV_TYPE);
 		}
 

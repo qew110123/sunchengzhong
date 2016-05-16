@@ -23,12 +23,12 @@ public class Downloadpptv {
 		// ParseJson(BuildJson());
 		String strHtml = "";
 		boolean bb = true;
-		while (bb) {
+//		while (bb) {
 			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "UTF-8", null, null);
-			if (strHtml != null && !"".equals(strHtml)) {
-				bb = false;
-			}
-		}
+//			if (strHtml != null && !"".equals(strHtml)) {
+//				bb = false;
+//			}
+//		}
 		// System.out.println(strHtml);
 		Document doc = Jsoup.parse(strHtml);
 		String DETAIL_URL="";

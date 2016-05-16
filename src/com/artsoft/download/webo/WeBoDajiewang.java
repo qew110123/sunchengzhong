@@ -56,6 +56,47 @@ public class WeBoDajiewang {
 		get.releaseConnection();
 
 	}
+	
+	public static String Weiboall(String newUrl) throws Exception {
+		// TODO Auto-generated method stub
+		DefaultHttpClient client = new DefaultHttpClient();
+		HttpResponse response = null;
+		System.out.println("******************************页面转向******************************");
+		// String newUrl =
+		// "http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=1091324464527";
+		HttpGet get = new HttpGet(newUrl);
+		// get.addHeader("Content-Type", "text/html;charset=UTF-8");
+		// get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64;
+		// rv:26.0) Gecko/20100101 Firefox/26.0");
+		// get.addHeader("Host", "data.weibo.com");
+		// get.addHeader("Accept",
+		// "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+		get.addHeader("Accept", "*/*");
+		get.addHeader("Accept-Encoding", "gzip, deflate, sdch");
+		get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
+		get.addHeader("Cache-Control", "max-age=0");
+		get.addHeader("Connection", "keep-alive");
+		get.addHeader("Content-Type", "application/x-www-form-urlencoded");
+		get.addHeader(new BasicHeader("Cookie",
+				"SINAGLOBAL=8549726845230.907.1445398578667; SUHB=0sqQ0pK3WBV2gN; SUB=_2AkMhLpLRdcNhrAFZmP0SzG3rbolXzQ7wu9_0M03fZ2JCMnoQgT5nqiRotBF_DN7Orke6kXahkJdZP3wN_xXCDM1NAU5yAAw.; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; DATA=usrmdinst_0; WBStore=8ca40a3ef06ad7b2|undefined; _s_tentry=www.baidu.com; Apache=3636198288224.295.1463024037215; ULV=1463024037240:30:4:3:3636198288224.295.1463024037215:1462874953123; UOR=picture.youth.cn,widget.weibo.com,www.baidu.com; PHPSESSID=m5v11jk24squ83afqf6m94grp7"));
+
+		get.addHeader("Host", "data.weibo.com");
+		get.addHeader("Referer", "http://data.weibo.com/index/hotword?wid=1091324230349&wname=%E6%AC%A2%E4%B9%90%E9%A2%82");
+//		get.addHeader("Upgrade-Insecure-Requests", "1");
+		get.addHeader("User-Agent",
+				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36");
+		get.addHeader("X-Requested-With", "XMLHttpRequest");
+		// get.addHeader("Accept-Language",
+		// "zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3");
+
+		HttpResponse httpResponse = client.execute(get);
+		String responseString = EntityUtils.toString(httpResponse.getEntity());
+		// 登录后首页的内容
+		System.out.println(responseString);
+		get.releaseConnection();
+		return responseString;
+//		return Test.weoborun(newUrl);
+	}
 
 	public static String Weibo(String newUrl) throws Exception {
 //		// TODO Auto-generated method stub
@@ -95,7 +136,7 @@ public class WeBoDajiewang {
 //		System.out.println(responseString);
 //		get.releaseConnection();
 //		return responseString;
-		return Test.Weibo(newUrl);
+		return TimeoutTest.runing(newUrl);
 	}
 
 	public static void people(String names, int data_type, String  data_id) throws Exception {
@@ -190,7 +231,7 @@ public class WeBoDajiewang {
 				Oracle.InsertCompany(tem_weibo_word_num);
 				String mobile="";
 				System.out.println(mobile=(String) objectobjects2.get("mobile"));
-				tem_weibo_word_num.setDimensionType(2);
+				tem_weibo_word_num.setDimensionType(3);
 				tem_weibo_word_num.setNewsNum(Integer.valueOf(mobile));
 				Oracle.InsertCompany(tem_weibo_word_num);
 			}
@@ -503,6 +544,7 @@ public class WeBoDajiewang {
 	public static void webopeople(String name ,int data_type,String  data_id){
 //		String name = "范冰冰";
 		String URLEncodername = "";
+		String codeString ="";
 		try {
 			System.out.println(
 					URLEncodername = java.net.URLEncoder.encode(java.net.URLEncoder.encode(name, "utf-8"), "utf-8"));
@@ -511,14 +553,28 @@ public class WeBoDajiewang {
 			e.printStackTrace();
 		}
 		try {
-			System.out.println(Weibo("http://data.weibo.com/index/ajax/contrast?key2=" + URLEncodername
+			System.out.println(codeString=Weibo("http://data.weibo.com/index/ajax/contrast?key2=" + URLEncodername
 					+ "&key3=&key4=&key5=&key6=&_t=0&__rnd=1450262484071"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			people(name, data_type,data_id);
+			JSONObject objectobject = JSONObject.fromObject(codeString);
+			String codeshuju=objectobject.getString("code");
+			if (codeshuju.equals("100000")) {
+				System.out.println("含有关键字");
+				people(name, data_type,data_id);
+			}else{
+				if (codeshuju.equals("100001")) {
+					System.out.println("没有关键词");
+				}
+				else{
+					System.out.println("出现问题");
+					CommonUtil.setLog( "出现问题"+TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "name："+name+"id:"+data_id);
+				}
+			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -591,14 +647,14 @@ public class WeBoDajiewang {
 		
 		
 		
-//		TimingTime(8, 00, 01);
-		 runstatic();
+		TimingTime(00, 00, 01);
+//		 runstatic();
 		/**
 		 * 名称  
 		 * data_type 类型 1 人 2 电视剧 3 电影
 		 * data_id  人物id
 		 */
-//		webopeople("范冰冰",1,"0");
+//		webopeople("杨桂梅",1,"0");
 //		System.out.println("运行网吧");
 		
 		

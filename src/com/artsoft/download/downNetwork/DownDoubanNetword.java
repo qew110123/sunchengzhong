@@ -191,7 +191,7 @@ public class DownDoubanNetword {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
 			}
-		}, time, 1000 * 60 * 60 * 1);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
 	}
 
 	public static void mainyunxing() {

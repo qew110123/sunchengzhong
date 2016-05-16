@@ -46,7 +46,7 @@ public class indexso360 {
 
 	}
 
-	public static void tem_person_keyword_distrib(String person_id, String data_date, String keyword, String urlMain) {
+	public static void tem_person_keyword_distrib(String person_id, String data_date, String keyword, String urlMain,int data_type) {
 		// String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
 		// "UTF-8", null, null);
 		// if (strHtml == null || strHtml.equals("")) {
@@ -76,13 +76,13 @@ public class indexso360 {
 			System.out.println(keyword = (String) objectobject.get("query"));
 			System.out.println(search_index = (int) objectobject.get("power"));
 			System.out.println(trend = (String) objectobject.get("trend"));
-			OracleHaoSou.intotem_person_keyword_distrib(data_date, person_id, keyword, search_index, trend, urlMain);
+			OracleHaoSou.intotem_person_keyword_distrib(data_date, person_id, keyword, search_index, trend, urlMain,data_type);
 
 		}
 	}
 
 	private static void tem_person_relevant_keyword(String person_id, String data_date, String keyword,
-			String urlMain) {
+			String urlMain,int data_type) {
 		// String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
 		// "UTF-8", null, null);
 		// if (strHtml == null || strHtml.equals("")) {
@@ -129,13 +129,13 @@ public class indexso360 {
 				String keyword_url = "http://www.so.com/s?ie=utf-8&src=360zhishu&q=" + utf8keyword + "&from=360zhishu";
 				// http://www.so.com/s?ie=utf-8&src=360zhishu&q=%E5%94%90%E5%AB%A3&from=360zhishu
 				OracleHaoSou.intotem_person_relevant_keyword(data_date, person_id, keyword, keyword_url, recreason,
-						trend, urlMain);
+						trend, urlMain,data_type);
 			}
 
 		}
 	}
 
-	private static void tem_person_relevant_news(String person_id, String data_date, String keyword, String urlMain) {
+	private static void tem_person_relevant_news(String person_id, String data_date, String keyword, String urlMain,int data_type) {
 		// String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
 		// "UTF-8", null, null);
 		// if (strHtml == null || strHtml.equals("")) {
@@ -169,11 +169,11 @@ public class indexso360 {
 			String news_date = (String) objectobject.get("pdate");
 
 			OracleHaoSou.intotem_person_relevant_news(data_date, person_id, news_date, news_sitename, news_title,
-					news_url, urlMain);
+					news_url, urlMain,data_type);
 		}
 	}
 
-	private static void tem_person_relevant_weibo(String person_id, String data_date, String keyword, String urlMain) {
+	private static void tem_person_relevant_weibo(String person_id, String data_date, String keyword, String urlMain,int data_type) {
 		// String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
 		// "UTF-8", null, null);
 		// if (strHtml == null || strHtml.equals("")) {
@@ -210,12 +210,12 @@ public class indexso360 {
 			String weibo_url = (String) objectobject.get("url");
 			String text = (String) objectobject.get("text");
 			OracleHaoSou.intotem_person_relevant_weibo(data_date, person_id, comments_num, forwards_num, comments_url,
-					forwards_url, text, timestamp, weibo_url, urlMain);
+					forwards_url, text, timestamp, weibo_url, urlMain,data_type);
 
 		}
 	}
 
-	private static void tem_person_keyword_up(String person_id, String data_date, String keyword, String urlMain) {
+	private static void tem_person_keyword_up(String person_id, String data_date, String keyword, String urlMain,int data_type) {
 		// String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
 		// "UTF-8", null, null);
 		// if (strHtml == null || strHtml.equals("")) {
@@ -245,40 +245,40 @@ public class indexso360 {
 			// System.out.println(news_title);
 			keyword = (String) objectobject.get("word");
 			String up_rate = (String) objectobject.get("ratio");
-			OracleHaoSou.intotem_person_keyword_up(data_date, person_id, keyword, up_rate, urlMain);
+			OracleHaoSou.intotem_person_keyword_up(data_date, person_id, keyword, up_rate, urlMain,data_type);
 		}
 	}
 
-	public static void my360run(String person_id, String data_date, String keyword, String krywordutf8) {
+	public static void my360run(String person_id, String data_date, String keyword, String krywordutf8,int data_type) {
 		try {
 			tem_person_keyword_distrib(person_id, data_date, keyword,
-					"http://index.so.com/index.php?a=radarJson&t=30&q=" + krywordutf8);
+					"http://index.so.com/index.php?a=radarJson&t=30&q=" + krywordutf8, data_type);
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		try {
 			tem_person_relevant_keyword(person_id, data_date, keyword,
-					"http://index.so.com/index.php?a=nlpJson&t=30&q=" + krywordutf8);
+					"http://index.so.com/index.php?a=nlpJson&t=30&q=" + krywordutf8, data_type);
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		try {
 			tem_person_relevant_news(person_id, data_date, keyword,
-					"http://index.so.com/index.php?a=relNewsJson&q=" + krywordutf8);
+					"http://index.so.com/index.php?a=relNewsJson&q=" + krywordutf8, data_type);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		try {
 			tem_person_relevant_weibo(person_id, data_date, keyword,
-					"http://index.so.com/index.php?a=relWeiboJson&q=" + krywordutf8);
+					"http://index.so.com/index.php?a=relWeiboJson&q=" + krywordutf8, data_type);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		try {
 			tem_person_keyword_up(person_id, data_date, keyword,
-					"http://index.so.com/index.php?a=surgeWordsJson&t=7&q=" + krywordutf8);
+					"http://index.so.com/index.php?a=surgeWordsJson&t=7&q=" + krywordutf8, data_type);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -323,7 +323,7 @@ public class indexso360 {
 						}
 					}
 					System.out.println("当前启动线程thread:" + pool.getPoolNum());
-					pool.performTask(new index360pool(person_id, data_date, keyword, krywordutf8));
+					pool.performTask(new index360pool(person_id, data_date, keyword, krywordutf8,1));
 
 					// }
 

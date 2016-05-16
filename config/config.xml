@@ -9,7 +9,7 @@
   <solrUrl>http://10.70.25.101:8080/solr/mgnews</solrUrl>
   
   <driver>oracle.jdbc.driver.OracleDriver</driver>  
-  <url218>jdbc:oracle:thin:@192.168.1.218:1521:yibase</url218>  
+  <url218>jdbc:oracle:thin:@192.168.1.10:1521:yibase</url218>  
   <user218>dwetl</user218>  
   <pwd218>ynkj666</pwd218>   
   <ProxyPath>proxy.txt</ProxyPath>  

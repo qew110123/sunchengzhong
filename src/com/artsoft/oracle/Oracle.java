@@ -32,7 +32,7 @@ public class Oracle {
 		list.add(tem_weibo_word_num.getUrl());
 		list.add(tem_weibo_word_num.getDimensionType());
 		list.add(tem_weibo_word_num.getDataType());
-		
+		System.out.println(list.toString());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
@@ -105,26 +105,33 @@ public class Oracle {
 	 * 
 	 */
 	public static void InsertCompany(Tem_weibo_word_tag tem_weibo_word_tag) {
-		Connection conn = DBOperate218.getInstance().getConnection();
-
-		String strSql = "insert into ods.tem_weibo_word_tag t (t.data_date,t.data_id,t.word,t.label_name,t.label_rate,t.into_date,t.url,t.dimension_type,t.data_type)values (?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?)";
-		List<Comparable> list = new ArrayList();
-		list.add(tem_weibo_word_tag.getDataDate());
-		list.add(tem_weibo_word_tag.getDataId());
-		list.add(tem_weibo_word_tag.getWord());
-		list.add(tem_weibo_word_tag.getLabelName());
-		if (tem_weibo_word_tag.getLabelRate().equals(null)||tem_weibo_word_tag.getLabelRate()==null) {
-			tem_weibo_word_tag.setLabelRate("");
+		try {
+			
+		
+			Connection conn = DBOperate218.getInstance().getConnection();
+	
+			String strSql = "insert into ods.tem_weibo_word_tag t (t.data_date,t.data_id,t.word,t.label_name,t.label_rate,t.into_date,t.url,t.dimension_type,t.data_type)values (?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?)";
+			List<Comparable> list = new ArrayList();
+			list.add(tem_weibo_word_tag.getDataDate());
+			list.add(tem_weibo_word_tag.getDataId());
+			list.add(tem_weibo_word_tag.getWord());
+			list.add(tem_weibo_word_tag.getLabelName());
+			if (tem_weibo_word_tag.getLabelRate().equals(null)||tem_weibo_word_tag.getLabelRate()==null) {
+				tem_weibo_word_tag.setLabelRate("");
+			}
+			list.add(tem_weibo_word_tag.getLabelRate());
+			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			list.add(tem_weibo_word_tag.getUrl());
+			list.add(tem_weibo_word_tag.getDimensionType());
+	//		list.add(tem_weibo_word_age_sex.getDimensionType());
+			list.add(tem_weibo_word_tag.getDataType());
+			System.out.println(list.toString());
+			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+			System.out.println(bb);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Êý¾Ý¿â³ö´í");
 		}
-		list.add(tem_weibo_word_tag.getLabelRate());
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		list.add(tem_weibo_word_tag.getUrl());
-		list.add(tem_weibo_word_tag.getDimensionType());
-//		list.add(tem_weibo_word_age_sex.getDimensionType());
-		list.add(tem_weibo_word_tag.getDataType());
-		System.out.println(list.toString());
-		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
-		System.out.println(bb);
 	}
 
 }

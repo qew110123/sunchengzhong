@@ -27,6 +27,27 @@ public class OracleHaoSou {
 		return (ArrayList<String>) list;
 
 	}
+	
+	
+	
+	/**
+	 * 拼写sql语句电影数据
+	 * 
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectdim_film(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
+		
+		sql = "select t.film_id,t.film_name,t.FILM_URL from ods.dim_film t order by t.film_id ";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		return (ArrayList<String>) list;
+
+	}
 
 	/**
 	 * sql语句并获取开始和结束 dao用户列表中
@@ -44,6 +65,9 @@ public class OracleHaoSou {
 		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 	}
+	
+	
+
 
 	/**
 	 * 入电视剧搜索量的库
@@ -59,7 +83,7 @@ public class OracleHaoSou {
 	 * @param createTime
 	 */
 	public static void intoPlayAmont(String tvplayId, String tyPlayName, String dataAmount, String videoType,
-			String palydate, String playUrl, String tvType, String DataType, String createTime) {
+			String palydate, String playUrl, int tvType, String DataType, String createTime) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		System.out.println(tvplayId + "tyPlayName" + tyPlayName + "dataAmount" + dataAmount + "videoType" + videoType
 				+ "palydate" + palydate + "playUrl" + playUrl + tvType + DataType + createTime);
@@ -76,7 +100,7 @@ public class OracleHaoSou {
 			list.add(Integer.parseInt(videoType));
 			list.add(palydate);
 			list.add(playUrl);
-			list.add(Integer.parseInt(tvType));
+			list.add(tvType);
 			list.add(Integer.parseInt(DataType));
 			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
@@ -742,11 +766,11 @@ public class OracleHaoSou {
 	 * @return
 	 */
 	public static void intotem_person_keyword_distrib(String data_date, String person_id, String keyword,
-			int search_index, String trend, String url) {
+			int search_index, String trend, String url ,int data_type) {
 
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String strSql = "insert into ods.tem_person_keyword_distrib t ( t.data_date,t.person_id,t.keyword ,t.search_index,t.trend,"
-				+ "t.into_date,t.url)values(?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+		String strSql = "insert into ods.TEM_KEYWORD_DISTRIB t ( t.data_date,t.data_id,t.keywords ,t.search_index,t.trend,"
+				+ "t.into_date,t.url,t.data_type)values(?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 
 		List<Comparable> list = new ArrayList();
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
@@ -757,6 +781,7 @@ public class OracleHaoSou {
 		list.add(trend);
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		list.add(url);
+		list.add(data_type);
 		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
@@ -768,11 +793,11 @@ public class OracleHaoSou {
 	 * @return
 	 */
 	public static void intotem_person_relevant_keyword(String data_date, String person_id, String keyword,
-			String keyword_url, String recreason, String trend, String url) {
+			String keyword_url, String recreason, String trend, String url,int data_type) {
 
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String strSql = "insert into ods.tem_person_relevant_keyword t ( t.data_date,t.person_id,t.keyword ,t.keyword_url,t.recreason,t.trend,"
-				+ "t.into_date,t.url)values(?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+		String strSql = "insert into ods.TEM_KEYWORD_RELEVANT_trend t ( t.data_date,t.data_id,t.keywords ,t.keyword_url,t.recreason,t.trend,"
+				+ "t.into_date,t.url,t.data_type)values(?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 
 		List<Comparable> list = new ArrayList();
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
@@ -784,6 +809,7 @@ public class OracleHaoSou {
 		list.add(trend);
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		list.add(url);
+		list.add(data_type);
 		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
@@ -795,11 +821,11 @@ public class OracleHaoSou {
 	 * @return
 	 */
 	public static void intotem_person_relevant_news(String data_date, String person_id, String news_date,
-			String news_sitename, String news_title, String news_url, String url) {
+			String news_sitename, String news_title, String news_url, String url,int data_type) {
 
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String strSql = "insert into ods.tem_person_relevant_news t ( t.data_date,t.person_id,t.news_date ,t.news_sitename,t.news_title,t.news_url,"
-				+ "t.into_date,t.url)values(?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+		String strSql = "insert into ods.TEM_KEYWORD_RELEVANT_NEWS t ( t.data_date,t.data_id,t.news_date ,t.news_sitename,t.news_title,t.news_url,"
+				+ "t.into_date,t.url,t.data_type)values(?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 
 		List<Comparable> list = new ArrayList();
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
@@ -811,6 +837,7 @@ public class OracleHaoSou {
 		list.add(news_url);
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		list.add(url);
+		list.add(data_type);
 		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
@@ -823,11 +850,11 @@ public class OracleHaoSou {
 	 * @return
 	 */
 	public static void intotem_person_relevant_weibo(String data_date, String person_id, String comments_num,
-			String forwards_num, String comments_url, String forwards_url, String text, String timestamp, String weibo_url, String url) {
+			String forwards_num, String comments_url, String forwards_url, String text, String timestamp, String weibo_url, String url,int data_type) {
 
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String strSql = "insert into ods.tem_person_relevant_weibo t ( t.data_date,t.person_id,t.comments_num ,t.forwards_num,t.comments_url,t.forwards_url,"
-				+ "t.text,t.timestamp,t.weibo_url,t.into_date,t.url)values(?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+		String strSql = "insert into ods.TEM_KEYWORD_RELEVANT_WEIBO t ( t.data_date,t.data_id,t.comments_num ,t.forwards_num,t.comments_url,t.forwards_url,"
+				+ "t.text,t.timestamp,t.weibo_url,t.into_date,t.url,t.data_type)values(?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 
 		List<Comparable> list = new ArrayList();
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
@@ -842,6 +869,7 @@ public class OracleHaoSou {
 		list.add(weibo_url);
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		list.add(url);
+		list.add(data_type);
 		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
@@ -853,11 +881,11 @@ public class OracleHaoSou {
 	 * @return
 	 */
 	public static void intotem_person_keyword_up(String data_date, String person_id, String keyword,
-			String up_rate, String url) {
+			String up_rate, String url,int data_type) {
 
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String strSql = "insert into ods.tem_person_keyword_up t ( t.data_date,t.person_id,t.keyword ,t.up_rate,"
-				+ "t.into_date,t.url)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+		String strSql = "insert into ods.TEM_KEYWORD_UP t ( t.data_date,t.data_id,t.keywords ,t.up_rate,"
+				+ "t.into_date,t.url,t.data_type)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 
 		List<Comparable> list = new ArrayList();
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
@@ -868,6 +896,7 @@ public class OracleHaoSou {
 //		list.add(trend);
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		list.add(url);
+		list.add(data_type);
 		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);

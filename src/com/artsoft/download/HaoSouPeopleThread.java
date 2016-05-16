@@ -84,8 +84,8 @@ public class HaoSouPeopleThread implements Runnable {
 					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
 					System.out.println(palydate = palydate.replaceAll("-", ""));
 
-					OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[i - 1], "0", palydate, urlBranch,
-							"0", DataType, "");
+//					OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[i - 1], "0", palydate, urlBranch,
+//							"0", DataType, "");
 					if (palydate.equals("20151111")) {
 						return;
 					}
