@@ -30,25 +30,30 @@ public class DownpptvMovie {
 //			}
 //		}
 		// System.out.println(strHtml);
-		Document doc = Jsoup.parse(strHtml);
-		Elements links = doc.select("li.tips");
-		// Element content = doc.getElementById("content");
-		// Elements links = content.getElementsByTag("a");
-		for (Element link : links) {
-			String name = "";
-			String score = "";
-			String DETAIL_URL="";
-			System.out.println(DETAIL_URL=link.select("a.detailbtn").attr("href"));
-			System.out.println(name = link.select("p.ui-txt span").text());
-			System.out.println(score = link.select("p.ui-txt em").text());
-			// Download.youkuBranch(strmainurl);
 			try {
-				OracleOpreater.intoReputationAndDETAIL_URL(name, "6", score, "0", "", mainUrl, "3", "1",DETAIL_URL);
+				Document doc = Jsoup.parse(strHtml);
+				Elements links = doc.select("li.tips");
+				// Element content = doc.getElementById("content");
+				// Elements links = content.getElementsByTag("a");
+				for (Element link : links) {
+					String name = "";
+					String score = "";
+					String DETAIL_URL="";
+					System.out.println(DETAIL_URL=link.select("a.detailbtn").attr("href"));
+					System.out.println(name = link.select("p.ui-txt span").text());
+					System.out.println(score = link.select("p.ui-txt em").text());
+					// Download.youkuBranch(strmainurl);
+					try {
+						OracleOpreater.intoReputationAndDETAIL_URL(name, "6", score, "0", "", mainUrl, "3", "1",DETAIL_URL);
 
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-		}
+		
 
 	}
 
@@ -109,8 +114,8 @@ public static void runstatic(){
 		// }
 		// }
 		
-		TimingTime(21, 59, 59);
-//		  runstatic();
+//		TimingTime(21, 59, 59);
+		  runstatic();
 	}
 
 }

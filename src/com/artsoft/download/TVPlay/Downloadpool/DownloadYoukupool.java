@@ -16,7 +16,7 @@ public class DownloadYoukupool implements TaskInterface {
 	public void perform() {
 		// TODO Auto-generated method stub
 //		DownloadYouku.youkuBranch(strmainurl);
-		DownloadYouku.youkuBranch(strmainurl);
+		DownloadYouku.youkuBranch1(strmainurl);
 		
 	}
 	

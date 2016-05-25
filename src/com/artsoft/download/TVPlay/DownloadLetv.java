@@ -79,7 +79,7 @@ public class DownloadLetv {
 		String score = "";
 		String aid = "";
 		String DETAIL_URL = "";
-		if (letvjsonArray.size() == 0) {
+		if (letvjsonArray == null) {
 			return;
 		}
 		try {

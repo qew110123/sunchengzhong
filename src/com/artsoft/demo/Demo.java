@@ -139,8 +139,9 @@ public class Demo {
 		//// strUrl="http://index.youku.com/ProAction!getPromptAnswer.action?word=%E5%90%8D";
 		// String strHtml = DownloadUtil.getHtmlText(strUrl, 1000 * 30,"UTF-8",
 		//// null, null);
-		//// String strHtml = DownloadUtil.readHtml(strUrl, 1000 * 30,"UTF-8",
-		//// cookstr, null);
+		 String strHtml = DownloadUtil.getHtmlText("http://cpquery.sipo.gov.cn//txnQueryOrdinaryPatents.do?select-key%3Ashenqingh=&select-key%3Azhuanlimc=&select-key%3Ashenqingrxm=%E6%9F%B3%E8%B6%85&select-key%3Azhuanlilx=&select-key%3Ashenqingr_from=&select-key%3Ashenqingr_to=&attribute-node:record_start-row=131&attribute-node:record_page-row=10&#anchor", 1000 * 30,"utf-8",
+				 null, null);
+		 System.out.println(strHtml);
 		//// StringBuffer strHtml = DownloadUtil.getContent(urlstr);
 		//// System.out.println(strHtml);
 		//
@@ -155,7 +156,7 @@ public class Demo {
 		//// String linkText = link.text();
 		// }
 		// Integer.parseInt("2223830274");
-		// double d = Double.parseDouble("2223830274");
+//		 double d = Double.parseDouble("2223830274");
 		// System.out.println(d);
 		// String s = "123.456 "; //要确保字符串为一个数值，否则会出异常
 		// double d = Double.parseDouble(s);
@@ -269,7 +270,7 @@ public class Demo {
 //		System.out.println(Double.parseDouble("0"));
 //		System.out.println(new Date(1453125367));
 //		
-//		Date   now   =   new   Date((long) Double.parseDouble("1443542400000"));   
+//		Date   now   =   new   Date((long) Double.parseDouble("1463311743000"));   
 //		SimpleDateFormat   dateFormat   =   new   SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式   
 //		String  hehe  = dateFormat.format(now);   
 //		System.out.println(hehe);

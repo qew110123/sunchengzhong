@@ -156,12 +156,33 @@ public class OracleBaidu {
 		 * 数据的补充 
 		 */
 		sql="select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
+		
+		/**
+		 * 2016年5月18日09:54:46
+		 * 数据补充
+		 */
+		sql="select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 	}
 	
+	
+	/**
+	 * 百度数据的中的电视剧补充
+	 * 2016年5月23日17:25:17
+	 * @return
+	 */
+	public static List selectbaidudianshijuTVplay() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name,a.tvplay_url from edw.dim_tvplay t left join ods.tem_tvplay a on t.tvplay_id = a.tvplay_id order by a.tvplay_id";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
 	/**
 	 * 百度数据的中的电视剧补充
 	 * 2015年12月2日18:11:49

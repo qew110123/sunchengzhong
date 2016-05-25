@@ -1,5 +1,6 @@
 package com.artsoft.download.TVPlay;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -52,7 +53,7 @@ public class DownloadYouku_always {
 			}
 
 			Document doc = Jsoup.parse(strHtml);
-			Elements links = doc.select("div.yk-col3");
+			Elements links = doc.select("div.box-series div.p-thumb");
 			// Element content = doc.getElementById("content");
 			// Elements links = content.getElementsByTag("a");
 			for (Element link : links) {
@@ -61,12 +62,20 @@ public class DownloadYouku_always {
 					continue;
 				}
 				String strmainurl = "";
-				System.out.println(strmainurl = link.select("div.p-meta-title a").attr("href"));
-				System.out.println(link.select("div.p-meta-title a").attr("title"));
-				System.out.println(link.select("span.p-actor").text());
-				System.out.println(link.select("span.p-num").text());
-				DownloadYouku_always.youkuBranch(strmainurl);
+				System.out.println(strmainurl = link.select("div.p-thumb a").attr("href"));
+//				System.out.println(link.select("div.p-meta-title a").attr("title"));
+//				System.out.println(link.select("span.p-actor").text());
+//				System.out.println(link.select("span.p-num").text());
+				
+				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+				
+				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				DownloadYouku_always.youkuBranch(strmainxiangxiurl);
 			}
+			
+			
+			
 
 			// 进行下一页数据的判断
 
@@ -102,24 +111,25 @@ public class DownloadYouku_always {
 		/**
 		 * 总播放: 评论: 顶:
 		 */
-
-		String name = "";// 名称
-		System.out.println(name = doc.select("span.name").text());
-		String Amount = "";// 播放量
-		System.out.println(Amount = doc.select("span.play").text());
-		Amount = Amount.replaceAll("总播放:", "").replaceAll(",", "");
-
-		String comment = ""; // 评论
-		System.out.println(comment = doc.select("span.comment").text());
-		comment = comment.replaceAll("评论:", "").replaceAll(",", "");
-
-		String answer = ""; // 顶
-		System.out.println(answer = doc.select("span.increm").text());
-		answer = answer.replaceAll("顶:", "").replaceAll(",", "");
-
-		String score = ""; // 评分
-		score = HtmlAnalyze.getTagText(strHtml, "<label>评分:</label>", "<style type=\"text/css\">");
-		System.out.println(score);
+		System.out.println(HtmlAnalyze.getTagText(strHtml, "<meta name=\"title\" content=\"", "\">"));
+		
+//		String name = "";// 名称
+//		System.out.println(name = doc.select("span.name").text());
+//		String Amount = "";// 播放量
+//		System.out.println(Amount = doc.select("span.play").text());
+//		Amount = Amount.replaceAll("总播放:", "").replaceAll(",", "");
+//
+//		String comment = ""; // 评论
+//		System.out.println(comment = doc.select("span.comment").text());
+//		comment = comment.replaceAll("评论:", "").replaceAll(",", "");
+//
+//		String answer = ""; // 顶
+//		System.out.println(answer = doc.select("span.increm").text());
+//		answer = answer.replaceAll("顶:", "").replaceAll(",", "");
+//
+//		String score = ""; // 评分
+//		score = HtmlAnalyze.getTagText(strHtml, "<label>评分:</label>", "<style type=\"text/css\">");
+//		System.out.println(score);
 		// System.out.println(score=HtmlAnalyze.getTagText(score, "<em
 		// class=\"num\">", "</em>"));
 		// answer=answer.replaceAll(",","");
@@ -249,8 +259,22 @@ public class DownloadYouku_always {
 		if (strNo == null || strNo.equals("")) {
 			return;
 		}
-
+		
+		String sid= HtmlAnalyze.getTagText(strHtmls, "var showid=\"", "\";");
+		System.out.println(sid);
+		if (sid == null || sid.equals("")) {
+			return;
+		}
+		
+		String catid= HtmlAnalyze.getTagText(strHtmls, "var catId=\"", "\";");
+		System.out.println(catid);
+		if (catid == null || catid.equals("")) {
+			return;
+		}
+		
 		String urlnew = "http://v.youku.com/v_vpactionInfo/id/" + strNo + "/pm/3?__rt=1&__ro=info_stat";
+		
+		urlnew="http://v.youku.com/QVideo/~ajax/getVideoPlayInfo?__rt=1&__ro=&id="+strNo+"&sid="+sid+"&type=vv&catid="+catid;
 		System.out.println(urlnew);
 
 		String tyPlayName;
@@ -273,14 +297,14 @@ public class DownloadYouku_always {
 		}
 
 		System.out.println(
-				playAmount = HtmlAnalyze.getTagText(strHtml, "总播放数:</label><span class=\"num\">", "</span></li>"));
+				playAmount = HtmlAnalyze.getTagText(strHtml, "{\"vv\":", ","));
 		playAmount = playAmount.replaceAll(",", "");
-		System.out.println(HtmlAnalyze.getTagText(strHtml, "顶 / 踩:</label><span class=\"num\">", "</span></li>"));
-		System.out.println(HtmlAnalyze.getTagText(strHtml, "收藏:</label><span class=\"num\">", "</span></li>"));
-		System.out.println(HtmlAnalyze.getTagText(strHtml, "评论:</label><span id=\"totalComment2\" class=\"num\">",
-				"</span></li>"));
-		System.out.println(HtmlAnalyze.getTagText(strHtml, "<label>播放指数:</label><a href=\"", "\" class=\"vrnum\""));
-		System.out.println(tyPlayName = HtmlAnalyze.getTagText(strHtml, "\"  target=\"_blank\">", "</a>"));
+//		System.out.println(HtmlAnalyze.getTagText(strHtml, "顶 / 踩:</label><span class=\"num\">", "</span></li>"));
+//		System.out.println(HtmlAnalyze.getTagText(strHtml, "收藏:</label><span class=\"num\">", "</span></li>"));
+//		System.out.println(HtmlAnalyze.getTagText(strHtml, "评论:</label><span id=\"totalComment2\" class=\"num\">",
+//				"</span></li>"));
+//		System.out.println(HtmlAnalyze.getTagText(strHtml, "<label>播放指数:</label><a href=\"", "\" class=\"vrnum\""));
+		System.out.println(tyPlayName = HtmlAnalyze.getTagText(strHtmls, "<meta name=\"title\" content=\"", "\">"));
 
 		OracleOpreater.intoPlayAmont(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, playUrl, tvType,
 				realUrl);
@@ -340,28 +364,62 @@ public class DownloadYouku_always {
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
-		String strkey = ReadTxtFile.getKeyWordFromFile("keyword.txt");
-		String[] keys = strkey.split("\n");
-		for (int i = 0; i < keys.length; i++) {
-			// System.out.println(i);
-			// System.out.println(keys[i]);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
-			// ConfigManager config = ConfigManager.getInstance();
-			String url = keys[i];
-			System.out.println(url);
-			boolean bb = true;
-			while (bb) {
-				String strurl = DownloadYouku_always.youkuMaim(url);
-				System.out.println("strurl" + strurl);
-				// System.out.println(strurl!=null&&!"".equals(strurl));
-				if (strurl != null && !"".equals(strurl) && !"".equals("http://www.youku.com")) {
-					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + strurl);
-					url = strurl;
-				} else {
-					bb = false;
+//		String strkey = ReadTxtFile.getKeyWordFromFile("keyword.txt");
+//		String[] keys = strkey.split("\n");
+//		for (int i = 0; i < keys.length; i++) {
+//			// System.out.println(i);
+//			// System.out.println(keys[i]);
+//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
+//			// ConfigManager config = ConfigManager.getInstance();
+//			String url = keys[i];
+//			System.out.println(url);
+//			boolean bb = true;
+//			while (bb) {
+//				String strurl = DownloadYouku_always.youkuMaim(url);
+//				System.out.println("strurl" + strurl);
+//				// System.out.println(strurl!=null&&!"".equals(strurl));
+//				if (strurl != null && !"".equals(strurl) && !"".equals("http://www.youku.com")) {
+//					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + strurl);
+//					url = strurl;
+//				} else {
+//					bb = false;
+//				}
+//
+//			}
+//		}
+		
+		
+		String url = "";
+		String[] diqu = { "大陆", "香港", "台湾", "韩国", "日本", "美国", "英国", "泰国", "新加坡" };
+		String[] leixing = { "古装", "武侠", "警匪", "军事", "神话", "科幻", "悬疑", "历史", "儿童", "农村", "都市", "家庭", "搞笑", "偶像", "言情", "时装", "优酷出品" };
+		for (String diqutxt : diqu) {
+			for (String leixingtxt : leixing) {
+				System.out.println(diqutxt + leixingtxt);
+				// http://www.youku.com/v_olist/c_96_g_%E6%81%90%E6%80%96_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_4.html
+				// http://www.youku.com/v_olist/c_96_g_%E6%AD%A6%E4%BE%A0_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_3.html
+				// http://www.youku.com/v_olist/c_96_g_%E6%AD%A6%E4%BE%A0_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_1.html
+				// try {
+				for (int i = 1; i < 30; i++) {
+					try {
+						url = "http://list.youku.com/category/show/c_97_g_" + java.net.URLEncoder.encode(leixingtxt, "utf-8")
+								+ "_a_" + java.net.URLEncoder.encode(diqutxt, "utf-8") + "_s_1_d_1_p_" + i + ".html";
+					} catch (UnsupportedEncodingException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					System.out.println(url);
+					String urlnext = youkuMaim(url);
+					if (urlnext.equals("") || urlnext == "" || urlnext == null) {
+						break;
+					}
 				}
 
+				// } catch (UnsupportedEncodingException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
 			}
+
 		}
 
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
@@ -382,12 +440,14 @@ public class DownloadYouku_always {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
 			}
-		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(3, 59, 59);
+		TimingTime(0, 59, 59);
+//		String url = "http://list.youku.com/category/show/c_97_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81_a_%E6%96%B0%E5%8A%A0%E5%9D%A1_s_1_d_1.html";
+//		youkuMaim(url);
 		// runstatic();
 	}
 

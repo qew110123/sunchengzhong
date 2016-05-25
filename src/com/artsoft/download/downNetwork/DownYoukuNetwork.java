@@ -32,16 +32,21 @@ public class DownYoukuNetwork {
 			}
 
 			Document doc = Jsoup.parse(strHtml);
-			Elements links = doc.select("div.yk-col3");
+			Elements links = doc.select("div.box-series div.p-thumb");
 			for (Element link : links) {
 
 				String strmainurl = "";
-				System.out.println(strmainurl = link.select("div.p-meta-title a").attr("href"));
-				System.out.println(link.select("div.p-meta-title a").attr("title"));
-				System.out.println(link.select("span.p-actor").text());
-				System.out.println(link.select("span.p-num").text());
-				System.out.println(link.select("span.p-status").text());
-				DownYoukuNetwork.youkuBranch(strmainurl);
+				System.out.println(strmainurl = link.select("div.p-thumb a").attr("href"));
+//				System.out.println(link.select("div.p-meta-title a").attr("title"));
+//				System.out.println(link.select("span.p-actor").text());
+//				System.out.println(link.select("span.p-num").text());
+//				System.out.println(link.select("span.p-status").text());
+				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+				
+				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				
+				DownYoukuNetwork.youkuBranch(strmainxiangxiurl);
 			}
 
 			// 进行下一页数据的判断

@@ -89,8 +89,11 @@ public class DownloadSohu {
 		if (strvid == null || strvid.equals("")) {
 			return;
 		}
+		//http://count.vrs.sohu.com/count/queryext.action?vids=2931949&plids=9107339&callback=playCountVrs
 		String urlnew = "http://count.vrs.sohu.com/count/queryext.action?vids=" + strvid + "&plids=" + strvplaylistId
 				+ "&callback=playCountVrs";
+		
+		
 		System.out.println(urlnew);
 
 		String tyPlayName;
@@ -108,8 +111,14 @@ public class DownloadSohu {
 		System.out.println(
 				playAmount = HtmlAnalyze.getTagText(strHtml, "{\"" + strvplaylistId + "\":{\"total\":", ",\""));
 		try {
-
-			OracleOpreater.intoReputationAndDETAIL_URL(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, playUrl,
+//			tyPlayName,source,playAmount, vodeoType, palydate, playUrl,
+//			tvType, urlerer
+//			OracleOpreater.intoReputationAndDETAIL_URL(tyPlayName, source, playAmount, vodeoType, "", playUrl, tvType, dataType, DETAIL_URL);
+//			
+//			OracleOpreater.intoPlayAmont(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, playUrl, tvType,
+//					realUrl);
+					
+			OracleOpreater.intoPlayAmont(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, playUrl,
 					tvType, urlerer);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -195,8 +204,8 @@ public class DownloadSohu {
 //			}
 //			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½áÊø");
 //		}
-//		 TimingTime(23, 59, 59);
-		 runstatic();
+		 TimingTime(0, 59, 59);
+//		 runstatic();
 	}
 
 }

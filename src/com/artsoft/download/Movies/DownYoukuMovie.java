@@ -46,7 +46,7 @@ public class DownYoukuMovie {
 			System.out.println(name=listTemp.get(1));
 			System.out.println(urlMain=listTemp.get(2));
 //			downBranch(strmainurl, name, urlMain);
-			DownYoukuMovie.youkuBranch(urlMain);
+			DownYoukuMovie.youkuBranch1(urlMain);
 		}
 		
 		
@@ -69,9 +69,9 @@ public class DownYoukuMovie {
 								+ "_a_" + java.net.URLEncoder.encode(diqutxt, "utf-8") + "_s_1_d_1_p_" + i + ".html";
 						System.out.println(url);
 						String urlnext = DownYoukuMovie.youkuMaim(url);
-						if (urlnext.equals("") || urlnext == "" || urlnext == null) {
-							break;
-						}
+//						if (urlnext.equals("") || urlnext == "" || urlnext == null) {
+//							break;
+//						}
 					}
 
 				} catch (UnsupportedEncodingException e) {
@@ -95,24 +95,32 @@ public class DownYoukuMovie {
 			}
 
 			Document doc = Jsoup.parse(strHtml);
-			Elements links = doc.select("div.yk-col3");
+			Elements links = doc.select("div.box-series div.p-thumb");
 			for (Element link : links) {
 
 				String strmainurl = "";
-				System.out.println(strmainurl = link.select("div.p-meta-title a").attr("href"));
-				System.out.println(link.select("div.p-meta-title a").attr("title"));
-				System.out.println(link.select("span.p-actor").text());
-				System.out.println(link.select("span.p-num").text());
-				System.out.println(link.select("span.p-status").text());
-				DownYoukuMovie.youkuBranch(strmainurl);
+				System.out.println(strmainurl = link.select("a").attr("href"));
+//				System.out.println(link.select("div.p-meta-title a").attr("title"));
+//				System.out.println(link.select("span.p-actor").text());
+//				System.out.println(link.select("span.p-num").text());
+//				System.out.println(link.select("span.p-status").text());
+				
+				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+				
+				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				
+				DownYoukuMovie.youkuBranch(strmainxiangxiurl);
 				// }
 
-				String strnexturl = HtmlAnalyze.getTagText(strHtml, "<li class=\"next\" title=\"下一页\"><a href=\"",
-						"\"  charset=");
-				if (strnexturl != null && !"".equals(strnexturl) && !"http://www.youku.com".equals(strnexturl)) {
-					strnexturl = "http://www.youku.com" + strnexturl;
-					return strnexturl;
-				}
+				
+			}
+			
+			String strnexturl = HtmlAnalyze.getTagText(strHtml, "<li class=\"next\" title=\"下一页\"><a href=\"",
+					"\"  charset=");
+			if (strnexturl != null && !"".equals(strnexturl) && !"http://www.youku.com".equals(strnexturl)) {
+				strnexturl = "http://www.youku.com" + strnexturl;
+				return strnexturl;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -196,6 +204,139 @@ public class DownYoukuMovie {
 		}
 
 	}
+	
+	
+	/**
+	 * 进行优酷网的详细类表页数据的采集
+	 * 
+	 * @param urlBranch
+	 */
+	public static void youkuBranch1(String urlBranch) {
+		// urlBranch="http://www.youku.com/show_page/id_zd56886dc86fc11e3a705.html";
+		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
+		if (strHtml == null || strHtml.equals("")) {
+			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
+		}
+		if (strHtml == null || strHtml.equals("")) {
+			return;
+		}
+		Document doc = Jsoup.parse(strHtml);
+		// Elements links = doc.select("div.yk-col3");
+
+		/**
+		 * 总播放: 评论: 顶:
+		 */
+
+		String name = "";// 名称
+//		System.out.println(name = doc.select("span.name").text());
+		System.out.println(name=HtmlAnalyze.getTagText(strHtml, "<meta name=\"title\" content=\"", "\">"));
+		
+		
+		///http://v.youku.com/QVideo/~ajax/getVideoPlayInfo?__rt=1&__ro=&id=391497703&sid=283994&type=vv%2Cpermission&catid=96
+		
+		String strNo = HtmlAnalyze.getTagText(strHtml, "var videoId = '", "'");
+		System.out.println(strNo);
+		if (strNo == null || strNo.equals("")) {
+			return;
+		}
+		
+		String sid= HtmlAnalyze.getTagText(strHtml, "var showid=\"", "\";");
+		System.out.println(sid);
+		if (sid == null || sid.equals("")) {
+			return;
+		}
+		
+		String catid= HtmlAnalyze.getTagText(strHtml, "var catId=\"", "\";");
+		System.out.println(catid);
+		if (catid == null || catid.equals("")) {
+			return;
+		}
+		
+		String video_owner = HtmlAnalyze.getTagText(strHtml, "var video_owner = '", "';");
+		System.out.println(video_owner );
+		if (video_owner  == null || video_owner .equals("")) {
+			return;
+		}
+		
+		String urlnew = "http://v.youku.com/v_vpactionInfo/id/" + strNo + "/pm/3?__rt=1&__ro=info_stat";
+		
+		urlnew="http://v.youku.com/QVideo/~ajax/getVideoPlayInfo?__rt=1&__ro=&id="+strNo+"&sid="+sid+"&type=vv&catid="+catid;
+//		System.out.println(urlnew);
+		
+		String strHtmlurlnew = DownloadUtil.getHtmlText(urlnew, 1000 * 30, "UTF-8", null, null);
+
+		if (strHtmlurlnew == null || strHtmlurlnew.equals("")) {
+			strHtmlurlnew = DownloadUtil.getHtmlText(urlnew, 1000 * 30, "UTF-8", null, null);
+		}
+		if (strHtmlurlnew == null || strHtmlurlnew.equals("")) {
+			return;
+		}
+
+		String Amount = "";// 播放量
+		System.out.println(
+				Amount = HtmlAnalyze.getTagText(strHtmlurlnew, "{\"vv\":", ","));
+		Amount = Amount.replaceAll(",", "");
+		
+//		System.out.println(Amount = doc.select("span.play").text());
+//		Amount = Amount.replaceAll("总播放:", "").replaceAll(",", "");
+
+		String comment = ""; // 评论
+		
+		//http://comments.youku.com/comments/~ajax/getStatus.html?__ap=%7B%22videoid%22%3A%22391497703%22%2C%22userid%22%3A%2297454045%22%2C%22oldSid%22%3A-1%2C%22showid%22%3A%22283994%22%2C%22episode%22%3A%22%22%7D&__ai=&__callback=commentInfoCallback
+		System.out.println(comment = doc.select("span.comment").text());
+		comment = comment.replaceAll("评论:", "").replaceAll(",", "");
+		String urlcomment="http://comments.youku.com/comments/~ajax/getStatus.html?__ap=%7B%22videoid%22%3A%22"+strNo+"%22%2C%22userid%22%3A%22"+video_owner+"%22%2C%22oldSid%22%3A-1%2C%22showid%22%3A%22"+sid+"%22%2C%22episode%22%3A%22%22%7D&__ai=&__callback=commentInfoCallback";
+		String strHtmlurlcomment = DownloadUtil.getHtmlText(urlcomment, 1000 * 30, "UTF-8", null, null);
+		System.out.println(
+				comment = HtmlAnalyze.getTagText(strHtmlurlcomment, "total\":\"", "\""));
+		comment=comment.replaceAll(",", "");
+
+//		String answer = ""; // 顶
+//		System.out.println(answer = doc.select("span.increm").text());
+//		answer = answer.replaceAll("顶:", "").replaceAll(",", "");
+
+		String score = ""; // 评分
+
+		//<span class="score_yk">
+		score = HtmlAnalyze.getTagText(strHtml, "class=\"score_yk\">", "</strong>");
+		// Pattern pattern = Pattern.compile("[0-9]*");
+		// Matcher isNum = pattern.matcher(score);
+		// score=doc.select("span.ratingstar").text();
+		if (score.contains("\r")) {
+			score = HtmlAnalyze.getTagText("#" + score, "#", "\r");
+		}
+		// if (!isNum.matches()) {
+		// score=doc.select("span.ratingstar").text().replace("评分:", "");
+		// }
+		System.out.println(score);
+
+		// String score = ""; // 集数
+		// score = HtmlAnalyze.getTagText(strHtml, "<label>评分:</label>", "<style
+		// type=\"text/css\">");
+		// System.out.println(score);
+		// 播放量
+		try {
+
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "1", Amount, "0", "", urlBranch, "3", "0", urlBranch);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		// 打分
+		try {
+
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "1", score, "0", "", urlBranch, "3", "1", urlBranch);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		// 评论
+		try {
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "1", comment, "0", "", urlBranch, "3", "2", urlBranch);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
 
 	// 判断数据开始时间
 	public static void TimingTime(int hh, int mm, int ss) {
@@ -221,8 +362,8 @@ public class DownYoukuMovie {
 //		runstatic();
 //		other();
 		// TimingTime(21, 59, 59);
-//		 TimingTime(1, 59, 59);
-		 runstatic();
+		 TimingTime(1, 59, 59);
+//		 runstatic();
 
 	}
 

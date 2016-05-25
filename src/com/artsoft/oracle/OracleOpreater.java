@@ -62,6 +62,21 @@ public class OracleOpreater {
 	}
 	
 	
+	/**
+	 * 进行数据的查看豆瓣数据的查看
+	 * @param times
+	 * @return
+	 */
+	public static String returndoubanwangluoju(String times) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		// String strSql = "select count(*) from ods.person_network_popularity";
+		String strSql = "select count(*) from ODS.TEM_NETWORK_REPUTATION t where t.source=9  and t.date_date='"+times+"' and t.tv_type=1 and t.data_type=1";
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
+	
+	
 	
 
 	/**

@@ -1,4 +1,4 @@
-package com.artsoft.download;
+package com.artsoft.download.webo.weiboSearch;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -235,16 +235,16 @@ public class WeiBo {
 		// TODO Auto-generated method stub
 		// new
 		// WeiBo(1,"http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
-		// WeiBoBranch("http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
+		 hunanBranch("http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index", null, null, null);
 
-		ConfigManager config = ConfigManager.getInstance();
-		// driver = config.getConfigValue("driver");
-		String xx = ConfigManager.getInstance().getConfigValue("IDwebopeople");
-		int xxnum = Integer.parseInt(xx);
-		for (int i = xxnum; i < 16871; i = i + 1000) {
-			// i=15780;
-			mainweboPeoPle(i, i + 1000);
-
-		}
+//		ConfigManager config = ConfigManager.getInstance();
+//		// driver = config.getConfigValue("driver");
+//		String xx = ConfigManager.getInstance().getConfigValue("IDwebopeople");
+//		int xxnum = Integer.parseInt(xx);
+//		for (int i = xxnum; i < 16871; i = i + 1000) {
+//			// i=15780;
+//			mainweboPeoPle(i, i + 1000);
+//
+//		}
 	}
 }

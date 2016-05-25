@@ -577,7 +577,7 @@ public class OracleHaoSou {
 	}
 
 	/**
-	 * 進入数据进行角色介绍添加
+	 * 進入数据进行角色介绍添加 和图片
 	 * 
 	 * @param tvplayid
 	 * @param tvplayname
@@ -593,12 +593,12 @@ public class OracleHaoSou {
 	 */
 	public static void intotemtvplay(String tvplayid, String tvplayname, String tvplayurl, String personid,
 			String personname, String personurl, String rolename, String personstillsurl, String dubbingname,
-			String dubbingurl, String roleintro) {
+			String dubbingurl, String roleintro,String PERSON_BIG_URL) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
 		String strSql = "insert into ods.tem_tvplay_person t(t.tvplay_id,t.tvplay_name,t.tvplay_url,"
-				+ "t.person_name,t.person_url,t.role_name,t.person_stills_url,t.dubbing_name,t.dubbing_url,"
-				+ "t.role_intro)values(?,?,?,?,?,?,?,?,?,?)";
+				+ "t.person_name,t.person_url,t.role_name,t.PERSON_SMALL_URL,t.dubbing_name,t.dubbing_url,"
+				+ "t.role_intro,t.PERSON_BIG_URL,INTO_DATE)values(?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
 
 		List<Comparable> list = new ArrayList();
 		list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
@@ -611,6 +611,8 @@ public class OracleHaoSou {
 		list.add(dubbingname);
 		list.add(dubbingurl);
 		list.add(roleintro);
+		list.add(PERSON_BIG_URL);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
@@ -661,8 +663,12 @@ public class OracleHaoSou {
 	public static ArrayList<String> selectphoto1() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.img_name，t.img_url  from ods.TEM_DIM_PERSON_ONTHER t";
+		sql = "select t.person_name，t.person_small_url,t.role_name,t.tvplay_name  from ODS.TEM_TVPLAY_PERSON t where t.into_date is not null group by t.person_name,t.person_small_url,t.role_name,t.tvplay_name";
+		
+		sql = "select t.person_big_url from ODS.TEM_TVPLAY_PERSON t where t.into_date is not null group by t.person_big_url";
+		
 		ArrayList<String> listname = new ArrayList<String>();
-		int iNum = 2;
+		int iNum = 1;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;

@@ -28,11 +28,16 @@ public class Imageimage3 {
 			// System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
 			System.out.println(listTemp.get(0));
-			System.out.println(listTemp.get(1));
+//			System.out.println(listTemp.get(1));
+//			System.out.println(listTemp.get(2));
+//			System.out.println(listTemp.get(3));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
 				try {
 					System.out.println(++i);
-					DownloadImage.download(listTemp.get(1), listTemp.get(0) + ".jpg", "D:\\image3\\");
+					String[] namelist=listTemp.get(0).split("/");
+//					DownloadImage.download(listTemp.get(1), listTemp.get(3) + "_"+listTemp.get(0).replace("*", "")+"_С_"+i+".jpg", "D:\\image_baidu_xiao\\");
+//					DownloadImage.download(listTemp.get(1), namelist[namelist.length-1], "D:\\image_baidu_xiao\\");
+					DownloadImage.download(listTemp.get(0), namelist[namelist.length-1], "D:\\image_baidu_big\\");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

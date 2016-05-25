@@ -153,8 +153,12 @@ public class BaiDuTeleplayDownload {
 			String dubbingname = "";
 			String dubbingurl = "";
 			String roleintro = "";
+			String PERSON_BIG_URL="";
+			String PERSON_BIG_URLall="";
 			for (Element elementli : linkli) {
 				System.out.println(personstillsurl = HtmlAnalyze.getTagText(elementli.toString(), "<img src=\"", "\""));
+				
+				System.out.println(PERSON_BIG_URLall = elementli.select("a.roleIntrodcution-picture").attr("href"));
 				System.out.println(
 						rolename = HtmlAnalyze.getTagText(elementli.toString(), "class=\"item-value\">", "</span>"));
 				System.out.println(personname = elementli.select("div.role-actor span.item-value").text());
@@ -165,6 +169,8 @@ public class BaiDuTeleplayDownload {
 				System.out.println(dubbingurl = elementli.select("div.role-voice span.item-value a").attr("href"));
 				// System.out.println(HtmlAnalyze.getTagText(elementli.select("div.role-voice
 				// span.item-value").toString(), "href=\"", "\""));
+				
+				
 				System.out.println(
 						roleintro = HtmlAnalyze.getTagText(elementli.toString(), "role-description\">", "</dd>"));
 				if (personurl != "") {
@@ -173,8 +179,16 @@ public class BaiDuTeleplayDownload {
 				if (dubbingurl != "") {
 					dubbingurl = "http://baike.baidu.com" + dubbingurl;
 				}
+				
+				if (PERSON_BIG_URLall != "") {
+					PERSON_BIG_URLall = "http://baike.baidu.com" + PERSON_BIG_URLall;
+					String strHtmlPERSON_BIG_URLall = DownloadUtil.getHtmlText(PERSON_BIG_URLall, 1000 * 30, "UTF-8", null, null);
+					Document docPERSON_BIG_URLall = Jsoup.parse(strHtmlPERSON_BIG_URLall);
+					PERSON_BIG_URL=docPERSON_BIG_URLall.getElementById("imgPicture").attr("src");
+				}
+				
 				OracleHaoSou.intotemtvplay(strId, strUrlname, url, "", personname, personurl, rolename, personstillsurl,
-						dubbingname, dubbingurl, roleintro);
+						dubbingname, dubbingurl, roleintro,PERSON_BIG_URL);
 
 			}
 		} catch (Exception e) {

@@ -177,13 +177,13 @@ public class cccc {
 			
 //			}
 //			TimingTime(23, 59, 59);
-//			TimingTime(11, 59, 59);
-			try {
-				runstatic();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			TimingTime(13, 59, 59);
+//			try {
+//				runstatic();
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 
 }

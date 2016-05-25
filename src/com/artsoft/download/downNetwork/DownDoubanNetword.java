@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.downloadThreadpool.IpFilter;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
@@ -191,7 +192,7 @@ public class DownDoubanNetword {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
 			}
-		}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 6);// 这里设定将延时每天固定执行
 	}
 
 	public static void mainyunxing() {
@@ -203,7 +204,7 @@ public class DownDoubanNetword {
 		// }
 		String strMax = OracleOpreater.returndouban(TimeTest.getNowTime("yyyyMMdd"));
 
-		if (Integer.parseInt(strMax) == 0) {
+		if (Integer.parseInt(strMax) < 400) {
 
 			/**
 			 * 豆瓣数据 2016年3月7日10：:2：:1
@@ -212,6 +213,7 @@ public class DownDoubanNetword {
 				// System.out.println(i);
 				try {
 
+					IpFilter.mainip("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=20");
 					DownDoubanNetword.mainurl(
 							"https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start="
 									+ i);

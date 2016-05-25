@@ -10,12 +10,86 @@ import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class DownloadHunantv {
+	
+	
+	public static void mainfalseurl(String mainUrl){
+
+		// String
+		// mainUrl="http://list.letv.com/apin/chandata.json?c=2&d=1&md=&o=20&p=4&s=1";
+		// ParseJson(BuildJson());
+		String strHtml = "";
+		boolean bb = true;
+		while (bb) {
+			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "UTF-8", null, null);
+			if (strHtml != null && !"".equals(strHtml)) {
+				bb = false;
+			}
+		}
+		String tyPlayName = "";
+		System.out.println(tyPlayName = HtmlAnalyze.getTagText(strHtml, "cname: \"", "\""));
+		
+		String strVolumess=HtmlAnalyze.getTagText(strHtml, tyPlayName , "_");
+		String serNumber = strVolumess.replaceAll("第", "").replaceAll("集", "");
+		if (serNumber.equals("1")) {
+			String idnum = HtmlAnalyze.getTagText(strHtml, "vid: ", ",");
+			String strVolumes=HtmlAnalyze.getTagText(strHtml, tyPlayName , "_");
+			hunanBranch(idnum, tyPlayName, strVolumes, mainUrl);
+		}
+		else{
+		try {
+			String idnum = HtmlAnalyze.getTagText(strHtml, "vid: ", ",");
+			String strVolumes=HtmlAnalyze.getTagText(strHtml, tyPlayName , "_");
+//			hunanBranch(idnum, tyPlayName, strVolumes, mainUrl);
+			String urlss="http://v.api.mgtv.com/list/tvlist?video_id="+idnum+"&page=0&size=50&callback=jQuery182009630912937482106_1463738087594&_=1463738087831";
+			String strHtmlurlss=DownloadUtil.getHtmlText(urlss, 1000 * 30, "UTF-8", null, null);
+			 strHtmlurlss=HtmlAnalyze.getTagText(strHtmlurlss, "(" , "}]}})");
+			 strHtmlurlss=strHtmlurlss+"}]}}";
+			System.out.println(strHtmlurlss); 
+			 JSONObject letvjson = new JSONObject();
+			//JSONArray letvjsonArray = new JSONArray();
+			letvjson = JSONObject.fromObject(strHtmlurlss);
+			
+			Object Amountdata =  letvjson.get("data");
+			JSONArray AmountdataJSONArray=(JSONArray) JSONObject.fromObject(Amountdata).get("list");
+			for (Object object : AmountdataJSONArray) {
+//				System.out.println();
+				JSONObject objectobject = JSONObject.fromObject(object);
+				String urls = (String) objectobject.get("url");
+				String t1 = (String) objectobject.get("t1");
+				String video_id = (String) objectobject.get("video_id");
+//				aid = (String) objectobject.get("aid");
+				if (!video_id.equals("")) {
+					urls="http://www.mgtv.com"+urls;
+					hunanBranch(video_id, tyPlayName, t1, mainUrl);
+				}
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			// /程序报错
+//			System.out.println("出错mainfalseurl");
+			
+			
+			String nexturl=HtmlAnalyze.getTagText(strHtml, "next_url: \"", "\"");
+			if (!nexturl.equals("")&&!nexturl.equals("null")) {
+				nexturl="http://www.mgtv.com"+nexturl;
+				mainurl(nexturl);
+			}
+		}
+		}
+
+	}
 
 	public static void mainurl(String mainUrl) {
 
@@ -35,21 +109,31 @@ public class DownloadHunantv {
 		try {
 
 			// System.out.println(strHtml);
-			Document doc = Jsoup.parse(strHtml);
-			Element linkmain = doc.getElementById("fluxes_static");
-			Elements links = linkmain.select("ul.v-list-inner li.v-list-unit");
-			// Element content = doc.getElementById("content");
-			// Elements links = content.getElementsByTag("a");
-			System.out.println(links.size());
-			for (Element link : links) {
-				String idnum = "";
-				String strVolumes = "";
-				System.out.println(strVolumes = link.select("span.inner-title").text());
-				System.out.println(idnum = link.select("a.video").attr("href"));
-				System.out.println(idnum = HtmlAnalyze.getTagText(idnum, "/f/", ".html"));
-				// System.out.println(link.select("span.inner-title").text());
-				hunanBranch(idnum, tyPlayName, strVolumes, mainUrl);
-			}
+//			Document doc = Jsoup.parse(strHtml);
+//			Element linkmain = doc.getElementById("fluxes_static");
+//			Elements links = linkmain.select("ul.v-list-inner li.v-list-unit");
+//			// Element content = doc.getElementById("content");
+//			// Elements links = content.getElementsByTag("a");
+//			System.out.println(links.size());
+//			for (Element link : links) {
+//				String idnum = "";
+//				String strVolumes = "";
+//				System.out.println(strVolumes = link.select("span.inner-title").text());
+//				System.out.println(idnum = link.select("a.video").attr("href"));
+//				System.out.println(idnum = HtmlAnalyze.getTagText(idnum, "/f/", ".html"));
+//				// System.out.println(link.select("span.inner-title").text());
+//				hunanBranch(idnum, tyPlayName, strVolumes, mainUrl);
+//				
+//			}
+			String idnum = HtmlAnalyze.getTagText(strHtml, "vid: ", ",");
+			String strVolumes=HtmlAnalyze.getTagText(strHtml, tyPlayName , "_");
+			hunanBranch(idnum, tyPlayName, strVolumes, mainUrl);
+			
+//			String nexturl=HtmlAnalyze.getTagText(strHtml, "next_url: \"", "\"");
+//			if (!nexturl.equals("")&&!nexturl.equals("null")) {
+//				nexturl="http://www.mgtv.com"+nexturl;
+//				mainurl(nexturl);
+//			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			// /程序报错
@@ -70,8 +154,9 @@ public class DownloadHunantv {
 		// String realUrl = "";
 
 		//http://videocenter-2039197532.cn-north-1.elb.amazonaws.com.cn//dynamicinfo?callback=jQuery18205857753134332597_1459236897033&vid=3088548&_=1459236897317
+		//http://videocenter-2039197532.cn-north-1.elb.amazonaws.com.cn//dynamicinfo?callback=jQuery18208216645761579375_1463733049128&vid=3173475&_=1463733050155
 		String urlnew = "http://videocenter-2039197532.cn-north-1.elb.amazonaws.com.cn//dynamicinfo?callback=jQuery182025981585565023124_1445935554595&vid="
-				+ idnum + "&_=1445935555113";
+				+ idnum + "&_=1463733050155";
 		System.out.println(urlnew);
 
 		String strHtml = DownloadUtil.getHtmlText(urlnew, 1000 * 30, "UTF-8", null, null);
@@ -116,7 +201,8 @@ public class DownloadHunantv {
 			// System.out.println(link.select("a").text());
 			String urlstr = "";
 			System.out.println(urlstr = link.select("a").attr("href"));
-			mainurl(urlstr);
+//			mainurl(urlstr);
+			mainfalseurl(urlstr);
 		}
 	}
 
@@ -153,8 +239,8 @@ public class DownloadHunantv {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//惊醒详细信息暂时不管
-//		TimingTime(23, 59, 59);
-		runstatic();
+		TimingTime(0, 59, 59);
+//		runstatic();
 	}
 
 }

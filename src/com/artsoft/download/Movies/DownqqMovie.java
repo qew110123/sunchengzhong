@@ -19,6 +19,24 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class DownqqMovie {
+	
+	public static void downBranchpingfen(String urlBranch, String nameBranch, String urlMain){
+		String htmlpinglunhtml=DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
+		String htmlidhtml=HtmlAnalyze.getTagText(htmlpinglunhtml, "<!--\"create_at\":","-->");
+		if (!htmlidhtml.equals("")) {
+			
+			String urlpinglun="http://coral.qq.com/article/1407496658/commentnum?callback=jQuery19105714774770759592_1464171533134&low_login=1&_="+htmlidhtml;
+			String commentnum=DownloadUtil.getHtmlText(urlpinglun, 1000 * 30, "UTF-8", null, null);
+			String comment=HtmlAnalyze.getTagText(commentnum, "commentnum\":\"","\"}");
+			
+			
+//			OracleOpreater.intoReputationAndDETAIL_URL(nameBranch, "3", comment, "0", "", urlBranch, "2", "2", urlBranch);
+			OracleOpreater.intoReputationAndDETAIL_URL(nameBranch, "3", comment, "0", "", urlpinglun, "3", "2",urlBranch);
+//			OracleOpreater.intoReputationAndDETAIL_URL(nameBranch, "3", numstring, "0", "", urlMain, "3", "0",DETAIL_URL);
+//			OracleOpreater.intoReputationAndDETAIL_URL(name, "3", score, "0", "", urlMain, "3", "1",strmainurl);
+		}
+	}
+	
 	public static boolean downMain(String urlMain ,int xxx) {
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
 		if (strHtml == null || strHtml.equals("")) {
@@ -47,7 +65,16 @@ public class DownqqMovie {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			downBranch(strmainurl, name, urlMain);
+			try {
+				downBranch(strmainurl, name, urlMain);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				downBranchpingfen(strmainurl, name, urlMain);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 		String tt = doc.select("span.txt_01").select("em.strong").first().text();
 		

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.artsoft.bean.TEM_WEIBO_TOPIC_SCORE;
 import com.artsoft.bean.Tem_weibo_word_age_sex;
 import com.artsoft.bean.Tem_weibo_word_area;
 import com.artsoft.bean.Tem_weibo_word_tag;
@@ -132,6 +133,142 @@ public class Oracle {
 			// TODO: handle exception
 			System.out.println("数据库出错");
 		}
+	}
+	
+	
+	/**
+	 *2016年5月11日16:47:19
+	 * 
+	 * @param company
+	 * 
+	 */
+	public static void Inserttem_weibo_topic_score(TEM_WEIBO_TOPIC_SCORE tem_weibo_topic_score) {
+		try {
+			
+		
+			Connection conn = DBOperate218.getInstance().getConnection();
+	
+			String strSql = "insert into ods.TEM_WEIBO_TOPIC_SCORE t (t.data_date,t.data_id ,t.reading_num,t.discuss_num,t.fan_num,"
+					+ "t.score,t.follow_num,t.into_date,t.data_url,t.big_type,t.data_type) values(?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?)";
+			List<Comparable> list = new ArrayList();
+//			list.add(tem_weibo_topic_score.getDataDate());
+//			list.add(tem_weibo_topic_score.getDataId());
+//			list.add(tem_weibo_topic_score.getReadingNum());
+//			list.add(tem_weibo_topic_score.getDiscussNum());
+//			list.add(tem_weibo_topic_score.getFanNum());
+//			list.add(tem_weibo_topic_score.getScore());
+//			list.add(tem_weibo_topic_score.getFanNum());
+//			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+//			list.add(tem_weibo_topic_score.getDataUrl());
+//			list.add(tem_weibo_topic_score.getBigType());
+//			list.add(tem_weibo_topic_score.getDataType());
+//			System.out.println(list.toString());
+			
+			
+			list.add(null);
+			list.add(null);
+			list.add(null);
+			list.add(null);
+			list.add(null);
+			list.add(null);
+			list.add(null);
+			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			list.add(null);
+			list.add(null);
+			list.add(null);
+			System.out.println(list.toString());
+			
+			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+			System.out.println(bb);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("数据库出错");
+		}
+	}
+	
+	
+	
+	
+	/**
+	 *2016年5月19日10:57:03
+	 * 
+	 * @param company
+	 * 添加微博微博电视剧/电影微博阅读量、讨论量、粉丝量、微博评分、关注、阅读数   
+	 * 前数据
+	 * 
+	 */
+	public static void Inserttem_weibo_topic_scorePart(TEM_WEIBO_TOPIC_SCORE tem_weibo_topic_score) {
+		try {
+			
+		
+			Connection conn = DBOperate218.getInstance().getConnection();
+	
+			String strSql = "insert into ods.TEM_WEIBO_TOPIC_SCORE t (t.data_date,t.data_id ,t.reading_num,t.discuss_num,t.fan_num,"
+					+ "t.into_date,t.data_url,t.big_type,t.data_type) values(?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?)";
+			List<Comparable> list = new ArrayList();
+			list.add(tem_weibo_topic_score.getDataDate());
+			list.add(tem_weibo_topic_score.getDataId());
+			list.add(tem_weibo_topic_score.getReadingNum());
+			list.add(tem_weibo_topic_score.getDiscussNum());
+			list.add(tem_weibo_topic_score.getFanNum());
+//			list.add(tem_weibo_topic_score.getScore());
+//			list.add(tem_weibo_topic_score.getFanNum());
+			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			list.add(tem_weibo_topic_score.getDataUrl());
+			list.add(tem_weibo_topic_score.getBigType());
+			list.add(tem_weibo_topic_score.getDataType());
+			System.out.println(list.toString());
+			
+			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+			System.out.println(bb);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("数据库出错");
+		}
+	}
+	
+	
+	/**
+	 *2016年5月19日15:54:45
+	 * 
+	 * @param company
+	 * 添加微博微博电视剧/电影微博阅读量、讨论量、粉丝量、微博评分、关注、阅读数   
+	 * 后数据
+	 * 
+	 */
+	public static void Inserttem_weibo_topic_scorePartBIG_TYPE2(TEM_WEIBO_TOPIC_SCORE tem_weibo_topic_score) {
+		try {
+			
+		
+			Connection conn = DBOperate218.getInstance().getConnection();
+	
+			String strSql = "insert into ods.TEM_WEIBO_TOPIC_SCORE t (t.data_date,t.data_id ,t.reading_num,t.score,t.follow_num,"
+					+ "t.into_date,t.data_url,t.big_type,t.data_type) values(?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?)";
+			List<Comparable> list = new ArrayList();
+			list.add(tem_weibo_topic_score.getDataDate());
+			list.add(tem_weibo_topic_score.getDataId());
+			list.add(tem_weibo_topic_score.getReadingNum());
+//			list.add(tem_weibo_topic_score.getDiscussNum());
+//			list.add(tem_weibo_topic_score.getFanNum());
+			list.add(tem_weibo_topic_score.getScore());
+			list.add(tem_weibo_topic_score.getFanNum());
+			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			list.add(tem_weibo_topic_score.getDataUrl());
+			list.add(tem_weibo_topic_score.getBigType());
+			list.add(tem_weibo_topic_score.getDataType());
+			System.out.println(list.toString());
+			
+			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+			System.out.println(bb);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("数据库出错");
+		}
+	}
+	
+	public static void main(String[] args) {
+		TEM_WEIBO_TOPIC_SCORE tem_weibo_topic_score=new TEM_WEIBO_TOPIC_SCORE();
+		Inserttem_weibo_topic_score(tem_weibo_topic_score);
 	}
 
 }

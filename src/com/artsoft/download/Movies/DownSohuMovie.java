@@ -36,10 +36,14 @@ public class DownSohuMovie {
 //		} catch (Exception e) {
 //			// TODO: handle exception
 //		}
-		Document doc = Jsoup.parse(strHtml);
-		Elements links = doc.select("div.general li");
+		try {
+			Document doc = Jsoup.parse(strHtml);
+			Elements links = doc.select("div.general li");
 
 		sohuDetailedfirst(urlBranch, name);
+		} catch (Exception e) {
+		// TODO: handle exception
+	}
 
 //		System.out.println(links.size());
 //		for (Element link : links) {
@@ -199,7 +203,8 @@ public class DownSohuMovie {
 		
 //			sohuMain("http://so.tv.sohu.com/list_p1101_p20_p3_p40_p5_p6_p77_p80_p9_2d1_p10_p11_p122_p13.html");
 //		 TimingTime(23, 59, 59);
-		TimingTime(21, 59, 59);
+//		TimingTime(21, 59, 59);
+		runstatic();
 //		runstatic();
 	}
 

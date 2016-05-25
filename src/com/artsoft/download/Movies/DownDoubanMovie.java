@@ -1,5 +1,6 @@
 package com.artsoft.download.Movies;
 
+import com.artsoft.download.downNetwork.DownDoubanNetword;
 import com.artsoft.downloadThreadpool.IpFilter;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
@@ -169,27 +170,41 @@ public class DownDoubanMovie {
 		// DownDoubanMovie.mainurl("http://movie.douban.com/j/search_subjects?type=movie&tag=%E6%9C%80%E6%96%B0&page_limit=20&page_start="+i);
 		// }
 
-		String[] list = { "热门", "最新", "经典", "可播放", "豆瓣高分", "冷门佳片", "华语", "欧美", "韩国 日本", "动作", "喜剧", "爱情", "科幻", "悬疑",
-				"恐怖", "文艺" };
-		for (String stringtext : list) {
-			for (int i = 0; i <= 500; i = i + 20) {
-				// System.out.println(i);
-				// try {
-				// DownDoubanMovie.mainurl("http://movie.douban.com/j/search_subjects?type=movie&tag="
-				// + java.net.URLEncoder.encode(stringtext, "utf-8")
-				// +"&page_limit=20&page_start="+i);
-				// } catch (UnsupportedEncodingException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
-				try {
-					DownDoubanMovie.mainurl("https://movie.douban.com/j/search_subjects?type=movie&tag=" + stringtext
-							+ "&page_limit=20&page_start=" + i);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
+		
+		
+		
+//		String strMax = OracleOpreater.returndouban(TimeTest.getNowTime("yyyyMMdd"));
+//
+//		if (Integer.parseInt(strMax) < 400) {
 
+			/**
+			 * 豆瓣数据 2016年3月7日10：:2：:1
+			 */
+			
+			
+			String[] list = { "热门", "最新", "经典", "可播放", "豆瓣高分", "冷门佳片", "华语", "欧美", "韩国 日本", "动作", "喜剧", "爱情", "科幻", "悬疑",
+					"恐怖", "文艺" };
+			for (String stringtext : list) {
+				for (int i = 0; i <= 500; i = i + 20) {
+					// System.out.println(i);
+					// try {
+					// DownDoubanMovie.mainurl("http://movie.douban.com/j/search_subjects?type=movie&tag="
+					// + java.net.URLEncoder.encode(stringtext, "utf-8")
+					// +"&page_limit=20&page_start="+i);
+					// } catch (UnsupportedEncodingException e) {
+					// // TODO Auto-generated catch block
+					// e.printStackTrace();
+					// }
+					try {
+						DownDoubanMovie.mainurl("https://movie.douban.com/j/search_subjects?type=movie&tag=" + stringtext
+								+ "&page_limit=20&page_start=" + i);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+
+//			}
+			
 		}
 
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
@@ -212,7 +227,7 @@ public class DownDoubanMovie {
 				 IpFilter.mainip("http://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=20");
 				 runstatic();
 			}
-		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
 	}
 
 	public static void main(String[] args) {
