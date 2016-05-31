@@ -506,7 +506,7 @@ public class WeiBoSearchTVplay {
 			// i=15780;
 			//电视剧
 			int TV_TYPE=2;
-			if (i>135) {
+			if (i>14002) {
 				mainProgram(i, i + 1000,TV_TYPE);
 				seleepTime(5);
 				

@@ -28,7 +28,7 @@ public class DownIqiyiNetword {
 			return;
 		}
 
-		String name = HtmlAnalyze.getTagText(strHtml, "<meta name=\"keywords\" content=\"", "\" /> ");
+		String name = HtmlAnalyze.getTagText(strHtml, "<meta name=\"keywords\" content=\"", "\" />");
 		if (name.equals("")||name.equals("null")||name==null) {
 			//data-shareplattrigger-videoname="
 			name=HtmlAnalyze.getTagText(strHtml, "data-shareplattrigger-videoname=\"", "\"");

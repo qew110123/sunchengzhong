@@ -69,5 +69,36 @@ public class OracleNetwork {
 		List<String> list = DBOperate218.getResultList(conn, strSql, iNum);
 		return (ArrayList<String>) list;
 	}
+	
+	
+	/**
+	 * 进行优酷数据进行二次搜索 
+	 * 2016年5月27日16:56:31
+	 * @return
+	 */
+	public static List selectyoukuTVplay(String date_date) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.detail_url from ODS.TEM_NETWORK_REPUTATION t where t.source=1 and t.tv_type=0 and t.data_type=0 and t.date_date>'"+date_date+"' group by t.detail_url";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 1;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	/**
+	 * 进行优酷数据进行二次搜索 
+	 * 2016年5月30日17:43:14
+	 * @return
+	 */
+	public static List selectyoukuvariety(String date_date) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.detail_url from ODS.TEM_NETWORK_REPUTATION t where t.source=1 and t.tv_type=2 and t.data_type=0 and t.date_date>'"+date_date+"' group by t.detail_url";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 1;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
 
 }

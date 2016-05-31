@@ -60,10 +60,12 @@ public class WeiBoSearchMoves {
 		System.out.println("需要采集的人名字数为" + returnNumTVle);
 		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
 			// i=15780;
-
-			int TV_TYPE = 3;
-			seleepTime(2);
-			mainProgram(i, i + 1000, TV_TYPE);
+			if (i>16001) {
+				
+				int TV_TYPE = 3;
+				seleepTime(2);
+				mainProgram(i, i + 1000, TV_TYPE);
+			}
 		}
 
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");

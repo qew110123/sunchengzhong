@@ -28,7 +28,7 @@ public class DownloadIqiyi {
 			return;
 		}
 
-		String name = HtmlAnalyze.getTagText(strHtml, "<meta name=\"keywords\" content=\"", "\" /> ");
+		String name = HtmlAnalyze.getTagText(strHtml, "<meta name=\"keywords\" content=\"", "\" />");
 		if (name.equals("")||name.equals("null")||name==null) {
 			//data-shareplattrigger-videoname="
 			name=HtmlAnalyze.getTagText(strHtml, "data-shareplattrigger-videoname=\"", "\"");
@@ -177,8 +177,8 @@ public class DownloadIqiyi {
 		// }
 		// }
 		
-//		TimingTime(23, 59, 59);
-		 runstatic();
+		TimingTime(1, 59, 59);
+//		 runstatic();
 		 
 		 
 //		 iQiYiBranch("http://www.iqiyi.com/a_19rrk30cd9.html#vfrm=2-4-0-1");

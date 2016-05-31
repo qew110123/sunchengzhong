@@ -1,8 +1,12 @@
 package com.artsoft.download.TVPlay;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -13,6 +17,7 @@ import org.jsoup.select.Elements;
 
 import com.artsoft.download.Movies.DownYoukuMovie;
 import com.artsoft.download.TVPlay.Downloadpool.DownloadYoukupool;
+import com.artsoft.oracle.OracleNetwork;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.pool.ThreadPool;
 import com.artsoft.util.CommonUtil;
@@ -529,12 +534,15 @@ public class DownloadYouku {
 			}
 		}
 	}
+	
+	
+	
 
 	public static void runstatic() {
 		CommonUtil.setLog("优酷总数" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
 		openstatic();
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-
+		openordor();
 //		Thread.sleep(millis);
 //		try {
 ////			System.out.println("等待2小时");
@@ -553,6 +561,63 @@ public class DownloadYouku {
 //		}
 
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
+	}
+	
+	/**
+	 * 
+	 * @param datestr
+	 *            日期字符串
+	 * @param day
+	 *            相对天数，为正数表示之后，为负数表示之前
+	 * @return 指定日期字符串n天之前或者之后的日期
+	 */
+	public static String getBeforeAfterDate(String datestr, int day) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		java.sql.Date olddate = null;
+		try {
+			df.setLenient(false);
+			olddate = new java.sql.Date(df.parse(datestr).getTime());
+		} catch (ParseException e) {
+			throw new RuntimeException("日期转换错误");
+		}
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(olddate);
+
+		int Year = cal.get(Calendar.YEAR);
+		int Month = cal.get(Calendar.MONTH);
+		int Day = cal.get(Calendar.DAY_OF_MONTH);
+
+		int NewDay = Day + day;
+
+		cal.set(Calendar.YEAR, Year);
+		cal.set(Calendar.MONTH, Month);
+		cal.set(Calendar.DAY_OF_MONTH, NewDay);
+		// System.out.println(df.format(cal.getTimeInMillis()));
+
+		return df.format(cal.getTimeInMillis());
+	}
+	/**
+	 * 2016年5月27日16:09:57
+	 * 进行整体数据的更细
+	 */
+	private static void openordor() {
+		// TODO Auto-generated method stub
+		TimeTest tt = new TimeTest();
+		String newtime = tt.getNowTime("yyyyMMdd");
+		System.out.println(newtime);
+		String date_date = getBeforeAfterDate(newtime, -30);
+		List<String> listArray =OracleNetwork.selectyoukuTVplay(date_date);
+		for (Object Objstring : listArray) {
+			List<String> listTemp = (List<String>) Objstring;
+			System.out.println(listTemp.get(0));
+			try {
+				
+				DownloadYouku.youkuBranch(listTemp.get(0));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
 	}
 
 	private static void openstatic() {
@@ -606,14 +671,18 @@ public class DownloadYouku {
 			public void run() {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
+				
 			}
-		}, time, 1000 * 60 * 60 * 6);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
 	}
+	
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		TimingTime(1, 59, 59);
-		openstatic();
+		openordor();
+//		openstatic();
 //		runstatic();
 	}
 
