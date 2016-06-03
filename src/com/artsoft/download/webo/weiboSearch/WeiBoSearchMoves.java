@@ -25,6 +25,9 @@ public class WeiBoSearchMoves {
 			System.out.println(listTemp.get(0));
 			System.out.println(listTemp.get(1));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
+				if (Integer.parseInt(listTemp.get(0))>1000) {
+					
+				
 				String urlBranch = "";
 				try {
 					urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode("#"+listTemp.get(1)+"#", "utf-8")
@@ -41,6 +44,7 @@ public class WeiBoSearchMoves {
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
 				}
 
 			}
@@ -60,12 +64,12 @@ public class WeiBoSearchMoves {
 		System.out.println("需要采集的人名字数为" + returnNumTVle);
 		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
 			// i=15780;
-			if (i>16001) {
+//			if (i>16001) {
 				
 				int TV_TYPE = 3;
 				seleepTime(2);
 				mainProgram(i, i + 1000, TV_TYPE);
-			}
+//			}
 		}
 
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");

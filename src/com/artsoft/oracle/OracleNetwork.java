@@ -91,9 +91,9 @@ public class OracleNetwork {
 	 * 2016Äê5ÔÂ30ÈÕ17:43:14
 	 * @return
 	 */
-	public static List selectyoukuvariety(String date_date) {
+	public static List selectyoukuvariety(String date_date, String source) {
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String sql = "select t.detail_url from ODS.TEM_NETWORK_REPUTATION t where t.source=1 and t.tv_type=2 and t.data_type=0 and t.date_date>'"+date_date+"' group by t.detail_url";
+		String sql = "select t.detail_url from ODS.TEM_NETWORK_REPUTATION t where t.source="+source+" and t.tv_type=2 and t.data_type=0 and t.date_date>'"+date_date+"' group by t.detail_url";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 1;

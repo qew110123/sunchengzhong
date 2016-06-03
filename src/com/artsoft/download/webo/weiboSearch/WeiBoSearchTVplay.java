@@ -468,11 +468,13 @@ public class WeiBoSearchTVplay {
 		List<String> listArray = OracleHaoSou.select(Integer.toString(statnum), Integer.toString(endnum));
 		System.out.println(listArray.size());
 		for (Object Objstring : listArray) {
+			
 //			System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
 			System.out.println(listTemp.get(0));
 			System.out.println(listTemp.get(1));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
+				if (Integer.parseInt(listTemp.get(0))>1000) {
 				String urlBranch = "";
 				try {
 					urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode("#"+listTemp.get(1)+"#", "utf-8")
@@ -490,6 +492,7 @@ public class WeiBoSearchTVplay {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				}
 
 			}
 		}
@@ -506,11 +509,11 @@ public class WeiBoSearchTVplay {
 			// i=15780;
 			//电视剧
 			int TV_TYPE=2;
-			if (i>14002) {
+//			if (i>14002) {
 				mainProgram(i, i + 1000,TV_TYPE);
 				seleepTime(5);
 				
-			}
+//			}
 		}
 
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
