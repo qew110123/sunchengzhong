@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.bean.TEM_DIM_FILM;
 import com.artsoft.bean.TvPlay;
 import com.artsoft.config.ConfigManager;
 import com.artsoft.oracle.OracleHaoSou;
@@ -230,7 +231,7 @@ public class BaiDuTeleplayDownload {
 			baseInfoValue = baseInfoValue.replace("	", "");
 		}
 		//
-		if ("中文名".equals(baseInfoName)) {
+		if ("中文名".equals(baseInfoName) || "中文名称".equals(baseInfoName)) {
 			tvplay.setTvplay_name(baseInfoValue);
 		}
 		if ("外文名".equals(baseInfoName)) {
@@ -328,35 +329,67 @@ public class BaiDuTeleplayDownload {
 			}
 		}
 		Document doc = Jsoup.parse(strHtml);
-		// Element linkmain = doc.getElementById("fluxes_static");
-		Elements links = doc.select("a.result-title");
-		// Element content = doc.getElementById("content");
-		// Elements links = content.getElementsByTag("a");
-		System.out.println(links.size());
-		// for (Element link : links) {
-		// String idnum = "";
-		// String strVolumes = "";
-		// System.out.println(strVolumes = link.text());
-		// System.out.println(idnum = link.attr("href"));
-		// }
-		if (links.size() > 0) {
+		
+		
+		
+//		// Element linkmain = doc.getElementById("fluxes_static");
+//		Elements links = doc.select("a.result-title");
+//		// Element content = doc.getElementById("content");
+//		// Elements links = content.getElementsByTag("a");
+//		System.out.println(links.size());
+//		// for (Element link : links) {
+//		// String idnum = "";
+//		// String strVolumes = "";
+//		// System.out.println(strVolumes = link.text());
+//		// System.out.println(idnum = link.attr("href"));
+//		// }
+//		if (links.size() > 0) {
+//			String strUrl = "";
+//			String strUrlname = "";
+//			System.out.println(strUrlname = links.first().text());
+//			System.out.println(strUrl = links.attr("href"));
+//			// mainmore(id, strUrl,strUrlname);
+//			if (strUrl != null && !"".equals(strUrl)) {
+//
+//				if (!strUrl.contains("http://baike.baidu.com")) {
+//					strUrl = "http://baike.baidu.com" + strUrl;
+//				}
+//				System.out.println(strUrl);
+//				// mainmore(id, strUrl);
+//				TvPlay tvplay = mainmore(id, strUrl, strUrlname);
+//				OracleHaoSou.InsertTVplay(tvplay);// 添加操作
+//				// OracleHaoSou.UpdateTVplay(tvplay);//修改操作
+//			}
+//		}
+		try {
+		Elements links = doc.select("dl.search-list dd");
+		for (Element element : links) {
 			String strUrl = "";
 			String strUrlname = "";
-			System.out.println(strUrlname = links.first().text());
-			System.out.println(strUrl = links.attr("href"));
-			// mainmore(id, strUrl,strUrlname);
-			if (strUrl != null && !"".equals(strUrl)) {
-
-				if (!strUrl.contains("http://baike.baidu.com")) {
-					strUrl = "http://baike.baidu.com" + strUrl;
+			String strallname="";
+			System.out.println(strUrlname = element.select("a.result-title").first().text());
+			System.out.println(strallname = element.select("p.result-summary").first().text());
+			System.out.println(strUrl = element.select("a.result-title").first().attr("href"));
+			if (strUrlname.contains("电视剧")||strallname.contains("电视剧")) {
+				if (strUrl!=null) {
+					System.out.println("成功");
+//					TEM_DIM_FILM movesfilm = mainmore(id, strUrl, strname);
+//					movesfilm.setBaikefilmname(strUrlname);
+//					
+//					OracleHaoSou.InsertTEM_DIM_FILM(movesfilm);// 添加操作
+					TvPlay tvplay = mainmore(id, strUrl, strname);
+					tvplay.setBaikefilmname(strUrlname);
+					OracleHaoSou.InsertTVplay(tvplay);// 添加操作
 				}
-				System.out.println(strUrl);
-				// mainmore(id, strUrl);
-				TvPlay tvplay = mainmore(id, strUrl, strUrlname);
-				OracleHaoSou.InsertTVplay(tvplay);// 添加操作
-				// OracleHaoSou.UpdateTVplay(tvplay);//修改操作
 			}
+			
 		}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		
 	}
 
 	/**

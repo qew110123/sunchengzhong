@@ -38,12 +38,35 @@ public class OracleBaidu {
 		 * 
 		 */
 		//sql="select *  from edw.dim_tvplay t where t.years is null   and t.tvplay_name not in ('我在锡林郭勒等你', 'HEAVENS GARDEN天上花园','秀才遇到兵','GIRL MEETS WORLD蕾蕾看世界','无尽的爱第二部','无尽的爱第一部','守住你的秘密')";
+		
+		/**
+		 * 2016年6月7日15:05:11
+		 * 
+		 */
+		sql="select tt.person_id,tt.person_name from (select p.person_id , p.person_name, p.person_url,t.person_url person_urls  from ods.dim_person p  left join ODS.TEM_DIM_PERSON t    on p.person_name = t.person_name where p.person_id > 20234   and p.sex = 0 order by p.person_name desc) tt where tt.person_urls is null order by tt.person_id";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 
 	}
+	
+	
+	/**
+	 * 百度数据的中的
+	 * 2016年6月6日16:35:35
+	 * @return
+	 */
+	public static List selecthuoqumingchengurl() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "  select max(p.person_url) person_url,      max(t.person_id) person_id,max(t.person_name) person_name  from ods.tem_play_person p  left join ods.dim_person t on p.person_name = t.person_name  where t.sex = 0  and p.person_url is not null  group by p.person_name order by person_id";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
 	
 	
 	/**
@@ -162,6 +185,13 @@ public class OracleBaidu {
 		 * 数据补充
 		 */
 		sql="select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
+		
+		/**
+		 * 2016年6月7日16:31:27
+		 * 完善电视剧基本信息抓取，按照电视剧关键字抓取百科搜索的当前的所有数据 
+		 */
+		sql="";
+		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -177,6 +207,38 @@ public class OracleBaidu {
 	public static List selectbaidudianshijuTVplay() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.tvplay_id,t.tvplay_name,a.tvplay_url from edw.dim_tvplay t left join ods.tem_tvplay a on t.tvplay_id = a.tvplay_id order by a.tvplay_id";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	/**
+	 * 百度数据的中的电视剧 
+	 * 百度词条数据图片
+ * 2016年6月8日15:55:02
+	 * @return
+	 */
+	public static List selectbaiTVplay() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,max(t.tvplay_name),t.tvplay_url  from ods.tem_tvplay t  group by t.tvplay_id,t.tvplay_url order by t.tvplay_id";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	/**
+	 * 百度数据的中的电影
+	 * 2016年6月12日17:58:50
+	 * @return
+	 */
+	public static List selectbaimove() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = " select t.film_id,t.film_name,t.film_url  from  ods.dim_film t where t.film_url is not null order by t.film_id";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
@@ -200,6 +262,22 @@ public class OracleBaidu {
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 	}
+	
+	/**
+	 * 百度数据的中的全部电影
+	 * 2016-6-3 16:21:09
+	 * @return
+	 */
+	public static List selectmove() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = " select t.film_id,t.film_name,t.FILM_URL from ods.dim_film t order by t.film_id ";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
 	
 	/**
 	 * 百度数据获取好友链接名称，和图片，主要是图片

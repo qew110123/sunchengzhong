@@ -125,13 +125,13 @@ public class baidu_newsnum {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
 			}
-		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		 openstatic();
-		TimingTime(3, 59, 59);
+		TimingTime(1, 59, 59);
 		// baidunews("",
 		// "http://news.baidu.com/ns?ct=1&rn=20&ie=utf-8&bs=%E5%94%90%E5%AB%A3&rsv_bp=1&sr=0&cl=2&f=8&prevct=no&tn=newstitle&word=%E5%94%90%E5%AB%A3&qq-pf-to=pcqq.c2c");
 	}

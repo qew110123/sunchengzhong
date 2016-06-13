@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.artsoft.bean.TEM_FILM_BOXOFFICE_REALTIME;
+import com.artsoft.bean.TEM_FILM_DAILY_CINEMA;
+import com.artsoft.bean.TEM_FILM_WEEK_CINEMA;
 import com.artsoft.util.TimeTest;
 
 public class OracleMovePiaoFang {
@@ -233,6 +236,115 @@ public class OracleMovePiaoFang {
 		System.out.println(bb);
 	}
 
+	
+	
+	
+	
+	/**
+	 * 票房数据进行数据的实时数据
+	 *TEM_FILM_BOXOFFICE_REALTIME
+	 *2016年6月7日18:10:46
+	 * 
+	 * @return
+	 */
+	public static void intoTEM_FILM_BOXOFFICE_REALTIME(TEM_FILM_BOXOFFICE_REALTIME  realitme) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.TEM_FILM_BOXOFFICE_REALTIME t (t.data_date,t.title,t.url,t.fid,t.released_days,t.real_time_boxoffice,t.boxoffice_rate,t.total_boxoffice,t.into_date,t.collection_url,t.real_date,t.DATA_TYPE)values(?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(realitme.getDataDate());
+		list.add(realitme.getTitle());
+		list.add(realitme.getUrl());
+		list.add(realitme.getFid());
+		list.add(realitme.getReleasedDays());
+		list.add(realitme.getRealTimeBoxoffice());
+		list.add(realitme.getBoxofficeRate());
+		list.add(realitme.getTotalBoxoffice());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(realitme.getCollectionUrl());
+		list.add(realitme.getREAL_DATE());
+		list.add(realitme.getDATA_TYPE());
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	
+	
+	
+	/**
+	 * 票房数据进行数据的实时数据
+	 * 单日票房
+	 *TEM_FILM_DAILY_CINEMA  dailycinema=new TEM_FILM_DAILY_CINEMA();
+	 *
+	 *2016年6月12日17:47:56
+	 * 
+	 * @return
+	 */
+	public static void intoTEM_FILM_WEEK_CINEMA(TEM_FILM_WEEK_CINEMA  dailycinema) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.TEM_FILM_WEEK_CINEMA t (t.week_data_date,t.title,t.week_boxoffice,t.avg_screen,t.field_average_pnum,t.screen_yield,t.scenes_time,t.into_date,t.collection_url)values(?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(dailycinema.getWeekDataDate());
+		list.add(dailycinema.getTitle());
+		list.add(dailycinema.getWeekBoxoffice());
+		list.add(dailycinema.getAvgScreen());
+		list.add(dailycinema.getFieldAveragePnum());
+		list.add(dailycinema.getScreenYield());
+		list.add(dailycinema.getScenesTime());
+//		list.add(dailycinema.getTotalBoxoffice());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(dailycinema.getCollectionUrl());
+//		list.add(realitme.getREAL_DATE());
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	
+	/**
+	 * 票房数据进行数据的实时数据
+	 * 周票房
+	 *TEM_FILM_DAILY_CINEMA  dailycinema=new TEM_FILM_DAILY_CINEMA();
+	 *
+	 *2016年6月12日18:58:04
+	 * 
+	 * @return
+	 */
+	public static void intoTEM_FILM_DAILY_CINEMA(TEM_FILM_DAILY_CINEMA  dailycinema) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.TEM_FILM_DAILY_CINEMA t (t.DATA_DATE,t.title,t.real_time_boxoffice,t.field_num,t.field_average_pnum,t.average_price,t.attendance_rate,t.into_date,t.collection_url)values(?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(dailycinema.getDataDate());
+		list.add(dailycinema.getTitle());
+		list.add(dailycinema.getRealTimeBoxoffice());
+		list.add(dailycinema.getFieldNum());
+		list.add(dailycinema.getFieldAveragePnum());
+		list.add(dailycinema.getAveragePrice());
+		list.add(dailycinema.getAttendanceRate());
+//		list.add(dailycinema.getTotalBoxoffice());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(dailycinema.getCollectionUrl());
+//		list.add(realitme.getREAL_DATE());
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
 	// tem_film_company 影投明细表
 
 	/**

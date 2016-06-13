@@ -474,7 +474,7 @@ public class WeiBoSearchTVplay {
 			System.out.println(listTemp.get(0));
 			System.out.println(listTemp.get(1));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
-				if (Integer.parseInt(listTemp.get(0))>1000) {
+				if (Integer.parseInt(listTemp.get(0))>3000) {
 				String urlBranch = "";
 				try {
 					urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode("#"+listTemp.get(1)+"#", "utf-8")
@@ -486,7 +486,7 @@ public class WeiBoSearchTVplay {
 						WeiBoBranch(urlBranch, listTemp.get(0), TV_TYPE);
 					} catch (Exception e) {
 						// TODO: handle exception
-						webDriver= null;
+//						webDriver= null;
 					}
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -510,7 +510,12 @@ public class WeiBoSearchTVplay {
 			//电视剧
 			int TV_TYPE=2;
 //			if (i>14002) {
+			try {
+				
 				mainProgram(i, i + 1000,TV_TYPE);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 				seleepTime(5);
 				
 //			}

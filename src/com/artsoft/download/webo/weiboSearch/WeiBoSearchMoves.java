@@ -18,14 +18,14 @@ public class WeiBoSearchMoves {
 	public static void mainProgram(int statnum, int endnum,int TV_TYPE) {
 		// TODO Auto-generated method stub
 		List<String> listArray = OracleHaoSou.selectdim_film(Integer.toString(statnum), Integer.toString(endnum));
-		System.out.println(listArray.size());
+//		System.out.println(listArray.size());
 		for (Object Objstring : listArray) {
 //			System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
 			System.out.println(listTemp.get(0));
 			System.out.println(listTemp.get(1));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
-				if (Integer.parseInt(listTemp.get(0))>1000) {
+				if (Integer.parseInt(listTemp.get(0))>4000) {
 					
 				
 				String urlBranch = "";
@@ -39,7 +39,7 @@ public class WeiBoSearchMoves {
 						WeiBoSearchTVplay.WeiBoBranch(urlBranch, listTemp.get(0), TV_TYPE);
 					} catch (Exception e) {
 						// TODO: handle exception
-						WeiBoSearchTVplay.webDriver= null;
+//						WeiBoSearchTVplay.webDriver= null;
 					}
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -67,8 +67,13 @@ public class WeiBoSearchMoves {
 //			if (i>16001) {
 				
 				int TV_TYPE = 3;
-				seleepTime(2);
-				mainProgram(i, i + 1000, TV_TYPE);
+//				seleepTime(2);
+				try {
+					mainProgram(i, i + 1000, TV_TYPE);
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 //			}
 		}
 

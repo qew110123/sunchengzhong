@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.artsoft.bean.Persion;
+import com.artsoft.bean.TEM_DIM_ENTRYIMG;
+import com.artsoft.bean.TEM_DIM_FILM;
+import com.artsoft.bean.TEM_PLAY_PERSON;
 import com.artsoft.bean.TvPlay;
 import com.artsoft.bean.tem_person_works;
 import com.artsoft.util.TimeTest;
@@ -211,8 +214,8 @@ public class OracleHaoSou {
 		strSql = "insert into ODS.TEM_DIM_PERSON t (t.person_id, t.person_name,t.img_url,t.person_url ,"
 				+ "t.SEX ,t.NATIONALITY,t.bloodtype ,t.height,t.weight,t.occupation ,t.constellation ,t.birthday,"
 				+ "t.deathday,t.alias_en,t.alias_cn,t.homeplace,t.major_awards,t.shcool,t.brokerage_firm,"
-				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers,t.hobby，t.basic_info) "
-				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "t.opus,t.sub_path,t.evaluation,t.birthday_place ,t.social_activities,t.flowers,t.volk,t.brokers,t.hobby，t.basic_info，t.UPDATE_TIME) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(persion.getId());
 		list.add(persion.getName());
@@ -245,6 +248,8 @@ public class OracleHaoSou {
 		list.add(persion.getHobby());
 		list.add(persion.getDescription_text());
 		// list.add(persion.getPersonSocialActivitiesList());
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
@@ -342,8 +347,8 @@ public class OracleHaoSou {
 				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
 				+ "t.before_teleplay,t.next_teleplay,t.open_time,t.close_time,t.total_planning,t.film_time,t.box_office,"
 				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
-				+ "t.recording_place,t.stills_url,t.UPDATE_TIME ) values"
-				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?)";
+				+ "t.recording_place,t.stills_url,t.UPDATE_TIME,t.BAIKE_FILM_NAME) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(tvplay.getTvplay_id());
 		list.add(tvplay.getTvplay_name());
@@ -392,7 +397,75 @@ public class OracleHaoSou {
 		list.add(tvplay.getStills_url());
 		// list.add(persion.getPersonSocialActivitiesList());
 		// 增加添加时间 、、2016年2月26日17：:4：:1
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(tvplay.getBaikefilmname());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	
+	/**
+	 * 进行电影
+	 * 2016年6月6日14:13:14
+	 * @param tvplay
+	 */
+	public static void InsertTEM_DIM_FILM(TEM_DIM_FILM movesfilm) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.tem_dim_film t(t.film_id,t.film_name,t.film_url,t.english_name,t.alias_name,t.years,t.producer,t.produce_company,t.produce_cost,t.produce_area,t.produce_date,t.show_date,t.premiere_date,t.create_time,t.performance_form,t.historical_background,t.description,t.issue_organization,t.subject_name_one,t.issuing_license,t.director,t.actors,t.screenwriter,t.subject_name_two,t.award,t.shooting_location,t.shooting_date,t.time_long,t.languages,t.imdb_code,t.film_img_url,t.film_level,t.play_platform,t.original,t.tv_name_uniq,t.baike_film_name)  values(?,?,?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(movesfilm.getFilmId());
+		list.add(movesfilm.getFilmName());
+		list.add(movesfilm.getFilmUrl());
+		list.add(movesfilm.getEnglishName());
+		list.add(movesfilm.getAliasName());
+		list.add(movesfilm.getYears());
+		list.add(movesfilm.getProducer());
+		list.add(movesfilm.getProduceCompany());
+		list.add(movesfilm.getProduceCost());
+		list.add(movesfilm.getProduceArea());
+		list.add(movesfilm.getProduceDate());
+		list.add(movesfilm.getShowDate());
+		list.add(movesfilm.getPremiereDate());
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(movesfilm.getPerformanceForm());
+		list.add(movesfilm.getHistoricalBackground());
+		list.add(movesfilm.getDescription());
+		list.add(movesfilm.getIssueOrganization());
+		list.add(movesfilm.getSubjectNameOne());
+		list.add(movesfilm.getIssuingLicense());
+		list.add(movesfilm.getDirector());
+		list.add(movesfilm.getActors());
+		list.add(movesfilm.getScreenwriter());
+		list.add(movesfilm.getSubjectNameTwo());
+		list.add(movesfilm.getAward());
+		list.add(movesfilm.getShootingLocation());
+		list.add(movesfilm.getShootingDate());
+		list.add(movesfilm.getTimeLong());
+		list.add(movesfilm.getLanguages());
+		list.add(movesfilm.getImdbCode());
+		list.add(movesfilm.getFilmImgUrl());
+		list.add(movesfilm.getFilmLevel());
+		list.add(movesfilm.getPlayPlatform());
+		list.add(movesfilm.getOriginal());
+		list.add(movesfilm.getFilmName()+movesfilm.getYears()+movesfilm.getDirector());
+		list.add(movesfilm.getBaikefilmname());
+		
+//		list.add(movesfilm.getBox_office());
+//		// list.add(movesfilm.getType());
+//		list.add(movesfilm.getCompere());
+//		list.add(movesfilm.getTotal_sponsor());
+//		list.add(movesfilm.getPartners());
+//		list.add(movesfilm.getSpecial_support());
+//		list.add(movesfilm.getSocial_platform());
+//		list.add(movesfilm.getGuest_program());
+//		list.add(movesfilm.getSeason_numbver());
+//		list.add(movesfilm.getRecording_place());
+//		list.add(movesfilm.getStills_url());
+		// list.add(persion.getPersonSocialActivitiesList());
+		// 增加添加时间 、、2016年2月26日17：:4：:1
+//		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
@@ -615,6 +688,103 @@ public class OracleHaoSou {
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
+	}
+	
+	
+	
+	/**
+	 * 進入数据进行角色介绍添加 和图片
+	 * 
+	 * @param tvplayid
+	 * @param tvplayname
+	 * @param tvplayurl
+	 * @param personid
+	 * @param personname
+	 * @param personurl
+	 * @param rolename
+	 * @param personstillsurl
+	 * @param dubbingname
+	 * @param dubbingurl
+	 * @param roleintro
+	 * 
+	 */
+	public static void intotemtvplayall(String tvplayid, String tvplayname, String tvplayurl, String personid,
+			String personname, String personurl, String rolename, String personstillsurl, String dubbingname,
+			String dubbingurl, String roleintro,String PERSON_BIG_URL,int DATA_TYPE) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.tem_tvplay_person t(t.tvplay_id,t.tvplay_name,t.tvplay_url,"
+				+ "t.person_name,t.person_url,t.role_name,t.PERSON_SMALL_URL,t.dubbing_name,t.dubbing_url,"
+				+ "t.role_intro,t.PERSON_BIG_URL,INTO_DATE,t.DATA_TYPE)values(?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(tvplayname);
+		list.add(tvplayurl);
+		list.add(personname);
+		list.add(personurl);
+		list.add(rolename);
+		list.add(personstillsurl);
+		list.add(dubbingname);
+		list.add(dubbingurl);
+		list.add(roleintro);
+		list.add(PERSON_BIG_URL);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(DATA_TYPE);
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	public static void intoTEM_PLAY_PERSON (TEM_PLAY_PERSON playpeoson){
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.TEM_PLAY_PERSON t(t.DATA_ID ,t.DATA_NAME,t.DATA_URL,"
+				+ "t.PERSON_NAME,t.PERSON_URL,t.ROLE_NAME,t.PERSON_SMALL_URL,t.DUBBING_NAME,t.ROLE_INTRO,"
+				+ "t.INTO_DATE,t.SOURCE)values(?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		list.add(playpeoson.getDataId());// 这里是将对象加入到list中
+		list.add(playpeoson.getDataName());
+		list.add(playpeoson.getDataUrl());
+		list.add(playpeoson.getPersonName());
+		list.add(playpeoson.getPersonUrl());
+		list.add(playpeoson.getRoleName());
+		list.add(playpeoson.getPersonSmallUrl());
+		list.add(playpeoson.getDubbingName());
+		list.add(playpeoson.getRoleIntro());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(playpeoson.getSource());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+		
+		
+	}
+	
+	/**
+	 * TEM_DIM_ENTRYIMG
+	 * 2016年6月8日15:44:48
+	 * 电影/电视剧剧照---词条 
+	 * @param playpeoson
+	 */
+	
+	public static void intoTEM_DIM_ENTRYIMG (TEM_DIM_ENTRYIMG ENTRYIMG){
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.TEM_DIM_ENTRYIMG t(t.data_id,t.data_title,t.small_url,t.big_url,t.into_date,t.data_url,t.data_type)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
+
+		List<Comparable> list = new ArrayList();
+		list.add(ENTRYIMG.getDataId());// 这里是将对象加入到list中
+		list.add(ENTRYIMG.getDataTitle());
+		list.add(ENTRYIMG.getSmallUrl());
+		list.add(ENTRYIMG.getBigUrl());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(ENTRYIMG.getDataUrl());
+		list.add(ENTRYIMG.getDataType());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+		
+		
 	}
 
 	/**

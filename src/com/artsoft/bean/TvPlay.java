@@ -111,9 +111,17 @@ public class TvPlay {
 	private int SOURCE = 0;
 	
 	
+	private String baikefilmname="";
 	
 	
-	
+	public String getBaikefilmname() {
+		return baikefilmname;
+	}
+
+	public void setBaikefilmname(String baikefilmname) {
+		this.baikefilmname = baikefilmname;
+	}
+
 	public String getIMDb() {
 		return IMDb;
 	}

@@ -234,7 +234,7 @@ public class OracleOpreater {
 		strSql = "insert into ods.TEM_DIM_FILM_PLATFORM t(t.B_FILM_ID,t.film_name,t.film_url,t.english_name,"
 				+ "t.alias_name,t.years,t.produce_area,t.show_date,t.create_time,t.update_time,t.source,t.description,"
 				+ "t.subject_name_one,t.director,t.actors,t.screenwriter,t.subject_name_two,t.subject_id_one,t.subject_id_two,"
-				+ "t.time_long,t.languages,t.imdb_code,t.film_level,t.original,t.BOX_OFFICES,t.PRODUCE_COMPANY,t.ISSUE_ORGANIZATION,t.PRODUCE_FORMAT)values(?,?,?,?,?,?,?,?,to_date(?,"
+				+ "t.time_long,t.languages,t.imdb_code,t.film_level,t.original,t.TOTAL_BOXOFFICE,t.PRODUCE_COMPANY,t.ISSUE_ORGANIZATION,t.PRODUCE_FORMAT)values(?,?,?,?,?,?,?,?,to_date(?,"
 				+ "'yyyy-mm-dd hh24:mi:ss'),null,?,?,?,?,?,?,?,null,null,?,?,?,?,?,?,?,?,?)";
 		
 		
