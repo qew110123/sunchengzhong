@@ -717,6 +717,11 @@ public class OracleHaoSou {
 				+ "t.person_name,t.person_url,t.role_name,t.PERSON_SMALL_URL,t.dubbing_name,t.dubbing_url,"
 				+ "t.role_intro,t.PERSON_BIG_URL,INTO_DATE,t.DATA_TYPE)values(?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
 
+		
+		strSql = "insert into ods.tem_play_role_stills t(t.tvplay_id,t.tvplay_name,t.tvplay_url,"
+				+ "t.person_name,t.person_url,t.role_name,t.PERSON_SMALL_URL,t.dubbing_name,t.dubbing_url,"
+				+ "t.role_intro,t.PERSON_BIG_URL,INTO_DATE,t.DATA_TYPE)values(?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+		
 		List<Comparable> list = new ArrayList();
 		list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
 		list.add(tvplayname);
@@ -772,7 +777,8 @@ public class OracleHaoSou {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
 		String strSql = "insert into ods.TEM_DIM_ENTRYIMG t(t.data_id,t.data_title,t.small_url,t.big_url,t.into_date,t.data_url,t.data_type)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
-
+		//
+		strSql="insert into ods.tem_play_stills t(t.data_id,t.data_title,t.small_url,t.big_url,t.into_date,t.data_url,t.data_type)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(ENTRYIMG.getDataId());// 这里是将对象加入到list中
 		list.add(ENTRYIMG.getDataTitle());

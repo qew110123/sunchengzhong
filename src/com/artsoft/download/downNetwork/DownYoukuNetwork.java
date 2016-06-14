@@ -17,6 +17,11 @@ public class DownYoukuNetwork {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ªÊ¼");
 		String strurl = DownYoukuNetwork
 				.youkuMaim("http://www.youku.com/v_olist/c_97_s_1_d_1_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81.html");
+		
+		DownYoukuNetwork
+		.youkuMaim("http://list.youku.com/category/show/c_97_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81_s_1_d_1_p_2.html");
+		
+		
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½áÊø");
 	}
 
@@ -114,6 +119,10 @@ public class DownYoukuNetwork {
 
 	}
 
+	/**
+	 * ÍøÂç¾ç
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		runstatic();
