@@ -297,7 +297,7 @@ public class OracleOpreater {
 				+ "t.alias_en ,t.alias_cn,t.major_actors ,t.director,t.screenwriter,t.producer ,t.production_company ,"
 				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.PRODUCED_COMPANY,"
 				+ "t.production_area,t.premiere_time,t.pages,t.photography_director,t.total_production,t.basic_info,"
-				+ "t.update_time,t.source)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "t.update_time,t.source,t.DATA_TYPE)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		List<Comparable> list = new ArrayList();
 		// 这里是将对象加入到list中
@@ -344,6 +344,8 @@ public class OracleOpreater {
 
 		list.add(playtv.getSOURCE());
 
+		list.add(playtv.getDATA_TYPE());
+		
 		boolean bb = DBOperate.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}

@@ -117,7 +117,9 @@ public class zhongguopiaofangwang {
 
 		JSONObject objectobjectmain = JSONObject.fromObject(strHtml);
 		JSONArray album_lists = new JSONArray();
-
+		try {
+			
+		
 		JSONArray data3 = (JSONArray) objectobjectmain.get("data3");
 		String TOTAL_FIELD_NUM = "";
 		for (Object object : data3) {
@@ -233,6 +235,9 @@ public class zhongguopiaofangwang {
 
 			OracleMovePiaoFang.intotem_want_see_index(data_date, MovieID, title, RapIndex, urlMain, 4, days, 4,
 					data_typeint, InsertDate);
+		}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 
 	}

@@ -1,16 +1,35 @@
 package com.artsoft.download.webo;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
+import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.MethodRetryHandler;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import com.artsoft.bean.Tem_weibo_word_age_sex;
@@ -61,6 +80,7 @@ public class WeBoDajiewang {
 		// TODO Auto-generated method stub
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpResponse response = null;
+		System.out.println(newUrl);
 		System.out.println("******************************页面转向******************************");
 		// String newUrl =
 		// "http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=1091324464527";
@@ -71,32 +91,376 @@ public class WeBoDajiewang {
 		// get.addHeader("Host", "data.weibo.com");
 		// get.addHeader("Accept",
 		// "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+		
+		//get.addHeader("ContentType", "text/html; charset=utf-8"));
+		
+		
+		
+		get.addHeader(new BasicHeader("Cookie",
+				"SINAGLOBAL=8858606864232.57.1447918197910; WEB3_PHP-FPM_BX=c6bf40b75e3394cc69125b6a8186b749; SUHB=0FQrI-caFr9Ekl; PHPSESSID=ksodvda9k8m5ut7n4853uis190; _s_tentry=login.sina.com.cn; Apache=4404089951422.065.1465977164977; ULV=1465977164986:3:1:1:4404089951422.065.1465977164977:1462960442581; myuid=3923882226; SUB=_2AkMgPYX4dcNhrABYmvsdxGngbotH-jzEiebBAn7uJhMyAxh77g00qSWE_hzUQtOQW953imvgXCU9NlbN4A..; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFLv95IJ-mdsv8MBKZwnWZl5JpVhGUydJURUfvDUFR3Zntt; UOR=,,login.sina.com.cn; WBStore=8ca40a3ef06ad7b2|undefined"));
+		
 		get.addHeader("Accept", "*/*");
-		get.addHeader("Accept-Encoding", "gzip, deflate, sdch");
+//		get.addHeader("Accept-Encoding", "gzip, deflate, sdch");
 		get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
-		get.addHeader("Cache-Control", "max-age=0");
+		//get.addHeader("Cache-Control", "max-age=0");
 		get.addHeader("Connection", "keep-alive");
 		get.addHeader("Content-Type", "application/x-www-form-urlencoded");
-		get.addHeader(new BasicHeader("Cookie",
-				"SINAGLOBAL=8549726845230.907.1445398578667; SUHB=0sqQ0pK3WBV2gN; SUB=_2AkMhLpLRdcNhrAFZmP0SzG3rbolXzQ7wu9_0M03fZ2JCMnoQgT5nqiRotBF_DN7Orke6kXahkJdZP3wN_xXCDM1NAU5yAAw.; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; DATA=usrmdinst_0; WBStore=8ca40a3ef06ad7b2|undefined; _s_tentry=www.baidu.com; Apache=3636198288224.295.1463024037215; ULV=1463024037240:30:4:3:3636198288224.295.1463024037215:1462874953123; UOR=picture.youth.cn,widget.weibo.com,www.baidu.com; PHPSESSID=m5v11jk24squ83afqf6m94grp7"));
+		//get.addHeader("Cookie",
+		//		"SINAGLOBAL=8549726845230.907.1445398578667; _s_tentry=fun.youth.cn; Apache=9864564227371.924.1464687037301; ULV=1464687037601:31:5:1:9864564227371.924.1464687037301:1463024037240; appkey=; un=764295333@qq.com; ULOGIN_IMG=14656991891358; SUHB=0WGNMFnY-fd5yZ; WEB3_PHP-FPM_BX=b4e45307e57611d895592857e89c154f; PHPSESSID=vm64vrd03jsilm939p4lkoa9g6; VARNISH-bx=9913ee32e2fe6443b57de6e7558564bf; __utma=31150890.1895517594.1465899683.1465899683.1465899683.1; __utmc=31150890; __utmz=31150890.1465899683.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); myuid=2805706924; SUB=_2AkMgPI5cdcNhrAFZmP0SzG3rbolH-jzEiebBAn7uJhMyAxh77k4hqSWwEaD6lLDhD8ViOPBOFfUs5eIiQQ..; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; WBStore=8ca40a3ef06ad7b2|undefined; UOR=picture.youth.cn,widget.weibo.com,www.baidu.com");
 
 		get.addHeader("Host", "data.weibo.com");
-		get.addHeader("Referer", "http://data.weibo.com/index/hotword?wid=1091324230349&wname=%E6%AC%A2%E4%B9%90%E9%A2%82");
+		get.addHeader("Referer", "http://data.weibo.com/index/zone");
 //		get.addHeader("Upgrade-Insecure-Requests", "1");
 		get.addHeader("User-Agent",
-				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36");
+				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36");
 		get.addHeader("X-Requested-With", "XMLHttpRequest");
 		// get.addHeader("Accept-Language",
 		// "zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3");
-
-		HttpResponse httpResponse = client.execute(get);
+//		get.addHeader("Content-Type", "text/html;charset=UTF-8");
+//		get.addHeader("charset=utf-8");
+//		get.connect();
+//		get.add
+//		get.setHeader("Content-Type", "text/html; charset=utf-8");
+		
+//		client.getParams().setParameter("http.protocol.content-charset", "UTF-8");
+		
+		HttpResponse httpResponse = new DefaultHttpClient().execute(get);
+		
+//		System.out.println(httpResponse.getStatusLine().getStatusCode());
+		
+		
+//		  HttpEntity httpEntity = httpResponse.getEntity();  
+//        String   result = EntityUtils.toString(httpEntity);//取出应答字符串  
+//		
+//		System.out.println(result.replaceAll("\r", ""));
+		
+		
+//		System.out.println(httpResponse.wait(get));
+//		response.setCharacterEncoding("UTF-8");
+//		httpResponse
+//		httpResponse.setHeader("Content-Type", "text/html; charset=utf-8");
+//		System.out.println(httpResponse);
+		
+//		httpResponse.
+//		String responseString = EntityUtils.toString(httpResponse.getEntity());
+//		System.out.println(httpResponse.getEntity());
+//		String responseString = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
 		String responseString = EntityUtils.toString(httpResponse.getEntity());
 		// 登录后首页的内容
+//		textview.setText(responseString);
+		
+	
+		
+		
+		
+//		System.out.println(responseString.wait(timeout););
+//		System.out.println( java.net.URLDecoder.decode(responseString,"GBK"));
 		System.out.println(responseString);
+		
 		get.releaseConnection();
+		
 		return responseString;
 //		return Test.weoborun(newUrl);
 	}
+	
+	/** 
+	    * @Title: methodPost  
+	    * @Description: httpclient方法中post提交数据的使用  
+	    * @param @return 
+	    * @param @throws Exception    
+	    * @return String     
+	    * @throws 
+	     */  
+	    public static String methodPost() throws Exception {  
+	        DefaultHttpClient httpclient = new DefaultHttpClient();  
+	        // // 代理的设置  
+	        // HttpHost proxy = new HttpHost("10.60.8.20", 8080);  
+	        // httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,  
+	        // proxy);  
+	  
+	        // 目标地址  
+	        HttpPost httppost = new HttpPost(  
+	                "http://data.weibo.com/index/ajax/contrast?key2=%25E5%25AD%2594%25E7%2590%25B3&key3=&key4=&key5=&key6=&_t=0&__rnd=1450262484071");  
+	        System.out.println("请求: " + httppost.getRequestLine());  
+	   
+	        // post 参数 传递  
+	        List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();  
+	        nvps.add(new BasicNameValuePair("key2", "%E8%8C%83%E5%86%B0%E5%86%B0")); // 参数  
+	        nvps.add(new BasicNameValuePair("_t", "0")); // 参数  
+	        nvps.add(new BasicNameValuePair("__rnd", "1465958748340")); // 参数  
+//	        nvps.add(new BasicNameValuePair("Accept-Encoding", "gzip, deflate, sdch")); // 参数  
+//	        nvps.add(new BasicNameValuePair("Accept-Language", "zh-CN,zh;q=0.8")); // 参数  
+//	        nvps.add(new BasicNameValuePair("Connection", "keep-alive")); // 参数  
+//	        nvps.add(new BasicNameValuePair("Content-Type", "application/x-www-form-urlencoded")); // 参数  
+//	        nvps.add(new BasicNameValuePair("Cookie", "SINAGLOBAL=8549726845230.907.1445398578667; un=764295333@qq.com; SUHB=0WGNMFnY-fd5yZ; __utma=31150890.1895517594.1465899683.1465899683.1465899683.1; __utmz=31150890.1465899683.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); myuid=2805706924; SUB=_2AkMgPI5cdcNhrAFZmP0SzG3rbolH-jzEiebBAn7uJhMyAxh77k4hqSWwEaD6lLDhD8ViOPBOFfUs5eIiQQ..; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; WEB3_PHP-FPM_GD=c2fabe0d8b25ece0332132ca379fe277; _s_tentry=www.baidu.com; UOR=picture.youth.cn,widget.weibo.com,www.baidu.com; Apache=7013302213083.097.1465958451637; ULV=1465958451641:32:1:1:7013302213083.097.1465958451637:1464687037601; WBStore=8ca40a3ef06ad7b2|undefined; PHPSESSID=ecuqj6vsd7ee9jbbmt649nn1j7")); // 参数  
+//	        nvps.add(new BasicNameValuePair("Host", "data.weibo.com")); // 参数  
+//	        nvps.add(new BasicNameValuePair("Referer", "http://data.weibo.com/index/zone")); // 参数  
+//	        nvps.add(new BasicNameValuePair("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36X-Requested-With:XMLHttpRequest")); // 参数  
+	        httppost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8)); // 设置参数给Post  
+	  
+	        // 执行  
+	        HttpResponse response = httpclient.execute(httppost);  
+	        HttpEntity entity = response.getEntity();  
+	        System.out.println(response.getStatusLine());  
+	        if (entity != null) {  
+	            System.out.println("Response content length: "  
+	                    + entity.getContentLength());  
+	        }  
+	        // 显示结果  
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(  
+	                entity.getContent(), "UTF-8"));  
+	  
+	        String line = null;  
+	        while ((line = reader.readLine()) != null) {  
+	            System.out.println(line);  
+	        }  
+	        if (entity != null) {  
+	            entity.consumeContent();  
+	        }  
+	        return null;  
+	  
+	    }  
+	    
+	    
+	    /** 
+	     * @Title: methodGet  
+	     * @Description:  以get方法提交数的使用  
+	     * @param @return 
+	     * @param @throws Exception    
+	     * @return String     
+	     * @throws 
+	      */  
+	     public static  String methodGet() throws  Exception {   
+	            DefaultHttpClient httpclient = new DefaultHttpClient();     
+//	                // 代理的设置     
+//	                 HttpHost proxy = new HttpHost("10.60.8.20", 8080);     
+//	                 httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);     
+	   
+	   
+	             // 目标地址     
+	              HttpPost httpGet = new HttpPost("http://data.weibo.com/index/ajax/contrast");     
+	                
+	              // 构造最简单的字符串数据     
+	               StringEntity reqEntity = new StringEntity("key2=%25E5%25AD%2594%25E7%2590%25B3&key3=&key4=&key5=&key6=&_t=0&__rnd=1450262484071");     
+	              // 设置类型     
+//	               reqEntity.setContentType("application/x-www-form-urlencoded");     
+	               
+//	               reqEntity.set
+	              // 设置请求的数据     
+//	               httpGet.setEntity(reqEntity);
+	               
+//	               httpGet.setHeader(name, value);
+	               
+//	               httpGet.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
+//	               httpGet.setHeader("Connection", "close");
+//	               httpGet.setHeader("Content-Encoding", "gzip");
+//	               
+//	               httpGet.setHeader("Content-Type", "text/html; charset=utf-8");
+//	               httpGet.setHeader("DPOOL_ARGS_MARK", "F");
+//	               httpGet.setHeader("DPOOL_HEADER", "hathor178");
+//	               httpGet.setHeader("DPOOL_LB7_HEADER", "hathor114");
+//	               httpGet.setHeader("DPOOL_LU", "web3");
+//	               httpGet.setHeader("DPOOL_URI_MARK", "F");
+//	               httpGet.setHeader("Server", "Sina");
+//	               httpGet.setHeader("Transfer-Encoding", "chunked");
+//	               httpGet.setHeader("Vary", "Accept-Encoding");
+	               
+	               httpGet.addHeader("Accept", "*/*");
+	               httpGet.addHeader("Accept-Encoding", "gzip, deflate, sdch");
+	               httpGet.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
+	       		//get.addHeader("Cache-Control", "max-age=0");
+	               httpGet.addHeader("Connection", "keep-alive");
+	               httpGet.addHeader("Content-Type", "application/x-www-form-urlencoded");
+	               httpGet.addHeader(new BasicHeader("Cookie",
+	       				"SINAGLOBAL=8549726845230.907.1445398578667; un=764295333@qq.com; SUHB=0WGNMFnY-fd5yZ; __utma=31150890.1895517594.1465899683.1465899683.1465899683.1; __utmz=31150890.1465899683.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); myuid=2805706924; SUB=_2AkMgPI5cdcNhrAFZmP0SzG3rbolH-jzEiebBAn7uJhMyAxh77k4hqSWwEaD6lLDhD8ViOPBOFfUs5eIiQQ..; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; WEB3_PHP-FPM_GD=c2fabe0d8b25ece0332132ca379fe277; _s_tentry=www.baidu.com; UOR=picture.youth.cn,widget.weibo.com,www.baidu.com; Apache=7013302213083.097.1465958451637; ULV=1465958451641:32:1:1:7013302213083.097.1465958451637:1464687037601; WBStore=8ca40a3ef06ad7b2|undefined; PHPSESSID=ecuqj6vsd7ee9jbbmt649nn1j7"));
+	       		//get.addHeader("Cookie",
+	       		//		"SINAGLOBAL=8549726845230.907.1445398578667; _s_tentry=fun.youth.cn; Apache=9864564227371.924.1464687037301; ULV=1464687037601:31:5:1:9864564227371.924.1464687037301:1463024037240; appkey=; un=764295333@qq.com; ULOGIN_IMG=14656991891358; SUHB=0WGNMFnY-fd5yZ; WEB3_PHP-FPM_BX=b4e45307e57611d895592857e89c154f; PHPSESSID=vm64vrd03jsilm939p4lkoa9g6; VARNISH-bx=9913ee32e2fe6443b57de6e7558564bf; __utma=31150890.1895517594.1465899683.1465899683.1465899683.1; __utmc=31150890; __utmz=31150890.1465899683.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); myuid=2805706924; SUB=_2AkMgPI5cdcNhrAFZmP0SzG3rbolH-jzEiebBAn7uJhMyAxh77k4hqSWwEaD6lLDhD8ViOPBOFfUs5eIiQQ..; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; WBStore=8ca40a3ef06ad7b2|undefined; UOR=picture.youth.cn,widget.weibo.com,www.baidu.com");
+
+	               httpGet.addHeader("Host", "data.weibo.com");
+	               httpGet.addHeader("Referer", "http://data.weibo.com/index/zone");
+//	       		get.addHeader("Upgrade-Insecure-Requests", "1");
+	               httpGet.addHeader("User-Agent",
+	       				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36");
+	               httpGet.addHeader("X-Requested-With", "XMLHttpRequest");
+	             
+	              // 执行     
+	              HttpResponse response = httpclient.execute(httpGet);     
+	              HttpEntity entity = response.getEntity();     
+	              System.out.println(response.getStatusLine());     
+	                
+	             if (entity != null) {     
+	                System.out.println("Response content length: " + entity.getContentLength());  //得到返回数据的长度    
+	              }     
+	              // 显示结果     
+	              BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));   
+	                
+	              String line = null;     
+	             while ((line = reader.readLine()) != null) {     
+	                  System.out.println(line);     
+	              }     
+	             if (entity != null) {     
+	                   entity.consumeContent();     
+	              }     
+	             return null;   
+	   
+	         }  	    
+	    
+	
+	     
+	     
+	     public static String doGet()  
+	     {  
+	         String uriAPI = "http://data.weibo.com/index/ajax/contrast?key2=%25E6%259D%25A8%25E6%25A1%2582%25E6%25A2%2585&key3=&key4=&key5=&key6=&_t=0&__rnd=1450262484071";  
+	         String result= "";  
+//	       HttpGet httpRequst = new HttpGet(URI uri);  
+//	       HttpGet httpRequst = new HttpGet(String uri);  
+//	       创建HttpGet或HttpPost对象，将要请求的URL通过构造方法传入HttpGet或HttpPost对象。  
+	         HttpGet httpRequst = new HttpGet(uriAPI);  
+	         
+	         httpRequst.addHeader(new BasicHeader("Cookie",
+	 				"SINAGLOBAL=8549726845230.907.1445398578667; un=764295333@qq.com; SUHB=0WGNMFnY-fd5yZ; __utma=31150890.1895517594.1465899683.1465899683.1465899683.1; __utmz=31150890.1465899683.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); myuid=2805706924; SUB=_2AkMgPI5cdcNhrAFZmP0SzG3rbolH-jzEiebBAn7uJhMyAxh77k4hqSWwEaD6lLDhD8ViOPBOFfUs5eIiQQ..; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; WEB3_PHP-FPM_GD=c2fabe0d8b25ece0332132ca379fe277; _s_tentry=www.baidu.com; UOR=picture.youth.cn,widget.weibo.com,www.baidu.com; Apache=7013302213083.097.1465958451637; ULV=1465958451641:32:1:1:7013302213083.097.1465958451637:1464687037601; WBStore=8ca40a3ef06ad7b2|undefined; PHPSESSID=ecuqj6vsd7ee9jbbmt649nn1j7"));
+	 		
+	         httpRequst.addHeader("Accept", "*/*");
+	         httpRequst.addHeader("Accept-Encoding", "gzip, deflate, sdch");
+	         httpRequst.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
+	 		//get.addHeader("Cache-Control", "max-age=0");
+	         httpRequst.addHeader("Connection", "keep-alive");
+	         httpRequst.addHeader("Content-Type", "application/x-www-form-urlencoded");
+//	         httpRequst.addHeader("Cookie",
+//	 				"SINAGLOBAL=8549726845230.907.1445398578667; _s_tentry=fun.youth.cn; Apache=9864564227371.924.1464687037301; ULV=1464687037601:31:5:1:9864564227371.924.1464687037301:1463024037240; appkey=; un=764295333@qq.com; ULOGIN_IMG=14656991891358; SUHB=0WGNMFnY-fd5yZ; WEB3_PHP-FPM_BX=b4e45307e57611d895592857e89c154f; PHPSESSID=vm64vrd03jsilm939p4lkoa9g6; VARNISH-bx=9913ee32e2fe6443b57de6e7558564bf; __utma=31150890.1895517594.1465899683.1465899683.1465899683.1; __utmc=31150890; __utmz=31150890.1465899683.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); myuid=2805706924; SUB=_2AkMgPI5cdcNhrAFZmP0SzG3rbolH-jzEiebBAn7uJhMyAxh77k4hqSWwEaD6lLDhD8ViOPBOFfUs5eIiQQ..; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; WBStore=8ca40a3ef06ad7b2|undefined; UOR=picture.youth.cn,widget.weibo.com,www.baidu.com");
+
+	         httpRequst.addHeader("Host", "data.weibo.com");
+	         httpRequst.addHeader("Referer", "http://data.weibo.com/index/zone");
+//	 		get.addHeader("Upgrade-Insecure-Requests", "1");
+	         httpRequst.addHeader("User-Agent",
+	 				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36");
+	         httpRequst.addHeader("X-Requested-With", "XMLHttpRequest");
+	   
+//	       new DefaultHttpClient().execute(HttpUriRequst requst);  
+	         try {  
+	    //使用DefaultHttpClient类的execute方法发送HTTP GET请求，并返回HttpResponse对象。  
+	             HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequst);//其中HttpGet是HttpUriRequst的子类  
+	             if(httpResponse.getStatusLine().getStatusCode() == 200)  
+	             {  
+	                 HttpEntity httpEntity = httpResponse.getEntity();  
+	                 result = EntityUtils.toString(httpEntity);//取出应答字符串  
+	             // 一般来说都要删除多余的字符   
+	                 result.replaceAll("\r", "");//去掉返回结果中的"\r"字符，否则会在结果字符串后面显示一个小方格    
+	                 System.out.println(result);
+	             }  
+	                    else   
+	                         httpRequst.abort();  
+	            } catch (ClientProtocolException e) {  
+	             // TODO Auto-generated catch block  
+	             e.printStackTrace();  
+	             result = e.getMessage().toString();  
+	         } catch (IOException e) {  
+	             // TODO Auto-generated catch block  
+	             e.printStackTrace();  
+	             result = e.getMessage().toString();  
+	         }  
+	         return result;  
+	     }  
+	     
+	     
+	     
+	     /**
+	     httpClient的get请求方式2
+	     * @return
+	     * @throws Exception
+	     */
+	    public static String doGet(String url, String charset)
+	        throws Exception {
+	      /*
+	       * 使用 GetMethod 来访问一个 URL 对应的网页,实现步骤: 1:生成一个 HttpClinet 对象并设置相应的参数。
+	       * 2:生成一个 GetMethod 对象并设置响应的参数。 3:用 HttpClinet 生成的对象来执行 GetMethod 生成的Get
+	       * 方法。 4:处理响应状态码。 5:若响应正常，处理 HTTP 响应内容。 6:释放连接。
+	       */
+	      /* 1 生成 HttpClinet 对象并设置参数 */
+	      HttpClient httpClient = new HttpClient();
+	      // 设置 Http 连接超时为5秒
+	      httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(5000);
+	      /* 2 生成 GetMethod 对象并设置参数 */
+	      GetMethod getMethod = new GetMethod(url);
+	      
+	      
+	      
+	    //设置http头  
+	        List<Header> headers = new ArrayList<Header>();  
+	        headers.add(new Header("Accept", "*/*"));  
+	        headers.add(new Header("Accept-Encoding", "gzip, deflate, sdch"));  
+	        headers.add(new Header("Accept-Language", "zh-CN,zh;q=0.8"));  
+	        headers.add(new Header("Connection", "keep-alive"));  
+	        headers.add(new Header("Content-Type", "application/x-www-form-urlencoded"));  
+	        
+	        headers.add(new Header("Cookie", "MSINAGLOBAL=8549726845230.907.1445398578667; un=764295333@qq.com; SUHB=0WGNMFnY-fd5yZ; __utma=31150890.1895517594.1465899683.1465899683.1465899683.1; __utmz=31150890.1465899683.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); myuid=2805706924; SUB=_2AkMgPI5cdcNhrAFZmP0SzG3rbolH-jzEiebBAn7uJhMyAxh77k4hqSWwEaD6lLDhD8ViOPBOFfUs5eIiQQ..; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFVId20mkyG_N-5ejfVKF0s5JpV2hMcShz4SKe0eXWpMC4odcXt; WEB3_PHP-FPM_GD=c2fabe0d8b25ece0332132ca379fe277; _s_tentry=www.baidu.com; UOR=picture.youth.cn,widget.weibo.com,www.baidu.com; Apache=7013302213083.097.1465958451637; ULV=1465958451641:32:1:1:7013302213083.097.1465958451637:1464687037601; WBStore=8ca40a3ef06ad7b2|undefined; PHPSESSID=ecuqj6vsd7ee9jbbmt649nn1j7; WEB3_PHP-FPM_BX=6fb2ead3c5f48fa5c2e869be7b88f9fc"));  
+	        
+	        headers.add(new Header("Host", "data.weibo.com"));  
+	        headers.add(new Header("Referer", "http://data.weibo.com/index/zone"));  
+	        
+	        
+	        headers.add(new Header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36"));  
+	        headers.add(new Header("X-Requested-With", "XMLHttpRequest"));  
+//	        headers.add(new Header("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)"));  
+	        
+	        
+	        httpClient.getHostConfiguration().getParams().setParameter("http.default-headers", headers);
+	      
+//	      getMethod
+	      
+	      // 设置 get 请求超时为 5 秒
+	      getMethod.getParams().setParameter(HttpMethodParams.SO_TIMEOUT, 5000);
+	      // 设置请求重试处理，用的是默认的重试处理：请求三次
+	      getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,	new DefaultHttpMethodRetryHandler());
+	      
+	      
+	      
+	      String response = "";
+	      /* 3 执行 HTTP GET 请求 */
+	      try {
+	        int statusCode = httpClient.executeMethod(getMethod);
+	        /* 4 判断访问的状态码 */
+	        if (statusCode != HttpStatus.SC_OK) {
+	          System.err.println("请求出错: "+ getMethod.getStatusLine());
+	        }
+	        
+	        
+//	        /* 5 处理 HTTP 响应内容 */
+//	        // HTTP响应头部信息，这里简单打印
+//	        Header[] headers = getMethod.getResponseHeaders();
+//	        for (Header h : headers)
+//	          System.out.println(h.getName() + "------------ " + h.getValue());
+	        
+	        
+	        Header[] headerss = getMethod.getResponseHeaders();
+	        for (Header h : headerss)
+	          System.out.println(h.getName() + "------------ " + h.getValue());
+	        
+//	        MethodRetryHandler Footers =  getMethod.getMethodRetryHandler();
+//	        System.out.println(Footers);
+	        
+	        // 读取 HTTP 响应内容，这里简单打印网页内容
+	        byte[] responseBody = getMethod.getResponseBody();// 读取为字节数组
+	        	        
+	        response = new String(responseBody, charset);
+	        System.out.println("----------response:" + response);
+	        // 读取为 InputStream，在网页内容数据量大时候推荐使用
+	        // InputStream response = getMethod.getResponseBodyAsStream();
+	      } catch (HttpException e) {
+	        // 发生致命的异常，可能是协议不对或者返回的内容有问题
+	        System.out.println("请检查输入的URL!");
+	        e.printStackTrace();
+	      } catch (IOException e) {
+	        // 发生网络异常
+	        System.out.println("发生网络异常!");
+	        e.printStackTrace();
+	      } finally {
+	        /* 6 .释放连接 */
+	        getMethod.releaseConnection();
+	      }
+	      return response;
+	    }
+	
 
 	public static String Weibo(String newUrl) throws Exception {
 //		// TODO Auto-generated method stub
@@ -646,16 +1010,24 @@ public class WeBoDajiewang {
 	public static void main(String[] args) throws Exception {
 		
 		
-		
+//		Weiboall("http://data.weibo.com/index/ajax/getdefaultattributealldata?__rnd=1465910360625");
 		TimingTime(00, 00, 01);
+		
 //		 runstatic();
 		/**
 		 * 名称  
 		 * data_type 类型 1 人 2 电视剧 3 电影
 		 * data_id  人物id
 		 */
-//		webopeople("杨桂梅",1,"0");
+//		webopeople("范冰冰",1,"0");
+//		daJeWang();
 //		System.out.println("运行网吧");
+//		methodPost();
+//		 methodGet() ;
+		
+//		doGet();
+		
+//		doGet("http://data.weibo.com/index/ajax/getdefaultattributealldata?__rnd=1465910360625", "utf-8");
 		
 		
 		

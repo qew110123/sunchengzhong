@@ -110,7 +110,17 @@ public class TvPlay {
 	// 1优酷 2 爱奇艺 3 腾讯 4 搜狐 5 乐视 6 ppTV 7芒果TV 8 迅雷看看  9豆瓣 10艺恩票房
 	private int SOURCE = 0;
 	
+	private int DATA_TYPE=0;
 	
+	
+	public int getDATA_TYPE() {
+		return DATA_TYPE;
+	}
+
+	public void setDATA_TYPE(int dATA_TYPE) {
+		DATA_TYPE = dATA_TYPE;
+	}
+
 	private String baikefilmname="";
 	
 	

@@ -95,44 +95,48 @@ public class zhongguopiaofangwang_yingyuandanripiaofang {
 			
 			JSONArray album_lists = new JSONArray();
 			
-			
-	
-			album_lists = (JSONArray) objectobjectmain.get("data1");
-			String title = "";
-			String BoxOffice = "";
-			String TodayShowCount = "";
-			String AvgPeople = "";
-			String price = "";
-			String Attendance="";
-			String url="";
-			for (Object object : album_lists) {
-				TEM_FILM_DAILY_CINEMA  dailycinema=new TEM_FILM_DAILY_CINEMA();
-				dailycinema.setDataDate(DATA_DATE);
+			try {
 				
-				JSONObject objectobject = JSONObject.fromObject(object);
-				title = (String) objectobject.get("CinemaName");
-				dailycinema.setTitle(title);
-	//			realitme.setRealTimeBoxoffice(BoxOffice);
-				BoxOffice = (String) objectobject.get("TodayBox");
-				dailycinema.setRealTimeBoxoffice(BoxOffice);
-	//			field_num = (String) objectobject.get("num_pro");
-				TodayShowCount = (String) objectobject.get("TodayShowCount");
-				dailycinema.setFieldNum(TodayShowCount);
-				AvgPeople = (String) objectobject.get("AvgPeople");
-				dailycinema.setFieldAveragePnum(AvgPeople);
-				price = (String) objectobject.get("price");
-				dailycinema.setAveragePrice(price);
-				Attendance = (String) objectobject.get("Attendance");
-				dailycinema.setAttendanceRate(Attendance);
-				//http://www.cbooo.cn/m/642020
-	//			url="http://www.cbooo.cn/m/"+mId;
-				dailycinema.setCollectionUrl(urlMain);
-	//			realitme.setCollectionUrl(urlMain);
-				
-				OracleMovePiaoFang.intoTEM_FILM_DAILY_CINEMA(dailycinema);
-				// }
-	
+				album_lists = (JSONArray) objectobjectmain.get("data1");
+				String title = "";
+				String BoxOffice = "";
+				String TodayShowCount = "";
+				String AvgPeople = "";
+				String price = "";
+				String Attendance="";
+				String url="";
+				for (Object object : album_lists) {
+					TEM_FILM_DAILY_CINEMA  dailycinema=new TEM_FILM_DAILY_CINEMA();
+					dailycinema.setDataDate(DATA_DATE);
+					
+					JSONObject objectobject = JSONObject.fromObject(object);
+					title = (String) objectobject.get("CinemaName");
+					dailycinema.setTitle(title);
+					//			realitme.setRealTimeBoxoffice(BoxOffice);
+					BoxOffice = (String) objectobject.get("TodayBox");
+					dailycinema.setRealTimeBoxoffice(BoxOffice);
+					//			field_num = (String) objectobject.get("num_pro");
+					TodayShowCount = (String) objectobject.get("TodayShowCount");
+					dailycinema.setFieldNum(TodayShowCount);
+					AvgPeople = (String) objectobject.get("AvgPeople");
+					dailycinema.setFieldAveragePnum(AvgPeople);
+					price = (String) objectobject.get("price");
+					dailycinema.setAveragePrice(price);
+					Attendance = (String) objectobject.get("Attendance");
+					dailycinema.setAttendanceRate(Attendance);
+					//http://www.cbooo.cn/m/642020
+					//			url="http://www.cbooo.cn/m/"+mId;
+					dailycinema.setCollectionUrl(urlMain);
+					//			realitme.setCollectionUrl(urlMain);
+					
+					OracleMovePiaoFang.intoTEM_FILM_DAILY_CINEMA(dailycinema);
+					// }
+					
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
+	
 		}
 	}
 

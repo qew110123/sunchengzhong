@@ -81,7 +81,7 @@ public class DownDoubanChaXunNetword {
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
 				String urlBranch = "";
 				try {
-					urlBranch = "http://www.douban.com/search?cat=1002&q="
+					urlBranch = "https://www.douban.com/search?cat=1002&q="
 							+ java.net.URLEncoder.encode(listTemp.get(0), "utf-8") + "";
 					mainUrlall(urlBranch, listTemp.get(0));
 
@@ -134,7 +134,7 @@ public class DownDoubanChaXunNetword {
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
 				String urlBranch = "";
 				try {
-					urlBranch = "http://www.douban.com/search?cat=1002&q="
+					urlBranch = "https://www.douban.com/search?cat=1002&q="
 							+ java.net.URLEncoder.encode(listTemp.get(0), "utf-8") + "";
 					mainUrlall(urlBranch, listTemp.get(0));
 

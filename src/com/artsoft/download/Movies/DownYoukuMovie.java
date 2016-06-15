@@ -46,7 +46,7 @@ public class DownYoukuMovie {
 			System.out.println(name=listTemp.get(1));
 			System.out.println(urlMain=listTemp.get(2));
 //			downBranch(strmainurl, name, urlMain);
-			DownYoukuMovie.youkuBranch1(urlMain);
+			DownYoukuMovie.youkuBranch(urlMain);
 		}
 		
 		
@@ -364,6 +364,7 @@ public class DownYoukuMovie {
 		// TimingTime(21, 59, 59);
 		 TimingTime(1, 59, 59);
 //		 runstatic();
+//		 other();
 
 	}
 
