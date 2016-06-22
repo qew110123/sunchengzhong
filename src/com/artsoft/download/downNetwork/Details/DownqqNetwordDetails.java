@@ -68,6 +68,14 @@ public class DownqqNetwordDetails {
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
 		}
+		
+		if (playtv.getShow_date().equals("")) {
+			
+			String show_date=HtmlAnalyze.getTagText(strHtml	, "年份：", "</span>");
+			
+			System.out.println(show_date);
+			playtv.setShow_date(show_date);
+		}
 
 		String classstr = ""; // 类型:
 		String daoyanAlltext = HtmlAnalyze.getTagText(strHtml, "class=\"tag_list\">", "</ul>", true, 0);
@@ -85,6 +93,9 @@ public class DownqqNetwordDetails {
 
 			i += 1;
 		}
+		
+		
+		
 		if (classstr.equals("")) {
 			daoyanAlltext = HtmlAnalyze.getTagText(strHtml, "类型：", "</span>", true, 0);
 			daoyanlists = daoyanAlltext.split("/a>/<a");
@@ -107,6 +118,11 @@ public class DownqqNetwordDetails {
 		System.out.println(classstr);
 
 		playtv.setSubject(classstr);
+		
+		if (playtv.getSubject().equals("")) {
+			daoyanAlltext = HtmlAnalyze.getTagText(strHtml, "类型：", "</span>");
+			playtv.setSubject(daoyanAlltext);
+		}
 
 		String daoyan = "";// 导演
 		String daoyanAll = HtmlAnalyze.getTagText(strHtml, "导演：", "</ul>", true, 0);
@@ -131,17 +147,40 @@ public class DownqqNetwordDetails {
 		}
 		System.out.println(daoyan);
 		playtv.setDirector(daoyan);
+		
+		
+		if (playtv.getDirector().equals("")) {
+			daoyanAlltext = HtmlAnalyze.getTagText(strHtml, "导演：", "</span>");
+			playtv.setDirector(daoyanAlltext);
+		}
 
-		String niandai = ""; // 年代
-		niandai = HtmlAnalyze.getTagText(strHtml, "年份：", "</span>");
-		playtv.setShoot_time(niandai);
+//		String niandai = ""; // 年代
+//		niandai = HtmlAnalyze.getTagText(strHtml, "年份：", "</span>");
+//		playtv.setShoot_time(niandai);
+		
+		
+		if (playtv.getShow_date().equals("")) {
+			
+			String show_date=HtmlAnalyze.getTagText(strHtml	, "年份：", "</span>");
+			
+			System.out.println(show_date);
+			playtv.setShow_date(show_date);
+		}
 
 		String diqu = ""; // 地区
 		diqu = HtmlAnalyze.getTagText(strHtml, "地区：", "</span>");
 		playtv.setProduction_area(diqu);
+		
+		if (playtv.getProduction_area().equals("")) {
+			
+			String show_date=HtmlAnalyze.getTagText(strHtml	, "地区：", "</span>");
+			
+			System.out.println(show_date);
+			playtv.setProduction_area(show_date);
+		}
 
 		String yanyuan = "";// 演员
-		String yanyuanAll = HtmlAnalyze.getTagText(strHtml, "主演：</span>", "</ul>", true, 0);
+		String yanyuanAll = HtmlAnalyze.getTagText(strHtml, "主演：", "</dd>", true, 0);
 		String[] yanyuanlist = yanyuanAll.split("</li><li");
 		i = 0;
 		for (String stringtext : yanyuanlist) {

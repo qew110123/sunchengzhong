@@ -33,18 +33,41 @@ public class Imageimage3 {
 //			System.out.println(listTemp.get(3));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
 				try {
-					System.out.println(++i);
-					String[] namelist=listTemp.get(0).split("/");
-//					DownloadImage.download(listTemp.get(1), listTemp.get(3) + "_"+listTemp.get(0).replace("*", "")+"_С_"+i+".jpg", "D:\\image_baidu_xiao\\");
-//					DownloadImage.download(listTemp.get(1), namelist[namelist.length-1], "D:\\image_baidu_xiao\\");
-					DownloadImage.download(listTemp.get(0), namelist[namelist.length-1], "D:\\image_baidu_big\\");
+					if (listTemp.get(0).contains("http")) {
+						System.out.println(++i);
+						String[] namelist=listTemp.get(0).split("/");
+	//					DownloadImage.download(listTemp.get(1), listTemp.get(3) + "_"+listTemp.get(0).replace("*", "")+"_С_"+i+".jpg", "D:\\image_baidu_xiao\\");
+	//					DownloadImage.download(listTemp.get(1), namelist[namelist.length-1], "D:\\image_baidu_xiao\\");
+						DownloadImage.download(listTemp.get(0), namelist[namelist.length-1], "D:\\image_baidu_xiao_tvplay\\");
+					}
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					System.out.println(listTemp.get(0));
-					System.out.println(listTemp.get(1));
-					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + listTemp.get(0) + listTemp.get(1));
+//					System.out.println(listTemp.get(0));
+//					System.out.println(listTemp.get(1));
+//					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + listTemp.get(0) + listTemp.get(1));
 				}
+				
+				try {
+//					System.out.println(++i);
+					String[] namelist=listTemp.get(1).split("/");
+//					DownloadImage.download(listTemp.get(1), listTemp.get(3) + "_"+listTemp.get(0).replace("*", "")+"_С_"+i+".jpg", "D:\\image_baidu_xiao\\");
+//					DownloadImage.download(listTemp.get(1), namelist[namelist.length-1], "D:\\image_baidu_xiao\\");
+					DownloadImage.download(listTemp.get(1), namelist[namelist.length-1], "D:\\image_baidu_big_tvplay\\");
+					
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+//					System.out.println(listTemp.get(0));
+//					System.out.println(listTemp.get(1));
+//					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + listTemp.get(0) + listTemp.get(1));
+				}
+				
+				
+				
+				
 			}
 		}
 

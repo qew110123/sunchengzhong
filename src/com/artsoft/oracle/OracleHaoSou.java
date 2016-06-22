@@ -51,6 +51,50 @@ public class OracleHaoSou {
 		return (ArrayList<String>) list;
 
 	}
+	
+	
+	/**
+	 * 拼写sql语句网络剧数据
+	 * 
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectdim_film_wangluoju(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
+		
+		sql = " select t.tvplay_id,t.tvplay_name,t.tvplay_url from ODS.DIM_NETWORK_TVPLAY t order by t.tvplay_id";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	
+	/**
+	 * 拼写sql语句综艺数据
+	 * 2016年6月17日17:12:11
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectdim_film_zhongyi(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
+		
+		sql = " select t.tvplay_id,t.tvplay_name,t.tvplay_url from ODS.DIM_NETWORK_TVPLAY t order by t.tvplay_id";
+		sql="select * from   ODS.DIM_NETWORK_VARIETY t order by t.tvplay_id";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	
+	
 
 	/**
 	 * sql语句并获取开始和结束 dao用户列表中
@@ -349,6 +393,17 @@ public class OracleHaoSou {
 				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
 				+ "t.recording_place,t.stills_url,t.UPDATE_TIME,t.BAIKE_FILM_NAME) values"
 				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		
+		strSql = "insert into ods.tem_tvplay t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
+				+ "t.major_actors,t.major_awards,t.director,t.screenwriTer,t.producer,t.production_company,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.produced_company,"
+				+ "t.production_area,t.premiere_time,t.pages,t.time_length,t.play_platform ,t.premiere_platform,"
+				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
+				+ "t.before_teleplay,t.next_teleplay,t.open_time,t.close_time,t.total_planning,t.film_time,t.box_office,"
+				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
+				+ "t.recording_place,t.stills_url,t.UPDATE_TIME,t.BAIKE_FILM_NAME,t.PRESENTER,t.AIR_TIME) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(tvplay.getTvplay_id());
 		list.add(tvplay.getTvplay_name());
@@ -385,7 +440,7 @@ public class OracleHaoSou {
 		list.add(tvplay.getTotal_planning());
 		list.add(tvplay.getFilm_time());
 		list.add(tvplay.getBox_office());
-		// list.add(tvplay.getType());
+		 list.add(tvplay.getType());
 		list.add(tvplay.getCompere());
 		list.add(tvplay.getTotal_sponsor());
 		list.add(tvplay.getPartners());
@@ -399,6 +454,8 @@ public class OracleHaoSou {
 		// 增加添加时间 、、2016年2月26日17：:4：:1
 		list.add(TimeTest.getNowTime("yyyyMMdd"));
 		list.add(tvplay.getBaikefilmname());
+		list.add(tvplay.getPRESENTER());
+		list.add(tvplay.getAIR_TIME());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
@@ -778,7 +835,7 @@ public class OracleHaoSou {
 
 		String strSql = "insert into ods.TEM_DIM_ENTRYIMG t(t.data_id,t.data_title,t.small_url,t.big_url,t.into_date,t.data_url,t.data_type)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 		//
-		strSql="insert into ods.tem_play_stills t(t.data_id,t.data_title,t.small_url,t.big_url,t.into_date,t.data_url,t.data_type)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
+		strSql="insert into ods.tem_play_stills t(t.data_id,t.data_title,t.small_url,t.big_url,t.into_date,t.data_url,t.data_type,t.STILLS_TITLE,t.STILLS_ORDERNO,t.UPDATE_DATE)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(ENTRYIMG.getDataId());// 这里是将对象加入到list中
 		list.add(ENTRYIMG.getDataTitle());
@@ -787,6 +844,9 @@ public class OracleHaoSou {
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		list.add(ENTRYIMG.getDataUrl());
 		list.add(ENTRYIMG.getDataType());
+		list.add(ENTRYIMG.getSTILLS_TITLE());
+		list.add(ENTRYIMG.getSTILLS_ORDERNO());
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 		
@@ -843,8 +903,18 @@ public class OracleHaoSou {
 		
 		sql = "select t.person_big_url from ODS.TEM_TVPLAY_PERSON t where t.into_date is not null group by t.person_big_url";
 		
+		sql="select small_url from ods.tem_play_stills t where t.stills_orderno = 1 and t.stills_title = '词条图片' and t.data_type = 0";
+		
+		sql="select big_url from ods.tem_play_stills t where t.stills_orderno = 1 and t.stills_title = '词条图片' and t.data_type = 0";
+		
+		sql="select big_url from ods.tem_play_stills t where t.stills_orderno = 1 and t.stills_title = '词条图片' and t.data_type = 3";
+		
+		sql="select small_url from ods.tem_play_stills t where t.stills_orderno = 1 and t.stills_title = '词条图片' and t.data_type = 3";
+		
+		sql="select small_url,big_url from ods.tem_play_stills t where t.stills_orderno = 1 and t.stills_title = '词条图片' and t.data_type = 0 ";
+		
 		ArrayList<String> listname = new ArrayList<String>();
-		int iNum = 1;
+		int iNum = 2;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;

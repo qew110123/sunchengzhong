@@ -80,6 +80,10 @@ public class variety_admin {
 	        }, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行  
 	    }
 
+		/**
+		 * 综艺
+		 * @param args
+		 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TimingTime(02, 00, 00);

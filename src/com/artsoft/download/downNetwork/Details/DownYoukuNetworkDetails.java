@@ -149,6 +149,17 @@ public class DownYoukuNetworkDetails {
 		classstr = HtmlAnalyze.getTagText(strHtml, "<label>类型:</label>", "导演");
 		System.out.println(classstr = classstr.replaceAll(" 					", ""));
 		playtv.setSubject(classstr);
+		
+		String show_date="";//上映时间
+		show_date=HtmlAnalyze.getTagText(strHtml, "<label>上映:</label>", "</span>");
+		System.out.println(show_date = show_date.replaceAll(" 					", ""));
+		playtv.setShow_date(show_date);
+		
+		//开播时间
+		String PLAY_DATE="";
+		PLAY_DATE=HtmlAnalyze.getTagText(strHtml, "<label>优酷开播:</label>", "</span>");
+		System.out.println(PLAY_DATE = PLAY_DATE.replaceAll(" 					", ""));
+		playtv.setPLAY_DATE(PLAY_DATE);
 
 		String peopleste = ""; // ren:
 		peopleste = HtmlAnalyze.getTagText(strHtml, "<label>主演:</label>", "总播放:");

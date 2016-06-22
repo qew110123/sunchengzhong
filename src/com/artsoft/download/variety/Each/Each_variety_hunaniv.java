@@ -45,7 +45,12 @@ public class Each_variety_hunaniv {
 			String urlstr = "";
 			System.out.println(urlstr = link.select("a").attr("href"));
 //			mainurl(urlstr);
-			mainfalseurl(urlstr);
+			try {
+				
+				mainfalseurl(urlstr);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 	}
 	

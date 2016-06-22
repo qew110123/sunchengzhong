@@ -100,7 +100,7 @@ public class HaoSouTV {
 		try {
 
 			String[] sourceStrArray = strtext.toString().split("\\|");
-			System.out.println(sourceStrArray.length);
+//			System.out.println(sourceStrArray.length);
 			if (starttime != null && !"".equals(starttime)) {
 
 				 try {
@@ -123,7 +123,7 @@ public class HaoSouTV {
 				// System.out.println(OracleHaoSou.returnMaxdianshijudata());
 				
 				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
-					System.out.println(sourceStrArray[i - 1]);
+//					System.out.println(sourceStrArray[i - 1]);
 					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
 					System.out.println(palydate = palydate.replaceAll("-", ""));
 

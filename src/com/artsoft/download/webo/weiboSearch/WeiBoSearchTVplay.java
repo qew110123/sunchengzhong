@@ -474,7 +474,7 @@ public class WeiBoSearchTVplay {
 			System.out.println(listTemp.get(0));
 			System.out.println(listTemp.get(1));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
-				if (Integer.parseInt(listTemp.get(0))>1168115) {
+				if (Integer.parseInt(listTemp.get(0))>1690448) {
 				String urlBranch = "";
 				try {
 					urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode("#"+listTemp.get(1)+"#", "utf-8")

@@ -33,13 +33,13 @@ public class BaiDuTeleplayDownload {
 		tvplay.setTvplay_id(Integer.parseInt(strId));
 		tvplay.setTvplay_url(url);
 		String strHtml = "";
-		boolean bb = true;
-		while (bb) {
+//		boolean bb = true;
+//		while (bb) {
 			strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
-			if (strHtml != null && !"".equals(strHtml)) {
-				bb = false;
-			}
-		}
+//			if (strHtml != null && !"".equals(strHtml)) {
+//				bb = false;
+//			}
+//		}
 
 		Document doc = Jsoup.parse(strHtml);
 		Elements links = doc.select("div.basic-info");
@@ -143,58 +143,58 @@ public class BaiDuTeleplayDownload {
 			// OracleHaoSou.InsertTVplay(tvplay);
 
 		}
-		try {
-
-			// 进行数据的另一个表数据 的添加
-			Elements linkli = doc.select("li.roleIntroduction-item");
-			String personname = "";
-			String personurl = "";
-			String rolename = "";
-			String personstillsurl = "";
-			String dubbingname = "";
-			String dubbingurl = "";
-			String roleintro = "";
-			String PERSON_BIG_URL="";
-			String PERSON_BIG_URLall="";
-			for (Element elementli : linkli) {
-				System.out.println(personstillsurl = HtmlAnalyze.getTagText(elementli.toString(), "<img src=\"", "\""));
-				
-				System.out.println(PERSON_BIG_URLall = elementli.select("a.roleIntrodcution-picture").attr("href"));
-				System.out.println(
-						rolename = HtmlAnalyze.getTagText(elementli.toString(), "class=\"item-value\">", "</span>"));
-				System.out.println(personname = elementli.select("div.role-actor span.item-value").text());
-				System.out.println(personurl = elementli.select("div.role-actor span.item-value a ").attr("href"));
-				// System.out.println(HtmlAnalyze.getTagText(elementli.select("div.role-actor
-				// span.item-value").toString(), "href=\"", "\""));
-				System.out.println(dubbingname = elementli.select("div.role-voice span.item-value").text());
-				System.out.println(dubbingurl = elementli.select("div.role-voice span.item-value a").attr("href"));
-				// System.out.println(HtmlAnalyze.getTagText(elementli.select("div.role-voice
-				// span.item-value").toString(), "href=\"", "\""));
-				
-				
-				System.out.println(
-						roleintro = HtmlAnalyze.getTagText(elementli.toString(), "role-description\">", "</dd>"));
-				if (personurl != "") {
-					personurl = "http://baike.baidu.com" + personurl;
-				}
-				if (dubbingurl != "") {
-					dubbingurl = "http://baike.baidu.com" + dubbingurl;
-				}
-				
-				if (PERSON_BIG_URLall != "") {
-					PERSON_BIG_URLall = "http://baike.baidu.com" + PERSON_BIG_URLall;
-					String strHtmlPERSON_BIG_URLall = DownloadUtil.getHtmlText(PERSON_BIG_URLall, 1000 * 30, "UTF-8", null, null);
-					Document docPERSON_BIG_URLall = Jsoup.parse(strHtmlPERSON_BIG_URLall);
-					PERSON_BIG_URL=docPERSON_BIG_URLall.getElementById("imgPicture").attr("src");
-				}
-				
-				OracleHaoSou.intotemtvplay(strId, strUrlname, url, "", personname, personurl, rolename, personstillsurl,
-						dubbingname, dubbingurl, roleintro,PERSON_BIG_URL);
-
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		try {
+//
+//			// 进行数据的另一个表数据 的添加
+//			Elements linkli = doc.select("li.roleIntroduction-item");
+//			String personname = "";
+//			String personurl = "";
+//			String rolename = "";
+//			String personstillsurl = "";
+//			String dubbingname = "";
+//			String dubbingurl = "";
+//			String roleintro = "";
+//			String PERSON_BIG_URL="";
+//			String PERSON_BIG_URLall="";
+//			for (Element elementli : linkli) {
+//				System.out.println(personstillsurl = HtmlAnalyze.getTagText(elementli.toString(), "<img src=\"", "\""));
+//				
+//				System.out.println(PERSON_BIG_URLall = elementli.select("a.roleIntrodcution-picture").attr("href"));
+//				System.out.println(
+//						rolename = HtmlAnalyze.getTagText(elementli.toString(), "class=\"item-value\">", "</span>"));
+//				System.out.println(personname = elementli.select("div.role-actor span.item-value").text());
+//				System.out.println(personurl = elementli.select("div.role-actor span.item-value a ").attr("href"));
+//				// System.out.println(HtmlAnalyze.getTagText(elementli.select("div.role-actor
+//				// span.item-value").toString(), "href=\"", "\""));
+//				System.out.println(dubbingname = elementli.select("div.role-voice span.item-value").text());
+//				System.out.println(dubbingurl = elementli.select("div.role-voice span.item-value a").attr("href"));
+//				// System.out.println(HtmlAnalyze.getTagText(elementli.select("div.role-voice
+//				// span.item-value").toString(), "href=\"", "\""));
+//				
+//				
+//				System.out.println(
+//						roleintro = HtmlAnalyze.getTagText(elementli.toString(), "role-description\">", "</dd>"));
+//				if (personurl != "") {
+//					personurl = "http://baike.baidu.com" + personurl;
+//				}
+//				if (dubbingurl != "") {
+//					dubbingurl = "http://baike.baidu.com" + dubbingurl;
+//				}
+//				
+//				if (PERSON_BIG_URLall != "") {
+//					PERSON_BIG_URLall = "http://baike.baidu.com" + PERSON_BIG_URLall;
+//					String strHtmlPERSON_BIG_URLall = DownloadUtil.getHtmlText(PERSON_BIG_URLall, 1000 * 30, "UTF-8", null, null);
+//					Document docPERSON_BIG_URLall = Jsoup.parse(strHtmlPERSON_BIG_URLall);
+//					PERSON_BIG_URL=docPERSON_BIG_URLall.getElementById("imgPicture").attr("src");
+//				}
+//				
+//				OracleHaoSou.intotemtvplay(strId, strUrlname, url, "", personname, personurl, rolename, personstillsurl,
+//						dubbingname, dubbingurl, roleintro,PERSON_BIG_URL);
+//
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 		return tvplay;
 
 	}
@@ -279,7 +279,7 @@ public class BaiDuTeleplayDownload {
 		if ("制片人".equals(baseInfoName)) {
 			tvplay.setProducer(baseInfoValue);
 		}
-		if ("在线播放平台".equals(baseInfoName)) {
+		if ("在线播放平台".equals(baseInfoName)||"播出频道".equals(baseInfoName)) {
 			tvplay.setPlay_platform(baseInfoValue);
 		}
 		if ("开机时间".equals(baseInfoName)) {
@@ -307,6 +307,14 @@ public class BaiDuTeleplayDownload {
 		if ("上映日期".equals(baseInfoName) || "上映时间".equals(baseInfoName)) {
 			tvplay.setShow_date(baseInfoValue);
 		}
+		if ("主持人".equals(baseInfoName)) {
+			tvplay.setPRESENTER(baseInfoValue);
+		}
+		
+		if ("播出时间".equals(baseInfoName)) {
+			tvplay.setAIR_TIME(baseInfoValue);
+		}
+		
 
 		return tvplay;
 	}

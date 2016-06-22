@@ -54,7 +54,12 @@ public class baidu_newsnum {
 					String url = "http://news.baidu.com/ns?ct=1&rn=20&ie=utf-8&bs=" + krywordutf8
 							+ "&rsv_bp=1&sr=0&cl=2&f=8&prevct=no&tn=newstitle&word=" + krywordutf8
 							+ "&qq-pf-to=pcqq.c2c";
-					baidunews(person_id, url, 1, 1);
+					try {
+						
+						baidunews(person_id, url, 1, 1);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 
 				}
 			}
@@ -88,7 +93,12 @@ public class baidu_newsnum {
 					String url = "http://news.baidu.com/ns?ct=1&rn=20&ie=utf-8&bs=" + krywordutf8
 							+ "&rsv_bp=1&sr=0&cl=2&f=8&prevct=no&tn=newstitle&word=" + krywordutf8
 							+ "&qq-pf-to=pcqq.c2c";
-					baidunews(person_id, url, 2, 1);
+					try {
+						
+						baidunews(person_id, url, 2, 1);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 
 				}
 			}
@@ -107,6 +117,7 @@ public class baidu_newsnum {
 		// String strurl = DownYoukuMovie
 		// .youkuMaim("http://www.youku.com/v_olist/c_97_s_1_d_1_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81.html");
 		openstatic();
+		
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½áÊø");
 	}
 

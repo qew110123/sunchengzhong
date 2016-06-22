@@ -69,7 +69,7 @@ public class DownAdmin {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TimingTime(00, 00, 00);
-
+		//ÍøÂç¾ç
 		// runstatic();
 	}
 

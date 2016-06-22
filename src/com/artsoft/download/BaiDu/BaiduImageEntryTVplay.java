@@ -42,6 +42,7 @@ public class BaiduImageEntryTVplay {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		runupdate();
+//		BaiduImageEntry.baidumainurl("7432", "http://baike.baidu.com/subview/3412436/16380924.htm","ÎäÃÄÄï´«Ææ" , 0);
 	}
 
 }

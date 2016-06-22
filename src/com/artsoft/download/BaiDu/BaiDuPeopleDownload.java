@@ -39,10 +39,10 @@ public class BaiDuPeopleDownload {
 				bb = false;
 			}
 		}
-		if (!strHtml.contains("ÑÝÔ±")) {
-			System.out.println();
-			return null;
-		}
+//		if (!strHtml.contains("ÑÝÔ±")) {
+//			System.out.println();
+//			return null;
+//		}
 
 		Document doc = Jsoup.parse(strHtml);
 		Elements links = doc.select("div.basic-info");

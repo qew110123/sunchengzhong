@@ -11,6 +11,12 @@ public class TEM_DIM_ENTRYIMG implements Serializable {
 //	private Date intoDate;
 	private String dataUrl="";
 	private int dataType;
+	
+	private String STILLS_TITLE="";
+	
+	private int STILLS_ORDERNO=0;
+	
+	
 
 	public void setDataId(String dataId){
 		this.dataId=dataId;
@@ -47,6 +53,21 @@ public class TEM_DIM_ENTRYIMG implements Serializable {
 	}
 	public Integer getDataType(){
 		return dataType;
+	}
+	public String getSTILLS_TITLE() {
+		return STILLS_TITLE;
+	}
+	public void setSTILLS_TITLE(String sTILLS_TITLE) {
+		STILLS_TITLE = sTILLS_TITLE;
+	}
+	public int getSTILLS_ORDERNO() {
+		return STILLS_ORDERNO;
+	}
+	public void setSTILLS_ORDERNO(int sTILLS_ORDERNO) {
+		STILLS_ORDERNO = sTILLS_ORDERNO;
+	}
+	public void setDataType(int dataType) {
+		this.dataType = dataType;
 	}
 }
 

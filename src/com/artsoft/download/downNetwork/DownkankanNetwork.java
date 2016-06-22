@@ -86,8 +86,15 @@ public class DownkankanNetwork {
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
 
-		for (int i = 1; i <= 37; i++) {
-			String url = "http://movie.kankan.com/type,order/teleplay,update/page" + i + "/";
+//		for (int i = 1; i <= 37; i++) {
+//			String url = "http://movie.kankan.com/type,order/teleplay,update/page" + i + "/";
+//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
+//			mainurl(url);
+//		}
+		
+		
+		for (int i = 1; i <= 5; i++) {
+			String url = "http://movie.kankan.com/type,order,genre/teleplay,update,wlj/page" + i + "/";
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
 			mainurl(url);
 		}

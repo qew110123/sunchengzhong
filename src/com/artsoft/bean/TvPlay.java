@@ -76,7 +76,7 @@ public class TvPlay {
 	// 票房
 	private String box_office = "";
 	// 类型 1 电视剧 2 电影 3 其他 4 节目
-	private String type = "";
+	private int type = 1;
 	// 主持人包含url
 	private String compere = "";
 	// 总冠名商包含url
@@ -100,6 +100,9 @@ public class TvPlay {
 	//上映日期
 	private String show_date = "";
 	
+	//开播日期
+	private String PLAY_DATE = "";
+	
 	//2016年1月26日16:48:46
 	private int classnum = 0;
 	//语言
@@ -111,6 +114,12 @@ public class TvPlay {
 	private int SOURCE = 0;
 	
 	private int DATA_TYPE=0;
+	
+	//主持人
+	private String PRESENTER="";
+	
+	//播出时间
+	private String AIR_TIME="";
 	
 	
 	public int getDATA_TYPE() {
@@ -470,13 +479,7 @@ public class TvPlay {
 		this.box_office = box_office;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
+	
 
 	public String getCompere() {
 		return compere;
@@ -604,5 +607,37 @@ public class TvPlay {
 
 	public void setPRODUCE_FORMAT(String pRODUCE_FORMAT) {
 		PRODUCE_FORMAT = pRODUCE_FORMAT;
+	}
+
+	public String getPLAY_DATE() {
+		return PLAY_DATE;
+	}
+
+	public void setPLAY_DATE(String pLAY_DATE) {
+		PLAY_DATE = pLAY_DATE;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public String getPRESENTER() {
+		return PRESENTER;
+	}
+
+	public void setPRESENTER(String pRESENTER) {
+		PRESENTER = pRESENTER;
+	}
+
+	public String getAIR_TIME() {
+		return AIR_TIME;
+	}
+
+	public void setAIR_TIME(String aIR_TIME) {
+		AIR_TIME = aIR_TIME;
 	}
 }
