@@ -89,7 +89,7 @@ public class BaiDuTeleplaynext_zhongyi {
 						TvPlay tvplay = BaiDuTeleplayDownload.mainmore(id, strUrl, strname);
 						tvplay.setBaikefilmname(strUrlname);
 						tvplay.setType(TYPE);
-						OracleHaoSou.InsertTVplay(tvplay);// 添加操作
+						OracleHaoSou.Insertzhongyi(tvplay);// 添加操作
 					}
 	//			}
 				
@@ -128,10 +128,10 @@ public class BaiDuTeleplaynext_zhongyi {
 					
 					urlBranch = "http://baike.baidu.com/search?word="
 							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&pn=0&rn=0&enc=utf8";
-					if (Integer.parseInt(listTemp.get(0))>65605) {
+//					if (Integer.parseInt(listTemp.get(0))>65605) {
 						mainUrlall(urlBranch, listTemp.get(0), listTemp.get(1),3);
 						CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0)+","+listTemp.get(1));
-					}
+//					}
 					
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block

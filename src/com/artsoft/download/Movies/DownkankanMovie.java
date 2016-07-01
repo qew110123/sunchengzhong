@@ -24,13 +24,13 @@ public class DownkankanMovie {
 		// mainUrl="http://list.letv.com/apin/chandata.json?c=2&d=1&md=&o=20&p=4&s=1";
 		// ParseJson(BuildJson());
 		String strHtml = "";
-		boolean bb = true;
-		while (bb) {
+//		boolean bb = true;
+//		while (bb) {
 			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "UTF-8", null, null);
-			if (strHtml != null && !"".equals(strHtml)) {
-				bb = false;
-			}
-		}
+//			if (strHtml != null && !"".equals(strHtml)) {
+//				bb = false;
+//			}
+//		}
 		// String tyPlayName = "";
 		// System.out.println(tyPlayName = HtmlAnalyze.getTagText(strHtml,
 		// "cname: \"", "\""));
@@ -71,13 +71,13 @@ public class DownkankanMovie {
 		// TODO Auto-generated method stub
 
 		String strHtml = "";
-		boolean bb = true;
-		while (bb) {
+//		boolean bb = true;
+//		while (bb) {
 			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "UTF-8", null, null);
-			if (strHtml != null && !"".equals(strHtml)) {
-				bb = false;
-			}
-		}
+//			if (strHtml != null && !"".equals(strHtml)) {
+//				bb = false;
+//			}
+//		}
 		String comment = "";
 		System.out.println(comment = HtmlAnalyze.getTagText(strHtml, " total:\"", "\""));
 		System.out.println(comment = comment.replaceAll(",", ""));
@@ -119,7 +119,7 @@ public class DownkankanMovie {
 	                System.out.println("-------设定要指定任务--------");  
 	                runstatic();
 	            } 
-	        }, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行  
+	        }, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行  
 	    } 
 	
 	
@@ -141,8 +141,8 @@ public class DownkankanMovie {
 //				e.printStackTrace();
 //			}
 //		}
-		TimingTime(1, 59, 59);
-//		runstatic();
+//		TimingTime(1, 59, 59);
+		runstatic();
 		
 	}
 

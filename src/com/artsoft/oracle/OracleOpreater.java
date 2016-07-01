@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.artsoft.bean.TEM_DIM_PLATFORM;
 import com.artsoft.bean.TvPlay;
 import com.artsoft.util.TimeTest;
 
@@ -183,6 +184,27 @@ public class OracleOpreater {
 		list.add(playUrl);
 		list.add(Integer.parseInt(tvType));
 		list.add(realUrl);
+		boolean bb = DBOperate.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	public static void intoPLATFORM(TEM_DIM_PLATFORM platform ) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "INSERT INTO  ods.TEM_DIM_PLATFORM t (t.tvplay_name,t.tvplay_url,t.basic_info,t.play_amount,t.time_info,t.major_actors,t.source,t.into_date) values(?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
+		strSql="INSERT INTO  ODS.TEM_DIM_VARIETY_PLATFORM t (t.tvplay_name,t.tvplay_url,t.basic_info,t.play_amount,t.time_info,t.major_actors,t.source,t.into_date) values(?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
+		//ODS.TEM_DIM_VARIETY_PLATFORM
+		List<Comparable> list = new ArrayList();
+		list.add(platform.getTvplayName());// 这里是将对象加入到list中
+		list.add(platform.getTvplayUrl());
+		list.add(platform.getBasicInfo());
+		list.add(platform.getPlayAmount());
+		list.add(platform.getTimeInfo());
+		list.add(platform.getMajorActors());
+		list.add(platform.getSource());
+//		list.add(Integer.parseInt(tvType));
+//		list.add(realUrl);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		boolean bb = DBOperate.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}

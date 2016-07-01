@@ -1,4 +1,4 @@
-package com.artsoft.download.Movies;
+package com.artsoft.download.downNetwork.DanJiBoFangLiang;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,46 +15,42 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DownSohuMovie {
+public class DownloadSohu_DanJiBoFangLiang {
 
 	public static void sohuBranch(String urlBranch) {
 
-		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "GBK", null, null);
+		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
 		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "GBK", null, null);
+			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
 		}
 		if (strHtml == null || strHtml.equals("")) {
 			return;
 		}
 		// <h2>电视剧：<span class="vname">
-		String name = HtmlAnalyze.getTagText(strHtml, "name=\"album\" content=\"", "\"");
-//		String score = HtmlAnalyze.getTagText(strHtml, "</em><strong class=\"score\">", "</strong> 分");
+		String name = HtmlAnalyze.getTagText(strHtml, "<span class=\"vname\">", "</span></h2>");
+		String score = HtmlAnalyze.getTagText(strHtml, "</em><strong class=\"score\">", "</strong> 分");
 		// 进行评分的采集
-//		try {
-//			OracleOpreater.intoReputation(name, "4", score, "0", "", urlBranch, "3", "1");
-//
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
 		try {
-			Document doc = Jsoup.parse(strHtml);
-			Elements links = doc.select("div.general li");
+			OracleOpreater.intoReputationAndDETAIL_URL(name, "4", score, "0", "", urlBranch, "0", "1",urlBranch);
 
-		sohuDetailedfirst(urlBranch, name);
 		} catch (Exception e) {
-		// TODO: handle exception
-	}
+			// TODO: handle exception
+		}
+		Document doc = Jsoup.parse(strHtml);
+		Elements links = doc.select("div.general li");
 
-//		System.out.println(links.size());
-//		for (Element link : links) {
-//			// System.out.println(link);
-//			String strmainurl = "";
-//			String strmaintitle = "";
-//			System.out.println(strmainurl = link.select("div.pic a").attr("href"));
-//			System.out.println(strmaintitle = link.select("div.pic a").attr("title").replaceAll(name, ""));
-//			sohuDetailed(strmainurl, strmaintitle);
-//
-//		}
+//		sohuDetailedfirst(links.first().select("div.pic a").attr("href"), name);
+
+		System.out.println(links.size());
+		for (Element link : links) {
+			// System.out.println(link);
+			String strmainurl = "";
+			String strmaintitle = "";
+			System.out.println(strmainurl = link.select("div.pic a").attr("href"));
+			System.out.println(strmaintitle = link.select("div.pic a").attr("title").replaceAll(name, ""));
+			sohuDetailed(strmainurl, strmaintitle);
+
+		}
 
 	}
 
@@ -78,7 +74,7 @@ public class DownSohuMovie {
 		String strHtml = DownloadUtil.getHtmlText(urlnew, 1000 * 30, "UTF-8", null, null);
 		String Amount = HtmlAnalyze.getTagText(strHtml, "{\"" + strvid + "\":{\"total\":", ",\"");
 		try {
-			OracleOpreater.intoReputationAndDETAIL_URL(name, "4", Amount, "0", "", urlerer, "3", "0",urlerer);
+//			OracleOpreater.intoReputationAndDETAIL_URL(name, "4", Amount, "0", "", urlerer, "0", "0",urlerer);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -93,8 +89,11 @@ public class DownSohuMovie {
 		if (strvid == null || strvid.equals("")) {
 			return;
 		}
+		//http://count.vrs.sohu.com/count/queryext.action?vids=2931949&plids=9107339&callback=playCountVrs
 		String urlnew = "http://count.vrs.sohu.com/count/queryext.action?vids=" + strvid + "&plids=" + strvplaylistId
 				+ "&callback=playCountVrs";
+		
+		
 		System.out.println(urlnew);
 
 		String tyPlayName;
@@ -104,7 +103,7 @@ public class DownSohuMovie {
 		String vodeoType = "0";
 		String palydate = "";
 		String playUrl = urlnew;
-		String tvType = "0";
+		String tvType = "1";
 		String realUrl = urlerer;
 		String strHtml = DownloadUtil.getHtmlText(urlnew, 1000 * 30, "UTF-8", null, null);
 		System.out.println(tyPlayName = HtmlAnalyze.getTagText(strHtmls, "<meta name=\"album\" content=\"", "\" /> "));
@@ -112,9 +111,15 @@ public class DownSohuMovie {
 		System.out.println(
 				playAmount = HtmlAnalyze.getTagText(strHtml, "{\"" + strvplaylistId + "\":{\"total\":", ",\""));
 		try {
-
-//			OracleOpreater.intoPlayAmont(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, playUrl,
-//					tvType, realUrl);
+//			tyPlayName,source,playAmount, vodeoType, palydate, playUrl,
+//			tvType, urlerer
+//			OracleOpreater.intoReputationAndDETAIL_URL(tyPlayName, source, playAmount, vodeoType, "", playUrl, tvType, dataType, DETAIL_URL);
+//			
+//			OracleOpreater.intoPlayAmont(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, playUrl, tvType,
+//					realUrl);
+					
+			OracleOpreater.intoPlayAmont(tyPlayName, serNumber, source, playAmount, vodeoType, palydate, playUrl,
+					tvType, urlerer);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -154,10 +159,11 @@ public class DownSohuMovie {
 
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
-		for (int i = 1; i <= 56; i++) {
-			sohuMain("http://so.tv.sohu.com/list_p1100_p20_p3_p40_p5_p6_p77_p80_p9_2d1_p10" + i + "_p11_p12_p13.html");
-
-		}
+//		for (int i = 1; i <= 83; i++) {
+//			sohuMain("http://so.tv.sohu.com/list_p1101_p2_p3_p4-1_p5_p6_p77_p80_p9_p10" + i + "_p11_p12_p13.html");
+//
+//		}
+		sohuMain("http://so.tv.sohu.com/list_p1101_p20_p3_p40_p5_p6_p77_p80_p9_2d1_p10_p11_p122_p13.html");
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 	}
 
@@ -199,13 +205,8 @@ public class DownSohuMovie {
 //			}
 //			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 //		}
-		
-		
-//			sohuMain("http://so.tv.sohu.com/list_p1101_p20_p3_p40_p5_p6_p77_p80_p9_2d1_p10_p11_p122_p13.html");
-//		 TimingTime(23, 59, 59);
-		TimingTime(1, 59, 59);
-//		runstatic();
-//		runstatic();
+		 TimingTime(0, 59, 59);
+//		 runstatic();
 	}
 
 }

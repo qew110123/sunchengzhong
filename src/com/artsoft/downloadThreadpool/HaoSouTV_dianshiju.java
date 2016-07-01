@@ -17,7 +17,7 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
-public class HaoSouTV {
+public class HaoSouTV_dianshiju {
 	static ThreadPool pool = new ThreadPool(10);
 	private static Proxy proxy = null;
 
@@ -37,9 +37,9 @@ public class HaoSouTV {
 					// urlBranch =
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
 					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
+							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"+%e7%94%b5%e8%a7%86%e5%89%a7"
 							+ "&area=%E5%85%A8%E5%9B%BD";
-					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "3",TV_TYPE);
+					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "5",TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，url:" + urlBranch);
@@ -55,7 +55,7 @@ public class HaoSouTV {
 				try {
 					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
 							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
-					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "4",TV_TYPE);
+					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "6",TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，url:" + urlBranch);
@@ -110,13 +110,17 @@ public class HaoSouTV {
 				 e.printStackTrace();
 				 }
 
-//				 for (int i = 0; i < sourceStrArray.length; i++) {
-//				 // System.out.println(sourceStrArray[i]
-//				 // + DemoTime.getBeforeAfterDate(starttime, i).toString());
-//				 OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[i], "0", DemoTime.getBeforeAfterDate(starttime,i).toString().replaceAll("-", ""), urlBranch, TV_TYPE, DataType, "");
-//				
-//				 }
-//				// System.out.println(OracleHaoSou.returnMaxdianshijudata());
+				// for (int i = 0; i < sourceStrArray.length; i++) {
+				// // System.out.println(sourceStrArray[i]
+				// // + DemoTime.getBeforeAfterDate(starttime, i).toString());
+				// OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName,
+				// sourceStrArray[i], "0",
+				// DemoTime.getBeforeAfterDate(starttime,
+				// i).toString().replaceAll("-", ""), urlBranch, "0",
+				// DataType, "");
+				//
+				// }
+				// System.out.println(OracleHaoSou.returnMaxdianshijudata());
 				
 				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
 //					System.out.println(sourceStrArray[i - 1]);
@@ -125,9 +129,9 @@ public class HaoSouTV {
 
 					OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[i - 1], "0", palydate, urlBranch,
 							TV_TYPE, DataType, "");
-//					if (palydate.equals("20151111")) {
-//						return;
-//					}
+					if (palydate.equals("20151111")) {
+						return;
+					}
 
 				}
 
@@ -251,6 +255,7 @@ public class HaoSouTV {
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
+//		runstatic();
 		 TimingTime(1, 00, 00);
 		// IpFilter ipxi=new IpFilter;
 

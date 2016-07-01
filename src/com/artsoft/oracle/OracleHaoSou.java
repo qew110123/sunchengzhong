@@ -404,6 +404,9 @@ public class OracleHaoSou {
 				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
 				+ "t.recording_place,t.stills_url,t.UPDATE_TIME,t.BAIKE_FILM_NAME,t.PRESENTER,t.AIR_TIME) values"
 				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		
+		
 		List<Comparable> list = new ArrayList();
 		list.add(tvplay.getTvplay_id());
 		list.add(tvplay.getTvplay_name());
@@ -461,6 +464,179 @@ public class OracleHaoSou {
 	}
 	
 	
+	
+	/**
+	 * 进行网络剧数据 的添加
+	 * 2016年6月30日16:04:15
+	 * @param tvplay
+	 */
+	public static void Insertwangluoju(TvPlay tvplay) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.tem_tvplay t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
+				+ "t.major_actors,t.major_awards,t.director,t.screenwriTer,t.producer,t.production_company,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.produced_company,"
+				+ "t.production_area,t.premiere_time,t.pages,t.time_length,t.play_platform ,t.premiere_platform,"
+				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
+				+ "t.before_teleplay,t.next_teleplay,t.open_time,t.close_time,t.total_planning,t.film_time,t.box_office,"
+				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
+				+ "t.recording_place,t.stills_url,t.UPDATE_TIME,t.BAIKE_FILM_NAME) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		
+		strSql = "insert into ods.tem_tvplay t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
+				+ "t.major_actors,t.major_awards,t.director,t.screenwriTer,t.producer,t.production_company,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.produced_company,"
+				+ "t.production_area,t.premiere_time,t.pages,t.time_length,t.play_platform ,t.premiere_platform,"
+				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
+				+ "t.before_teleplay,t.next_teleplay,t.open_time,t.close_time,t.total_planning,t.film_time,t.box_office,"
+				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
+				+ "t.recording_place,t.stills_url,t.UPDATE_TIME,t.BAIKE_FILM_NAME,t.PRESENTER,t.AIR_TIME) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		strSql="insert into ods.TEM_DIM_NETWORK_PLAY t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
+				+ "t.major_actors,t.major_awards,t.director,t.screenwriTer,t.producer,t.production_company,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.produced_company,"
+				+ "t.production_area,t.premiere_time,t.pages,t.time_length,t.play_platform ,t.premiere_platform,"
+				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
+				+ "t.open_time,t.close_time,t.total_planning,t.film_time,"
+				+ "t.recording_place,t.stills_url,t.BASIC_INFO,t.UPDATE_TIME,t.BAIKE_NAME,t.SHOW_DATE) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(tvplay.getTvplay_id());
+		list.add(tvplay.getTvplay_name());
+		list.add(tvplay.getTvplay_url());
+		list.add(tvplay.getAlias_en());
+		list.add(tvplay.getAlias_cn());
+		list.add(tvplay.getMajor_actors());
+		list.add(tvplay.getMajor_awards());
+		list.add(tvplay.getDirector());
+		list.add(tvplay.getScreenwriter());
+		list.add(tvplay.getProducer());
+		list.add(tvplay.getProduction_company());
+		list.add(tvplay.getIssuing_company());
+		list.add(tvplay.getShoot_time());
+		list.add(tvplay.getShoot_place());
+		list.add(tvplay.getSubject());
+		list.add(tvplay.getProduced_time());
+		list.add(tvplay.getProduced_company());
+		list.add(tvplay.getProduction_area());
+		list.add(tvplay.getPremiere_time());
+		list.add(tvplay.getPages());
+		list.add(tvplay.getTime_length());
+		list.add(tvplay.getPlay_platform());
+		list.add(tvplay.getPremiere_platform());
+		list.add(tvplay.getPhorogrphy_director());
+		list.add(tvplay.getTotal_production());
+		list.add(tvplay.getProduction_chairman());
+		list.add(tvplay.getProduction_cost());
+		list.add(tvplay.getPlay_theater());
+//		list.add(tvplay.getBefore_eleplay());
+//		list.add(tvplay.getNext_teleplay());
+		list.add(tvplay.getOpen_time());
+		list.add(tvplay.getClose_time());
+		list.add(tvplay.getTotal_planning());
+		list.add(tvplay.getFilm_time());
+//		list.add(tvplay.getBox_office());
+//		 list.add(tvplay.getType());
+//		list.add(tvplay.getCompere());
+//		list.add(tvplay.getTotal_sponsor());
+//		list.add(tvplay.getPartners());
+//		list.add(tvplay.getSpecial_support());
+//		list.add(tvplay.getSocial_platform());
+//		list.add(tvplay.getGuest_program());
+//		list.add(tvplay.getSeason_numbver());
+		list.add(tvplay.getRecording_place());
+		list.add(tvplay.getStills_url());
+		// list.add(persion.getPersonSocialActivitiesList());
+		// 增加添加时间 、、2016年2月26日17：:4：:1
+		list.add(tvplay.getBasic_info());
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(tvplay.getBaikefilmname());
+//		list.add(tvplay.getPRESENTER());
+		list.add(tvplay.getAIR_TIME());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+
+
+	/**
+	 * 进行综艺数据 的添加
+	 * 2016年6月30日16:05:29
+	 * @param tvplay
+	 */
+	public static void Insertzhongyi(TvPlay tvplay) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		
+		
+		String strSql = "insert into ods.tem_tvplay t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
+				+ "t.major_actors,t.major_awards,t.director,t.screenwriTer,t.producer,t.production_company,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.produced_company,"
+				+ "t.production_area,t.premiere_time,t.pages,t.time_length,t.play_platform ,t.premiere_platform,"
+				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
+				+ "t.total_planning,t.film_time,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
+				+ "t.recording_place,t.stills_url,t.BASIC_INFO,t.UPDATE_TIME,t.PRESENTER,t.AIR_TIME) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		
+		
+		List<Comparable> list = new ArrayList();
+		list.add(tvplay.getTvplay_id());
+		list.add(tvplay.getTvplay_name());
+		list.add(tvplay.getTvplay_url());
+		list.add(tvplay.getAlias_en());
+		list.add(tvplay.getAlias_cn());
+		list.add(tvplay.getMajor_actors());
+		list.add(tvplay.getMajor_awards());
+		list.add(tvplay.getDirector());
+		list.add(tvplay.getScreenwriter());
+		list.add(tvplay.getProducer());
+		list.add(tvplay.getProduction_company());
+		list.add(tvplay.getIssuing_company());
+		list.add(tvplay.getShoot_time());
+		list.add(tvplay.getShoot_place());
+		list.add(tvplay.getSubject());
+		list.add(tvplay.getProduced_time());
+		list.add(tvplay.getProduced_company());
+		list.add(tvplay.getProduction_area());
+		list.add(tvplay.getPremiere_time());
+		list.add(tvplay.getPages());
+		list.add(tvplay.getTime_length());
+		list.add(tvplay.getPlay_platform());
+		list.add(tvplay.getPremiere_platform());
+		list.add(tvplay.getPhorogrphy_director());
+		list.add(tvplay.getTotal_production());
+		list.add(tvplay.getProduction_chairman());
+		list.add(tvplay.getProduction_cost());
+		list.add(tvplay.getPlay_theater());
+//		list.add(tvplay.getBefore_eleplay());
+//		list.add(tvplay.getNext_teleplay());
+//		list.add(tvplay.getOpen_time());
+//		list.add(tvplay.getClose_time());
+		list.add(tvplay.getTotal_planning());
+		list.add(tvplay.getFilm_time());
+//		list.add(tvplay.getBox_office());
+//		 list.add(tvplay.getType());
+		list.add(tvplay.getCompere());
+		list.add(tvplay.getTotal_sponsor());
+		list.add(tvplay.getPartners());
+		list.add(tvplay.getSpecial_support());
+		list.add(tvplay.getSocial_platform());
+		list.add(tvplay.getGuest_program());
+		list.add(tvplay.getSeason_numbver());
+		list.add(tvplay.getRecording_place());
+		list.add(tvplay.getStills_url());
+		list.add(tvplay.getBasic_info());
+		// list.add(persion.getPersonSocialActivitiesList());
+		// 增加添加时间 、、2016年2月26日17：:4：:1
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+//		list.add(tvplay.getBaikefilmname());
+		list.add(tvplay.getPRESENTER());
+		list.add(tvplay.getAIR_TIME());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
 	
 	/**
 	 * 进行电影
@@ -913,8 +1089,11 @@ public class OracleHaoSou {
 		
 		sql="select small_url,big_url from ods.tem_play_stills t where t.stills_orderno = 1 and t.stills_title = '词条图片' and t.data_type = 0 ";
 		
+		
+		sql="select t.person_small_url as baike_url from ODS.DEL_TEM_PLAY_PERSON t where t.source = 0 and t.person_small_url is not null";
+		
 		ArrayList<String> listname = new ArrayList<String>();
-		int iNum = 2;
+		int iNum = 1;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;

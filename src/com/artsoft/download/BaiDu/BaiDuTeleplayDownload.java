@@ -243,7 +243,7 @@ public class BaiDuTeleplayDownload {
 		if ("出品时间".equals(baseInfoName)) {
 			tvplay.setProduced_time(baseInfoValue);
 		}
-		if ("出品公司".equals(baseInfoName)) {
+		if ("出品公司".equals(baseInfoName)||"制片公司".equals(baseInfoName)) {
 			tvplay.setProduced_company(baseInfoValue);
 		}
 		if ("制片地区".equals(baseInfoName)) {

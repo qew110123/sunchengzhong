@@ -249,6 +249,24 @@ public class OracleBaidu {
 	
 	
 	/**
+	 * 百度数据的中的人
+	 * 百度词条数据图片
+ * 2016年6月22日15:10:58
+	 * @return
+	 */
+	public static List selectbaipeople() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select p.person_id,p.person_name, p.person_url from ods.dim_person p";
+		
+//		sql="select t.tvplay_id,max(t.tvplay_name),t.tvplay_url  from ods.tem_tvplay t left join ods.tem_play_stills s on s.data_id = t.tvplay_id where t.tvplay_url is not null and  s.small_url is null or s.big_url is null group by t.tvplay_id,t.tvplay_url order by t.tvplay_id";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	/**
 	 * 百度数据的中的电视剧 
 	 * 百度词条数据图片
  * 2016年6月8日15:55:02
@@ -274,6 +292,7 @@ public class OracleBaidu {
 	public static List selectbaimove() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = " select t.film_id,t.film_name,t.film_url  from  ods.dim_film t where t.film_url is not null order by t.film_id";
+		sql="select * from edw.dim_film t where t.film_name = '美人鱼'";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
@@ -306,6 +325,8 @@ public class OracleBaidu {
 	public static List selectmove() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = " select t.film_id,t.film_name,t.FILM_URL from ods.dim_film t order by t.film_id ";
+		
+		sql="select * from edw.dim_film t where t.film_name = '美人鱼'";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);

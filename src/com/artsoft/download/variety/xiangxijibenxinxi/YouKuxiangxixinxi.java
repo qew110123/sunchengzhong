@@ -1,4 +1,4 @@
-package com.artsoft.download.variety.Each;
+package com.artsoft.download.variety.xiangxijibenxinxi;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -11,6 +11,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.bean.TEM_DIM_PLATFORM;
 import com.artsoft.download.TVPlay.DownloadYouku;
 import com.artsoft.oracle.OracleNetwork;
 import com.artsoft.oracle.OracleOpreater;
@@ -18,8 +19,7 @@ import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.TimeTest;
 
-public class Each_variety_youku {
-	
+public class YouKuxiangxixinxi {
 	
 	
 	public static void youkuBranch(String urlall){
@@ -29,7 +29,6 @@ public class Each_variety_youku {
 		//http://www.youku.com/show_page/id_z427435942dbc11df97c0.html
 		//http://www.youku.com/show_point_id_z9cfbe28619ec11e29498.html?dt=json&tab_num=4&__rt=1&__ro=reload_point
 		//http://www.youku.com/show_point/id_z2554dd90b91811e59e2a.html?dt=json&divid=point_reload_201512&tab=0&__rt=1&__ro=point_reload_201512
-		//http://www.youku.com/show_point_id_zc3c10ca46d8d11e1b52a.html?dt=json&tab_num=4&__rt=1&__ro=reload_point
 		String caijiurl=urlall.replace("show_page/", "show_point_")+"?dt=json&tab_num=4&__rt=1&__ro=reload_point";
 		String html=DownloadUtil.getHtmlText(caijiurl, 30000, "UTF-8", null, null);
 		Document doc=Jsoup.parse(html);
@@ -40,7 +39,6 @@ public class Each_variety_youku {
 			for (Element element : links) {
 				//http://www.youku.com/show_page/id_z427435942dbc11df97c0.html
 				//http://www.youku.com/show_episode/id_z427435942dbc11df97c0.html?dt=json&divid=reload_200806&__rt=1&__ro=reload_200806
-				//http://www.youku.com/show_point/id_zc3c10ca46d8d11e1b52a.html?dt=json&divid=point_reload_201204&tab=0&__rt=1&__ro=point_reload_201204
 				String reload="";
 				System.out.println(reload=element.attr("data"));
 				caijiurl=urlall.replace("show_page", "show_point")+"?dt=json&divid="+reload+"&tab=0&__rt=1&__ro="+reload;
@@ -49,45 +47,76 @@ public class Each_variety_youku {
 				Document REAL_URLdoc=Jsoup.parse(REAL_URLhtml);
 				Elements linksREAL_UR=REAL_URLdoc.select("div.item");
 				for (Element element2 : linksREAL_UR) {
+					TEM_DIM_PLATFORM platform=new TEM_DIM_PLATFORM();
 					String tyPlayName="";
-					String source="1";
+//					String source="1";
+					platform.setSource(1);
+					
 					String playAmount="";
-					String vodeoType="0";
-					String palydate="";
+//					String vodeoType="0";
+//					String palydate="";
 					String playUrl="";
-					String tvType="2";
-					String realUrl=caijiurl;
+//					String tvType="2";
+//					String realUrl=caijiurl;
 					System.out.println(tyPlayName=element2.select("div.title a").text());
+					platform.setTvplayName(tyPlayName);
 					System.out.println(playUrl=element2.select("div.title a").attr("href"));
+					platform.setTvplayUrl(playUrl);
 					
 					System.out.println(playAmount=element2.select("div.stat span.num").text());
 					if (!playAmount.equals("")) {
 						playAmount=playAmount.replace(",", "");
 					}
+					platform.setPlayAmount(playAmount);
+					String BASIC_INFO="";
+					System.out.println(BASIC_INFO=element2.select("div.desc").text());
+					platform.setBasicInfo(BASIC_INFO);
 					
-					OracleOpreater.intoPlayAmont(tyPlayName, source, playAmount, vodeoType, palydate, playUrl, tvType, realUrl);
+					String TIME_INFO="";
+//					System.out.println(TIME_INFO=element2.select("div.desc").text());
+					Elements ElementTIME_INFO= element2.select("div.keylist li");
+					for (Element element3 : ElementTIME_INFO) {
+						String ktime=element3.select("em").first().text();
+						String aString = element3.select("a").first().text();
+						TIME_INFO=TIME_INFO+ktime+"/"+aString+";";
+					}
+					System.out.println(TIME_INFO);
+					platform.setTimeInfo(TIME_INFO);
+					
+					String MAJOR_ACTORS="";
+//					System.out.println(TIME_INFO=element2.select("div.desc").text());
+					Elements MAJOR_ACTORSElements= element2.select("div.guestlist li");
+					for (Element element3 : MAJOR_ACTORSElements) {
+//						String ktime=element3.select("em").first().text();
+//						String aString = element3.select("a").first().text();
+//						TIME_INFO=ktime+"/"+aString+";";
+						MAJOR_ACTORS=MAJOR_ACTORS+element3.select("a").first().text()+";";
+					}
+					System.out.println(MAJOR_ACTORS);
+					platform.setMajorActors(MAJOR_ACTORS);
+					OracleOpreater.intoPLATFORM(platform);
 				}
 			}
 		}else{
-			Elements linksREAL_UR2=doc.select("div.item");
-			for (Element element2 : linksREAL_UR2) {
-				String tyPlayName="";
-				String source="1";
-				String playAmount="";
-				String vodeoType="0";
-				String palydate="";
-				String playUrl="";
-				String tvType="2";
-				String realUrl=caijiurl;
-				System.out.println(tyPlayName=element2.select("div.title a").text());
-				System.out.println(playUrl=element2.select("div.title a").attr("href"));
-				
-				System.out.println(playAmount=element2.select("div.stat span.num").text());
-				if (!playAmount.equals("")) {
-					playAmount=playAmount.replace(",", "");
-				}
-				OracleOpreater.intoPlayAmont(tyPlayName, source, playAmount, vodeoType, palydate, playUrl, tvType, realUrl);
-			}
+//			Elements linksREAL_UR2=doc.select("div.item");
+//			for (Element element2 : linksREAL_UR2) {
+//				String tyPlayName="";
+//				String source="1";
+//				String playAmount="";
+//				String vodeoType="0";
+//				String palydate="";
+//				String playUrl="";
+//				String tvType="2";
+//				String realUrl=caijiurl;
+//				System.out.println(tyPlayName=element2.select("div.title a").text());
+//				System.out.println(playUrl=element2.select("div.title a").attr("href"));
+//				
+//				System.out.println(playAmount=element2.select("div.stat span.num").text());
+//				if (!playAmount.equals("")) {
+//					playAmount=playAmount.replace(",", "");
+//				}
+//				OracleOpreater.intoPlayAmont(tyPlayName, source, playAmount, vodeoType, palydate, playUrl, tvType, realUrl);
+//			}
 			
 		}
 		
@@ -121,7 +150,7 @@ public class Each_variety_youku {
 	}
 	
 	public static void runstatic() {
-		CommonUtil.setLog("优酷总数" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+		CommonUtil.setLog("" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
 //		openstatic();
 //		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		openordor();
@@ -167,9 +196,8 @@ public class Each_variety_youku {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		TimingTime(1, 59, 59);
-//		openordor();
-//		youkuBranch("http://www.youku.com/show_page/id_z427435942dbc11df97c0.html");
-		youkuBranch("http://www.youku.com/show_page/id_zc3c10ca46d8d11e1b52a.html");
+//		youkuBranch("http://www.youku.com/show_page/id_z234cc978f0e411e583e8.html");
+		runstatic();
 	}
 
 }

@@ -86,7 +86,8 @@ public class BaiDuTeleplaynext_wangluoju {
 					TvPlay tvplay = BaiDuTeleplayDownload.mainmore(id, strUrl, strname);
 					tvplay.setBaikefilmname(strUrlname);
 					tvplay.setType(2);
-					OracleHaoSou.InsertTVplay(tvplay);// 添加操作
+//					OracleHaoSou.InsertTVplay(tvplay);// 添加操作
+					OracleHaoSou.Insertwangluoju(tvplay);// 添加操作
 				}
 //			}
 			

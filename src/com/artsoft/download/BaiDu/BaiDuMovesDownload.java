@@ -508,9 +508,10 @@ public class BaiDuMovesDownload {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		TEM_DIM_FILM movesfilm =mainmore("0", "http://baike.baidu.com/link?url=lvbgoPAi-XZIClr2KlJVootafA3egGcYQIDof3AnAoM1SoPWXIxJ5UnTV48rNdSAVVm4VxAY_QTmTIU7Mzy2LrOT9jclkmMwoLtIgS_81FS", "π¶∑Ú–‹√®");
-//		OracleHaoSou.InsertTEM_DIM_FILM(movesfilm);
+		TEM_DIM_FILM movesfilm =mainmore("13206", "http://baike.baidu.com/subview/9514/15201085.htm", "√¿»À”„");
+		OracleHaoSou.InsertTEM_DIM_FILM(movesfilm);
 //		runnewMain();
+		
 		
 	}
 	
