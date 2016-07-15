@@ -220,9 +220,9 @@ public class BaiDuMovesDownload {
 	 * @return
 	 */
 	public static TEM_DIM_FILM buildTvPlay(String baseInfoName, String baseInfoValue, TEM_DIM_FILM movesfilm) {
-		if (baseInfoValue != null && !baseInfoValue.equals("")) {
-			baseInfoValue = baseInfoValue.replace("	", "");
-		}
+//		if (baseInfoValue != null && !baseInfoValue.equals("")) {
+//			baseInfoValue = baseInfoValue.replace("	", "");
+//		}
 		//
 		if ("ÖÐÎÄÃû".equals(baseInfoName)) {
 //			movesfilm.setAliasName(baseInfoValue);

@@ -17,12 +17,18 @@ import com.artsoft.oracle.OracleNetwork;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
+import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
 public class YouKuxiangxixinxi {
 	
 	
 	public static void youkuBranch(String urlall){
+		String url=urlall;
+		String tvplayNamehtml=DownloadUtil.getHtmlText(urlall, 30000, "UTF-8", null, null);
+		String tvplayName="";
+		tvplayName= HtmlAnalyze.getTagText(tvplayNamehtml, "class=\"name\">", "</span>");
+		
 		if (urlall.equals("")) {
 			return;
 		}
@@ -33,6 +39,10 @@ public class YouKuxiangxixinxi {
 		String html=DownloadUtil.getHtmlText(caijiurl, 30000, "UTF-8", null, null);
 		Document doc=Jsoup.parse(html);
 		Element linkid=doc.getElementById("zySeriesTab");
+		
+		
+//		String tvplayName=
+		
 //		System.out.println(linkid);
 		if (linkid!=null) {
 			Elements links=linkid.select("li");
@@ -59,7 +69,8 @@ public class YouKuxiangxixinxi {
 //					String tvType="2";
 //					String realUrl=caijiurl;
 					System.out.println(tyPlayName=element2.select("div.title a").text());
-					platform.setTvplayName(tyPlayName);
+//					platform.setTvplayName(tyPlayName);
+					platform.setTvplayNameSmall(tyPlayName);
 					System.out.println(playUrl=element2.select("div.title a").attr("href"));
 					platform.setTvplayUrl(playUrl);
 					
@@ -94,6 +105,9 @@ public class YouKuxiangxixinxi {
 					}
 					System.out.println(MAJOR_ACTORS);
 					platform.setMajorActors(MAJOR_ACTORS);
+					platform.setDataType(2);
+					platform.setTvplayName(tvplayName);
+					platform.setUrl(url);
 					OracleOpreater.intoPLATFORM(platform);
 				}
 			}

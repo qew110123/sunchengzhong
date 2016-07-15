@@ -26,9 +26,9 @@ public class BaiDUPeoplemoreurl {
 			String name="";
 			List<String> listTemp = (List<String>) Objstring;
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
-				System.out.println(url=listTemp.get(0));
-				System.out.println(id=listTemp.get(1));
-				System.out.println(name=listTemp.get(2));
+				System.out.println(id=listTemp.get(0));
+				System.out.println(name=listTemp.get(1));
+				System.out.println(url=listTemp.get(2));
 //				BaiDuPeopleDownload.mainmore(listTemp.get(0), listTemp.get(2));
 //				
 //				System.out.println(listTemp.get(0));

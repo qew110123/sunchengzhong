@@ -83,16 +83,27 @@ public class BaiduImageyanyuanWangJu {
 			System.out.println(listTemp.get(1));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0)) && listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
 				String urlBranch = "";
-				try {
-					urlBranch = "http://baike.baidu.com/search?word="
-							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&pn=0&rn=0&enc=utf8";
-					mainUrlall(urlBranch, listTemp.get(0), listTemp.get(1));
-					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0)+","+listTemp.get(1));
-					
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+//				try {
+//					urlBranch = "http://baike.baidu.com/search?word="
+//							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&pn=0&rn=0&enc=utf8";
+//					mainUrlall(urlBranch, listTemp.get(0), listTemp.get(1));
+//					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0)+","+listTemp.get(1));
+//					
+//				} catch (UnsupportedEncodingException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				String id=listTemp.get(0);
+				String strname=listTemp.get(1);
+				String strUrl=listTemp.get(2);
+				if (strUrl!= null && !"".equals(strUrl) ) {
+					try {
+						BaiduImageyanyuan.mainmore(id, strUrl, strname, 1);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 				}
+				
 			}
 		}
 	}

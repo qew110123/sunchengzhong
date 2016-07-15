@@ -40,8 +40,14 @@ public class BaiDuTeleplayDownload {
 //				bb = false;
 //			}
 //		}
+			
 
 		Document doc = Jsoup.parse(strHtml);
+		
+		String eTL_NAME="";
+		eTL_NAME=doc.select("dd.lemmaWgt-lemmaTitle-title h1").text();
+		tvplay.setETL_NAME(eTL_NAME);
+		
 		Elements links = doc.select("div.basic-info");
 		for (Element link : links) {
 			String[] sourceStrArray = link.toString().split("d>");
@@ -234,7 +240,7 @@ public class BaiDuTeleplayDownload {
 		if ("中文名".equals(baseInfoName) || "中文名称".equals(baseInfoName)) {
 			tvplay.setTvplay_name(baseInfoValue);
 		}
-		if ("外文名".equals(baseInfoName)) {
+		if ("外文名".equals(baseInfoName)||"外文名称".equals(baseInfoName)) {
 			tvplay.setAlias_en(baseInfoValue);
 		}
 		if ("别名".equals(baseInfoName) || "其它译名".equals(baseInfoName)) {
@@ -307,13 +313,39 @@ public class BaiDuTeleplayDownload {
 		if ("上映日期".equals(baseInfoName) || "上映时间".equals(baseInfoName)) {
 			tvplay.setShow_date(baseInfoValue);
 		}
-		if ("主持人".equals(baseInfoName)) {
+		if ("主持人".equals(baseInfoName)||"跑男团队长".equals(baseInfoName)) {
 			tvplay.setPRESENTER(baseInfoValue);
 		}
 		
 		if ("播出时间".equals(baseInfoName)) {
 			tvplay.setAIR_TIME(baseInfoValue);
 		}
+		
+		if ("音乐老师".equals(baseInfoName)||"导师".equals(baseInfoName)||baseInfoName.contains("导师")) {
+			String daoshi=tvplay.getGuest_program();
+			daoshi=daoshi+"、"+baseInfoValue;
+			tvplay.setGuest_program(daoshi);
+		}
+		
+		if ("节目冠名".equals(baseInfoName)||"季度冠名".equals(baseInfoName)) {
+			tvplay.setTotal_sponsor(baseInfoValue);
+		}
+		
+		if ("每季期数".equals(baseInfoName)||"期数".equals(baseInfoName)) {
+			tvplay.setPages(baseInfoValue);
+		}
+		
+		if ("主要嘉宾".equals(baseInfoName)) {
+			tvplay.setGuest_program(baseInfoValue);
+		}
+		
+		if ("制作公司".equals(baseInfoName)) {
+			tvplay.setPRODUCE_COMPANY(baseInfoValue);
+		}
+		
+		
+		
+		
 		
 
 		return tvplay;

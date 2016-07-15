@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.artsoft.bean.TEM_FILM_BOXOFFICE_REALTIME;
 import com.artsoft.bean.TEM_FILM_DAILY_CINEMA;
+import com.artsoft.bean.TEM_FILM_SCHEDULE;
 import com.artsoft.bean.TEM_FILM_WEEK_CINEMA;
 import com.artsoft.util.TimeTest;
 
@@ -230,6 +231,31 @@ public class OracleMovePiaoFang {
 		list.add(collection_url);
 		list.add(total_field_num);
 		list.add(source);
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	
+	
+	public static void intoTEM_FILM_SCHEDULE(TEM_FILM_SCHEDULE schedule) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "INSERT INTO  ods.TEM_FILM_SCHEDULE t (t.DATA_DATE,t.FID,t.URL,t.CITY_NAME,t.TITLE,t.FIELD_RATE,t.FIELD_NUM,t.INTO_DATE,t.COLLECTION_URL) values(?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(schedule.getDataDate());
+		list.add(schedule.getFid());
+		list.add(schedule.getUrl());
+		list.add(schedule.getCityName());
+		list.add(schedule.getTitle());
+		list.add(schedule.getFieldNumRate());
+		list.add(schedule.getFieldNum());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(schedule.getCollectionUrl());
 		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		System.out.println(list.toString());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);

@@ -60,6 +60,8 @@ public class OracleBaidu {
 	public static List selecthuoqumingchengurl() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "  select max(p.person_url) person_url,      max(t.person_id) person_id,max(t.person_name) person_name  from ods.tem_play_person p  left join ods.dim_person t on p.person_name = t.person_name  where t.sex = 0  and p.person_url is not null  group by p.person_name order by person_id";
+		
+		sql="select max(p.person_id) as person_id,t.person_name,max(t.person_url) as person_url,max(p.person_url) as person_urls  from ODS.DEL_DIM_PERSON t left join ods.dim_person p on t.person_name = p.person_name where p.person_url is null and t.person_name is not null and p.person_id is not null group by t.person_name";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -224,7 +226,10 @@ public class OracleBaidu {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.tvplay_id,t.tvplay_name,a.tvplay_url from edw.dim_tvplay t left join ods.tem_tvplay a on t.tvplay_id = a.tvplay_id order by a.tvplay_id";
 		sql=" select t.tvplay_id,t.tvplay_name,t.tvplay_url from ODS.DIM_NETWORK_TVPLAY t order by t.tvplay_id";
-		
+		/**
+		 * 2016Äê7ÔÂ5ÈÕ17:57:59
+		 */
+		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from ODS.DIM_NETWORK_PLAY t";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -241,8 +246,10 @@ public class OracleBaidu {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select * from   ODS.DIM_NETWORK_VARIETY t order by t.tvplay_id";
 		
+		sql="select t.variety_id,t.variety_name from ODS.DIM_VARIETY t";
+		
 		ArrayList<String> listname = new ArrayList<String>();
-		int iNum = 3;
+		int iNum = 2;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 	}

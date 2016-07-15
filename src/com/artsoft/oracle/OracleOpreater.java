@@ -192,7 +192,8 @@ public class OracleOpreater {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
 		String strSql = "INSERT INTO  ods.TEM_DIM_PLATFORM t (t.tvplay_name,t.tvplay_url,t.basic_info,t.play_amount,t.time_info,t.major_actors,t.source,t.into_date) values(?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
-		strSql="INSERT INTO  ODS.TEM_DIM_VARIETY_PLATFORM t (t.tvplay_name,t.tvplay_url,t.basic_info,t.play_amount,t.time_info,t.major_actors,t.source,t.into_date) values(?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
+		strSql="INSERT INTO  ODS.TEM_DIM_VARIETY_PLATFORM t (t.tvplay_name,t.tvplay_url,t.basic_info,t.play_amount,t.time_info,t.major_actors,t.source,t.into_date,t.DATA_TYPE,"
+				+ "PRODUCE_AREA,SUBJECT_NAME,CHANNEL_NAME,TVPLAY_NAME_SMALL,URL) values(?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?)";
 		//ODS.TEM_DIM_VARIETY_PLATFORM
 		List<Comparable> list = new ArrayList();
 		list.add(platform.getTvplayName());// 这里是将对象加入到list中
@@ -202,9 +203,17 @@ public class OracleOpreater {
 		list.add(platform.getTimeInfo());
 		list.add(platform.getMajorActors());
 		list.add(platform.getSource());
+//		list.add(platform.getProduceArea());
 //		list.add(Integer.parseInt(tvType));
 //		list.add(realUrl);
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(platform.getDataType());
+		list.add(platform.getProduceArea());
+		list.add(platform.getSubjectName());
+		list.add(platform.getChannelName());
+		list.add(platform.getTvplayNameSmall());
+		list.add(platform.getUrl());
+//		list.add(platform.getTVSTATION());
 		boolean bb = DBOperate.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}

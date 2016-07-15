@@ -20,6 +20,14 @@ public class TEM_DIM_PLATFORM {
 	private String majorActors="";
 	private int source=1;
 //	private Date intoDate;
+	
+	private int dataType=1;
+	private String produceArea="";
+	private String subjectName="";
+	private String channelName="";
+	private String tvplayNameSmall="";
+	private String url="";
+	private String TVSTATION="";
 
 
 	public void setTvplayName(String tvplayName){
@@ -63,5 +71,47 @@ public class TEM_DIM_PLATFORM {
 	}
 	public Integer getSource(){
 		return source;
+	}
+	public int getDataType() {
+		return dataType;
+	}
+	public void setDataType(int dataType) {
+		this.dataType = dataType;
+	}
+	public String getProduceArea() {
+		return produceArea;
+	}
+	public void setProduceArea(String produceArea) {
+		this.produceArea = produceArea;
+	}
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+	public String getChannelName() {
+		return channelName;
+	}
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
+	}
+	public String getTvplayNameSmall() {
+		return tvplayNameSmall;
+	}
+	public void setTvplayNameSmall(String tvplayNameSmall) {
+		this.tvplayNameSmall = tvplayNameSmall;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getTVSTATION() {
+		return TVSTATION;
+	}
+	public void setTVSTATION(String tVSTATION) {
+		TVSTATION = tVSTATION;
 	}
 }

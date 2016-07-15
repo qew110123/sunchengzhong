@@ -121,6 +121,17 @@ public class TvPlay {
 	//播出时间
 	private String AIR_TIME="";
 	
+	//清洗数据名称
+	private String ETL_NAME="";
+	
+	
+
+	//百科标题
+	private String 	BAIKE_NAME="";
+	
+	
+	private String baikefilmname="";
+	
 	
 	public int getDATA_TYPE() {
 		return DATA_TYPE;
@@ -130,7 +141,7 @@ public class TvPlay {
 		DATA_TYPE = dATA_TYPE;
 	}
 
-	private String baikefilmname="";
+	
 	
 	
 	public String getBaikefilmname() {
@@ -639,5 +650,21 @@ public class TvPlay {
 
 	public void setAIR_TIME(String aIR_TIME) {
 		AIR_TIME = aIR_TIME;
+	}
+	
+	public String getETL_NAME() {
+		return ETL_NAME;
+	}
+
+	public void setETL_NAME(String eTL_NAME) {
+		ETL_NAME = eTL_NAME;
+	}
+
+	public String getBAIKE_NAME() {
+		return BAIKE_NAME;
+	}
+
+	public void setBAIKE_NAME(String bAIKE_NAME) {
+		BAIKE_NAME = bAIKE_NAME;
 	}
 }

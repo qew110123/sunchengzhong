@@ -248,37 +248,211 @@ public class indexso360 {
 			OracleHaoSou.intotem_person_keyword_up(data_date, person_id, keyword, up_rate, urlMain,data_type);
 		}
 	}
+	
+	/**
+	 *2016年7月5日10:37:03
+	 *进行360指数地区分布
+	 *
+	 * @param person_id
+	 * @param data_date
+	 * @param keyword
+	 * @param urlMain
+	 * http://index.so.com/index.php?a=drawAreaJson&t=30&q=%E6%AC%A2%E4%B9%90%E9%A2%82
+	 * @param data_type
+	 */
+	public static void TEM_360_WORD_AREA(String person_id, String data_date, String keyword, String urlMain,int data_type) {
+
+
+		String strHtml = Htmlurl(urlMain);
+		
+//		 String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
+//				 "UTF-8", null, null);
+//				 if (strHtml == null || strHtml.equals("")) {
+//				 strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null,
+//				 null);
+//				 }
+//				 if (strHtml == null || strHtml.equals("")) {
+//				 // return;
+//				 strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null,
+//				 null);
+//				 }
+
+		JSONObject people = new JSONObject();
+		JSONArray list = new JSONArray();
+
+		people = JSONObject.fromObject(strHtml);
+		System.out.println(people);
+
+		JSONObject data = (JSONObject) people.get("data");
+		JSONArray datalist = (JSONArray) data.get("list");
+
+		for (Object object : datalist) {
+			JSONObject objectobject = JSONObject.fromObject(object);
+			// String news_title=(String) objectobject.get("title");
+			// System.out.println(news_title);
+//			keyword = (String) objectobject.get("word");
+//			String up_rate = (String) objectobject.get("ratio");
+			String AREA_TOP= (String) objectobject.getString("rank");
+			String AREA_NAME_CN= (String) objectobject.getString("province");
+			String AREA_RATE= (String) objectobject.getString("perctent");
+			OracleHaoSou.intoTEM_360_WORD_AREA(data_date, person_id, keyword, AREA_TOP,AREA_NAME_CN,AREA_RATE, urlMain,data_type);
+		}
+	}
+	
+	
+	/**
+	 *2016年7月5日10:47:26
+	 *360关注人物性别比例年龄分布
+	 *http://index.so.com/index.php?a=portrayalJson&t=30&q=%E6%AC%A2%E4%B9%90%E9%A2%82
+	 */
+	public static void TEM_360_WORD_AGE_SEX(String person_id, String data_date, String keyword, String urlMain,int data_type) {
+
+
+		String strHtml = Htmlurl(urlMain);
+		
+//		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
+//				 "UTF-8", null, null);
+//				 if (strHtml == null || strHtml.equals("")) {
+//				 strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null,
+//				 null);
+//				 }
+//				 if (strHtml == null || strHtml.equals("")) {
+//				 // return;
+//				 strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null,
+//				 null);
+//				 }
+
+		JSONObject people = new JSONObject();
+		JSONArray list = new JSONArray();
+
+		people = JSONObject.fromObject(strHtml);
+		System.out.println(people);
+
+		JSONObject data = (JSONObject) people.get("data");
+		String MAN_RATE=data.getString("male");
+		String WOMAN_RATE=data.getString("female");
+		String age=data.getString("age");
+		String RATE_19="";
+		String RATE_29="";
+		String RATE_39="";
+		String RATE_49="";
+		String RATE_50="";
+		try {
+//			String ageString =data.getString(age);
+			String [] rate=age.split(",");
+			RATE_19=rate[0];
+			RATE_29=rate[1];
+			RATE_39=rate[2];
+			RATE_49=rate[3];
+			RATE_50=rate[4];
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		OracleHaoSou.intoTEM_360_WORD_AGE_SEX(data_date, person_id, keyword, MAN_RATE, WOMAN_RATE, RATE_19, RATE_29, RATE_39, RATE_49, RATE_50, urlMain, data_type);
+		
+	}
+	
+	/**
+	 * 2016年7月5日11:20:12
+	 * 360关键字标签
+	 * TEM_360_WORD_TAG
+	 * http://index.so.com/index.php?a=portrayalJson&t=30&q=%E6%AC%A2%E4%B9%90%E9%A2%82
+	 */
+	private static void TEM_360_WORD_TAG(String person_id, String data_date, String keyword, String urlMain,int data_type) {
+
+		String strHtml = Htmlurl(urlMain);
+		
+//		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
+//				 "UTF-8", null, null);
+//				 if (strHtml == null || strHtml.equals("")) {
+//				 strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null,
+//				 null);
+//				 }
+//				 if (strHtml == null || strHtml.equals("")) {
+//				 // return;
+//				 strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null,
+//				 null);
+//				 }
+
+		JSONObject people = new JSONObject();
+		JSONArray list = new JSONArray();
+
+		people = JSONObject.fromObject(strHtml);
+		System.out.println(people);
+
+		JSONObject data = (JSONObject) people.get("data");
+		JSONArray datalist = (JSONArray) data.get("tags");
+
+		for (Object object : datalist) {
+			JSONObject objectobject = JSONObject.fromObject(object);
+			// String news_title=(String) objectobject.get("title");
+			// System.out.println(news_title);
+			String LABEL_NAME = (String) objectobject.get("tag");
+			String LABEL_NUM = (String) objectobject.get("power");
+			OracleHaoSou.intoTEM_360_WORD_TAG(data_date, person_id, keyword, LABEL_NAME, LABEL_NUM, urlMain,data_type);
+		}
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @param person_id
+	 * @param data_date
+	 * @param keyword
+	 * @param krywordutf8
+	 * @param data_type
+	 */
 
 	public static void my360run(String person_id, String data_date, String keyword, String krywordutf8,int data_type) {
+//		try {
+//			tem_person_keyword_distrib(person_id, data_date, keyword,
+//					"http://index.so.com/index.php?a=radarJson&t=30&q=" + krywordutf8, data_type);
+//
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		try {
+//			tem_person_relevant_keyword(person_id, data_date, keyword,
+//					"http://index.so.com/index.php?a=nlpJson&t=30&q=" + krywordutf8, data_type);
+//
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		try {
+//			tem_person_relevant_news(person_id, data_date, keyword,
+//					"http://index.so.com/index.php?a=relNewsJson&q=" + krywordutf8, data_type);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		try {
+//			tem_person_relevant_weibo(person_id, data_date, keyword,
+//					"http://index.so.com/index.php?a=relWeiboJson&q=" + krywordutf8, data_type);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		try {
+//			tem_person_keyword_up(person_id, data_date, keyword,
+//					"http://index.so.com/index.php?a=surgeWordsJson&t=7&q=" + krywordutf8, data_type);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+		
+//		try {
+//			TEM_360_WORD_AREA(person_id, data_date, keyword, "http://index.so.com/index.php?a=drawAreaJson&t=30&q=" + krywordutf8, data_type);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+		
+//		try {
+//			TEM_360_WORD_AGE_SEX(person_id, data_date, keyword, "http://index.so.com/index.php?a=portrayalJson&t=30&q=" + krywordutf8, data_type);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+		
 		try {
-			tem_person_keyword_distrib(person_id, data_date, keyword,
-					"http://index.so.com/index.php?a=radarJson&t=30&q=" + krywordutf8, data_type);
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		try {
-			tem_person_relevant_keyword(person_id, data_date, keyword,
-					"http://index.so.com/index.php?a=nlpJson&t=30&q=" + krywordutf8, data_type);
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		try {
-			tem_person_relevant_news(person_id, data_date, keyword,
-					"http://index.so.com/index.php?a=relNewsJson&q=" + krywordutf8, data_type);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		try {
-			tem_person_relevant_weibo(person_id, data_date, keyword,
-					"http://index.so.com/index.php?a=relWeiboJson&q=" + krywordutf8, data_type);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		try {
-			tem_person_keyword_up(person_id, data_date, keyword,
-					"http://index.so.com/index.php?a=surgeWordsJson&t=7&q=" + krywordutf8, data_type);
+			TEM_360_WORD_TAG(person_id, data_date, keyword, "http://index.so.com/index.php?a=portrayalJson&t=30&q=" + krywordutf8, data_type);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -362,8 +536,17 @@ public class indexso360 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// runstatic();
-		// openstatic();
+//		 openstatic();
 		TimingTime(00, 59, 59);
+//		String krywordutf8="";
+//		try {
+//			krywordutf8 = java.net.URLEncoder.encode("你好", "utf-8");
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		my360run("0", "0", "0", krywordutf8, 0);
+		
 	}
 
 }

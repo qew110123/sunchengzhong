@@ -570,14 +570,14 @@ public class OracleHaoSou {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		
 		
-		String strSql = "insert into ods.tem_tvplay t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
+		String strSql = "insert into ods.TEM_DIM_VARIETY t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
 				+ "t.major_actors,t.major_awards,t.director,t.screenwriTer,t.producer,t.production_company,"
 				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.produced_company,"
 				+ "t.production_area,t.premiere_time,t.pages,t.time_length,t.play_platform ,t.premiere_platform,"
 				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
-				+ "t.total_planning,t.film_time,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
-				+ "t.recording_place,t.stills_url,t.BASIC_INFO,t.UPDATE_TIME,t.PRESENTER,t.AIR_TIME) values"
-				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "t.total_planning,t.film_time,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
+				+ "t.recording_place,t.stills_url,t.BASIC_INFO,t.UPDATE_TIME,t.PRESENTER,t.AIR_TIME,ETL_NAME,BAIKE_NAME) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		
 		
@@ -592,7 +592,7 @@ public class OracleHaoSou {
 		list.add(tvplay.getDirector());
 		list.add(tvplay.getScreenwriter());
 		list.add(tvplay.getProducer());
-		list.add(tvplay.getProduction_company());
+		list.add(tvplay.getPRODUCE_COMPANY());
 		list.add(tvplay.getIssuing_company());
 		list.add(tvplay.getShoot_time());
 		list.add(tvplay.getShoot_place());
@@ -618,7 +618,7 @@ public class OracleHaoSou {
 		list.add(tvplay.getFilm_time());
 //		list.add(tvplay.getBox_office());
 //		 list.add(tvplay.getType());
-		list.add(tvplay.getCompere());
+//		list.add(tvplay.getCompere());
 		list.add(tvplay.getTotal_sponsor());
 		list.add(tvplay.getPartners());
 		list.add(tvplay.getSpecial_support());
@@ -634,6 +634,8 @@ public class OracleHaoSou {
 //		list.add(tvplay.getBaikefilmname());
 		list.add(tvplay.getPRESENTER());
 		list.add(tvplay.getAIR_TIME());
+		list.add(tvplay.getETL_NAME());
+		list.add(tvplay.getBAIKE_NAME());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
@@ -1325,6 +1327,106 @@ public class OracleHaoSou {
 		list.add(keyword);
 		list.add(up_rate);
 //		list.add(trend);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(url);
+		list.add(data_type);
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	/**
+	 * TEM_360_WORD_AREA
+	 * 360指数地区分布
+	 * 2016年7月5日10:40:14
+	 * 
+	 * @return
+	 */
+	public static void intoTEM_360_WORD_AREA(String data_date, String person_id, String keyword,
+			String AREA_TOP,String AREA_NAME_CN,String AREA_RATE, String url,int data_type) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.TEM_360_WORD_AREA t ( t.data_date,t.data_id,t.WORD ,t.AREA_TOP,t.AREA_NAME_CN,AREA_RATE,"
+				+ "t.into_date,t.url,t.data_type)values(?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(data_date);
+		list.add(person_id);
+		list.add(keyword);
+//		list.add(up_rate);
+		list.add(AREA_TOP);
+		list.add(AREA_NAME_CN);
+		list.add(AREA_RATE);
+//		list.add(trend);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(url);
+		list.add(data_type);
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	/**
+	 * TEM_360_WORD_AGE_SEX
+	 * 360关注人物性别比例年龄分布
+	 * 2016年7月5日11:04:59
+	 * 
+	 * @return
+	 */
+	public static void intoTEM_360_WORD_AGE_SEX(String data_date, String person_id, String keyword,
+			String MAN_RATE,String WOMAN_RATE,String RATE_19,String RATE_29,String RATE_39,String RATE_49,String RATE_50, String url,int data_type) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.TEM_360_WORD_AGE_SEX t ( t.data_date,t.data_id,t.WORD ,t.MAN_RATE,t.WOMAN_RATE,RATE19,RATE29,RATE39,RATE49,RATE50,"
+				+ "t.into_date,t.url,t.data_type)values(?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(data_date);
+		list.add(person_id);
+		list.add(keyword);
+//		list.add(up_rate);
+		list.add(MAN_RATE);
+		list.add(WOMAN_RATE);
+		list.add(RATE_19);
+		list.add(RATE_29);
+		list.add(RATE_39);
+		list.add(RATE_49);
+		list.add(RATE_50);
+//		list.add(trend);
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(url);
+		list.add(data_type);
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	
+	/**
+	 * TEM_360_WORD_TAG
+	 * 360关键字标签
+	 * 2016年7月5日11:22:18
+	 * 
+	 * @return
+	 */
+	public static void intoTEM_360_WORD_TAG(String data_date, String person_id, String keyword,
+			String LABEL_NAME,String LABEL_NUM, String url,int data_type) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "insert into ods.TEM_360_WORD_TAG t ( t.data_date,t.data_id,t.WORD ,t.LABEL_NAME,t.LABEL_NUM,"
+				+ "t.into_date,t.url,t.data_type)values(?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(data_date);
+		list.add(person_id);
+		list.add(keyword);
+		list.add(LABEL_NAME);
+		list.add(LABEL_NUM);
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		list.add(url);
 		list.add(data_type);

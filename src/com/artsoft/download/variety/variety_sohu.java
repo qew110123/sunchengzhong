@@ -124,7 +124,11 @@ public class variety_sohu {
 		
 		if (name.equals("")) {
 			name = HtmlAnalyze.getTagText(strHtml, "<title>", "</title>");
+			if ("我想和你唱".equals(name)) {
+				System.out.println(name);
+			}
 		}
+		
 		
 		String Amount = "";// 播放量
 		System.out.println(Amount = HtmlAnalyze.getTagText(strHtml, "<span>总播放：</span> ", "</li>"));
