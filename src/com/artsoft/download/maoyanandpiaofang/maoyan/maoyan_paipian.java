@@ -1,4 +1,4 @@
-package com.artsoft.download.maoyanandpiaofang;
+package com.artsoft.download.maoyanandpiaofang.maoyan;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
@@ -18,7 +18,8 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
-public class maoyanall {
+public class maoyan_paipian {
+	
 	
 	
 	
@@ -30,7 +31,7 @@ public class maoyanall {
 		String datetext = TimeTest.getBeforeAfterDate(TimeTest.getNowTime("yyyy-MM-dd"), -1).toString();
 //		String urlMain = "http://piaofang.maoyan.com/?date=" + datetext;
 //		openstatPaipian(urlMain, datetext);
-		for (int i = -1; i > -547; i--) {
+		for (int i = -1; i > -7; i--) {
 			datetext = TimeTest.getBeforeAfterDate(TimeTest.getNowTime("yyyy-MM-dd"), i).toString();
 			try {
 				openstaticPaipianShuJuquanguo("", datetext);
@@ -247,14 +248,14 @@ public class maoyanall {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
 			}
-		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
 	}
 	public static void main(String[] args) {
-//		TimingTime(11, 59, 59);
+		TimingTime(1, 59, 59);
 //		openstaticPaipianShuJuquanguo("", "2016-07-11");
 //		openstatic();
 	//	openstatic();
-		runstatic();
+//		runstatic();
 	}
 	
 

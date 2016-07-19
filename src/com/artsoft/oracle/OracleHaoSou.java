@@ -94,6 +94,28 @@ public class OracleHaoSou {
 	}
 	
 	
+	/**
+	 * 拼写sql语句综艺数据——汉字版
+	 * 2016年7月18日14:41:18
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectdim_film_zhongyi_hanziban(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
+		
+		sql = " select t.tvplay_id,t.tvplay_name,t.tvplay_url from ODS.DIM_NETWORK_TVPLAY t order by t.tvplay_id";
+		sql="select * from   ODS.DIM_NETWORK_VARIETY t order by t.tvplay_id";
+		sql="select t.VARIETY_ID, t.variety_name_back,t.VARIETY_NAME from  ODS.DIM_VARIETY t where t.variety_name_back is not null";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	
 	
 
 	/**
