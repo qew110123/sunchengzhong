@@ -96,11 +96,11 @@ public class OracleSarFtGov {
 	}
 
 	public static void intotemtvplaychange(String old_value, String new_value, String tvplay_name,
-			String produce_company, int set_number, int type) {
+			String produce_company, int set_number, int type,String URL) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		System.out.println(old_value + new_value + tvplay_name + produce_company + set_number + type );
 		String strSql = "insert into ods.TEM_TVPLAY_CHANGE t (t.old_value,t.new_value,t.tvplay_name,t.produce_company,"
-				+ "t.set_number,t.type,t.create_date)values(?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
+				+ "t.set_number,t.type,t.create_date,DATA_DATE,url)values(?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 		List<Comparable> list = new ArrayList();
 		// list.add(null);// 这里是将对象加入到list中
 		list.add(old_value);
@@ -110,6 +110,8 @@ public class OracleSarFtGov {
 		list.add(set_number);
 		list.add(type);
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(URL);
 		boolean bb = DBOperate.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}

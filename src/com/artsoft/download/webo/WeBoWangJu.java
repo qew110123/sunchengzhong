@@ -46,7 +46,7 @@ public class WeBoWangJu {
 	public static void openstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 //		String returnNumTVle=OracleHaoSou.returnNumPeople("ods.dim_film");
-		String returnNumTVle=OracleHaoSou.returnNumPeople("ODS.DIM_NETWORK_TVPLAY");
+		String returnNumTVle=OracleHaoSou.returnNumPeople("ODS.DIM_NETWORK_PLAY");
 		System.out.println("需要采集的人名字数为"+returnNumTVle);
 		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
 			// i=15780;

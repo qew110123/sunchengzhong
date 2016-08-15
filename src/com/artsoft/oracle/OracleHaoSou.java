@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.artsoft.bean.CREATIVE_TEAM;
 import com.artsoft.bean.Persion;
 import com.artsoft.bean.TEM_DIM_ENTRYIMG;
 import com.artsoft.bean.TEM_DIM_FILM;
@@ -64,7 +65,7 @@ public class OracleHaoSou {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
 		
-		sql = " select t.tvplay_id,t.tvplay_name,t.tvplay_url from ODS.DIM_NETWORK_TVPLAY t order by t.tvplay_id";
+		sql = " select t.NETWORKPLAY_ID,t.NETWORKPLAY_NAME,t.NETWORKPLAY_URL from ODS.DIM_NETWORK_PLAY t order by t.NETWORKPLAY_ID";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -85,7 +86,7 @@ public class OracleHaoSou {
 		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
 		
 		sql = " select t.tvplay_id,t.tvplay_name,t.tvplay_url from ODS.DIM_NETWORK_TVPLAY t order by t.tvplay_id";
-		sql="select * from   ODS.DIM_NETWORK_VARIETY t order by t.tvplay_id";
+		sql="select * from  ods.dim_variety t order by t.VARIETY_ID";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -1490,6 +1491,63 @@ public class OracleHaoSou {
 		list.add(TimeTest.getNowTime("yyyyMMdd"));
 		list.add(personwork.getName_URL());
 		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	/**
+	 *tem_person_works 百度综艺数据的创作团队
+	 *2016年7月28日17:18:38
+	 * 
+	 * @return
+	 */
+	public static void intoCREATIVE_TEAM( CREATIVE_TEAM CREATIVE ) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "INSERT INTO ods.CREATIVE_TEAM t (t.data_id,t.data_name,t.data_url,t.master_plan,t.president_chips,t.chief_producer,t.general_director,t.head_writer,t.artist_tc,t.director_group,t.screenwriter_group,t.director_korea_group,t.artist_consultant,t.camera_tc,t.technology_boss_tc,t.technology_tc,t.later_boss_tc,t.propaganda_tc,t.advert_boss_plan,t.advert_plan,t.dress_plan,t.dresser,t.dress_team,t.makeup_team,t.producer_boss_tc,t.producer_director,t.producer_cooperation,t.producer,t.producer_boss,t.advisory_unit,t.production_unit,t.post_system,t.han_production_company,t.plan_boss,t.plan,t.director,t.data_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(CREATIVE.getDataId());
+		list.add(CREATIVE.getDataName());
+		list.add(CREATIVE.getDataUrl());
+		list.add(CREATIVE.getMasterPlan());
+		list.add(CREATIVE.getPresidentChips());
+		list.add(CREATIVE.getChiefProducer());
+		list.add(CREATIVE.getGeneralDirector());
+		list.add(CREATIVE.getHeadWriter());
+		list.add(CREATIVE.getArtistTc());
+		list.add(CREATIVE.getDirectorGroup());
+		list.add(CREATIVE.getScreenwriterGroup());
+		list.add(CREATIVE.getDirectorKoreaGroup());
+		list.add(CREATIVE.getArtistConsultant());
+		list.add(CREATIVE.getCameraTc());
+		list.add(CREATIVE.getTechnologyBossTc());
+		list.add(CREATIVE.getTechnologyTc());
+		list.add(CREATIVE.getLaterBossTc());
+		list.add(CREATIVE.getPropagandaTc());
+		list.add(CREATIVE.getAdvertBossPlan());
+		list.add(CREATIVE.getAdvertPlan());
+		list.add(CREATIVE.getDressPlan());
+		list.add(CREATIVE.getDresser());
+		list.add(CREATIVE.getDressTeam());
+		list.add(CREATIVE.getMakeupTeam());
+		list.add(CREATIVE.getProducerBossTc());
+		list.add(CREATIVE.getProducerDirector());
+		list.add(CREATIVE.getProducerCooperation());
+		list.add(CREATIVE.getProducer());
+		list.add(CREATIVE.getProducerBoss());
+		list.add(CREATIVE.getAdvisoryUnit());
+		list.add(CREATIVE.getProductionUnit());
+		list.add(CREATIVE.getPostSystem());
+		list.add(CREATIVE.getHanProductionCompany());
+		list.add(CREATIVE.getPlanBoss());
+		list.add(CREATIVE.getPlan());
+		list.add(CREATIVE.getDirector());
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		System.out.println(list);
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}

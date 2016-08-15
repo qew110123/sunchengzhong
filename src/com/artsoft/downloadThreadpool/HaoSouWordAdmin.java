@@ -34,7 +34,13 @@ public class HaoSouWordAdmin {
 		// if (strHtml == null || strHtml.equals("")) {
 		// return;
 		// }
+		
+//		 String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30,
+//				 "UTF-8", null, null);
 		String strHtml = urlreturnHtml(urlBranch);
+		
+		
+		
 //		System.out.println(strHtml);
 
 		String strtext = HtmlAnalyze.getTagText(strHtml, "\":\"", "\"}");
@@ -49,33 +55,45 @@ public class HaoSouWordAdmin {
 			System.out.println(sourceStrArray.length);
 			if (starttime != null && !"".equals(starttime)) {
 
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(1000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 
-				// for (int i = 0; i < sourceStrArray.length; i++) {
-				// // System.out.println(sourceStrArray[i] +
-				// // DemoTime.getBeforeAfterDate(starttime, i));
-				// OracleHaoSou.intoPeoPle(tvplayId, sourceStrArray[i],
-				// DemoTime.getBeforeAfterDate(starttime,
-				// i).toString().replaceAll("-", ""), "", urlBranch,
-				// DataType);
-				// }
+//				 for (int i = 0; i < sourceStrArray.length; i++) {
+//				 // System.out.println(sourceStrArray[i] +
+//				 // DemoTime.getBeforeAfterDate(starttime, i));
+//				 OracleHaoSou.intoPeoPle(tvplayId, sourceStrArray[i],
+//				 DemoTime.getBeforeAfterDate(starttime,
+//				 i).toString().replaceAll("-", ""), "", urlBranch,
+//				 DataType);
+//				 }
 
 				// OracleHaoSou.returnMaxdianpeople();
-				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
-					System.out.println(sourceStrArray[i - 1]);
-					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
+//				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
+//					System.out.println(sourceStrArray[i - 1]);
+//					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
+//					System.out.println(palydate = palydate.replaceAll("-", ""));
+//					// System.out.println(sourceStrArray[i-1] +
+//					// DemoTime.getBeforeAfterDate(starttime, i-1));
+//					OracleHaoSou.intoPeoPle(tvplayId, sourceStrArray[i - 1], palydate, "", urlBranch, DataType);
+//					if (palydate.equals("20151027")) {
+//						return;
+//					}
+//				}
+				
+				String starttimeto=HtmlAnalyze.getTagText(starttime+"#", "to\":\"","#");
+//				String palydateto=starttimeto.replaceAll("-", "");
+				for (int i = 0; i < 7; i++) {
+					String palydate = DemoTime.getBeforeAfterDate(starttimeto, 0-i).toString();
+//					System.out.println(palydateto=starttimeto.replaceAll("-", ""));
 					System.out.println(palydate = palydate.replaceAll("-", ""));
-					// System.out.println(sourceStrArray[i-1] +
-					// DemoTime.getBeforeAfterDate(starttime, i-1));
-					OracleHaoSou.intoPeoPle(tvplayId, sourceStrArray[i - 1], palydate, "", urlBranch, DataType);
-					if (palydate.equals("20151027")) {
-						return;
-					}
+//					OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[sourceStrArray.length -1- i], "0", palydate, urlBranch,
+//							TV_TYPE, DataType, "");
+					OracleHaoSou.intoPeoPle(tvplayId, sourceStrArray[sourceStrArray.length -1- i], palydate, "", urlBranch, DataType);
+					
 				}
 
 			}
@@ -310,8 +328,15 @@ public class HaoSouWordAdmin {
 		// TODO Auto-generated method stub
 
 		TimingTime(8, 00, 01);
-		// runstatic();
-		System.out.println("ÔËÐÐÍø°É");
+//		// runstatic();
+//		System.out.println("ÔËÐÐÍø°É");
+		
+//		String urlBranch="http://index.so.com/index.php?a=soIndexJson&q=%E6%AC%A2%E4%B9%90%E9%A2%82&area=%E5%85%A8%E5%9B%BD";
+//		String tvplayId="0";
+//		String tyPlayName="»¶ÀÖËÌ";
+//		String DataType="3";
+//		int TV_TYPE=0;
+//		HaosouPeoPleBranch(urlBranch, tvplayId, tyPlayName, DataType);
 
 	}
 

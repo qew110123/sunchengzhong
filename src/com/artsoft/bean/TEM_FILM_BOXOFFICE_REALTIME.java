@@ -15,6 +15,10 @@ public class TEM_FILM_BOXOFFICE_REALTIME implements Serializable {
 //	private Date intoDate;
 	private String collectionUrl="";
 	private String REAL_DATE="";
+	private int SOURCE;
+	public void setSOURCE(int sOURCE) {
+		SOURCE = sOURCE;
+	}
 	public int getDATA_TYPE() {
 		return DATA_TYPE;
 	}
@@ -82,5 +86,9 @@ public class TEM_FILM_BOXOFFICE_REALTIME implements Serializable {
 	public String getCollectionUrl(){
 		return collectionUrl;
 	}
+	public int getSOURCE() {
+		return SOURCE;
+	}
+
 }
 

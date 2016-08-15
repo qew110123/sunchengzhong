@@ -25,7 +25,7 @@ public class WeiBoSearchMoves {
 			System.out.println(listTemp.get(0));
 			System.out.println(listTemp.get(1));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
-				if (Integer.parseInt(listTemp.get(0))>29996) {
+				if (Integer.parseInt(listTemp.get(0))>10065) {
 					
 				
 				String urlBranch = "";

@@ -44,6 +44,16 @@ public class OracleBaidu {
 		 * 
 		 */
 		sql="select tt.person_id,tt.person_name from (select p.person_id , p.person_name, p.person_url,t.person_url person_urls  from ods.dim_person p  left join ODS.TEM_DIM_PERSON t    on p.person_name = t.person_name where p.person_id > 20234   and p.sex = 0 order by p.person_name desc) tt where tt.person_urls is null order by tt.person_id";
+		
+		/**
+		 * 2016年8月9日18:30:05
+		 * 
+		 */
+		sql="select  t.person_id,t.person_name,length(t.person_name),t.person_url from ods.dim_person t where t.person_id >172000 ";
+		
+		
+		
+		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -192,7 +202,24 @@ public class OracleBaidu {
 		 * 2016年6月7日16:31:27
 		 * 完善电视剧基本信息抓取，按照电视剧关键字抓取百科搜索的当前的所有数据 
 		 */
-		sql="";
+		
+		/**
+		 * 2016年8月4日09:48:16
+		 * 电视剧
+		 */
+		sql="select t.tvplay_id, t.tvplay_name,to_char(t.create_time,'yyyymmdd') from edw.dim_tvplay t where t.years is null order by to_char(t.create_time,'yyyymmdd')desc";
+		
+		/**
+		 * 2016年8月9日13:09:30
+		 * 电视剧
+		 */
+		sql="select t.* , to_char(create_time,'yyyymmdd')   from edw.dim_tvplay t where t.years is null  and t.create_time>to_date('20160723','yyyymmdd')";
+		
+		
+		/**
+		 * 2016年8月11日18:40:48
+		 */
+		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null ";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
@@ -209,6 +236,8 @@ public class OracleBaidu {
 	public static List selectbaidudianshijuTVplay() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.tvplay_id,t.tvplay_name,a.tvplay_url from edw.dim_tvplay t left join ods.tem_tvplay a on t.tvplay_id = a.tvplay_id order by a.tvplay_id";
+		
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.f_tvplay_record t where t.tvplay_url is not null";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
@@ -247,6 +276,13 @@ public class OracleBaidu {
 		String sql = "select * from   ODS.DIM_NETWORK_VARIETY t order by t.tvplay_id";
 		
 		sql="select t.variety_id,t.variety_name from ODS.DIM_VARIETY t";
+		
+		/**
+		 * 2016年7月26日10:53:18
+		 * 跑一遍variety_name_back
+		 */
+		
+		sql="select t.variety_id,t.variety_name_back from ods.dim_variety t where t.variety_name_back is not null";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;

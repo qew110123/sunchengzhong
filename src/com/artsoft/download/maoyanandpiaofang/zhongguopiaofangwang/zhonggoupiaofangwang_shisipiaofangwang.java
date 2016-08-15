@@ -85,6 +85,7 @@ public class zhonggoupiaofangwang_shisipiaofangwang {
 			realitme.setUrl(url);
 			realitme.setCollectionUrl(urlMain);
 			realitme.setDATA_TYPE(0);;
+			realitme.setSOURCE(2);
 			OracleMovePiaoFang.intoTEM_FILM_BOXOFFICE_REALTIME(realitme);
 			// }
 

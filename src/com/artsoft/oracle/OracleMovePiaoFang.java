@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.artsoft.bean.TEM_FILM_BOXOFFICE_REALTIME;
+import com.artsoft.bean.TEM_FILM_CINEMA;
+import com.artsoft.bean.TEM_FILM_CINEMA_DATE;
 import com.artsoft.bean.TEM_FILM_DAILY_CINEMA;
 import com.artsoft.bean.TEM_FILM_SCHEDULE;
 import com.artsoft.bean.TEM_FILM_WEEK_CINEMA;
@@ -261,8 +263,64 @@ public class OracleMovePiaoFang {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
+	
+	
+	public static void intoTEM_FILM_CINEMA(TEM_FILM_CINEMA CINEMA) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "INSERT INTO  ods.tem_film_cinema_area  t (t.DATA_DATE,t.TITLE,t.URL,t.TOP,t.TOTAL_BOXOFFICE,t.FIELD_PNUM,t.FIELD_AVERAGE_PNUM,REAL_TIME_BOXOFFICE,t.INTO_DATE,t.COLLECTION_URL,t.DATA_ID,CITY_NAME,t.DATA_TYPE) values(?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(CINEMA.getDataDate());
+		list.add(CINEMA.getTitle());
+		list.add(CINEMA.getUrl());
+		list.add(CINEMA.getTop());
+		list.add(CINEMA.getTotalBoxoffice());
+		list.add(CINEMA.getFieldPnum());
+		list.add(CINEMA.getFieldAveragePnum());
+		list.add(CINEMA.getRealTimeBoxoffice());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(CINEMA.getCollectionUrl());
+		list.add(CINEMA.getFid());
+		list.add(CINEMA.getCITY_NAME());
+		list.add(CINEMA.getDATA_TYPE());
+//		list.add(CINEMA.getCollectionUrl());
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
 
 	
+	
+	public static void intoTEM_FILM_CINEMA_DATE(TEM_FILM_CINEMA_DATE CINEMA_date) {
+
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String strSql = "INSERT INTO  ods.tem_film_cinema_daily t (t.title,t.URL,t.DATA_DATE,t.CYCLE,t.TOTAL_BOXOFFICE,t.FIELD_AVERAGE_PNUM,REAL_TIME_BOXOFFICE,DATA_TYPE,t.INTO_DATE,t.COLLECTION_URL,t.DATA_ID,CITY_NAME,t.TYPE) values(?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+		list.add(CINEMA_date.getTitle());
+		list.add(CINEMA_date.getUrl());
+		list.add(CINEMA_date.getDataDate());
+		list.add(CINEMA_date.getCycle());
+		list.add(CINEMA_date.getTotalBoxoffice());
+		list.add(CINEMA_date.getFieldAveragePnum());
+		list.add(CINEMA_date.getRealTimeBoxoffice());
+		list.add(CINEMA_date.getDataType());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(CINEMA_date.getCollectionUrl());
+		list.add(CINEMA_date.getFid());
+//		list.add(CINEMA.getCollectionUrl());
+		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(CINEMA_date.getCITY_NAME());
+		list.add(CINEMA_date.getTYPE());
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
 	
 	
 	
@@ -276,7 +334,7 @@ public class OracleMovePiaoFang {
 	public static void intoTEM_FILM_BOXOFFICE_REALTIME(TEM_FILM_BOXOFFICE_REALTIME  realitme) {
 
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String strSql = "insert into ods.TEM_FILM_BOXOFFICE_REALTIME t (t.data_date,t.title,t.url,t.fid,t.released_days,t.real_time_boxoffice,t.boxoffice_rate,t.total_boxoffice,t.into_date,t.collection_url,t.real_date,t.DATA_TYPE)values(?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?)";
+		String strSql = "insert into ods.TEM_FILM_BOXOFFICE_REALTIME t (t.data_date,t.title,t.url,t.fid,t.released_days,t.real_time_boxoffice,t.boxoffice_rate,t.total_boxoffice,t.into_date,t.collection_url,t.real_date,t.DATA_TYPE,SOURCE)values(?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)";
 
 		List<Comparable> list = new ArrayList();
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
@@ -293,6 +351,7 @@ public class OracleMovePiaoFang {
 		list.add(realitme.getREAL_DATE());
 		list.add(realitme.getDATA_TYPE());
 		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(realitme.getSOURCE());
 		System.out.println(list.toString());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);

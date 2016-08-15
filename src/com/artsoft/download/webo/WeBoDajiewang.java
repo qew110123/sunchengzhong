@@ -970,7 +970,12 @@ public class WeBoDajiewang {
 			 * data_type 类型 1 人 2 电视剧 3 电影
 			 * data_id  人物id
 			 */
-			webopeople(listTemp.get(1),1,listTemp.get(0));
+			try {
+				webopeople(listTemp.get(1),1,listTemp.get(0));
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 
 	}

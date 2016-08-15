@@ -575,21 +575,32 @@ public class adminmaoyan {
 		// openstaticLiShiShuJu(urlMain);
 		// TimeTest.getBeforeAfterDate("2013-01-11", -1019);1535
 
-		// for (int i = -79; i > -1536; i--) {
-		// String datetext = TimeTest.getBeforeAfterDate("2016-03-15",
-		// i).toString();
-		// String urlMain = "http://piaofang.maoyan.com/?date=" + datetext;
-		// System.out.println(urlMain);
-		// openstaticLiShiShuJu(urlMain, datetext);
-		// }
+		 for (int i = -1; i > -4; i--) {
+		 String datetext = TimeTest.getBeforeAfterDate(TimeTest.getNowTime("yyyy-MM-dd"),
+		 i).toString();
+		 String urlMain = "http://piaofang.maoyan.com/?date=" + datetext;
+		 System.out.println(urlMain);
+		 openstaticLiShiShuJu(urlMain, datetext);
+		 }
+		 
+		 
 
 		// String datetext=TimeTest.getBeforeAfterDate("2016-03-15",
 		// 0).toString();
 		// String datetext = TimeTest.getNowTime("yyyy-MM-dd");
-		String datetext = TimeTest.getBeforeAfterDate(TimeTest.getNowTime("yyyy-MM-dd"), -1).toString();
-		String urlMain = "http://piaofang.maoyan.com/?date=" + datetext;
-		// urlMain = "";
-		openstaticLiShiShuJu(urlMain, datetext);
+		 
+		 
+		 
+		 /**
+		  * 每日运行
+		  * 2016年8月15日11:07:31
+		  */
+//		String datetext = TimeTest.getBeforeAfterDate(TimeTest.getNowTime("yyyy-MM-dd"), -1).toString();
+//		String urlMain = "http://piaofang.maoyan.com/?date=" + datetext;
+//		// urlMain = "";
+//		openstaticLiShiShuJu(urlMain, datetext);
+		
+		
 	}
 
 	/**
@@ -746,14 +757,16 @@ public class adminmaoyan {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// runstatic();
+//		 runstatic();
 		// openstatic();
 
 		//
 		// openstaticLiShiShuJu("http://piaofang.maoyan.com/?date=2016-04-08",
 		// "2016-04-08");
 		// historyopenstatic();
+		 
 		TimingTime(11, 59, 59);
+		
 //		openstatic();
 		// historyopenstatic();
 		// tem_film_daily_boxoffice_other("", "",

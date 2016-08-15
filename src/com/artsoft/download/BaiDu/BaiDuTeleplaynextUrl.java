@@ -45,8 +45,10 @@ public class BaiDuTeleplaynextUrl {
 //					OracleHaoSou.UpdatPpartTVplay(tvplay);//整体表修改操作
 					
 				
-					BaiDuTeleplayDownload.mainmore(id, url,name);
 					
+					TvPlay tvplay = BaiDuTeleplayDownload.mainmore(id, url,name);
+//					tvplay.setBaikefilmname(strUrlname);
+					OracleHaoSou.InsertTVplay(tvplay);// 添加操作
 //					
 //				} catch (UnsupportedEncodingException e) {
 //					// TODO Auto-generated catch block

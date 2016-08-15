@@ -17,16 +17,195 @@ public class Changing {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+//		mainurl1("http://dsj.sarft.gov.cn/tims/site/views/applications/changing/view.shanty?appName=changing&id=013f977998df4841402881a03e45415b");
 		String mainUrl = "http://dsj.sarft.gov.cn/tims/site/views/applications/importantLixiang/view.shanty?appName=importantLixiang&id=0143d2a261a65a344028819a43aeb279";
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 8; i++) {
 			mainUrl = "http://dsj.sarft.gov.cn/tims/site/views/applications.shanty?appName=changing&pageIndex=" + i;
 			urlmainall(mainUrl);
 		}
+		
+		
+		
 //		 mainUrl =
 //		 "http://dsj.sarft.gov.cn/tims/site/views/applications/changing/view.shanty?appName=changing&id=0145cc133e3325fe4028819a45743e51";
 //		 mainurl(mainUrl);
 		// System.out.println(textnull(" 战地黄花 狙击手 北京小马奔腾影视公司"));
 
+	}
+	
+	private static void mainurl1(String mainUrl) {
+		// TODO Auto-generated method stub
+		String strHtml = "";
+		boolean bb = true;
+		while (bb) {
+			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "UTF-8", null, null);
+			if (strHtml != null && !"".equals(strHtml)) {
+				bb = false;
+			}
+		}
+		
+		String biangejumingall=HtmlAnalyze.getTagText(strHtml.toString(), "变更剧名的电视剧", "</table>",false,0);
+		
+		String biangejuming=HtmlAnalyze.getTagText(biangejumingall.toString(), "<table", "</table>",false,0);
+		
+		Document biangejumingdoc = Jsoup.parse(biangejuming);
+		
+		
+		String OLD_VALUE = "";// 原来的值
+		String NEW_VALUE = "";// 变更后的值
+		String TVPLAY_NAME = "";// 剧名
+		String PRODUCE_COMPANY = "";// 制作公司
+		int SET_NUMBER = 0; // 集数
+		
+		Elements linktd = biangejumingdoc.select("tr");
+		for (Element element : linktd) {
+//			System.out.println(element);
+			OLD_VALUE = "";// 原来的值
+			NEW_VALUE = "";// 变更后的值
+			TVPLAY_NAME = "";// 剧名
+			PRODUCE_COMPANY = "";// 制作公司
+			int TYPE = 0;
+			
+			int x = 0;
+			Elements linkstrtd = element.select("td");
+			for (Element element3 : linkstrtd) {
+				// System.out.println(element3.text());
+				// System.out.println(x);
+					TYPE = 1;
+					if (x % 3 == 0) {
+						TVPLAY_NAME = element3.text();
+						OLD_VALUE = element3.text();
+					}
+					if (x % 3 == 1) {
+						NEW_VALUE = element3.text();
+					}
+					if (x % 3 == 2) {
+						PRODUCE_COMPANY = element3.text();
+						System.out.println(
+								OLD_VALUE + NEW_VALUE + TVPLAY_NAME + PRODUCE_COMPANY + SET_NUMBER + TYPE);
+						if (!OLD_VALUE.equals("原剧名")) {
+						OracleSarFtGov.intotemtvplaychange(OLD_VALUE, NEW_VALUE, TVPLAY_NAME,
+								PRODUCE_COMPANY, 0, TYPE,mainUrl);
+							
+						}
+					}
+					x+=1;
+
+			}
+		}
+		
+		
+		
+		
+		
+		String biangezhizhuodanweiall=HtmlAnalyze.getTagText(strHtml.toString(), "变更制作单位的电视剧", "</table>",false,0);
+		
+		String biangezhizhuodanwei=HtmlAnalyze.getTagText(biangezhizhuodanweiall.toString(), "<table", "</table>",false,0);
+		
+		Document biangezhizhuodanweidoc = Jsoup.parse(biangezhizhuodanwei);
+		
+		
+//		String OLD_VALUE = "";// 原来的值
+//		String NEW_VALUE = "";// 变更后的值
+//		String TVPLAY_NAME = "";// 剧名
+//		String PRODUCE_COMPANY = "";// 制作公司
+//		int SET_NUMBER = 0; // 集数
+		
+		Elements linkbiangezhizhuodanwei = biangezhizhuodanweidoc.select("tr");
+		for (Element element : linkbiangezhizhuodanwei) {
+//			System.out.println(element);
+			OLD_VALUE = "";// 原来的值
+			NEW_VALUE = "";// 变更后的值
+			TVPLAY_NAME = "";// 剧名
+			PRODUCE_COMPANY = "";// 制作公司
+			int TYPE = 0;
+			
+			int x = 0;
+			Elements linkstrtd = element.select("td");
+			for (Element element3 : linkstrtd) {
+				TYPE = 2;
+				if (x % 3 == 0) {
+					TVPLAY_NAME = element3.text();
+				}
+				if (x % 3 == 1) {
+					OLD_VALUE = element3.text();
+				}
+				if (x % 3 == 2) {
+					NEW_VALUE = element3.text();
+					PRODUCE_COMPANY = element3.text();
+					System.out.println(
+							OLD_VALUE + NEW_VALUE + TVPLAY_NAME + PRODUCE_COMPANY + SET_NUMBER + TYPE);
+					
+					if (!OLD_VALUE.equals("原制作单位")) {
+					OracleSarFtGov.intotemtvplaychange(OLD_VALUE, NEW_VALUE, TVPLAY_NAME,
+							PRODUCE_COMPANY, 0, TYPE,mainUrl);
+					}
+				}
+				x+=1;
+
+				// System.out.println(element3.text());
+			}
+		}
+		
+		
+		
+		String biangejishuall=HtmlAnalyze.getTagText(strHtml.toString(), "变更电视剧集数", "</table>",false,0);
+		
+		String biangejishu=HtmlAnalyze.getTagText(biangejishuall.toString(), "<table", "</table>",false,0);
+		
+		Document biangejishudoc = Jsoup.parse(biangejishu);
+		
+		
+//		String OLD_VALUE = "";// 原来的值
+//		String NEW_VALUE = "";// 变更后的值
+//		String TVPLAY_NAME = "";// 剧名
+//		String PRODUCE_COMPANY = "";// 制作公司
+//		int SET_NUMBER = 0; // 集数
+		
+		Elements linkbiangejishuwei = biangejishudoc.select("tr");
+		for (Element element : linkbiangejishuwei) {
+//			System.out.println(element);
+			OLD_VALUE = "";// 原来的值
+			NEW_VALUE = "";// 变更后的值
+			TVPLAY_NAME = "";// 剧名
+			PRODUCE_COMPANY = "";// 制作公司
+			int TYPE = 0;
+			
+			int x = 0;
+			Elements linkstrtd = element.select("td");
+			for (Element element3 : linkstrtd) {
+					TYPE = 3;
+					if (x % 3 == 0) {
+						TVPLAY_NAME = element3.text();
+					}
+					if (x % 3 == 1) {
+						OLD_VALUE = element3.text();
+						NEW_VALUE = element3.text();
+						try {
+							SET_NUMBER = Integer
+									.parseInt(HtmlAnalyze.getTagText(element3.text(), "变更为", "集"));
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+					}
+					if (x % 3 == 2) {
+						PRODUCE_COMPANY = element3.text();
+						System.out.println(
+								OLD_VALUE + NEW_VALUE + TVPLAY_NAME + PRODUCE_COMPANY + SET_NUMBER + TYPE);
+						if (!OLD_VALUE.equals("增减数量")) {
+							OracleSarFtGov.intotemtvplaychange(OLD_VALUE, NEW_VALUE, TVPLAY_NAME,
+									PRODUCE_COMPANY, SET_NUMBER, TYPE,mainUrl);
+						}
+					}
+
+					// System.out.println(element3.text());
+				x += 1;
+			}
+		}
+		
+		
+		
 	}
 
 	private static void urlmainall(String mainUrl) {
@@ -50,7 +229,7 @@ public class Changing {
 				if (!"#".equals(urlss)) {
 					urlss = "http://dsj.sarft.gov.cn" + urlss;
 					System.out.println(urlss);
-					mainurl(urlss);
+					mainurl1(urlss);
 				}
 			}
 		}
@@ -110,7 +289,7 @@ public class Changing {
 									System.out.println(
 											OLD_VALUE + NEW_VALUE + TVPLAY_NAME + PRODUCE_COMPANY + SET_NUMBER + TYPE);
 									OracleSarFtGov.intotemtvplaychange(OLD_VALUE, NEW_VALUE, TVPLAY_NAME,
-											PRODUCE_COMPANY, 0, TYPE);
+											PRODUCE_COMPANY, 0, TYPE,mainUrl);
 								}
 
 								// System.out.println(element3.text());
@@ -143,7 +322,7 @@ public class Changing {
 									System.out.println(
 											OLD_VALUE + NEW_VALUE + TVPLAY_NAME + PRODUCE_COMPANY + SET_NUMBER + TYPE);
 									OracleSarFtGov.intotemtvplaychange(OLD_VALUE, NEW_VALUE, TVPLAY_NAME,
-											PRODUCE_COMPANY, 0, TYPE);
+											PRODUCE_COMPANY, 0, TYPE,mainUrl);
 								}
 
 								// System.out.println(element3.text());
@@ -181,7 +360,7 @@ public class Changing {
 									System.out.println(
 											OLD_VALUE + NEW_VALUE + TVPLAY_NAME + PRODUCE_COMPANY + SET_NUMBER + TYPE);
 									OracleSarFtGov.intotemtvplaychange(OLD_VALUE, NEW_VALUE, TVPLAY_NAME,
-											PRODUCE_COMPANY, SET_NUMBER, TYPE);
+											PRODUCE_COMPANY, SET_NUMBER, TYPE,mainUrl);
 								}
 
 								// System.out.println(element3.text());

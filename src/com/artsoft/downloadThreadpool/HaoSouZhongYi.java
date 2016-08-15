@@ -91,7 +91,7 @@ public class HaoSouZhongYi {
 		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		//select t.film_id,t.film_name from ods.dim_film t
-		String returnNumTVle=OracleHaoSou.returnNumPeople("ODS.DIM_NETWORK_VARIETY");
+		String returnNumTVle=OracleHaoSou.returnNumPeople("ODS.dim_variety");
 		
 		System.out.println("需要采集的人名字数为"+returnNumTVle);
 		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {

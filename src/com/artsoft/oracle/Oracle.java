@@ -8,6 +8,7 @@ import com.artsoft.bean.TEM_WEIBO_TOPIC_SCORE;
 import com.artsoft.bean.Tem_weibo_word_age_sex;
 import com.artsoft.bean.Tem_weibo_word_area;
 import com.artsoft.bean.Tem_weibo_word_tag;
+import com.artsoft.bean.WECHAT_INFORMATION;
 import com.artsoft.bean.tem_weibo_word_num;
 import com.artsoft.util.TimeTest;
 
@@ -265,6 +266,54 @@ public class Oracle {
 			System.out.println("数据库出错");
 		}
 	}
+	
+	
+	/**
+	 * 2016年5月11日14:27:59
+	 * 
+	 * @param company
+	 * 
+	 */
+	public static void InsertWECHAT_INFORMATION(WECHAT_INFORMATION INFORMATION) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "INSERT INTO ods.WECHAT_INFORMATION t (t.data_id,t.names,t.dates,t.post_user,t.content_all,t.content_p,t.urls,t.weixinhao,t.data_date,t.weixin_ation,t.original,t.ranking,IMG_BIG_URL,IMG_BIG_NAME) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(INFORMATION.getDataId());
+		list.add(INFORMATION.getNames());
+		list.add(INFORMATION.getDates());
+		list.add(INFORMATION.getPostUser());
+		list.add(INFORMATION.getContentAll());
+		list.add(INFORMATION.getContentP());
+		list.add(INFORMATION.getUrls());
+		list.add(INFORMATION.getWeixinhao());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(INFORMATION.getWeixinAtion());
+		list.add(INFORMATION.getOriginal());
+		list.add(INFORMATION.getRanking());
+		list.add(INFORMATION.getIMG_BIG_URL());
+		list.add(INFORMATION.getIMG_BIG_NAME());
+//		list.add(INFORMATION.getUrls());
+		
+//		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	/**
+	 * 百度数据的中的网络剧补充
+	 * 2016年6月17日16:37:43
+	 * @return
+	 */
+	public static List selectWEIXIN_NUMBER() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.* from ODS.WEIXIN_NUMBER t";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
 	
 	public static void main(String[] args) {
 		TEM_WEIBO_TOPIC_SCORE tem_weibo_topic_score=new TEM_WEIBO_TOPIC_SCORE();

@@ -133,6 +133,11 @@ public class TvPlay {
 	private String baikefilmname="";
 	
 	
+	//ÖÐ¹úÆ±·¿Íø
+	private String SELAREA="";
+	
+	
+	
 	public int getDATA_TYPE() {
 		return DATA_TYPE;
 	}
@@ -666,5 +671,13 @@ public class TvPlay {
 
 	public void setBAIKE_NAME(String bAIKE_NAME) {
 		BAIKE_NAME = bAIKE_NAME;
+	}
+
+	public String getSELAREA() {
+		return SELAREA;
+	}
+
+	public void setSELAREA(String sELAREA) {
+		SELAREA = sELAREA;
 	}
 }

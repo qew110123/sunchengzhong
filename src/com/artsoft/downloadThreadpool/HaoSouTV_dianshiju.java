@@ -54,7 +54,7 @@ public class HaoSouTV_dianshiju {
 				// Ã½Ìå¹Ø×¢¶È
 				try {
 					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
+							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"+%e7%94%b5%e8%a7%86%e5%89%a7";
 					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "6",TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

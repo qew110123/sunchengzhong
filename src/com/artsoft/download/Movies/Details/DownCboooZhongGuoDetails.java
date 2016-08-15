@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import com.artsoft.bean.TvPlay;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
@@ -18,7 +22,7 @@ import net.sf.json.JSONObject;
 public class DownCboooZhongGuoDetails {
 	static int i = 0;
 	
-	public static void xiangxiurl(TvPlay playtv,String url ){
+	public static void xiangxiurl(TvPlay playtv,String url ,String area){
 		boolean bb = true;
 		String strHtmllittle = "";
 		while (bb) {
@@ -70,6 +74,9 @@ public class DownCboooZhongGuoDetails {
 			i += 1;
 		}
 		System.out.println(yanyuan);
+		if (yanyuan.length()>2000) {
+			yanyuan=yanyuan.substring(0,2000);
+		}
 		playtv.setMajor_actors(yanyuan);
 
 		String daoyan = "";// 导演
@@ -152,10 +159,12 @@ public class DownCboooZhongGuoDetails {
 		// playtv.setLgName(yuyan);
 
 		playtv.setClassnum(10);
-		OracleOpreater.intoTEM_DIM_FILM_PLATFORM(playtv);
+		
+		playtv.setSELAREA(area);
+		OracleOpreater.intoTEM_DIM_FILM_PLATFORM_SELAREA(playtv);
 	}
 
-	private static String cboooMaim(String mainUrl) {
+	private static String cboooMaim(String mainUrl,String area) {
 		// TODO Auto-generated method stub
 		try {
 
@@ -197,7 +206,7 @@ public class DownCboooZhongGuoDetails {
 				BoxOffice = (String) objectobject.get("BoxOffice");
 				playtv.setBox_office(BoxOffice);
 				
-				xiangxiurl(playtv, url);
+				xiangxiurl(playtv, url,area);
 
 				
 			}
@@ -207,14 +216,32 @@ public class DownCboooZhongGuoDetails {
 		return null;
 	}
 
-	public static void openstatic() {
-		String url = "";
-		for (int i = 1; i < 255; i++) {
-			url = "http://www.cbooo.cn/Mdata/getMdata_movie?area=50&type=0&year=0&initial=%E5%85%A8%E9%83%A8&pIndex="
+	public static void openstatic(String ateaid,String area) {
+		
+		String url = "http://www.cbooo.cn/Mdata/getMdata_movie?area="+ateaid+"&type=0&year=0&initial=%E5%85%A8%E9%83%A8&pIndex=1";
+		
+//		while (bb) {
+		String	strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
+//			if (strHtml != null && !"".equals(strHtml)) {
+//				bb = false;
+//			}
+//		}
+		String tPage=HtmlAnalyze.getTagText(strHtml, "tPage\":", ",");
+		
+		int inttPage=Integer.parseInt(tPage);
+		
+		
+//		String url = "";
+		
+		for (int i = 1; i < inttPage+1; i++) {
+//			url = "http://www.cbooo.cn/Mdata/getMdata_movie?area=50&type=0&year=0&initial=%E5%85%A8%E9%83%A8&pIndex="
+//					+ i + "";
+			
+			url = "http://www.cbooo.cn/Mdata/getMdata_movie?area="+ateaid+"&type=0&year=0&initial=%E5%85%A8%E9%83%A8&pIndex="
 					+ i + "";
 			System.out.println(url);
 			try {
-				DownCboooZhongGuoDetails.cboooMaim(url);
+				DownCboooZhongGuoDetails.cboooMaim(url,area);
 
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -222,12 +249,43 @@ public class DownCboooZhongGuoDetails {
 		}
 
 	}
+	public static void openstatic_other() {
+		String strHtml = "";
+		boolean bb = true;
+		while (bb) {
+			strHtml = DownloadUtil.getHtmlText("http://www.cbooo.cn/movies", 1000 * 30, "UTF-8", null, null);
+			if (strHtml != null && !"".equals(strHtml)) {
+				bb = false;
+			}
+		}
+		
+		Element iddoc= Jsoup.parse(strHtml);
+		
+		Elements selArealist=iddoc.getElementById("selArea").select("option");
+		String ateaid="";
+		String area="";
+		for (Element element : selArealist) {
+//			System.out.println(element);
+			System.out.println(ateaid=element.attr("value"));
+			System.out.println(area=element.text());
+//			if (!ateaid.equals("16")&&!ateaid.equals("25")&&!ateaid.equals("1")&&!ateaid.equals("40")&&!ateaid.equals("37")&&!ateaid.equals("50")) {
+				try {
+					openstatic(ateaid, area);
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+//			}
+		}
+	}
+	
+	
 	
 	
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
-		openstatic();
+		openstatic_other();
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
@@ -256,11 +314,14 @@ public class DownCboooZhongGuoDetails {
 	 */
 	///////////////////////
 	public static void main(String[] args) {
-		openstatic();
+//		openstatic();
+//		openstatic_other();
 //		TimingTime(hh, mm, ss);
-//		 TimingTime(21, 59, 59);
 //		TvPlay playtv = new TvPlay();
-//			DownCboooZhongGuoDetails.xiangxiurl(playtv,"http://www.cbooo.cn/m/1008");
+//		DownCboooZhongGuoDetails.xiangxiurl(playtv,"http://www.cbooo.cn/m/346818","中国");
+//		 
+		TimingTime(1, 59, 59);
+		 
 	}
 
 }

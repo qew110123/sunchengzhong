@@ -89,6 +89,8 @@ public class HaoSouTV {
 		// }
 		String strHtml = urlreturnHtml(urlBranch);
 //		System.out.println(strHtml);
+//		String strHtml= DownloadUtil.getHtmlText(urlBranch, 1000 * 30,
+//				 "UTF-8", null, null);
 
 		String strtext = HtmlAnalyze.getTagText(strHtml, "\":\"", "\"}");
 		String starttime = HtmlAnalyze.getTagText(strHtml, "from\":\"", "\"}");
@@ -118,17 +120,26 @@ public class HaoSouTV {
 //				 }
 //				// System.out.println(OracleHaoSou.returnMaxdianshijudata());
 				
-				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
-//					System.out.println(sourceStrArray[i - 1]);
-					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
+//				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
+////					System.out.println(sourceStrArray[i - 1]);
+//					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
+//					System.out.println(palydate = palydate.replaceAll("-", ""));
+//					OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[i - 1], "0", palydate, urlBranch,
+//							TV_TYPE, DataType, "");
+////					if (palydate.equals("20151111")) {
+////						return;
+////					}
+//				}
+				
+				String starttimeto=HtmlAnalyze.getTagText(starttime+"#", "to\":\"","#");
+//				String palydateto=starttimeto.replaceAll("-", "");
+				for (int i = 0; i < 7; i++) {
+					String palydate = DemoTime.getBeforeAfterDate(starttimeto, 0-i).toString();
+//					System.out.println(palydateto=starttimeto.replaceAll("-", ""));
 					System.out.println(palydate = palydate.replaceAll("-", ""));
-
-					OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[i - 1], "0", palydate, urlBranch,
+					OracleHaoSou.intoPlayAmont(tvplayId, tyPlayName, sourceStrArray[sourceStrArray.length -1- i], "0", palydate, urlBranch,
 							TV_TYPE, DataType, "");
-//					if (palydate.equals("20151111")) {
-//						return;
-//					}
-
+					
 				}
 
 			}
@@ -251,7 +262,7 @@ public class HaoSouTV {
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
-		 TimingTime(1, 00, 00);
+		
 		// IpFilter ipxi=new IpFilter;
 
 //		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
@@ -265,6 +276,13 @@ public class HaoSouTV {
 //		}
 //
 //		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
+		 TimingTime(1, 00, 00);
+//		String urlBranch="http://index.so.com/index.php?a=soIndexJson&q=%E6%AC%A2%E4%B9%90%E9%A2%82&area=%E5%85%A8%E5%9B%BD";
+//		String tvplayId="0";
+//		String tyPlayName="»¶ÀÖËÌ";
+//		String DataType="3";
+//		int TV_TYPE=0;
+//		HaosouBranch(urlBranch, tvplayId, tyPlayName, DataType, TV_TYPE);
 	}
 
 }

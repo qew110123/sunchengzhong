@@ -287,7 +287,7 @@ public class zhongguopiaofangwang_zhongpiaofang {
 	 */
 	///////////////////////
 	public static void main(String[] args) {
-		openstatic();
+//		openstatic();
 //		TimingTime(hh, mm, ss);
 		 TimingTime(0, 59, 59);
 //		TvPlay playtv = new TvPlay();
