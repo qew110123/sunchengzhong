@@ -317,10 +317,10 @@ public class DownCboooZhongGuoDetails {
 //		openstatic();
 //		openstatic_other();
 //		TimingTime(hh, mm, ss);
-//		TvPlay playtv = new TvPlay();
-//		DownCboooZhongGuoDetails.xiangxiurl(playtv,"http://www.cbooo.cn/m/346818","中国");
+		TvPlay playtv = new TvPlay();
+		DownCboooZhongGuoDetails.xiangxiurl(playtv,"http://www.cbooo.cn/m/3354","中国");
 //		 
-		TimingTime(1, 59, 59);
+//		TimingTime(1, 59, 59);
 		 
 	}
 

@@ -132,10 +132,56 @@ public class BaiDuTeleplaynext_wangluoju {
 			}
 		}
 	}
+	
+	
+	
+	public static void runnewMainurl(){
+		List<String> listArray = OracleBaidu.selectbaidudianshijuWangluojuurl();
+		
+		for (Object Objstring : listArray) {
+			System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			String id="";
+			System.out.println(id=listTemp.get(0));
+			String strname="";
+			System.out.println(strname=listTemp.get(1));
+			String strUrl="";
+			System.out.println(strUrl=listTemp.get(2));
+			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))&&listTemp.get(2) != null && !"".equals(listTemp.get(2))) {
+				String urlBranch = "";
+				try {
+					
+//					urlBranch = "http://baike.baidu.com/search?word="
+//							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&pn=0&rn=0&enc=utf8";
+//					mainUrlall(urlBranch, listTemp.get(0), listTemp.get(1));
+//					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0)+","+listTemp.get(1));
+					
+					
+					TvPlay tvplay = BaiDuTeleplayDownload.mainmore(id, strUrl, strname);
+//					tvplay.setBaikefilmname(strUrlname);
+					tvplay.setType(2);
+//					OracleHaoSou.InsertTVplay(tvplay);// 添加操作
+					OracleHaoSou.Insertwangluoju(tvplay);// 添加操作
+					
+//				}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+			}
+		}
+	}
+	
+	
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		runnewMain();
+		//没有url
+//		runnewMain();
+		//有url
+		runnewMainurl();
+		
 	}
 
 }

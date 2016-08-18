@@ -221,6 +221,17 @@ public class OracleBaidu {
 		 */
 		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null ";
 		
+		/**
+		 * 2016年8月15日22:16:15
+		 * 
+		 */
+		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null and t.create_time>to_date('20160801','yyyymmdd')";
+		
+		/**
+		 * 2016年8月17日15:34:37
+		 */
+		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null and t.create_time>to_date('20160731','yyyymmdd')";
+		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -236,6 +247,8 @@ public class OracleBaidu {
 	public static List selectbaidudianshijuTVplay() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.tvplay_id,t.tvplay_name,a.tvplay_url from edw.dim_tvplay t left join ods.tem_tvplay a on t.tvplay_id = a.tvplay_id order by a.tvplay_id";
+		
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.f_tvplay_record t where t.tvplay_url is not null";
 		
 		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.f_tvplay_record t where t.tvplay_url is not null";
 		
@@ -259,6 +272,25 @@ public class OracleBaidu {
 		 * 2016年7月5日17:57:59
 		 */
 		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from ODS.DIM_NETWORK_PLAY t";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	/**
+	 * 百度数据的中的网络剧补充 url
+	 * 2016年8月16日17:05:18
+	 * @return
+	 */
+	public static List selectbaidudianshijuWangluojuurl() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name,a.tvplay_url from edw.dim_tvplay t left join ods.tem_tvplay a on t.tvplay_id = a.tvplay_id order by a.tvplay_id";
+		/**
+		 * 2016年7月5日17:57:59
+		 */
+		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from edw.dim_networkplay t where t.networkplay_url is not null";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -561,6 +593,9 @@ public class OracleBaidu {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
+	
+	
 	
 	
 }

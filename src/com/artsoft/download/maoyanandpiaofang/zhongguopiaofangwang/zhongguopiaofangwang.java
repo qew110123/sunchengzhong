@@ -318,42 +318,47 @@ public class zhongguopiaofangwang {
 		String title = "";
 		String field_num = "";
 		 String total_field_num = "";
-		for (Object object : album_lists) {
-			JSONObject objectobject = JSONObject.fromObject(object);
-			Level = (String) objectobject.get("Level");
-			fid = (String) objectobject.get("movieid");
-			title = (String) objectobject.get("cnName");
+		 try {
+			
+			 for (Object object : album_lists) {
+				 JSONObject objectobject = JSONObject.fromObject(object);
+				 Level = (String) objectobject.get("Level");
+				 fid = (String) objectobject.get("movieid");
+				 title = (String) objectobject.get("cnName");
 //			field_num = (String) objectobject.get("num_pro");
-			field_num = (String) objectobject.get("sunnum");
-			total_field_num = (String) objectobject.get("tolNum");
-			// boxoffice_rate = (String) objectobject.get("Per_num");
-			// OracleMovePiaoFang.intoTEM_FILM_DAILY_BOXOFFICE(DATA_DATE, TITLE,
-			// URL, FID, RELEASED_DAYS, TOTAL_BOXOFFICE,
-			// REAL_TIME_BOXOFFICE, "", "", "", 4, "", URL, "",
-			// FIELD_AVERAGE_PRICE, FIELD_AVERAGE_PNUM, BOXOFFICE_UP, WOMINDEX,
-			// MOVIEIMG);
-			String city_name = "";
-			// if (Level.equals("4")||Level.equals("5")) {
-			if (Level.equals("1")) {
-				city_name = "一线城市";
-			}
-			if (Level.equals("2")) {
-				city_name = "二线城市";
-			}
-			if (Level.equals("3")) {
-				city_name = "三线城市";
-			}
-
-			if (Level.equals("4")) {
-				city_name = "四线城市";
-			}
-			if (Level.equals("5")) {
-				city_name = "五线城市";
-			}
-			OracleMovePiaoFang.intotem_film_city(fid, title, DATA_DATE, city_name, "", "", "", "", "", "", "", "",
-					field_num, urlMain, total_field_num, 4);
-			// }
-
+				 field_num = (String) objectobject.get("sunnum");
+				 total_field_num = (String) objectobject.get("tolNum");
+				 // boxoffice_rate = (String) objectobject.get("Per_num");
+				 // OracleMovePiaoFang.intoTEM_FILM_DAILY_BOXOFFICE(DATA_DATE, TITLE,
+				 // URL, FID, RELEASED_DAYS, TOTAL_BOXOFFICE,
+				 // REAL_TIME_BOXOFFICE, "", "", "", 4, "", URL, "",
+				 // FIELD_AVERAGE_PRICE, FIELD_AVERAGE_PNUM, BOXOFFICE_UP, WOMINDEX,
+				 // MOVIEIMG);
+				 String city_name = "";
+				 // if (Level.equals("4")||Level.equals("5")) {
+				 if (Level.equals("1")) {
+					 city_name = "一线城市";
+				 }
+				 if (Level.equals("2")) {
+					 city_name = "二线城市";
+				 }
+				 if (Level.equals("3")) {
+					 city_name = "三线城市";
+				 }
+				 
+				 if (Level.equals("4")) {
+					 city_name = "四线城市";
+				 }
+				 if (Level.equals("5")) {
+					 city_name = "五线城市";
+				 }
+				 OracleMovePiaoFang.intotem_film_city(fid, title, DATA_DATE, city_name, "", "", "", "", "", "", "", "",
+						 field_num, urlMain, total_field_num, 4);
+				 // }
+				 
+			 }
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 
 	}

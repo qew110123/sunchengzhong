@@ -249,8 +249,14 @@ public class WeiBoSearchTVplay {
 			
 				
 			
-			WebElement detailmoves=webDriver.findElement(By.xpath("//*[@id='pl_weibo_directright']/div[@class='WB_cardwrap S_bg2 wbs_interest_wrap']/div[@class='pl_gspage_r']/div[@class='card_scroll']/div[@class='wbs_relevant_interest']/div[@class='content_film']/a"));
-			System.out.println(urlBranchmoves = detailmoves.getAttribute("href"));
+			try {
+				
+				WebElement detailmoves=webDriver.findElement(By.xpath("//*[@id='pl_weibo_directright']/div[@class='WB_cardwrap S_bg2 wbs_interest_wrap']/div[@class='pl_gspage_r']/div[@class='card_scroll']/div[@class='wbs_relevant_interest']/div[@class='content_film']/a"));
+				System.out.println(urlBranchmoves = detailmoves.getAttribute("href"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 			//获取cook
 			// And now output all the available cookies for the current URL
 //			Set<Cookie> allCookies = webDriver.manage().getCookies();
@@ -267,21 +273,27 @@ public class WeiBoSearchTVplay {
 //			driver.save_screenshot("C:\error.jpg")
 			
 			System.out.println(urlBranchurl );
-			seleepTime(7);
-			try {
-				
-				WeiBoBranch1(urlBranchurl, DATA_ID, DATA_TYPE);
-			} catch (Exception e) {
-				// TODO: handle exception
+			if (!urlBranchurl.equals("")&&urlBranchurl!=null) {
+				seleepTime(7);
+				try {
+					
+					WeiBoBranch1(urlBranchurl, DATA_ID, DATA_TYPE);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
-			
-			seleepTime(7);
-			try {
-				
-				WeiBoBranch2(urlBranchmoves, DATA_ID, DATA_TYPE);
-				shuaxin();
-			} catch (Exception e) {
-				// TODO: handle exception
+			System.out.println(urlBranchmoves );
+			System.out.println(!urlBranchmoves.equals(""));
+			System.out.println(urlBranchmoves!=null);
+			if (!urlBranchmoves.equals("")&&urlBranchmoves!=null) {
+				seleepTime(7);
+				try {
+					
+					WeiBoBranch2(urlBranchmoves, DATA_ID, DATA_TYPE);
+					shuaxin();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
 			
 			

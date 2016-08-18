@@ -9,6 +9,8 @@ import org.jsoup.select.Elements;
 
 import com.artsoft.bean.TvPlay;
 import com.artsoft.download.BaiDu.BaiDuTeleplayDownload;
+import com.artsoft.download.BaiDu.BaiduImageyanyuan;
+import com.artsoft.oracle.OracleBaidu;
 import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.oracle.OracleNetwork;
 import com.artsoft.util.CommonUtil;
@@ -67,52 +69,98 @@ public class DownBaiDu {
 			}
 		}
 	}
+	
+	
+	public static void runupdate() {
+		List<String> listArray = OracleBaidu.selectbaidudianshijuWangluoju();
+		for (Object Objstring : listArray) {
+			System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			System.out.println(listTemp.get(0));
+			System.out.println(listTemp.get(1));
+			if (listTemp.get(0) != null && !"".equals(listTemp.get(0)) && listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
+				String urlBranch = "";
+//				try {
+//					urlBranch = "http://baike.baidu.com/search?word="
+//							+ java.net.URLEncoder.encode(listTemp.get(1), "utf-8") + "&pn=0&rn=0&enc=utf8";
+//					mainUrlall(urlBranch, listTemp.get(0), listTemp.get(1));
+//					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0)+","+listTemp.get(1));
+//					
+//				} catch (UnsupportedEncodingException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				String id=listTemp.get(0);
+				String strname=listTemp.get(1);
+				String strUrl=listTemp.get(2);
+				if (strUrl!= null && !"".equals(strUrl) ) {
+					try {
+//						BaiduImageyanyuan.mainmore(id, strUrl, strname, 1);
+						
+//						mainUrlall(strUrl, "", strUrl);
+						
+						TvPlay tvplay = BaiDuTeleplayDownload.mainmore(id, strUrl, strname);
+						tvplay.setTvplay_name(strname);
+						tvplay.setTvplay_id(Integer.valueOf(id));
+						
+						// OracleHaoSou.InsertTVplay(tvplay);//添加操作
+						// OracleHaoSou.UpdateTVplay(tvplay);//修改操作
+						OracleHaoSou.InWangLuoTVplay(tvplay);// 添加操作网络操作
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+				
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		runupdate();
 		
-		TimeTest tt = new TimeTest();
-		String timesday=tt.getNowTime("yyyyMMdd");
-		List<String> listArray = OracleNetwork.selectbaidudianshiju(timesday);
-
-		for (Object Objstring : listArray) {
-			// System.out.println(Objstring);
-			List<String> listTemp = (List<String>) Objstring;
-			System.out.println(listTemp.get(0));
-			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
-				String urlBranch = "";
-				try {
-					String text=listTemp.get(0);
-					text=text.replace(" ", "").replace("免费版","");
-					urlBranch = "http://baike.baidu.com/search?word="
-							+ java.net.URLEncoder.encode(text, "utf-8") + "&pn=0&rn=0&enc=utf8";
-					mainUrlall(urlBranch, "", text);
-
-					CommonUtil.setLog(
-							TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + text + "," + listTemp.get(0));
-
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		}
-
-		// String text = "绝世撸神";
-		// String urlBranch = "";
-		// try {
-		// urlBranch = "http://baike.baidu.com/search?word=" +
-		// java.net.URLEncoder.encode(text, "utf-8") + "&pn=0&rn=0&enc=utf8";
-		// mainUrlall(urlBranch,"", text);
-		//
-		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" +
-		// text + "," + text);
-		//
-		// } catch (UnsupportedEncodingException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+//		TimeTest tt = new TimeTest();
+//		String timesday=tt.getNowTime("yyyyMMdd");
+////		List<String> listArray = OracleNetwork.selectbaidudianshiju(timesday);
+//
+//		for (Object Objstring : listArray) {
+//			// System.out.println(Objstring);
+//			List<String> listTemp = (List<String>) Objstring;
+//			System.out.println(listTemp.get(0));
+//			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
+//				String urlBranch = "";
+//				try {
+//					String text=listTemp.get(0);
+//					text=text.replace(" ", "").replace("免费版","");
+//					urlBranch = "http://baike.baidu.com/search?word="
+//							+ java.net.URLEncoder.encode(text, "utf-8") + "&pn=0&rn=0&enc=utf8";
+//					mainUrlall(urlBranch, "", text);
+//
+//					CommonUtil.setLog(
+//							TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + text + "," + listTemp.get(0));
+//
+//				} catch (UnsupportedEncodingException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//			}
+//		}
+//
+//		// String text = "绝世撸神";
+//		// String urlBranch = "";
+//		// try {
+//		// urlBranch = "http://baike.baidu.com/search?word=" +
+//		// java.net.URLEncoder.encode(text, "utf-8") + "&pn=0&rn=0&enc=utf8";
+//		// mainUrlall(urlBranch,"", text);
+//		//
+//		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" +
+//		// text + "," + text);
+//		//
+//		// } catch (UnsupportedEncodingException e) {
+//		// // TODO Auto-generated catch block
+//		// e.printStackTrace();
+//		// }
 
 	}
 

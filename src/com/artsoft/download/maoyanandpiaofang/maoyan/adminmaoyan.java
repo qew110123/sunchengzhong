@@ -86,6 +86,9 @@ public class adminmaoyan {
 		System.out.println(Aspect_Ratio);
 
 		String DESCRIPTION = HtmlAnalyze.getTagText(strHtml, "Ó°Æ¬¼ò½é</div>", "</div>");
+		if (DESCRIPTION.length()>1000) {
+			DESCRIPTION=DESCRIPTION.substring(0,1000);
+		}
 		System.out.println(DESCRIPTION);
 
 		OracleMovePiaoFang.intotem_dim_film_boxoffice(id, title, score, score_num, want_see_num, type, duration,

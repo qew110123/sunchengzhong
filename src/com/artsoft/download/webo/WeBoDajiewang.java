@@ -959,12 +959,14 @@ public class WeBoDajiewang {
 			System.out.println(listTemp.get(0));
 			System.out.println(listTemp.get(1));
 			
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(3000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			
+			
 			/**
 			 * 名称  
 			 * data_type 类型 1 人 2 电视剧 3 电影
@@ -1008,7 +1010,7 @@ public class WeBoDajiewang {
 					System.out.println("-------设定要指定任务--------");
 					runstatic();
 				}
-			}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+			}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
 		}
 	
 
@@ -1024,7 +1026,7 @@ public class WeBoDajiewang {
 		 * data_type 类型 1 人 2 电视剧 3 电影
 		 * data_id  人物id
 		 */
-//		webopeople("范冰冰",1,"0");
+//		webopeople("王宝强",1,"2346");
 //		daJeWang();
 //		System.out.println("运行网吧");
 //		methodPost();

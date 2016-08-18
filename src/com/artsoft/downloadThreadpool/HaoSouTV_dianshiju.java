@@ -30,15 +30,25 @@ public class HaoSouTV_dianshiju {
 			List<String> listTemp = (List<String>) Objstring;
 			System.out.println(listTemp.get(0));
 			System.out.println(listTemp.get(1));
-			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
+			
+			
+			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
 				String urlBranch = "";
 				// 指数
 				try {
 					// urlBranch =
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
+					
+					if (listTemp.get(1).length()<=2) {
 					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
 							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"+%e7%94%b5%e8%a7%86%e5%89%a7"
 							+ "&area=%E5%85%A8%E5%9B%BD";
+					
+					}else{
+						urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
+								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
+								+ "&area=%E5%85%A8%E5%9B%BD";
+					}
 					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "5",TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -53,8 +63,14 @@ public class HaoSouTV_dianshiju {
 				}
 				// 媒体关注度
 				try {
+					if (listTemp.get(1).length()<=2) {
 					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
 							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"+%e7%94%b5%e8%a7%86%e5%89%a7";
+					
+					}else{
+						urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
+								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
+					}
 					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "6",TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

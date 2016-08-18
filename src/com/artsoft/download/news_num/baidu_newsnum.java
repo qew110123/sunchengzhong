@@ -40,7 +40,7 @@ public class baidu_newsnum {
 				List<String> listTemp = (List<String>) Objstring;
 				System.out.println(listTemp.get(0));
 				System.out.println(listTemp.get(1));
-				if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
+				if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
 					String person_id = listTemp.get(0);
 					String keyword = listTemp.get(1);
 					// String data_date = TimeTest.getNowTime("yyyyMMdd");

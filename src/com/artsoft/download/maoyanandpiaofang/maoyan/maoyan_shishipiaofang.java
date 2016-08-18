@@ -13,6 +13,8 @@ import org.jsoup.select.Elements;
 
 import com.artsoft.bean.TEM_FILM_BOXOFFICE_REALTIME;
 import com.artsoft.oracle.OracleMovePiaoFang;
+import com.artsoft.oracle2.DBManager;
+import com.artsoft.oracle2.DateUtil;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
@@ -29,9 +31,9 @@ public class maoyan_shishipiaofang {
 		
 		for (int i = 0; i < 10; i++) {
 			htmls_num=htmls_num.replace(numstaticnum[i], numstaticnum1[i]);
-			System.out.println(numstaticnum[i]);
-			System.out.println(numstaticnum1[i]);
-			System.out.println(htmls_num);
+//			System.out.println(numstaticnum[i]);
+//			System.out.println(numstaticnum1[i]);
+//			System.out.println(htmls_num);
 		}
 		return htmls_num;
 	}
@@ -218,6 +220,12 @@ public class maoyan_shishipiaofang {
 		// String strurl = DownYoukuMovie
 		// .youkuMaim("http://www.youku.com/v_olist/c_97_s_1_d_1_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81.html");
 		openstatic();
+		
+		DBManager dbm = DBManager.instance();
+		dbm.executeCall("call sp_f_film_boxoffice_realtime('"+DateUtil.getAfterDayDate(-1)+"') ");
+		dbm.executeCall("call dwetl.MART_F_FILM_INDEX('"+DateUtil.getAfterDayDate(-1)+"') ");
+		System.out.println("存储过程运行完毕 ");
+		
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 	}
 	

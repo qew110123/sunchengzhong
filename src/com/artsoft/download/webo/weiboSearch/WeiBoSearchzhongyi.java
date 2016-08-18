@@ -250,8 +250,14 @@ public class WeiBoSearchzhongyi {
 			
 				
 			
-			WebElement detailmoves=webDriver.findElement(By.xpath("//*[@id='pl_weibo_directright']/div[@class='WB_cardwrap S_bg2 wbs_interest_wrap']/div[@class='pl_gspage_r']/div[@class='card_scroll']/div[@class='wbs_relevant_interest']/div[@class='content_film']/a"));
-			System.out.println(urlBranchmoves = detailmoves.getAttribute("href"));
+			try {
+				
+				WebElement detailmoves=webDriver.findElement(By.xpath("//*[@id='pl_weibo_directright']/div[@class='WB_cardwrap S_bg2 wbs_interest_wrap']/div[@class='pl_gspage_r']/div[@class='card_scroll']/div[@class='wbs_relevant_interest']/div[@class='content_film']/a"));
+				System.out.println(urlBranchmoves = detailmoves.getAttribute("href"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 			//获取cook
 			// And now output all the available cookies for the current URL
 //			Set<Cookie> allCookies = webDriver.manage().getCookies();
@@ -268,26 +274,32 @@ public class WeiBoSearchzhongyi {
 //			driver.save_screenshot("C:\error.jpg")
 			
 			System.out.println(urlBranchurl );
-			seleepTime(7);
-			try {
-				
-				WeiBoBranch1(urlBranchurl, DATA_ID, DATA_TYPE);
-			} catch (Exception e) {
-				// TODO: handle exception
+			if (!urlBranchurl.equals("")&&urlBranchurl!=null) {
+				seleepTime(7);
+				try {
+					
+					WeiBoBranch1(urlBranchurl, DATA_ID, DATA_TYPE);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			System.out.println(urlBranchmoves );
+			System.out.println(!urlBranchmoves.equals(""));
+			System.out.println(urlBranchmoves!=null);
+			if (!urlBranchmoves.equals("")&&urlBranchmoves!=null) {
+				seleepTime(7);
+				try {
+					
+					WeiBoBranch2(urlBranchmoves, DATA_ID, DATA_TYPE);
+					shuaxin();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
 			
-			seleepTime(7);
-			try {
-				
-				WeiBoBranch2(urlBranchmoves, DATA_ID, DATA_TYPE);
-				shuaxin();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
 			
 			
-			
-			
+//			System.out.println("222");
 			
 			
 //			System.out.println(atrW_f14.getText());
@@ -485,7 +497,7 @@ public class WeiBoSearchzhongyi {
 //					hunanBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
 					try {
 						seleepTime(10);
-						WeiBoBranch(urlBranch, listTemp.get(0), TV_TYPE);
+						WeiBoSearchTVplay.WeiBoBranch(urlBranch, listTemp.get(0), TV_TYPE);
 					} catch (Exception e) {
 						// TODO: handle exception
 //						webDriver= null;
@@ -509,7 +521,7 @@ public class WeiBoSearchzhongyi {
 //		System.out.println("需要采集的电视剧数为"+returnNumTVle);
 //		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
 			// i=15780;
-			//电视剧
+			//综艺
 			int TV_TYPE=4;
 //			if (i>14002) {
 			try {
@@ -555,7 +567,6 @@ public class WeiBoSearchzhongyi {
 //			
 //			WeiBoBranch("http://s.weibo.com/weibo/%2523%25E7%25BE%258E%25E5%259B%25BD%25E9%2598%259F%25E9%2595%25BF3%2523&Refer=STopic_box", "0", 0);
 //		}
-		TimingTime(1, 00, 00);
 //		ConfigManager config = ConfigManager.getInstance();
 //		// driver = config.getConfigValue("driver");
 //		String xx = ConfigManager.getInstance().getConfigValue("IDwebopeople");
@@ -565,5 +576,9 @@ public class WeiBoSearchzhongyi {
 //			mainweboPeoPle(i, i + 1000);
 //
 //		}
+		
+		TimingTime(1, 00, 00);
+		
+//		WeiBoSearchTVplay.WeiBoBranch("http://s.weibo.com/weibo/%2523%25E8%258A%2588%25E6%259C%2588%25E4%25BC%25A0%2523&Refer=STopic_box", "180151",2);
 	}
 }

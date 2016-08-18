@@ -314,6 +314,22 @@ public class Oracle {
 		return (ArrayList<String>) list;
 	}
 	
+	/**
+	 * 
+	 * 2016年8月16日15:26:14
+	 * 猫眼数据进行电影数据进行搜索
+	 * @return
+	 */
+	public static List selectmaoyanshijuTmove() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.film_id,t.film_name from mart.dim_film t where t.box_offices = 0";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
 	
 	public static void main(String[] args) {
 		TEM_WEIBO_TOPIC_SCORE tem_weibo_topic_score=new TEM_WEIBO_TOPIC_SCORE();

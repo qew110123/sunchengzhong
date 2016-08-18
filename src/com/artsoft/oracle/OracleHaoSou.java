@@ -829,13 +829,13 @@ public class OracleHaoSou {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
 		String strSql = "insert into ODS.tem_NETWORK_TVPLAY t "
-				+ "(t.netplay_name,t.english_name,t.alias_name,t.set_num,t.producer,t.produce_company,"
+				+ "(t.NETPLAY_ID,t.netplay_name,t.english_name,t.alias_name,t.set_num,t.producer,t.produce_company,"
 				+ "t.produce_area,t.produce_date,t.show_date, t.premiere_date,t.shot_start_date,t.SHOT_END_DATE,"
 				+ "t.create_time,t.issue_organization,t.play_platform, t.netplay_subject,t.time_long,"
-				+ "t.actors,t.director,t.screenwriter,t.basic_info,t.stills_url,t.NETPLAY_URL) "
-				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?,?,?,?)";
+				+ "t.actors,t.director,t.screenwriter,t.basic_info,t.stills_url,t.NETPLAY_URL,t.update_time) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
-		// list.add(tvplay.getTvplay_id());
+		 list.add(tvplay.getTvplay_id());
 		list.add(tvplay.getTvplay_name());
 		// list.add(tvplay.getTvplay_url());
 		list.add(tvplay.getAlias_en());
@@ -876,6 +876,8 @@ public class OracleHaoSou {
 		list.add(tvplay.getBasic_info());
 		list.add(tvplay.getStills_url());
 		list.add(tvplay.getTvplay_url());
+		
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
 
 		// list.add(tvplay.getMajor_awards());
 		// list.add(tvplay.getProducer());

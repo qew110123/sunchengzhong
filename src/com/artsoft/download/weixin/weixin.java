@@ -19,6 +19,8 @@ import com.artsoft.demo.imag.Image2;
 import com.artsoft.downloadThreadpool.IpFilter;
 import com.artsoft.oracle.Oracle;
 import com.artsoft.oracle.OracleBaidu;
+import com.artsoft.oracle2.DBManager;
+import com.artsoft.oracle2.DateUtil;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadUtil;
@@ -51,6 +53,9 @@ public class weixin {
 					try {
 						
 						runnewMain();
+						
+						DBManager dbm = DBManager.instance();
+						dbm.executeCall(TimeTest.getNowTime("yyyyMMdd"));
 					} catch (Exception e) {
 						// TODO: handle exception
 					}

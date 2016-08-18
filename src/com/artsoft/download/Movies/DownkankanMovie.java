@@ -141,8 +141,8 @@ public class DownkankanMovie {
 //				e.printStackTrace();
 //			}
 //		}
-//		TimingTime(1, 59, 59);
-		runstatic();
+		TimingTime(1, 59, 59);
+//		runstatic();
 		
 	}
 
