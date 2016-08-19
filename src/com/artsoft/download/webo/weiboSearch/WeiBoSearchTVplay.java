@@ -69,6 +69,7 @@ public class WeiBoSearchTVplay {
 	}
 	
 	public static void WeiBoBranch1(String urlBranchurl,String DATA_ID,int DATA_TYPE){
+		WebDriverBranch();
 		webDriver.get(urlBranchurl);
 		
 		System.out.println( webDriver.getTitle());
@@ -139,6 +140,7 @@ public class WeiBoSearchTVplay {
 	
 	
 	public static void WeiBoBranch2(String urlBranchmoves,String DATA_ID,int DATA_TYPE){
+		WebDriverBranch();
 		TEM_WEIBO_TOPIC_SCORE tem_weibo_topic_score1=new TEM_WEIBO_TOPIC_SCORE();
 		tem_weibo_topic_score1.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
 		tem_weibo_topic_score1.setDataId(Integer.parseInt(DATA_ID));
@@ -233,29 +235,25 @@ public class WeiBoSearchTVplay {
 			String title = webDriver.getTitle();
 			System.out.println("标题: " + title);
 			// 获取淘宝价格
-			WebElement detail = webDriver.findElement(By.xpath("//*[@id=\"pl_weibo_directright\"]"));
-//			System.out.println(detail.getText());
-			WebElement atr = detail.findElement(By.xpath("div[@class='WB_cardwrap S_bg2 wbs_interest_wrap']"));
-			WebElement atr1 = atr.findElement(By.xpath("div[@class='pl_gspage_r']"));
-			WebElement atr2 = atr1.findElement(By.xpath("div[@class='card_scroll']"));
-			WebElement atr3 = atr2.findElement(By.xpath("div[@class='wbs_relevant_interest']"));
-			WebElement atr5 = atr3.findElement(By.xpath("div[@class='content_topic']"));
-			WebElement atr4 = atr5.findElement(By.xpath("a"));
 			String urlBranchurl = "";
-//			System.out.println(atr4);
-			System.out.println(urlBranchurl = atr4.getAttribute("href"));
-			
-			String urlBranchmoves = "";
-			
-				
-			
 			try {
 				
-				WebElement detailmoves=webDriver.findElement(By.xpath("//*[@id='pl_weibo_directright']/div[@class='WB_cardwrap S_bg2 wbs_interest_wrap']/div[@class='pl_gspage_r']/div[@class='card_scroll']/div[@class='wbs_relevant_interest']/div[@class='content_film']/a"));
-				System.out.println(urlBranchmoves = detailmoves.getAttribute("href"));
+			
+				WebElement detail = webDriver.findElement(By.xpath("//*[@id=\"pl_weibo_directright\"]"));
+	//			System.out.println(detail.getText());
+				WebElement atr = detail.findElement(By.xpath("div[@class='WB_cardwrap S_bg2 wbs_interest_wrap']"));
+				WebElement atr1 = atr.findElement(By.xpath("div[@class='pl_gspage_r']"));
+				WebElement atr2 = atr1.findElement(By.xpath("div[@class='card_scroll']"));
+				WebElement atr3 = atr2.findElement(By.xpath("div[@class='wbs_relevant_interest']"));
+				WebElement atr5 = atr3.findElement(By.xpath("div[@class='content_topic']"));
+				WebElement atr4 = atr5.findElement(By.xpath("a"));
+	//			System.out.println(atr4);
+				System.out.println(urlBranchurl = atr4.getAttribute("href"));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+			
+			
 			
 			//获取cook
 			// And now output all the available cookies for the current URL
@@ -282,69 +280,39 @@ public class WeiBoSearchTVplay {
 					// TODO: handle exception
 				}
 			}
-			System.out.println(urlBranchmoves );
-			System.out.println(!urlBranchmoves.equals(""));
-			System.out.println(urlBranchmoves!=null);
-			if (!urlBranchmoves.equals("")&&urlBranchmoves!=null) {
-				seleepTime(7);
-				try {
-					
-					WeiBoBranch2(urlBranchmoves, DATA_ID, DATA_TYPE);
-					shuaxin();
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
 			
 			
 			
 			
+			/**
+			 * 评分
+			 */
 			
 			
-//			System.out.println(atrW_f14.getText());
-			
-			
-//			WebElement element = driver.findElement(By.className("input_class"));
-			//WebElement element = driver.findElement(By.xpath("//*[@id='index-page']/footer/div[3]/ul/li[2]/a/span"));
-			
-//			WebElement atrpstarnum;
-//			System.out.println(atr2);
-//			System.out.println(atrpstarnum = atr2.findElement(By.xpath(("div[@class='star_detail']"))));
-//			WebElement atrpstarnum1;
-//			System.out.println(atrpstarnum1 = atrpstarnum.findElement(By.xpath(("p[@class='star_num']"))));
-//			List<WebElement> liList;
-//			System.out.println(liList = atrpstarnum1.findElements(By.xpath(("span"))));
-//			int i1 = 0;
-//			// String =
-//
-//			String strfansCount = "";
-//			String strvCount = "";
-//			int fansCount = 0;
-//			int vCount = 0;
-//			for (WebElement webElement : liList) {
-//				WebElement atrpstarnumaa;
-//				System.out.println(atrpstarnumaa = webElement.findElement(By.xpath(("a"))));
-//				System.out.println(atrpstarnumaa.getText());
-//				if (i1 == 1) {
-//					strfansCount = atrpstarnumaa.getText().replaceAll("万", "0000");
-//				}
-//				if (i1 == 2) {
-//					strvCount = atrpstarnumaa.getText().replaceAll("万", "0000");
-//				}
-//				i1 += 1;
+//			String urlBranchmoves = "";
+//				
+//			
+//			try {
+//				
+//				WebElement detailmoves=webDriver.findElement(By.xpath("//*[@id='pl_weibo_directright']/div[@class='WB_cardwrap S_bg2 wbs_interest_wrap']/div[@class='pl_gspage_r']/div[@class='card_scroll']/div[@class='wbs_relevant_interest']/div[@class='content_film']/a"));
+//				System.out.println(urlBranchmoves = detailmoves.getAttribute("href"));
+//			} catch (Exception e) {
+//				// TODO: handle exception
 //			}
-//
-//			if (strfansCount != null && !"".equals(strfansCount) && strvCount != null && !"".equals(strvCount)) {
-//				fansCount = Integer.parseInt(strfansCount);
-//				vCount = Integer.parseInt(strvCount);
-//				// OracleHaoSou.intoPeoPlewebo(tvplayId, strhtmlurl, fansCount,
-//				// vCount, "", "", mainUrl, "1");
-//				mapreturn.put("urlBranch", urlBranch);
-//				// mapreturn.put("fansCount", fansCount);
-//				mapreturn.put("fansCount", fansCount);
-//				mapreturn.put("vCount", vCount);
-//
+//			System.out.println(urlBranchmoves );
+//			System.out.println(!urlBranchmoves.equals(""));
+//			System.out.println(urlBranchmoves!=null);
+//			if (!urlBranchmoves.equals("")&&urlBranchmoves!=null) {
+//				seleepTime(7);
+//				try {
+//					
+//					WeiBoBranch2(urlBranchmoves, DATA_ID, DATA_TYPE);
+//					shuaxin();
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
 //			}
+			
 			
 		} catch (Exception e) {
 			// TODO: handle exception

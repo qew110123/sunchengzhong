@@ -406,50 +406,50 @@ public class indexso360 {
 	 */
 
 	public static void my360run(String person_id, String data_date, String keyword, String krywordutf8,int data_type) {
-//		try {
-//			tem_person_keyword_distrib(person_id, data_date, keyword,
-//					"http://index.so.com/index.php?a=radarJson&t=30&q=" + krywordutf8, data_type);
-//
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		try {
-//			tem_person_relevant_keyword(person_id, data_date, keyword,
-//					"http://index.so.com/index.php?a=nlpJson&t=30&q=" + krywordutf8, data_type);
-//
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		try {
-//			tem_person_relevant_news(person_id, data_date, keyword,
-//					"http://index.so.com/index.php?a=relNewsJson&q=" + krywordutf8, data_type);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		try {
-//			tem_person_relevant_weibo(person_id, data_date, keyword,
-//					"http://index.so.com/index.php?a=relWeiboJson&q=" + krywordutf8, data_type);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		try {
-//			tem_person_keyword_up(person_id, data_date, keyword,
-//					"http://index.so.com/index.php?a=surgeWordsJson&t=7&q=" + krywordutf8, data_type);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
+		try {
+			tem_person_keyword_distrib(person_id, data_date, keyword,
+					"http://index.so.com/index.php?a=radarJson&t=30&q=" + krywordutf8, data_type);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			tem_person_relevant_keyword(person_id, data_date, keyword,
+					"http://index.so.com/index.php?a=nlpJson&t=30&q=" + krywordutf8, data_type);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			tem_person_relevant_news(person_id, data_date, keyword,
+					"http://index.so.com/index.php?a=relNewsJson&q=" + krywordutf8, data_type);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			tem_person_relevant_weibo(person_id, data_date, keyword,
+					"http://index.so.com/index.php?a=relWeiboJson&q=" + krywordutf8, data_type);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			tem_person_keyword_up(person_id, data_date, keyword,
+					"http://index.so.com/index.php?a=surgeWordsJson&t=7&q=" + krywordutf8, data_type);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-//		try {
-//			TEM_360_WORD_AREA(person_id, data_date, keyword, "http://index.so.com/index.php?a=drawAreaJson&t=30&q=" + krywordutf8, data_type);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
+		try {
+			TEM_360_WORD_AREA(person_id, data_date, keyword, "http://index.so.com/index.php?a=drawAreaJson&t=30&q=" + krywordutf8, data_type);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-//		try {
-//			TEM_360_WORD_AGE_SEX(person_id, data_date, keyword, "http://index.so.com/index.php?a=portrayalJson&t=30&q=" + krywordutf8, data_type);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
+		try {
+			TEM_360_WORD_AGE_SEX(person_id, data_date, keyword, "http://index.so.com/index.php?a=portrayalJson&t=30&q=" + krywordutf8, data_type);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		try {
 			TEM_360_WORD_TAG(person_id, data_date, keyword, "http://index.so.com/index.php?a=portrayalJson&t=30&q=" + krywordutf8, data_type);
@@ -511,7 +511,12 @@ public class indexso360 {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
 		// String strurl = DownYoukuMovie
 		// .youkuMaim("http://www.youku.com/v_olist/c_97_s_1_d_1_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81.html");
-		openstatic();
+		try {
+			
+			openstatic();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 	}
 
@@ -530,23 +535,24 @@ public class indexso360 {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
 			}
-		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// runstatic();
 //		 openstatic();
+		
 		TimingTime(00, 59, 59);
 //		String krywordutf8="";
 //		try {
-//			krywordutf8 = java.net.URLEncoder.encode("你好", "utf-8");
+//			krywordutf8 = java.net.URLEncoder.encode("王宝强", "utf-8");
 //		} catch (UnsupportedEncodingException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		my360run("0", "0", "0", krywordutf8, 0);
-		
+//		my360run("2346", "20160818", "王宝强", krywordutf8, 1);
+//		
 	}
 
 }

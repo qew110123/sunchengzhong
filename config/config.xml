@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="gb2312"?>
 
-<info>
+<info> 
   <driver>oracle.jdbc.driver.OracleDriver</driver>  
   <url>jdbc:oracle:thin:@192.168.1.16:1521:orcl</url>  
   <user>tvprisdb</user>  
-  <pwd>tvprisdb</pwd>   
-  <urls>http://www.youku.com/v_olist/c_97_g__a__sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_25.html</urls>   
-  <solrUrl>http://10.70.25.101:8080/solr/mgnews</solrUrl>
-  
+  <pwd>tvprisdb</pwd>  
+  <urls>http://www.youku.com/v_olist/c_97_g__a__sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_25.html</urls>  
+  <solrUrl>http://10.70.25.101:8080/solr/mgnews</solrUrl>  
   <driver>oracle.jdbc.driver.OracleDriver</driver>  
   <url218>jdbc:oracle:thin:@192.168.1.10:1521:yibase</url218>  
   <user218>dwetl</user218>  
-  <pwd218>ynkj666</pwd218>   
+  <pwd218>ynkj666</pwd218>  
   <ProxyPath>proxy.txt</ProxyPath>  
-  <!-- 这里写注释-->
-  <ID>0</ID>
-  <IDpeople>11636</IDpeople>
-  <IDwebopeople>295</IDwebopeople>
-  <IDBaiDupeople>16441</IDBaiDupeople>
-  <numBaidu>57</numBaidu>
-  <!-- 百度中基本信息数据的补全     2015年11月14日18:01:24 -->
-   <numBaidunum>0</numBaidunum>
-   
+  <!-- 这里写注释-->  
+  <ID>0</ID>  
+  <IDpeople>11636</IDpeople>  
+  <IDwebopeople>295</IDwebopeople>  
+  <IDBaiDupeople>16441</IDBaiDupeople>  
+  <numBaidu>57</numBaidu>  
+  <!-- 百度中基本信息数据的补全     2015年11月14日18:01:24 -->  
+  <numBaidunum>0</numBaidunum>  
+  <!-- weibo大数     2016年8月18日21:48:24 -->  
+  <weibobagnum>192</weibobagnum>  
+  <!-- weibo小数     2016年8月18日21:57:51 -->  
+  <weiboxiaonum>29</weiboxiaonum> 
 </info>

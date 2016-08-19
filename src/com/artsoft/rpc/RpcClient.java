@@ -15,7 +15,7 @@ public class RpcClient{
 	public Object initParam = null ;
 	private XmlRpcClient mClient = null ;
 	String rpcUrl;
-	String strRpcUrl = "http://127.0.0.1:9923"; //me
+	String strRpcUrl = "http://192.168.1.128:9923"; //me
 	
 	
 	public RpcClient() {
@@ -100,11 +100,38 @@ public class RpcClient{
 		//返回
 		return obj.toString().trim();
 	}
+	
+	
+	
+	/**
+	 * 获取微博数据的采集
+	 * @return
+	 */
+	public String turnweibo(String ip,String Keyword,String intNum){
+		//加密
+		
+		//参数 以数组封装
+		String[] objParams = new String[]{ip,Keyword,intNum};
+	
+		//调用 发布 方法 
+		Object obj = execute("RpcInterface.Keyword",objParams);
+		
+		//判断返回值
+		if(obj == null)
+			return null;
+		
+		//返回
+		return obj.toString().trim();
+	}
+	
+	
+	
 	public static void main(String []args)
 	{
 		RpcClient client = new RpcClient();
 		String strTemp = client.turnHtml("111111更广泛的高富帅111.doc");
 		System.out.println(strTemp);
+		
 	}
 	
 }

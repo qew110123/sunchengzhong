@@ -287,7 +287,7 @@ public class Oracle {
 		list.add(INFORMATION.getContentP());
 		list.add(INFORMATION.getUrls());
 		list.add(INFORMATION.getWeixinhao());
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
 		list.add(INFORMATION.getWeixinAtion());
 		list.add(INFORMATION.getOriginal());
 		list.add(INFORMATION.getRanking());

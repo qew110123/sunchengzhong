@@ -1,4 +1,4 @@
-package com.artsoft.download.weixin;
+package com.artsoft.download.news_toutiao.weixin;
 
 import java.io.UnsupportedEncodingException;
 import java.net.Proxy;
