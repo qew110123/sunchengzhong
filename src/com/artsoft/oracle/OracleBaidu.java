@@ -89,149 +89,19 @@ public class OracleBaidu {
 	public static List selectbaidudianshiju() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select * from ods.dim_tvplay_tmp s where s.tvplay_id >=23342 ";
-		/**
-		 * 2015年12月11日14:23:27
-		 * 需要补充网络剧信息的
-		 */
-		sql = "select * from edw.dim_tvplay t   where  t.years is null ";
-		/**
-		 *l2015年12月18日14:43:54
-		 * 数据的补充 
-		 */
-		sql="select * from edw.dim_tvplay p where p.tvplay_name in ('守住你的秘密','天上花园','我在锡林郭勒等你','秀才遇到兵','蕾蕾看世界','战鼓擂','无尽的爱第二部','家有爹娘第一部','无尽的爱第一部','摘下你的面具','我的宠物老公','极限追击','功夫婆婆','爸爸回家','为了一句话','子夜搏杀','爱情碟中谍','遍地惊雷','天使之恋一','正义联盟第一季天外来客','痴情为谁','草莽英雄传','杀戮','夺爱千金','蜂鸟','长城红','一个鬼子都不留之三威震太行','冲动的惩罚','映山红','刀剑出鞘','玉海棠','私房钱','不见鬼子不挂弦','实习天使','老人恋爱也疯狂','悲喜一家人','绝望的主妇第一季','猎魔行动','家和万事兴之花好月圆','狐影之枪花','错爱孽缘','纪晓岚','婚姻攻防战之爱要付出','喋血敌后','苦爱','邻里一家人','桃花运','温州两家人','野蛮寡妇','生死争夺','爱我你别走','长在面包树上的女人','文房四宝','孤军剿匪','秦时明月','遗产争夺战','绝密特工','芈月传','勇敢爱','豹龙斗')";
-		/**
-		 *2015年12月29日12:29:04
-		 * 数据的补充 
-		 */
-		sql="select * from  edw.dim_tvplay t where t.years  is null";
-		
-		
-		/**
-		 * 2016年1月11日14:51:10
-		 * 数据补充
-		 * select * from edw.dim_tvplay t  where t.years is null;
-		 */
-		sql="select * from edw.dim_tvplay t  where t.years is null";
-		
-		/**
-		 *2016年1月7日11:15:30
-		 *2016年1月14日18:39:31
-		 * 数据的补充 
-		 */
-		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.dim_tvplay t where t.tvplay_url is not null and t.tvplay_url !='无'";
-		
-		
-		/**
-		 * url数据补充
-		 * 2016年1月14日18:47:35
-		 * 
-		 */
-		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.dim_tvplay t where t.tvplay_id not in (select t.tvplay_id from ods.tem_tvplay t where t.tvplay_id in (select t.tvplay_id from edw.dim_tvplay t where t.tvplay_url is not null and t.tvplay_url !='无')) and t.tvplay_url is not null and t.tvplay_url !='无'";
-		
-		
-		/**
-		 *2016年1月21日17:04:07
-		 * 数据的补充  （名称）
-		 */
-		sql="select * from edw.dim_tvplay t where t.years is null and t.tvplay_name not in ('我在锡林郭勒等你','HEAVENS GARDEN天上花园','秀才遇到兵', 'GIRL MEETS WORLD蕾蕾看世界','无尽的爱第二部','无尽的爱第一部','守住你的秘密')";
-		
-		/**
-		 * 2016年2月26日16：:2：:0
-		 * 数据的补充
-		 */
-		sql="select *  from edw.dim_tvplay t where t.years is null ";
-		
-		/**
-		 * 2016年3月10日10:19:48
-		 * 电视剧补充
-		 */
-		sql="select * from edw.dim_tvplay t where t.years is null";
-		
-		
-		/**
-		 * 2016年3月17日13:18:12
-		 * 电视剧补充
-		 */
-		sql="select *  from edw.dim_tvplay t where t.years is null order by t.tvplay_name";
-		
-		/**
-		 * 2016年3月23日13:14:11
-		 * 电视剧补充
-		 */
-		sql="select *  from edw.dim_tvplay t where t.years is null order by t.tvplay_name";
-		
-		/**
-		  * 2016年3月29日17:59:17
-		 * 电视剧补充
-		 */
-		sql="select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
-		
-		
-		/**
-		 * 2016年4月20日11:16:01
-		 * 电视剧补充
-		 */
-		
-		sql="select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
-		
-		
-		/**
-		 * 2016年4月21日11:36:45
-		 * 数据的补充 
-		 */
-		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from ods.tem_tvplay t";
-		/**
-		 * 2016年4月26日16:18:36
-		 * 数据的补充 
-		 */
-		sql=" select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
-		
-		/**
-		 * 2016年5月4日10:18:31
-		 * 数据的补充 
-		 */
-		sql="select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
-		
-		/**
-		 * 2016年5月18日09:54:46
-		 * 数据补充
-		 */
-		sql="select *   from edw.dim_tvplay t   where t.years is null order by t.tvplay_name";
-		
-		/**
-		 * 2016年6月7日16:31:27
-		 * 完善电视剧基本信息抓取，按照电视剧关键字抓取百科搜索的当前的所有数据 
-		 */
-		
-		/**
-		 * 2016年8月4日09:48:16
-		 * 电视剧
-		 */
-		sql="select t.tvplay_id, t.tvplay_name,to_char(t.create_time,'yyyymmdd') from edw.dim_tvplay t where t.years is null order by to_char(t.create_time,'yyyymmdd')desc";
-		
-		/**
-		 * 2016年8月9日13:09:30
-		 * 电视剧
-		 */
-		sql="select t.* , to_char(create_time,'yyyymmdd')   from edw.dim_tvplay t where t.years is null  and t.create_time>to_date('20160723','yyyymmdd')";
-		
-		
-		/**
-		 * 2016年8月11日18:40:48
-		 */
-		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null ";
-		
-		/**
-		 * 2016年8月15日22:16:15
-		 * 
-		 */
-		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null and t.create_time>to_date('20160801','yyyymmdd')";
 		
 		/**
 		 * 2016年8月17日15:34:37
 		 */
 		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null and t.create_time>to_date('20160731','yyyymmdd')";
 		
+		
+		
+		/**
+		 * 2016年8月19日11:23:25
+		 */
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null and t.create_time>to_date('20160807','yyyymmdd')";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);

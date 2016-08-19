@@ -22,6 +22,21 @@ public class Image2 {
 		}
 		return nameurl;
 	}
+	
+	
+	public static String imagUrldownload_1(String urldownload){
+		String nameurl="";
+		String[] namelist=urldownload.split("/");
+		try {
+			nameurl=namelist[namelist.length-1]+"";
+			DownloadImage.download(urldownload, nameurl, "D:\\Image\\weixin\\");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Í¼Æ¬ÏÂÔØ³ö´í£¡");
+		}
+		return nameurl;
+	}
 
 	public static void main(String[] args) {
 

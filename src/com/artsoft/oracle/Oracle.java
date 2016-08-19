@@ -277,7 +277,7 @@ public class Oracle {
 	public static void InsertWECHAT_INFORMATION(WECHAT_INFORMATION INFORMATION) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
-		String strSql = "INSERT INTO ods.WECHAT_INFORMATION t (t.data_id,t.names,t.dates,t.post_user,t.content_all,t.content_p,t.urls,t.weixinhao,t.data_date,t.weixin_ation,t.original,t.ranking,IMG_BIG_URL,IMG_BIG_NAME) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String strSql = "INSERT INTO ods.WECHAT_INFORMATION t (t.data_id,t.names,t.dates,t.post_user,t.content_all,t.content_p,t.urls,t.weixinhao,t.data_date,t.weixin_ation,t.original,t.ranking,IMG_BIG_URL,IMG_BIG_NAME,SOURCE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(INFORMATION.getDataId());
 		list.add(INFORMATION.getNames());
@@ -293,6 +293,8 @@ public class Oracle {
 		list.add(INFORMATION.getRanking());
 		list.add(INFORMATION.getIMG_BIG_URL());
 		list.add(INFORMATION.getIMG_BIG_NAME());
+		list.add(INFORMATION.getSOURCE());
+		
 //		list.add(INFORMATION.getUrls());
 		
 //		System.out.println(list.toString());

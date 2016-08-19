@@ -28,6 +28,7 @@ public class WECHAT_INFORMATION {
 	private String ranking="";
 	private String IMG_BIG_URL="";
 	private String IMG_BIG_NAME="";
+	private int SOURCE=1;
 	
 	
 
@@ -103,6 +104,12 @@ public class WECHAT_INFORMATION {
 	}
 	public void setIMG_BIG_NAME(String iMG_BIG_NAME) {
 		IMG_BIG_NAME = iMG_BIG_NAME;
+	}
+	public int getSOURCE() {
+		return SOURCE;
+	}
+	public void setSOURCE(int sOURCE) {
+		SOURCE = sOURCE;
 	}
 
 }

@@ -432,7 +432,7 @@ public class weixin {
 //				System.out.println(js_contentStringp);
 				wechat.setContentP(js_contentStringp);
 				
-				
+				wechat.setSOURCE(1);
 				
 				Oracle.InsertWECHAT_INFORMATION(wechat);
 				
@@ -532,7 +532,7 @@ public class weixin {
 					}
 					wechat1.setContentP(js_contentStringp);
 					
-					wechat.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/big/");
+					wechat1.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/big/");
 					
 					 imgnameurl=(String) app_msg_ext_infoobject.get("cover");
 					imgname="";
@@ -542,7 +542,9 @@ public class weixin {
 					}
 					
 					
-					wechat.setIMG_BIG_NAME(imgname);
+					wechat1.setIMG_BIG_NAME(imgname);
+					
+					wechat1.setSOURCE(1);
 					
 					Oracle.InsertWECHAT_INFORMATION(wechat1);
 					}
