@@ -19,7 +19,7 @@ public class tengxunyule_2 {
 	
 	
 	
-	private static void runnewMain() {
+	static void runnewMain() {
 		// TODO Auto-generated method stub
 		String urlMain="http://ent.qq.com/movie/movie2012/sjhy.htm";
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "gb2312", null, null);
@@ -44,6 +44,9 @@ public class tengxunyule_2 {
 			String imgurl=link.select("img").first().attr("src");
 			System.out.println(imgurl);
 			
+			String DATES=link.select("span.date").text();
+			wechat.setDates(DATES);
+			
 			wechat.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/big/");
 			
 			String imgname="";
@@ -61,8 +64,8 @@ public class tengxunyule_2 {
 			String names=docs.select("div.hd h1").text();
 			System.out.println(names);
 			wechat.setNames(names);
-			String DATES=docs.select("span.a_time").text();
-			wechat.setDates(DATES);
+//			String DATES=docs.select("span.a_time").text();
+//			wechat.setDates(DATES);
 			String CONTENT_ALL=docs.getElementById("Cnt-Main-Article-QQ").toString();
 			wechat.setContentAll(CONTENT_ALL);
 //			String CONTENT_P=docs.select("article-detail");
@@ -74,7 +77,7 @@ public class tengxunyule_2 {
 			String  js_contentStringp="";
 			int ii=0;
 			 for (Element element : js_contentps) {
-				if (ii>2) {
+//				if (ii>2) {
 					String Stringelement="";
 					
 					if (element.toString().contains("<img")) {
@@ -93,7 +96,7 @@ public class tengxunyule_2 {
 						 	
 					}
 					js_contentStringp=js_contentStringp+Stringelement+"||";
-				}
+//				}
 				ii+=1;
 				
 				
@@ -105,6 +108,7 @@ public class tengxunyule_2 {
 				
 			wechat.setSOURCE(3);
 			
+			wechat.setPostUser("ÌÚÑ¶ÓéÀÖ");
 			Oracle.InsertWECHAT_INFORMATION(wechat);
 		}
 	}

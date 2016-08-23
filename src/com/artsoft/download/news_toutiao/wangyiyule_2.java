@@ -11,22 +11,20 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.artsoft.bean.WECHAT_INFORMATION;
-import com.artsoft.demo.imag.Image2;
 import com.artsoft.oracle.Oracle;
 import com.artsoft.util.DownloadUtil;
+import com.artsoft.util.HtmlAnalyze;
 
-public class tengxunyule_1 {
-	
-	
-	
+public class wangyiyule_2 {
+
 	static void runnewMain() {
 		// TODO Auto-generated method stub
-		String urlMain="http://ent.qq.com/zt2012/views/index.htm";
-		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "gb2312", null, null);
+		String urlMain="http://ent.163.com/special/ysl/";
+String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "gbk", null, null);
 		
 		Document doc = Jsoup.parse(strHtml);
 		//
-		Elements links = doc.getElementById("listZone").select("ul.newsList li");
+		Elements links = doc.getElementById("news-flow-content").select("li");
 		for (Element link : links) {
 //			System.out.println(link);
 			WECHAT_INFORMATION wechat=new WECHAT_INFORMATION();
@@ -38,7 +36,7 @@ public class tengxunyule_1 {
 //			String names=link.select("a").first().text();
 			String url= link.select("a").first().attr("href");
 			System.out.println(url);
-			url="http://ent.qq.com"+url;
+//			url="http://ent.qq.com"+url;
 			wechat.setUrls(url);
 //			wechat.setUrls(urls);
 //			wechat.setUrls(url);
@@ -47,7 +45,8 @@ public class tengxunyule_1 {
 			System.out.println(names);
 			wechat.setNames(names);
 			
-			String DATES=link.select("em").text();
+			String DATES=link.select("p.sourceDate").toString();//.text();
+			DATES=HtmlAnalyze.getTagText(DATES, "</span>", "</p>");
 			wechat.setDates(DATES);
 			
 			
@@ -64,7 +63,7 @@ public class tengxunyule_1 {
 //			
 //			wechat.setIMG_BIG_NAME(imgname);
 			
-			String strHtmls = DownloadUtil.getHtmlText(url, 1000 * 30, "gb2312", null, null);
+			String strHtmls = DownloadUtil.getHtmlText(url, 1000 * 30, "gbk", null, null);
 			
 			Document docs = Jsoup.parse(strHtmls);
 //			String names=docs.getElementById("page").select("h1").text();
@@ -72,16 +71,24 @@ public class tengxunyule_1 {
 //			wechat.setNames(names);
 //			String DATES=docs.select("span.time").text();
 //			wechat.setDates(DATES);
-			String CONTENT_ALL=docs.getElementById("articleContent").toString();
-			System.out.println(CONTENT_ALL);
+			String CONTENT_ALL=docs.select("div.con_1").toString();
+			
+			
+			
+			
+			
 			
 			wechat.setContentAll(CONTENT_ALL);
 //			String CONTENT_P=docs.select("article-detail");
 			
+			while (CONTENT_ALL.contains("<script")) {
+				
+				String CONTENT_ALLhtml=HtmlAnalyze.getTagText(CONTENT_ALL, "<script", "</script>",false,0);
+				CONTENT_ALL=CONTENT_ALL.replace(CONTENT_ALLhtml, "");
+			}
 			
 			
-			
-			Elements  js_contentps=docs.getElementById("articleContent").select("p");
+			Elements  js_contentps=docs.select("div.con_1").select("p");
 			String  js_contentStringp="";
 			int ii=0;
 			 for (Element element : js_contentps) {
@@ -111,14 +118,13 @@ public class tengxunyule_1 {
 			}
 //			wechat1.setContentP(js_contentStringp);
 			
-			System.out.println(js_contentStringp);
-			wechat.setContentP(js_contentStringp);
+//			System.out.println(js_contentStringp);
+			wechat.setContentP(CONTENT_ALL);
 				
-			wechat.setSOURCE(3);
+			wechat.setSOURCE(4);
 			
+			wechat.setPostUser("Õ¯“◊”È¿÷");
 			
-
-			wechat.setPostUser("Ã⁄—∂”È¿÷");
 			
 			Oracle.InsertWECHAT_INFORMATION(wechat);
 		}
@@ -157,7 +163,7 @@ public class tengxunyule_1 {
 	
 	public static void main(String[] args) {
 	//TimingTime(1, 59, 59);
-	runnewMain();
+		runnewMain();
 	}
 
 }

@@ -35,7 +35,7 @@ public class RpcInterface {
 		try {
 			WanfangBykeyWordMain bb=new WanfangBykeyWordMain();
 			returnstringkey=bb.Keywordbig_xuanze(Integer.valueOf(intNum));
-//			returnstringkey=bb.Keyword(Integer.valueOf(intNum));
+//			returnstringkey=bb.Keywordbig(Integer.valueOf(intNum));
 //		System.out.println("获取关键字为"+returnstringkey);
 		} catch (Exception e) {
 			// TODO: handle exception

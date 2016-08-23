@@ -37,6 +37,25 @@ public class Image2 {
 		}
 		return nameurl;
 	}
+	
+	
+	
+	public static String imagUrldownload_allurl(String urldownload){
+		String nameurl="";
+		String[] namelist=urldownload.split("/");
+		try {
+			nameurl=namelist[namelist.length-2]+".jpg";
+			//http://img.art-d.com.cn:88/upload/img/news/contents/20160822/aoLjFpe7tp95ia7AR1UZjzsPHuVHyhUQ8OkghZmibqzgPrQNWdNdibN1FL9ebzvbpW4rTmicWCI4nux9RDzyUXj5Xw.jpg
+			DownloadImage.download(urldownload, nameurl, "D:\\Image\\news\\contents\\"+TimeTest.getNowTime("yyyyMMdd")+"\\" );
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Í¼Æ¬ÏÂÔØ³ö´í£¡");
+		}
+		return "http://img.art-d.com.cn:88/upload/img/news/contents/"+TimeTest.getNowTime("yyyyMMdd")+"/"+nameurl;
+	}
+	
+	
 
 	public static void main(String[] args) {
 

@@ -239,7 +239,7 @@ public class maoyan_shishipiaofang {
 			Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
 
 			Timer timer = new Timer();
-			timer.scheduleAtFixedRate(new TimerTask() {
+			timer.schedule(new TimerTask() {
 				public void run() {
 					System.out.println("-------设定要指定任务--------");
 					runstatic();
@@ -249,7 +249,7 @@ public class maoyan_shishipiaofang {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(11, 59, 59);
+		TimingTime(01, 59, 59);
 //		runstatic();
 		
 //		String String1="<i class=\"cs gsBlur\">&#xed68;.&#xe85b;%</i>";

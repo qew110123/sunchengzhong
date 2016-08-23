@@ -46,7 +46,7 @@ public class weixin {
 			Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
 
 			Timer timer = new Timer();
-			timer.scheduleAtFixedRate(new TimerTask() {
+			timer.schedule(new TimerTask() {
 				public void run() {
 					System.out.println("-------设定要指定任务--------");
 //					runstatic();
@@ -409,7 +409,20 @@ public class weixin {
 						String Stringelement="";
 						
 						if (element.toString().contains("<img")) {
-							Stringelement=element.toString();
+							
+							try {
+								String imgotherhtml=HtmlAnalyze.getTagText(element.toString(), "<img", "\">",false,0);
+								String imgurlhtml=HtmlAnalyze.getTagText(imgotherhtml, "data-src=\"", "\" ");
+								String newimgurl=Image2.imagUrldownload_allurl(imgurlhtml);
+								
+								Stringelement=element.toString().replace(imgotherhtml, "<img src=\""+newimgurl+"\" >");
+								
+							} catch (Exception e) {
+								// TODO: handle exception
+								Stringelement=element.toString();
+							}
+							
+							
 							
 						}else{
 							if (element.toString().contains("<strong>")) {
@@ -510,7 +523,23 @@ public class weixin {
 							String Stringelement="";
 							
 							if (element.toString().contains("<img")) {
-								Stringelement=element.toString();
+//								Stringelement=element.toString();
+								try {
+									String imgotherhtml=HtmlAnalyze.getTagText(element.toString(), "<img", "\">",false,0);
+									String imgurlhtml=HtmlAnalyze.getTagText(imgotherhtml, "data-src=\"", "\" ");
+									String newimgurl=Image2.imagUrldownload_allurl(imgurlhtml);
+									
+									Stringelement=element.toString().replace(imgotherhtml, "<img src=\""+newimgurl+"\" >");
+									
+								} catch (Exception e) {
+									// TODO: handle exception
+									Stringelement=element.toString();
+								}
+								
+								
+								
+								
+//								Stringelement=element.toString().replace(imgotherhtml, "<img src=\""+newimgurl+"\" >");
 								
 							}else{
 								if (element.toString().contains("<strong>")) {

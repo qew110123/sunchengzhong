@@ -102,6 +102,10 @@ public class OracleBaidu {
 		 */
 		
 		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null and t.create_time>to_date('20160807','yyyymmdd')";
+		/**
+		 * 2016年8月23日12:40:19
+		 */
+		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null and t.create_time>to_date('20160817','yyyymmdd')";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);

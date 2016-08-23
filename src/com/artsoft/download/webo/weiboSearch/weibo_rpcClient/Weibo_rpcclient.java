@@ -55,11 +55,11 @@ public class Weibo_rpcclient {
 			}
 			
 		}
-		
-		
-		
 	}
 	
+	public static void main(String[] args) {
+		run_rpc_weibo("64", "快乐大本营", "", 5);
+	}
 	
 	
 

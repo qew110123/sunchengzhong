@@ -19,7 +19,7 @@ public class tengxunyule_4 {
 	
 	
 	
-	private static void runnewMain() {
+	static void runnewMain() {
 		// TODO Auto-generated method stub
 		String urlMain="http://ent.qq.com/tv/tv_2012/sjyzp.htm";
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "gb2312", null, null);
@@ -74,7 +74,7 @@ public class tengxunyule_4 {
 			String  js_contentStringp="";
 			int ii=0;
 			 for (Element element : js_contentps) {
-				if (ii>2) {
+//				if (ii>2) {
 					String Stringelement="";
 					
 					if (element.toString().contains("<img")) {
@@ -93,7 +93,7 @@ public class tengxunyule_4 {
 						 	
 					}
 					js_contentStringp=js_contentStringp+Stringelement+"||";
-				}
+//				}
 				ii+=1;
 				
 				
@@ -104,6 +104,8 @@ public class tengxunyule_4 {
 			wechat.setContentP(js_contentStringp);
 				
 			wechat.setSOURCE(3);
+			
+			wechat.setPostUser("ÌÚÑ¶ÓéÀÖ");
 			
 			Oracle.InsertWECHAT_INFORMATION(wechat);
 		}

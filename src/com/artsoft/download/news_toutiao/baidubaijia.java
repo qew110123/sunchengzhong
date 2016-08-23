@@ -20,7 +20,7 @@ import com.artsoft.util.TimeTest;
 public class baidubaijia {
 	
 	
-	private static void runnewMain() {
+	static void runnewMain() {
 		// TODO Auto-generated method stub
 		String urlMain="http://baijia.baidu.com/?tn=listarticle&labelid=4";
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
@@ -104,6 +104,8 @@ public class baidubaijia {
 			wechat.setContentP(js_contentStringp);
 				
 			wechat.setSOURCE(2);
+			
+			wechat.setPostUser("百度百家");
 			
 			Oracle.InsertWECHAT_INFORMATION(wechat);
 			
