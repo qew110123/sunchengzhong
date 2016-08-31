@@ -14,8 +14,10 @@ import com.artsoft.download.downNetwork.DanJiBoFangLiang.DownloadHunantv_DanJiBo
 import com.artsoft.download.downNetwork.DanJiBoFangLiang.DownloadSohu_DanJiBoFangLiang;
 import com.artsoft.download.downNetwork.DanJiBoFangLiang.DownloadYouku_always_DanJiBoFangLiang;
 import com.artsoft.download.maoyanandpiaofang.maoyan.adminmaoyan;
+import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_jibenxinxi_zhongpiaofang;
 import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_paipian;
 import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_runother;
+import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_shishipiaofang;
 import com.artsoft.download.maoyanandpiaofang.zhongguopiaofangwang.zhonggoupiaofangwang_shisipiaofangwang;
 import com.artsoft.download.maoyanandpiaofang.zhongguopiaofangwang.zhongguopiaofangwang;
 import com.artsoft.download.maoyanandpiaofang.zhongguopiaofangwang.zhongguopiaofangwang_danri;
@@ -102,7 +104,7 @@ public class Thread_Main implements Runnable {
 		}
 		
 		/**
-		 * Ã¨ÆËadminmaoyan
+		 * Ã¨ÑÛadminmaoyan
 		 */
 		
 		if (name.equals("adminmaoyan")) {
@@ -116,6 +118,18 @@ public class Thread_Main implements Runnable {
 		if (name.equals("maoyan_runother")) {
 			maoyan_runother.TimingTime(1, 59, 59);
 		}
+		
+		if (name.equals("maoyan_jibenxinxi_zhongpiaofang")) {
+			maoyan_jibenxinxi_zhongpiaofang.TimingTime(10, 59, 59);
+		}
+		
+		if (name.equals("maoyan_shishipiaofang")) {
+			maoyan_shishipiaofang.TimingTime(01, 00, 59);
+		}
+		
+		
+		
+		
 		
 		/**
 		 * ÖÐ¹úÆ±·¿Íø

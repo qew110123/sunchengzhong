@@ -25,6 +25,29 @@ public class OracleHaoSou {
 	public static ArrayList<String> select(String startRow, String endRow) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
+		
+		sql="select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.* from (select t.tvplay_id,t.tvplay_name from edw.dim_tvplay t order by t.tvplay_id ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2 on t1.tvplay_id =t2.data_id order by t1.tvplay_id";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	
+	
+	/**
+	 * 拼写sql语句并获取开始和结束
+	 * 
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selecttvplay(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
+		
+		sql="select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.* from (select t.tvplay_id,t.tvplay_name from         mart.f_tvplay_index t left join         (select nr.tvplay_id,count( distinct nr.data_type) as counts                 from ods.tem_network_reputation nr               where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 0              group by nr.tvplay_id              ) n on t.tvplay_id = n.tvplay_id and n.counts = 2             where t.data_date = '29991231' and n.tvplay_id is null    order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2 on t1.tvplay_id =t2.data_id ";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -46,6 +69,11 @@ public class OracleHaoSou {
 		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
 		
 		sql = "select t.film_id,t.film_name,t.FILM_URL from ods.dim_film t order by t.film_id ";
+		
+		sql="select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.* from (select t.film_id,t.film_name from ods.dim_film t ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2 on t1.film_id =t2.data_id order by t1.film_id";
+		
+		sql="  select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.* from (select t.film_id,t.film_name from          mart.f_film_index t left join          (select nr.tvplay_id,count( distinct nr.data_type) as counts                  from ods.tem_network_reputation nr                where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 3               group by nr.tvplay_id             ) n on t.film_id = n.tvplay_id and n.counts = 2   where t.data_date = '29991231' and n.tvplay_id is null   order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2 on t1.film_id =t2.data_id     ";
+		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -129,6 +157,27 @@ public class OracleHaoSou {
 	public static ArrayList<String> selectname(String startRow, String endRow) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.person_id,t.person_name from ODS.DIM_PERSON t order by t.person_id";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+	
+	
+	/**
+	 * sql语句并获取开始和结束 dao用户列表中
+	 * 
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectname360admin(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id                   where t.data_date = '29991231') p   left join (select np.person_id,count(distinct np.date_type) as counts from ods.person_network_popularity np                      where np.date_type in(2,3) and np.date_date = to_char(sysdate - 1, 'yyyymmdd')                     group by np.person_id              ) n     on p.person_id = n.person_id and n.counts =2   where n.person_id is null   order by nvl(complex_index, 0) desc";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -1213,6 +1262,55 @@ public class OracleHaoSou {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		// String strSql = "select count(*) from ods.person_network_popularity";
 		String strSql = "select count(*) from " + strdbname;
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
+	
+	
+	
+	/**
+	 * 获取当360字数dianying
+	 * 2016年8月30日11:18:29
+	 * 
+	 * @return
+	 */
+	public static String returnNummove() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		// String strSql = "select count(*) from ods.person_network_popularity";
+		String strSql = "select count(*) from  ( select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.* from (select t.film_id,t.film_name from          mart.f_film_index t left join          (select nr.tvplay_id,count( distinct nr.data_type) as counts                  from ods.tem_network_reputation nr                where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 3               group by nr.tvplay_id             ) n on t.film_id = n.tvplay_id and n.counts = 2   where t.data_date = '29991231' and n.tvplay_id is null   order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2 on t1.film_id =t2.data_id    ) " ;
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
+	
+	
+	
+	
+	/**
+	 * 获取当360字数总需要采集的人数的个数
+	 * 
+	 * @return
+	 */
+	public static String returnNumPeople() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		// String strSql = "select count(*) from ods.person_network_popularity";
+		String strSql = "select count(*) from (select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id                   where t.data_date = '29991231') p   left join (select np.person_id,count(distinct np.date_type) as counts from ods.person_network_popularity np                      where np.date_type in(2,3) and np.date_date = to_char(sysdate - 1, 'yyyymmdd')                     group by np.person_id              ) n     on p.person_id = n.person_id and n.counts =2   where n.person_id is null   order by nvl(complex_index, 0) desc)";
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
+	
+	
+	/**
+	 * 获取当360字数总需要采集的人数的个数
+	 * 
+	 * @return
+	 */
+	public static String returnNumtvplay() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		// String strSql = "select count(*) from ods.person_network_popularity";
+		String strSql = "select count(*) from ( select t.tvplay_id,t.tvplay_name from         mart.f_tvplay_index t left join         (select nr.tvplay_id,count( distinct nr.data_type) as counts                 from ods.tem_network_reputation nr               where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 0              group by nr.tvplay_id              ) n on t.tvplay_id = n.tvplay_id and n.counts = 2             where t.data_date = '29991231' and n.tvplay_id is null    order by nvl(t.complex_index,0) desc)";
 		String strMax = DBOperate218.getResultValue(conn, strSql);
 		System.out.println(strMax);
 		return strMax;

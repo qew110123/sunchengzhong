@@ -1,7 +1,7 @@
 package com.artsoft.downloadThreadpool;
 
+import com.artsoft.downloadThreadpool.people.HaoSouWordAdmin;
 import com.artsoft.pool.TaskInterface;
-import com.artsoft.downloadThreadpool.HaoSouWordAdmin;
 
 public class MyHaoSoutask implements TaskInterface {
 	String urlBranch; //

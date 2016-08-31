@@ -27,6 +27,7 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.ReadTxtFile;
 import com.artsoft.util.TimeTest;
+import com.artsoft.util.ftp.FavFTPUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -34,6 +35,8 @@ import net.sf.json.JSONObject;
 public class weixin {
 	private static Proxy proxy = null;
 	static String strproxy = "";
+	
+	
 	
 	
 	// 判断数据开始时间
@@ -64,18 +67,7 @@ public class weixin {
 			}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
 		}
 	
-	/**
-	 * 微信
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		TimingTime(1, 59, 59);
-//		runnewMain();
-		
-//		mainUrl("http://mp.weixin.qq.com/profile?src=3&timestamp=1470797300&ver=1&signature=xNK5roZsfw0mDZ*FrmNUG*T-M8y5I2lDXhhW1e0OxFpUUxjiUaL8YnMAvjMRkHyoFx1p6utvLKX6qJgFgchaJw==", "1", "测试", "测试");
-		
-	}
+	
 	
 	
 	
@@ -359,6 +351,11 @@ public class weixin {
 				
 				
 				wechat.setIMG_BIG_NAME(imgname);
+				
+				
+				
+				
+				
 //				wechat
 				String content_url=(String) app_msg_ext_infoobject.get("content_url");
 				content_url="http://mp.weixin.qq.com"+StringEscapeUtils.unescapeHtml(content_url).replace("\\/", "/");
@@ -404,6 +401,8 @@ public class weixin {
 				Elements js_contentps=js_content.select("p");
 				String js_contentStringp="";
 				int ii=0;
+				int iii=0;
+				String leibiaoimg="";
 				for (Element element : js_contentps) {
 					if (ii>2) {
 						String Stringelement="";
@@ -412,9 +411,12 @@ public class weixin {
 							
 							try {
 								String imgotherhtml=HtmlAnalyze.getTagText(element.toString(), "<img", "\">",false,0);
-								String imgurlhtml=HtmlAnalyze.getTagText(imgotherhtml, "data-src=\"", "\" ");
+								String imgurlhtml=HtmlAnalyze.getTagText(imgotherhtml, "data-src=\"", "\"");
 								String newimgurl=Image2.imagUrldownload_allurl(imgurlhtml);
-								
+								if (iii==0) {
+									leibiaoimg=newimgurl;
+								}
+								iii+=1;
 								Stringelement=element.toString().replace(imgotherhtml, "<img src=\""+newimgurl+"\" >");
 								
 							} catch (Exception e) {
@@ -444,6 +446,16 @@ public class weixin {
 				}
 //				System.out.println(js_contentStringp);
 				wechat.setContentP(js_contentStringp);
+				
+				
+				if (imgname.equals("")||imgname==null) {
+					wechat.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/contents/");
+					String[] namelist=leibiaoimg.split("/");
+//					try {
+					String 	nameurl=namelist[namelist.length-1];
+					wechat.setIMG_BIG_NAME(nameurl);
+					
+				}
 				
 				wechat.setSOURCE(1);
 				
@@ -518,6 +530,9 @@ public class weixin {
 					 js_contentps=js_content.select("p");
 					 js_contentStringp="";
 					 ii=0;
+					 
+					 
+					 iii=0;
 					 for (Element element : js_contentps) {
 						if (ii>2) {
 							String Stringelement="";
@@ -526,8 +541,13 @@ public class weixin {
 //								Stringelement=element.toString();
 								try {
 									String imgotherhtml=HtmlAnalyze.getTagText(element.toString(), "<img", "\">",false,0);
-									String imgurlhtml=HtmlAnalyze.getTagText(imgotherhtml, "data-src=\"", "\" ");
+									String imgurlhtml=HtmlAnalyze.getTagText(imgotherhtml, "data-src=\"", "\"");
 									String newimgurl=Image2.imagUrldownload_allurl(imgurlhtml);
+									
+									if (iii==0) {
+										leibiaoimg=newimgurl;
+									}
+									iii+=1;
 									
 									Stringelement=element.toString().replace(imgotherhtml, "<img src=\""+newimgurl+"\" >");
 									
@@ -570,8 +590,19 @@ public class weixin {
 						imgname=Image2.imagUrldownload(imgurls);
 					}
 					
-					
 					wechat1.setIMG_BIG_NAME(imgname);
+					
+					
+					
+					
+					if (imgname.equals("")||imgname==null) {
+						wechat.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/contents/");
+						String[] namelist=leibiaoimg.split("/");
+//						try {
+						String 	nameurl=namelist[namelist.length-1];
+						wechat1.setIMG_BIG_NAME(nameurl);
+						
+					}
 					
 					wechat1.setSOURCE(1);
 					
@@ -590,7 +621,76 @@ public class weixin {
 //			}
 			}
 		
+	}
+	
+	
+ 	static String hostname = "192.168.1.18";
+ 	static int port = 21;
+ 	static String username = "shareuser";
+ 	static String password = "shareuser18";
+	
+ 	/**
+ 	 * ftp weixin  列表微信数据
+ 	 * 2016年8月29日17:07:52
+ 	 */
+	public static void leibiaoFavFTPUtil(String filename) {
+//		String hostname = "192.168.1.18";
+//		int port = 21;
+//		String username = "shareuser";
+//		String password = "shareuser18";
+		String pathname = "/big";
+//		String filename = "1.jpg";
+		String originfilename = "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\weixin\\"+filename;
+		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);
+		System.out.println("big上传成功");
+		
+		
+		pathname = "/small";
+		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);
+		System.out.println("small上传成功");
+		// String localpath = "D:/";
+
+		// FavFTPUtil.downloadFile(hostname, port, username, password, pathname,
+		// filename, localpath);
+	}
+	
+	
+	
+	
+	
+	
+	/**
+ 	 * ftp weixin  列表微信数据 内容
+ 	 * 2016年8月29日17:13:14
+ 	 */
+	public static void neirongFavFTPUtil(String filename) {
+//		String hostname = "192.168.1.18";
+//		int port = 21;
+//		String username = "shareuser";
+//		String password = "shareuser18";
+		String pathname = "/contents/"+TimeTest.getNowTime("yyyyMMdd")+"";
+//		String filename = "1.jpg";
+		String originfilename = "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\news\\contents\\"+TimeTest.getNowTime("yyyyMMdd")+"\\"+filename;
+		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);
+		System.out.println("contents上传成功");
 		
 	}
+	
 
+	
+	/**
+	 * 微信
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		TimingTime(1, 59, 59);
+//		testFavFTPUtil();
+//		runnewMain();
+		
+//		mainUrl("http://mp.weixin.qq.com/profile?src=3&timestamp=1472458473&ver=1&signature=wZc-SNBGU1wcd2X8bPaZEH3VTDnev2q-ZrRlT2bF1aQgoCE3fyLzWMKmYgSY52eT2koNOiIYbkKYOc3KxheSGw==", "1", "测试", "测试");
+		
+	}
+	
+	
 }

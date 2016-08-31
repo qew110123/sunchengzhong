@@ -5,18 +5,22 @@ import junit.framework.TestCase;
 public class FavFTPTest extends TestCase {
   
  public void testFavFTPUtil(){
- String hostname = "127.0.0.1";
+ String hostname = "192.168.1.18";
  int port = 21;
- String username = "business";
- String password = "business";
- String pathname = "business/ebook"; 
- String filename = "big.rar"; 
- String originfilename = "C:\\Users\\Downloads\\Downloads.rar";
+ String username = "shareuser";
+ String password = "shareuser18";
+ String pathname = "/contents"; 
+ String filename = "1.jpg"; 
+ String originfilename = "D:\\1.jpg";
  FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);
 // String localpath = "D:/";
   
 // FavFTPUtil.downloadFile(hostname, port, username, password, pathname, filename, localpath);
  }
+ 
+ 
+ 
+ 
  public static void main(String[] args) {
 	 FavFTPTest bb= new FavFTPTest();
 	 bb.testFavFTPUtil();

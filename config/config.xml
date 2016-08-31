@@ -20,8 +20,8 @@
   <numBaidu>57</numBaidu>  
   <!-- 百度中基本信息数据的补全     2015年11月14日18:01:24 -->  
   <numBaidunum>0</numBaidunum>  
-  <!-- weibo大数     2016年8月18日21:48:24 -->  
-  <weibobagnum>32</weibobagnum>  
-  <!-- weibo小数     2016年8月18日21:57:51 -->  
-  <weiboxiaonum>1</weiboxiaonum> 
+  <!-- 2016年8月24日13:17:06 大 -->  
+  <weibobagnum>0</weibobagnum>  
+  <!-- 2016年8月24日13:18:48  小-->  
+  <weiboxiaonum>20</weiboxiaonum> 
 </info>

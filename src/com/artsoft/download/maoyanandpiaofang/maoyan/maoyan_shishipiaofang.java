@@ -221,10 +221,14 @@ public class maoyan_shishipiaofang {
 		// .youkuMaim("http://www.youku.com/v_olist/c_97_s_1_d_1_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81.html");
 		openstatic();
 		
-		DBManager dbm = DBManager.instance();
-		dbm.executeCall("call sp_f_film_boxoffice_realtime('"+DateUtil.getAfterDayDate(-1)+"') ");
-		dbm.executeCall("call dwetl.MART_F_FILM_INDEX('"+DateUtil.getAfterDayDate(-1)+"') ");
-		System.out.println("存储过程运行完毕 ");
+		if ((Integer.valueOf(TimeTest.getNowTime("HH"))==23&&Integer.valueOf(TimeTest.getNowTime("mm"))>30)||(Integer.valueOf(TimeTest.getNowTime("HH"))==0&&Integer.valueOf(TimeTest.getNowTime("mm"))<30)) {
+			System.out.println("存储过程运行不在运行时间内 ");
+		}else{
+			DBManager dbm = DBManager.instance();
+			dbm.executeCall("call sp_f_film_boxoffice_realtime('"+DateUtil.getAfterDayDate(-1)+"') ");
+			dbm.executeCall("call dwetl.MART_F_FILM_INDEX('"+DateUtil.getAfterDayDate(-1)+"') ");
+			System.out.println("存储过程运行完毕 ");
+		}
 		
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 	}
@@ -239,7 +243,7 @@ public class maoyan_shishipiaofang {
 			Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
 
 			Timer timer = new Timer();
-			timer.schedule(new TimerTask() {
+			timer.scheduleAtFixedRate(new TimerTask() {
 				public void run() {
 					System.out.println("-------设定要指定任务--------");
 					runstatic();
@@ -249,7 +253,7 @@ public class maoyan_shishipiaofang {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(01, 59, 59);
+		TimingTime(01, 00, 59);
 //		runstatic();
 		
 //		String String1="<i class=\"cs gsBlur\">&#xed68;.&#xe85b;%</i>";

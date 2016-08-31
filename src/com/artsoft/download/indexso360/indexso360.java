@@ -12,9 +12,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.artsoft.downloadThreadpool.HaoSouWordAdmin;
 import com.artsoft.downloadThreadpool.IpFilter;
 import com.artsoft.downloadThreadpool.MyHaoSoutask;
+import com.artsoft.downloadThreadpool.people.HaoSouWordAdmin;
 import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.oracle.OracleMovePiaoFang;
 import com.artsoft.pool.ThreadPool;

@@ -53,7 +53,7 @@ public class Admin {
 		
 		
 		/**
-		 * Ã¨ÆË
+		 * Ã¨ÑÛ
 		 */
 		
 		new Thread(new Thread_Main("adminmaoyan")).start();
@@ -64,6 +64,11 @@ public class Admin {
 		
 		new Thread(new Thread_Main("maoyan_runother")).start();
 		
+		
+		new Thread(new Thread_Main("maoyan_jibenxinxi_zhongpiaofang")).start();
+		
+		
+		new Thread(new Thread_Main("maoyan_shishipiaofang")).start();
 		
 		/**
 		 * ÖĞ¹úÆ±·¿Íø

@@ -30,11 +30,22 @@ public class HaoSouZhongYi {
 				String urlBranch = "";
 				// 指数
 				try {
+					
+					if (listTemp.get(1).length()<=2) {
+						urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
+								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
+								+ "%E7%BB%BC%E8%89%BA&area=%E5%85%A8%E5%9B%BD";
 					// urlBranch =
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
-					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
-							+ "&area=%E5%85%A8%E5%9B%BD";
+					}else{
+						urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
+								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
+								+ "&area=%E5%85%A8%E5%9B%BD";
+						
+					}
+					
+					
+					
 					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "3",TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -49,8 +60,15 @@ public class HaoSouZhongYi {
 				}
 				// 媒体关注度
 				try {
-					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
+					
+					if (listTemp.get(1).length()<=2) {
+						urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
+								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"%E7%BB%BC%E8%89%BA";
+					}else{
+						
+						urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
+								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
+					}
 					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "4",TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

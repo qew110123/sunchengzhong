@@ -54,6 +54,18 @@ public class OracleNetwork {
 		return (ArrayList<String>) list;
 	}
 
+	
+	
+	public static List<String> selectleshimovie(String nowTime) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = " select t.detail_url, t.tvplay_name, t.play_url   from ODS.TEM_NETWORK_REPUTATION t, (select tt1.tvplay_name           from (select t1.tvplay_name, t1.date_date, count(*)  from ODS.TEM_NETWORK_REPUTATION t1                  where t1.date_date = '"+nowTime+"'                    and t1.data_type = 0and t1.tv_type = 3                    and t1.source = 5                  group by t1.tvplay_name, t1.date_date) tt1           FULL JOIN (select t1.tvplay_name, t1.date_date, count(*)                       from ODS.TEM_NETWORK_REPUTATION t1                      where t1.date_date = '"+nowTime+"'                        and t1.data_type = 1and t1.tv_type = 3                        and t1.source = 5                      group by t1.tvplay_name, t1.date_date) tt2             ON tt1.tvplay_name = tt2.tvplay_name  group by tt1.tvplay_name ) tt3  where t.date_date = '"+nowTime+"'    and t.data_type = 0and t.tv_type = 3    and t.source = 5    and t.tvplay_name in tt3.tvplay_name  group by t.tvplay_name, t.play_url, t.detail_url";
+//		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from ods.tem_tvplay t";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, strSql, iNum);
+		return (ArrayList<String>) list;
+	}
 
 
 	public static List<String> selectqqMovie(String nowTime) {

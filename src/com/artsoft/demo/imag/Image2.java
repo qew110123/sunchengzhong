@@ -2,6 +2,7 @@ package com.artsoft.demo.imag;
 
 import java.util.List;
 
+import com.artsoft.download.news_toutiao.weixin.weixin;
 import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadImage;
@@ -14,7 +15,9 @@ public class Image2 {
 		String[] namelist=urldownload.split("/");
 		try {
 			nameurl=namelist[namelist.length-2]+".jpg";
-			DownloadImage.download(urldownload, nameurl, "D:\\Image\\weixin\\");
+			DownloadImage.download(urldownload, nameurl, "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\weixin\\");
+			System.out.println("图片下载成功");
+			weixin.leibiaoFavFTPUtil(nameurl);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -29,7 +32,10 @@ public class Image2 {
 		String[] namelist=urldownload.split("/");
 		try {
 			nameurl=namelist[namelist.length-1]+"";
-			DownloadImage.download(urldownload, nameurl, "D:\\Image\\weixin\\");
+			DownloadImage.download(urldownload, nameurl, "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\weixin\\");
+			
+			weixin.leibiaoFavFTPUtil(nameurl);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,7 +52,26 @@ public class Image2 {
 		try {
 			nameurl=namelist[namelist.length-2]+".jpg";
 			//http://img.art-d.com.cn:88/upload/img/news/contents/20160822/aoLjFpe7tp95ia7AR1UZjzsPHuVHyhUQ8OkghZmibqzgPrQNWdNdibN1FL9ebzvbpW4rTmicWCI4nux9RDzyUXj5Xw.jpg
-			DownloadImage.download(urldownload, nameurl, "D:\\Image\\news\\contents\\"+TimeTest.getNowTime("yyyyMMdd")+"\\" );
+			DownloadImage.download(urldownload, nameurl, "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\news\\contents\\"+TimeTest.getNowTime("yyyyMMdd")+"\\" );
+			weixin.neirongFavFTPUtil(nameurl);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("图片下载出错！");
+		}
+		return "http://img.art-d.com.cn:88/upload/img/news/contents/"+TimeTest.getNowTime("yyyyMMdd")+"/"+nameurl;
+	}
+	
+	
+	
+	public static String imagUrldownload_allurl_baidu(String urldownload){
+		String nameurl="";
+		String[] namelist=urldownload.split("/");
+		try {
+			nameurl=namelist[namelist.length-1];
+			//http://img.art-d.com.cn:88/upload/img/news/contents/20160822/aoLjFpe7tp95ia7AR1UZjzsPHuVHyhUQ8OkghZmibqzgPrQNWdNdibN1FL9ebzvbpW4rTmicWCI4nux9RDzyUXj5Xw.jpg
+			DownloadImage.download(urldownload, nameurl, "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\news\\contents\\"+TimeTest.getNowTime("yyyyMMdd")+"\\" );
+			weixin.neirongFavFTPUtil(nameurl);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

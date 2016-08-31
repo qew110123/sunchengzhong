@@ -74,7 +74,7 @@ public class WanfangBykeyWordMain {
 	
 	
 	
-	static boolean hhtimeTrue=true;// 判断今天时候运行完毕 true 没有运行完 ， false 运行完毕
+	static boolean hhtimeTrue=false;// 判断今天时候运行完毕 true 没有运行完 ， false 运行完毕
 	
 	
 	public  String Keyword( int intnum ){
@@ -92,7 +92,7 @@ public class WanfangBykeyWordMain {
 		
 		List<String> listArrayxiaoshuju = listArray.subList(numintn, numintn+intnum); 
 		numintn=numintn+intnum;
-		ConfigManager.getInstance().setConfigValue("weiboxiaonum",""+numintn);
+//		ConfigManager.getInstance().setConfigValue("weiboxiaonum",""+numintn);
 		
 		JSONArray arrayjsonname = new JSONArray();
 		
@@ -168,12 +168,14 @@ public class WanfangBykeyWordMain {
 			
 			List<String> listArrayxiaoshuju = listArraybig.subList(numintnbig, numintnbig+intnum); 
 			numintnbig=numintnbig+intnum;
-			System.out.println("微博全部值："+numintnbig);
-			ConfigManager.getInstance().setConfigValue("weibobagnum",""+numintnbig);
+			
+//			ConfigManager.getInstance().setConfigValue("weibobagnum",""+numintnbig);
 			
 			
 			
 			for (Object Objstring : listArrayxiaoshuju) {
+				System.out.println("微博全部值："+listArraybig.size());
+				System.out.println("微博运行值："+numintnbig);
 				JSONObject datajson = new JSONObject();
 				System.out.println(Objstring);
 				if (Objstring==null) {
@@ -225,7 +227,7 @@ public class WanfangBykeyWordMain {
 		List<String> listArrayxiaoshuju = listArraybig.subList(numintnbig, numintnbig+intnum); 
 		numintnbig=numintnbig+intnum;
 		System.out.println("微博全部值："+numintnbig);
-		ConfigManager.getInstance().setConfigValue("weibobagnum",""+numintnbig);
+//		ConfigManager.getInstance().setConfigValue("weibobagnum",""+numintnbig);
 		
 		JSONArray arrayjsonname = new JSONArray();
 		

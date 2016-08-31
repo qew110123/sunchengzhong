@@ -1,4 +1,4 @@
-package com.artsoft.downloadThreadpool;
+package com.artsoft.downloadThreadpool.tvplay;
 
 import java.net.Proxy;
 import java.text.SimpleDateFormat;
@@ -9,6 +9,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.artsoft.demo.DemoTime;
+import com.artsoft.downloadThreadpool.HaoSouTVtask;
+import com.artsoft.downloadThreadpool.IpFilter;
+import com.artsoft.downloadThreadpool.people.haoSou_thread_admin;
 import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.pool.ThreadPool;
 import com.artsoft.util.CommonUtil;
@@ -18,12 +21,12 @@ import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
 public class HaoSouTV_dianshiju {
-	static ThreadPool pool = new ThreadPool(10);
+	static ThreadPool pool = new ThreadPool(30);
 	private static Proxy proxy = null;
 
 	public static void mainProgram(int statnum, int endnum,int TV_TYPE) {
 		// TODO Auto-generated method stub
-		List<String> listArray = OracleHaoSou.select(Integer.toString(statnum), Integer.toString(endnum));
+		List<String> listArray = OracleHaoSou.selecttvplay(Integer.toString(statnum), Integer.toString(endnum));
 		System.out.println(listArray.size());
 		for (Object Objstring : listArray) {
 //			System.out.println(Objstring);
@@ -41,7 +44,7 @@ public class HaoSouTV_dianshiju {
 					
 					if (listTemp.get(1).length()<=2) {
 					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"+%e7%94%b5%e8%a7%86%e5%89%a7"
+							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"%e7%94%b5%e8%a7%86%e5%89%a7"
 							+ "&area=%E5%85%A8%E5%9B%BD";
 					
 					}else{
@@ -65,7 +68,7 @@ public class HaoSouTV_dianshiju {
 				try {
 					if (listTemp.get(1).length()<=2) {
 					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"+%e7%94%b5%e8%a7%86%e5%89%a7";
+							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"%e7%94%b5%e8%a7%86%e5%89%a7";
 					
 					}else{
 						urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
@@ -169,9 +172,9 @@ public class HaoSouTV_dianshiju {
 
 	private static void HaosouBranch1(String urlBranch, String string, String string2, String string3,int TV_TYPE) {
 		// TODO Auto-generated method stub
-		while (pool.getPoolNum() > 10) {
+		while (pool.getPoolNum() > 30) {
 			try {
-				System.out.println("线程数量大于10，等待5s");
+				System.out.println("线程数量大于30，等待5s");
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -239,7 +242,7 @@ public class HaoSouTV_dianshiju {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		String returnNumTVle=OracleHaoSou.returnNumPeople("edw.dim_tvplay");
+		String returnNumTVle=OracleHaoSou.returnNumtvplay();
 		System.out.println("需要采集的人名字数为"+returnNumTVle);
 		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
 			// i=15780;
@@ -265,14 +268,21 @@ public class HaoSouTV_dianshiju {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
 			}
-		}, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 5);// 这里设定将延时每天固定执行
 	}
 
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
 //		runstatic();
-		 TimingTime(1, 00, 00);
+//		 TimingTime(9, 30, 00);
+		
+		
+		new Thread(new haoSou_thread_tvtype("adminSou")).start();
+		new Thread(new haoSou_thread_tvtype("ip")).start();
+		
+		
+		
 		// IpFilter ipxi=new IpFilter;
 
 //		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");

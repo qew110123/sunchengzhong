@@ -1,4 +1,4 @@
-package com.artsoft.downloadThreadpool;
+package com.artsoft.downloadThreadpool.people;
 
 import java.net.Proxy;
 import java.text.SimpleDateFormat;
@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.artsoft.admin.Thread_Main;
 import com.artsoft.demo.DemoTime;
 import com.artsoft.download.HaoSouPeopleThread;
+import com.artsoft.downloadThreadpool.IpFilter;
+import com.artsoft.downloadThreadpool.MyHaoSoutask;
 import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.pool.ThreadPool;
 import com.artsoft.util.CommonUtil;
@@ -141,7 +144,7 @@ public class HaoSouWordAdmin {
 	 */
 
 	private static void mainPeoPle(int statnum, int endnum) {
-		List<String> listArray = OracleHaoSou.selectname(Integer.toString(statnum), Integer.toString(endnum));
+		List<String> listArray = OracleHaoSou.selectname360admin(Integer.toString(statnum), Integer.toString(endnum));
 		for (Object Objstring : listArray) {
 			System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
@@ -191,12 +194,14 @@ public class HaoSouWordAdmin {
 					// TODO Auto-generated catch block
 					// System.out.println("运行报错，等待5分钟" + urlBranch);
 					System.out.println("运行报错，url:" + urlBranch);
-					try {
-						Thread.sleep(1000 * 60 * 5);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					
+//					try {
+//						Thread.sleep(1000 * 60 * 5);
+//					} catch (InterruptedException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
+					
 					e.printStackTrace();
 				}
 				// 媒体关注度
@@ -261,7 +266,7 @@ public class HaoSouWordAdmin {
 				System.out.println("打开出错" + i + "次,链接：" + urlBranch);
 
 			}
-			if (i > 10) {
+			if (i > 5) {
 				bb = false;
 			}
 
@@ -297,7 +302,7 @@ public class HaoSouWordAdmin {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		String returnNumPeople = OracleHaoSou.returnNumPeople("ODS.DIM_PERSON");
+		String returnNumPeople = OracleHaoSou.returnNumPeople();
 		System.out.println("需要采集的人名字数为" + returnNumPeople);
 
 		for (int i = 0; i < Integer.parseInt(returnNumPeople); i = i + 1000) {
@@ -305,29 +310,72 @@ public class HaoSouWordAdmin {
 		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
+	
+	
+	
+	
 
+	
+	
+	
+	
 	// 判断数据开始时间
-	public static void TimingTime(int hh, int mm, int ss) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
-		calendar.set(Calendar.MINUTE, mm); // 控制分
-		calendar.set(Calendar.SECOND, ss); // 控制秒
+		public static void TimingTime(int hh, int mm, int ss) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+			calendar.set(Calendar.MINUTE, mm); // 控制分
+			calendar.set(Calendar.SECOND, ss); // 控制秒
 
-		Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+			Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
 
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask() {
-			public void run() {
-				System.out.println("-------设定要指定任务--------");
-				runstatic();
-			}
-		}, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行
-	}
+			Timer timer = new Timer();
+			timer.scheduleAtFixedRate(new TimerTask() {
+				public void run() {
+					System.out.println("-------设定要指定任务--------");
+					runstatic();
+					
+					
+				}
+			}, time, 1000 * 60 * 60 * 5);// 这里设定将延时每天固定执行
+		}
+		
+		
+		
+		
+		// 判断数据开始时间
+		public static void TimingTimeip(int hh, int mm, int ss) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+			calendar.set(Calendar.MINUTE, mm); // 控制分
+			calendar.set(Calendar.SECOND, ss); // 控制秒
+
+			Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+				public void run() {
+					System.out.println("-------设定要指定任务--------");
+//					runstatic();
+					IpFilter.mainip("http://index.haosou.com/");
+					
+					
+				}
+			}, time, 1000 * 60 * 30 * 1);// 这里设定将延时每天固定执行
+		}
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		
+		
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+		
+		
+		new Thread(new haoSou_thread_admin("adminSou")).start();
+		new Thread(new haoSou_thread_admin("ip")).start();
 
-		TimingTime(8, 00, 01);
+//		TimingTime(9, 00, 01);
 //		// runstatic();
 //		System.out.println("运行网吧");
 		

@@ -11,7 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.artsoft.download.webo.weiboSearch.WeiBoSearchTVplay;
-import com.artsoft.downloadThreadpool.HaoSouWordAdmin;
+import com.artsoft.downloadThreadpool.people.HaoSouWordAdmin;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;

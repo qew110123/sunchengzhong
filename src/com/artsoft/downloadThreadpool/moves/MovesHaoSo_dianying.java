@@ -1,4 +1,4 @@
-package com.artsoft.downloadThreadpool;
+package com.artsoft.downloadThreadpool.moves;
 
 import java.net.Proxy;
 import java.text.SimpleDateFormat;
@@ -9,6 +9,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.artsoft.demo.DemoTime;
+import com.artsoft.downloadThreadpool.HaoSouTVtask;
+import com.artsoft.downloadThreadpool.IpFilter;
 import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.pool.ThreadPool;
 import com.artsoft.util.CommonUtil;
@@ -17,7 +19,7 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
-public class MovesHaoSo {
+public class MovesHaoSo_dianying {
 	static ThreadPool pool = new ThreadPool(30);
 	private static Proxy proxy = null;
 
@@ -36,10 +38,17 @@ public class MovesHaoSo {
 				try {
 					// urlBranch =
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
-					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
-							+ "&area=%E5%85%A8%E5%9B%BD";
-					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "3",TV_TYPE);
+					if (listTemp.get(1).length()<=2) {
+						urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
+								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"%e7%94%b5%e5%bd%b1"
+								+ "&area=%E5%85%A8%E5%9B%BD";
+					}else{
+						urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
+								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
+								+ "&area=%E5%85%A8%E5%9B%BD";
+					}
+					
+					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "5",TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，url:" + urlBranch);
@@ -53,9 +62,15 @@ public class MovesHaoSo {
 				}
 				// 媒体关注度
 				try {
+					if (listTemp.get(1).length()<=2) {
 					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
-					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "4",TV_TYPE);
+							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"%e7%94%b5%e5%bd%b1";
+					}
+					else{
+						urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
+								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
+					}
+					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "6",TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，url:" + urlBranch);
@@ -224,7 +239,7 @@ public class MovesHaoSo {
 		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		//select t.film_id,t.film_name from ods.dim_film t
-		String returnNumTVle=OracleHaoSou.returnNumPeople("ods.dim_film");
+		String returnNumTVle=OracleHaoSou.returnNummove();
 		System.out.println("需要采集的人名字数为"+returnNumTVle);
 		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
 			// i=15780;
@@ -252,6 +267,7 @@ public class MovesHaoSo {
 //			}
 //		}, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行
 //	}
+	
 	
 	public static void runstaticshijian(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
@@ -291,14 +307,16 @@ public class MovesHaoSo {
             } 
         }, time, 1000 * 60 * 60 * 1);// 这里设定将延时每天固定执行  
     }
-	
+
 
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
+//		runstatic();
 //		 TimingTime(1, 00, 00);
-		 
 		 rundingshitime(1, 00, 00);
+		 
+//		 runstatic();
 		// IpFilter ipxi=new IpFilter;
 
 //		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");

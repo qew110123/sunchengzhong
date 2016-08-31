@@ -139,9 +139,9 @@ public class Demo {
 		//// strUrl="http://index.youku.com/ProAction!getPromptAnswer.action?word=%E5%90%8D";
 		// String strHtml = DownloadUtil.getHtmlText(strUrl, 1000 * 30,"UTF-8",
 		//// null, null);
-		 String strHtml = DownloadUtil.getHtmlText("http://cpquery.sipo.gov.cn//txnQueryOrdinaryPatents.do?select-key%3Ashenqingh=&select-key%3Azhuanlimc=&select-key%3Ashenqingrxm=%E6%9F%B3%E8%B6%85&select-key%3Azhuanlilx=&select-key%3Ashenqingr_from=&select-key%3Ashenqingr_to=&attribute-node:record_start-row=131&attribute-node:record_page-row=10&#anchor", 1000 * 30,"utf-8",
-				 null, null);
-		 System.out.println(strHtml);
+//		 String strHtml = DownloadUtil.getHtmlText("http://cpquery.sipo.gov.cn//txnQueryOrdinaryPatents.do?select-key%3Ashenqingh=&select-key%3Azhuanlimc=&select-key%3Ashenqingrxm=%E6%9F%B3%E8%B6%85&select-key%3Azhuanlilx=&select-key%3Ashenqingr_from=&select-key%3Ashenqingr_to=&attribute-node:record_start-row=131&attribute-node:record_page-row=10&#anchor", 1000 * 30,"utf-8",
+//				 null, null);
+//		 System.out.println(strHtml);
 		//// StringBuffer strHtml = DownloadUtil.getContent(urlstr);
 		//// System.out.println(strHtml);
 		//

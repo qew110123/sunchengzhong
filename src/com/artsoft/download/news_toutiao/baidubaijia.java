@@ -15,6 +15,7 @@ import com.artsoft.demo.imag.Image2;
 import com.artsoft.oracle.Oracle;
 import com.artsoft.oracle2.DBManager;
 import com.artsoft.util.DownloadUtil;
+import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
 public class baidubaijia {
@@ -73,12 +74,35 @@ public class baidubaijia {
 			Elements  js_contentps=docs.select("div.article-detail p");
 			String  js_contentStringp="";
 			int ii=0;
+//			int iii=0;
 			 for (Element element : js_contentps) {
 				if (ii>2) {
 					String Stringelement="";
 					
 					if (element.toString().contains("<img")) {
-						Stringelement=element.toString();
+//						Stringelement=element.toString();
+						try {
+							String imgotherhtml=HtmlAnalyze.getTagText(element.toString(), "<img", "\">",false,0);
+							String imgurlhtml=HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
+							String newimgurl=Image2.imagUrldownload_allurl_baidu(imgurlhtml);
+							
+//							if (iii==0) {
+//								leibiaoimg=newimgurl;
+//							}
+//							iii+=1;
+							
+							Stringelement=element.toString().replace(imgotherhtml, "<img src=\""+newimgurl+"\" >");
+							
+						} catch (Exception e) {
+							// TODO: handle exception
+							Stringelement=element.toString();
+						}
+						
+						
+						
+						
+						
+						
 						
 					}else{
 						if (element.toString().contains("<strong>")) {
