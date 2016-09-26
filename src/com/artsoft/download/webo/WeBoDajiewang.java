@@ -952,7 +952,7 @@ public class WeBoDajiewang {
 	 */
 
 	private static void mainPeoPle(int statnum, int endnum) {
-		List<String> listArray = OracleHaoSou.selectname(Integer.toString(statnum), Integer.toString(endnum));
+		List<String> listArray = OracleHaoSou.selectname_weibo(Integer.toString(statnum), Integer.toString(endnum));
 		for (Object Objstring : listArray) {
 			System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
@@ -1055,15 +1055,17 @@ public class WeBoDajiewang {
 		
 		
 //		Weiboall("http://data.weibo.com/index/ajax/getdefaultattributealldata?__rnd=1465910360625");
-		TimingTime(00, 00, 01);
-//		 rundingshitime(1, 00, 00);
+		
+		
+		
+		 rundingshitime(1, 00, 00);
 //		 runstatic();
 		/**
 		 * 名称  
 		 * data_type 类型 1 人 2 电视剧 3 电影
 		 * data_id  人物id
 		 */
-//		webopeople("王宝强",1,"2346");
+//		webopeople("郭德纲",1,"3806");
 //		daJeWang();
 //		System.out.println("运行网吧");
 //		methodPost();
@@ -1073,6 +1075,8 @@ public class WeBoDajiewang {
 		
 //		doGet("http://data.weibo.com/index/ajax/getdefaultattributealldata?__rnd=1465910360625", "utf-8");
 		
+		
+//		TimingTime(00, 00, 01);
 		
 		
 	}

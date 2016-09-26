@@ -55,6 +55,7 @@ public class Downloadqq {
 
 	public static void downBranch(String urlBranch, String nameBranch, String urlMain) {
 		// http: // v.qq.com/cover/e/e7hi6lep1yc51ca.html
+		String urlBranch1=urlBranch;
 
 		urlBranch = urlBranch.replaceAll("http://v.qq.com/cover/", "").replaceAll("html", "");
 		urlBranch = HtmlAnalyze.getTagText(urlBranch, "/", ".");
@@ -89,7 +90,7 @@ public class Downloadqq {
 		System.out.println(numstring);
 		try {
 			OracleOpreater.intoReputationAndDETAIL_URL(nameBranch, "3", numstring, "0", "", urlMain, "0", "0",
-					urlBranch);
+					urlBranch1);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

@@ -169,7 +169,7 @@ public class HaoSouZhongYi_gaicheng123 {
 	        Date time = calendar.getTime();         // 得出执行任务的时间,此处为今天的12：00：00  
 	  
 	        Timer timer = new Timer();  
-	        timer.schedule(new TimerTask() {  
+	        timer.scheduleAtFixedRate(new TimerTask() {  
 	            public void run() {  
 	                System.out.println("-------设定要指定任务--------");  
 	                try {
@@ -184,7 +184,7 @@ public class HaoSouZhongYi_gaicheng123 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		 TimingTime(1, 00, 00);
-		 rundingshitime(1, 00, 00);
+		 rundingshitime(1, 10, 00);
 //		runstatic();
 	}
 

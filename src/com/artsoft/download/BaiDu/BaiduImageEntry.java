@@ -9,6 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.artsoft.bean.TEM_DIM_ENTRYIMG;
+import com.artsoft.demo.imag.Image1;
 import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
@@ -87,7 +88,16 @@ public class BaiduImageEntry {
 				ENTRYIMG.setDataId(id);
 				ENTRYIMG.setSTILLS_TITLE(stills_title);
 				ENTRYIMG.setSTILLS_ORDERNO(xx);
-				
+				if (sount==0) {
+					
+					String sMALL_NAME="";
+					sMALL_NAME=Image1.downloadimg_baidu_Tvplay_small(smiimg);
+					
+					ENTRYIMG.setSMALL_NAME(sMALL_NAME);
+					String bIG_NAME="";
+					bIG_NAME=Image1.downloadimg_baidu_Tvplay_big(bigurl);
+					ENTRYIMG.setBIG_NAME(bIG_NAME);
+				}
 				OracleHaoSou.intoTEM_DIM_ENTRYIMG(ENTRYIMG);
 				xx+=1;
 			}

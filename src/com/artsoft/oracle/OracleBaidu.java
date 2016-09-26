@@ -17,6 +17,8 @@ public class OracleBaidu {
 	public static List selecthuoqu() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.person_id,t.person_name from ODS.DIM_PERSON t where t.profile is null and t.birth_date is null and t.birth_place is null and t.typical_works is null";
+		
+		sql="select t.person_id,t.person_name from edw.dim_person t where t.person_url is null";
 //		sql = "select t1.person_id,t1.person_name ,t1.person_url from ODS.TEM_TVPLAY_ACTORS t1,(select distinct t.person_url from ODS.TEM_TVPLAY_ACTORS t where t.person_id  >=16873 and t.person_url is not null) t2 where  t1.person_url = t2.person_url";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
@@ -50,6 +52,8 @@ public class OracleBaidu {
 		 * 
 		 */
 		sql="select  t.person_id,t.person_name,length(t.person_name),t.person_url from ods.dim_person t where t.person_id >172000 ";
+		
+		sql="select * from edw.dim_person t where t.person_url is null";
 		
 		
 		
@@ -114,6 +118,16 @@ public class OracleBaidu {
 		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null and t.create_time>to_date('20160810','yyyymmdd')";
 		
 		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null and t.create_time>to_date('20160810','yyyymmdd')";
+
+
+		sql="select t.tvplay_id,t.tvplay_name,to_char(create_time,'yyyymmdd') 生成时间 from edw.dim_tvplay t where t.years is null and t.create_time>to_date('20160810','yyyymmdd')";
+		
+		
+		sql="select * from  edw.dim_tvplay t where t.tvplay_url is null  ";
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t   where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
+		
+//		sql="select t.*, t.rowid from ODS.DEL_DIM_TVPLAY t";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -232,6 +246,8 @@ public class OracleBaidu {
 	public static List selectbaiTVplay() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.tvplay_id,max(t.tvplay_name),t.tvplay_url  from ods.tem_tvplay t  group by t.tvplay_id,t.tvplay_url order by t.tvplay_id";
+		
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from mart.dim_tvplay t where t.tvplay_url is not null order by t.tvplay_id desc";
 		
 //		sql="select t.tvplay_id,max(t.tvplay_name),t.tvplay_url  from ods.tem_tvplay t left join ods.tem_play_stills s on s.data_id = t.tvplay_id where t.tvplay_url is not null and  s.small_url is null or s.big_url is null group by t.tvplay_id,t.tvplay_url order by t.tvplay_id";
 		

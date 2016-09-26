@@ -1,6 +1,9 @@
 package com.artsoft.bean;
 
 public class TvPlay {
+	
+	
+	
 	// id
 	private Integer tvplay_id=-1;
 	// 剧名称
@@ -135,6 +138,11 @@ public class TvPlay {
 	
 	//中国票房网
 	private String SELAREA="";
+	
+	//是否入库
+	
+	private boolean bb=false;
+	
 	
 	
 	
@@ -680,4 +688,14 @@ public class TvPlay {
 	public void setSELAREA(String sELAREA) {
 		SELAREA = sELAREA;
 	}
+
+	public boolean isBb() {
+		return bb;
+	}
+
+	public void setBb(boolean bb) {
+		this.bb = bb;
+	}
+
+
 }

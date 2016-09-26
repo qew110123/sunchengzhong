@@ -116,6 +116,9 @@ public class BaiDuTeleplayDownload {
 
 				}
 				tvplay = buildTvPlay(baseInfoName, baseInfoValue, tvplay);
+				if (baseInfoName.equals("集数")||baseInfoName.equals("主演")||baseInfoName.equals("导演")) {
+					tvplay.setBb(true);
+				}
 
 			}
 			String stills_url = "";
@@ -410,7 +413,7 @@ public class BaiDuTeleplayDownload {
 			System.out.println(strUrlname = element.select("a.result-title").first().text());
 			System.out.println(strallname = element.select("p.result-summary").first().text());
 			System.out.println(strUrl = element.select("a.result-title").first().attr("href"));
-			if (strUrlname.contains("电视剧")||strallname.contains("电视剧")) {
+//			if (strUrlname.contains("电视剧")||strallname.contains("电视剧")) {
 				if (strUrl!=null) {
 					System.out.println("成功");
 //					TEM_DIM_FILM movesfilm = mainmore(id, strUrl, strname);
@@ -418,10 +421,13 @@ public class BaiDuTeleplayDownload {
 //					
 //					OracleHaoSou.InsertTEM_DIM_FILM(movesfilm);// 添加操作
 					TvPlay tvplay = mainmore(id, strUrl, strname);
-					tvplay.setBaikefilmname(strUrlname);
-					OracleHaoSou.InsertTVplay(tvplay);// 添加操作
+					if (tvplay.isBb()) {
+						tvplay.setBaikefilmname(strUrlname);
+						OracleHaoSou.InsertTVplay(tvplay);// 添加操作
+					}
+					
 				}
-			}
+//			}
 			
 		}
 		} catch (Exception e) {
@@ -544,7 +550,7 @@ public class BaiDuTeleplayDownload {
 		/**
 		 * 测试
 		 */
-		TvPlay tvplay = mainmore("40", "http://baike.baidu.com/view/13097674.htm", "大都市小爱情");
+		TvPlay tvplay = mainmore("187", "http://baike.baidu.com/view/3263475.htm", "暗战上海滩");
 //		OracleHaoSou.InsertTVplay(tvplay);// 添加操作
 		OracleHaoSou.UpdatPpartTVplay(tvplay);//整体表修改操作
 	}

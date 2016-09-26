@@ -1,31 +1,16 @@
 package WanfangBykeyWordMain;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.artsoft.config.ConfigManager;
-import com.artsoft.download.BaiDu.BaiDuTeleplayDownload;
-import com.artsoft.oracle.OracleBaidu;
 import com.artsoft.oracle.oracleRpc;
-import com.artsoft.util.CommonUtil;
 import com.artsoft.util.TimeTest;
 
 import net.sf.json.JSONArray;
 
-//import com.gesoft.MainSearch.staticNumPag;
-//import com.gesoft.MainSearch.staticNumint;
-//import com.gesoft.config.ConfigManager;
 
 public class WanfangBykeyWordMain {
 	/*
@@ -59,7 +44,7 @@ public class WanfangBykeyWordMain {
 	综艺前200
 	网剧前200
 	*/
-	List<String> listArraybig = oracleRpc.selectmaoyanshijuTmovebig();
+	static List<String> listArraybig = oracleRpc.selectmaoyanshijuTmovebig();
 	
 	
 	/*
@@ -70,14 +55,14 @@ public class WanfangBykeyWordMain {
 	网剧网络热播前50
 	类型  2 电视剧 3 电影 4综艺 5 网剧 
 	*/
-	List<String> listArray = oracleRpc.selectmaoyanshijuTmove();
+	static List<String> listArray = oracleRpc.selectmaoyanshijuTmove();
 	
 	
 	
-	static boolean hhtimeTrue=false;// 判断今天时候运行完毕 true 没有运行完 ， false 运行完毕
+	static boolean hhtimeTrue=true;// 判断今天时候运行完毕 true 没有运行完 ， false 运行完毕
 	
 	
-	public  String Keyword( int intnum ){
+	public static  String Keyword( int intnum ){
 		// TODO Auto-generated method stub
 		String stringbb="";		
 		
@@ -142,10 +127,10 @@ public class WanfangBykeyWordMain {
 	
 	
 
-	int hhtimeint=Integer.valueOf(TimeTest.getNowTime("HH"));  //获取当前小时 00 01 02..23
+	static int hhtimeint=Integer.valueOf(TimeTest.getNowTime("HH"));  //获取当前小时 00 01 02..23
 	
 	
-	public  String Keywordbig_xuanze( int intnum ){
+	public static  String Keywordbig_xuanze( int intnum ){
 		// TODO Auto-generated method stub
 		String stringbb="";		
 		
@@ -220,7 +205,7 @@ public class WanfangBykeyWordMain {
 	}
 	
 	
-	public  String Keywordbig( int intnum ){
+	public static  String Keywordbig( int intnum ){
 		// TODO Auto-generated method stub
 		String stringbb="";		
 		
@@ -279,9 +264,11 @@ public class WanfangBykeyWordMain {
 	
 	public static void main(String[] args) {
 		for (int i = 0; i < 10; i++) {
-			WanfangBykeyWordMain bb=new WanfangBykeyWordMain();
-			bb.Keywordbig(1);
+//			WanfangBykeyWordMain bb=new WanfangBykeyWordMain();
+//			bb.Keywordbig(1);
+			Keywordbig(1);
 		}
+		
 		
 	}
 }

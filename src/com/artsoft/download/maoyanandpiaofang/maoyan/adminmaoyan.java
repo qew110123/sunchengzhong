@@ -15,19 +15,33 @@ import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
+import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_key.maoyan_key;
 import com.artsoft.oracle.OracleMovePiaoFang;
 
 public class adminmaoyan {
 
 	public static void tem_dim_film_boxoffice(String id, String title, String urlMain) {
-		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
-		if (strHtml == null || strHtml.equals("")) {
+		String strHtml = "";
+//		if (strHtml == null || strHtml.equals("")) {
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+//		if (strHtml == null || strHtml.equals("")) {
 			// return;
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
+			
+			maoyan_key.openkey();
+			
+			String keturlString ="";
+			System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+			
+			if (!keturlString.equals("")) {
+				strHtml=maoyan_shishipiaofang.Stringhtml_int(keturlString,strHtml,urlMain);
+				
+			}
+			
+			
+			
+//		}
 
 		Document doc = Jsoup.parse(strHtml);
 
@@ -102,12 +116,22 @@ public class adminmaoyan {
 	public static void tem_film_daily_boxoffice_other(String id, String title, String urlMain) {
 
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		}
-		if (strHtml == null || strHtml.equals("")) {
-			// return;
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		if (strHtml == null || strHtml.equals("")) {
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+//		if (strHtml == null || strHtml.equals("")) {
+//			// return;
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		}
+		
+		
+		String keturlString ="";
+		System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+		
+		if (!keturlString.equals("")) {
+			maoyan_key.openkey();
+			strHtml=maoyan_shishipiaofang.Stringhtml_int(keturlString,strHtml,urlMain);
+			
 		}
 
 		Document doc = Jsoup.parse(strHtml);
@@ -252,6 +276,16 @@ public class adminmaoyan {
 		if (strHtml == null || strHtml.equals("")) {
 			// return;
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+		}
+		
+		
+		String keturlString ="";
+		System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+		
+		if (!keturlString.equals("")) {
+			maoyan_key.openkey();
+			strHtml=maoyan_shishipiaofang.Stringhtml_int(keturlString,strHtml,urlMain);
+			
 		}
 
 		Document doc = Jsoup.parse(strHtml);
@@ -630,9 +664,46 @@ public class adminmaoyan {
 		if (urlMain == null || urlMain.equals("")) {
 			urlMain = "http://piaofang.maoyan.com/";
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+			
+			
+			String keturlString ="";
+			System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+			
+			if (!keturlString.equals("")) {
+				maoyan_key.openkey();
+				strHtml=maoyan_shishipiaofang.Stringhtml_int(keturlString,strHtml,urlMain);
+				maoyan_key.openkey();
+				
+//				String keturlString ="";
+				System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+				
+				if (!keturlString.equals("")) {
+					strHtml=maoyan_shishipiaofang.Stringhtml_int(keturlString,strHtml,urlMain);
+					
+				}
+			}
 		}
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+			
+			
+			String keturlString ="";
+			System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+			
+			if (!keturlString.equals("")) {
+				maoyan_key.openkey();
+				strHtml=maoyan_shishipiaofang.Stringhtml_int(keturlString,strHtml,urlMain);
+				maoyan_key.openkey();
+				
+//				String keturlString ="";
+				System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+				
+				if (!keturlString.equals("")) {
+					strHtml=maoyan_shishipiaofang.Stringhtml_int(keturlString,strHtml,urlMain);
+					
+				}
+			}
+			
 		}
 
 		Document doc = Jsoup.parse(strHtml);
@@ -663,6 +734,12 @@ public class adminmaoyan {
 			// System.out.println(link.select("li.c1").toString());
 			System.out.println(total_boxoffice = HtmlAnalyze.getTagText(link.select("li.c1").toString(), "1rem\">",
 					"</em>", true, 0));
+			
+			
+			if (!total_boxoffice.equals("")&&total_boxoffice.contains("class")) {
+				total_boxoffice= HtmlAnalyze.getTagText(total_boxoffice.toString(), "\">",
+						"</i>");
+			}
 
 			String real_time_boxoffice = "";
 			System.out.println(real_time_boxoffice = link.select("li.c2").text());
@@ -811,12 +888,17 @@ public class adminmaoyan {
 		
 //		TimingTime(1, 59, 59);
 		
-		rundingshitime(1, 00, 00);
 		
 //		openstatic();
 		// historyopenstatic();
 		// tem_film_daily_boxoffice_other("", "",
 		// "http://piaofang.maoyan.com/movie/246970?_v_=yes");
+		
+		runstatic();
+		
+		rundingshitime(1, 00, 00);
+		
+		
 
 	}
 

@@ -89,9 +89,9 @@ public class OracleNetwork {
 	public static List selectyoukuTVplay(String date_date) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.detail_url from ODS.TEM_NETWORK_REPUTATION t where t.source=1 and t.tv_type=0 and t.data_type=0 and t.date_date>'"+date_date+"' group by t.detail_url";
-		
+		sql=" select t.tvplay_name, t.detail_url from ODS.TEM_NETWORK_REPUTATION t where t.source=1 and t.tv_type=0 and t.data_type=0 and t.date_date>'"+date_date+"' group by t.detail_url,t.tvplay_name";
 		ArrayList<String> listname = new ArrayList<String>();
-		int iNum = 1;
+		int iNum = 2;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 	}
@@ -107,6 +107,40 @@ public class OracleNetwork {
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 1;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+	
+	/**
+	 * 进行数据进行二次搜索 
+	 * 2016年9月8日16:49:17
+	 * @return
+	 */
+	public static List selectTVplayorder(String date_date,String source) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.detail_url from ODS.TEM_NETWORK_REPUTATION t where t.source=1 and t.tv_type=0 and t.data_type=0 and t.date_date>'"+date_date+"' group by t.detail_url";
+		sql=" select t.tvplay_name, t.detail_url from ODS.TEM_NETWORK_REPUTATION t where t.source="+source+" and t.tv_type=0 and t.data_type=0 and t.date_date>'"+date_date+"' group by t.detail_url,t.tvplay_name";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	/**
+	 * 进行数据进行二次搜索 
+	 * 2016年9月8日16:49:17
+	 * @return
+	 */
+	public static List selectTVplayorder_tv_type(String date_date,String source) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.detail_url from ODS.TEM_NETWORK_REPUTATION t where t.source=1 and t.tv_type=0 and t.data_type=0 and t.date_date>'"+date_date+"' group by t.detail_url";
+		sql=" select t.tvplay_name, t.detail_url from ODS.TEM_NETWORK_REPUTATION t where t.source="+source+" and t.tv_type=0 and t.data_type=1 and t.date_date>'"+date_date+"' group by t.detail_url,t.tvplay_name";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 	}

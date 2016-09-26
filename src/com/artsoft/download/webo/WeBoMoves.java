@@ -17,7 +17,7 @@ public class WeBoMoves {
 
 	public static void mainProgram(int statnum, int endnum) {
 		// TODO Auto-generated method stub
-		List<String> listArray = OracleHaoSou.selectdim_film(Integer.toString(statnum), Integer.toString(endnum));
+		List<String> listArray = OracleHaoSou.selectdim_film_wobo(Integer.toString(statnum), Integer.toString(endnum));
 		System.out.println(listArray.size());
 		for (Object Objstring : listArray) {
 			// System.out.println(Objstring);

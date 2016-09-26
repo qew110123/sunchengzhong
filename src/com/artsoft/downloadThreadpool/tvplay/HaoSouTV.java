@@ -198,7 +198,7 @@ public class HaoSouTV {
 				System.out.println("打开出错" + i + "次,链接：" + urlBranch);
 
 			}
-			if (i > 5) {
+			if (i > 10) {
 				bb = false;
 			}
 

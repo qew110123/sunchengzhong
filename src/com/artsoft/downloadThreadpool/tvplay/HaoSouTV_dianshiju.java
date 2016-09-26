@@ -21,7 +21,7 @@ import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
 public class HaoSouTV_dianshiju {
-	static ThreadPool pool = new ThreadPool(30);
+	static ThreadPool pool = new ThreadPool(100);
 	private static Proxy proxy = null;
 
 	public static void mainProgram(int statnum, int endnum,int TV_TYPE) {
@@ -172,7 +172,7 @@ public class HaoSouTV_dianshiju {
 
 	private static void HaosouBranch1(String urlBranch, String string, String string2, String string3,int TV_TYPE) {
 		// TODO Auto-generated method stub
-		while (pool.getPoolNum() > 30) {
+		while (pool.getPoolNum() > 100) {
 			try {
 				System.out.println("线程数量大于30，等待5s");
 				Thread.sleep(5000);
@@ -252,6 +252,20 @@ public class HaoSouTV_dianshiju {
 
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
+	
+	
+	public static void runstaticshijian(){
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+		System.out.println(TimeTest.getNowTime("HH"));
+		if (Integer.valueOf(TimeTest.getNowTime("HH"))>=9) {
+			runstatic();
+		}
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
+	}
+	
+	
+	
+	
 
 	// 判断数据开始时间
 	public static void TimingTime(int hh, int mm, int ss) {
@@ -266,9 +280,9 @@ public class HaoSouTV_dianshiju {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				System.out.println("-------设定要指定任务--------");
-				runstatic();
+				runstaticshijian();
 			}
-		}, time, 1000 * 60 * 60 * 5);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 1);// 这里设定将延时每天固定执行
 	}
 
 	public static void main(String[] args) {

@@ -638,14 +638,14 @@ public class weixin {
 //		int port = 21;
 //		String username = "shareuser";
 //		String password = "shareuser18";
-		String pathname = "/big";
+		String pathname = "/news/big";
 //		String filename = "1.jpg";
 		String originfilename = "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\weixin\\"+filename;
 		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);
 		System.out.println("big上传成功");
 		
 		
-		pathname = "/small";
+		pathname = "/news/small";
 		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);
 		System.out.println("small上传成功");
 		// String localpath = "D:/";
@@ -668,7 +668,7 @@ public class weixin {
 //		int port = 21;
 //		String username = "shareuser";
 //		String password = "shareuser18";
-		String pathname = "/contents/"+TimeTest.getNowTime("yyyyMMdd")+"";
+		String pathname = "/news/contents/"+TimeTest.getNowTime("yyyyMMdd")+"";
 //		String filename = "1.jpg";
 		String originfilename = "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\news\\contents\\"+TimeTest.getNowTime("yyyyMMdd")+"\\"+filename;
 		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);

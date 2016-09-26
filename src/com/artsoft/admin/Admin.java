@@ -56,19 +56,19 @@ public class Admin {
 		 * Ã¨ÑÛ
 		 */
 		
-		new Thread(new Thread_Main("adminmaoyan")).start();
-		
-		
-		new Thread(new Thread_Main("maoyan_paipian")).start();
-		
-		
-		new Thread(new Thread_Main("maoyan_runother")).start();
-		
-		
-		new Thread(new Thread_Main("maoyan_jibenxinxi_zhongpiaofang")).start();
-		
-		
-		new Thread(new Thread_Main("maoyan_shishipiaofang")).start();
+//		new Thread(new Thread_Main("adminmaoyan")).start();
+//		
+//		
+//		new Thread(new Thread_Main("maoyan_paipian")).start();
+//		
+//		
+//		new Thread(new Thread_Main("maoyan_runother")).start();
+//		
+//		
+//		new Thread(new Thread_Main("maoyan_jibenxinxi_zhongpiaofang")).start();
+//		
+//		
+//		new Thread(new Thread_Main("maoyan_shishipiaofang")).start();
 		
 		/**
 		 * ÖĞ¹úÆ±·¿Íø

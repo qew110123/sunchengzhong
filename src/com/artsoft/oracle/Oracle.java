@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.artsoft.bean.MAYAO_KEY;
+import com.artsoft.bean.TEM_TVPLAY_TIDBITS;
 import com.artsoft.bean.TEM_WEIBO_TOPIC_SCORE;
 import com.artsoft.bean.Tem_weibo_word_age_sex;
 import com.artsoft.bean.Tem_weibo_word_area;
@@ -302,6 +304,44 @@ public class Oracle {
 		System.out.println(bb);
 	}
 	
+	
+	
+	/**
+	 * 2016年5月11日14:27:59
+	 * 
+	 * @param company
+	 * 
+	 */
+	public static void InsertWECHAT_INFORMATION_id(WECHAT_INFORMATION INFORMATION) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "INSERT INTO ods.WECHAT_INFORMATION t (t.data_id,t.names,t.dates,t.post_user,t.content_all,t.content_p,t.urls,t.weixinhao,t.data_date,t.weixin_ation,t.original,t.ranking,IMG_BIG_URL,IMG_BIG_NAME,SOURCE,DATA_TYPE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(INFORMATION.getDataId());
+		list.add(INFORMATION.getNames());
+		list.add(INFORMATION.getDates());
+		list.add(INFORMATION.getPostUser());
+		list.add(INFORMATION.getContentAll());
+		list.add(INFORMATION.getContentP());
+		list.add(INFORMATION.getUrls());
+		list.add(INFORMATION.getWeixinhao());
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(INFORMATION.getWeixinAtion());
+		list.add(INFORMATION.getOriginal());
+		list.add(INFORMATION.getRanking());
+		list.add(INFORMATION.getIMG_BIG_URL());
+		list.add(INFORMATION.getIMG_BIG_NAME());
+		list.add(INFORMATION.getSOURCE());
+		list.add(INFORMATION.getDATA_TYPE());
+		
+//		list.add(INFORMATION.getUrls());
+		
+//		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
 	/**
 	 * 百度数据的中的网络剧补充
 	 * 2016年6月17日16:37:43
@@ -331,6 +371,113 @@ public class Oracle {
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 	}
+	
+	
+	
+	
+	
+	/**
+	 * 2016年9月5日17:16:02
+	 * 
+	 * @param company
+	 * 
+	 */
+	public static void IntoTEM_TVPLAY_TIDBITS(TEM_TVPLAY_TIDBITS tidbits) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ODS.TEM_TVPLAY_TIDBITS t (t.data_date,t.tvplay_name,t.title_name,t.detail_url,t.play_url,t.put_date,t.play_amount,t.play_platform,t.time_longs,t.order_no"
+				+ ",t.img_small_url,t.img_small_name,t.into_date,t.data_type,t.SOURCE)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+//		list.add(tidbits.getDataId());
+		list.add(tidbits.getTvplayName());
+		list.add(tidbits.getTitleName());
+		list.add(tidbits.getDetailUrl());
+		list.add(tidbits.getPlayUrl());
+		list.add(tidbits.getPutDate());
+		list.add(tidbits.getPlayAmount());
+		list.add(tidbits.getPlayPlatform());
+		list.add(tidbits.getTimeLongs());
+		list.add(tidbits.getOrderNo());
+		list.add(tidbits.getImgSmallUrl());
+		list.add(tidbits.getImgSmallName());
+//		list.add(tidbits.getIntoDate());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(tidbits.getDataType());
+		list.add(tidbits.getSOURCE());
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+
+	/**
+	 * 2016年9月14日13:20:39
+	 * 
+	 * @param mayao_key
+	 * 
+	 */
+	public static void IntoMAYAO_KEY(MAYAO_KEY mayao_key) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ODS.Mayao_Key t (t.key_url,t.one,t.two,t.three,t.four,t.five,t.six,t.seven,t.eight,t.nine,t.zero)values(?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(mayao_key.getKeyUrl());
+		list.add(mayao_key.getOne());
+		list.add(mayao_key.getTwo());
+		list.add(mayao_key.getThree());
+		list.add(mayao_key.getFour());
+		list.add(mayao_key.getFive());
+		list.add(mayao_key.getSix());
+		list.add(mayao_key.getSeven());
+		list.add(mayao_key.getEight());
+		list.add(mayao_key.getNine());
+		list.add(mayao_key.getZero());
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	/**
+	 * mayao_key
+	 * 2016年9月14日13:45:42
+	 * @return
+	 */
+	public static List selectmayao_key (String key_url) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.key_url,t.one,t.two,t.three,t.four,t.five,t.six,t.seven,t.eight,t.nine,t.zero from ODS.Mayao_Key t  where key_url='"+key_url+"'";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 11;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+
+	/**
+	 * 拼写sql语句并获取开始和结束
+	 * 
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selecttvplay() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t where t.tvplay_id>114 order by t.tvplay_id ";
+		
+//		sql="select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.* from (select t.tvplay_id,t.tvplay_name from         mart.f_tvplay_index t left join         (select nr.tvplay_id,count( distinct nr.data_type) as counts                 from ods.tem_network_reputation nr               where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 0              group by nr.tvplay_id              ) n on t.tvplay_id = n.tvplay_id and n.counts = 2             where t.data_date = '29991231' and n.tvplay_id is null    order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2 on t1.tvplay_id =t2.data_id ";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	
 	
 	
 	public static void main(String[] args) {

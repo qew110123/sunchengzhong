@@ -29,6 +29,7 @@ public class WECHAT_INFORMATION {
 	private String IMG_BIG_URL="";
 	private String IMG_BIG_NAME="";
 	private int SOURCE=1;
+	private int DATA_TYPE=0;
 	
 	
 
@@ -110,6 +111,12 @@ public class WECHAT_INFORMATION {
 	}
 	public void setSOURCE(int sOURCE) {
 		SOURCE = sOURCE;
+	}
+	public int getDATA_TYPE() {
+		return DATA_TYPE;
+	}
+	public void setDATA_TYPE(int dATA_TYPE) {
+		DATA_TYPE = dATA_TYPE;
 	}
 
 }

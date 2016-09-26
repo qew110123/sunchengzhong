@@ -22,6 +22,8 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.ReadTxtFile;
 import com.artsoft.util.TimeTest;
 
+import WanfangBykeyWordMain.WanfangBykeyWordMain;
+
 public class Demo {
 	public static String getKeyWordFromFile(String FileName) {
 		// FileName : Config/keyword.txt
@@ -126,6 +128,7 @@ public class Demo {
 	public static void main(String[] args) {
 //		System.out.println(getvalue(2));
 		System.out.println(Double.parseDouble("-1"));
+		WanfangBykeyWordMain.Keywordbig_xuanze(Integer.valueOf(1));
 		// TODO Auto-generated method stub
 		//// String cookstr="BAIDUID=3AADC6F35D3F3088991AA4460A697FE2:FG=1;
 		//// BIDUPSID=3AADC6F35D3F3088991AA4460A697FE2; PSTM=1445389865;

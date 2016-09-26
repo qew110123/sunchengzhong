@@ -33,8 +33,11 @@ public class RpcInterface {
 		System.out.println("用户ip:"+ip+"，调用方法名称Keyword:");	
 		String returnstringkey="";
 		try {
-			WanfangBykeyWordMain bb=new WanfangBykeyWordMain();
-			returnstringkey=bb.Keywordbig_xuanze(Integer.valueOf(intNum));
+//			WanfangBykeyWordMain bb=new WanfangBykeyWordMain();
+//			returnstringkey=bb.Keywordbig_xuanze(Integer.valueOf(intNum));
+			
+			returnstringkey=WanfangBykeyWordMain.Keywordbig_xuanze(Integer.valueOf(intNum));
+			
 //			returnstringkey=bb.Keywordbig(Integer.valueOf(intNum));
 //		System.out.println("获取关键字为"+returnstringkey);
 		} catch (Exception e) {

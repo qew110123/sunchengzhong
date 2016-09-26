@@ -16,7 +16,9 @@ public class TEM_DIM_ENTRYIMG implements Serializable {
 	
 	private int STILLS_ORDERNO=0;
 	
+	private String SMALL_NAME="";
 	
+	private String BIG_NAME="";
 
 	public void setDataId(String dataId){
 		this.dataId=dataId;
@@ -68,6 +70,18 @@ public class TEM_DIM_ENTRYIMG implements Serializable {
 	}
 	public void setDataType(int dataType) {
 		this.dataType = dataType;
+	}
+	public String getSMALL_NAME() {
+		return SMALL_NAME;
+	}
+	public void setSMALL_NAME(String sMALL_NAME) {
+		SMALL_NAME = sMALL_NAME;
+	}
+	public String getBIG_NAME() {
+		return BIG_NAME;
+	}
+	public void setBIG_NAME(String bIG_NAME) {
+		BIG_NAME = bIG_NAME;
 	}
 }
 

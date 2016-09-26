@@ -17,7 +17,7 @@ public class WeBoTvPlay {
 
 	public static void mainProgram(int statnum, int endnum) {
 		// TODO Auto-generated method stub
-		List<String> listArray = OracleHaoSou.select(Integer.toString(statnum), Integer.toString(endnum));
+		List<String> listArray = OracleHaoSou.selecttvplay_weibo(Integer.toString(statnum), Integer.toString(endnum));
 		System.out.println(listArray.size());
 		for (Object Objstring : listArray) {
 			// System.out.println(Objstring);

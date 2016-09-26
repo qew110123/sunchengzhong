@@ -7,7 +7,6 @@ import java.util.TimerTask;
 
 import com.artsoft.bean.TEM_FILM_BOXOFFICE_REALTIME;
 import com.artsoft.bean.TvPlay;
-import com.artsoft.download.Movies.Details.DownCboooZhongGuoDetails;
 import com.artsoft.oracle.OracleMovePiaoFang;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;

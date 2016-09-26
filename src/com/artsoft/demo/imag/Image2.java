@@ -66,6 +66,12 @@ public class Image2 {
 	
 	public static String imagUrldownload_allurl_baidu(String urldownload){
 		String nameurl="";
+		urldownload=urldownload.replace("&amp;", "");
+		if (urldownload.contains("?")) {
+			String [] urldownloadlist=urldownload.split("?");
+			urldownload=urldownloadlist[0];
+		}
+		
 		String[] namelist=urldownload.split("/");
 		try {
 			nameurl=namelist[namelist.length-1];

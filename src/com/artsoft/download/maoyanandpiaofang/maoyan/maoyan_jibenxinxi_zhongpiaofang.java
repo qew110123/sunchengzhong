@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_key.maoyan_key;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
@@ -29,6 +30,16 @@ public class maoyan_jibenxinxi_zhongpiaofang {
 		}
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+			
+			
+			String keturlString ="";
+			System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+			
+			if (!keturlString.equals("")) {
+				maoyan_key.openkey();
+				strHtml=maoyan_shishipiaofang.Stringhtml_int(keturlString,strHtml,urlMain);
+				
+			}
 		}
 
 		Document doc = Jsoup.parse(strHtml);

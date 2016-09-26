@@ -10,6 +10,8 @@ import com.artsoft.bean.TEM_FILM_CINEMA_DATE;
 import com.artsoft.bean.TEM_FILM_DAILY_CINEMA;
 import com.artsoft.bean.TEM_FILM_SCHEDULE;
 import com.artsoft.bean.TEM_FILM_WEEK_CINEMA;
+import com.artsoft.util.CommonUtil;
+import com.artsoft.util.Stirngstr;
 import com.artsoft.util.TimeTest;
 
 public class OracleMovePiaoFang {
@@ -29,23 +31,29 @@ public class OracleMovePiaoFang {
 
 		List<Comparable> list = new ArrayList();
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
-		list.add(data_date);
-		list.add(title);
-		list.add(url);
-		list.add(uid);
-		list.add(released_days);
-		list.add(total_boxoffice);
-		list.add(real_time_boxoffice);
-		list.add(boxoffice_rate);
-		list.add(slice_rate);
-		list.add(attendance_rate);
-		list.add(source);
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		list.add(collection_url);
-		list.add(BOXOFFICE_TYPE);
-		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
-		System.out.println(bb);
+		
+		if (Stirngstr.isNumeribaidu(real_time_boxoffice)) {
+			list.add(data_date);
+			list.add(title);
+			list.add(url);
+			list.add(uid);
+			list.add(released_days);
+			list.add(total_boxoffice);
+			list.add(real_time_boxoffice);
+			list.add(boxoffice_rate);
+			list.add(slice_rate);
+			list.add(attendance_rate);
+			list.add(source);
+			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			list.add(collection_url);
+			list.add(BOXOFFICE_TYPE);
+			// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+			System.out.println(bb);
+		}
+		else{
+			System.out.println("网站结构数据有变，数据不入库,单日票房");
+		}
 	}
 
 	/**
@@ -66,33 +74,45 @@ public class OracleMovePiaoFang {
 
 		List<Comparable> list = new ArrayList();
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
-		list.add(data_date);
-		list.add(title);
-		list.add(url);
-		list.add(uid);
-		list.add(released_days);
-		list.add(total_boxoffice);
-		list.add(real_time_boxoffice);
-		list.add(boxoffice_rate);
-		list.add(slice_rate);
-		list.add(attendance_rate);
-		list.add(source);
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		list.add(collection_url);
-		list.add(BOXOFFICE_TYPE);
-		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		list.add(FIELD_AVERAGE_PRICE);
-		list.add(FIELD_AVERAGE_PNUM);
-		list.add(BOXOFFICE_UP);
-		list.add(WOMINDEX);
-		list.add(MOVIEIMG);
-		System.out.println(list.toString());
-		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
-		System.out.println(bb);
+		
+		if (Stirngstr.isNumeribaidu(total_boxoffice.replace("万", "").replace("亿", ""))) {
+			list.add(data_date);
+			list.add(title);
+			list.add(url);
+			list.add(uid);
+			list.add(released_days);
+			list.add(total_boxoffice);
+			list.add(real_time_boxoffice);
+			list.add(boxoffice_rate);
+			list.add(slice_rate);
+			list.add(attendance_rate);
+			list.add(source);
+			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			list.add(collection_url);
+			list.add(BOXOFFICE_TYPE);
+			// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			list.add(FIELD_AVERAGE_PRICE);
+			list.add(FIELD_AVERAGE_PNUM);
+			list.add(BOXOFFICE_UP);
+			list.add(WOMINDEX);
+			list.add(MOVIEIMG);
+			System.out.println(list.toString());
+			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+			System.out.println(bb);
+			}
+		else{
+			System.out.println("网站结构数据有变，数据不入库,单日票房");
+		}
 	}
+	
+	
+	
 
 	/**
-	 * 猫眼数据中的 票房总tem_dim_film_boxoffice 2016年3月14日17:25:51 影片基本信息表
+	 * 猫眼数据中的 票房总tem_dim_film_boxoffice 
+	 * 2016年3月14日17:25:51 影片基本信息表
+	 * 
+	 * 与2016年9月9日10:16:48 进行二次修改
 	 * 
 	 * @return
 	 */
@@ -110,33 +130,47 @@ public class OracleMovePiaoFang {
 
 		List<Comparable> list = new ArrayList();
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
-		list.add(fid);
-		list.add(title);
-		list.add(score);
-		list.add(score_num);
-		list.add(want_see_num);
-		list.add(type);
-		list.add(duration);
-		list.add(standard);
-		list.add(released_date);
-		list.add(total_boxoffice);
-		list.add(first_week_boxoffice);
-		list.add(director);
-		list.add(actors);
-		list.add(produce_company);
-		list.add(issue_company);
-		list.add(union_issue_company);
-		list.add(times_length);
-		list.add(color);
-		list.add(aspect_ratio);
-		list.add(description);
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		list.add(collection_url);
-		list.add(source);
-
-		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
-		System.out.println(bb);
+		try {
+			
+//			if (Stirngstr.isNumeribaidu(total_boxoffice)) {
+				int xx=Integer.valueOf(score_num);
+				list.add(fid);
+				list.add(title);
+				list.add(score);
+				list.add(score_num);
+				list.add(want_see_num);
+				list.add(type);
+				list.add(duration);
+				list.add(standard);
+				list.add(released_date);
+				list.add(total_boxoffice);
+				list.add(first_week_boxoffice);
+				list.add(director);
+				list.add(actors);
+				list.add(produce_company);
+				list.add(issue_company);
+				list.add(union_issue_company);
+				list.add(times_length);
+				list.add(color);
+				list.add(aspect_ratio);
+				list.add(description);
+				list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+				list.add(collection_url);
+				list.add(source);
+		
+				// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+				boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+				System.out.println(bb);
+//			}else{
+//				System.out.println("网站结构数据有变，数据不入库,单日票房");
+//			}
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("网站结构数据有变，数据不入库");
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":网站结构数据有变，数据不入库");
+			
+		}
 	}
 
 	/**
@@ -154,20 +188,24 @@ public class OracleMovePiaoFang {
 				+ "t.field_average_pnum,t.into_date,t.collection_url,t.BOXOFFICE_TYPE)values(?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 
 		List<Comparable> list = new ArrayList();
-		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
-		list.add(fid);
-		list.add(title);
-		list.add(data_date);
-		list.add(day_boxoffice);
-		list.add(boxoffice_rate);
-		list.add(slice_rate);
-		list.add(field_average_pnum);
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		list.add(collection_url);
-		list.add(BOXOFFICE_TYPE);
-		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
-		System.out.println(bb);
+			// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
+			if (Stirngstr.isNumeribaidu(day_boxoffice)) {
+			list.add(fid);
+			list.add(title);
+			list.add(data_date);
+			list.add(day_boxoffice);
+			list.add(boxoffice_rate);
+			list.add(slice_rate);
+			list.add(field_average_pnum);
+			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			list.add(collection_url);
+			list.add(BOXOFFICE_TYPE);
+			// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+			System.out.println(bb);
+		}else{
+			System.out.println("网站结构数据有变，数据不入库,单日票房");
+		}
 	}
 
 	/**
@@ -335,26 +373,36 @@ public class OracleMovePiaoFang {
 
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String strSql = "insert into ods.TEM_FILM_BOXOFFICE_REALTIME t (t.data_date,t.title,t.url,t.fid,t.released_days,t.real_time_boxoffice,t.boxoffice_rate,t.total_boxoffice,t.into_date,t.collection_url,t.real_date,t.DATA_TYPE,SOURCE)values(?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)";
-
+		
+		
 		List<Comparable> list = new ArrayList();
+		
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
-		list.add(realitme.getDataDate());
-		list.add(realitme.getTitle());
-		list.add(realitme.getUrl());
-		list.add(realitme.getFid());
-		list.add(realitme.getReleasedDays());
-		list.add(realitme.getRealTimeBoxoffice());
-		list.add(realitme.getBoxofficeRate());
-		list.add(realitme.getTotalBoxoffice());
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		list.add(realitme.getCollectionUrl());
-		list.add(realitme.getREAL_DATE());
-		list.add(realitme.getDATA_TYPE());
-		// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		list.add(realitme.getSOURCE());
-		System.out.println(list.toString());
-		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
-		System.out.println(bb);
+		
+		if (Stirngstr.isNumeribaidu(realitme.getRealTimeBoxoffice())) {
+			
+		
+		
+			list.add(realitme.getDataDate());
+			list.add(realitme.getTitle());
+			list.add(realitme.getUrl());
+			list.add(realitme.getFid());
+			list.add(realitme.getReleasedDays());
+			list.add(realitme.getRealTimeBoxoffice());
+			list.add(realitme.getBoxofficeRate());
+			list.add(realitme.getTotalBoxoffice());
+			list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			list.add(realitme.getCollectionUrl());
+			list.add(realitme.getREAL_DATE());
+			list.add(realitme.getDATA_TYPE());
+			// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+			list.add(realitme.getSOURCE());
+			System.out.println(list.toString());
+			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+			System.out.println(bb);
+		}else{
+			System.out.println("网站结构数据有变，数据不入库");
+		}
 	}
 	
 	

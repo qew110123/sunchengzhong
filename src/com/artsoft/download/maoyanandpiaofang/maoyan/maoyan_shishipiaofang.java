@@ -3,6 +3,7 @@ package com.artsoft.download.maoyanandpiaofang.maoyan;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,6 +13,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.artsoft.bean.TEM_FILM_BOXOFFICE_REALTIME;
+import com.artsoft.oracle.Oracle;
 import com.artsoft.oracle.OracleMovePiaoFang;
 import com.artsoft.oracle2.DBManager;
 import com.artsoft.oracle2.DateUtil;
@@ -19,22 +21,61 @@ import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
+import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_key.maoyan_key;
+
 
 public class maoyan_shishipiaofang {
 	
 	
 	
-	public static  String Stringhtml_int(String htmls){
+	private static final List<String> Objstring = null;
+
+	public static  String Stringhtml_int(String keturlString,String htmls,String url){
 		String htmls_num=htmls;
-		String[] numstaticnum={"&#xf884;","&#xe3f9;","&#xf351;","&#xebdc;","&#xf796;","&#xf2ca;","&#xe08f;","&#xf869;","&#xf193;","&#xef4f;"};
-		String[] numstaticnum1={"0","1","2","3","4","5","6","7","8","9"};
-		
-		for (int i = 0; i < 10; i++) {
-			htmls_num=htmls_num.replace(numstaticnum[i], numstaticnum1[i]);
-//			System.out.println(numstaticnum[i]);
-//			System.out.println(numstaticnum1[i]);
-//			System.out.println(htmls_num);
+		boolean bb=true;
+		int iii=0;
+		while (bb) {
+			List<List> listArray1 =Oracle.selectmayao_key(keturlString);
+			
+			
+			if (listArray1!=null&&listArray1.size()>0) {
+				for (List listArray : listArray1) {
+				
+				
+//				List<String> listArray =listArray.get(0);
+				System.out.println(listArray.toString());
+				System.out.println(listArray.get(0));
+				System.out.println(listArray.get(10));
+				String[] numstaticnum={listArray.get(10).toString(),listArray.get(1).toString(),listArray.get(2).toString(),listArray.get(3).toString(),
+						listArray.get(4).toString(),listArray.get(5).toString(),listArray.get(6).toString(),listArray.get(7).toString(),listArray.get(8).toString(),listArray.get(9).toString()};
+				String[] numstaticnum1={"0","1","2","3","4","5","6","7","8","9"};
+				
+				for (int i = 0; i < 10; i++) {
+					htmls_num=htmls_num.replace(numstaticnum[i], numstaticnum1[i]);
+	//				System.out.println(numstaticnum[i]);
+	//				System.out.println(numstaticnum1[i]);
+	//				System.out.println(htmls_num);
+				}
+				}
+				bb=false;
+				
+			}else{
+				
+				maoyan_key.openkey();
+				
+				if (iii%5==4) {
+					String strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
+					
+//					String keturlString ="";
+					System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+					
+					iii=0;
+				}
+				iii=iii+1;
+				
+			}
 		}
+		
 		return htmls_num;
 	}
 	
@@ -53,7 +94,16 @@ public class maoyan_shishipiaofang {
 		}
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-			strHtml=Stringhtml_int(strHtml);
+			
+			
+			String keturlString ="";
+			System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+			
+			if (!keturlString.equals("")) {
+				maoyan_key.openkey();
+				strHtml=Stringhtml_int(keturlString,strHtml,urlMain);
+				
+			}
 //			System.out.println(strHtml);
 //			strHtml=Jsoup.connect(urlMain);
 //			 doc =(Document) Jsoup.connect(urlMain);
@@ -102,6 +152,12 @@ public class maoyan_shishipiaofang {
 			// System.out.println(link.select("li.c1").toString());
 			System.out.println(total_boxoffice = HtmlAnalyze.getTagText(link.select("li.c1").toString(), "1rem\">",
 					"</em>", true, 0));
+			
+			if (!total_boxoffice.equals("")&&total_boxoffice.contains("class")) {
+				total_boxoffice= HtmlAnalyze.getTagText(total_boxoffice.toString(), "\">",
+						"</i>");
+			}
+			
 
 			String real_time_boxoffice = "";
 			System.out.println(real_time_boxoffice = link.select("li.c2").text());
@@ -219,16 +275,21 @@ public class maoyan_shishipiaofang {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
 		// String strurl = DownYoukuMovie
 		// .youkuMaim("http://www.youku.com/v_olist/c_97_s_1_d_1_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81.html");
-		openstatic();
-		
-		if ((Integer.valueOf(TimeTest.getNowTime("HH"))==23&&Integer.valueOf(TimeTest.getNowTime("mm"))>30)||(Integer.valueOf(TimeTest.getNowTime("HH"))==0&&Integer.valueOf(TimeTest.getNowTime("mm"))<30)) {
-			System.out.println("存储过程运行不在运行时间内 ");
-		}else{
-			DBManager dbm = DBManager.instance();
-			dbm.executeCall("call sp_f_film_boxoffice_realtime('"+DateUtil.getAfterDayDate(-1)+"') ");
-			dbm.executeCall("call dwetl.MART_F_FILM_INDEX('"+DateUtil.getAfterDayDate(-1)+"') ");
-			System.out.println("存储过程运行完毕 ");
+		try {
+			openstatic();
+			
+			if ((Integer.valueOf(TimeTest.getNowTime("HH"))==23&&Integer.valueOf(TimeTest.getNowTime("mm"))>30)||(Integer.valueOf(TimeTest.getNowTime("HH"))==0&&Integer.valueOf(TimeTest.getNowTime("mm"))<30)) {
+				System.out.println("存储过程运行不在运行时间内 ");
+			}else{
+				DBManager dbm = DBManager.instance();
+				dbm.executeCall("call sp_f_film_boxoffice_realtime('"+DateUtil.getAfterDayDate(-1)+"') ");
+				dbm.executeCall("call dwetl.MART_F_FILM_INDEX('"+DateUtil.getAfterDayDate(-1)+"') ");
+				System.out.println("存储过程运行完毕 ");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
+		
 		
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 	}
@@ -253,8 +314,7 @@ public class maoyan_shishipiaofang {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(01, 00, 59);
-//		runstatic();
+		
 		
 //		String String1="<i class=\"cs gsBlur\">&#xed68;.&#xe85b;%</i>";
 //		String String2="&#xed68;";
@@ -276,6 +336,12 @@ public class maoyan_shishipiaofang {
 //+"        }"
 //+"    }";
 //		System.out.println(html);
+		
+		
+		
+//		runstatic();
+		TimingTime(01, 00, 59);
+//		openstatic();
 		
 	}
 

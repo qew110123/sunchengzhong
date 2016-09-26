@@ -22,7 +22,7 @@ import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
 public class HaoSouWordAdmin {
-	static ThreadPool pool = new ThreadPool(40);
+	static ThreadPool pool = new ThreadPool(100);
 	private static Proxy proxy = null;
 
 	public static void HaosouPeoPleBranch(String urlBranch, String tvplayId, String tyPlayName, String DataType) {
@@ -158,7 +158,7 @@ public class HaoSouWordAdmin {
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
 					// HaosouPeoPleBranch(urlBranch, listTemp.get(0),
 					// listTemp.get(1), "2");
-					while (pool.getPoolNum() > 40) {
+					while (pool.getPoolNum() > 100) {
 						try {
 							System.out.println("线程数量大于40，等待5s");
 							Thread.sleep(5000);
@@ -266,7 +266,7 @@ public class HaoSouWordAdmin {
 				System.out.println("打开出错" + i + "次,链接：" + urlBranch);
 
 			}
-			if (i > 5) {
+			if (i > 10) {
 				bb = false;
 			}
 
@@ -317,7 +317,14 @@ public class HaoSouWordAdmin {
 
 	
 	
-	
+	public static void runstaticshijian(){
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+		System.out.println(TimeTest.getNowTime("HH"));
+		if (Integer.valueOf(TimeTest.getNowTime("HH"))>=9) {
+			runstatic();
+		}
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
+	}
 	
 	// 判断数据开始时间
 		public static void TimingTime(int hh, int mm, int ss) {
@@ -332,11 +339,11 @@ public class HaoSouWordAdmin {
 			timer.scheduleAtFixedRate(new TimerTask() {
 				public void run() {
 					System.out.println("-------设定要指定任务--------");
-					runstatic();
+//					runstatic();
 					
-					
+					runstaticshijian();
 				}
-			}, time, 1000 * 60 * 60 * 5);// 这里设定将延时每天固定执行
+			}, time, 1000 * 60 * 60 * 1);// 这里设定将延时每天固定执行
 		}
 		
 		

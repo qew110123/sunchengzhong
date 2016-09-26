@@ -70,6 +70,7 @@ public class BaiDuTeleplaynextUrl {
 		
 		TvPlay tvplay = BaiDuTeleplayDownload.mainmore("2050", "http://baike.baidu.com/subview/314374/15080759.htm","红色通道");
 		System.out.println(tvplay);
+		
 //		BaiDuTeleplayDownload.mainmore("0", "http://baike.baidu.com/link?url=UB4Ixeuqqi6TaUMlzQhQ_KHQ26JdvD72z1ft_bvQINbLweaglG7FM0ASdQxLMsZOyT0vmwYR1ps3M9KB6bv9l_paBRMC6nN23wQ9G_c9qEnTQbrkqLTA7mIQNsd-b3u0","");
 		
 //		TvPlay tvplay =BaiDuTeleplayDownload.mainmore("12803", "http://baike.baidu.com/view/940398.htm","青春出动");

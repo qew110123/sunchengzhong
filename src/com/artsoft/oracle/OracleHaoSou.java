@@ -43,6 +43,30 @@ public class OracleHaoSou {
 	 * @param endRow
 	 * @return
 	 */
+	public static ArrayList<String> selecttvplay_weibo(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
+		
+		sql="select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.* from (select t.tvplay_id,t.tvplay_name from edw.dim_tvplay t order by t.tvplay_id ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2 on t1.tvplay_id =t2.data_id order by t1.tvplay_id";
+		
+		sql="  select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.*  from (select t.tvplay_id,t.tvplay_name from edw.dim_tvplay t order by t.tvplay_id ) t1  left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2  on t1.tvplay_id =t2.data_id   left join  (select w.DATA_ID from ODS.TEM_WEIBO_WORD_NUM w where    w.data_type=2 and w.data_date=to_char(sysdate-1,'yyyymmdd') )w on t1.tvplay_id =w.data_id  left join  (  select t.tvplay_id,t.tvplay_name,t.COMPLEX_INDEX   from mart.f_tvplay_index t  where t.data_date='29991231' )s  on t1.tvplay_id =s.tvplay_id  where w.data_id is null order by nvl(s.COMPLEX_INDEX,0) desc";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	
+	
+	/**
+	 * 拼写sql语句并获取开始和结束
+	 * 
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
 	public static ArrayList<String> selecttvplay(String startRow, String endRow) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
@@ -82,6 +106,34 @@ public class OracleHaoSou {
 	}
 	
 	
+	
+	/**
+	 * 拼写sql语句电影数据
+	 * 
+	 * 
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectdim_film_wobo(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
+		
+		sql = "select t.film_id,t.film_name,t.FILM_URL from ods.dim_film t order by t.film_id ";
+		
+		sql="select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.* from (select t.film_id,t.film_name from ods.dim_film t ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2 on t1.film_id =t2.data_id order by t1.film_id";
+		
+		sql="  select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.* from (select t.film_id,t.film_name from          mart.f_film_index t left join          (select nr.tvplay_id,count( distinct nr.data_type) as counts                  from ods.tem_network_reputation nr                where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 3               group by nr.tvplay_id             ) n on t.film_id = n.tvplay_id and n.counts = 2   where t.data_date = '29991231' and n.tvplay_id is null   order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2 on t1.film_id =t2.data_id     ";
+		
+		sql="select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.*   from (select t.film_id,t.film_name from ods.dim_film t ) t1   left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2   on t1.film_id =t2.data_id   left join  (select w.DATA_ID from ODS.TEM_WEIBO_WORD_NUM w where    w.data_type=3 and w.data_date=to_char(sysdate-1,'yyyymmdd') )w on t1.film_id =w.data_id  left join  (  select t.film_id,t.film_name,t.COMPLEX_INDEX   from mart.f_film_index t  where t.data_date='29991231' )s  on t1.film_id =s.film_id  where w.data_id is null order by nvl(s.COMPLEX_INDEX,0) desc;";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	
 	/**
 	 * 拼写sql语句网络剧数据
 	 * 
@@ -94,6 +146,8 @@ public class OracleHaoSou {
 		String sql = "select t.tvplay_id,t.tvplay_name 电视剧,t.years 制作年代,t.issuing_license from edw.dim_tvplay t order by t.tvplay_id ";
 		
 		sql = " select t.NETWORKPLAY_ID,t.NETWORKPLAY_NAME,t.NETWORKPLAY_URL from ODS.DIM_NETWORK_PLAY t order by t.NETWORKPLAY_ID";
+		
+		sql=" select t1.NETWORKPLAY_ID,( case when t2.data_type=4  then t1.NETWORKPLAY_NAME||'网剧' else  t1.NETWORKPLAY_NAME end  )as movename,t2.* from (select t.NETWORKPLAY_ID,t.NETWORKPLAY_NAME,t.NETWORKPLAY_URL from ODS.DIM_NETWORK_PLAY t order by t.NETWORKPLAY_ID ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=4 ) t2 on t1.NETWORKPLAY_ID =t2.data_id ";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -115,6 +169,10 @@ public class OracleHaoSou {
 		
 		sql = " select t.tvplay_id,t.tvplay_name,t.tvplay_url from ODS.DIM_NETWORK_TVPLAY t order by t.tvplay_id";
 		sql="select * from  ods.dim_variety t order by t.VARIETY_ID";
+		
+		
+		
+		sql="  select t1.VARIETY_ID,( case when t2.data_type=5  then t1.variety_name||'综艺' else  t1.variety_name end  )as movename,t2.* from ( select t.VARIETY_ID ,t.variety_name from  ods.dim_variety t order by t.VARIETY_ID  ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=5 ) t2 on t1.VARIETY_ID =t2.data_id ";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -137,6 +195,9 @@ public class OracleHaoSou {
 		sql = " select t.tvplay_id,t.tvplay_name,t.tvplay_url from ODS.DIM_NETWORK_TVPLAY t order by t.tvplay_id";
 		sql="select * from   ODS.DIM_NETWORK_VARIETY t order by t.tvplay_id";
 		sql="select t.VARIETY_ID, t.variety_name_back,t.VARIETY_NAME from  ODS.DIM_VARIETY t where t.variety_name_back is not null";
+		
+		
+		sql="  select t1.VARIETY_ID,( case when t2.data_type=5  then t1.variety_name||'综艺' else  t1.variety_name end  )as movename,t2.* from ( select t.VARIETY_ID, t.variety_name_back,t.VARIETY_NAME from  ODS.DIM_VARIETY t where t.variety_name_back is not null order by t.VARIETY_ID  ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=5 ) t2 on t1.VARIETY_ID =t2.data_id ";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -149,6 +210,25 @@ public class OracleHaoSou {
 
 	/**
 	 * sql语句并获取开始和结束 dao用户列表中
+	 * 2016年9月7日16:18:25
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectname_weibo(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.person_id,t.person_name   from edw.DIM_PERSON t, (select w.DATA_ID from ODS.TEM_WEIBO_WORD_NUM w where    w.data_type=1 and w.data_date=to_char(sysdate-1,'yyyymmdd') )w, (  select t.person_id,t.person_name,greatest(t.actor_complex_index,t.director_complex_index,t.screenwriter_complex_index) person_index   from mart.f_person_index t  where t.data_date='29991231' )s where t.person_id=w.DATA_ID(+) and t.person_id=s.person_id(+) and  w.data_id is null group by t.person_id,t.person_name order by max(nvl(s.person_index,0)) desc;";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	/**
+	 * sql语句并获取
+	微博指数进行数据对比，今天数据
 	 * 
 	 * @param startRow
 	 * @param endRow
@@ -1087,7 +1167,7 @@ public class OracleHaoSou {
 
 		String strSql = "insert into ods.TEM_DIM_ENTRYIMG t(t.data_id,t.data_title,t.small_url,t.big_url,t.into_date,t.data_url,t.data_type)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 		//
-		strSql="insert into ods.tem_play_stills t(t.data_id,t.data_title,t.small_url,t.big_url,t.into_date,t.data_url,t.data_type,t.STILLS_TITLE,t.STILLS_ORDERNO,t.UPDATE_DATE)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?)";
+		strSql="insert into ods.tem_play_stills t(t.data_id,t.data_title,t.small_url,t.big_url,t.into_date,t.data_url,t.data_type,t.STILLS_TITLE,t.STILLS_ORDERNO,t.UPDATE_DATE,SMALL_NAME,BIG_NAME)values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(ENTRYIMG.getDataId());// 这里是将对象加入到list中
 		list.add(ENTRYIMG.getDataTitle());
@@ -1099,6 +1179,8 @@ public class OracleHaoSou {
 		list.add(ENTRYIMG.getSTILLS_TITLE());
 		list.add(ENTRYIMG.getSTILLS_ORDERNO());
 		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(ENTRYIMG.getSMALL_NAME());
+		list.add(ENTRYIMG.getBIG_NAME());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 		
