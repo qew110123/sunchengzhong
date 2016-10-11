@@ -127,7 +127,14 @@ public class OracleBaidu {
 		
 		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t   where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
 		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t   where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
+		
 //		sql="select t.*, t.rowid from ODS.DEL_DIM_TVPLAY t";
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t   where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t  where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t  where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);

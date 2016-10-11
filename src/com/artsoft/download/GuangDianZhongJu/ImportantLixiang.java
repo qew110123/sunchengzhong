@@ -304,8 +304,13 @@ public class ImportantLixiang {
 				provinceopinion = HtmlAnalyze.getTagText(element.toString(), "省级管理部门备案意见", "总局意见");
 				adminopinion = HtmlAnalyze.getTagText(element.toString(), "总局意见", "</tbody>");
 				tvplaycontent = HtmlAnalyze.getTagText(element.toString(), "内容提要：", "省级管理部门备案意见");
-				OracleSarFtGov.intosubjectproject(tvplayname, gdsubjectname, setnumber, reportcompany, projectdate,
-						shootinglicense, provinceopinion, adminopinion, tvplaycontent, remark, "", "1", "", "");
+				try {
+					
+					OracleSarFtGov.intosubjectproject(tvplayname, gdsubjectname, setnumber, reportcompany, projectdate,
+							shootinglicense, provinceopinion, adminopinion, tvplaycontent, remark, "", "1", "", "");
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 
 			}
 

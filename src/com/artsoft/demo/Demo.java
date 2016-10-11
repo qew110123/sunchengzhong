@@ -23,6 +23,7 @@ import com.artsoft.util.ReadTxtFile;
 import com.artsoft.util.TimeTest;
 
 import WanfangBykeyWordMain.WanfangBykeyWordMain;
+import oracle.security.o3logon.b;
 
 public class Demo {
 	public static String getKeyWordFromFile(String FileName) {
@@ -127,156 +128,25 @@ public class Demo {
 	 */
 	public static void main(String[] args) {
 //		System.out.println(getvalue(2));
-		System.out.println(Double.parseDouble("-1"));
-		WanfangBykeyWordMain.Keywordbig_xuanze(Integer.valueOf(1));
-		// TODO Auto-generated method stub
-		//// String cookstr="BAIDUID=3AADC6F35D3F3088991AA4460A697FE2:FG=1;
-		//// BIDUPSID=3AADC6F35D3F3088991AA4460A697FE2; PSTM=1445389865;
-		//// BDSFRCVID=YxIsJeCCxG3ICov459p-VZx1qNDZSXG-d5OR3J;
-		//// H_BDCLCKID_SF=tRk8oItMJCvBfJuk-4QEbbQH-UnLqhcOW67Z0lOnMp05OqOv568heJOD3R6OJRow3NQghp0E5I5cVCO_e4bK-TrXDGuetx5;
-		//// BDUSS=BnYVFaZEhifmlxYzhYaUg0cEdOUHpOcVYtU0NkZXZQc3R5bEZBT2JhVDVjMDVXQVFBQUFBJCQAAAAAAAAAAAEAAAChkbEONzY0Mjk1MzMzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPnmJlb55iZWVl;
-		//// locale=zh;
-		//// H_PS_PSSID=12897_1430_17619_12826_17001_17470_17073_15669_12073_17421_17050";
-		// String
-		//// strUrl="http://baike.baidu.com/link?url=aoe7rD8rFgF6w_1UD08-XlUAt5Uqr_6Sb7Aw0dfHt5reNDSWJ3k1BIQBjOn2MchyxuZ4XpFxQGWaoMOe_NNkda";
-		//// strUrl="http://index.youku.com/ProAction!getPromptAnswer.action?word=%E5%90%8D";
-		// String strHtml = DownloadUtil.getHtmlText(strUrl, 1000 * 30,"UTF-8",
-		//// null, null);
-//		 String strHtml = DownloadUtil.getHtmlText("http://cpquery.sipo.gov.cn//txnQueryOrdinaryPatents.do?select-key%3Ashenqingh=&select-key%3Azhuanlimc=&select-key%3Ashenqingrxm=%E6%9F%B3%E8%B6%85&select-key%3Azhuanlilx=&select-key%3Ashenqingr_from=&select-key%3Ashenqingr_to=&attribute-node:record_start-row=131&attribute-node:record_page-row=10&#anchor", 1000 * 30,"utf-8",
-//				 null, null);
-//		 System.out.println(strHtml);
-		//// StringBuffer strHtml = DownloadUtil.getContent(urlstr);
-		//// System.out.println(strHtml);
-		//
-		// Document doc = Jsoup.parse(strHtml);
-		// Elements links = doc.select("div.basic-info");
-		//// Element content = doc.getElementById("content");
-		//// Elements links = content.getElementsByTag("a");
-		// for (Element link : links) {
-		// System.out.println(link);
-		// System.out.println(link.text());
-		//// String linkHref = link.attr("href");
-		//// String linkText = link.text();
-		// }
-		// Integer.parseInt("2223830274");
-//		 double d = Double.parseDouble("2223830274");
-		// System.out.println(d);
-		// String s = "123.456 "; //要确保字符串为一个数值，否则会出异常
-		// double d = Double.parseDouble(s);
-		// float f = Float.parseFloat(s);
-		// System.out.println(d);
-		// System.out.println(f);
-
-		// String str = "love23next234csdn3423javaeye";
-		// str = str.trim();
-		// String str2 = "";
-		// if (str != null && !"".equals(str)) {
-		// for (int i = 0; i < str.length(); i++) {
-		// if (str.charAt(i) >= 48 && str.charAt(i) <= 57) {
-		// str2 += str.charAt(i);
-		// }
-		// }
-		//
-		// }
-		// System.out.println(str2);
-		// System.out.println(Integer.valueOf("118898"));
-		// CommonUtil.setLog("32232323");
-		// ConfigManager config = ConfigManager.getInstance();
-		// String url=config.setConfigValue(strKey, strVal);
-
-		// String[] keys=getKeyWordFromFile("keyword.txt").split("\n");
-		// for (int i = 0; i < keys.length; i++) {
-		//// System.out.println(i);
-		//// System.out.println(keys[i]);
-		// try {
-		// String message = java.net.URLEncoder.encode(keys[i],"utf-8");
-		// System.out.println(message);
-		// } catch (UnsupportedEncodingException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// }
-		// System.out.println(keys.toString());
-		// System.out.println(getKeyWordFromFile("keyword.txt"));
-//		for (int i = 0; i < 100; i++) {
-			
-////			Proxy proxy = null;
-//			Proxy proxy = proxy("107.167.111.36", "80");
-////			proxy = DealProxy.getInstance().getPoxxy();
-//			System.out.println(proxy);
-//			//
-//			
-//			System.out.println(proxy);
-//			String url =
-//					"http://ip.cn/";
-//			String strHtml = DownloadUtil.getHtmlText(url, 1000 * 1, "utf-8", null,
-//					proxy);
-//			
-//			System.out.println(strHtml);
+//		System.out.println(Double.parseDouble("-1"));
+//		WanfangBykeyWordMain.Keywordbig_xuanze(Integer.valueOf(1));
 		
-//		String str=null;
-//		if (str==null||(str+="123").equals(str)) {
-//			System.out.println(str);
-//		}
-//		if (str==null&&(str+="123").equals(str)) {
-//			System.out.println(str);
-//		}
-//		System.out.println(str);
-//		String s;
-//		System.out.println("s="+s);
+		String str1="abc";
+		String str2="abc";
+		System.out.println(str1==str2);
 		
-//		}
-
-//		String path = "D:\\image\\";
-//		File file = new File(path);
-//		File[] tempList = file.listFiles();
-//		System.out.println("该目录下对象个数：" + tempList.length);
-//		for (int i = 0; i < tempList.length; i++) {
-//			if (tempList[i].isFile()) {
-//				System.out.println(tempList[i].toString().replaceAll("image", "").replaceAll("D:", "")
-//						.replaceAll("\\\\", "").replaceAll(".jpg", ""));
-//			}
-//			if (tempList[i].isDirectory()) {
-//				System.out.println("文件夹：" + tempList[i]);
-//			}
-//		}
+		String str3 = new String ("abd");
+		System.out.println(str1==str3);
 		
 		
-//		 List<String> list = new ArrayList<String>();
-//		  list.add("草莓");         //向列表中添加数据
-//		  list.add("香蕉");        //向列表中添加数据
-//		  list.add("菠萝");        //向列表中添加数据
-//		  for (int i = 0; i < list.size(); i++) {    //通过循环输出列表中的内容
-//		  System.out.println(i + ":" + list.get(i));
-//		  }
-//		  String o = "苹果";
-//		System.out.println("list对象中是否包含元素" + o + ":" + list.contains(o));
-		//判断字符串中是否包含指定字符串对象
+		str1.concat("def");
+		System.out.println(str1);
 		
-//		System.out.println(TimeTest.getNowTime("yyyyMMdd"));
+		StringBuffer sb= new StringBuffer("abc");
+		sb.append("deff");
+		System.out.println(sb);
 		
-//		ReadTxtFile.wirterfile("IpFilter.txt", "111111");
-//		ReadTxtFile.wirterfile("IpFilter.txt", "22222");
-		//http://img5.imgtn.bdimg.com/it/u=3839833749,319426364&fm=21&gp=0.jpg
-//		try {
-//			download(
-//					"http://img2.imgtn.bdimg.com/it/u=954023560,3150965806&fm=21&gp=0.jpg",
-//					"u=3935255986,3954096083&fm=15&gp=0.jpg", "D:\\image1\\");
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		String sss = "abc12jlskdf4a";
-//		System.out.println(sss.replaceAll("\\D+", ""));
-		
-//		System.out.println(Double.parseDouble("0"));
-//		System.out.println(new Date(1453125367));
-//		
-//		Date   now   =   new   Date((long) Double.parseDouble("1463311743000"));   
-//		SimpleDateFormat   dateFormat   =   new   SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式   
-//		String  hehe  = dateFormat.format(now);   
-//		System.out.println(hehe);
+		System.out.println(5<<2);
 		
 	}
 
