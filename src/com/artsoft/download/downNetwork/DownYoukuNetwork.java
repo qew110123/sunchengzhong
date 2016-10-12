@@ -46,10 +46,18 @@ public class DownYoukuNetwork {
 //				System.out.println(link.select("span.p-actor").text());
 //				System.out.println(link.select("span.p-num").text());
 //				System.out.println(link.select("span.p-status").text());
-				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
-				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+//				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+//				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+				
+//				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				
+				Document strmainurlHtmldoc = Jsoup.connect(strmainurl).get();
 				
 				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://tv.youku.com/")) {
+//					System.out.println(strmainurlHtmldoc);
+					strmainxiangxiurl=HtmlAnalyze.getTagText(strmainurlHtmldoc.toString(), "desc-link\" href=\"","\"");
+				}
 				
 				DownYoukuNetwork.youkuBranch(strmainxiangxiurl);
 			}

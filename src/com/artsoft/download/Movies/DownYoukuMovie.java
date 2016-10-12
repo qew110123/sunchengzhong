@@ -14,6 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.download.TVPlay.DownloadYouku;
 import com.artsoft.oracle.OracleNetwork;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
@@ -35,7 +36,10 @@ public class DownYoukuMovie {
 
 	private static void other() {
 		// TODO Auto-generated method stub
-		List<String> listArray =OracleNetwork.selectyoukumovie(TimeTest.getNowTime("yyyyMMdd"));
+		TimeTest tt = new TimeTest();
+		String newtime = tt.getNowTime("yyyyMMdd");
+		String date_date = DownloadYouku.getBeforeAfterDate(newtime, -30);
+		List<String> listArray =OracleNetwork.selectyoukumovie(date_date);
 		String strmainurl="";
 		String name="";
 		String urlMain="";
@@ -105,10 +109,15 @@ public class DownYoukuMovie {
 //				System.out.println(link.select("span.p-num").text());
 //				System.out.println(link.select("span.p-status").text());
 				
-				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
-				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+//				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+//				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+				Document strmainurlHtmldoc = Jsoup.connect(strmainurl).get();
 				
 				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://movie.youku.com/")) {
+//					System.out.println(strmainurlHtmldoc);
+					strmainxiangxiurl=HtmlAnalyze.getTagText(strmainurlHtmldoc.toString(), "desc-link\" href=\"","\"");
+				}
 				
 				DownYoukuMovie.youkuBranch(strmainxiangxiurl);
 				// }
@@ -360,7 +369,7 @@ public class DownYoukuMovie {
 		// TODO Auto-generated method stub
 //		DownYoukuMovie.youkuBranch("http://www.youku.com/show_page/id_zcc0b658c962411de83b1.html");
 //		runstatic();
-//		other();
+//		other();d
 		// TimingTime(21, 59, 59);
 		 TimingTime(1, 59, 59);
 //		 runstatic();

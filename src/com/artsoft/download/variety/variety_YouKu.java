@@ -135,11 +135,22 @@ public class variety_YouKu {
 				}
 				String strmainurl = "";
 				System.out.println(strmainurl = link.select("div.p-thumb a").attr("href"));
+//				
+//				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+//				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+//				
+//				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
 				
-				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
-				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+				
+				Document strmainurlHtmldoc = Jsoup.connect(strmainurl).get();
 				
 				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://zy.youku.com/")) {
+//					System.out.println(strmainurlHtmldoc);
+					strmainxiangxiurl=HtmlAnalyze.getTagText(strmainurlHtmldoc.toString(), "desc-link\" href=\"","\"");
+				}
+				
+				
 				youkuBranch(strmainxiangxiurl);
 			}
 			
