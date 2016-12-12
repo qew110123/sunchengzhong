@@ -5,8 +5,8 @@ public class TvPlay {
 	
 	
 	// id
-	private Integer tvplay_id=-1;
-	// 剧名称
+//	private Integer tvplay_id=-1;
+	private String  tvplay_id="";
 	private String tvplay_name = "";
 	// 百度百科url
 	private String tvplay_url = "";
@@ -223,11 +223,11 @@ public class TvPlay {
 		
 	}
 
-	public Integer getTvplay_id() {
+	public String getTvplay_id() {
 		return tvplay_id;
 	}
 
-	public void setTvplay_id(Integer tvplay_id) {
+	public void setTvplay_id(String tvplay_id) {
 		this.tvplay_id = tvplay_id;
 	}
 

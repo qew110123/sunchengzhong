@@ -22,6 +22,7 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_key.maoyan_key;
+import com.artsoft.download.maoyanandpiaofang.zhongguopiaofangwang.zhongguopiaofangwang_xunzhe.zhongguopiaofangwang_xunzhe;
 
 
 public class maoyan_shishipiaofang {
@@ -224,6 +225,13 @@ public class maoyan_shishipiaofang {
 			
 			OracleMovePiaoFang.intoTEM_FILM_BOXOFFICE_REALTIME(realitme);
 			
+			
+			try {
+				zhongguopiaofangwang_xunzhe.shoushuozhongguopiaofangwang(text);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 
 //			tem_dim_film_boxoffice(uid, text, strmainurl);
 //			tem_film_daily_boxoffice_other(uid, text, strmainurl);
@@ -340,8 +348,13 @@ public class maoyan_shishipiaofang {
 		
 		
 //		runstatic();
-		TimingTime(01, 00, 59);
 //		openstatic();
+		TimingTime(01, 00, 59);
+		
+//		DBManager dbm = DBManager.instance();
+//		dbm.executeCall("call sp_f_film_boxoffice_realtime('"+DateUtil.getAfterDayDate(-1)+"') ");
+//		dbm.executeCall("call dwetl.MART_F_FILM_INDEX('"+DateUtil.getAfterDayDate(-1)+"') ");
+//		System.out.println("存储过程运行完毕 ");
 		
 	}
 

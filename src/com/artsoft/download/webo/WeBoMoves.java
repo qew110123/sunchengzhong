@@ -124,6 +124,7 @@ public class WeBoMoves {
 		// TODO Auto-generated method stub
 //		TimingTime(00, 00, 01);
 		rundingshitime(1, 00, 00);
+		
 	}
 
 }

@@ -57,6 +57,13 @@ public class TVplayAdmin {
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
+	
+	
+	
+	
+	
+	
+	
 
 	// 判断数据开始时间
 	public static void TimingTime(int hh, int mm, int ss) {

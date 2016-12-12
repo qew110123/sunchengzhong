@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.download.downNetwork.Details.DownIqiyiNetwordDetails;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
@@ -120,16 +121,28 @@ public class DownIqiyiNetword {
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
-		String strkey = ReadTxtFile.getKeyWordFromFile("keywordiqiyi.txt");
-		String[] keys = strkey.split("\n");
-		for (int i = 0; i < keys.length; i++) {
-			System.out.println(keys[i]);
-			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
-			String url = keys[i];
-			System.out.println(url);
-			boolean bb = true;
-			DownIqiyiNetword.youkuMaim(url);
+//		String strkey = ReadTxtFile.getKeyWordFromFile("keywordiqiyi.txt");
+//		String[] keys = strkey.split("\n");
+//		for (int i = 0; i < keys.length; i++) {
+//			System.out.println(keys[i]);
+//			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
+//			String url = keys[i];
+//			System.out.println(url);
+//			boolean bb = true;
+//			DownIqiyiNetword.youkuMaim(url);
+//		}
+		
+		for (int j = 0; j < 6; j++) {
+			try {
+				
+//				DownIqiyiNetwordDetails.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
+				
+				DownIqiyiNetword.youkuMaim("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
+		
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
@@ -148,22 +161,22 @@ public class DownIqiyiNetword {
                 System.out.println("-------设定要指定任务--------");  
                 runstatic();
             } 
-        }, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行  
+        }, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行  
     } 
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		
-//		TimingTime(23, 59, 59);
-		for (int j = 0; j < 4; j++) {
-			try {
-				
-				DownIqiyiNetword.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
+		TimingTime(01, 59, 59);
+//		for (int j = 0; j < 4; j++) {
+//			try {
+//				
+//				DownIqiyiNetword.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+//		}
 
 	}
 }

@@ -145,14 +145,14 @@ public class variety_hunaniv {
 		// System.out.println(strHtml);
 		Document doc = Jsoup.parse(strHtml);
 		// Element linkmain = doc.getElementById("fluxes_static");
-		Elements links = doc.select("p.img-box a");
+		Elements links = doc.select("li a.u-video");
 		// Element content = doc.getElementById("content");
 		// Elements links = content.getElementsByTag("a");
 		System.out.println(links.size());
 		for (Element link : links) {
 			// System.out.println(link.select("a").text());
 			String urlstr = "";
-			System.out.println(urlstr = link.select("a").attr("href"));
+			System.out.println(urlstr = link.attr("href"));
 //			mainurl(urlstr);
 			mainfalseurl(urlstr);
 		}
@@ -163,7 +163,7 @@ public class variety_hunaniv {
 
 		for (int i = 1; i <= 22; i++) {
 			//http://list.mgtv.com/1/---------5-3---.html
-			String url = "http://list.mgtv.com/1/---------5-" + i + "---.html";
+			String url = "http://list.mgtv.com/1/---------2-" + i + "-0--.html";
 			System.out.println(url);
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
 			mainmore(url);
@@ -194,7 +194,7 @@ public class variety_hunaniv {
 		
 //		TimingTime(0, 59, 59);
 		
-//		runstatic();
+		runstatic();
 
 	}
 

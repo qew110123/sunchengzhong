@@ -98,6 +98,8 @@ public class OracleHaoSou {
 		
 		sql="  select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.* from (select t.film_id,t.film_name from          mart.f_film_index t left join          (select nr.tvplay_id,count( distinct nr.data_type) as counts                  from ods.tem_network_reputation nr                where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 3               group by nr.tvplay_id             ) n on t.film_id = n.tvplay_id and n.counts = 2   where t.data_date = '29991231' and n.tvplay_id is null   order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2 on t1.film_id =t2.data_id     ";
 		
+		
+//		sql="select * from (select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.* from (select t.film_id,t.film_name from          mart.f_film_index t left join          (select nr.tvplay_id,count( distinct nr.data_type) as counts                  from ods.tem_network_reputation nr                where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 3               group by nr.tvplay_id             ) n on t.film_id = n.tvplay_id and n.counts = 2   where t.data_date = '29991231' and n.tvplay_id is null   order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2 on t1.film_id =t2.data_id)t11 where t11.movename='你的名字。'";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -125,7 +127,7 @@ public class OracleHaoSou {
 		
 		sql="  select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.* from (select t.film_id,t.film_name from          mart.f_film_index t left join          (select nr.tvplay_id,count( distinct nr.data_type) as counts                  from ods.tem_network_reputation nr                where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 3               group by nr.tvplay_id             ) n on t.film_id = n.tvplay_id and n.counts = 2   where t.data_date = '29991231' and n.tvplay_id is null   order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2 on t1.film_id =t2.data_id     ";
 		
-		sql="select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.*   from (select t.film_id,t.film_name from ods.dim_film t ) t1   left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2   on t1.film_id =t2.data_id   left join  (select w.DATA_ID from ODS.TEM_WEIBO_WORD_NUM w where    w.data_type=3 and w.data_date=to_char(sysdate-1,'yyyymmdd') )w on t1.film_id =w.data_id  left join  (  select t.film_id,t.film_name,t.COMPLEX_INDEX   from mart.f_film_index t  where t.data_date='29991231' )s  on t1.film_id =s.film_id  where w.data_id is null order by nvl(s.COMPLEX_INDEX,0) desc;";
+		sql="select t1.film_id,( case when t2.data_type=3  then t1.film_name||'电影' else  t1.film_name end  )as movename,t2.*   from (select t.film_id,t.film_name from ods.dim_film t ) t1   left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=3 ) t2   on t1.film_id =t2.data_id   left join  (select w.DATA_ID from ODS.TEM_WEIBO_WORD_NUM w where    w.data_type=3 and w.data_date=to_char(sysdate-1,'yyyymmdd') )w on t1.film_id =w.data_id  left join  (  select t.film_id,t.film_name,t.COMPLEX_INDEX   from mart.f_film_index t  where t.data_date='29991231' )s  on t1.film_id =s.film_id  where w.data_id is null order by nvl(s.COMPLEX_INDEX,0) desc";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -217,7 +219,7 @@ public class OracleHaoSou {
 	 */
 	public static ArrayList<String> selectname_weibo(String startRow, String endRow) {
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String sql = "select t.person_id,t.person_name   from edw.DIM_PERSON t, (select w.DATA_ID from ODS.TEM_WEIBO_WORD_NUM w where    w.data_type=1 and w.data_date=to_char(sysdate-1,'yyyymmdd') )w, (  select t.person_id,t.person_name,greatest(t.actor_complex_index,t.director_complex_index,t.screenwriter_complex_index) person_index   from mart.f_person_index t  where t.data_date='29991231' )s where t.person_id=w.DATA_ID(+) and t.person_id=s.person_id(+) and  w.data_id is null group by t.person_id,t.person_name order by max(nvl(s.person_index,0)) desc;";
+		String sql = "select t.person_id,t.person_name   from edw.DIM_PERSON t, (select w.DATA_ID from ODS.TEM_WEIBO_WORD_NUM w where    w.data_type=1 and w.data_date=to_char(sysdate-1,'yyyymmdd') )w, (  select t.person_id,t.person_name,greatest(t.actor_complex_index,t.director_complex_index,t.screenwriter_complex_index) person_index   from mart.f_person_index t  where t.data_date='29991231' )s where t.person_id=w.DATA_ID(+) and t.person_id=s.person_id(+) and  w.data_id is null group by t.person_id,t.person_name order by max(nvl(s.person_index,0)) desc";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -251,13 +253,70 @@ public class OracleHaoSou {
 	/**
 	 * sql语句并获取开始和结束 dao用户列表中
 	 * 
+	 * all 
+	 * 2016年11月15日17:55:39
 	 * @param startRow
 	 * @param endRow
 	 * @return
 	 */
 	public static ArrayList<String> selectname360admin(String startRow, String endRow) {
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String sql = "select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id                   where t.data_date = '29991231') p   left join (select np.person_id,count(distinct np.date_type) as counts from ods.person_network_popularity np                      where np.date_type in(2,3) and np.date_date = to_char(sysdate - 1, 'yyyymmdd')                     group by np.person_id              ) n     on p.person_id = n.person_id and n.counts =2   where n.person_id is null   order by nvl(complex_index, 0) desc";
+		String sql = "select p.person_id, p.person_name from (select p.person_id,  p.person_name,  greatest(nvl(t.actor_complex_index, 0),  nvl(t.director_complex_index, 0),  nvl(t.screenwriter_complex_index, 0)) complex_index,  nvl(t.actor_complex_index, 0) as actor_complex_index,  nvl(t.director_complex_index, 0) as director_complex_index,  nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index   from edw.dim_person p   left join mart.f_person_index t  on p.person_id = t.person_id  where t.data_date = '29991231' and p.is_del =1)  p left join (select np.person_id, count(distinct np.date_type) as counts  from ods.person_network_popularity np where np.date_type in (2, 3)   and np.date_date = to_char(sysdate - 1, 'yyyymmdd') group by np.person_id) n   on p.person_id = n.person_id  and n.counts = 2   where n.person_id is null   order by nvl(complex_index, 0) desc";
+		sql = "select p.person_id, p.person_name from (select p.person_id,  p.person_name,  greatest(nvl(t.actor_complex_index, 0),  nvl(t.director_complex_index, 0),  nvl(t.screenwriter_complex_index, 0)) complex_index,  nvl(t.actor_complex_index, 0) as actor_complex_index,  nvl(t.director_complex_index, 0) as director_complex_index,  nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index   from edw.dim_person p   left join mart.f_person_index t  on p.person_id = t.person_id  where t.data_date = '20161110' and p.is_del =1)  p left join (select np.person_id, count(distinct np.date_type) as counts  from ods.person_network_popularity np where np.date_type in (2, 3)   and np.date_date = to_char(sysdate - 1, 'yyyymmdd') group by np.person_id) n   on p.person_id = n.person_id  and n.counts = 2   where n.person_id is null   order by nvl(complex_index, 0) desc";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+	public static ArrayList<String> selectname360admin_shuoshuozhishu(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id          where t.data_date = '29991231'  and p.is_del =1) p   left join (select np.person_id, count(distinct np.date_type) as counts                from ods.person_network_popularity np               where np.date_type in (2)                 and np.date_date = to_char(sysdate - 1, 'yyyymmdd')               group by np.person_id) n     on p.person_id = n.person_id  where n.person_id is null  order by nvl(complex_index, 0) desc";
+		sql = "select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id          where t.data_date = '20161110'  and p.is_del =1) p   left join (select np.person_id, count(distinct np.date_type) as counts                from ods.person_network_popularity np               where np.date_type in (2)                 and np.date_date = to_char(sysdate - 1, 'yyyymmdd')               group by np.person_id) n     on p.person_id = n.person_id  where n.person_id is null  order by nvl(complex_index, 0) desc";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+	
+	/**
+	 * sql语句并获取开始和结束 dao用户列表中
+	 * 
+	 * 媒体关注度
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectname360adminmeitiguanzhudu(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id                   where t.data_date = '29991231') p   left join (select np.person_id,count(distinct np.date_type) as counts from ods.person_network_popularity np                      where np.date_type in(3) and np.date_date = to_char(sysdate - 1, 'yyyymmdd')                     group by np.person_id              ) n     on p.person_id = n.person_id and n.counts =2   where n.person_id is null   order by nvl(complex_index, 0) desc";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	/**
+	 * sql语句并获取开始和结束 dao用户列表中
+	 * 
+	 * 媒体关注度
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectname360admin_meitiguanzhudu(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id          where t.data_date = '29991231'  and p.is_del =1) p   left join (select np.person_id, count(distinct np.date_type) as counts                from ods.person_network_popularity np               where np.date_type in (3)                 and np.date_date = to_char(sysdate - 1, 'yyyymmdd')               group by np.person_id) n     on p.person_id = n.person_id   where n.person_id is null  order by nvl(complex_index, 0) desc,p.person_id";
+		 sql = "select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id          where t.data_date = '20161110'  and p.is_del =1) p   left join (select np.person_id, count(distinct np.date_type) as counts                from ods.person_network_popularity np               where np.date_type in (3)                 and np.date_date = to_char(sysdate - 1, 'yyyymmdd')               group by np.person_id) n     on p.person_id = n.person_id   where n.person_id is null  order by nvl(complex_index, 0) desc,p.person_id";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -444,7 +503,9 @@ public class OracleHaoSou {
 		list.add(persion.getHobby());
 		list.add(persion.getDescription_text());
 		// list.add(persion.getPersonSocialActivitiesList());
+		
 		list.add(TimeTest.getNowTime("yyyyMMdd"));
+//		list.add("20161101");
 		
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
@@ -560,7 +621,8 @@ public class OracleHaoSou {
 		
 		
 		List<Comparable> list = new ArrayList();
-		list.add(tvplay.getTvplay_id());
+		list.add(Long.parseLong(tvplay.getTvplay_id()));
+		
 		list.add(tvplay.getTvplay_name());
 		list.add(tvplay.getTvplay_url());
 		list.add(tvplay.getAlias_en());
@@ -622,7 +684,7 @@ public class OracleHaoSou {
 	 * 2016年6月30日16:04:15
 	 * @param tvplay
 	 */
-	public static void Insertwangluoju(TvPlay tvplay) {
+	public static void Insertwangluoju1(TvPlay tvplay) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
 		String strSql = "insert into ods.tem_tvplay t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
@@ -1371,13 +1433,74 @@ public class OracleHaoSou {
 	
 	/**
 	 * 获取当360字数总需要采集的人数的个数
-	 * 
+	 * all
+	 * 2016年11月15日17:54:53
 	 * @return
 	 */
 	public static String returnNumPeople() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		// String strSql = "select count(*) from ods.person_network_popularity";
-		String strSql = "select count(*) from (select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id                   where t.data_date = '29991231') p   left join (select np.person_id,count(distinct np.date_type) as counts from ods.person_network_popularity np                      where np.date_type in(2,3) and np.date_date = to_char(sysdate - 1, 'yyyymmdd')                     group by np.person_id              ) n     on p.person_id = n.person_id and n.counts =2   where n.person_id is null   order by nvl(complex_index, 0) desc)";
+		String strSql = "select count(*) from ( select p.person_id, p.person_name from (select p.person_id,  p.person_name,  greatest(nvl(t.actor_complex_index, 0),  nvl(t.director_complex_index, 0),  nvl(t.screenwriter_complex_index, 0)) complex_index,  nvl(t.actor_complex_index, 0) as actor_complex_index,  nvl(t.director_complex_index, 0) as director_complex_index,  nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index   from edw.dim_person p   left join mart.f_person_index t  on p.person_id = t.person_id  where t.data_date = '29991231' and p.is_del =1)  p left join (select np.person_id, count(distinct np.date_type) as counts  from ods.person_network_popularity np where np.date_type in (2, 3)   and np.date_date = to_char(sysdate - 1, 'yyyymmdd') group by np.person_id) n   on p.person_id = n.person_id  and n.counts = 2   where n.person_id is null   order by nvl(complex_index, 0) desc)";
+		strSql = "select count(*) from ( select p.person_id, p.person_name from (select p.person_id,  p.person_name,  greatest(nvl(t.actor_complex_index, 0),  nvl(t.director_complex_index, 0),  nvl(t.screenwriter_complex_index, 0)) complex_index,  nvl(t.actor_complex_index, 0) as actor_complex_index,  nvl(t.director_complex_index, 0) as director_complex_index,  nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index   from edw.dim_person p   left join mart.f_person_index t  on p.person_id = t.person_id  where t.data_date = '20161110' and p.is_del =1)  p left join (select np.person_id, count(distinct np.date_type) as counts  from ods.person_network_popularity np where np.date_type in (2, 3)   and np.date_date = to_char(sysdate - 1, 'yyyymmdd') group by np.person_id) n   on p.person_id = n.person_id  and n.counts = 2   where n.person_id is null   order by nvl(complex_index, 0) desc)";
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
+	
+	
+	
+	
+	/**
+	 * 获取当360字数总需要采集的人数的个数
+	 * 搜索指数
+	 * 一共的数据
+	 * 
+	 * @return
+	 */
+	public static String returnNumPeople_shoushuozishu_yigongdezhishu() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		// String strSql = "select count(*) from ods.person_network_popularity";
+		String strSql = "select count(*) from (select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id          where t.data_date = '29991231'  and p.is_del =1) p   left join (select np.person_id, count(distinct np.date_type) as counts                from ods.person_network_popularity np               where np.date_type in (2)                 and np.date_date = to_char(sysdate - 1, 'yyyymmdd')               group by np.person_id) n     on p.person_id = n.person_id  where n.person_id is null  order by nvl(complex_index, 0) desc)";
+		strSql = "select count(*) from (select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id          where t.data_date = '20161110'  and p.is_del =1) p   left join (select np.person_id, count(distinct np.date_type) as counts                from ods.person_network_popularity np               where np.date_type in (2)                 and np.date_date = to_char(sysdate - 1, 'yyyymmdd')               group by np.person_id) n     on p.person_id = n.person_id  where n.person_id is null  order by nvl(complex_index, 0) desc)";
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
+	
+	
+	
+	
+
+	/**
+	 * 获取当360字数总需要采集的人数的个数
+	 * 搜索指数
+	 * 一共的数据
+	 * 
+	 * @return
+	 */
+	public static String returnNumPeople_shoushuozishu_yigongdezhishu_shoushuozishu() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		// String strSql = "select count(*) from ods.person_network_popularity";
+		String strSql = "select count(*) from (select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id          where t.data_date = '29991231'  and p.is_del =1) p   left join (select np.person_id, count(distinct np.date_type) as counts                from ods.person_network_popularity np               where np.date_type in (2)                 and np.date_date = to_char(sysdate - 1, 'yyyymmdd')               group by np.person_id) n     on p.person_id = n.person_id  where n.person_id is null  order by nvl(complex_index, 0) desc)";
+		strSql = "select count(*) from (select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id          where t.data_date = '20161110'  and p.is_del =1) p   left join (select np.person_id, count(distinct np.date_type) as counts                from ods.person_network_popularity np               where np.date_type in (2)                 and np.date_date = to_char(sysdate - 1, 'yyyymmdd')               group by np.person_id) n     on p.person_id = n.person_id  where n.person_id is null  order by nvl(complex_index, 0) desc)";
+		String strMax = DBOperate218.getResultValue(conn, strSql);
+		System.out.println(strMax);
+		return strMax;
+	}
+	
+	
+	/**
+	 * 获取当360字数总需要采集的人数的个数
+	 * 搜索指数
+	 * 一共的数据
+	 * 
+	 * @return
+	 */
+	public static String returnNumPeople_meitiguanzhudu_yigongdezhishu() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		// String strSql = "select count(*) from ods.person_network_popularity";
+		String strSql = "select count(*) from (select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id          where t.data_date = '29991231'  and p.is_del =1) p   left join (select np.person_id, count(distinct np.date_type) as counts                from ods.person_network_popularity np               where np.date_type in (3)                 and np.date_date = to_char(sysdate - 1, 'yyyymmdd')               group by np.person_id) n     on p.person_id = n.person_id   where n.person_id is null  order by nvl(complex_index, 0) desc,p.person_id)";
+		strSql = "select count(*) from (select p.person_id, p.person_name   from (select p.person_id,                p.person_name,                greatest(nvl(t.actor_complex_index, 0),                         nvl(t.director_complex_index, 0),                         nvl(t.screenwriter_complex_index, 0)) complex_index,                nvl(t.actor_complex_index, 0) as actor_complex_index,                nvl(t.director_complex_index, 0) as director_complex_index,                nvl(t.screenwriter_complex_index, 0) as screenwriter_complex_index           from edw.dim_person p           left join mart.f_person_index t             on p.person_id = t.person_id          where t.data_date = '20161110'  and p.is_del =1) p   left join (select np.person_id, count(distinct np.date_type) as counts                from ods.person_network_popularity np               where np.date_type in (3)                 and np.date_date = to_char(sysdate - 1, 'yyyymmdd')               group by np.person_id) n     on p.person_id = n.person_id   where n.person_id is null  order by nvl(complex_index, 0) desc,p.person_id)";
 		String strMax = DBOperate218.getResultValue(conn, strSql);
 		System.out.println(strMax);
 		return strMax;
@@ -1661,6 +1784,9 @@ public class OracleHaoSou {
 		// list.add(Integer.parseInt(tvplayid));// 这里是将对象加入到list中
 		list.add(personwork.getPersonId());
 		list.add(personwork.getPersonUrl());
+		if (!personwork.getName().equals("")) {
+			personwork.setName(personwork.getName().replace(" ", "").replace("&nbsp;", ""));
+		}
 		list.add(personwork.getName());
 		list.add(personwork.getProducedTime());
 		list.add(personwork.getRoleName());

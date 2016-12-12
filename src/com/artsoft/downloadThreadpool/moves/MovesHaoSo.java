@@ -39,7 +39,7 @@ public class MovesHaoSo {
 					// urlBranch =
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
 					urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
+							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", "").replaceAll("。", ""), "utf-8")
 							+ "&area=%E5%85%A8%E5%9B%BD";
 					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "3",TV_TYPE);
 				} catch (Exception e) {
@@ -56,7 +56,7 @@ public class MovesHaoSo {
 				// 媒体关注度
 				try {
 					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
+							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", "").replaceAll("。", ""), "utf-8");
 					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "4",TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -300,6 +300,8 @@ public class MovesHaoSo {
 		// TODO Auto-generated method stub
 //		 TimingTime(1, 00, 00);
 		 
+		
+		//没有加电影数据的
 		 rundingshitime(1, 00, 00);
 		 
 //		 runstatic();

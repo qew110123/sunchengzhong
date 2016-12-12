@@ -1,6 +1,5 @@
 package com.artsoft.download.BaiDu;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -8,9 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import com.artsoft.oracle.OracleBaidu;
-import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
-import com.artsoft.util.TimeTest;
 
 public class tem_tvplay_person_WangJu {
 	

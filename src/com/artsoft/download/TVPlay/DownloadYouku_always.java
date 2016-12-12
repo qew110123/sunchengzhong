@@ -67,6 +67,10 @@ public class DownloadYouku_always {
 //				System.out.println(link.select("span.p-actor").text());
 //				System.out.println(link.select("span.p-num").text());
 				
+				if (!strmainurl.contains("http://")) {
+					strmainurl=strmainurl.replace("//", "http://");
+				}
+				
 				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
 				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
 				

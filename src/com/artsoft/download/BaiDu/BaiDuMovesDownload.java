@@ -508,8 +508,8 @@ public class BaiDuMovesDownload {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TEM_DIM_FILM movesfilm =mainmore("13206", "http://baike.baidu.com/subview/9514/15201085.htm", "美人鱼");
-		OracleHaoSou.InsertTEM_DIM_FILM(movesfilm);
+//		TEM_DIM_FILM movesfilm =mainmore("13206", "http://baike.baidu.com/subview/9514/15201085.htm", "美人鱼");
+//		OracleHaoSou.InsertTEM_DIM_FILM(movesfilm);
 //		runnewMain();
 		
 		

@@ -1,7 +1,5 @@
 package com.artsoft.downloadThreadpool.people;
 
-import com.artsoft.download.news_num.baidu_newsnum;
-
 public class haoSou_thread_admin implements Runnable{
 	
 	
@@ -17,9 +15,8 @@ public class haoSou_thread_admin implements Runnable{
 		// TODO Auto-generated method stub
 		
 		/**
-		 * °Ù¶ÈËÑË÷Á¿
+		 * 
 		 */
-
 		if (name.equals("adminSou")) {
 //			baidu_newsnum.TimingTime(1, 59, 59);
 			HaoSouWordAdmin.TimingTime(9, 00, 01);

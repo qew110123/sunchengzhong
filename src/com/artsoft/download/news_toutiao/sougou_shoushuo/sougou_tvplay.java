@@ -11,6 +11,7 @@ import com.artsoft.oracle2.DBManager;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.TimeTest;
 import com.artsoft.download.news_toutiao.sougou_shoushuo.sougou_shoushuo;
+import com.artsoft.downloadThreadpool.people.haoSou_thread_admin;
 
 
 public class sougou_tvplay {
@@ -18,7 +19,7 @@ public class sougou_tvplay {
 	
 	public static void runstatic( ) {
 		// TODO Auto-generated method stub
-		List<String> listArray = Oracle.selecttvplay();
+		List<String> listArray = Oracle.selectshougoutvplay();
 		System.out.println(listArray.size());
 		for (Object Objstring : listArray) {
 //			System.out.println(Objstring);
@@ -31,16 +32,13 @@ public class sougou_tvplay {
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
 				try {
 					
-					
 //					sougou_shoushuo.runnewMain(name, 2, id);
 					
 					TimeoutTest.runing(name, 2, id);
 					
-					
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
-				
 				
 				
 			}
@@ -69,6 +67,8 @@ public class sougou_tvplay {
 //							DBManager dbm = DBManager.instance();
 //							dbm.executeCall(TimeTest.getNowTime("yyyyMMdd"));
 							CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+							new Thread(new haoSou_thread_admin("ip")).start();
+							
 							runstatic();
 							CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 						} catch (Exception e) {
@@ -76,7 +76,7 @@ public class sougou_tvplay {
 						}
 						
 					}
-				}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
+				}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
 			}
 	
 

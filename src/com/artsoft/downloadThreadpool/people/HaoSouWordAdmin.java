@@ -363,7 +363,12 @@ public class HaoSouWordAdmin {
 				public void run() {
 					System.out.println("-------设定要指定任务--------");
 //					runstatic();
-					IpFilter.mainip("http://index.haosou.com/");
+					try {
+						IpFilter.mainip("http://index.haosou.com/");
+						
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 					
 					
 				}
@@ -385,10 +390,11 @@ public class HaoSouWordAdmin {
 //		TimingTime(9, 00, 01);
 //		// runstatic();
 //		System.out.println("运行网吧");
-		
-//		String urlBranch="http://index.so.com/index.php?a=soIndexJson&q=%E6%AC%A2%E4%B9%90%E9%A2%82&area=%E5%85%A8%E5%9B%BD";
-//		String tvplayId="0";
-//		String tyPlayName="欢乐颂";
+		                //http://index.haosou.com/index.php?a=soIndexJson&area=%E5%85%A8%E5%9B%BD&q=%E5%91%A8%E6%98%9F%E9%A9%B0
+		//http://index.haosou.com/index.php?a=soMediaJson&q=%E5%91%A8%E6%98%9F%E9%A9%B0
+//		String urlBranch="http://index.haosou.com/index.php?a=soMediaJson&q=%E7%8E%8B%E5%AE%9D%E5%BC%BA";
+//		String tvplayId="2346";
+//		String tyPlayName="王宝强";
 //		String DataType="3";
 //		int TV_TYPE=0;
 //		HaosouPeoPleBranch(urlBranch, tvplayId, tyPlayName, DataType);

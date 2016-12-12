@@ -111,9 +111,22 @@ public class DownYoukuMovie {
 				
 //				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
 //				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+				if (strmainurl.equals("http://tv.youku.com/")) {
+					strmainurl=link.select("a.desc-link").attr("href");
+				}
+				if (!strmainurl.contains("http://")) {
+					strmainurl=strmainurl.replace("//", "http://");
+				}
+				
 				Document strmainurlHtmldoc = Jsoup.connect(strmainurl).get();
 				
 				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				if (strmainxiangxiurl.equals("http://movie.youku.com/")) {
+					strmainxiangxiurl=strmainurlHtmldoc.select("a.desc-link").attr("href");
+				}
+				if (!strmainxiangxiurl.contains("http://")) {
+					strmainxiangxiurl=strmainxiangxiurl.replace("//", "http://");
+				}
 				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://movie.youku.com/")) {
 //					System.out.println(strmainurlHtmldoc);
 					strmainxiangxiurl=HtmlAnalyze.getTagText(strmainurlHtmldoc.toString(), "desc-link\" href=\"","\"");
@@ -159,31 +172,37 @@ public class DownYoukuMovie {
 		 */
 
 		String name = "";// 名称
-		System.out.println(name = doc.select("span.name").text());
+		name = doc.select("span.name").text();
+		if (name.equals("")) {
+			name=HtmlAnalyze.getTagText(strHtml, "<a title=\"", "\"");
+		}
 		String Amount = "";// 播放量
-		System.out.println(Amount = doc.select("span.play").text());
+		Amount = doc.select("span.play").text();
+		if (Amount.equals("")) {
+			Amount=HtmlAnalyze.getTagText(strHtml, "总播放数：", "<");
+		}
 		Amount = Amount.replaceAll("总播放:", "").replaceAll(",", "");
+		
 
 		String comment = ""; // 评论
-		System.out.println(comment = doc.select("span.comment").text());
+		comment = doc.select("span.comment").text();
+		if (comment.equals("")) {
+			comment=HtmlAnalyze.getTagText(strHtml, "评论：", "<");
+		}
 		comment = comment.replaceAll("评论:", "").replaceAll(",", "");
 
 		String answer = ""; // 顶
-		System.out.println(answer = doc.select("span.increm").text());
+		answer = doc.select("span.increm").text();
+		if (answer.equals("")) {
+			answer=HtmlAnalyze.getTagText(strHtml, "顶：", "<");
+		}
 		answer = answer.replaceAll("顶:", "").replaceAll(",", "");
 
 		String score = ""; // 评分
-
 		score = HtmlAnalyze.getTagText(strHtml, "<label>评分:</label>", "<style type=\"text/css\">");
-		// Pattern pattern = Pattern.compile("[0-9]*");
-		// Matcher isNum = pattern.matcher(score);
-		// score=doc.select("span.ratingstar").text();
-		if (score.contains("\r")) {
-			score = HtmlAnalyze.getTagText("#" + score, "#", "\r");
+		if (score.equals("")) {
+			score=HtmlAnalyze.getTagText(strHtml, "class=\"star-num\">", "<");
 		}
-		// if (!isNum.matches()) {
-		// score=doc.select("span.ratingstar").text().replace("评分:", "");
-		// }
 		System.out.println(score);
 
 		// String score = ""; // 集数

@@ -411,7 +411,7 @@ public class DownIqiyiNetwordDetails {
 		
 		
 //		TimingTime(23, 59, 59);
-		for (int j = 0; j < 4; j++) {
+		for (int j = 0; j < 6; j++) {
 			try {
 				
 				DownIqiyiNetwordDetails.mainurl("http://list.iqiyi.com/www/2/-24065------------4-"+j+"-1-iqiyi--.html");

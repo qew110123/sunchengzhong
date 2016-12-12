@@ -16,7 +16,7 @@ public class xunzhe_xiangxixinxi {
 //		JSONObject objectobject = JSONObject.fromObject(object);
 		String [] idlist=url.split("/");
 		String id= idlist[idlist.length-1];
-		playtv.setTvplay_id( Integer.parseInt(id));
+		playtv.setTvplay_id(id);
 //		String url = (String) objectobject.get("ID");
 //		System.out.println(url = "http://www.cbooo.cn/m/" + url);
 		playtv.setTvplay_url(url);

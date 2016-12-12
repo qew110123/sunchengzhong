@@ -76,6 +76,17 @@ public class OracleBaidu {
 		String sql = "  select max(p.person_url) person_url,      max(t.person_id) person_id,max(t.person_name) person_name  from ods.tem_play_person p  left join ods.dim_person t on p.person_name = t.person_name  where t.sex = 0  and p.person_url is not null  group by p.person_name order by person_id";
 		
 		sql="select max(p.person_id) as person_id,t.person_name,max(t.person_url) as person_url,max(p.person_url) as person_urls  from ODS.DEL_DIM_PERSON t left join ods.dim_person p on t.person_name = p.person_name where p.person_url is null and t.person_name is not null and p.person_id is not null group by t.person_name";
+		sql="select t.person_id,t.person_name,t.person_url from edw.dim_person t where t.person_url is not null and t.person_url !='无'";
+		sql="select t.person_id,t.person_name,t.person_url from edw.dim_person t where t.person_url is not null and t.person_url !='无' and t.person_url not  like '%，%' ";
+		sql="select p.person_id,p.person_name,p.person_url from edw.dim_person p where p.person_id not in(select t.person_id from ods.tem_dim_person t ) and  p.person_url is not null and p.person_url !='无' and p.person_url not  like '%，%'";
+		
+		sql="select t.person_id,t.person_name,t.person_url from EDW.Dim_Person t where t.update_date >='20161116'";
+		sql="select t.person_id,t.person_name,t.person_url from EDW.DIM_PERSON t where t.update_date >='20161121' and t.person_url !='无'";
+		
+		sql="select t.person_id,t.person_name,t.person_url from EDW.DIM_PERSON t where t.update_date >='20161122' and t.person_url !='无'";
+		
+		sql="select t.person_id,t.person_name,t.person_url from EDW.DIM_PERSON t where t.update_date >='20161124' and t.person_url !='无'";
+		sql="select t.person_id,t.person_name,t.person_url from EDW.DIM_PERSON t  where t.person_name in('范伟' ,'张歆艺','周冬雨','马思纯') ";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -135,6 +146,24 @@ public class OracleBaidu {
 		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t  where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
 		
 		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t  where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t  where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
+		
+		sql=" select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t  where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901'";
+		
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t  where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901'  ";
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t   where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t  where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901'";
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t   where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901'";
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t   where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901'";
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t  where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901'  ";
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t   where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901'  ";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -155,6 +184,15 @@ public class OracleBaidu {
 		
 		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.f_tvplay_record t where t.tvplay_url is not null";
 		
+		sql=" select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where t.update_date >='20161116'";
+		
+		sql="select to_char(t.tvplay_id),t.tvplay_name,t.tvplay_url from EDW.F_TVPLAY_RECORD t where t.update_date >='20161121' and t.tvplay_url is not null";
+		
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where t.tvplay_name in('不可能完成的任务','小别离','青云志','大好时光')";
+		
+		sql=" select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where t.update_date >='20161206' and t.tvplay_url is not null";
+		
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where t.update_date >='20161206' and t.tvplay_url is not null ";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -175,6 +213,13 @@ public class OracleBaidu {
 		 * 2016年7月5日17:57:59
 		 */
 		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from ODS.DIM_NETWORK_PLAY t";
+		
+		
+		
+		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from edw.dim_networkplay t";
+		
+		
+		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -194,6 +239,68 @@ public class OracleBaidu {
 		 * 2016年7月5日17:57:59
 		 */
 		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from edw.dim_networkplay t where t.networkplay_url is not null";
+		
+		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url,t.img_big_name from edw.dim_networkplay t where t.networkplay_url is not null";
+		
+		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from EDW.DIM_NETWORKPLAY t where t.update_date = '20161107' and t.networkplay_url is not null";
+		
+		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from EDW.Dim_Networkplay t where t.update_date >='20161121' and t.networkplay_url is not null";
+		
+		sql=" select t.networkplay_id,t.networkplay_name,t.networkplay_url from EDW.Dim_Networkplay t where t.update_date >='20161122' and t.networkplay_url is not null";
+		
+		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from EDW.Dim_Networkplay t where t.update_date >='20161124' and t.networkplay_url is not null";
+		
+		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from EDW.Dim_Networkplay t where t.update_date >='20161125' and t.networkplay_url is not null";
+		
+		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from EDW.Dim_Networkplay t where t.update_date >='20161130' and t.networkplay_url is not null";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	/**
+	 * 百度数据的中的网络剧补充 url
+	 * 2016年8月16日17:05:18
+	 * @return
+	 */
+	public static List selectbaidudianshiju_Moves_url() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.film_id,t.film_name,t.film_url from EDW.DIM_FILM t where t.update_date >='20161206' and t.film_url is not null";
+		
+		sql="select t.film_id,t.film_name,t.film_url from EDW.DIM_FILM t where t.update_date >='20161206' and t.film_url is not null";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+	//
+	/**
+	 * 百度数据的中的综艺
+	 * 2016年6月21日16:02:35
+	 * @return
+	 */
+	public static List selectbaidudianshijuzhongyiall() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select * from   ODS.DIM_NETWORK_VARIETY t order by t.tvplay_id";
+		
+		sql="select t.variety_id,t.variety_name from ODS.DIM_VARIETY t";
+		
+		/**
+		 * 2016年7月26日10:53:18
+		 * 跑一遍variety_name_back
+		 */
+		
+		sql="select t.variety_id,t.variety_name_back from ods.dim_variety t where t.variety_name_back is not null";
+		
+		sql="select t.variety_id,t.variety_name,t.variety_url,t.img_big_name from edw.dim_variety t ";
+		
+//		sql="select t.networkplay_id,t.networkplay_name,t.networkplay_url from edw.dim_networkplay t";
+		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -219,8 +326,20 @@ public class OracleBaidu {
 		
 		sql="select t.variety_id,t.variety_name_back from ods.dim_variety t where t.variety_name_back is not null";
 		
+		sql="select t.variety_id,t.variety_name,t.variety_url,t.img_big_name from edw.dim_variety t where t.variety_url is not null";
+		
+		sql="select t.variety_id,t.variety_name,t.variety_url from EDW.DIM_VARIETY t  where t.variety_url is not null and t.update_date='20161107'";
+		
+		sql="select t.variety_id,t.variety_name,t.variety_url from EDW.Dim_Variety t where t.update_date >='20161116' and t.variety_url is not null";
+		
+		sql="select t.variety_id,t.variety_name,t.variety_url from EDW.Dim_Variety t where t.update_date >='20161121' and t.variety_url is not null";
+		
+		sql="select t.variety_id,t.variety_name,t.variety_url from EDW.Dim_Variety t where t.update_date >='20161124' and t.variety_url is not null";
+		
+		sql="select t.variety_id,t.variety_name,t.variety_url from EDW.Dim_Variety t where t.update_date >='20161130' and t.variety_url is not null";
+		
 		ArrayList<String> listname = new ArrayList<String>();
-		int iNum = 2;
+		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 	}
@@ -256,7 +375,25 @@ public class OracleBaidu {
 		
 		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from mart.dim_tvplay t where t.tvplay_url is not null order by t.tvplay_id desc";
 		
+		
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.f_tvplay_record t  where t.tvplay_url is not null order by t.tvplay_id desc";
+		
+		sql=" select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.f_tvplay_record t  where t.tvplay_url is not null and ASCIISTR(t.tvplay_url) like '%\\%' order by t.tvplay_id desc";
+		
+		
+		sql="select  to_char(t.tvplay_id),t.tvplay_name,t.tvplay_url from edw.f_tvplay_record t where t.tvplay_name = '深井食堂'";
+		
+		
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url  from EDW.F_TVPLAY_RECORD t where t.tvplay_id not in (select t.tvplay_id from edw.f_tvplay_stills t group by t.tvplay_id) and t.tvplay_url is not null order by t.project_date_back desc";
+		
+		sql="select t.tvplay_id,t.tvplay_name,to_char(t.create_time,'yyyymmdd')  from edw.dim_tvplay t  where t.years is null and to_char(t.create_time,'yyyymmdd') >='20160901' ";
+		
+		
+		sql=" select  to_char(t.tvplay_id),t.tvplay_name,t.tvplay_url from edw.f_tvplay_record t where t.tvplay_name = '少林寺传奇之东归英雄'";
+//		sql=" select t.tvplay_id,t.tvplay_name,t.tvplay_url from edw.f_tvplay_record t where t.tvplay_url is not null and t.tvplay_name like  '%铁核桃之无间风云%'";
 //		sql="select t.tvplay_id,max(t.tvplay_name),t.tvplay_url  from ods.tem_tvplay t left join ods.tem_play_stills s on s.data_id = t.tvplay_id where t.tvplay_url is not null and  s.small_url is null or s.big_url is null group by t.tvplay_id,t.tvplay_url order by t.tvplay_id";
+		
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.F_TVPLAY_RECORD t where t.update_date >='20161121' and t.tvplay_url is not null";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
@@ -291,6 +428,8 @@ public class OracleBaidu {
 		 * 2016年5月10日11:33:58
 		 */
 		sql = "select t.person_id,t.person_url,PERSON_NAME from edw.dim_person t  where t.person_url is not null order by t.person_id";
+		
+		sql=" select t.person_id,t.person_url,t.person_name from EDW.DIM_PERSON t where t.update_date >='20161205' and t.person_url is not null and t.person_url !='无'";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -303,6 +442,24 @@ public class OracleBaidu {
 	 * @return
 	 */
 	public static List selectmove() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = " select t.film_id,t.film_name,t.FILM_URL from ods.dim_film t order by t.film_id ";
+		
+		sql="select * from edw.dim_film t where t.film_name = '美人鱼'";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	/**
+	 * 百度数据的中的全部电影
+	 * 电影中的数据的图片数据
+	 * 2016年11月1日15:02:35
+	 * @return
+	 */
+	public static List selectmove_zhuyanshujutupianxianzai() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = " select t.film_id,t.film_name,t.FILM_URL from ods.dim_film t order by t.film_id ";
 		

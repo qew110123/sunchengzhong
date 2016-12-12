@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.artsoft.bean.DEL_DIM_NETWORKPLAY;
 import com.artsoft.bean.MAYAO_KEY;
+import com.artsoft.bean.TEM_BAIDU_NEW;
 import com.artsoft.bean.TEM_TVPLAY_TIDBITS;
 import com.artsoft.bean.TEM_WEIBO_TOPIC_SCORE;
 import com.artsoft.bean.Tem_weibo_word_age_sex;
@@ -279,7 +281,7 @@ public class Oracle {
 	public static void InsertWECHAT_INFORMATION(WECHAT_INFORMATION INFORMATION) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
-		String strSql = "INSERT INTO ods.WECHAT_INFORMATION t (t.data_id,t.names,t.dates,t.post_user,t.content_all,t.content_p,t.urls,t.weixinhao,t.data_date,t.weixin_ation,t.original,t.ranking,IMG_BIG_URL,IMG_BIG_NAME,SOURCE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String strSql = "INSERT INTO ods.WECHAT_INFORMATION t (t.data_id,t.names,t.dates,t.post_user,t.content_all,t.content_p,t.urls,t.weixinhao,t.data_date,t.weixin_ation,t.original,t.ranking,IMG_BIG_URL,IMG_BIG_NAME,SOURCE,DATA_TYPE,UPDATE_FLAG) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		List<Comparable> list = new ArrayList();
 		list.add(INFORMATION.getDataId());
 		list.add(INFORMATION.getNames());
@@ -296,6 +298,39 @@ public class Oracle {
 		list.add(INFORMATION.getIMG_BIG_URL());
 		list.add(INFORMATION.getIMG_BIG_NAME());
 		list.add(INFORMATION.getSOURCE());
+		list.add(INFORMATION.getDATA_TYPE());
+		list.add(TimeTest.getNowTime("yyyyMMddHH"));
+//		list.add(INFORMATION.getUrls());
+		
+//		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	/**
+	 * 2016年11月25日17:37:24
+	 * 
+	 * @param company
+	 * 
+	 */
+	public static void InsertDEL_DIM_NETWORKPLAY(DEL_DIM_NETWORKPLAY NETWORKPLAY) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "INSERT INTO ods.DEL_DIM_NETWORKPLAY t (t.NETWORKPLAY_ID,t.NETWORKPLAY_NAME,t.SHOW_NAME,t.ACTORS,t.DIRECTOR,t.SCREENWRITER, t.LABEL_NAME,t.FIRST_DATE,t.SET_NUM,t.SCORE,t.DATA_URL) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(NETWORKPLAY.getNetworkplayId());
+		list.add(NETWORKPLAY.getNetworkplayName());
+		list.add(NETWORKPLAY.getShowName());
+		list.add(NETWORKPLAY.getActors());
+		list.add(NETWORKPLAY.getDirector());
+		list.add(NETWORKPLAY.getScreenwriter());
+		list.add(NETWORKPLAY.getLabelName());
+		list.add(NETWORKPLAY.getFirstDate());
+//		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(NETWORKPLAY.getSetNum());
+		list.add(NETWORKPLAY.getScore());
+		list.add(NETWORKPLAY.getDataUrl());
 		
 //		list.add(INFORMATION.getUrls());
 		
@@ -304,6 +339,26 @@ public class Oracle {
 		System.out.println(bb);
 	}
 	
+	
+	/**
+	 * 2016-11-25 17:37:28
+	 * 
+	 * @param company
+	 * 
+	 */
+	public static void InsertTEM_BAIDU_NEW(TEM_BAIDU_NEW BAIDU_NEW) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "INSERT INTO ods.TEM_BAIDU_NEW t (t.TVPLAY_NAME,t.SHOW_NAME,t.SOURCES,t.CREATE_DATE,t.TVPLAY_URL) VALUES (?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(BAIDU_NEW.getTvplayName());
+		list.add(BAIDU_NEW.getShowName());
+		list.add(BAIDU_NEW.getSources());
+		list.add(BAIDU_NEW.getCreateDate());
+		list.add(BAIDU_NEW.getTvplayUrl());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
 	
 	
 	/**
@@ -316,6 +371,9 @@ public class Oracle {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
 		String strSql = "INSERT INTO ods.WECHAT_INFORMATION t (t.data_id,t.names,t.dates,t.post_user,t.content_all,t.content_p,t.urls,t.weixinhao,t.data_date,t.weixin_ation,t.original,t.ranking,IMG_BIG_URL,IMG_BIG_NAME,SOURCE,DATA_TYPE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		if (INFORMATION.getContentP()==null||INFORMATION.getContentP().equals("")) {
+			return;
+		}
 		List<Comparable> list = new ArrayList();
 		list.add(INFORMATION.getDataId());
 		list.add(INFORMATION.getNames());
@@ -350,6 +408,7 @@ public class Oracle {
 	public static List selectWEIXIN_NUMBER() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.* from ODS.WEIXIN_NUMBER t";
+//		sql=" select t.* from ODS.WEIXIN_NUMBER t where t.public_number='影投人'";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
@@ -390,6 +449,42 @@ public class Oracle {
 		List<Comparable> list = new ArrayList();
 		list.add(TimeTest.getNowTime("yyyyMMdd"));
 //		list.add(tidbits.getDataId());
+		list.add(tidbits.getTvplayName());
+		list.add(tidbits.getTitleName());
+		list.add(tidbits.getDetailUrl());
+		list.add(tidbits.getPlayUrl());
+		list.add(tidbits.getPutDate());
+		list.add(tidbits.getPlayAmount());
+		list.add(tidbits.getPlayPlatform());
+		list.add(tidbits.getTimeLongs());
+		list.add(tidbits.getOrderNo());
+		list.add(tidbits.getImgSmallUrl());
+		list.add(tidbits.getImgSmallName());
+//		list.add(tidbits.getIntoDate());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(tidbits.getDataType());
+		list.add(tidbits.getSOURCE());
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+
+	/**
+	 * 2016年9月5日17:16:02
+	 * 
+	 * @param company
+	 * 
+	 */
+	public static void IntoTEM_TVPLAY_TIDBITS_andid(TEM_TVPLAY_TIDBITS tidbits) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ODS.TEM_TVPLAY_TIDBITS t (t.data_date,t.TVPLAY_ID,t.tvplay_name,t.title_name,t.detail_url,t.play_url,t.put_date,t.play_amount,t.play_platform,t.time_longs,t.order_no"
+				+ ",t.img_small_url,t.img_small_name,t.into_date,t.data_type,t.SOURCE)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(Long.parseLong(tidbits.getTvplayId()));
 		list.add(tidbits.getTvplayName());
 		list.add(tidbits.getTitleName());
 		list.add(tidbits.getDetailUrl());
@@ -472,6 +567,32 @@ public class Oracle {
 //		sql="select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.* from (select t.tvplay_id,t.tvplay_name from         mart.f_tvplay_index t left join         (select nr.tvplay_id,count( distinct nr.data_type) as counts                 from ods.tem_network_reputation nr               where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 0              group by nr.tvplay_id              ) n on t.tvplay_id = n.tvplay_id and n.counts = 2             where t.data_date = '29991231' and n.tvplay_id is null    order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2 on t1.tvplay_id =t2.data_id ";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
+		List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	
+	
+	/**
+	 * 拼写sql语句并获取开始和结束
+	 * 搜狗数据
+	 * 
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectshougoutvplay() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_id,t.tvplay_name from edw.f_tvplay_record t  where t.project_date_back >='20130601'";
+		
+//		sql="select t.tvplay_id,t.tvplay_name from EDW.F_TVPLAY_RECORD t where t.tvplay_name = '老子传奇'";
+		
+//		sql="select t.tvplay_id,t.tvplay_name from edw.f_tvplay_record t where t.tvplay_name = '龙珠传奇'";
+		
+//		sql="select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.* from (select t.tvplay_id,t.tvplay_name from         mart.f_tvplay_index t left join         (select nr.tvplay_id,count( distinct nr.data_type) as counts                 from ods.tem_network_reputation nr               where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 0              group by nr.tvplay_id              ) n on t.tvplay_id = n.tvplay_id and n.counts = 2             where t.data_date = '29991231' and n.tvplay_id is null    order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2 on t1.tvplay_id =t2.data_id ";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
 		List<String> list =DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 

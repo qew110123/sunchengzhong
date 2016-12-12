@@ -44,6 +44,23 @@ public class Image2 {
 		return nameurl;
 	}
 	
+	public static String imagUrldownload_2(String urldownload){
+		String nameurl="";
+		String[] namelist=urldownload.split("/");
+		try {
+			nameurl=namelist[namelist.length-2]+"";
+			DownloadImage.download(urldownload, nameurl, "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\weixin\\");
+			
+			weixin.leibiaoFavFTPUtil(nameurl);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Í¼Æ¬ÏÂÔØ³ö´í£¡");
+		}
+		return nameurl;
+	}
+	
 	
 	
 	public static String imagUrldownload_allurl(String urldownload){

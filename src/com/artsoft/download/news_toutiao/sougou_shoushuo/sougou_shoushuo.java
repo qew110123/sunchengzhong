@@ -1,6 +1,8 @@
 package com.artsoft.download.news_toutiao.sougou_shoushuo;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.Proxy;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,6 +12,7 @@ import org.jsoup.select.Elements;
 import com.artsoft.bean.WECHAT_INFORMATION;
 import com.artsoft.demo.imag.Image2;
 import com.artsoft.oracle.Oracle;
+import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
@@ -115,25 +118,25 @@ public class sougou_shoushuo {
 					String Stringelement = "";
 
 					if (element.toString().contains("<img")) {
-						// Stringelement=element.toString();
-						try {
-							String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
-							String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
-							String newimgurl = Image2.imagUrldownload_allurl_baidu(imgurlhtml);
-							if (iii == 0) {
-								if ( !wechat.getIMG_BIG_NAME().equals("")) {
-									
-									leibiaoimg = newimgurl;
-								}
-							}
-							iii += 1;
-							Stringelement = element.toString().replace(imgotherhtml,
-									"<img src=\"" + newimgurl + "\" >");
-
-						} catch (Exception e) {
-							// TODO: handle exception
-							Stringelement = element.toString();
-						}
+						 Stringelement=element.toString();
+//						try {
+//							String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
+//							String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
+//							String newimgurl = Image2.imagUrldownload_allurl_baidu(imgurlhtml);
+//							if (iii == 0) {
+//								if ( !wechat.getIMG_BIG_NAME().equals("")) {
+//									
+//									leibiaoimg = newimgurl;
+//								}
+//							}
+//							iii += 1;
+//							Stringelement = element.toString().replace(imgotherhtml,
+//									"<img src=\"" + newimgurl + "\" >");
+//
+//						} catch (Exception e) {
+//							// TODO: handle exception
+//							Stringelement = element.toString();
+//						}
 
 					} else {
 						if (element.toString().contains("<strong>")) {
@@ -300,25 +303,25 @@ public class sougou_shoushuo {
 					String Stringelement = "";
 
 					if (element.toString().contains("<img")) {
-						// Stringelement=element.toString();
-						try {
-							String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
-							String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
-							String newimgurl = Image2.imagUrldownload_allurl_baidu(imgurlhtml);
-							if (iii == 0) {
-								if ( !wechat.getIMG_BIG_NAME().equals("")) {
-									
-									leibiaoimg = newimgurl;
-								}
-							}
-							iii += 1;
-							Stringelement = element.toString().replace(imgotherhtml,
-									"<img src=\"" + newimgurl + "\" >");
-
-						} catch (Exception e) {
-							// TODO: handle exception
-							Stringelement = element.toString();
-						}
+						 Stringelement=element.toString();
+//						try {
+//							String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
+//							String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
+//							String newimgurl = Image2.imagUrldownload_allurl_baidu(imgurlhtml);
+//							if (iii == 0) {
+//								if ( !wechat.getIMG_BIG_NAME().equals("")) {
+//									
+//									leibiaoimg = newimgurl;
+//								}
+//							}
+//							iii += 1;
+//							Stringelement = element.toString().replace(imgotherhtml,
+//									"<img src=\"" + newimgurl + "\" >");
+//
+//						} catch (Exception e) {
+//							// TODO: handle exception
+//							Stringelement = element.toString();
+//						}
 
 					} else {
 						if (element.toString().contains("<strong>")) {
@@ -485,25 +488,25 @@ public class sougou_shoushuo {
 					String Stringelement = "";
 
 					if (element.toString().contains("<img")) {
-						// Stringelement=element.toString();
-						try {
-							String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
-							String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
-							String newimgurl = Image2.imagUrldownload_allurl_baidu(imgurlhtml);
-							if (iii == 0) {
-								if ( !wechat.getIMG_BIG_NAME().equals("")) {
-									
-									leibiaoimg = newimgurl;
-								}
-							}
-							iii += 1;
-							Stringelement = element.toString().replace(imgotherhtml,
-									"<img src=\"" + newimgurl + "\" >");
-
-						} catch (Exception e) {
-							// TODO: handle exception
-							Stringelement = element.toString();
-						}
+						 Stringelement=element.toString();
+//						try {
+//							String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
+//							String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
+//							String newimgurl = Image2.imagUrldownload_allurl_baidu(imgurlhtml);
+//							if (iii == 0) {
+//								if ( !wechat.getIMG_BIG_NAME().equals("")) {
+//									
+//									leibiaoimg = newimgurl;
+//								}
+//							}
+//							iii += 1;
+//							Stringelement = element.toString().replace(imgotherhtml,
+//									"<img src=\"" + newimgurl + "\" >");
+//
+//						} catch (Exception e) {
+//							// TODO: handle exception
+//							Stringelement = element.toString();
+//						}
 
 					} else {
 						if (element.toString().contains("<strong>")) {
@@ -671,25 +674,25 @@ public class sougou_shoushuo {
 					String Stringelement = "";
 
 					if (element.toString().contains("<img")) {
-						// Stringelement=element.toString();
-						try {
-							String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
-							String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
-							String newimgurl = Image2.imagUrldownload_allurl_baidu(imgurlhtml);
-							if (iii == 0) {
-								if ( !wechat.getIMG_BIG_NAME().equals("")) {
-									
-									leibiaoimg = newimgurl;
-								}
-							}
-							iii += 1;
-							Stringelement = element.toString().replace(imgotherhtml,
-									"<img src=\"" + newimgurl + "\" >");
-
-						} catch (Exception e) {
-							// TODO: handle exception
-							Stringelement = element.toString();
-						}
+						 Stringelement=element.toString();
+//						try {
+//							String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
+//							String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
+//							String newimgurl = Image2.imagUrldownload_allurl_baidu(imgurlhtml);
+//							if (iii == 0) {
+//								if ( !wechat.getIMG_BIG_NAME().equals("")) {
+//									
+//									leibiaoimg = newimgurl;
+//								}
+//							}
+//							iii += 1;
+//							Stringelement = element.toString().replace(imgotherhtml,
+//									"<img src=\"" + newimgurl + "\" >");
+//
+//						} catch (Exception e) {
+//							// TODO: handle exception
+//							Stringelement = element.toString();
+//						}
 
 					} else {
 						if (element.toString().contains("<strong>")) {
@@ -856,25 +859,25 @@ public class sougou_shoushuo {
 					String Stringelement = "";
 
 					if (element.toString().contains("<img")) {
-						// Stringelement=element.toString();
-						try {
-							String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
-							String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
-							String newimgurl = Image2.imagUrldownload_allurl_baidu(imgurlhtml);
-							if (iii == 0) {
-								if ( !wechat.getIMG_BIG_NAME().equals("")) {
-									
-									leibiaoimg = newimgurl;
-								}
-							}
-							iii += 1;
-							Stringelement = element.toString().replace(imgotherhtml,
-									"<img src=\"" + newimgurl + "\" >");
-
-						} catch (Exception e) {
-							// TODO: handle exception
-							Stringelement = element.toString();
-						}
+						 Stringelement=element.toString();
+//						try {
+//							String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
+//							String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "src=\"", "\"");
+//							String newimgurl = Image2.imagUrldownload_allurl_baidu(imgurlhtml);
+//							if (iii == 0) {
+//								if ( !wechat.getIMG_BIG_NAME().equals("")) {
+//									
+//									leibiaoimg = newimgurl;
+//								}
+//							}
+//							iii += 1;
+//							Stringelement = element.toString().replace(imgotherhtml,
+//									"<img src=\"" + newimgurl + "\" >");
+//
+//						} catch (Exception e) {
+//							// TODO: handle exception
+//							Stringelement = element.toString();
+//						}
 
 					} else {
 						if (element.toString().contains("<strong>")) {
@@ -942,10 +945,42 @@ public class sougou_shoushuo {
 			e.printStackTrace();
 		}
 		System.out.println(nameutf8);
-		String urlMain= "http://www.sogou.com/web?ie=utf8&query="+nameutf8;
+		String urlMain= "http://www.sogou.com/web?query="+nameutf8+"&w=03021800&ie=utf8";
+//		urlMain="http://www.sogou.com/web?query=%E5%B0%8F%E5%88%AB%E7%A6%BB";
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "gbk", null, null);
 		
 		String query= HtmlAnalyze.getTagText(strHtml, "'query':'", "'");
+		
+		
+//		query="%C7%E0%B4%BA%C2%E9%C0%B1%CC%CC";
+		
+		
+		if (query==null||query.equals("")) {
+				strHtml =DownloadUtil.getHtmlText(urlMain, 1000 * 30, "utf-8", null, null);
+			 query= HtmlAnalyze.getTagText(strHtml, "'query':'", "'");
+		}
+		
+		if (query==null||query.equals("")) {
+			try {
+				strHtml = Jsoup.connect(urlMain).get().toString();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			 query= HtmlAnalyze.getTagText(strHtml, "'query':'", "'");
+		}
+		
+		if (query==null||query.equals("")) {
+			
+			 query= query_url(urlMain);
+		}
+		
+		
+		
+		if (query==null||query.equals("")) {
+			return;
+		}
 		
 		System.out.println(query);
 		
@@ -961,7 +996,7 @@ public class sougou_shoushuo {
 		try {
 			//http://news.sogou.com/news?query=site:qq.com%20%D0%A1%B1%F0%C0%EB&manual=true&mode=1&sort=1&p=42230302
 			runnew_qq(
-					"http://news.sogou.com/news?query=site:qq.com%20"+query+"&manual=true&mode=1&sort=1&p=42230302",dATA_TYPE,id);
+					"http://news.sogou.com/news?query=site:qq.com%20"+query+"&manual=true&mode=2&sort=1&p=42230302",dATA_TYPE,id);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -970,7 +1005,7 @@ public class sougou_shoushuo {
 			
 			//http://news.sogou.com/news?query=site:sina.com.cn%20%D0%A1%B1%F0%C0%EB&manual=true&mode=1&sort=1&p=42230302
 			runnew_sina(
-					"http://news.sogou.com/news?query=site:sina.com.cn%20"+query+"&manual=true&mode=1&sort=1&p=42230302",dATA_TYPE,id);
+					"http://news.sogou.com/news?query=site:sina.com.cn%20"+query+"&manual=true&mode=2&sort=1&p=42230302",dATA_TYPE,id);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -979,7 +1014,7 @@ public class sougou_shoushuo {
 		try {
 			//http://news.sogou.com/news?query=site:ifeng.com%20%D0%A1%B1%F0%C0%EB&manual=true&mode=1&sort=1&p=42230302
 			runnew_fenghuang(
-					"http://news.sogou.com/news?query=site:ifeng.com%20"+query+"&manual=true&mode=1&sort=1&p=42230302",dATA_TYPE,id);
+					"http://news.sogou.com/news?query=site:ifeng.com%20"+query+"&manual=true&mode=2&sort=1&p=42230302",dATA_TYPE,id);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -989,7 +1024,7 @@ public class sougou_shoushuo {
 			//http://news.sogou.com/news?query=site:163.com%20%D0%A1%B1%F0%C0%EB&manual=true&mode=1&sort=1&p=42230302
 			//endText
 			runnew_163(
-					"http://news.sogou.com/news?query=site:163.com%20"+query+"&manual=true&mode=1&sort=1&p=42230302",dATA_TYPE,id);
+					"http://news.sogou.com/news?query=site:163.com%20"+query+"&manual=true&mode=2&sort=1&p=42230302",dATA_TYPE,id);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -998,10 +1033,48 @@ public class sougou_shoushuo {
 
 	
 
+	private static String query_url(String urlMain) {
+		// TODO Auto-generated method stub
+		String strHtml = "";
+		// strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8",
+		// null, proxy);
+		boolean bb = true;
+		String query="";
+		int i = 0;
+		Proxy proxy = null;
+		while (bb) {
+			proxy = DealProxy.getInstance().getPoxxy();
+			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "gbk", null, proxy);
+			query= HtmlAnalyze.getTagText(strHtml, "'query':'", "'");
+			if (query != null && !"".equals(query)) {
+				bb = false;
+				
+			} else {
+				System.out.println("打开出错" + i + "次,链接：" + urlMain);
+
+			}
+			if (i > 20) {
+				bb = false;
+			}
+
+			i += 1;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return query;
+	}
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String  id="0";
-		runnewMain("小别离",2,id);
+		String  id="500000000000002793";
+		runnewMain("青春麻辣烫",2,id);
+		
+//		runnewMain
 
 	}
 

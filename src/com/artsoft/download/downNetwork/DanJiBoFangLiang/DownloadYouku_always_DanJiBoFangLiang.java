@@ -67,11 +67,19 @@ public class DownloadYouku_always_DanJiBoFangLiang {
 //				System.out.println(link.select("div.p-meta-title a").attr("title"));
 //				System.out.println(link.select("span.p-actor").text());
 //				System.out.println(link.select("span.p-num").text());
+//				System.out.println(link.select("span.p-status").text());
+//				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+//				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
 				
-				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
-				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+//				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				
+				Document strmainurlHtmldoc = Jsoup.connect(strmainurl).get();
 				
 				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://tv.youku.com/")) {
+//					System.out.println(strmainurlHtmldoc);
+					strmainxiangxiurl=HtmlAnalyze.getTagText(strmainurlHtmldoc.toString(), "desc-link\" href=\"","\"");
+				}
 				DownloadYouku_always_DanJiBoFangLiang.youkuBranch(strmainxiangxiurl);
 			}
 			
@@ -333,11 +341,11 @@ public class DownloadYouku_always_DanJiBoFangLiang {
 		// urlBranch="http://www.youku.com/show_page/id_zd56886dc86fc11e3a705.html";
 		String strHtmls = DownloadUtil.getHtmlText(urlDetailed, 1000 * 30, "UTF-8", null, null);
 
-		String strhtml = CommonUtil.getTagInfo(strHtmls, "<div class=\"items\">", "<div class=\"clear\"></div>");
+//		String strhtml = CommonUtil.getTagInfo(strHtmls, "<div class=\"items\">", "<div class=\"clear\"></div>");
 
 		// System.out.println(strhtml);
 
-		Document doc = Jsoup.parse(strhtml);
+		Document doc = Jsoup.parse(strHtmls);
 		// Elements links = doc.select("div.yk-col3");
 		// Element content = doc.getElementById("zy_bd");
 		Elements links = doc.select("div.item");
@@ -450,10 +458,10 @@ public class DownloadYouku_always_DanJiBoFangLiang {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(0, 59, 59);
+//		TimingTime(0, 59, 59);
 //		String url = "http://list.youku.com/category/show/c_97_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81_a_%E6%96%B0%E5%8A%A0%E5%9D%A1_s_1_d_1.html";
 //		youkuMaim(url);
-		// runstatic();
+		 runstatic();
 	}
 
 }

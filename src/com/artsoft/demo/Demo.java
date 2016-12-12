@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadImage;
@@ -122,7 +123,45 @@ public class Demo {
 		}
 		return result;
 	}
+	
+	String s;
 
+	
+	
+	
+	 private static int solve(int[] arr, int n) {
+	        int left = 0;
+	        int right = n - 1;
+	        int ans = 0;
+	        while (left < right) {
+	            if (arr[left] < arr[right]) {
+	                arr[left + 1] += arr[left];
+	                ++left;
+	                ++ans;
+	            }else if (arr[left] > arr[right]){
+	                arr[right - 1] += arr[right];
+	                --right;
+	                ++ans;
+	            }else {
+	                ++left;
+	                --right;
+	            }
+	        }
+	        return ans;
+	    }
+	void Mystery(){
+		s=" constructor";
+	}
+
+
+	private static void change(String s, StringBuffer sb) {
+		// TODO Auto-generated method stub
+		s="aaaa";
+		sb.setLength(0);
+		sb.append("aaaa");
+		
+	}
+	
 	/**
 	 * @param args
 	 */
@@ -131,22 +170,65 @@ public class Demo {
 //		System.out.println(Double.parseDouble("-1"));
 //		WanfangBykeyWordMain.Keywordbig_xuanze(Integer.valueOf(1));
 		
-		String str1="abc";
-		String str2="abc";
-		System.out.println(str1==str2);
+//		String str1="abc";
+//		String str2="abc";
+//		System.out.println(str1==str2);
+//		
+//		String str3 = new String ("abd");
+//		System.out.println(str1==str3);
+//		
+//		
+//		str1.concat("def");
+//		System.out.println(str1);
+//		
+//		StringBuffer sb= new StringBuffer("abc");
+//		sb.append("deff");
+//		System.out.println(sb);
+//		
+//		System.out.println(5<<2);
+//		
+//		String aa="/////";
+//		System.out.println(aa.replace("//", "/"));
+//		String d ="bookkeeper";
+//		d.substring(1,7);
+//		d="w"+d;
+////		d.append("woo");
+//		System.out.println(d);
 		
-		String str3 = new String ("abd");
-		System.out.println(str1==str3);
+//		String s="bbbb";
+//		
+//		StringBuffer sb=new StringBuffer("bbbb");
+//		change(s,sb);
+//		System.out.println(s+sb);
+		
+//		Mystery m =new Mystery();
+//		 int x[]= new int[15];
+//		System.out.println(x[5]);
+//		float foo=0x0123;
 		
 		
-		str1.concat("def");
-		System.out.println(str1);
+//		int a =0;
+//		int c=0;
+//		do {
+//			--c;
+//			a=a-1;
+//			System.out.println(a);
+//			
+//		} while (a>0);
+//		System.out.println(c);
 		
-		StringBuffer sb= new StringBuffer("abc");
-		sb.append("deff");
-		System.out.println(sb);
 		
-		System.out.println(5<<2);
+		 Scanner scan = new Scanner(System.in);
+	        while (scan.hasNext()) {
+	            int n = scan.nextInt();
+	            int[] arr = new int[n];
+	            for (int i = 0; i < n; i++) {
+	                arr[i] = scan.nextInt();
+	            }
+	            System.out.println(solve(arr,n));
+	        }
+	        scan.close();
+		
 		
 	}
 

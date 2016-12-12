@@ -101,7 +101,9 @@ public class DownBaiDu {
 						
 						TvPlay tvplay = BaiDuTeleplayDownload.mainmore(id, strUrl, strname);
 						tvplay.setTvplay_name(strname);
-						tvplay.setTvplay_id(Integer.valueOf(id));
+//						tvplay.setTvplay_id(Integer.valueOf(id));
+						
+						tvplay.setTvplay_id(id);
 						
 						// OracleHaoSou.InsertTVplay(tvplay);//添加操作
 						// OracleHaoSou.UpdateTVplay(tvplay);//修改操作

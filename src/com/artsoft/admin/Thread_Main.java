@@ -10,6 +10,7 @@ import com.artsoft.download.Movies.DownpptvMovie;
 import com.artsoft.download.Movies.DownqqMovie;
 import com.artsoft.download.TVPlay.TVplayAdmin;
 import com.artsoft.download.TVPlay.platform.Adminplatform;
+import com.artsoft.download.downNetwork.DownAdmin;
 import com.artsoft.download.downNetwork.DanJiBoFangLiang.DownloadHunantv_DanJiBoFangLiang;
 import com.artsoft.download.downNetwork.DanJiBoFangLiang.DownloadSohu_DanJiBoFangLiang;
 import com.artsoft.download.downNetwork.DanJiBoFangLiang.DownloadYouku_always_DanJiBoFangLiang;
@@ -127,7 +128,13 @@ public class Thread_Main implements Runnable {
 			maoyan_shishipiaofang.TimingTime(01, 00, 59);
 		}
 		
-		
+		/**
+		 * ÍøÂç¾ç
+		 * DownAdmin
+		 */
+		if (name.equals("DownAdmin")) {
+			DownAdmin.main(null);
+		}
 		
 		
 		

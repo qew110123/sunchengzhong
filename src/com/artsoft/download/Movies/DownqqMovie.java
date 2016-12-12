@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.download.TVPlay.DownloadYouku;
 import com.artsoft.oracle.OracleNetwork;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
@@ -171,7 +172,10 @@ public class DownqqMovie {
 	 * 获得分手，不能得到播放量的数据进行重新运行
 	 */
 	public static void Again(){
-		List<String> listArray =OracleNetwork.selectqqMovie(TimeTest.getNowTime("yyyyMMdd"));
+		TimeTest tt = new TimeTest();
+		String newtime = tt.getNowTime("yyyyMMdd");
+		String date_date = DownloadYouku.getBeforeAfterDate(newtime, -30);
+		List<String> listArray =OracleNetwork.selectqqMovie(date_date);
 		String strmainurl="";
 		String name="";
 		String urlMain="";

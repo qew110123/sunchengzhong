@@ -23,32 +23,35 @@ public class MovesHaoSo_dianying {
 	static ThreadPool pool = new ThreadPool(30);
 	private static Proxy proxy = null;
 
-	public static void mainProgram(int statnum, int endnum,int TV_TYPE) {
+	public static void mainProgram(int statnum, int endnum, int TV_TYPE) {
 		// TODO Auto-generated method stub
 		List<String> listArray = OracleHaoSou.selectdim_film(Integer.toString(statnum), Integer.toString(endnum));
 		System.out.println(listArray.size());
+		String id = "";
+		String name = "";
 		for (Object Objstring : listArray) {
-//			System.out.println(Objstring);
+			// System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
-			System.out.println(listTemp.get(0));
-			System.out.println(listTemp.get(1));
-			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))) {
+			System.out.println(id = listTemp.get(0));
+			System.out.println(name = listTemp.get(1));
+			if (id != null && !"".equals(id) && name!= null
+					&& !"".equals(name)) {
 				String urlBranch = "";
 				// 指数
 				try {
 					// urlBranch =
 					// "http://index.haosou.com/index.php?a=soMediaJson&q="+java.net.URLEncoder.encode(listTemp.get(1),"utf-8");
-					if (listTemp.get(1).length()<=2) {
+					if (listTemp.get(1).length() <= 2) {
 						urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
-								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"%e7%94%b5%e5%bd%b1"
-								+ "&area=%E5%85%A8%E5%9B%BD";
-					}else{
+								+ java.net.URLEncoder.encode(name.replaceAll(",", "").replaceAll("。", ""), "utf-8")
+								+ "%e7%94%b5%e5%bd%b1" + "&area=%E5%85%A8%E5%9B%BD";
+					} else {
 						urlBranch = "http://index.haosou.com/index.php?a=soIndexJson&q="
-								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")
+								+ java.net.URLEncoder.encode(name.replaceAll(",", "").replaceAll("。", ""), "utf-8")
 								+ "&area=%E5%85%A8%E5%9B%BD";
 					}
-					
-					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "5",TV_TYPE);
+
+					HaosouBranch1(urlBranch, id, name, "5", TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，url:" + urlBranch);
@@ -62,15 +65,15 @@ public class MovesHaoSo_dianying {
 				}
 				// 媒体关注度
 				try {
-					if (listTemp.get(1).length()<=2) {
-					urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
-							+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8")+"%e7%94%b5%e5%bd%b1";
-					}
-					else{
+					if (listTemp.get(1).length() <= 2) {
 						urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
-								+ java.net.URLEncoder.encode(listTemp.get(1).replaceAll(",", ""), "utf-8");
+								+ java.net.URLEncoder.encode(name.replaceAll(",", "").replaceAll("。", ""), "utf-8")
+								+ "%e7%94%b5%e5%bd%b1";
+					} else {
+						urlBranch = "http://index.haosou.com/index.php?a=soMediaJson&q="
+								+ java.net.URLEncoder.encode(name.replaceAll(",", "").replaceAll("。", ""), "utf-8");
 					}
-					HaosouBranch1(urlBranch, listTemp.get(0), listTemp.get(1), "6",TV_TYPE);
+					HaosouBranch1(urlBranch, id, name, "6", TV_TYPE);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					System.out.println("运行报错，url:" + urlBranch);
@@ -90,7 +93,8 @@ public class MovesHaoSo_dianying {
 	}
 
 	// 行电视剧数据
-	public static void HaosouBranch(String urlBranch, String tvplayId, String tyPlayName, String DataType,int TV_TYPE) {
+	public static void HaosouBranch(String urlBranch, String tvplayId, String tyPlayName, String DataType,
+			int TV_TYPE) {
 		// proxy=DealProxy.getInstance().getPoxxy();
 		// String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30,
 		// "UTF-8", null, proxy);
@@ -103,14 +107,14 @@ public class MovesHaoSo_dianying {
 		// return;
 		// }
 		String strHtml = urlreturnHtml(urlBranch);
-//		System.out.println(strHtml);
+		// System.out.println(strHtml);
 
 		String strtext = HtmlAnalyze.getTagText(strHtml, "\":\"", "\"}");
 		String starttime = HtmlAnalyze.getTagText(strHtml, "from\":\"", "\"}");
 		String endtime = HtmlAnalyze.getTagText(strHtml, "from\":\"", "\"}");
 
-//		System.out.println(strtext);
-//		System.out.println(starttime);
+		// System.out.println(strtext);
+		// System.out.println(starttime);
 
 		try {
 
@@ -118,12 +122,12 @@ public class MovesHaoSo_dianying {
 			System.out.println(sourceStrArray.length);
 			if (starttime != null && !"".equals(starttime)) {
 
-				 try {
-				 Thread.sleep(1000);
-				 } catch (InterruptedException e) {
-				 // TODO Auto-generated catch block
-				 e.printStackTrace();
-				 }
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// for (int i = 0; i < sourceStrArray.length; i++) {
 				// // System.out.println(sourceStrArray[i]
@@ -136,7 +140,7 @@ public class MovesHaoSo_dianying {
 				//
 				// }
 				// System.out.println(OracleHaoSou.returnMaxdianshijudata());
-				
+
 				for (int i = sourceStrArray.length; i > sourceStrArray.length - 7; i--) {
 					System.out.println(sourceStrArray[i - 1]);
 					String palydate = DemoTime.getBeforeAfterDate(starttime, i).toString();
@@ -154,9 +158,9 @@ public class MovesHaoSo_dianying {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("好搜电视剧分析数据日期 ，入库报错,运行报错");
-//			System.out.println("运行报错，url:" + urlBranch);
+			// System.out.println("运行报错，url:" + urlBranch);
 			try {
-				Thread.sleep(1000 );
+				Thread.sleep(1000);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -166,7 +170,7 @@ public class MovesHaoSo_dianying {
 
 	}
 
-	private static void HaosouBranch1(String urlBranch, String string, String string2, String string3,int TV_TYPE) {
+	private static void HaosouBranch1(String urlBranch, String string, String string2, String string3, int TV_TYPE) {
 		// TODO Auto-generated method stub
 		while (pool.getPoolNum() > 30) {
 			try {
@@ -178,7 +182,7 @@ public class MovesHaoSo_dianying {
 			}
 		}
 		System.out.println("当前启动线程thread:" + pool.getPoolNum());
-		pool.performTask(new HaoSouTVtask(urlBranch, string, string2, string3,TV_TYPE));
+		pool.performTask(new HaoSouTVtask(urlBranch, string, string2, string3, TV_TYPE));
 
 	}
 
@@ -217,119 +221,124 @@ public class MovesHaoSo_dianying {
 		return strHtml;
 
 	}
-	
+
 	/**
-	    * 得到二个日期间的间隔天数
-	    */
+	 * 得到二个日期间的间隔天数
+	 */
 	public static String getTwoDay(String sj1, String sj2) {
-	    SimpleDateFormat myFormatter = new SimpleDateFormat("yyyyMMdd");
-	    long day = 0;
-	    try {
-	     java.util.Date date = myFormatter.parse(sj1);
-	     java.util.Date mydate = myFormatter.parse(sj2);
-	     day = (date.getTime() - mydate.getTime()) / (24 * 60 * 60 * 1000);
-	    } catch (Exception e) {
-	     return "";
-	    }
-	    return day + "";
+		SimpleDateFormat myFormatter = new SimpleDateFormat("yyyyMMdd");
+		long day = 0;
+		try {
+			java.util.Date date = myFormatter.parse(sj1);
+			java.util.Date mydate = myFormatter.parse(sj2);
+			day = (date.getTime() - mydate.getTime()) / (24 * 60 * 60 * 1000);
+		} catch (Exception e) {
+			return "";
+		}
+		return day + "";
 	}
 
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-		//select t.film_id,t.film_name from ods.dim_film t
-		String returnNumTVle=OracleHaoSou.returnNummove();
-		System.out.println("需要采集的人名字数为"+returnNumTVle);
+		// select t.film_id,t.film_name from ods.dim_film t
+		String returnNumTVle = OracleHaoSou.returnNummove();
+		System.out.println("需要采集的人名字数为" + returnNumTVle);
 		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
 			// i=15780;
-			int TV_TYPE=3;
-			mainProgram(i, i + 1000,TV_TYPE);
+			int TV_TYPE = 3;
+			mainProgram(i, i + 1000, TV_TYPE);
 		}
 
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
 	// 判断数据开始时间
-//	public static void TimingTime(int hh, int mm, int ss) {
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
-//		calendar.set(Calendar.MINUTE, mm); // 控制分
-//		calendar.set(Calendar.SECOND, ss); // 控制秒
-//
-//		Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
-//
-//		Timer timer = new Timer();
-//		timer.scheduleAtFixedRate(new TimerTask() {
-//			public void run() {
-//				System.out.println("-------设定要指定任务--------");
-//				runstatic();
-//			}
-//		}, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行
-//	}
-	
-	
-	public static void runstaticshijian(){
+	// public static void TimingTime(int hh, int mm, int ss) {
+	// Calendar calendar = Calendar.getInstance();
+	// calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+	// calendar.set(Calendar.MINUTE, mm); // 控制分
+	// calendar.set(Calendar.SECOND, ss); // 控制秒
+	//
+	// Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+	//
+	// Timer timer = new Timer();
+	// timer.scheduleAtFixedRate(new TimerTask() {
+	// public void run() {
+	// System.out.println("-------设定要指定任务--------");
+	// runstatic();
+	// }
+	// }, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行
+	// }
+
+	public static void runstaticshijian() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
-		if (TimeTest.getNowTime("HH").equals("07") || TimeTest.getNowTime("HH").equals("09") || TimeTest.getNowTime("HH").equals("13")) {
-//			CountNum.runCount();
+		if (TimeTest.getNowTime("HH").equals("07") || TimeTest.getNowTime("HH").equals("09")
+				|| TimeTest.getNowTime("HH").equals("13")) {
+			// CountNum.runCount();
 			runstatic();
 		}
-		
+
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
-	
-	
+
 	/**
-	 * 测试时间
-	 * 2016年8月17日17:30:00
+	 * 测试时间 2016年8月17日17:30:00
+	 * 
 	 * @param args
 	 */
-	public static void rundingshitime(int hh , int mm ,int ss) {  
-        Calendar calendar = Calendar.getInstance();  
-        calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时  
-        calendar.set(Calendar.MINUTE, mm);       // 控制分  
-        calendar.set(Calendar.SECOND, ss);       // 控制秒  
-  
-        Date time = calendar.getTime();         // 得出执行任务的时间,此处为今天的12：00：00  
-  
-        Timer timer = new Timer();  
-        timer.schedule(new TimerTask() {  
-            public void run() {  
-                System.out.println("-------设定要指定任务--------");  
-                try {
-					
-                	runstaticshijian();
+	public static void rundingshitime(int hh, int mm, int ss) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, hh); // 控制时
+		calendar.set(Calendar.MINUTE, mm); // 控制分
+		calendar.set(Calendar.SECOND, ss); // 控制秒
+
+		Date time = calendar.getTime(); // 得出执行任务的时间,此处为今天的12：00：00
+
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			public void run() {
+				System.out.println("-------设定要指定任务--------");
+				try {
+
+					runstaticshijian();
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
-            } 
-        }, time, 1000 * 60 * 60 * 1);// 这里设定将延时每天固定执行  
-    }
+			}
+		}, time, 1000 * 60 * 60 * 1);// 这里设定将延时每天固定执行
+	}
 
-
+	
+	//添加电影数据
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
+		// runstatic();
+		// TimingTime(1, 00, 00);
+		
+		
+		
+		rundingshitime(1, 00, 00);
 //		runstatic();
-//		 TimingTime(1, 00, 00);
-		 rundingshitime(1, 00, 00);
-		 
-//		 runstatic();
 		// IpFilter ipxi=new IpFilter;
 
-//		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-//		IpFilter.mainip("http://index.haosou.com/");
-//		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
-//		String returnNumTVle=OracleHaoSou.returnNumPeople("edw.dim_tvplay");
-//		System.out.println("需要采集的人名字数为"+returnNumTVle);
-//		for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
-//			// i=15780;
-//			mainProgram(i, i + 1000);
-//		}
-//
-//		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开
+		// 始");
+		// IpFilter.mainip("http://index.haosou.com/");
+		// CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd
+		// HH:mm:ss"));
+		// String returnNumTVle=OracleHaoSou.returnNumPeople("edw.dim_tvplay");
+		// System.out.println("需要采集的人名字数为"+returnNumTVle);
+		// for (int i = 0; i < Integer.parseInt(returnNumTVle); i = i + 1000) {
+		// // i=15780;
+		// mainProgram(i, i + 1000);
+		// }
+		//
+		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结
+		// 束");
 	}
 
 }

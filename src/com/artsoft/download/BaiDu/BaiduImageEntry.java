@@ -37,9 +37,22 @@ public class BaiduImageEntry {
 			return;
 		}
 		String citiaourl=HtmlAnalyze.getTagText(html, "<a class=\"more-link\" href=\"", "\"");
-		if (citiaourl==null) {
+		
+		if (citiaourl==null||citiaourl.equals("")) {
+			try {
+				Document docss = Jsoup.connect(url).get();
+				html=docss.toString();
+				citiaourl=HtmlAnalyze.getTagText(html, "<a class=\"more-link\" href=\"", "\"");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if (citiaourl==null||citiaourl.equals("")) {
 			return;
 		}
+		
 		String citiaoallurl="http://baike.baidu.com"+citiaourl;
 //		String htmlcitiao=DownloadUtil.getHtmlTextNew(citiaoallurl, 30000, "utf-8", null, null);
 		

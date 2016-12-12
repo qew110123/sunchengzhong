@@ -90,8 +90,8 @@ public class DownloadYouku {
 //				if (i <= 0) {
 //					continue;
 //				}
-				String strmainurl = "";
-				System.out.println(strmainurl = link.select("div.p-thumb a").attr("href"));
+//				String strmainurl = "";
+//				System.out.println(strmainurl = link.select("div.p-thumb a").attr("href"));
 //				System.out.println(link.select("div.p-meta-title a").attr("title"));
 //				System.out.println(link.select("span.p-actor").text());
 //				System.out.println(link.select("span.p-num").text());
@@ -109,10 +109,25 @@ public class DownloadYouku {
 				// DownloadYouku.youkuBranch(strmainurl);
 //				System.out.println("当前启动线程thread:" + pool.getPoolNum());
 //				pool.performTask(new DownloadYoukupool(strmainurl));
-				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
-				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+				
+//				String strmainurlHtml = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+//				Document strmainurlHtmldoc = Jsoup.parse(strmainurlHtml);
+//				
+//				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				
+				String strmainurl = "";
+				System.out.println(strmainurl = link.select("a").attr("href"));
+				if (!strmainurl.contains("http://")) {
+					strmainurl=strmainurl.replace("//", "http://");
+				}
+				
+				Document strmainurlHtmldoc = Jsoup.connect(strmainurl).get();
 				
 				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://tv.youku.com/")) {
+//					System.out.println(strmainurlHtmldoc);
+					strmainxiangxiurl=HtmlAnalyze.getTagText(strmainurlHtmldoc.toString(), "desc-link\" href=\"","\"");
+				}
 				
 				DownloadYouku.youkuBranch(strmainxiangxiurl);
 				
@@ -138,6 +153,11 @@ public class DownloadYouku {
 	 * @param urlBranch
 	 */
 	public static void youkuBranch(String urlBranch) {
+		
+		if (!urlBranch.contains("http://")) {
+			urlBranch=urlBranch.replace("//", "http://");
+		}
+		
 		// urlBranch="http://www.youku.com/show_page/id_zd56886dc86fc11e3a705.html";
 		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
 		if (strHtml == null || strHtml.equals("")) {
@@ -154,21 +174,37 @@ public class DownloadYouku {
 		 */
 
 		String name = "";// 名称
-		System.out.println(name = doc.select("span.name").text());
+		name = doc.select("span.name").text();
+		if (name.equals("")) {
+			name=HtmlAnalyze.getTagText(strHtml, "<a title=\"", "\"");
+		}
 		String Amount = "";// 播放量
-		System.out.println(Amount = doc.select("span.play").text());
+		Amount = doc.select("span.play").text();
+		if (Amount.equals("")) {
+			Amount=HtmlAnalyze.getTagText(strHtml, "总播放数：", "<");
+		}
 		Amount = Amount.replaceAll("总播放:", "").replaceAll(",", "");
+		
 
 		String comment = ""; // 评论
-		System.out.println(comment = doc.select("span.comment").text());
+		comment = doc.select("span.comment").text();
+		if (comment.equals("")) {
+			comment=HtmlAnalyze.getTagText(strHtml, "评论：", "<");
+		}
 		comment = comment.replaceAll("评论:", "").replaceAll(",", "");
 
 		String answer = ""; // 顶
-		System.out.println(answer = doc.select("span.increm").text());
+		answer = doc.select("span.increm").text();
+		if (answer.equals("")) {
+			answer=HtmlAnalyze.getTagText(strHtml, "顶：", "<");
+		}
 		answer = answer.replaceAll("顶:", "").replaceAll(",", "");
 
 		String score = ""; // 评分
 		score = HtmlAnalyze.getTagText(strHtml, "<label>评分:</label>", "<style type=\"text/css\">");
+		if (score.equals("")) {
+			score=HtmlAnalyze.getTagText(strHtml, "class=\"star-num\">", "<");
+		}
 		System.out.println(score);
 
 		OracleOpreater.intoReputationAndDETAIL_URL(name, "1", Amount, "0", "", urlBranch, "0", "0", urlBranch);
@@ -612,7 +648,7 @@ public class DownloadYouku {
 			System.out.println(listTemp.get(0));
 			try {
 				
-				DownloadYouku.youkuBranch(listTemp.get(0));
+				DownloadYouku.youkuBranch(listTemp.get(1));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -677,13 +713,23 @@ public class DownloadYouku {
 	}
 	
 	
+	/**
+	 * 
+	 * 优酷播放量
+	 * 2016年11月25日10:41:55
+	 * @param args
+	 */
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		TimingTime(1, 59, 59);
-		openordor();
+//		openordor();
 //		openstatic();
 //		runstatic();
+		
+		
+		TimingTime(1, 59, 59);
+		
+//		openstatic();
 	}
 
 }

@@ -5,14 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
+import net.sf.cglib.proxy.Proxy;
+
 public class DemoTime {
 
 	public static void iQiYiBranch(String urlBranch) {
-		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
+		
+		java.net.Proxy proxy = DealProxy.getInstance().getPoxxy();
+		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, proxy);
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
 		}
@@ -88,8 +93,12 @@ public class DemoTime {
 //				"http://index.haosou.com/index.php?a=soIndexJson&q=%E8%B5%B5%E4%B8%BD%E9%A2%96&area=%E5%85%A8%E5%9B%BD");
 //		iQiYiBranch(
 //				"http://index.haosou.com/index.php?a=soMediaJson&q=%E8%B5%B5%E4%B8%BD%E9%A2%96");
-		iQiYiBranch(
-				"http://baike.baidu.com/search/word?word=%C0%C5%E7%F0%B0%F1");
+		while (true) {
+			iQiYiBranch(
+					"http://t.cn/RVdBdaz");
+			
+		}
+		
 		
 
 	}

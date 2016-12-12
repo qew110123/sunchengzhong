@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.artsoft.bean.TvPlay;
+import com.artsoft.download.maoyanandpiaofang.zhongguopiaofangwang.zhongguopiaofangwang_xunzhe.zhongguopiaofangwang_xunzhe;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
@@ -183,7 +184,7 @@ public class DownCboooZhongGuoDetails {
 			for (Object object : album_lists) {
 				TvPlay playtv = new TvPlay();
 				JSONObject objectobject = JSONObject.fromObject(object);
-				playtv.setTvplay_id( Integer.parseInt((String) objectobject.get("ID")));
+				playtv.setTvplay_id( (String) objectobject.get("ID"));
 				String url = (String) objectobject.get("ID");
 				System.out.println(url = "http://www.cbooo.cn/m/" + url);
 				playtv.setTvplay_url(url);
@@ -279,15 +280,53 @@ public class DownCboooZhongGuoDetails {
 		}
 	}
 	
-	
+	private static void openMain() {
+		// TODO Auto-generated method stub
+		String strHtml = "";
+		boolean bb = true;
+		while (bb) {
+			strHtml = DownloadUtil.getHtmlText("http://www.cbooo.cn/", 1000 * 30, "UTF-8", null, null);
+			if (strHtml != null && !"".equals(strHtml)) {
+				bb = false;
+			}
+		}
+		
+		Element iddoc= Jsoup.parse(strHtml);
+		
+		Elements selArealist=iddoc.getElementById("topdatatr").select("tr.trtop");
+		String ateaid="";
+		String area="";
+		for (Element element : selArealist) {
+//			System.out.println(element);
+			System.out.println(ateaid=element.attr("id"));
+//			System.out.println(area=element.text());
+			if (!ateaid.equals("")&&ateaid!=null) {
+				String url="http://www.cbooo.cn/m/"+ateaid;
+				zhongguopiaofangwang_xunzhe.xuanzheng(url);
+			}
+		}
+		
+	}
 	
 	
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-
-		openstatic_other();
+		try {
+			openMain();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			
+			openstatic_other();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
+
+	
 
 	// 判断数据开始时间
 	public static void TimingTime(int hh, int mm, int ss) {
@@ -302,9 +341,22 @@ public class DownCboooZhongGuoDetails {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				System.out.println("-------设定要指定任务--------");
-				runstatic();
+//				runstatic();
+				runstaticshijian();
 			}
 		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+	}
+	
+	
+	public static void runstaticshijian(){
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+
+		if (TimeTest.getNowTime("HH").equals("09") ) {
+//			CountNum.runCount();
+			runstatic();
+		}
+		
+		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
 	/**
@@ -320,7 +372,10 @@ public class DownCboooZhongGuoDetails {
 //		TvPlay playtv = new TvPlay();
 //		DownCboooZhongGuoDetails.xiangxiurl(playtv,"http://www.cbooo.cn/m/3354","中国");
 //		 
-		TimingTime(1, 59, 59);
+		
+//		openMain();
+		
+		TimingTime(2, 59, 59);
 		 
 	}
 

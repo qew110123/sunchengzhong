@@ -58,6 +58,7 @@ public class HuaXuYouKu {
 		
 		page1=youkudown(strHtml.toString(), name, urlBranch, 2,page1);
 		
+		
 		for (int i = 1; i < 10; i++) {
 			String urlmore="http://www.youku.com/show_around_type_2_title_%E9%A2%84%E5%91%8A%E7%89%87.html?id="+id+"&page="+i+"&dt=json&tab_num="+tab_num+"&__rt=1&__ro=around_type_2_title_%E9%A2%84%E5%91%8A%E7%89%87_more"+i;
 			strHtml = DownloadUtil.getHtmlText(urlBranchjson, 1000 * 30, "UTF-8", null, null);
@@ -244,8 +245,10 @@ public class HuaXuYouKu {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		openordor();
-//		youkuBranch("Æ¥·òÓ¢ÐÛ", "http://www.youku.com/show_page/id_z1b8c5c54e79a11e2a705.html");
+//		youkuBranch("¼«Æ·¼Ò¶¡", "http://list.youku.com/show/id_z6a4d7c5aab1d11e6b9bb.html");
 //		youkuhuaxu("Æ¥·òÓ¢ÐÛ", "http://www.youku.com/show_page/id_z1b8c5c54e79a11e2a705.html");
+		
+//		youkuhuaxu("¼«Æ·¼Ò¶¡", "http://list.youku.com/show/id_z6a4d7c5aab1d11e6b9bb.html");
 	}
 
 }

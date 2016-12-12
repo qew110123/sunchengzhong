@@ -2,7 +2,7 @@ package com.artsoft.bean;
 
 public class TEM_TVPLAY_TIDBITS {
 	private String dataDate="";
-	private int tvplayId;
+	private String tvplayId;
 	private String tvplayName="";
 	private String titleName="";
 	private String detailUrl="";
@@ -90,11 +90,11 @@ public class TEM_TVPLAY_TIDBITS {
 	public Integer getDataType(){
 		return dataType;
 	}
-	public int getTvplayId() {
+	public String getTvplayId() {
 		return tvplayId;
 	}
-	public void setTvplayId(int tvplayId) {
-		this.tvplayId = tvplayId;
+	public void setTvplayId(String d) {
+		this.tvplayId = d;
 	}
 	public int getPlayAmount() {
 		return playAmount;

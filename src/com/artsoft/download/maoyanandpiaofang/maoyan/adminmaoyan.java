@@ -617,7 +617,12 @@ public class adminmaoyan {
 		 i).toString();
 		 String urlMain = "http://piaofang.maoyan.com/?date=" + datetext;
 		 System.out.println(urlMain);
-		 openstaticLiShiShuJu(urlMain, datetext);
+		 try {
+			 openstaticLiShiShuJu(urlMain, datetext);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		 }
 		 
 		 
@@ -783,19 +788,62 @@ public class adminmaoyan {
 			}
 
 			System.out.println(BOXOFFICE_TYPE);
+			try {
+				
+				OracleMovePiaoFang.intotem_film_daily_boxoffice(data_date, text, strmainurl, uid, released_days,
+						total_boxoffice, real_time_boxoffice, boxoffice_rate, slice_rate, attendance_rate, 1, "", urlMain,
+						BOXOFFICE_TYPE);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				tem_dim_film_boxoffice(uid, text, strmainurl);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				tem_film_daily_boxoffice_other(uid, text, strmainurl);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				tem_daily_film_slice(uid, text, strmainurl, datetext);//
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				tem_film_city(uid, text, strmainurl, datetext);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				tem_film_company(uid, text, strmainurl, datetext);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				tem_audience_crowd(uid, text, strmainurl, datetext);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 
-			OracleMovePiaoFang.intotem_film_daily_boxoffice(data_date, text, strmainurl, uid, released_days,
-					total_boxoffice, real_time_boxoffice, boxoffice_rate, slice_rate, attendance_rate, 1, "", urlMain,
-					BOXOFFICE_TYPE);
-
-			tem_dim_film_boxoffice(uid, text, strmainurl);
-			tem_film_daily_boxoffice_other(uid, text, strmainurl);
-			tem_daily_film_slice(uid, text, strmainurl, datetext);//
-			tem_film_city(uid, text, strmainurl, datetext);
-			tem_film_company(uid, text, strmainurl, datetext);
-			tem_audience_crowd(uid, text, strmainurl, datetext);
-			tem_want_see_index(uid, text, strmainurl);
-			tem_want_see_city(uid, text, strmainurl, datetext);
+			try {
+				
+				tem_want_see_index(uid, text, strmainurl);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			try {
+				
+				tem_want_see_city(uid, text, strmainurl, datetext);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			
+			
+			
 
 			// TimeTest tt = new TimeTest();
 			// String datetext=tt.getNowTime("yyyy-MM-dd");

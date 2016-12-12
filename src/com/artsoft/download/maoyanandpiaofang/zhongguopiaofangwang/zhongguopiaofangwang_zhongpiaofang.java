@@ -204,7 +204,7 @@ public class zhongguopiaofangwang_zhongpiaofang {
 			for (Object object : album_lists) {
 				TvPlay playtv = new TvPlay();
 				JSONObject objectobject = JSONObject.fromObject(object);
-				playtv.setTvplay_id( Integer.parseInt((String) objectobject.get("ID")));
+				playtv.setTvplay_id((String) objectobject.get("ID"));
 				String url = (String) objectobject.get("ID");
 				System.out.println(url = "http://www.cbooo.cn/m/" + url);
 				playtv.setTvplay_url(url);

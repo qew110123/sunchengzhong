@@ -30,7 +30,9 @@ public class BaiDuTeleplayDownload {
 	public static TvPlay mainmore(String strId, String url, String strUrlname) {
 		TvPlay tvplay = new TvPlay();
 		// TODO Auto-generated method stub
-		tvplay.setTvplay_id(Integer.parseInt(strId));
+//		tvplay.setTvplay_id(Integer.parseInt(strId));
+		tvplay.setTvplay_id(strId);
+		
 		tvplay.setTvplay_url(url);
 		String strHtml = "";
 //		boolean bb = true;

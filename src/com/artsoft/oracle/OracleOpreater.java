@@ -119,6 +119,7 @@ public class OracleOpreater {
 		list.add(Integer.parseInt(tvType));
 		list.add(Integer.parseInt(dataType));
 		list.add(DETAIL_URL);
+		System.out.println(list.toString());
 		boolean bb = DBOperate.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 
@@ -342,7 +343,7 @@ public class OracleOpreater {
 		// 这里是将对象加入到list中
 		
 //		if (!playtv.getTvplay_id().equals("")) {
-			list.add(playtv.getTvplay_id());
+			list.add(Long.parseLong(playtv.getTvplay_id()));
 //		}else{
 //			list.add("");
 //		}

@@ -27,6 +27,28 @@ public class Image1 {
 	}
 	
 	
+	
+	public static String downloadimg_return1(String urldownload) {
+		String nameurl = "";
+		String[] namelist = urldownload.split("/");
+		try {
+			nameurl = namelist[namelist.length - 2] + ".jpg";
+			// DownloadImage.download(urldownload, nameurl,
+			// "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\weixin\\");
+			DownloadImage.download(urldownload, nameurl, "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\huaxu\\");
+			System.out.println("图片下载成功");
+//			weixin.leibiaoFavFTPUtil(nameurl);
+			HuaXuYouKu.leibiaoFavFTPUtil(nameurl);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("图片下载出错！");
+		}
+		return nameurl;
+
+	}
+	
+	
 	public static String downloadimg_no_jpg(String urldownload) {
 		String nameurl = "";
 		String[] namelist = urldownload.split("/");

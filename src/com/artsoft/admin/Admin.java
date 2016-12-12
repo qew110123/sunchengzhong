@@ -21,12 +21,20 @@ public class Admin {
 		 */
 
 		new Thread(new Thread_Main("TVplayAdmin")).start();
+		
+		
+		
+		/**
+		 * 网络剧 一键运行
+		 */
+
+		new Thread(new Thread_Main("DownAdmin")).start();
 
 		/**
 		 * 电视剧每集播放量 一键运行
 		 */
 
-		new Thread(new Thread_Main("Adminplatform")).start();
+//		new Thread(new Thread_Main("Adminplatform")).start();
 
 		/**
 		 * 电影
