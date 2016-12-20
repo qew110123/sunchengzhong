@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_tangying;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
@@ -124,6 +125,23 @@ public class DownqqNetword {
 				// TODO: handle exception
 			}
 			downBranch(strmainurl, name, urlMain);
+			
+			
+			String numstring="";
+			numstring=link.select("span.info_inner").text();
+			
+			numstring=maoyan_tangying.Stringnum(numstring);
+			System.out.println(numstring);
+			
+			try {
+				OracleOpreater.intoReputation(name, "3", numstring, "0", "", strmainurl, "1", "0");
+//				OracleOpreater.intoReputationAndDETAIL_URL(strmainurl, "3", numstring, "0", "", urlMain, "0", "0",
+//						strmainurl);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			
 		}
 		String tt = doc.select("span.txt_01").select("em.strong").first().text();
 		
@@ -192,6 +210,8 @@ public class DownqqNetword {
 		openstatic();
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
+	
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -232,7 +252,10 @@ public class DownqqNetword {
 		// url);
 		// downMain(url);
 		// }
+		
+//		 TimingTime(23, 59, 59);
 		runstatic();
+//		runstatic();
 
 	}
 

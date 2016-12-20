@@ -173,7 +173,7 @@ public class variety_YouKu {
 					strmainxiangxiurl=strmainxiangxiurl.replace("//", "http://");
 				}
 				
-				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://zy.youku.com/")) {
+				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://zy.youku.com/")||strmainxiangxiurl.equals("//zy.youku.com/")) {
 //					System.out.println(strmainurlHtmldoc);
 					strmainxiangxiurl=HtmlAnalyze.getTagText(strmainurlHtmldoc.toString(), "desc-link\" href=\"","\"");
 				}

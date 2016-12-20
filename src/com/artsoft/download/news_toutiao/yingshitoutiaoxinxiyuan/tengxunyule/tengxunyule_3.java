@@ -19,7 +19,7 @@ public class tengxunyule_3 {
 	
 	
 	
-	public static void runnewMain(String urlMain) {
+	public static void runnewMain(String urlMain ,int DATA_TYPE) {
 		// TODO Auto-generated method stub
 //		String urlMain="http://ent.qq.com/tv/tv_2012/sjynd.htm";
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "gb2312", null, null);
@@ -44,15 +44,17 @@ public class tengxunyule_3 {
 			String imgurl=link.select("img").first().attr("src");
 			System.out.println(imgurl);
 			
-			wechat.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/big/");
 			
 			String imgname="";
 			if (!imgurl.equals("")&&imgurl!=null) {
 				String imgurls=imgurl.replace("\\/", "/");
 				imgname=Image2.imagUrldownload_1(imgurls);
 			}
-			
-			wechat.setIMG_BIG_NAME(imgname);
+			if (!imgname.equals("")) {
+				
+				wechat.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/big/");
+				wechat.setIMG_BIG_NAME(imgname);
+			}
 			
 //			wechat.setUrls(url);
 			String strHtmls = DownloadUtil.getHtmlText(url, 1000 * 30, "gb2312", null, null);
@@ -105,7 +107,7 @@ public class tengxunyule_3 {
 				
 			wechat.setSOURCE(3);
 			
-			
+			wechat.setDATA_TYPE(DATA_TYPE);
 			
 			wechat.setPostUser("Ã⁄—∂”È¿÷");
 			
@@ -128,7 +130,7 @@ public class tengxunyule_3 {
 //				runstatic();
 				try {
 					
-					runnewMain("http://ent.qq.com/tv/tv_2012/zyxwsj.htm");
+					runnewMain("http://ent.qq.com/tv/tv_2012/zyxwsj.htm",5);
 //					
 //					DBManager dbm = DBManager.instance();
 //					dbm.executeCall(TimeTest.getNowTime("yyyyMMdd"));
@@ -144,7 +146,7 @@ public class tengxunyule_3 {
 	
 	public static void main(String[] args) {
 	//TimingTime(1, 59, 59);
-	runnewMain("http://ent.qq.com/tv/tv_2012/zyxwsj.htm");
+	runnewMain("http://ent.qq.com/tv/tv_2012/zyxwsj.htm",5);
 	}
 
 }

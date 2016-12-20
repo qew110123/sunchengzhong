@@ -247,7 +247,7 @@ public class QQ_ShouShuo {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		openordor();
-		openordor();
-//		qqbranch_allmain("0","¡˙÷È¥´∆Ê", "http://v.qq.com/x/search/?ses=qid%3D7xQAoVybVwYmhu44CkMivhVazOqlxi4RRoxSPorJdnVpStZ3g7lgTw%26last_query%3D%E9%BE%99%E7%8F%A0%E4%BC%A0%E5%A5%87%20%E7%89%87%E8%8A%B1%26tabid_list%3D0%7C2%7C1%7C4%7C6%7C12%7C5%7C17%7C8%7C7%26tabname_list%3D%E5%85%A8%E9%83%A8%7C%E7%94%B5%E8%A7%86%E5%89%A7%7C%E7%94%B5%E5%BD%B1%7C%E5%8A%A8%E6%BC%AB%7C%E7%BA%AA%E5%BD%95%E7%89%87%7C%E5%A8%B1%E4%B9%90%7C%E9%9F%B3%E4%B9%90%7C%E6%B8%B8%E6%88%8F%7C%E5%8E%9F%E5%88%9B%7C%E5%85%B6%E4%BB%96&q=%E9%BE%99%E7%8F%A0%E4%BC%A0%E5%A5%87%20%E7%89%87%E8%8A%B1&stag=4&filter=sort%3D0%26pubfilter%3D0%26duration%3D0%26tabid%3D2#!filtering=1",1);
+//		openordor();
+		qqbranch_allmain("6546849","º‚∑Ê÷Æ¡“—Ê«‡¥∫", "https://v.qq.com/x/search/?q=%E5%B0%96%E9%94%8B%E4%B9%8B%E7%83%88%E7%84%B0%E9%9D%92%E6%98%A5&stag=0&smartbox_ab=",1);
 	}
 }

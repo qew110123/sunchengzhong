@@ -29,7 +29,7 @@ public class xinlangyule_1 {
 
 		objects = JSONObject.fromObject(strHtml);
 //		System.out.println(objects);
-		System.out.println(objects.get("data"));
+//		System.out.println(objects.get("data"));
 //		JSONObject data = (JSONObject) objects.get("data");
 //		System.out.println(data);
 		list = (JSONArray) objects.get("data");
@@ -51,10 +51,50 @@ public class xinlangyule_1 {
 				continue;
 			}
 //			System.out.println(strHtml_xiangxi);
-			Document docs = Jsoup.parse(strHtml_xiangxi);
+			//处理logo图片
 			
-			Elements  js_contentps=docs.select("div.content_wrappr_left p");
+			strHtml_xiangxi=strHtml_xiangxi.replace("<img src=\"http://n.sinaimg.cn/8ee96216/20150813/appimg.jpg\">", "");
+			
+			//处理图片
+			Document docsimg = Jsoup.parse(strHtml_xiangxi);
+			Elements  js_contentps_img=docsimg.select("div.content_wrappr_left img");
+			Elements  js_contentps_content_wrappr_left;
+			js_contentps_content_wrappr_left=docsimg.select("div.content_wrappr_left");
+			
+			String new_strHtml_xiangxi=js_contentps_content_wrappr_left.toString();
+			for (Element element : js_contentps_img) {
+				String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">", false, 0);
+//				String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "data-src=\"", "\"");
+//				String newimgurl = Image2.imagUrldownload_allurl(imgurlhtml);
+				new_strHtml_xiangxi = new_strHtml_xiangxi.toString().replace(imgotherhtml,
+						"<p>"+imgotherhtml+"</p>");
+//				String new_img_String ="<p>"+element.toString()+"</p>";
+//				new_strHtml_xiangxi = new_strHtml_xiangxi.replace(element.toString(),new_img_String);
+//				if (new_strHtml_xiangxi.contains(new_img_String)) {
+//					System.out.println(1111);
+//				}
+//				
+//				System.out.println(new_img_String);
+			}
+			
+			
+			
+//			System.out.println(strHtml_xiangxi);
+			
+			
+			Document docs = Jsoup.parse(new_strHtml_xiangxi);
+//			System.out.println(docs.select("div.content_wrappr_left"));
+			
+			Elements  js_contentps=docs.select("div.content p");
 			try {
+				
+				try {
+					if (js_contentps.size()==0) {
+					js_contentps=docs.select("div.content_wrappr_left p");
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				try {
 				if (js_contentps.size()==0) {
 					js_contentps=docs.getElementById("article-main").select("p");
@@ -108,7 +148,7 @@ public class xinlangyule_1 {
 //			System.out.println(search_index = (int) objectobject.get("power"));
 //			System.out.println(trend = (String) objectobject.get("trend"));
 //			OracleHaoSou.intotem_person_keyword_distrib(data_date, person_id, keyword, search_index, trend, urlMain,data_type);
-			 System.out.println(js_contentStringp);
+//			 System.out.println(js_contentStringp);
 			 if (!js_contentStringp.equals("")) {
 				 WECHAT_INFORMATION wechat=new WECHAT_INFORMATION();
 				 wechat.setUrls(xiangxi_url);
@@ -126,7 +166,7 @@ public class xinlangyule_1 {
 				wechat.setPostUser(String.valueOf(objectobject.get("media_name")));
 				
 				
-				wechat.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/big/");
+				
 				JSONObject objectsimg = (JSONObject) objectobject.get("img");
 				String imgurls_u=(String) objectsimg.get("u");
 				
@@ -136,12 +176,16 @@ public class xinlangyule_1 {
 				if (!imgurl.equals("")&&imgurl!=null) {
 					String imgurls=imgurl.replace("\\/", "/");
 					imgname=Image2.imagUrldownload_1(imgurls);
+					wechat.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/big/");
 				}
 				
 				wechat.setIMG_BIG_NAME(imgname);
 				
 				wechat.setDATA_TYPE(DATA_TYPE);
-				Oracle.InsertWECHAT_INFORMATION(wechat);
+				if (!wechat.getContentAll().equals("")) {
+					System.out.println(wechat.getContentAll());
+					Oracle.InsertWECHAT_INFORMATION(wechat);
+				}
 				 
 			}
 		}

@@ -142,6 +142,10 @@ public class DownSohuMovie {
 				String texturl = link.select("a").attr("href");
 				// System.out.println(texthtml);
 				if (texthtml != null && !"".equals(texthtml) && texturl != null && !"".equals(texturl)) {
+					
+					if (!texturl.contains("http://")) {
+						texturl=texturl.replace("//", "http://");
+					}
 					System.out.println(texturl);
 					sohuBranch(texturl);
 				}

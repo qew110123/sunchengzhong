@@ -124,10 +124,14 @@ public class DownloadYouku {
 				Document strmainurlHtmldoc = Jsoup.connect(strmainurl).get();
 				
 				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
-				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://tv.youku.com/")) {
+				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://tv.youku.com/")||strmainxiangxiurl.equals("//tv.youku.com/")) {
 //					System.out.println(strmainurlHtmldoc);
 					strmainxiangxiurl=HtmlAnalyze.getTagText(strmainurlHtmldoc.toString(), "desc-link\" href=\"","\"");
 				}
+				if (!strmainxiangxiurl.contains("http://")) {
+					strmainxiangxiurl=strmainxiangxiurl.replace("//", "http://");
+				}
+				
 				
 				DownloadYouku.youkuBranch(strmainxiangxiurl);
 				

@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_tangying;
 import com.artsoft.oracle.OracleNetwork;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
@@ -128,6 +129,20 @@ public class Downloadqq {
 				// TODO: handle exception
 			}
 			downBranch(strmainurl, name, urlMain);
+			
+			String numstring="";
+			numstring=link.select("span.info_inner").text();
+			
+			numstring=maoyan_tangying.Stringnum(numstring);
+			System.out.println(numstring);
+			
+			try {
+				
+				OracleOpreater.intoReputationAndDETAIL_URL(name, "3", numstring, "0", "", urlMain, "0", "0",
+						strmainurl);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 		String tt = doc.select("span.txt_01").select("em.strong").first().text();
 
@@ -196,6 +211,8 @@ public class Downloadqq {
 			public void run() {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
+//				runstatic();
+				Again();
 			}
 		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
 	}
@@ -209,9 +226,9 @@ public class Downloadqq {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		// TimingTime(23, 59, 59);
-		runstatic();
-		Again();
+		 TimingTime(23, 59, 59);
+//		runstatic();
+//		Again();
 		
 //		downBranch("http://v.qq.com/cover/g/gglfv6h7b1xvkf7.html", "老妈与奶爸", "http://v.qq.com/x/teleplaylist/?sort=4&offset=840&itype=-1&iarea=815&iyear=-1&ipay=-1");
 	}

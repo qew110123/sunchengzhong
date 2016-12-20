@@ -200,7 +200,7 @@ public class QQ_huaxu {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		runstatic();
+//		runstatic();
 //		openordor();
 //		qqbranch("山海经之赤影传说", "http://v.qq.com/cover/1/1hnc62lteegcjhu.html",1);
 	}

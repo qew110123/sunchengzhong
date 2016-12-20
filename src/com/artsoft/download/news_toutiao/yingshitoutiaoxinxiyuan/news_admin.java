@@ -57,14 +57,14 @@ public class news_admin {
 		}
 		
 		try {
-			tengxunyule_3.runnewMain("http://ent.qq.com/tv/tv_2012/sjynd.htm");
+			tengxunyule_3.runnewMain("http://ent.qq.com/tv/tv_2012/sjynd.htm",5);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
 		
 		try {
-			tengxunyule_3.runnewMain("http://ent.qq.com/tv/tv_2012/zyxwsj.htm");
+			tengxunyule_3.runnewMain("http://ent.qq.com/tv/tv_2012/zyxwsj.htm",5);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -101,13 +101,13 @@ public class news_admin {
 		}
 		
 		try {
-			wangyiyule_2.runnewMain("http://ent.163.com/special/ysl/");
+			wangyiyule_2.runnewMain("http://ent.163.com/special/ysl/",0);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
 		try {
-			wangyiyule_2.runnewMain("http://ent.163.com/special/00032VQS/zongyijiemu.html");
+			wangyiyule_2.runnewMain("http://ent.163.com/special/00032VQS/zongyijiemu.html",5);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -191,9 +191,35 @@ public class news_admin {
 		
 		System.out.println("调用存储过程");
 		
+		
+		
+		
 		DBManager dbm = DBManager.instance();
 //		dbm.executeCall(TimeTest.getNowTime("yyyyMMdd"));
+		
+		dbm.executeCall("call sp_dim_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
+		
+		System.out.println("运行sp_dim_news完毕");
+		
+		
+		
 		dbm.executeCall("call sp_f_movies_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
+		
+		System.out.println("运行sp_f_movies_news完毕");
+		
+		
+		try {
+			//等5分钟
+			System.out.println("等5分钟");
+			Thread.sleep(1000*60*5);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		dbm.executeCall("call mart_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
+		
+		System.out.println("运行mart_news 可以 完毕");
 		
 		// DownloadHunantv.runstatic();
 

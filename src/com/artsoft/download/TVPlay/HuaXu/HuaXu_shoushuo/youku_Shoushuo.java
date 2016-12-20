@@ -144,8 +144,8 @@ public class youku_Shoushuo {
 		// TODO Auto-generated method stub
 //		openordor();
 //		http://www.soku.com/search_video/q_%E9%BA%BB%E9%9B%80_orderby_1_limitdate_0?site=14&_lg=10&cateid=97&spm=a2h0k.8191407.0.0
-//		youkuBranch_yugaopiao("¡˙÷È¥´∆Ê","http://www.soku.com/search_video/q_%E9%BE%99%E7%8F%A0%E4%BC%A0%E5%A5%87+%E7%89%87%E8%8A%B1_orderby_1_limitdate_0?site=14&_lg=10&cateid=97&spm=a2h0k.8191407.0.0");
-		openordor();
+		youkuBranch_yugaopiao("6546849","º‚∑Ê÷Æ¡“—Ê«‡¥∫","http://www.soku.com/search_video/q_%E5%B0%96%E9%94%8B%E4%B9%8B%E7%83%88%E7%84%B0%E9%9D%92%E6%98%A5_cateid_97_limitdate_0?site=14&_lg=10&orderby=2&spm=a2h0k.8191407.0.0");
+//		openordor();
 
 	}
 

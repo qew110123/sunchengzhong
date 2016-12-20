@@ -18,7 +18,7 @@ import com.artsoft.util.HtmlAnalyze;
 
 public class wangyiyule_2 {
 
-	public static void runnewMain(String urlMain) {
+	public static void runnewMain(String urlMain,int DATA_TYPE) {
 		// TODO Auto-generated method stub
 //		String urlMain="http://ent.163.com/special/ysl/";
 String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "gbk", null, null);
@@ -132,6 +132,7 @@ String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "gbk", null, null)
 			
 			wechat.setPostUser("Õ¯“◊”È¿÷");
 			
+			wechat.setDATA_TYPE(DATA_TYPE);
 			
 			Oracle.InsertWECHAT_INFORMATION(wechat);
 		}
@@ -170,7 +171,7 @@ String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "gbk", null, null)
 	
 	public static void main(String[] args) {
 	//TimingTime(1, 59, 59);
-		runnewMain("http://ent.163.com/special/ysl/");
+		runnewMain("http://ent.163.com/special/ysl/",0);
 //		wangyiyule_2.runnewMain("http://ent.163.com/special/00032VQS/zongyijiemu.html");
 	}
 

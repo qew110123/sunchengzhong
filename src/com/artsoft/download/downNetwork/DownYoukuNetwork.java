@@ -67,11 +67,13 @@ public class DownYoukuNetwork {
 					strmainxiangxiurl=strmainxiangxiurl.replace("//", "http://");
 				}
 				
-				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://tv.youku.com/")) {
+				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://tv.youku.com/")||strmainxiangxiurl.equals("//tv.youku.com/")) {
 //					System.out.println(strmainurlHtmldoc);
 					strmainxiangxiurl=HtmlAnalyze.getTagText(strmainurlHtmldoc.toString(), "desc-link\" href=\"","\"");
 				}
-				
+				if (!strmainxiangxiurl.contains("http://")) {
+					strmainxiangxiurl=strmainxiangxiurl.replace("//", "http://");
+				}
 				DownYoukuNetwork.youkuBranch(strmainxiangxiurl);
 			}
 
