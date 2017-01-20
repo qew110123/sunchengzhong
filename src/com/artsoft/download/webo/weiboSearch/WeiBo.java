@@ -73,6 +73,9 @@ public class WeiBo {
 		// }
 
 		WebDriverBranch();
+		
+		System.out.println("等待3秒");
+		seleepTime(3000);
 
 		// ChromeOptions options = new ChromeOptions();
 		// options.addArguments(“–user-data-dir=C:/Users/xxx/AppData/Local/Google/Chrome/User

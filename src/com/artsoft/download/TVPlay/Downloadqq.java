@@ -119,7 +119,7 @@ public class Downloadqq {
 			System.out.println(name = link.select("strong.figure_title a").attr("title"));
 			// System.out.println(link.select("a").text());
 			// System.out.println(link.text());
-			System.out.println(score = link.select("span.mod_score").text());
+			System.out.println(score = link.select("div.figure_score").text().replace(" ", ""));
 			try {
 				// OracleOpreater.intoReputationAndDETAIL_URL(name, "3", score,
 				// "0", "", urlMain, "3", "1",strmainurl);
@@ -131,7 +131,7 @@ public class Downloadqq {
 			downBranch(strmainurl, name, urlMain);
 			
 			String numstring="";
-			numstring=link.select("span.info_inner").text();
+			numstring=link.select("span.num").text();
 			
 			numstring=maoyan_tangying.Stringnum(numstring);
 			System.out.println(numstring);
@@ -144,17 +144,17 @@ public class Downloadqq {
 				// TODO: handle exception
 			}
 		}
-		String tt = doc.select("span.txt_01").select("em.strong").first().text();
-
-		try {
-			if (xxx < Integer.parseInt(tt)) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		String tt = doc.select("span.txt_01").select("em.strong").first().text();
+//
+//		try {
+//			if (xxx < Integer.parseInt(tt)) {
+//				return true;
+//			} else {
+//				return false;
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 
 		return true;
 
@@ -183,11 +183,18 @@ public class Downloadqq {
 		String url = "";
 		String[] diqu = { "814", "815", "816", "817", "818", "819" };
 		for (String diqutxt : diqu) {
-			for (int i = 0; i < 5000; i = i + 20) {
+			for (int i = 0; i < 5000; i = i + 30) {
 				url = "http://v.qq.com/x/teleplaylist/?sort=4&offset=" + i + "&itype=-1&iarea=" + diqutxt
 						+ "&iyear=-1&ipay=-1";
 				System.out.println(url);
-				boolean bb = downMain(url, i);
+				
+				boolean bb=true;
+				try {
+					
+					 bb = downMain(url, i);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				// String urlnext = DownYoukuMovie.youkuMaim(url);
 				if (!bb) {
 					break;
@@ -220,13 +227,14 @@ public class Downloadqq {
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
 		openstatic();
+		Again();
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":½á Êø");
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		 TimingTime(23, 59, 59);
+		 TimingTime(2, 59, 59);
 //		runstatic();
 //		Again();
 		

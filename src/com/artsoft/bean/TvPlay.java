@@ -142,9 +142,12 @@ public class TvPlay {
 	//是否入库
 	
 	private boolean bb=false;
+	//看点
+	private String LABEL_TYPE="";
 	
-	
-	
+//	//来源 
+//	int SOURCE=1;
+	int source_class=1;
 	
 	public int getDATA_TYPE() {
 		return DATA_TYPE;
@@ -695,6 +698,22 @@ public class TvPlay {
 
 	public void setBb(boolean bb) {
 		this.bb = bb;
+	}
+
+	public String getLABEL_TYPE() {
+		return LABEL_TYPE;
+	}
+
+	public void setLABEL_TYPE(String lABEL_TYPE) {
+		LABEL_TYPE = lABEL_TYPE;
+	}
+
+	public int getSource_class() {
+		return source_class;
+	}
+
+	public void setSource_class(int source_class) {
+		this.source_class = source_class;
 	}
 
 

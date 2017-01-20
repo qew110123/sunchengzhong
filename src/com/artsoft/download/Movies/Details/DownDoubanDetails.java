@@ -1,30 +1,23 @@
 package com.artsoft.download.Movies.Details;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import com.artsoft.bean.TvPlay;
-import com.artsoft.download.Movies.DownDoubanMovie;
-import com.artsoft.downloadThreadpool.IpFilter;
-import com.artsoft.oracle.OracleOpreater;
-import com.artsoft.util.CommonUtil;
-import com.artsoft.util.DealProxy;
-import com.artsoft.util.DownloadUtil;
-import com.artsoft.util.HtmlAnalyze;
-import com.artsoft.util.ReadTxtFile;
-import com.artsoft.util.TimeTest;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.net.Proxy;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.artsoft.bean.TvPlay;
+import com.artsoft.downloadThreadpool.IpFilter;
+import com.artsoft.oracle.OracleOpreater;
+import com.artsoft.util.CommonUtil;
+import com.artsoft.util.DealProxy;
+import com.artsoft.util.DownloadUtil;
+import com.artsoft.util.HtmlAnalyze;
+import com.artsoft.util.TimeTest;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class DownDoubanDetails {
 

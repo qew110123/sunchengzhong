@@ -1,6 +1,5 @@
 package com.artsoft.download.news_toutiao.weixin;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.Proxy;
 import java.util.Calendar;
@@ -17,11 +16,8 @@ import org.jsoup.select.Elements;
 
 import com.artsoft.bean.WECHAT_INFORMATION;
 import com.artsoft.demo.imag.Image2;
-import com.artsoft.downloadThreadpool.IpFilter;
 import com.artsoft.oracle.Oracle;
-import com.artsoft.oracle.OracleBaidu;
 import com.artsoft.oracle2.DBManager;
-import com.artsoft.oracle2.DateUtil;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadUtil;
@@ -708,6 +704,206 @@ public class weixin {
 		System.out.println("contents上传成功");
 
 	}
+	
+	
+	
+	
+	
+	public static WECHAT_INFORMATION mainUrlxiangxixiexi(String content_url) {
+
+
+		WECHAT_INFORMATION wechat1 = new WECHAT_INFORMATION();
+
+		String htmlss = urlreturnHtml(content_url);
+		
+		
+		Document htmlssdoc = Jsoup.parse(htmlss);
+		
+		
+		wechat1.setUrls(content_url);
+//		String weixinhao="";
+//		try {
+//			weixinhao=htmlssdoc.getElementById("post-user").text();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		
+//		wechat1.setWeixinhao(weixinhao);
+//		
+//		try {
+//			weixinhao=htmlssdoc.getElementById("post-user").text();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		title = (String) app_msg_ext_infoobject.get("title");
+
+//		digest = (String) app_msg_ext_infoobject.get("digest");
+
+//		cover = (String) app_msg_ext_infoobject.get("cover");
+
+		// htmlss= DownloadUtil.getHtmlText(content_url, 1000 * 30,
+		// "UTF-8", null, null);
+
+		String activity_name = htmlssdoc.getElementById("activity-name").text();
+		System.out.println(activity_name);
+		wechat1.setNames(activity_name);
+		// 是否是原创
+		String yuanchang = "";
+		try {
+			htmlssdoc.getElementById("copyright_logo").text();
+			yuanchang = "0";
+		} catch (Exception e) {
+			// TODO: handle exception
+			yuanchang = "1";
+		}
+
+		wechat1.setOriginal(yuanchang);
+		String post_date = htmlssdoc.getElementById("post-date").text();
+		// System.out.println(post_date);
+		wechat1.setDates(post_date);
+
+		String post_user = htmlssdoc.getElementById("post-user").text();
+		// System.out.println(post_user);
+		wechat1.setPostUser(post_user);
+
+		Element js_content = htmlssdoc.getElementById("js_content");
+		String js_contentString = js_content.toString();
+		// System.out.println(js_contentString);
+		wechat1.setContentAll(js_contentString);
+		
+		String js_content_new=js_content.toString();
+		
+		Elements js_contentps_h2 = js_content.select("h2");
+		for (Element element : js_contentps_h2) {
+			if (!element.toString().equals("")&&element.toString()!=null) {
+//				String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<h2", "</h2>",
+//						false, 0);
+//				
+//				String h2html=imgotherhtml;
+//				String h2html
+//				
+//				js_content_new=js_content_new.replace(imgotherhtml, imgotherhtml+ "#h2#");
+//				js_content_new=js_content_new.replace("</h2>", "*h2*</p>");
+				
+				String openp = HtmlAnalyze.getTagText(element.toString(), "<h2", ">",
+						false, 0);
+				
+				
+				String js_content_new_ever="<p>#h2#"+element.text().toString()+"#h2#</p>";
+				
+				js_content_new=js_content_new.replace(element.toString(), js_content_new_ever);
+			}
+		}
+		
+		js_content = Jsoup.parse(js_content_new);
+		
+
+//		Elements js_contentps = js_content.select("p strong");
+		Elements js_contentps = js_content.select("p");
+		String js_contentStringp = "";
+		int ii = 0;
+
+		int iii = 0;
+		
+		String leibiaoimg = "";
+		for (Element element : js_contentps) {
+			if (ii >= 0) {
+				String Stringelement = "";
+
+				if (element.toString().contains("<img")) {
+					// Stringelement=element.toString();
+					try {
+						String imgotherhtml = HtmlAnalyze.getTagText(element.toString(), "<img", "\">",
+								false, 0);
+						String imgurlhtml = HtmlAnalyze.getTagText(imgotherhtml, "data-src=\"", "\"");
+						String newimgurl = Image2.imagUrldownload_allurl(imgurlhtml);
+
+						if (iii == 0) {
+							leibiaoimg = newimgurl;
+						}
+						iii += 1;
+
+						Stringelement = element.toString().replace(imgotherhtml,
+								"<img src=\"" + newimgurl + "\" >");
+
+					} catch (Exception e) {
+						// TODO: handle exception
+						Stringelement = element.toString();
+					}
+
+					// Stringelement=element.toString().replace(imgotherhtml,
+					// "<img src=\""+newimgurl+"\" >");
+
+				} else {
+					if (element.toString().contains("<strong>")) {
+						String Stringelement_1_2 = element.toString().replace("<strong>", "#1#strong#2#")
+								.replace("</strong>", "#1#/strong#2#");
+						Document docStringelement = Jsoup.parse(Stringelement_1_2);
+						String Stringelementother = docStringelement.text();
+						Stringelement = Stringelementother.replace("#1#strong#2#", "<strong>")
+								.replace("#1#/strong#2#", "</strong>");
+
+					} else {
+						
+						
+						Stringelement = element.text();
+					}
+
+				}
+				js_contentStringp = js_contentStringp + Stringelement + "||";
+			}
+			ii += 1;
+
+		}
+		if (js_contentStringp!=null&&!js_contentStringp.equals("")) {
+			//			htmlss=htmlss.replace("<h2", "<p #1@#");
+			//          htmlss=htmlss.replace("</h2>", "#1@#</p>");
+			//<strong></strong>
+			js_contentStringp=js_contentStringp.replace("#h2#", "<strong>");
+			js_contentStringp=js_contentStringp.replace("*h2*", "</strong>");
+		}
+		
+		
+		wechat1.setContentP(js_contentStringp);
+
+
+		String imgnameurl = "";
+		String imgname = "";
+		if (!imgnameurl.equals("") && imgnameurl != null) {
+			String imgurls = imgnameurl.replace("\\/", "/");
+			imgname = Image2.imagUrldownload(imgurls);
+		}
+		
+		
+//		if (!imgname.equals("") && imgname != null) {
+//			wechat1.setIMG_BIG_NAME(imgname);
+//			wechat1.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/big/");
+//		}
+
+		if (imgname.equals("") || imgname == null) {
+			                      //http://img.art-d.com.cn:88/upload/img/news/contents/20161229/pm6tuNJM0NfGfgv1NyAbcbSMfoTvQuemeXIHNmn2kuv0poE6jGfGV0ygTWsicjzwXxaWUsTF4pmvSP4yEyR1blw.jpg
+			wechat1.setIMG_BIG_URL("http://img.art-d.com.cn:88/upload/img/news/contents/"+TimeTest.getNowTime("yyyyMMdd")+"/");
+			String[] namelist = leibiaoimg.split("/");
+			// try {
+			String nameurl = namelist[namelist.length - 1];
+			wechat1.setIMG_BIG_NAME(nameurl);
+		}
+		wechat1.setSOURCE(1);
+		
+//		wechat1.setUPDATE_FLAG(TimeTest.getNowTime("yyyyMMddHH"));
+//		
+//		wechat1.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+
+		Oracle.InsertWECHAT_INFORMATION(wechat1);
+		
+		
+		return wechat1;
+
+
+}
+	
+	
+	
 
 	/**
 	 * 微信
@@ -722,8 +918,30 @@ public class weixin {
 		// mainUrl("http://mp.weixin.qq.com/profile?src=3&timestamp=1472458473&ver=1&signature=wZc-SNBGU1wcd2X8bPaZEH3VTDnev2q-ZrRlT2bF1aQgoCE3fyLzWMKmYgSY52eT2koNOiIYbkKYOc3KxheSGw==",
 		// "1", "测试", "测试");
 
-		 TimingTime(1, 59, 59);
 //		runnewMain();
+		 
+		mainUrlxiangxixiexi("http://mp.weixin.qq.com/s?__biz=MzI5MTU5MDM1OA==&tempkey=Gt5dBHenlNjY7%2FUBdXi8R%2B3JA9qHInj153lqtxHJltwK3RtdrLsYD8yjQ6XbqdNZnkO8fgF2dmbJGUNB9drGeuYc5bxkcj1qx9OSG4FqycWpZJpaUb4vV%2FS8KIBRBVPxla8N84p4p7BjUMAj6jW%2B2A%3D%3D&chksm=6c0f1b615b7892771bc7770cdc66fa95c519adf9e42601ad1787061bca2ea11962829828a25f#rd");
+		 
+//		 TimingTime(1, 59, 59);
+		 
+		 
+//		dbm.executeCall(TimeTest.getNowTime("yyyyMMdd"));
+		
+		
+		DBManager dbm = DBManager.instance();
+		
+		dbm.executeCall("call sp_dim_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
+		
+		System.out.println("运行sp_dim_news完毕");
+		
+		
+		dbm.executeCall("call sp_f_movies_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
+		
+		System.out.println("运行sp_f_movies_news完毕");
+		
+		dbm.executeCall("call mart_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
+		
+		System.out.println("运行mart_news 可以 完毕");
 	}
 
 }

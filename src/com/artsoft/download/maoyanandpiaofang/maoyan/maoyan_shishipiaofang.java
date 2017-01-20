@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -222,6 +224,24 @@ public class maoyan_shishipiaofang {
 			realitme.setDATA_TYPE(0);;
 			
 			realitme.setSOURCE(1);
+			String SHOW_DATE="";
+			
+			try {
+				String strHtmlxiangxi = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+				Document docstrHtmlxiangxi = Jsoup.parse(strHtmlxiangxi);
+//				 SHOW_DATE = 
+				 
+				 String atrxt=docstrHtmlxiangxi.select("p.info-release").first().text();
+				 String regEx="[^0-9]";   
+				 Pattern   p   =   Pattern.compile(regEx);      
+				 Matcher   m   =   p.matcher(atrxt);      
+				 System.out.println(  SHOW_DATE= m.replaceAll("").trim());
+				 realitme.setSHOW_DATE(SHOW_DATE);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 			
 			OracleMovePiaoFang.intoTEM_FILM_BOXOFFICE_REALTIME(realitme);
 			

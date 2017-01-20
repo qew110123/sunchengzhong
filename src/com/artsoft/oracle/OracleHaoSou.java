@@ -679,6 +679,101 @@ public class OracleHaoSou {
 	
 	
 	
+	
+	
+	
+	/**
+	 * 进行电视剧数据 的添加
+	 * 2017年1月10日15:29:45
+	 * 
+	 * @param tvplay
+	 */
+	public static void InsertTVplay_source(TvPlay tvplay) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.tem_tvplay t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
+				+ "t.major_actors,t.major_awards,t.director,t.screenwriTer,t.producer,t.production_company,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.produced_company,"
+				+ "t.production_area,t.premiere_time,t.pages,t.time_length,t.play_platform ,t.premiere_platform,"
+				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
+				+ "t.before_teleplay,t.next_teleplay,t.open_time,t.close_time,t.total_planning,t.film_time,t.box_office,"
+				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
+				+ "t.recording_place,t.stills_url,t.UPDATE_TIME,t.BAIKE_FILM_NAME) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		
+		strSql = "insert into ods.tem_tvplay t(t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
+				+ "t.major_actors,t.major_awards,t.director,t.screenwriTer,t.producer,t.production_company,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.produced_company,"
+				+ "t.production_area,t.premiere_time,t.pages,t.time_length,t.play_platform ,t.premiere_platform,"
+				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
+				+ "t.before_teleplay,t.next_teleplay,t.open_time,t.close_time,t.total_planning,t.film_time,t.box_office,"
+				+ "t.type,t.compere,t.total_sponsor,t.partners,t.special_support,t.social_platform,t.guest_program,t.season_number,"
+				+ "t.recording_place,t.stills_url,t.UPDATE_TIME,t.BAIKE_FILM_NAME,t.PRESENTER,t.AIR_TIME,SOURCE) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		
+		
+		List<Comparable> list = new ArrayList();
+//		list.add(Long.parseLong(tvplay.getTvplay_id()));
+		
+		list.add(tvplay.getTvplay_name());
+		list.add(tvplay.getTvplay_url());
+		list.add(tvplay.getAlias_en());
+		list.add(tvplay.getAlias_cn());
+		list.add(tvplay.getMajor_actors());
+		list.add(tvplay.getMajor_awards());
+		list.add(tvplay.getDirector());
+		list.add(tvplay.getScreenwriter());
+		list.add(tvplay.getProducer());
+		list.add(tvplay.getProduction_company());
+		list.add(tvplay.getIssuing_company());
+		list.add(tvplay.getShoot_time());
+		list.add(tvplay.getShoot_place());
+		list.add(tvplay.getSubject());
+		list.add(tvplay.getProduced_time());
+		list.add(tvplay.getProduced_company());
+		list.add(tvplay.getProduction_area());
+		list.add(tvplay.getPremiere_time());
+		list.add(tvplay.getPages());
+		list.add(tvplay.getTime_length());
+		list.add(tvplay.getPlay_platform());
+		list.add(tvplay.getPremiere_platform());
+		list.add(tvplay.getPhorogrphy_director());
+		list.add(tvplay.getTotal_production());
+		list.add(tvplay.getProduction_chairman());
+		list.add(tvplay.getProduction_cost());
+		list.add(tvplay.getPlay_theater());
+		list.add(tvplay.getBefore_eleplay());
+		list.add(tvplay.getNext_teleplay());
+		list.add(tvplay.getOpen_time());
+		list.add(tvplay.getClose_time());
+		list.add(tvplay.getTotal_planning());
+		list.add(tvplay.getFilm_time());
+		list.add(tvplay.getBox_office());
+		 list.add(tvplay.getType());
+		list.add(tvplay.getCompere());
+		list.add(tvplay.getTotal_sponsor());
+		list.add(tvplay.getPartners());
+		list.add(tvplay.getSpecial_support());
+		list.add(tvplay.getSocial_platform());
+		list.add(tvplay.getGuest_program());
+		list.add(tvplay.getSeason_numbver());
+		list.add(tvplay.getRecording_place());
+		list.add(tvplay.getStills_url());
+		// list.add(persion.getPersonSocialActivitiesList());
+		// 增加添加时间 、、2016年2月26日17：:4：:1
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(tvplay.getBaikefilmname());
+		list.add(tvplay.getPRESENTER());
+		list.add(tvplay.getAIR_TIME());
+		list.add(tvplay.getSource_class());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	
 	/**
 	 * 进行网络剧数据 的添加
 	 * 2016年6月30日16:04:15
@@ -900,6 +995,77 @@ public class OracleHaoSou {
 		list.add(movesfilm.getOriginal());
 		list.add(movesfilm.getFilmName()+movesfilm.getYears()+movesfilm.getDirector());
 		list.add(movesfilm.getBaikefilmname());
+		
+//		list.add(movesfilm.getBox_office());
+//		// list.add(movesfilm.getType());
+//		list.add(movesfilm.getCompere());
+//		list.add(movesfilm.getTotal_sponsor());
+//		list.add(movesfilm.getPartners());
+//		list.add(movesfilm.getSpecial_support());
+//		list.add(movesfilm.getSocial_platform());
+//		list.add(movesfilm.getGuest_program());
+//		list.add(movesfilm.getSeason_numbver());
+//		list.add(movesfilm.getRecording_place());
+//		list.add(movesfilm.getStills_url());
+		// list.add(persion.getPersonSocialActivitiesList());
+		// 增加添加时间 、、2016年2月26日17：:4：:1
+//		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	
+	
+	/**
+	 * 进行电影
+	 * 2017年1月10日16:24:31
+	 * class
+	 * @param tvplay
+	 */
+	public static void InsertTEM_DIM_FILM_SOURCE(TEM_DIM_FILM movesfilm) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.tem_dim_film t(t.film_name,t.film_url,t.english_name,t.alias_name,t.years,t.producer,t.produce_company,t.produce_cost,t.produce_area,t.produce_date,t.show_date,t.premiere_date,t.create_time,t.performance_form,t.historical_background,t.description,t.issue_organization,t.subject_name_one,t.issuing_license,t.director,t.actors,t.screenwriter,t.subject_name_two,t.award,t.shooting_location,t.shooting_date,t.time_long,t.languages,t.imdb_code,t.film_img_url,t.film_level,t.play_platform,t.original,t.tv_name_uniq,t.baike_film_name,SOURCE)  values(?,?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+//		list.add(movesfilm.getFilmId());
+		list.add(movesfilm.getFilmName());
+		list.add(movesfilm.getFilmUrl());
+		list.add(movesfilm.getEnglishName());
+		list.add(movesfilm.getAliasName());
+		list.add(movesfilm.getYears());
+		list.add(movesfilm.getProducer());
+		list.add(movesfilm.getProduceCompany());
+		list.add(movesfilm.getProduceCost());
+		list.add(movesfilm.getProduceArea());
+		list.add(movesfilm.getProduceDate());
+		list.add(movesfilm.getShowDate());
+		list.add(movesfilm.getPremiereDate());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(movesfilm.getPerformanceForm());
+		list.add(movesfilm.getHistoricalBackground());
+		list.add(movesfilm.getDescription());
+		list.add(movesfilm.getIssueOrganization());
+		list.add(movesfilm.getSubjectNameOne());
+		list.add(movesfilm.getIssuingLicense());
+		list.add(movesfilm.getDirector());
+		list.add(movesfilm.getActors());
+		list.add(movesfilm.getScreenwriter());
+		list.add(movesfilm.getSubjectNameTwo());
+		list.add(movesfilm.getAward());
+		list.add(movesfilm.getShootingLocation());
+		list.add(movesfilm.getShootingDate());
+		list.add(movesfilm.getTimeLong());
+		list.add(movesfilm.getLanguages());
+		list.add(movesfilm.getImdbCode());
+		list.add(movesfilm.getFilmImgUrl());
+		list.add(movesfilm.getFilmLevel());
+		list.add(movesfilm.getPlayPlatform());
+		list.add(movesfilm.getOriginal());
+		list.add(movesfilm.getFilmName()+movesfilm.getYears()+movesfilm.getDirector());
+		list.add(movesfilm.getBaikefilmname());
+		list.add(movesfilm.getSOURCE());
+		
 		
 //		list.add(movesfilm.getBox_office());
 //		// list.add(movesfilm.getType());

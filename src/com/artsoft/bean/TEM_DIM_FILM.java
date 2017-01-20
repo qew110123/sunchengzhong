@@ -86,6 +86,7 @@ public class TEM_DIM_FILM implements Serializable {
 	private String original="";
 	private String tvNameUniq="";
 	private String baikefilmname="";
+	int  SOURCE=1;
 
 	public String getBaikefilmname() {
 		return baikefilmname;
@@ -308,6 +309,12 @@ public class TEM_DIM_FILM implements Serializable {
 	}
 	public String getTvNameUniq(){
 		return tvNameUniq;
+	}
+	public int getSOURCE() {
+		return SOURCE;
+	}
+	public void setSOURCE(int sOURCE) {
+		SOURCE = sOURCE;
 	}
 }
 

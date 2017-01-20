@@ -453,5 +453,86 @@ public class OracleOpreater {
 		boolean bb = DBOperate.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}
+	
+	
+	
+	
+	/**
+	 * 添加电视剧数据 TEM_DIM_TVPLAY_PLATFORM 2016年3月30日18:13:06 2016年4月1日16:23:54
+	 * 
+	 * 2016年12月21日14:32:39
+	 * LABEL_TYPE
+	 * 添加标签类型 对应爱奇艺看点
+	 * @param playtv
+	 */
+	public static void intoTEM_DIM_TVPLAY_PLATFORM_LABEL_TYPE(TvPlay playtv) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String info= playtv.getBasic_info();
+		if (info!=null &&!info.equals("")&&!info.equals("null")) {
+			info=info.replace("&gt", "");
+		}
+
+		String strSql = "insert into ods.TEM_DIM_TVPLAY_PLATFORM t ( t.tvplay_name,t.tvplay_url ,"
+				+ "t.alias_en ,t.alias_cn,t.major_actors ,t.director,t.screenwriter,t.producer ,t.production_company ,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.PRODUCED_COMPANY,"
+				+ "t.production_area,t.premiere_time,t.pages,t.photography_director,t.total_production,t.basic_info,"
+				+ "t.update_time,t.source,t.DATA_TYPE,t.SHOW_DATE,t.PLAY_DATE,t.LABEL_TYPE)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+		List<Comparable> list = new ArrayList();
+		// 这里是将对象加入到list中
+
+		list.add(playtv.getTvplay_name());
+		list.add(playtv.getTvplay_url());
+		list.add(playtv.getAlias_en());
+		list.add(playtv.getAlias_cn());
+		list.add(playtv.getMajor_actors());
+		// list.add(playtv.getProduction_area());
+		list.add(playtv.getDirector());
+		list.add(playtv.getScreenwriter());
+
+		list.add(playtv.getProducer());
+
+		list.add(playtv.getProduction_company());
+
+		list.add(playtv.getIssuing_company());
+
+		list.add(playtv.getShoot_time());
+
+		list.add(playtv.getShoot_place());
+
+		list.add(playtv.getSubject());
+
+		// list.add("");
+		list.add(playtv.getProduced_time());
+
+		list.add(playtv.getProduced_company());
+
+		list.add(playtv.getProduction_area());
+
+		list.add(playtv.getPremiere_time());
+
+		list.add(playtv.getPages());
+
+		list.add(playtv.getPhorogrphy_director());
+
+		list.add(playtv.getTotal_production());
+
+		list.add(info);
+
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+
+		list.add(playtv.getSOURCE());
+
+		list.add(playtv.getDATA_TYPE());
+		
+		list.add(playtv.getShow_date());
+		
+		list.add(playtv.getPLAY_DATE());
+		
+		list.add(playtv.getLABEL_TYPE());
+		
+		boolean bb = DBOperate.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
 
 }

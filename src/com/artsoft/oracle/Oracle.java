@@ -7,8 +7,13 @@ import java.util.List;
 import com.artsoft.bean.DEL_DIM_NETWORKPLAY;
 import com.artsoft.bean.MAYAO_KEY;
 import com.artsoft.bean.TEM_BAIDU_NEW;
+import com.artsoft.bean.TEM_CHINA_NETWORK_VIDEO_INDEX;
+import com.artsoft.bean.TEM_IQIYI_AND_YOUKU_WORD_INDEX;
+import com.artsoft.bean.TEM_PERSON_URL;
+import com.artsoft.bean.TEM_PERSON_URL_WORKS;
 import com.artsoft.bean.TEM_TVPLAY_TIDBITS;
 import com.artsoft.bean.TEM_WEIBO_TOPIC_SCORE;
+import com.artsoft.bean.TVPLAY_IQIYI_INDEX;
 import com.artsoft.bean.Tem_weibo_word_age_sex;
 import com.artsoft.bean.Tem_weibo_word_area;
 import com.artsoft.bean.Tem_weibo_word_tag;
@@ -604,6 +609,211 @@ public class Oracle {
 	public static void main(String[] args) {
 		TEM_WEIBO_TOPIC_SCORE tem_weibo_topic_score=new TEM_WEIBO_TOPIC_SCORE();
 		Inserttem_weibo_topic_score(tem_weibo_topic_score);
+	}
+
+	public static void InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(TEM_IQIYI_AND_YOUKU_WORD_INDEX iqiyi) {
+		// TODO Auto-generated method stub
+		
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.TEM_IQIYI_AND_YOUKU_WORD_INDEX t (t.data_date,t.data_id,t.word,t.LABEL_NAME,t.LABEL_RATE,t.INTO_DATE,t.DIMENSION_TYPE,t.SOURCE)values (?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(iqiyi.getDataId());
+		list.add(iqiyi.getWord());
+		list.add(iqiyi.getLabelName());
+		list.add(iqiyi.getLabelRate());
+		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(iqiyi.getDimensionType());
+		list.add(iqiyi.getSource());
+
+		
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+		
+		
+	}
+	
+	
+	public static ArrayList<String> selec_tvplay() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_name from ODS.DEL_TVPLAY_NAME_TEM t where t.type = 1 and (t.label_name like '%民国%' or t.label_name like '%寻宝%') group by t.tvplay_name";
+		
+//		sql="select t.tvplay_id,t.tvplay_name from EDW.F_TVPLAY_RECORD t where t.tvplay_name = '老子传奇'";
+		
+//		sql="select t.tvplay_id,t.tvplay_name from edw.f_tvplay_record t where t.tvplay_name = '龙珠传奇'";
+		
+//		sql="select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.* from (select t.tvplay_id,t.tvplay_name from         mart.f_tvplay_index t left join         (select nr.tvplay_id,count( distinct nr.data_type) as counts                 from ods.tem_network_reputation nr               where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 0              group by nr.tvplay_id              ) n on t.tvplay_id = n.tvplay_id and n.counts = 2             where t.data_date = '29991231' and n.tvplay_id is null    order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2 on t1.tvplay_id =t2.data_id ";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 1;
+		List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+
+	}
+
+	public static void InsertTVPLAY_IQIYI_INDEX(TVPLAY_IQIYI_INDEX tvplayindex) {
+		// TODO Auto-generated method stub
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.TVPLAY_IQIYI_INDEX t (t.TVPLAY_NAME,t.V_COUNT,t.data_date,t.DATA_URL,t.CREATE_DATE)values (?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(tvplayindex.getTvplayName());
+		list.add(tvplayindex.getVCount());
+		list.add(tvplayindex.getDataDate());
+		list.add(tvplayindex.getDataUrl());
+//		list.add(tvplayindex.get);
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		
+		
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+		
+		
+	}
+	
+	
+	public static void InsertTVPLAY_IQIYI_INDEX_SOURCE(TVPLAY_IQIYI_INDEX tvplayindex) {
+		// TODO Auto-generated method stub
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.TVPLAY_IQIYI_INDEX t (t.TVPLAY_NAME,t.V_COUNT,t.data_date,t.DATA_URL,t.CREATE_DATE,SOURCE)values (?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(tvplayindex.getTvplayName());
+		list.add(tvplayindex.getVCount());
+		list.add(tvplayindex.getDataDate());
+		list.add(tvplayindex.getDataUrl());
+//		list.add(tvplayindex.get);
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(tvplayindex.getSOURCE());
+
+		
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+		
+		
+	}
+
+	public static void InsertTEM_PERSON_URL(TEM_PERSON_URL personurl) {
+		// TODO Auto-generated method stub
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.TEM_PERSON_URL t (t.PERSON_ID,t.PERSON_NAME,t.PERSON_URL,t.TYPE,t.UP_DATE)values (?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(personurl.getPersonId());
+		list.add(personurl.getPersonName());
+		list.add(personurl.getPersonUrl());
+		list.add(personurl.getType());
+//		list.add(tvplayindex.get);
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+
+		
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	
+
+	public static void InsertTEM_PERSON_URL_WORKS(TEM_PERSON_URL_WORKS work) {
+		// TODO Auto-generated method stub
+		
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.TEM_PERSON_URL_WORKS t (t.PERSON_ID,t.PERSON_NAME,t.PERSON_URL,t.DATE_NAME,t.DATE_URL,"
+				+ "DATE_DIRECTOR,DATE_MAJOR_ACTORS,UPDATE_TIME,SOURCE,DATA_TYPE,DATE_TIME)values (?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(work.getPersonId());
+		list.add(work.getPersonName());
+		list.add(work.getPersonUrl());
+		list.add(work.getDateName());
+		
+		list.add(work.getDateUrl());
+		list.add(work.getDateDirector());
+		list.add(work.getDateMajorActors());
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(work.getSource());
+		list.add(work.getDataType());
+		list.add(work.getDateTime());
+//		list.add(work.getDateName());
+//		list.add(work.getDateName());
+//		list.add(tvplayindex.get);
+
+		
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+		
+	}
+	
+	
+	
+	public static ArrayList<String> selec_mart_dim_person() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.person_id,t.person_name,t.actor_new_works from mart.dim_person t";
+		
+		sql="select t.person_id,t.person_name,t.actor_new_works from mart.dim_person t where t.actor_new_works is not null";
+		
+//		sql="select t.tvplay_id,t.tvplay_name from EDW.F_TVPLAY_RECORD t where t.tvplay_name = '老子传奇'";
+		
+//		sql="select t.tvplay_id,t.tvplay_name from edw.f_tvplay_record t where t.tvplay_name = '龙珠传奇'";
+		
+//		sql="select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.* from (select t.tvplay_id,t.tvplay_name from         mart.f_tvplay_index t left join         (select nr.tvplay_id,count( distinct nr.data_type) as counts                 from ods.tem_network_reputation nr               where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 0              group by nr.tvplay_id              ) n on t.tvplay_id = n.tvplay_id and n.counts = 2             where t.data_date = '29991231' and n.tvplay_id is null    order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2 on t1.tvplay_id =t2.data_id ";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	
+	
+	public static ArrayList<String> selec_mart_dim_person_TEM_PERSON_URL() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.person_id,t.person_name,t.actor_new_works from mart.dim_person t";
+		
+		sql="select max(person_id),max(person_name),max(person_url) from ods.TEM_PERSON_URL t where t.type=1 and t.up_date='20170111' group by t.person_url";
+		
+		
+		sql=" select person_id,person_name,person_url from (select distinct * from ods.TEM_PERSON_URL t  where t.type = 1) tt1 where tt1.person_id not in (select person_id  from ODS.TEM_PERSON_URL_WORKS t where t.source = 1 group by t.person_id)";
+		
+//		sql="select t.tvplay_id,t.tvplay_name from EDW.F_TVPLAY_RECORD t where t.tvplay_name = '老子传奇'";
+		
+//		sql="select t.tvplay_id,t.tvplay_name from edw.f_tvplay_record t where t.tvplay_name = '龙珠传奇'";
+		
+//		sql="select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.* from (select t.tvplay_id,t.tvplay_name from         mart.f_tvplay_index t left join         (select nr.tvplay_id,count( distinct nr.data_type) as counts                 from ods.tem_network_reputation nr               where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 0              group by nr.tvplay_id              ) n on t.tvplay_id = n.tvplay_id and n.counts = 2             where t.data_date = '29991231' and n.tvplay_id is null    order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2 on t1.tvplay_id =t2.data_id ";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+
+	}
+
+	public static void InsertTEM_TEM_CHINA_NETWORK_VIDEO_INDEX(TEM_CHINA_NETWORK_VIDEO_INDEX index) {
+		// TODO Auto-generated method stub
+		
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ods.TEM_CHINA_NETWORK_VIDEO_INDEX t (t.DATA_DATE,t.DATA_ID,t.DATA_NAME,t.PLAY_TITLE,t.PLAY_NUM,"
+				+ "PLAY_TOP,PLAY_STEP,COMMENTS,COLLECTION,DISPLAY_OUT,INTO_DATE,TYPE)values (?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(index.getDataId());
+		list.add(index.getDataName());
+		list.add(index.getPlayTitle());
+		list.add(index.getPlayNum());
+		
+		list.add(index.getPlayTop());
+		list.add(index.getPlayStep());
+		list.add(index.getComments());
+		list.add(index.getCollection());
+		list.add(index.getDisplayOut());
+//		list.add(index.getIntoDate());
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(index.getType());
+
+		
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+		
 	}
 
 }

@@ -372,7 +372,7 @@ public class OracleMovePiaoFang {
 	public static void intoTEM_FILM_BOXOFFICE_REALTIME(TEM_FILM_BOXOFFICE_REALTIME  realitme) {
 
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String strSql = "insert into ods.TEM_FILM_BOXOFFICE_REALTIME t (t.data_date,t.title,t.url,t.fid,t.released_days,t.real_time_boxoffice,t.boxoffice_rate,t.total_boxoffice,t.into_date,t.collection_url,t.real_date,t.DATA_TYPE,SOURCE)values(?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?)";
+		String strSql = "insert into ods.TEM_FILM_BOXOFFICE_REALTIME t (t.data_date,t.title,t.url,t.fid,t.released_days,t.real_time_boxoffice,t.boxoffice_rate,t.total_boxoffice,t.into_date,t.collection_url,t.real_date,t.DATA_TYPE,SOURCE,SHOW_DATE)values(?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?,?,?,?)";
 		
 		
 		List<Comparable> list = new ArrayList();
@@ -397,6 +397,8 @@ public class OracleMovePiaoFang {
 			list.add(realitme.getDATA_TYPE());
 			// list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 			list.add(realitme.getSOURCE());
+			list.add(realitme.getSHOW_DATE());
+			
 			System.out.println(list.toString());
 			boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 			System.out.println(bb);

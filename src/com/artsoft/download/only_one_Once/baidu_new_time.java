@@ -130,7 +130,11 @@ public class baidu_new_time {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		baidunew("µÁÄ¹±Ê¼Ç");
+//		baidunew("µÁÄ¹±Ê¼Ç");
+		
+//		baidunew("Ñ°Áú¾÷");
+		
+		baidunew("¾Å²ãÑıËş");
 
 	}
 

@@ -115,6 +115,10 @@ public class DownqqNetword {
 			// System.out.println(link.select("a").text());
 			// System.out.println(link.text());
 			System.out.println(score = link.select("span.mod_score").text());
+			
+			if (score.equals("")) {
+				System.out.println(score = link.select("div.figure_score").text().replace(" ", ""));
+			}
 			try {
 //				OracleOpreater.intoReputationAndDETAIL_URL(name, "3", score, "0", "", urlMain, "3", "1",strmainurl);
 //				OracleOpreater.intoReputationAndDETAIL_URL(name, "3", score, "0", "", urlMain, "0", "1",strmainurl);
@@ -130,6 +134,10 @@ public class DownqqNetword {
 			String numstring="";
 			numstring=link.select("span.info_inner").text();
 			
+			if (numstring.equals("")) {
+				numstring=link.select("span.num").text();
+			}
+			
 			numstring=maoyan_tangying.Stringnum(numstring);
 			System.out.println(numstring);
 			
@@ -143,19 +151,19 @@ public class DownqqNetword {
 			
 			
 		}
-		String tt = doc.select("span.txt_01").select("em.strong").first().text();
-		
-		
-		try {
-			if (xxx<Integer.parseInt(tt)) {
-				return true;
-			}
-			else{
-				return false;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		String tt = doc.select("span.txt_01").select("em.strong").first().text();
+//		
+//		
+//		try {
+//			if (xxx<Integer.parseInt(tt)) {
+//				return true;
+//			}
+//			else{
+//				return false;
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 		
 		return true;
 		

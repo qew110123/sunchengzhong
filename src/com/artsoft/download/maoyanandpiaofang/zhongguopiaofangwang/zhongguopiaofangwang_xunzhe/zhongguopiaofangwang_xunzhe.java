@@ -112,7 +112,7 @@ public class zhongguopiaofangwang_xunzhe {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		shoushuozhongguopiaofangwang("…ŸƒÍ");
-		 xuanzheng("http://www.cbooo.cn/m/657651");
+		 xuanzheng("http://www.cbooo.cn/m/657204");
 	}
 
 }

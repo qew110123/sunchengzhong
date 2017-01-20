@@ -57,39 +57,54 @@ public class DownqqMovie {
 			String name = "";
 			System.out.println(strmainurl = link.select("strong.figure_title a").attr("href"));
 			// System.out.println(strmainurl = link.select("a").attr("id"));
-			System.out.println(name = link.select("strong.figure_title a").attr("title"));
+			System.out.println(name = link.select("strong.figure_title").attr("title"));
+			
+			if (name.equals("")) {
+				System.out.println(name = link.select("strong.figure_title").text());
+			}
 			// System.out.println(link.select("a").text());
 			// System.out.println(link.text());
-			System.out.println(score = link.select("span.mod_score").text());
+			score = link.select("span.mod_score").text();
+			if (score.equals("")) {
+				score = link.select("div.figure_score").text().replace(" ", "");
+			}
+			System.out.println(score);
+			
 			try {
+				//评分
 				OracleOpreater.intoReputationAndDETAIL_URL(name, "3", score, "0", "", urlMain, "3", "1",strmainurl);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 			try {
+				//总播放量
 				downBranch(strmainurl, name, urlMain);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+			
+			
+			
 			try {
+				//评论量
 				downBranchpingfen(strmainurl, name, urlMain);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 		}
-		String tt = doc.select("span.txt_01").select("em.strong").first().text();
-		
-		
-		try {
-			if (xxx<Integer.parseInt(tt)) {
-				return true;
-			}
-			else{
-				return false;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		String tt = doc.select("span.txt_01").select("em.strong").first().text();
+//		
+//		
+//		try {
+//			if (xxx<Integer.parseInt(tt)) {
+//				return true;
+//			}
+//			else{
+//				return false;
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 		
 		return true;
 		
@@ -142,7 +157,14 @@ public class DownqqMovie {
 			numstring = HtmlAnalyze.getTagText(strHtml, "\"allnumc\":",",");
 		}
 		System.out.println(numstring);
+		
+		if (numstring.equals("")) {
+			
+		}
+		
+		
 		try {
+			//总播放量
 			OracleOpreater.intoReputationAndDETAIL_URL(nameBranch, "3", numstring, "0", "", urlMain, "3", "0",DETAIL_URL);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -202,13 +224,13 @@ public class DownqqMovie {
 	public static void openstatic() {
 		String url = "";
 		String[] diqu = { "100024", "100025", "100026", "100027", "100028", "100029", "100030", "100031", "100032", "100033" };
-		String[] nianfen = { "100063", "100034", "100035", "100036", "100037", "100038", "100039", "100040"};
+		String[] nianfen = {"2016", "100063", "100034", "100035", "100036", "100037", "100038", "100039", "100040"};
 		for (String diqutxt : diqu) {
 			for (String nianfentxt : nianfen) {
 				System.out.println(diqutxt + nianfentxt);
 				
 				try {
-					for (int i = 0; i < 5000; i=i+20) {
+					for (int i = 0; i < 5000; i=i+30) {
 						url = "http://v.qq.com/x/movielist/?cate=-1&offset="+i+"&sort=5&pay=-1&area=" + diqutxt
 								+ "&year=" + nianfentxt + "";
 						System.out.println(url);
