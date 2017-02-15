@@ -920,7 +920,7 @@ public class weixin {
 
 //		runnewMain();
 		 
-		mainUrlxiangxixiexi("http://mp.weixin.qq.com/s?__biz=MzI5MTU5MDM1OA==&tempkey=Gt5dBHenlNjY7%2FUBdXi8R%2B3JA9qHInj153lqtxHJltwK3RtdrLsYD8yjQ6XbqdNZnkO8fgF2dmbJGUNB9drGeuYc5bxkcj1qx9OSG4FqycWpZJpaUb4vV%2FS8KIBRBVPxla8N84p4p7BjUMAj6jW%2B2A%3D%3D&chksm=6c0f1b615b7892771bc7770cdc66fa95c519adf9e42601ad1787061bca2ea11962829828a25f#rd");
+		mainUrlxiangxixiexi("http://mp.weixin.qq.com/s?__biz=MzI5MTU5MDM1OA==&tempkey=Gt5dBHenlNjY7%2FUBdXi8R%2B3JA9qHInj153lqtxHJltySIVhBDDf2ubZ2c761lRM7TWnTX41K2fo13%2FUu7e%2B%2FO%2BTGjZbrW98Z0rA3Jyz5U5lNhUWt0OM3ww3eKkwIHf1PWlTGez8SFAho2FPlpKqJ1A%3D%3D&chksm=6c0f1b505b7892463b7801092e44a090415e55e5f700616f05f92bdddd85ae1ba8c12bbfb599#rd");
 		 
 //		 TimingTime(1, 59, 59);
 		 
