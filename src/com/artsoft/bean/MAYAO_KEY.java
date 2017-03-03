@@ -14,6 +14,8 @@ public class MAYAO_KEY {
 	private String eight;
 	private String nine;
 	private String zero;
+	private String KEY_URL_NEW;
+	
 
 	public void setId(Integer id){
 		this.id=id;
@@ -86,6 +88,12 @@ public class MAYAO_KEY {
 	}
 	public String getZero(){
 		return zero;
+	}
+	public String getKEY_URL_NEW() {
+		return KEY_URL_NEW;
+	}
+	public void setKEY_URL_NEW(String kEY_URL_NEW) {
+		KEY_URL_NEW = kEY_URL_NEW;
 	}
 
 }

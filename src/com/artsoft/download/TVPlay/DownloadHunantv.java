@@ -38,6 +38,10 @@ public class DownloadHunantv {
 		String tyPlayName = "";
 		System.out.println(tyPlayName = HtmlAnalyze.getTagText(strHtml, "cname: \"", "\""));
 		
+		if (tyPlayName.equals("")) {
+			tyPlayName = HtmlAnalyze.getTagText(strHtml, "title: \"", "\"");
+		}
+		
 		String strVolumess=HtmlAnalyze.getTagText(strHtml, tyPlayName , "_");
 		String serNumber = strVolumess.replaceAll("第", "").replaceAll("集", "");
 		if (serNumber.equals("1")) {
@@ -193,7 +197,7 @@ public class DownloadHunantv {
 		// System.out.println(strHtml);
 		Document doc = Jsoup.parse(strHtml);
 		// Element linkmain = doc.getElementById("fluxes_static");
-		Elements links = doc.select("p.img-box a");
+		Elements links = doc.select("ul.v-list-inner li a");
 		// Element content = doc.getElementById("content");
 		// Elements links = content.getElementsByTag("a");
 		System.out.println(links.size());
@@ -210,7 +214,10 @@ public class DownloadHunantv {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 
 		for (int i = 1; i <= 22; i++) {
-			String url = "http://list.hunantv.com/2/----------" + i + "---.html";
+			
+			//http://list.mgtv.com/2/---------2-1-0--.html
+			//http://list.mgtv.com/2/---------2-2-0--.html
+			String url = "http://list.mgtv.com/2/---------2-" + i + "-0--.html";
 			System.out.println(url);
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + url);
 			mainmore(url);

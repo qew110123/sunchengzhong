@@ -541,6 +541,35 @@ public class Oracle {
 	
 	
 	/**
+	 * 2017年3月3日14:29:33
+	 * 
+	 * @param mayao_key
+	 * 
+	 */
+	public static void IntoMAYAO_KEY_new(MAYAO_KEY mayao_key) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "insert into ODS.Mayao_Key t (t.key_url,t.one,t.two,t.three,t.four,t.five,t.six,t.seven,t.eight,t.nine,t.zero,t.KEY_URL_NEW)values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(mayao_key.getKeyUrl());
+		list.add(mayao_key.getOne());
+		list.add(mayao_key.getTwo());
+		list.add(mayao_key.getThree());
+		list.add(mayao_key.getFour());
+		list.add(mayao_key.getFive());
+		list.add(mayao_key.getSix());
+		list.add(mayao_key.getSeven());
+		list.add(mayao_key.getEight());
+		list.add(mayao_key.getNine());
+		list.add(mayao_key.getZero());
+		list.add(mayao_key.getKEY_URL_NEW());
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
+	}
+	
+	
+	/**
 	 * mayao_key
 	 * 2016年9月14日13:45:42
 	 * @return

@@ -103,6 +103,8 @@ public class OracleOpreater {
 //			
 //		}
 		
+		
+		
 
 		System.out.println(tyPlayName + source + dataAmount + vodeoType + upDatedate + playUrl + tvType + dataType);
 		String strSql = "INSERT INTO ODS.TEM_NETWORK_REPUTATION t (t.TVPLAY_NAME,t.SOURCE ,t.DATA_AMOUNT,t.VIDEO_TYPE,t.DATE_DATE"
@@ -114,7 +116,20 @@ public class OracleOpreater {
 		list.add(Double.parseDouble(dataAmount));
 		list.add(Integer.parseInt(vodeoType));
 		// list.add(TimeTest.getNowTime("yyyyMMdd"));
-		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		//0  总播放量/ 1 评分/ 2 评论量/ 默认减3小时
+		if (dataType.endsWith("0")||dataType.endsWith("1")||dataType.endsWith("2")) {
+			
+			try {
+				list.add(TimeTest.getOneHoursAgoTime());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else {
+			list.add(TimeTest.getNowTime("yyyyMMdd"));
+			
+		}
 		list.add(playUrl);
 		list.add(Integer.parseInt(tvType));
 		list.add(Integer.parseInt(dataType));

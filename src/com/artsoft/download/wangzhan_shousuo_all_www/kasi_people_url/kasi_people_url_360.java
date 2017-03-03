@@ -17,6 +17,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.artsoft.bean.TEM_PERSON_URL;
+import com.artsoft.oracle.Oracle;
 import com.artsoft.util.DownloadUtil;
 
 public class kasi_people_url_360 {
@@ -70,7 +72,7 @@ public class kasi_people_url_360 {
 	}
 	
 	
-	private static void shoushuo(String id,String name, String zhuopin) {
+	public static void shoushuo(String id,String name, String zhuopin) {
 		// TODO Auto-generated method stub
 		// https://www.baidu.com/s?wd=%E5%88%98%E6%B6%9B&pn=10&oq=%E5%88%98%E6%B6%9B
 		// http://www.baidu.com/s?wd=刘涛&pn=10&oq=刘涛
@@ -83,7 +85,8 @@ public class kasi_people_url_360 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String url = "http://www.so.com/s?q=" + krywordutf8 + "" 	;
+		String url = "http://baike.so.com/search/?q=" + krywordutf8 + "" 	;
+//		url="http://baike.so.com/search/?q=%E5%88%98%E6%B6%9B";
 		String strHtml = Htmlurl(url);
 		
 		
@@ -105,8 +108,11 @@ public class kasi_people_url_360 {
 				System.out.println(element.text());
 				String urlxiangxi = "";
 				System.out.println(urlxiangxi = element.select("a").attr("href"));
+				
+				
+				
 
-//				chaxunall(id,name, zhuopin, urlxiangxi);
+				chaxunall(id,name, zhuopin, urlxiangxi);
 			}
 
 		}
@@ -115,13 +121,109 @@ public class kasi_people_url_360 {
 	
 	
 	/**
+	 * 通过主页进行数据的筛选2017年2月22日14:37:18
+	 * 
+	 * @param name
+	 * @param zhuopin
+	 * @param urlxiangxi
+	 */
+	private static void chaxunall(String id,String name, String zhuopin, String urlxiangxi) {
+		// TODO Auto-generated method stub
+		// String
+		// url="http://www.baidu.com/s?wd="+krywordutf8+"&pn=0&"+krywordutf8;
+
+		xuanzhe(id,name, zhuopin, urlxiangxi);
+
+		
+//		try {
+//			
+//			String strHtml = Htmlurl(urlxiangxi);
+//			Document doc = Jsoup.parse(strHtml);
+//			Elements linkli = doc.getElementById("sense-list").select("li");
+//			for (Element element : linkli) {
+//				System.out.println(element);
+//				String title = "";
+//				String urltitle = "";
+//				System.out.println(title = element.select("a").attr("title"));
+//				System.out.println(urltitle = element.select("a").attr("href"));
+//				if (urltitle.equals("") || urltitle == null) {
+//					continue;
+//				}
+//				if (!urltitle.contains("http://baike.so.com")) {
+//					urltitle = "http://baike.so.com" + urltitle;
+//				}
+//				System.out.println(urltitle);
+//				xuanzhe(id,name, zhuopin, urltitle);
+//			}
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+		
+
+	}
+	
+	
+	
+	
+	/**
+	 * 查找先关数据
+	 * 2017年2月22日14:44:45
+	 * 
+	 * @param name
+	 * @param zhuopin
+	 * @param urltitle
+	 */
+	private static void xuanzhe(String id,String name, String zhuopin, String urltitle) {
+		// TODO Auto-generated method stub
+		
+		if (zhuopin==null||zhuopin.equals("")) {
+			return;
+		}
+
+		String strHtml = Htmlurl(urltitle);
+
+		String[] zhuopinlist = zhuopin.split(",");
+		boolean bb = false;
+		int inti = 0;
+		for (int i = 0; i < zhuopinlist.length; i++) {
+			if (strHtml.contains(zhuopinlist[i])) {
+				System.out.println(urltitle);
+				inti += 1;
+			}
+		}
+//		if (inti == zhuopinlist.length) {
+		if (inti >0) {
+			System.out.println("成功找到url");
+			
+			TEM_PERSON_URL personurl = new TEM_PERSON_URL();
+			personurl.setPersonId(id);
+			personurl.setPersonName(name);
+			personurl.setPersonUrl(urltitle);
+			personurl.setType(3);
+//			personurl.setUpDate(upDate);
+			
+			System.out.println(personurl);
+			
+			 Oracle.InsertTEM_PERSON_URL(personurl);
+		}
+
+	}
+	
+	
+	
+	
+	
+	/**
 	 * 2017年1月5日14:58:15 统一打开方式
 	 * 
 	 * @param urlMain
 	 * @return
+	 * https://www.so.com/s?q=%E5%88%98%E6%B6%9B
 	 */
 	public static String Htmlurl(String urlMain) {
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//		System.out.println(strHtml);
 		int i = 0;
 		while (i < 15 && strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
@@ -134,59 +236,10 @@ public class kasi_people_url_360 {
 	
 	public static String httpsurl(String url){
 		
-		
-		
 		return url;
 		
 	}
-	public static void daJeWang1() throws Exception {
-		// TODO Auto-generated method stub
-		DefaultHttpClient client = new DefaultHttpClient();
-		HttpResponse response = null;
-		System.out.println("******************************页面转向******************************");
-		String newUrl = "https://www.so.com/s?q=%E5%88%98%E6%B6%9B";
-		HttpGet get = new HttpGet(newUrl);
-		get.addHeader(new BasicHeader("Cookie",
-				"QiHooGUID=9005CF9080F848C87CA75FC319F6FCC1.1483607109510; tso_Anoyid=11148360710911119819; __guid=15484592.4293868065840577500.1483607111971.779; dpr=1; webp=1; userexp=1; count=7; __huid=103XYUPvogtJnL3nNjIuDLLWXQUUOrPGL026NfazJA2jo%3D; gtHuid=1"));
-		get.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-		get.addHeader("Accept-Encoding", "gzip, deflate, sdch, br");
-		get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
-		get.addHeader("Cache-Control", "max-age=0");
-		get.addHeader("Connection", "keep-alive");
-//		get.addHeader("Content-Type", "text/html;charset=UTF-8");
-//		get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0");
-		get.addHeader("Host", "www.so.com");
-		get.addHeader("Upgrade-Insecure-Requests", "1");
-		get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
-		HttpResponse httpResponse = client.execute(get);
-		String responseString = EntityUtils.toString(httpResponse.getEntity());
-		// 登录后首页的内容
-		System.out.println(responseString);
-		get.releaseConnection();
-
-	}
 	
-	public static void daJeWang() throws Exception {
-		// TODO Auto-generated method stub
-		DefaultHttpClient client = new DefaultHttpClient();
-		HttpResponse response = null;
-		System.out.println("******************************页面转向******************************");
-		String newUrl = "http://www.dajie.com/home";
-		HttpGet get = new HttpGet(newUrl);
-		get.addHeader(new BasicHeader("Cookie",
-				"DJ_UVID=MTQ0Njc3NTY0MTU1Mzc3MDc2; DJ_RF=empty; DJ_EU=http%3A%2F%2Fwww.dajie.com%2Fhome; login_email=764295333%40qq.com; dj_auth_v3=MW_qOtlnwl_JWoggzLsiIygjegD07-zT0hRU1DpC7Nwrsyf3qxtw-s9uPFHeds4*; uchome_loginuser=23860580; dj_cap=623eefeadd1d35d8d524c3a4c11e428f; USER_ACTION=request^AProfessional^ANORMAL^A-^A-; login_email=764295333%40qq.comHost:www.dajie.com"));
-		get.addHeader("Content-Type", "text/html;charset=UTF-8");
-		get.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0");
-		get.addHeader("Host", "www.dajie.com");
-		get.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-		get.addHeader("Accept-Language", "zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3");
-		HttpResponse httpResponse = client.execute(get);
-		String responseString = EntityUtils.toString(httpResponse.getEntity());
-		// 登录后首页的内容
-		System.out.println(responseString);
-		get.releaseConnection();
-
-	}
 	
 	
 

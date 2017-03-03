@@ -206,7 +206,7 @@ public class HuaXuYouKu {
 //		int port = 21;
 //		String username = "shareuser";
 //		String password = "shareuser18";
-		String pathname = "/tvplay/tidbits";
+		String pathname = "/img/tvplay/tidbits";
 //		String filename = "1.jpg";
 		String originfilename = "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\huaxu\\"+filename;
 		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);

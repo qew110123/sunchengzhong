@@ -9,7 +9,7 @@ public class FavFTPTest extends TestCase {
 		int port = 21;
 		String username = "shareuser";
 		String password = "shareuser18";
-		String pathname = "/contents";
+		String pathname = "/img/contents";
 		String filename = "1.jpg";
 		String originfilename = "D:\\1.jpg";
 		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);

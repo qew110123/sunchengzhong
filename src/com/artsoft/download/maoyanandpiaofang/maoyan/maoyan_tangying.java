@@ -540,13 +540,13 @@ public class maoyan_tangying {
 	
 	
 	public static String  Stringnum( String numString){
-		int numIn=0;
+		long numIn=0;
 		if (numString==null||numString.equals("")) {
 			numString="-1";
 			numIn=0;
 		}
 		if (numString.contains("亿")) {
-			numIn=(int) ((Double.parseDouble(numString.replace("亿", "")))*100000000);
+			numIn=(long) ((Double.parseDouble(numString.replace("亿", "")))*100000000);
 		}else{
 			
 		
@@ -598,6 +598,8 @@ public class maoyan_tangying {
 //		TimingTime(1, 59, 59);
 //		openstaticPaipianShuJuquanguo("", "2016-07-11");
 		openstatic();
+		
+//		Stringnum("55亿");
 	//	openstatic();
 //		runstatic();
 	}

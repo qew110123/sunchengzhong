@@ -12,6 +12,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import com.artsoft.util.DownloadUtil;
+
 public class Text {
 	private static void writerTxt(String text) {
 		BufferedWriter fw = null;
@@ -40,6 +46,29 @@ public class Text {
 
 //		writerTxt("111");
 //		writerTxt("111");
+		
+		String strHtml = "";
+		String url="http://www.open-open.com/jsoup/set-html.htm";
+		strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
+		
+		System.out.println(strHtml);
+		
+		System.out.println("****************************************");
+		
+		Document doc = Jsoup.parse(strHtml);
+		
+		Element div = doc.select("div").first(); // <div></div>
+		div.html("<p>lorem ipsum</p>"); // <div><p>lorem ipsum</p></div>
+		div.prepend("<p>First</p>");//在div前添加html内容
+		div.append("<p>Last</p>");//在div之后添加html内容
+		// 添完后的结果: <div><p>First</p><p>lorem ipsum</p><p>Last</p></div>
+
+//		Element span = doc.select("span").first(); // <span>One</span>
+//		span.wrap("<li><a href='http://example.com/'></a></li>");
+		// 添完后的结果: <li><a href="http://example.com"><span>One</span></a></li>
+		
+		
+		System.out.println(doc);
 		
 	}
 

@@ -318,7 +318,7 @@ public class BaiDuTeleplayDownload {
 		if ("上映日期".equals(baseInfoName) || "上映时间".equals(baseInfoName)) {
 			tvplay.setShow_date(baseInfoValue);
 		}
-		if ("主持人".equals(baseInfoName)||"跑男团队长".equals(baseInfoName)) {
+		if ("主持人".equals(baseInfoName)||"跑男团队长".equals(baseInfoName)||"挑战者".equals(baseInfoName)) {
 			tvplay.setPRESENTER(baseInfoValue);
 		}
 		

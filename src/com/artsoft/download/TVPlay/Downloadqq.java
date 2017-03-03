@@ -219,7 +219,7 @@ public class Downloadqq {
 				System.out.println("-------设定要指定任务--------");
 				runstatic();
 //				runstatic();
-				Again();
+//				Again();
 			}
 		}, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
 	}
@@ -235,6 +235,10 @@ public class Downloadqq {
 		// TODO Auto-generated method stub
 
 		 TimingTime(2, 59, 59);
+		
+//		openstatic();
+		
+		
 //		runstatic();
 //		Again();
 		

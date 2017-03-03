@@ -67,9 +67,11 @@ public class DownYoukuMovie {
 				// http://www.youku.com/v_olist/c_96_g_%E6%81%90%E6%80%96_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_4.html
 				// http://www.youku.com/v_olist/c_96_g_%E6%AD%A6%E4%BE%A0_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_3.html
 				// http://www.youku.com/v_olist/c_96_g_%E6%AD%A6%E4%BE%A0_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_1.html
+				
+				//http://list.youku.com/category/show/c_96_g_%E6%AD%A6%E4%BE%A0_a_%E5%A4%A7%E9%99%86_s_1_d_1_p_2.html?spm=a2h1n.8251845.0.0
 				try {
 					for (int i = 1; i < 30; i++) {
-						url = "http://www.youku.com/v_olist/c_96_g_" + java.net.URLEncoder.encode(leixingtxt, "utf-8")
+						url = "http://list.youku.com/category/show/c_96_g_" + java.net.URLEncoder.encode(leixingtxt, "utf-8")
 								+ "_a_" + java.net.URLEncoder.encode(diqutxt, "utf-8") + "_s_1_d_1_p_" + i + ".html";
 						System.out.println(url);
 						String urlnext = DownYoukuMovie.youkuMaim(url);

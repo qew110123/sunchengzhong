@@ -34,6 +34,12 @@ public class maoyan_jibenxinxi_zhongpiaofang {
 			
 			String keturlString ="";
 			System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+			if (keturlString.equals("")) {
+				maoyan_key.openkey();
+				strHtml=maoyan_shishipiaofang.Stringhtml_int(keturlString,strHtml,urlMain);
+				System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src:url(", ")"));
+				
+			}
 			
 			if (!keturlString.equals("")) {
 				maoyan_key.openkey();

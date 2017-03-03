@@ -5,6 +5,7 @@ import java.net.Proxy;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -99,7 +100,7 @@ public class weixin {
 
 			i += 1;
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -673,13 +674,13 @@ public class weixin {
 		// int port = 21;
 		// String username = "shareuser";
 		// String password = "shareuser18";
-		String pathname = "/news/big";
+		String pathname = "/img/news/big";
 		// String filename = "1.jpg";
 		String originfilename = "D:\\Image\\" + TimeTest.getNowTime("yyyyMMdd") + "\\weixin\\" + filename;
 		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);
 		System.out.println("big上传成功");
 
-		pathname = "/news/small";
+		pathname = "/img/news/small";
 		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);
 		System.out.println("small上传成功");
 		// String localpath = "D:/";
@@ -696,7 +697,7 @@ public class weixin {
 		// int port = 21;
 		// String username = "shareuser";
 		// String password = "shareuser18";
-		String pathname = "/news/contents/" + TimeTest.getNowTime("yyyyMMdd") + "";
+		String pathname = "/img/news/contents/" + TimeTest.getNowTime("yyyyMMdd") + "";
 		// String filename = "1.jpg";
 		String originfilename = "D:\\Image\\" + TimeTest.getNowTime("yyyyMMdd") + "\\news\\contents\\"
 				+ TimeTest.getNowTime("yyyyMMdd") + "\\" + filename;
@@ -904,6 +905,66 @@ public class weixin {
 	
 	
 	
+	
+	
+	public static  void WeiXinOnlyRun() {
+		
+		
+		
+//		mainUrlxiangxixiexi("http://mp.weixin.qq.com/s?__biz=MzI5MTU5MDM1OA==&tempkey=uU%2BBpVRh9m5xTZilGjnWKML9xxdsiNP%2BS9eL5SeBanagZkvKMZfehFVtO3QCo%2FiPHmJY%2Fu5Uc%2FF3wRroC1u%2Fwa5i7dsl6kaoSI9GL%2Bp%2FMni1E203SkFcRA35LOXqZEok4znKokNr4tMYQZA2Fji3vQ%3D%3D&chksm=6c0f1dbe5b7894a87a324e2a535ca2ad7df2a293b82a8d490451a077e02bdf941dbde44a3b8a#rd");
+//		
+//		mainUrlxiangxixiexi("http://mp.weixin.qq.com/s?__biz=MzI5MTU5MDM1OA==&tempkey=uU%2BBpVRh9m5xTZilGjnWKML9xxdsiNP%2BS9eL5SeBanaSv7fZrE0XPMf6MIhYfP3SUnqxFXlaXKOQMGVs9%2Blge72%2FFJaRBhW6d7g1nWYTUYa1E203SkFcRA35LOXqZEokNs0Y9P3FCXt9QFDSQ1W8kA%3D%3D&chksm=6c0f1dbe5b7894a87eb4ad9cce15ee89727065366f98661f008189a5f19f9cc74dc329a97a5e#rd");
+		 
+		
+		
+		
+		String strkey = ReadTxtFile.getKeyWordFromFile("keyWeiXinUrl.txt");
+		String[] keys = strkey.split("\n");
+		for (int i = 0; i < keys.length; i++) {
+			// System.out.println(i);
+			// System.out.println(keys[i]);
+			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + keys[i]);
+			// ConfigManager config = ConfigManager.getInstance();
+			String url = keys[i];
+			System.out.println(url);
+			
+			mainUrlxiangxixiexi(url);
+		}
+		
+		
+		Scanner in = new Scanner(System.in);
+		System.out.println("是否运行(y/n)");
+		String numi = in.next();
+		System.out.println(numi);
+		
+		if (numi.equals("y")||numi.equals("Y")) {
+			System.out.println("开始运行存储过程");
+			DBManager dbm = DBManager.instance();
+			
+			dbm.executeCall("call sp_dim_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
+			
+			System.out.println("运行sp_dim_news完毕");
+			
+			
+			dbm.executeCall("call sp_f_movies_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
+			
+			System.out.println("运行sp_f_movies_news完毕");
+			
+			dbm.executeCall("call mart_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
+			
+			System.out.println("运行mart_news 可以 完毕");
+		}else {
+			System.out.println("放弃运行存储过程");
+		}
+		
+		 
+		
+		
+
+		
+	}
+	
+	
 
 	/**
 	 * 微信
@@ -920,28 +981,17 @@ public class weixin {
 
 //		runnewMain();
 		 
-		mainUrlxiangxixiexi("http://mp.weixin.qq.com/s?__biz=MzI5MTU5MDM1OA==&tempkey=Gt5dBHenlNjY7%2FUBdXi8R%2B3JA9qHInj153lqtxHJltySIVhBDDf2ubZ2c761lRM7TWnTX41K2fo13%2FUu7e%2B%2FO%2BTGjZbrW98Z0rA3Jyz5U5lNhUWt0OM3ww3eKkwIHf1PWlTGez8SFAho2FPlpKqJ1A%3D%3D&chksm=6c0f1b505b7892463b7801092e44a090415e55e5f700616f05f92bdddd85ae1ba8c12bbfb599#rd");
-		 
-//		 TimingTime(1, 59, 59);
-		 
-		 
-//		dbm.executeCall(TimeTest.getNowTime("yyyyMMdd"));
+		TimingTime(1, 59, 59);
 		
 		
-		DBManager dbm = DBManager.instance();
-		
-		dbm.executeCall("call sp_dim_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
-		
-		System.out.println("运行sp_dim_news完毕");
+		//单次运行数据的整体数据
+//		WeiXinOnlyRun();
 		
 		
-		dbm.executeCall("call sp_f_movies_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
 		
-		System.out.println("运行sp_f_movies_news完毕");
 		
-		dbm.executeCall("call mart_news('"+TimeTest.getNowTime("yyyyMMdd")+"') ");
 		
-		System.out.println("运行mart_news 可以 完毕");
+		
 	}
 
 }

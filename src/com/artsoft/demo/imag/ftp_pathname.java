@@ -19,7 +19,7 @@ public class ftp_pathname {
 //		String username = "shareuser";
 //		String password = "shareuser18";
 		///tvplay/stills/
-		String pathname = "/tvplay/stills/big";
+		String pathname = "/img/tvplay/stills/big";
 //		String filename = "1.jpg";
 		String originfilename = "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\tvplay\\stills\\big\\"+filename;
 		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);
@@ -38,7 +38,7 @@ public class ftp_pathname {
 //		String username = "shareuser";
 //		String password = "shareuser18";
 		///tvplay/stills/
-		String pathname = "/tvplay/stills/small";
+		String pathname = "/img/tvplay/stills/small";
 //		String filename = "1.jpg";
 		String originfilename = "D:\\Image\\"+TimeTest.getNowTime("yyyyMMdd")+"\\tvplay\\stills\\small\\"+filename;
 		FavFTPUtil.uploadFileFromProduction(hostname, port, username, password, pathname, filename, originfilename);

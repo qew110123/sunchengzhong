@@ -36,6 +36,13 @@ public class DownqqMovie {
 //			OracleOpreater.intoReputationAndDETAIL_URL(nameBranch, "3", numstring, "0", "", urlMain, "3", "0",DETAIL_URL);
 //			OracleOpreater.intoReputationAndDETAIL_URL(name, "3", score, "0", "", urlMain, "3", "1",strmainurl);
 		}
+//		else{
+//			String comment=HtmlAnalyze.getTagText(htmlpinglunhtml, "class=\"video_score\">","</span>");
+//			if (!comment.equals("")) {
+//				
+//				OracleOpreater.intoReputationAndDETAIL_URL(nameBranch, "3", comment, "0", "", urlBranch, "3", "2",urlBranch);
+//			}
+//		}
 	}
 	
 	public static boolean downMain(String urlMain ,int xxx) {
@@ -114,19 +121,33 @@ public class DownqqMovie {
 	public static void downBranch(String urlBranch, String nameBranch, String urlMain) {
 		// http: // v.qq.com/cover/e/e7hi6lep1yc51ca.html
 		String DETAIL_URL=urlBranch;
-
-		urlBranch = urlBranch.replaceAll("http://v.qq.com/cover/", "").replaceAll("html", "");
-		urlBranch = HtmlAnalyze.getTagText(urlBranch, "/", ".");
+		
+		if (urlBranch.contains("cover")) {
+			urlBranch =  HtmlAnalyze.getTagText(urlBranch, "cover/",".");
+		}
+		else if (urlBranch.contains("http://v.qq.com/cover/")) {
+			urlBranch = urlBranch.replaceAll("http://v.qq.com/cover/", "").replaceAll("html", "");
+		}else if (urlBranch.contains("https://v.qq.com/x/cover/")) {
+			urlBranch = urlBranch.replaceAll("https://v.qq.com/x/cover/", "").replaceAll("html", "");
+			
+		}else if (urlBranch.contains("v.qq.com/x/cover/")) {
+			urlBranch = urlBranch.replaceAll("https://v.qq.com/x/cover/", "").replaceAll("html", "");
+			
+		}
+		
+//		urlBranch = HtmlAnalyze.getTagText(urlBranch, "/", ".");
 //		urlBranch = urlBranch.replaceAll("http://v.qq.com/cover/", "").replaceAll("html", "");
 //		urlBranch = HtmlAnalyze.getTagText(urlBranch, "/", ".");
 		String idlist=urlBranch;
 		// http://sns.video.qq.com/tvideo/fcgi-bin/batchgetplaymount?callback=jQuery191043746947194449604_1445913614627&low_login=1&id=e7hi6lep1yc51ca&otype=json&_=1445913614628
+		System.out.println(urlBranch);
 		System.out.println(urlBranch);
 		if (urlBranch == null || "".equals(urlBranch)) {
 			return;
 		}
 		urlBranch = "http://sns.video.qq.com/tvideo/fcgi-bin/batchgetplaymount?callback=jQuery191043746947194449604_1445913614627&low_login=1&id="
 				+ urlBranch + "&otype=json&_=1445913614628";
+		
 		String strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);
 		if (strHtml == null || strHtml.equals("")) {
 			strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8", null, null);

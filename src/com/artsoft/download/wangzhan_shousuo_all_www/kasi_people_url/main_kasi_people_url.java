@@ -18,6 +18,8 @@ public class main_kasi_people_url {
 		kasi_people_url_baidu baidu=new kasi_people_url_baidu();
 		kasi_people_url_sougou sogou=new kasi_people_url_sougou();
 		kasi_people_url_douban douban= new kasi_people_url_douban();
+		
+		kasi_people_url_360 baidu360=new kasi_people_url_360();
 		List<String> listArray = Oracle.selec_mart_dim_person();
 		String id ="";
 		String name ="";
@@ -33,7 +35,7 @@ public class main_kasi_people_url {
 //				BaiDuTeleplayDownload.selec_mart_dim_person(listTemp.get(0), listTemp.get(2));
 				try {
 					
-					baidu.shoushuo(id, name, zhuopin);
+//					baidu.shoushuo(id, name, zhuopin);
 					
 					
 //					sogou.shoushuo(id, name, zhuopin);
@@ -42,6 +44,9 @@ public class main_kasi_people_url {
 					
 //					douban.shoushuo(id, name, zhuopin);
 					
+					
+					
+					baidu360.shoushuo(id, name, zhuopin);
 					
 				} catch (Exception e) {
 					// TODO: handle exception

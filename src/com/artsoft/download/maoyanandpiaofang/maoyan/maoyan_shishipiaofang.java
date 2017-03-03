@@ -1,6 +1,7 @@
 package com.artsoft.download.maoyanandpiaofang.maoyan;
 
 import java.io.IOException;
+import java.net.Proxy;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,11 +21,13 @@ import com.artsoft.oracle.OracleMovePiaoFang;
 import com.artsoft.oracle2.DBManager;
 import com.artsoft.oracle2.DateUtil;
 import com.artsoft.util.CommonUtil;
+import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_key.maoyan_key;
 import com.artsoft.download.maoyanandpiaofang.zhongguopiaofangwang.zhongguopiaofangwang_xunzhe.zhongguopiaofangwang_xunzhe;
+import com.artsoft.downloadThreadpool.people.haoSou_thread_admin;
 
 
 public class maoyan_shishipiaofang {
@@ -93,14 +96,24 @@ public class maoyan_shishipiaofang {
 //		Document  doc = null ;
 		if (urlMain == null || urlMain.equals("")) {
 			urlMain = "http://piaofang.maoyan.com/";
+			
+			
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
 		}
 		if (strHtml == null || strHtml.equals("")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+			
+//			Proxy proxy = null;
+//			
+//			proxy = DealProxy.getInstance().getPoxxy();
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 10, "UTF-8", null, proxy);
+			
+			 strHtml = urlreturnHtml(urlMain);
+			
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
 			
 			
 			String keturlString ="";
-			System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+			System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src:url(", ")"));
 			
 			if (!keturlString.equals("")) {
 				maoyan_key.openkey();
@@ -274,8 +287,49 @@ public class maoyan_shishipiaofang {
 
 	}
 	
+	private static Proxy proxy = null;
 	
-	
+	private static String urlreturnHtml(String urlMain) {
+		String strHtml = "";
+		// strHtml = DownloadUtil.getHtmlText(urlBranch, 1000 * 30, "UTF-8",
+		// null, proxy);
+//		new Thread(new haoSou_thread_admin("ip")).start();
+		boolean bb = true;
+		int i = 0;
+		while (bb) {
+			proxy = DealProxy.getInstance().getPoxxy();
+			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 10, "UTF-8", null, null);
+			if (strHtml != null && !"".equals(strHtml)) {
+				bb = false;
+				if (strHtml.contains("360指数_访问异常出错")) {
+					bb = true;
+					System.out.println(Thread.currentThread().getName());
+					System.out.println("ip 代理出错");
+				}
+			} else {
+				System.out.println("打开出错" + i + "次,链接：" + urlMain);
+
+			}
+			if (i > 10) {
+				bb = false;
+			}
+
+			i += 1;
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return strHtml;
+
+	}
+
+
+
+
+
 	public static void openstatic() {
 		// http://piaofang.maoyan.com/?date=2016-03-15
 		// String urlMain = "http://piaofang.maoyan.com/";

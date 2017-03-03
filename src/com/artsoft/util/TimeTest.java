@@ -47,7 +47,34 @@ public class TimeTest {
 		System.out.println("获取本季度第一天到最后一天:"+tt.getThisSeasonTime(11));
 		System.out.println("获取两个日期之间间隔天数2008-12-1~2008-9.29:"+TimeTest.getTwoDay("2015-01-12","2016-07-12"));
 		System.out.println("指定日期字符串n天之前或者之后的日期  2013-01-11:" + TimeTest.getBeforeAfterDate("2013-01-11", -1019));
+		
+		try {
+			System.out.println("把时间设置为当前时间-3小时，同理，也可以设置其他时间"+getOneHoursAgoTime ());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+	public   static  String  getOneHoursAgoTime () throws Exception {   
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+		TimeTest tt = new TimeTest();
+    String str="20110823";
+    str=tt.getNowTime("yyyyMMdd HH:mm:ss");
+    Date dt=sdf.parse(str);
+    Calendar rightNow = Calendar.getInstance();
+    rightNow.setTime(dt);
+//    rightNow.add(Calendar.YEAR,-1);//日期减1年
+//    rightNow.add(Calendar.MONTH,3);//日期加3个月
+//    rightNow.add(Calendar.DAY_OF_YEAR,10);//日期加10天
+    rightNow.add(Calendar.HOUR,-3);//减3小时
+    Date dt1=rightNow.getTime();
+    System.out.println(dt1);
+    String reStr = sdf.format(dt1);
+    System.out.println(reStr=reStr.substring(0, 8));
+    return reStr;
+    }
+	
 	
 	
 	/**

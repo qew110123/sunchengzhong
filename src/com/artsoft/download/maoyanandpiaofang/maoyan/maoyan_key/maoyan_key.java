@@ -28,6 +28,9 @@ public class maoyan_key {
 		
 		System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
 		
+		String KEY_URL_NEW="";
+		System.out.println(KEY_URL_NEW=HtmlAnalyze.getTagText(strHtml, "src:url(", ")"));
+		
 		
 		String numString1 ="";
 		System.out.println(numString1=HtmlAnalyze.getTagText(strHtml, "<span id='ticket_count'><i class=\"cs gsBlur\">", "Íò"));
@@ -57,6 +60,11 @@ public class maoyan_key {
 		MAYAO_KEY maoyankey=new MAYAO_KEY();
 		
 		maoyankey.setKeyUrl(keturlString);
+		maoyankey.setKeyUrl(KEY_URL_NEW);
+		
+		maoyankey.setKEY_URL_NEW(KEY_URL_NEW);
+		
+		
 		try {
 			
 		
@@ -108,6 +116,8 @@ public class maoyan_key {
 		try {
 			if (maoyankey.getFive()!=null) {
 				
+				
+//				maoyankey.setZero("0");
 				Oracle.IntoMAYAO_KEY(maoyankey);
 			}
 		} catch (Exception e) {

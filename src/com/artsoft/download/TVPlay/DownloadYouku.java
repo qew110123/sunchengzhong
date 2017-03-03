@@ -674,8 +674,10 @@ public class DownloadYouku {
 				// try {
 				for (int i = 1; i < 30; i++) {
 					try {
-						url = "http://www.youku.com/v_olist/c_97_g_" + java.net.URLEncoder.encode(leixingtxt, "utf-8")
-								+ "_a_" + java.net.URLEncoder.encode(diqutxt, "utf-8") + "_s_1_d_1_p_" + i + ".html";
+//						http://list.youku.com/category/show/c_97_g_%E5%8F%A4%E8%A3%85_a_%E5%A4%A7%E9%99%86_s_1_d_1.html?spm=a2h1n.8251845.filterPanel.5!3~1~3!2~A
+//						http://list.youku.com/category/show/c_97_a_%E5%8F%A4%E8%A3%85_s_1_d_1_g_%E5%A4%A7%E9%99%86_s_1_d_1_p_1.html?spm=a2h1n.8251845.0.0
+						url = "http://list.youku.com/category/show/c_97_a_" + java.net.URLEncoder.encode(leixingtxt, "utf-8")
+								+ "_a_" + java.net.URLEncoder.encode(diqutxt, "utf-8") + "_s_1_d_1_p_" + i + ".html?spm=a2h1n.8251845.0.0";
 					} catch (UnsupportedEncodingException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

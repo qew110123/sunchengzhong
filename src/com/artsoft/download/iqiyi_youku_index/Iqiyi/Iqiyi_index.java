@@ -25,9 +25,6 @@ public class Iqiyi_index {
 	}
 	
 	
-	
-	
-	
 
 	private static void runstatic() {
 		// TODO Auto-generated method stub

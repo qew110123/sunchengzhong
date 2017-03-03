@@ -260,6 +260,25 @@ public class OracleBaidu {
 	}
 	
 	
+	
+	
+	/**
+	 * 百度数据的中的网络剧补充 url
+	 * 单独脚本运行
+	 * 2017年2月20日13:58:42
+	 * @return
+	 */
+	public static List selectbaidudianshijuWangluojuurl_jiaoben() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.networkplay_id,t.networkplay_name,t.networkplay_url from edw.dim_networkplay t where t.actors is null and t.networkplay_url !='无' and t.networkplay_url is not null";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
 	/**
 	 * 百度数据的中的网络剧补充 url
 	 * 2016年8月16日17:05:18
@@ -337,6 +356,22 @@ public class OracleBaidu {
 		sql="select t.variety_id,t.variety_name,t.variety_url from EDW.Dim_Variety t where t.update_date >='20161124' and t.variety_url is not null";
 		
 		sql="select t.variety_id,t.variety_name,t.variety_url from EDW.Dim_Variety t where t.update_date >='20161130' and t.variety_url is not null";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	/**
+	 * 百度数据的中的综艺
+	 * 2016年6月21日16:02:35
+	 * @return
+	 */
+	public static List selectbaidudianshijuzhongyiScropt() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.variety_id,t.variety_name,t.variety_url from edw.dim_variety t where t.actors is null and t.guest_program is null and t.presenter is null and t.variety_url !='无' and t.variety_url is not null and t.is_del !=-1 ";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
