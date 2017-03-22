@@ -88,7 +88,7 @@ public class Movies {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TimingTime(02, 00, 00);
+		TimingTime(03, 00, 00);
 	}
 
 }

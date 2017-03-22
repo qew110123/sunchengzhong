@@ -12,16 +12,16 @@ public class maoyan_key {
 		openkey();
 	}
 	
-	public static void openkey() {
+	public static boolean openkey() {
 		// TODO Auto-generated method stub
 		String urlMain = "http://piaofang.maoyan.com/?date=2016-02-17";
 		
 		
 		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-		while (strHtml.contains("抱歉，迷路了")) {
-			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
-			
-		}
+//		while (strHtml.contains("抱歉，迷路了")) {
+//			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+//			
+//		}
 		
 //		System.out.println(strHtml);
 		String keturlString ="";
@@ -120,10 +120,13 @@ public class maoyan_key {
 //				maoyankey.setZero("0");
 				Oracle.IntoMAYAO_KEY(maoyankey);
 			}
+			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("数据库 违反唯一约束条件！");
+			return false;
 		}
+		
 		
 	}
 

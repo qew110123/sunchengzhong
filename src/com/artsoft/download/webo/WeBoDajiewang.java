@@ -781,7 +781,21 @@ public class WeBoDajiewang {
 
 		Tem_weibo_word_age_sex tem_weibo_word_age_sex = new Tem_weibo_word_age_sex();
 		tem_weibo_word_age_sex.setUrl(url);
-		tem_weibo_word_age_sex.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+		
+		
+		
+		String urlString="http://data.weibo.com/index/attribute";
+//		String htmlsStrnig="";
+		
+		String htmlsStrnig=DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8",null, null);
+//		System.out.println(htmlsStrnig);
+		
+		String timeString=HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
+		if (!timeString.equals("")) {
+			timeString=timeString.replace("-", "");
+		}
+		tem_weibo_word_age_sex.setDataDate(timeString);
+		
 		tem_weibo_word_age_sex.setDataId(data_id);
 		tem_weibo_word_age_sex.setWord(keywordnames);
 
@@ -843,7 +857,9 @@ public class WeBoDajiewang {
 		Oracle.InsertCompany(tem_weibo_word_age_sex);
 
 		Tem_weibo_word_tag tem_weibo_word_tag = new Tem_weibo_word_tag();
-		tem_weibo_word_tag.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+//		tem_weibo_word_tag.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+		tem_weibo_word_tag.setDataDate(timeString);
+		
 		tem_weibo_word_tag.setDataId(data_id);
 		tem_weibo_word_tag.setWord(keywordnames);
 		tem_weibo_word_tag.setDataType(data_type);
@@ -1107,6 +1123,17 @@ public class WeBoDajiewang {
 		JSONObject objectkeyworduser = JSONObject.fromObject(objectkeywordzones.get("user"));
 		// 用户热议度
 		keywordzoneuser(objectkeyworduser, data_type, data_id, urlair);
+		
+		String urlString="http://data.weibo.com/index/attribute";
+//		String htmlsStrnig="";
+		
+		String htmlsStrnig=DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8",null, null);
+//		System.out.println(htmlsStrnig);
+		
+		String timeString=HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
+		if (!timeString.equals("")) {
+			timeString=timeString.replace("-", "");
+		}
 
 		String getdefaultattributealldata = Weibo(
 				"http://data.weibo.com/index/ajax/getdefaultattributealldata?__rnd=" + s);
@@ -1116,7 +1143,8 @@ public class WeBoDajiewang {
 
 		Tem_weibo_word_age_sex tem_weibo_word_age_sex = new Tem_weibo_word_age_sex();
 		tem_weibo_word_age_sex.setUrl(url);
-		tem_weibo_word_age_sex.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+//		tem_weibo_word_age_sex.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+		tem_weibo_word_age_sex.setDataDate(timeString);
 		tem_weibo_word_age_sex.setDataId(data_id);
 		tem_weibo_word_age_sex.setWord(keywordnames);
 
@@ -1178,7 +1206,8 @@ public class WeBoDajiewang {
 		Oracle.InsertCompany(tem_weibo_word_age_sex);
 
 		Tem_weibo_word_tag tem_weibo_word_tag = new Tem_weibo_word_tag();
-		tem_weibo_word_tag.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+//		tem_weibo_word_tag.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+		tem_weibo_word_tag.setDataDate(timeString);
 		tem_weibo_word_tag.setDataId(data_id);
 		tem_weibo_word_tag.setWord(keywordnames);
 		tem_weibo_word_tag.setDataType(data_type);
@@ -1329,6 +1358,17 @@ public class WeBoDajiewang {
 		String index = "";
 		String wname = "";
 		String stateInitColor = "";
+		
+		String urlString="http://data.weibo.com/index/attribute";
+//		String htmlsStrnig="";
+		
+		String htmlsStrnig=DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8",null, null);
+//		System.out.println(htmlsStrnig);
+		
+		String timeString=HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
+		if (!timeString.equals("")) {
+			timeString=timeString.replace("-", "");
+		}
 
 		String[][] numsix = { { "chongqing", "重庆" }, { "zhejiang", "浙江" }, { "yunnan", "云南" }, { "xinjiang", "新疆" },
 				{ "hongkong", "香港" }, { "xizang", "西藏" }, { "tianjin", "天津" }, { "taiwan", "台湾" }, { "sichuan", "四川" },
@@ -1347,7 +1387,9 @@ public class WeBoDajiewang {
 				Tem_weibo_word_area tem_weibo_word_area = new Tem_weibo_word_area();
 				JSONObject objectkeywordzones = JSONObject.fromObject(objectkeywordzone.get(pingyin));
 				// {"value":"9.16%","ct":"7055","index":"2","wname":"邓超","stateInitColor":"61B6FD"}
-				tem_weibo_word_area.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+//				tem_weibo_word_area.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+				tem_weibo_word_area.setDataDate(timeString);
+				
 				tem_weibo_word_area.setDataType(data_type);
 				tem_weibo_word_area.setDataId(data_id);
 				tem_weibo_word_area.setAreaNameEn(pingyin);
@@ -1378,6 +1420,19 @@ public class WeBoDajiewang {
 
 	//// 用户热议度
 	public static void keywordzoneuser(JSONObject objectkeywordzone, int data_type, String data_id, String urlair) {
+		
+		String urlString="http://data.weibo.com/index/attribute";
+//		String htmlsStrnig="";
+		
+		String htmlsStrnig=DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8",null, null);
+//		System.out.println(htmlsStrnig);
+		
+		String timeString=HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
+		if (!timeString.equals("")) {
+			timeString=timeString.replace("-", "");
+		}
+		
+		
 		String pingyin = "";
 		String address = "";
 		String value = "";
@@ -1401,7 +1456,8 @@ public class WeBoDajiewang {
 			System.out.println(pingyin + address);
 			try {
 				Tem_weibo_word_area tem_weibo_word_area = new Tem_weibo_word_area();
-				tem_weibo_word_area.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+//				tem_weibo_word_area.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+				tem_weibo_word_area.setDataDate(timeString);
 				tem_weibo_word_area.setDataType(data_type);
 				tem_weibo_word_area.setDataId(data_id);
 				tem_weibo_word_area.setAreaNameEn(pingyin);
@@ -1535,7 +1591,7 @@ public class WeBoDajiewang {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 		System.out.println(TimeTest.getNowTime("HH"));
 		if (TimeTest.getNowTime("HH").equals("01") || TimeTest.getNowTime("HH").equals("09")
-				|| TimeTest.getNowTime("HH").equals("13")) {
+				|| TimeTest.getNowTime("HH").equals("16")) {
 			runstatic();
 		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
@@ -1586,11 +1642,13 @@ public class WeBoDajiewang {
 		// Weiboall("http://data.weibo.com/index/ajax/getdefaultattributealldata?__rnd=1465910360625");
 
 		rundingshitime(1, 00, 00);
-		// runstatic();
+		
+		
+//		 runstatic();
 		/**
 		 * 名称 data_type 类型 1 人 2 电视剧 3 电影 data_id 人物id
 		 */
-		// webopeople("郭德纲",1,"3806");
+//		 webopeople("郭德纲",1,"3806");
 		// daJeWang();
 		// System.out.println("运行网吧");
 		// methodPost();

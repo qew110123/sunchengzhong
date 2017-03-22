@@ -238,7 +238,7 @@ public class OracleHaoSou {
 	 */
 	public static ArrayList<String> selectname(String startRow, String endRow) {
 		Connection conn = DBOperate218.getInstance().getConnection();
-		String sql = "select t.person_id,t.person_name from ODS.DIM_PERSON t order by t.person_id";
+		String sql = "select t.person_id,t.person_name from edw.dim_person t where t.is_del !=-1 order by t.person_id";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
 		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
@@ -246,6 +246,27 @@ public class OracleHaoSou {
 		return (ArrayList<String>) list;
 	}
 	
+	
+	
+	/**
+	 * sql语句并获取
+	 * 2017年3月7日11:24:49
+	 * 整体数据的人物数据
+	 * 每日数据的的数据
+	 * 
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public static ArrayList<String> selectnameMeiRI(String startRow, String endRow) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select a.person_id,max(a.person_name) from (select p.person_id, p.person_name,         ROW_NUMBER() OVER(PARTITION BY p.sex ORDER BY p.network_index desc,p.person_id asc) ranks   from  mart.f_person_index p  where  bitand(p.identity,1) = 1 and p.sex in(1,2) and p.data_date = '20170301' union all select p.person_id, p.person_name,         ROW_NUMBER() OVER(PARTITION BY 1 ORDER BY p.screenwriter_complex_index desc,p.person_id asc) ranks   from  mart.f_person_index p  where  bitand(p.identity,2) = 2 and p.sex in(1,2) and p.data_date = '20170301'  union all select p.person_id, p.person_name,         ROW_NUMBER() OVER(PARTITION BY 1 ORDER BY p.director_complex_index desc,p.person_id asc) ranks   from  mart.f_person_index p  where  bitand(p.identity,4) = 4 and p.sex in(1,2) and p.data_date = '20170301') a  where a.ranks <=100  group by a.person_id";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.selectStartTOEnd(conn, sql, startRow, endRow, iNum);
+		// List<String> list =DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
 	
 	
 	
@@ -413,15 +434,15 @@ public class OracleHaoSou {
 		System.out
 				.println(personId + weiboUid + fansCount + vCountNumber + updateDate + createDate + dataUrl + dateType);
 
-		String strSql = "insert into ods.person_network_popularity t (t.person_id,t.WEIBO_UID,t.FANS_COUNT ,t.V_COUNT,t.update_date,t.create_date,t.data_url,t.date_type) "
-				+ "values(?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
+		String strSql = "insert into ods.person_network_popularity t (t.person_id,t.WEIBO_UID,t.FANS_COUNT ,t.V_COUNT,t.DATE_DATE,t.create_date,t.data_url,t.date_type) "
+				+ "values(?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 
 		List<Comparable> list = new ArrayList();
 		list.add(Integer.parseInt(personId));// 这里是将对象加入到list中
 		list.add(weiboUid);
 		list.add(fansCount);
 		list.add(vCountNumber);
-		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
 		list.add(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		list.add(dataUrl);
 		list.add(dateType);
@@ -619,6 +640,15 @@ public class OracleHaoSou {
 				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		
+		strSql = "insert into ods.tem_tvplay t(t.tvplay_id,t.tvplay_name,t.tvplay_url,t.alias_en,t.alias_cn,"
+				+ "t.major_actors,t.major_awards,t.director,t.screenwriTer,t.producer,t.production_company,"
+				+ "t.issuing_company,t.shoot_time,t.shoot_place,t.subject,t.produced_time,t.produced_company,"
+				+ "t.production_area,t.premiere_time,t.pages,t.time_length,t.play_platform ,t.premiere_platform,"
+				+ "t.photography_director,t.total_production,t.production_chairman,t.production_cost,t.play_theater,"
+				+ "t.before_teleplay,t.next_teleplay,t.open_time,t.close_time，t.BASIC_INFO,t.total_planning,t.UPDATE_TIME,t.BAIKE_FILM_NAME) values"
+				+ " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		
 		
 		List<Comparable> list = new ArrayList();
 		list.add(Long.parseLong(tvplay.getTvplay_id()));
@@ -654,25 +684,28 @@ public class OracleHaoSou {
 		list.add(tvplay.getNext_teleplay());
 		list.add(tvplay.getOpen_time());
 		list.add(tvplay.getClose_time());
+;		list.add(tvplay.getBasic_info());
 		list.add(tvplay.getTotal_planning());
-		list.add(tvplay.getFilm_time());
-		list.add(tvplay.getBox_office());
-		 list.add(tvplay.getType());
-		list.add(tvplay.getCompere());
-		list.add(tvplay.getTotal_sponsor());
-		list.add(tvplay.getPartners());
-		list.add(tvplay.getSpecial_support());
-		list.add(tvplay.getSocial_platform());
-		list.add(tvplay.getGuest_program());
-		list.add(tvplay.getSeason_numbver());
-		list.add(tvplay.getRecording_place());
-		list.add(tvplay.getStills_url());
+//		list.add(tvplay.getFilm_time());
+//		list.add(tvplay.getBox_office());
+//		 list.add(tvplay.getType());
+//		list.add(tvplay.getCompere());
+//		list.add(tvplay.getTotal_sponsor());
+//		list.add(tvplay.getPartners());
+//		list.add(tvplay.getSpecial_support());
+//		list.add(tvplay.getSocial_platform());
+//		list.add(tvplay.getGuest_program());
+//		list.add(tvplay.getSeason_numbver());
+//		list.add(tvplay.getRecording_place());
+//		list.add(tvplay.getStills_url());
+		
+		
 		// list.add(persion.getPersonSocialActivitiesList());
 		// 增加添加时间 、、2016年2月26日17：:4：:1
 		list.add(TimeTest.getNowTime("yyyyMMdd"));
 		list.add(tvplay.getBaikefilmname());
-		list.add(tvplay.getPRESENTER());
-		list.add(tvplay.getAIR_TIME());
+//		list.add(tvplay.getPRESENTER());
+//		list.add(tvplay.getAIR_TIME());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}

@@ -733,7 +733,7 @@ public class DownloadYouku {
 //		runstatic();
 		
 		
-		TimingTime(1, 59, 59);
+		TimingTime(3, 59, 59);
 		
 //		openstatic();
 	}

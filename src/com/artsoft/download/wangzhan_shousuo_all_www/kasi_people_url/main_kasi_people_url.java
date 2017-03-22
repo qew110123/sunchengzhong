@@ -38,7 +38,7 @@ public class main_kasi_people_url {
 //					baidu.shoushuo(id, name, zhuopin);
 					
 					
-//					sogou.shoushuo(id, name, zhuopin);
+					sogou.shoushuo(id, name, zhuopin);
 					
 					
 					
@@ -46,13 +46,32 @@ public class main_kasi_people_url {
 					
 					
 					
-					baidu360.shoushuo(id, name, zhuopin);
+//					baidu360.shoushuo(id, name, zhuopin);
 					
 				} catch (Exception e) {
 					// TODO: handle exception
+					seleepTime(4);
+					
+					
 				}
 			}
 		}
 	}
+	
+	
+	public static void seleepTime(int t) {
+		t = (int) (t * Math.random());
+		t = t + 5;
+		// t = 2;
+		try {
+			System.out.println("当前等待" + t + "秒");
+			// System.out.println("等待2秒,等待" + t + "秒");
+			Thread.sleep(t * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 }

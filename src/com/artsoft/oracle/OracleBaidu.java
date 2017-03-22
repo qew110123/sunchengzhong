@@ -193,12 +193,30 @@ public class OracleBaidu {
 		sql=" select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where t.update_date >='20161206' and t.tvplay_url is not null";
 		
 		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where t.update_date >='20161206' and t.tvplay_url is not null ";
+		
+//		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where   t.tvplay_name='多情江山'";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 	}
 	
+	
+	
+	/**
+	 * 百度数据的中的电视剧补充
+	 * 2016年5月23日17:25:17
+	 * @return
+	 */
+	public static List selectbaidudianshijuTVplay(String sql) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		
+//		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where   t.tvplay_name='多情江山'";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
 	
 	/**
 	 * 百度数据的中的网络剧补充
@@ -631,6 +649,8 @@ public class OracleBaidu {
 		list.add(url);
 		list.add(data_type);
 		list.add(source);
+		
+		System.out.println(list.toString());
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 	}

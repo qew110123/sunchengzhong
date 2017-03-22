@@ -36,7 +36,7 @@ public class qqindex {
 
 	private static void qqIndex(String name, String krywordutf8) {
 		// TODO Auto-generated method stub
-		String qq_index="http://tbi.tencent.com/tbi/queryTagIndex?end=20170228&start=20160830&tag=%E7%90%85%E7%90%8A%E6%A6%9C&tagId&type=0";
+		String qq_index="http://tbi.tencent.com/tbi/queryTagIndex?end=20170315&start=20170214&tag=315&tagId&type=0";
 		
 		qq_shoushuo_index(name,qq_index);
 		
@@ -94,9 +94,7 @@ public class qqindex {
 
 		// get.addHeader("ContentType", "text/html; charset=utf-8"));
 
-		get.addHeader(new BasicHeader("Cookie",
-				"pgv_pvi=2984485888; pgv_si=s1728838656; _csrf=zh1Z8x2uL4D_9inmGiri_NSp; ptui_loginuin=764295333@qq.com; ptisp=cnc; ptcz=ae348d5d158bf9e63106941022b04d700d030bafd07f41cf612eb9fde73e33aa; pt2gguin=o0764295333; uin=o0764295333; skey=@RJDsvEHl8; p_uin=o0764295333; p_skey=A1FwOxt8zp*xKiDtusbRcQAolBpz3kRWEHIwJIXYNmc_; pt4_token=8gbBIrUfkXmN2rL*aI5-VTAioUgIT70LP--c1T9z0U4_; XSRF-TOKEN=Z773wkZP-NnY0dwo2yWStuEIUQIxFRHiVaBU"));
-
+		
 //		get.addHeader("Accept", "application/json, text/plain, */*");
 		 get.addHeader("Accept-Encoding", "gzip, deflate");
 		get.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
@@ -129,6 +127,22 @@ public class qqindex {
 		get.addHeader("User-Agent",
 				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
 		get.addHeader("X-XSRF-TOKEN", "Z773wkZP-NnY0dwo2yWStuEIUQIxFRHiVaBU");
+		
+		get.addHeader(new BasicHeader("Cookie",
+				"pgv_pvi=2984485888; Hm_lvt_407473d433e871de861cf818aa1405a1=1488521619,1488521622; _csrf=5ROstcwvYhvCg9sKUGgE02vr; pgv_si=s8261459968; ptui_loginuin=764295333@qq.com; ptisp=cnc; ptcz=ae348d5d158bf9e63106941022b04d700d030bafd07f41cf612eb9fde73e33aa; pt2gguin=o0764295333; uin=o0764295333; skey=@faimznUZH; p_uin=o0764295333; p_skey=x2KIQztZUBUwKuHw1pd*NzCY9l7WYUmBoZ51HjoLh4U_; pt4_token=nPX*doLc21-gWc5bwAc*8HsO3ccas7b5Dp2Lx6Ldcwc_; XSRF-TOKEN=8vellQxK-tvhKjf28X8PIZGnP6Gd0g4DMJ_Y"));
+
+		
+		
+		get.addHeader("Set-Cookie",
+				"XSRF-TOKEN=9bJxzInr-fX0yO91wJloQhKinoPfx1mfHmjQ; Path=/");
+		
+		get.addHeader("ETag",
+				"W/\"2e92-zZAnsMV5xQuS2aSVBnbVGQ\"");
+		get.addHeader("Transfer-Encoding",
+				"chunked");
+		
+		get.addHeader("Vary",
+				"Accept-Encoding");
 		
 		// get.addHeader("Accept-Language",
 		// "zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3");

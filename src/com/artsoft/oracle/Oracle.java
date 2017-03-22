@@ -19,6 +19,7 @@ import com.artsoft.bean.Tem_weibo_word_area;
 import com.artsoft.bean.Tem_weibo_word_tag;
 import com.artsoft.bean.WECHAT_INFORMATION;
 import com.artsoft.bean.tem_weibo_word_num;
+import com.artsoft.util.Stirngstr;
 import com.artsoft.util.TimeTest;
 
 public class Oracle {
@@ -88,9 +89,14 @@ public class Oracle {
 
 		String strSql = "insert into ods.tem_weibo_word_age_sex t (t.data_date,t.data_id,t.word,t.man_rate,t.woman_rate,t.rate12,t.rate18,t.rate24,t.rate34,t.rate50,t.other_rate,t.into_date,t.url,t.data_type)values (?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
 		List<Comparable> list = new ArrayList();
+		if (!Stirngstr.isNumeribaidu(tem_weibo_word_age_sex.getManRate())) {
+			return;
+			
+		}
 		list.add(tem_weibo_word_age_sex.getDataDate());
 		list.add(tem_weibo_word_age_sex.getDataId());
 		list.add(tem_weibo_word_age_sex.getWord());
+		
 		list.add(tem_weibo_word_age_sex.getManRate());
 		list.add(tem_weibo_word_age_sex.getWomanRate());
 		list.add(tem_weibo_word_age_sex.getRate12());
@@ -413,6 +419,23 @@ public class Oracle {
 	public static List selectWEIXIN_NUMBER() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.* from ODS.WEIXIN_NUMBER t";
+//		sql=" select t.* from ODS.WEIXIN_NUMBER t where t.public_number='影投人'";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 2;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+	/**
+	 * 微信数据
+	 * 2017年3月8日18:46:35
+	 * @return
+	 */
+	public static List selectWEIXIN_NUMBER_NEW() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.person_id,t.person_name from mart.f_person_index t where t.data_date = '29991231' order by t.network_index desc,t.person_id";
 //		sql=" select t.* from ODS.WEIXIN_NUMBER t where t.public_number='影投人'";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;

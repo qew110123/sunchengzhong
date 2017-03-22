@@ -3,6 +3,8 @@ package com.artsoft.download.BaiDu;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,6 +28,17 @@ import com.artsoft.util.TimeTest;
  */
 
 public class BaiDuTeleplayDownload {
+	
+	
+	public static boolean isChineseChar(String str){
+        boolean temp = false;
+        Pattern p=Pattern.compile("[\u4e00-\u9fa5]"); 
+        Matcher m=p.matcher(str); 
+        if(m.find()){ 
+            temp =  true;
+        }
+        return temp;
+    }
 
 	public static TvPlay mainmore(String strId, String url, String strUrlname) {
 		TvPlay tvplay = new TvPlay();
@@ -45,6 +58,36 @@ public class BaiDuTeleplayDownload {
 			
 
 		Document doc = Jsoup.parse(strHtml);
+		
+		
+		//您所访问的页面不存在
+		if (strHtml.contains("您所访问的页面不存在")) {
+			
+			if (isChineseChar(url)) {
+				
+				url=url.replace("#", "787878788");
+				
+				url=url.replace(":", "909090909090");
+				
+				String url_gai=url.replace("/", "11111111");
+				String urlutf_8="";
+				try {
+					urlutf_8 = java.net.URLEncoder.encode(url_gai, "utf-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				url=urlutf_8.replace("11111111", "/");
+				url=url.replace("909090909090", ":");
+				
+				url=url.replace("787878788","#" );
+				strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
+				
+				 doc = Jsoup.parse(strHtml);
+				
+			}
+			
+		}
 		
 		String eTL_NAME="";
 		eTL_NAME=doc.select("dd.lemmaWgt-lemmaTitle-title h1").text();
@@ -266,10 +309,10 @@ public class BaiDuTeleplayDownload {
 		if ("发行公司".equals(baseInfoName)) {
 			tvplay.setIssuing_company(baseInfoValue);
 		}
-		if ("首播时间".equals(baseInfoName)) {
+		if ("首播时间".equals(baseInfoName)||"上映时间".equals(baseInfoName)||"上映日期".equals(baseInfoName)) {
 			tvplay.setPremiere_time(baseInfoValue);
 		}
-		if ("导演".equals(baseInfoName)) {
+		if ("导演".equals(baseInfoName)||"总导演".equals(baseInfoName)||"执行导演".equals(baseInfoName)) {
 			tvplay.setDirector(baseInfoValue);
 		}
 		if ("编剧".equals(baseInfoName)) {

@@ -86,6 +86,49 @@ public class zhonggoupiaofangwang_shisipiaofangwang {
 			realitme.setCollectionUrl(urlMain);
 			realitme.setDATA_TYPE(0);;
 			realitme.setSOURCE(2);
+			
+			try {
+				String strHtmllittle = "";
+				strHtmllittle = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
+
+				String times = ""; // 上映:
+				times = HtmlAnalyze.getTagText(strHtmllittle, "上映时间：", "</p>");
+				
+				if (!times.equals("")) {
+//					String nain= HtmlAnalyze.getTagText(times, "-", "</p>");
+					String[] timelist=times.split("-");
+					if (timelist.length>=3) {
+						String nian=timelist[0];
+						String yue=timelist[1];
+						if (yue.length()==1) {
+							yue="0"+yue;
+						}
+						String ri=timelist[2];
+						String riqi= HtmlAnalyze.getTagText("#"+ri, "#", "（");
+						if (riqi.length()==1) {
+							riqi="0"+riqi;
+						}
+						String time=nian+yue+riqi;
+						
+						if (time.length()==8) {
+							realitme.setSHOW_DATE(time);
+							
+						}
+						
+					}
+					
+					
+					
+					
+				}
+				
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			
+			
 			OracleMovePiaoFang.intoTEM_FILM_BOXOFFICE_REALTIME(realitme);
 			// }
 
