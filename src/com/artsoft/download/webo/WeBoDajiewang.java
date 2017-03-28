@@ -95,7 +95,7 @@ public class WeBoDajiewang {
 		// get.addHeader("ContentType", "text/html; charset=utf-8"));
 
 		get.addHeader(new BasicHeader("Cookie",
-				"SINAGLOBAL=8858606864232.57.1447918197910; WEB3_PHP-FPM_BX=c6bf40b75e3394cc69125b6a8186b749; SUHB=0FQrI-caFr9Ekl; PHPSESSID=ksodvda9k8m5ut7n4853uis190; _s_tentry=login.sina.com.cn; Apache=4404089951422.065.1465977164977; ULV=1465977164986:3:1:1:4404089951422.065.1465977164977:1462960442581; myuid=3923882226; SUB=_2AkMgPYX4dcNhrABYmvsdxGngbotH-jzEiebBAn7uJhMyAxh77g00qSWE_hzUQtOQW953imvgXCU9NlbN4A..; SUBP=0033WrSXqPxfM72wWs9jqgMF55529P9D9WFLv95IJ-mdsv8MBKZwnWZl5JpVhGUydJURUfvDUFR3Zntt; UOR=,,login.sina.com.cn; WBStore=8ca40a3ef06ad7b2|undefined"));
+				"SINAGLOBAL=8549726845230.907.1445398578667; __gads=ID=46056e51dc6eb672:T=1475908478:S=ALNI_MYvN_Is2kebj2dLegaJvLN0bGJQVw; _s_tentry=finance.sina.com.cn; Apache=8536805170313.9795.1489634179652; ULV=1489634179661:46:1:1:8536805170313.9795.1489634179652:1486707921563; SSOLoginState=1490088832; WEB3=58d2b12dc53cd1764c5a65500ce67947; PHPSESSID=4edukt88jcbb7vbn20l1h3ch60; wvr=6; SCF=AqTzGspM_YKGV5hnw2ZSBX6OX0L5qlEW2MiWPmKhXroNIxRbXlNGvzwHxbHemli-rt7QdWR7q6ZFRFSmEIX47FI.; SUB=_2A2513aQ-DeRxGeVM7FAU-SfIyzuIHXVWqpL2rDV8PUJbmtAKLXbukW9YCqrB6MILzaa1LnIUDc8eDf3Mjw..; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWZw9HKHxaOfTueIzrn7iVw5JpX5o2p5NHD95Q0eoMESK.4Sh5NWs4Dqcjgi--RiKyFiKysi--RiKyFiKysehMpeBtt; SUHB=0cSXEVu0urLYb6; ALF=1522120074; WBStorage=02e13baf68409715|undefined; UOR=picture.youth.cn,widget.weibo.com,login.sina.com.cn"));
 
 		get.addHeader("Accept", "*/*");
 		// get.addHeader("Accept-Encoding", "gzip, deflate, sdch");
@@ -664,8 +664,8 @@ public class WeBoDajiewang {
 		// 1000 * 30, "UTF-8",
 		// null, null);
 		String strHtml = DownloadUtil.getHtmlText(
-				"http://data.weibo.com/index/hotword?wid=1091324101491&wname=%E4%BD%A0%E5%A5%BD", 1000 * 30, "UTF-8",
-				null, null);
+				"http://data.weibo.com/index/hotword?wid=1091324464527&wname=%E8%8C%83%E5%86%B0%E5%86%B0", 1000 * 30,
+				"UTF-8", null, null);
 		String timeDiff = HtmlAnalyze.getTagText(strHtml, "server_time': '", "'");
 		System.out.println(new Date());
 		// System.out.println(Weibo("http://data.weibo.com/index/ajax/contrast?key2=%25E6%259D%258E%25E6%2599%25A8&key3=&key4=&key5=&key6=&_t=0&__rnd=1450260534657"));
@@ -673,12 +673,31 @@ public class WeBoDajiewang {
 
 		Date date = new Date(System.currentTimeMillis());
 		int s = 0;
+
+		System.out.println("获取系统毫秒数方法1：" + Long.toString(new Date().getTime()));
+		System.out.println("获取系统毫秒数方法2：" + Long.toString(System.currentTimeMillis() / 1000));
+		System.out.println(  date);
+		System.out.println(  date.getTime());
+		System.out.println((int) date.getTime());
+		System.out.println(Integer.valueOf((int) date.getTime()));
+		System.out.println(Integer.parseInt(timeDiff));
+		System.out.println(date.getTime() - Integer.parseInt(timeDiff));
+//		System.out.println(
+//				Integer.valueOf(Long.toString(System.currentTimeMillis())) - Integer.parseInt(timeDiff));
 		System.out.println(s = (int) (date.getTime() - Integer.parseInt(timeDiff)));
+		s=Integer.parseInt(Long.toString(System.currentTimeMillis() / 1000));
+
+		// if (s < 0) {
+		// s = -s;
+		//
+		// }
 
 		// System.out.println(Integer.parseInt(timeDiff));
 		// System.out.println(new Date()- new Date(Integer.parseInt(timeDiff));
 		String url = "http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=" + s;
 		String hostnum = Weibo("http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=" + s);
+		// http://data.weibo.com/index/ajax/getchartdata?wid=1091324464527&sdate=2016-03-01&edate=2016-04-30&__rnd=1490257777797
+		// http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=1490257993194
 		// Weibo("http://data.weibo.com/index/ajax/getchartdata?month=default&__rnd=1449471097626");
 		// System.out.println(new SimpleDateFormat("yyyy-MM-dd
 		// hh:mm:ss").format(new Date(1446912627104l)));
@@ -690,67 +709,69 @@ public class WeBoDajiewang {
 		String keywordnames = HtmlAnalyze.getTagText(hostnum, "keyword\":[\"", "\"]}");
 
 		if (!names.equals(keywordnames)) {
-			return;
-		}
-		System.out.println(objectobject.get("data"));
-		JSONArray authors = new JSONArray();
-		authors = (JSONArray) objectobject.get("data");
-		for (Object object : authors) {
-			JSONObject objectobjects = JSONObject.fromObject(object);
-			// objectobject=JSONObject.fromObject(object);
-			// String ANIMATION_NAME="";
-			// System.out.println(ANIMATION_NAME=(String)
-			// objectobjects.get("name"));
-			JSONArray arrayjsonname = new JSONArray();
-			arrayjsonname = (JSONArray) objectobjects.get("zt");
-			String NEWS_NUM = "";
-			String DATA_DATE = "";
-			for (Object object2 : arrayjsonname) {
-				tem_weibo_word_num tem_weibo_word_num = new tem_weibo_word_num();
-				tem_weibo_word_num.setWord(keywordnames);
-				tem_weibo_word_num.setDataId(data_id);
-				System.out.println(object2);
-				JSONObject objectobjects2 = JSONObject.fromObject(object2);
-				System.out.println(DATA_DATE = (String) objectobjects2.get("day_key"));
-				if (DATA_DATE != null && !DATA_DATE.equals("")) {
-					DATA_DATE = DATA_DATE.replace("-", "");
+			// return;
+			keywordnames = names;
+		} else {
+			System.out.println(objectobject.get("data"));
+			JSONArray authors = new JSONArray();
+			authors = (JSONArray) objectobject.get("data");
+			for (Object object : authors) {
+				JSONObject objectobjects = JSONObject.fromObject(object);
+				// objectobject=JSONObject.fromObject(object);
+				// String ANIMATION_NAME="";
+				// System.out.println(ANIMATION_NAME=(String)
+				// objectobjects.get("name"));
+				JSONArray arrayjsonname = new JSONArray();
+				arrayjsonname = (JSONArray) objectobjects.get("zt");
+				String NEWS_NUM = "";
+				String DATA_DATE = "";
+				for (Object object2 : arrayjsonname) {
+					tem_weibo_word_num tem_weibo_word_num = new tem_weibo_word_num();
+					tem_weibo_word_num.setWord(keywordnames);
+					tem_weibo_word_num.setDataId(data_id);
+					System.out.println(object2);
+					JSONObject objectobjects2 = JSONObject.fromObject(object2);
+					System.out.println(DATA_DATE = (String) objectobjects2.get("day_key"));
+					if (DATA_DATE != null && !DATA_DATE.equals("")) {
+						DATA_DATE = DATA_DATE.replace("-", "");
+						tem_weibo_word_num.setDataDate(DATA_DATE);
+						System.out.println(objectobjects2.get("wid"));
+						System.out.println(NEWS_NUM = (String) objectobjects2.get("value"));
+						tem_weibo_word_num.setNewsNum(Integer.valueOf(NEWS_NUM));
+						tem_weibo_word_num.setDimensionType(1);
+						tem_weibo_word_num.setDataType(data_type);
+						tem_weibo_word_num.setUrl(url);
+						Oracle.InsertCompany(tem_weibo_word_num);
+					}
+
+				}
+
+				JSONArray arrayjsonnameyd = new JSONArray();
+				arrayjsonnameyd = (JSONArray) objectobjects.get("yd");
+				for (Object object2 : arrayjsonnameyd) {
+					tem_weibo_word_num tem_weibo_word_num = new tem_weibo_word_num();
+					tem_weibo_word_num.setWord(keywordnames);
+					// System.out.println(object2);
+					String pc = "";
+					JSONObject objectobjects2 = JSONObject.fromObject(object2);
+					System.out.println(DATA_DATE = (String) objectobjects2.get("daykey").toString().replace("-", ""));
 					tem_weibo_word_num.setDataDate(DATA_DATE);
-					System.out.println(objectobjects2.get("wid"));
-					System.out.println(NEWS_NUM = (String) objectobjects2.get("value"));
-					tem_weibo_word_num.setNewsNum(Integer.valueOf(NEWS_NUM));
-					tem_weibo_word_num.setDimensionType(1);
+					System.out.println(pc = (String) objectobjects2.get("pc"));
 					tem_weibo_word_num.setDataType(data_type);
+					// tem_weibo_word_num.setDimensionType(1);
+					tem_weibo_word_num.setDimensionType(2);
+					tem_weibo_word_num.setNewsNum(Integer.valueOf(pc));
+					tem_weibo_word_num.setDataId(data_id);
 					tem_weibo_word_num.setUrl(url);
+					Oracle.InsertCompany(tem_weibo_word_num);
+					String mobile = "";
+					System.out.println(mobile = (String) objectobjects2.get("mobile"));
+					tem_weibo_word_num.setDimensionType(3);
+					tem_weibo_word_num.setNewsNum(Integer.valueOf(mobile));
 					Oracle.InsertCompany(tem_weibo_word_num);
 				}
 
 			}
-
-			JSONArray arrayjsonnameyd = new JSONArray();
-			arrayjsonnameyd = (JSONArray) objectobjects.get("yd");
-			for (Object object2 : arrayjsonnameyd) {
-				tem_weibo_word_num tem_weibo_word_num = new tem_weibo_word_num();
-				tem_weibo_word_num.setWord(keywordnames);
-				// System.out.println(object2);
-				String pc = "";
-				JSONObject objectobjects2 = JSONObject.fromObject(object2);
-				System.out.println(DATA_DATE = (String) objectobjects2.get("daykey").toString().replace("-", ""));
-				tem_weibo_word_num.setDataDate(DATA_DATE);
-				System.out.println(pc = (String) objectobjects2.get("pc"));
-				tem_weibo_word_num.setDataType(data_type);
-				// tem_weibo_word_num.setDimensionType(1);
-				tem_weibo_word_num.setDimensionType(2);
-				tem_weibo_word_num.setNewsNum(Integer.valueOf(pc));
-				tem_weibo_word_num.setDataId(data_id);
-				tem_weibo_word_num.setUrl(url);
-				Oracle.InsertCompany(tem_weibo_word_num);
-				String mobile = "";
-				System.out.println(mobile = (String) objectobjects2.get("mobile"));
-				tem_weibo_word_num.setDimensionType(3);
-				tem_weibo_word_num.setNewsNum(Integer.valueOf(mobile));
-				Oracle.InsertCompany(tem_weibo_word_num);
-			}
-
 		}
 		String wid = HtmlAnalyze.getTagText(hostnum, "\"wid\":\"", "\"");
 		System.out.println("地理位置");
@@ -761,17 +782,21 @@ public class WeBoDajiewang {
 
 		// JSONArray authors = new JSONArray();
 		// authors = (JSONArray) objectobject.get("data");
-		JSONObject objectkeywordzones = JSONObject.fromObject(keywordzone);
+		if (!keywordzone.contains(names)) {
+			// return;
+		} else {
+			JSONObject objectkeywordzones = JSONObject.fromObject(keywordzone);
 
-		// System.out.println(objectkeywordzones.get("zone"));
-		JSONObject objectkeywordzone = JSONObject.fromObject(objectkeywordzones.get("zone"));
-		// System.out.println(objectkeywordzone.get("jiangsu"));
-		// 地域热议度
-		keywordzone(objectkeywordzone, data_type, data_id, urlair);
+			// System.out.println(objectkeywordzones.get("zone"));
+			JSONObject objectkeywordzone = JSONObject.fromObject(objectkeywordzones.get("zone"));
+			// System.out.println(objectkeywordzone.get("jiangsu"));
+			// 地域热议度
+			keywordzone(objectkeywordzone, data_type, data_id, urlair);
 
-		JSONObject objectkeyworduser = JSONObject.fromObject(objectkeywordzones.get("user"));
-		// 用户热议度
-		keywordzoneuser(objectkeyworduser, data_type, data_id, urlair);
+			JSONObject objectkeyworduser = JSONObject.fromObject(objectkeywordzones.get("user"));
+			// 用户热议度
+			keywordzoneuser(objectkeyworduser, data_type, data_id, urlair);
+		}
 
 		String getdefaultattributealldata = Weibo(
 				"http://data.weibo.com/index/ajax/getdefaultattributealldata?__rnd=" + s);
@@ -779,221 +804,224 @@ public class WeBoDajiewang {
 		getdefaultattributealldata = DownloadUtil.decodeUnicode(getdefaultattributealldata);
 		System.out.println(getdefaultattributealldata);
 
-		Tem_weibo_word_age_sex tem_weibo_word_age_sex = new Tem_weibo_word_age_sex();
-		tem_weibo_word_age_sex.setUrl(url);
-		
-		
-		
-		String urlString="http://data.weibo.com/index/attribute";
-//		String htmlsStrnig="";
-		
-		String htmlsStrnig=DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8",null, null);
-//		System.out.println(htmlsStrnig);
-		
-		String timeString=HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
-		if (!timeString.equals("")) {
-			timeString=timeString.replace("-", "");
+		if (!getdefaultattributealldata.contains(names)) {
+			// return;
+		} else {
+
+			Tem_weibo_word_age_sex tem_weibo_word_age_sex = new Tem_weibo_word_age_sex();
+			tem_weibo_word_age_sex.setUrl(url);
+
+			String urlString = "http://data.weibo.com/index/attribute";
+			// String htmlsStrnig="";
+
+			String htmlsStrnig = DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8", null, null);
+			// System.out.println(htmlsStrnig);
+
+			String timeString = HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
+			if (!timeString.equals("")) {
+				timeString = timeString.replace("-", "");
+			}
+			tem_weibo_word_age_sex.setDataDate(timeString);
+
+			tem_weibo_word_age_sex.setDataId(data_id);
+			tem_weibo_word_age_sex.setWord(keywordnames);
+
+			JSONObject objectkeyworduserda = JSONObject.fromObject(getdefaultattributealldata);
+			JSONObject objectkeyworduserdata = JSONObject.fromObject(objectkeyworduserda.get("data"));
+
+			String sexMan = "";
+			String sexwoman = "";
+			JSONObject objectkeyworduserdatasex = JSONObject.fromObject(objectkeyworduserdata.get("sex"));
+			JSONObject objectkeyworduserdatasexkey2 = JSONObject.fromObject(objectkeyworduserdatasex.get("key2"));
+			System.out.println(objectkeyworduserdatasexkey2.get("man"));
+			// JSONObject
+			// objectkeyworduserdatasexkey2man=JSONObject.fromObject(objectkeyworduserdatasexkey2.get("man"));
+			// JSONObject
+			// objectkeyworduserdatasexkey2woman=JSONObject.fromObject(objectkeyworduserdatasexkey2.get("woman"));
+			// JSONObject
+			// objectkeyworduserdatasexkey2word=JSONObject.fromObject(objectkeyworduserdatasexkey2.get("word"));
+			sexMan = (String) objectkeyworduserdatasexkey2.get("man");
+			tem_weibo_word_age_sex.setManRate(sexMan);
+			sexwoman = (String) objectkeyworduserdatasexkey2.get("woman");
+			tem_weibo_word_age_sex.setWomanRate(sexwoman);
+			tem_weibo_word_age_sex.setDataType(data_type);
+			String age0_12 = "";
+			String age12_18 = "";
+			String age19_24 = "";
+			String age25_34 = "";
+			String age35_50 = "";
+			String ageother = "";
+			JSONObject objectkeyworduserdataage = JSONObject.fromObject(objectkeyworduserdata.get("age"));
+			JSONObject objectkeyworduserdataagekey2 = JSONObject.fromObject(objectkeyworduserdataage.get("key2"));
+			JSONObject objectkeyworduserdataagekey2_0 = JSONObject.fromObject(objectkeyworduserdataagekey2.get("0"));
+			// JSONObject
+			// objectkeyworduserdataagekey2_0_0_12=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("0-12"));
+			// JSONObject
+			// objectkeyworduserdataagekey2_0_12_18=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("12-18"));
+			// JSONObject
+			// objectkeyworduserdataagekey2_0_19_24=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("19-24"));
+			// JSONObject
+			// objectkeyworduserdataagekey2_0_25_34=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("25-34"));
+			// JSONObject
+			// objectkeyworduserdataagekey2_0_35_50=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("35-50"));
+			// JSONObject
+			// objectkeyworduserdataagekey2_0_ageother=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("other"));
+			age0_12 = objectkeyworduserdataagekey2_0.get("0-12").toString();
+			age12_18 = objectkeyworduserdataagekey2_0.get("12-18").toString();
+			age19_24 = objectkeyworduserdataagekey2_0.get("19-24").toString();
+			age25_34 = objectkeyworduserdataagekey2_0.get("25-34").toString();
+			age35_50 = objectkeyworduserdataagekey2_0.get("35-50").toString();
+			ageother = objectkeyworduserdataagekey2_0.get("other").toString();
+			tem_weibo_word_age_sex.setRate12(age0_12);
+			tem_weibo_word_age_sex.setRate18v(age12_18);
+			tem_weibo_word_age_sex.setRate24(age19_24);
+			tem_weibo_word_age_sex.setRate34(age25_34);
+			tem_weibo_word_age_sex.setRate50(age35_50);
+			tem_weibo_word_age_sex.setOtherRate(ageother);
+
+			// JSONObject
+			// objectkeyworduserdataagekey2_0_0_12=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("0-12"));
+			Oracle.InsertCompany(tem_weibo_word_age_sex);
+
+			Tem_weibo_word_tag tem_weibo_word_tag = new Tem_weibo_word_tag();
+			// tem_weibo_word_tag.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+			tem_weibo_word_tag.setDataDate(timeString);
+
+			tem_weibo_word_tag.setDataId(data_id);
+			tem_weibo_word_tag.setWord(keywordnames);
+			tem_weibo_word_tag.setDataType(data_type);
+			tem_weibo_word_tag.setDimensionType(1);
+			tem_weibo_word_tag.setUrl(url);
+			String meishi = "";
+			String luyou = "";
+			String mingrenmingxing = "";
+			String lule = "";
+			String gaoxiaoyoumo = "";
+			JSONObject objectkeyworduserdatatag = JSONObject.fromObject(objectkeyworduserdata.get("tag"));
+			JSONObject objectkeyworduserdatatagkey2 = JSONObject.fromObject(objectkeyworduserdatatag.get("key2"));
+			JSONObject objectkeyworduserdatatagkey2_0 = JSONObject.fromObject(objectkeyworduserdatatagkey2.get("0"));
+			// JSONObject
+			// objectkeyworduserdatatagkey2_0meishi=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("美食"));
+			// JSONObject
+			// objectkeyworduserdatatagkey2_0luyou=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("旅游"));
+			// JSONObject
+			// objectkeyworduserdatatagkey2_0mingrenmingxing=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("名人明星"));
+			// JSONObject
+			// objectkeyworduserdatatagkey2_0lule=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("娱乐"));
+			// JSONObject
+			// objectkeyworduserdatatagkey2_0gaoxiaoyoumo=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("搞笑幽默"));
+			meishi = (String) objectkeyworduserdatatagkey2_0.get("美食");
+			tem_weibo_word_tag.setLabelName("美食");
+			tem_weibo_word_tag.setLabelRate(meishi);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			luyou = (String) objectkeyworduserdatatagkey2_0.get("旅游");
+			tem_weibo_word_tag.setLabelName("旅游");
+			tem_weibo_word_tag.setLabelRate(luyou);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			mingrenmingxing = (String) objectkeyworduserdatatagkey2_0.get("名人明星");
+			tem_weibo_word_tag.setLabelName("名人明星");
+			tem_weibo_word_tag.setLabelRate(mingrenmingxing);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			lule = (String) objectkeyworduserdatatagkey2_0.get("娱乐");
+			tem_weibo_word_tag.setLabelName("娱乐");
+			tem_weibo_word_tag.setLabelRate(lule);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			gaoxiaoyoumo = (String) objectkeyworduserdatatagkey2_0.get("搞笑幽默");
+			tem_weibo_word_tag.setLabelName("搞笑幽默");
+			tem_weibo_word_tag.setLabelRate(gaoxiaoyoumo);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			String moxie = "";
+			String shuiping = "";
+			String shuangyu = "";
+			String baiyang = "";
+			String jinniu = "";
+			String shuangzi = "";
+			String juxie = "";
+			String shizi = "";
+			String chunv = "";
+			String tianping = "";
+			String tianxie = "";
+			String sheshou = "";
+			tem_weibo_word_tag.setDimensionType(2);
+			JSONObject objectkeyworduserdatastar = JSONObject.fromObject(objectkeyworduserdata.get("star"));
+			JSONObject objectkeyworduserdatastarkey2 = JSONObject.fromObject(objectkeyworduserdatastar.get("key2"));
+			JSONObject objectkeyworduserdatastarkey2_0 = JSONObject.fromObject(objectkeyworduserdatastarkey2.get("0"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0moxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("摩羯座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0shuiping=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("水瓶座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0shuangyu=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("双鱼座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0baiyang=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("白羊座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0jinniu=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("金牛座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0shuangzi=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("双子座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0juxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("巨蟹座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0shizi=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("狮子座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0chunv=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("处女座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0tianping=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("天秤座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0tianxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("天蝎座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0sheshou=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("射手座"));
+			// JSONObject
+			// objectkeyworduserdatastarkey2_0moxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("摩羯座"));
+
+			moxie = objectkeyworduserdatastarkey2_0.get("摩羯座").toString();
+			tem_weibo_word_tag.setLabelName("摩羯座");
+			tem_weibo_word_tag.setLabelRate(moxie);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			shuiping = objectkeyworduserdatastarkey2_0.get("水瓶座").toString();
+			tem_weibo_word_tag.setLabelName("水瓶座");
+			tem_weibo_word_tag.setLabelRate(shuiping);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			shuangyu = objectkeyworduserdatastarkey2_0.get("双鱼座").toString();
+			tem_weibo_word_tag.setLabelName("双鱼座");
+			tem_weibo_word_tag.setLabelRate(shuangyu);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			baiyang = objectkeyworduserdatastarkey2_0.get("白羊座").toString();
+			tem_weibo_word_tag.setLabelName("白羊座");
+			tem_weibo_word_tag.setLabelRate(baiyang);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			jinniu = objectkeyworduserdatastarkey2_0.get("金牛座").toString();
+			tem_weibo_word_tag.setLabelName("金牛座");
+			tem_weibo_word_tag.setLabelRate(jinniu);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			shuangzi = objectkeyworduserdatastarkey2_0.get("双子座").toString();
+			tem_weibo_word_tag.setLabelName("双子座");
+			tem_weibo_word_tag.setLabelRate(shuangzi);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			juxie = objectkeyworduserdatastarkey2_0.get("巨蟹座").toString();
+			tem_weibo_word_tag.setLabelName("巨蟹座");
+			tem_weibo_word_tag.setLabelRate(juxie);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			shizi = objectkeyworduserdatastarkey2_0.get("狮子座").toString();
+			tem_weibo_word_tag.setLabelName("狮子座");
+			tem_weibo_word_tag.setLabelRate(shizi);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			chunv = objectkeyworduserdatastarkey2_0.get("处女座").toString();
+			tem_weibo_word_tag.setLabelName("处女座");
+			tem_weibo_word_tag.setLabelRate(chunv);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			tianping = objectkeyworduserdatastarkey2_0.get("天秤座").toString();
+			tem_weibo_word_tag.setLabelName("天秤座");
+			tem_weibo_word_tag.setLabelRate(tianping);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			tianxie = objectkeyworduserdatastarkey2_0.get("天蝎座").toString();
+			tem_weibo_word_tag.setLabelName("天蝎座");
+			tem_weibo_word_tag.setLabelRate(tianxie);
+			Oracle.InsertCompany(tem_weibo_word_tag);
+			sheshou = objectkeyworduserdatastarkey2_0.get("射手座").toString();
+			tem_weibo_word_tag.setLabelName("射手座");
+			tem_weibo_word_tag.setLabelRate(sheshou);
+			Oracle.InsertCompany(tem_weibo_word_tag);
 		}
-		tem_weibo_word_age_sex.setDataDate(timeString);
-		
-		tem_weibo_word_age_sex.setDataId(data_id);
-		tem_weibo_word_age_sex.setWord(keywordnames);
-
-		JSONObject objectkeyworduserda = JSONObject.fromObject(getdefaultattributealldata);
-		JSONObject objectkeyworduserdata = JSONObject.fromObject(objectkeyworduserda.get("data"));
-
-		String sexMan = "";
-		String sexwoman = "";
-		JSONObject objectkeyworduserdatasex = JSONObject.fromObject(objectkeyworduserdata.get("sex"));
-		JSONObject objectkeyworduserdatasexkey2 = JSONObject.fromObject(objectkeyworduserdatasex.get("key2"));
-		System.out.println(objectkeyworduserdatasexkey2.get("man"));
-		// JSONObject
-		// objectkeyworduserdatasexkey2man=JSONObject.fromObject(objectkeyworduserdatasexkey2.get("man"));
-		// JSONObject
-		// objectkeyworduserdatasexkey2woman=JSONObject.fromObject(objectkeyworduserdatasexkey2.get("woman"));
-		// JSONObject
-		// objectkeyworduserdatasexkey2word=JSONObject.fromObject(objectkeyworduserdatasexkey2.get("word"));
-		sexMan = (String) objectkeyworduserdatasexkey2.get("man");
-		tem_weibo_word_age_sex.setManRate(sexMan);
-		sexwoman = (String) objectkeyworduserdatasexkey2.get("woman");
-		tem_weibo_word_age_sex.setWomanRate(sexwoman);
-		tem_weibo_word_age_sex.setDataType(data_type);
-		String age0_12 = "";
-		String age12_18 = "";
-		String age19_24 = "";
-		String age25_34 = "";
-		String age35_50 = "";
-		String ageother = "";
-		JSONObject objectkeyworduserdataage = JSONObject.fromObject(objectkeyworduserdata.get("age"));
-		JSONObject objectkeyworduserdataagekey2 = JSONObject.fromObject(objectkeyworduserdataage.get("key2"));
-		JSONObject objectkeyworduserdataagekey2_0 = JSONObject.fromObject(objectkeyworduserdataagekey2.get("0"));
-		// JSONObject
-		// objectkeyworduserdataagekey2_0_0_12=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("0-12"));
-		// JSONObject
-		// objectkeyworduserdataagekey2_0_12_18=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("12-18"));
-		// JSONObject
-		// objectkeyworduserdataagekey2_0_19_24=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("19-24"));
-		// JSONObject
-		// objectkeyworduserdataagekey2_0_25_34=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("25-34"));
-		// JSONObject
-		// objectkeyworduserdataagekey2_0_35_50=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("35-50"));
-		// JSONObject
-		// objectkeyworduserdataagekey2_0_ageother=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("other"));
-		age0_12 = objectkeyworduserdataagekey2_0.get("0-12").toString();
-		age12_18 = objectkeyworduserdataagekey2_0.get("12-18").toString();
-		age19_24 = objectkeyworduserdataagekey2_0.get("19-24").toString();
-		age25_34 = objectkeyworduserdataagekey2_0.get("25-34").toString();
-		age35_50 = objectkeyworduserdataagekey2_0.get("35-50").toString();
-		ageother = objectkeyworduserdataagekey2_0.get("other").toString();
-		tem_weibo_word_age_sex.setRate12(age0_12);
-		tem_weibo_word_age_sex.setRate18v(age12_18);
-		tem_weibo_word_age_sex.setRate24(age19_24);
-		tem_weibo_word_age_sex.setRate34(age25_34);
-		tem_weibo_word_age_sex.setRate50(age35_50);
-		tem_weibo_word_age_sex.setOtherRate(ageother);
-
-		// JSONObject
-		// objectkeyworduserdataagekey2_0_0_12=JSONObject.fromObject(objectkeyworduserdataagekey2_0.get("0-12"));
-		Oracle.InsertCompany(tem_weibo_word_age_sex);
-
-		Tem_weibo_word_tag tem_weibo_word_tag = new Tem_weibo_word_tag();
-//		tem_weibo_word_tag.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
-		tem_weibo_word_tag.setDataDate(timeString);
-		
-		tem_weibo_word_tag.setDataId(data_id);
-		tem_weibo_word_tag.setWord(keywordnames);
-		tem_weibo_word_tag.setDataType(data_type);
-		tem_weibo_word_tag.setDimensionType(1);
-		tem_weibo_word_tag.setUrl(url);
-		String meishi = "";
-		String luyou = "";
-		String mingrenmingxing = "";
-		String lule = "";
-		String gaoxiaoyoumo = "";
-		JSONObject objectkeyworduserdatatag = JSONObject.fromObject(objectkeyworduserdata.get("tag"));
-		JSONObject objectkeyworduserdatatagkey2 = JSONObject.fromObject(objectkeyworduserdatatag.get("key2"));
-		JSONObject objectkeyworduserdatatagkey2_0 = JSONObject.fromObject(objectkeyworduserdatatagkey2.get("0"));
-		// JSONObject
-		// objectkeyworduserdatatagkey2_0meishi=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("美食"));
-		// JSONObject
-		// objectkeyworduserdatatagkey2_0luyou=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("旅游"));
-		// JSONObject
-		// objectkeyworduserdatatagkey2_0mingrenmingxing=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("名人明星"));
-		// JSONObject
-		// objectkeyworduserdatatagkey2_0lule=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("娱乐"));
-		// JSONObject
-		// objectkeyworduserdatatagkey2_0gaoxiaoyoumo=JSONObject.fromObject(objectkeyworduserdatatagkey2_0.get("搞笑幽默"));
-		meishi = (String) objectkeyworduserdatatagkey2_0.get("美食");
-		tem_weibo_word_tag.setLabelName("美食");
-		tem_weibo_word_tag.setLabelRate(meishi);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		luyou = (String) objectkeyworduserdatatagkey2_0.get("旅游");
-		tem_weibo_word_tag.setLabelName("旅游");
-		tem_weibo_word_tag.setLabelRate(luyou);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		mingrenmingxing = (String) objectkeyworduserdatatagkey2_0.get("名人明星");
-		tem_weibo_word_tag.setLabelName("名人明星");
-		tem_weibo_word_tag.setLabelRate(mingrenmingxing);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		lule = (String) objectkeyworduserdatatagkey2_0.get("娱乐");
-		tem_weibo_word_tag.setLabelName("娱乐");
-		tem_weibo_word_tag.setLabelRate(lule);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		gaoxiaoyoumo = (String) objectkeyworduserdatatagkey2_0.get("搞笑幽默");
-		tem_weibo_word_tag.setLabelName("搞笑幽默");
-		tem_weibo_word_tag.setLabelRate(gaoxiaoyoumo);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		String moxie = "";
-		String shuiping = "";
-		String shuangyu = "";
-		String baiyang = "";
-		String jinniu = "";
-		String shuangzi = "";
-		String juxie = "";
-		String shizi = "";
-		String chunv = "";
-		String tianping = "";
-		String tianxie = "";
-		String sheshou = "";
-		tem_weibo_word_tag.setDimensionType(2);
-		JSONObject objectkeyworduserdatastar = JSONObject.fromObject(objectkeyworduserdata.get("star"));
-		JSONObject objectkeyworduserdatastarkey2 = JSONObject.fromObject(objectkeyworduserdatastar.get("key2"));
-		JSONObject objectkeyworduserdatastarkey2_0 = JSONObject.fromObject(objectkeyworduserdatastarkey2.get("0"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0moxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("摩羯座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0shuiping=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("水瓶座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0shuangyu=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("双鱼座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0baiyang=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("白羊座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0jinniu=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("金牛座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0shuangzi=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("双子座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0juxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("巨蟹座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0shizi=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("狮子座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0chunv=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("处女座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0tianping=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("天秤座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0tianxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("天蝎座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0sheshou=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("射手座"));
-		// JSONObject
-		// objectkeyworduserdatastarkey2_0moxie=JSONObject.fromObject(objectkeyworduserdatastarkey2_0.get("摩羯座"));
-
-		moxie = objectkeyworduserdatastarkey2_0.get("摩羯座").toString();
-		tem_weibo_word_tag.setLabelName("摩羯座");
-		tem_weibo_word_tag.setLabelRate(moxie);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		shuiping = objectkeyworduserdatastarkey2_0.get("水瓶座").toString();
-		tem_weibo_word_tag.setLabelName("水瓶座");
-		tem_weibo_word_tag.setLabelRate(shuiping);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		shuangyu = objectkeyworduserdatastarkey2_0.get("双鱼座").toString();
-		tem_weibo_word_tag.setLabelName("双鱼座");
-		tem_weibo_word_tag.setLabelRate(shuangyu);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		baiyang = objectkeyworduserdatastarkey2_0.get("白羊座").toString();
-		tem_weibo_word_tag.setLabelName("白羊座");
-		tem_weibo_word_tag.setLabelRate(baiyang);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		jinniu = objectkeyworduserdatastarkey2_0.get("金牛座").toString();
-		tem_weibo_word_tag.setLabelName("金牛座");
-		tem_weibo_word_tag.setLabelRate(jinniu);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		shuangzi = objectkeyworduserdatastarkey2_0.get("双子座").toString();
-		tem_weibo_word_tag.setLabelName("双子座");
-		tem_weibo_word_tag.setLabelRate(shuangzi);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		juxie = objectkeyworduserdatastarkey2_0.get("巨蟹座").toString();
-		tem_weibo_word_tag.setLabelName("巨蟹座");
-		tem_weibo_word_tag.setLabelRate(juxie);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		shizi = objectkeyworduserdatastarkey2_0.get("狮子座").toString();
-		tem_weibo_word_tag.setLabelName("狮子座");
-		tem_weibo_word_tag.setLabelRate(shizi);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		chunv = objectkeyworduserdatastarkey2_0.get("处女座").toString();
-		tem_weibo_word_tag.setLabelName("处女座");
-		tem_weibo_word_tag.setLabelRate(chunv);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		tianping = objectkeyworduserdatastarkey2_0.get("天秤座").toString();
-		tem_weibo_word_tag.setLabelName("天秤座");
-		tem_weibo_word_tag.setLabelRate(tianping);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		tianxie = objectkeyworduserdatastarkey2_0.get("天蝎座").toString();
-		tem_weibo_word_tag.setLabelName("天蝎座");
-		tem_weibo_word_tag.setLabelRate(tianxie);
-		Oracle.InsertCompany(tem_weibo_word_tag);
-		sheshou = objectkeyworduserdatastarkey2_0.get("射手座").toString();
-		tem_weibo_word_tag.setLabelName("射手座");
-		tem_weibo_word_tag.setLabelRate(sheshou);
-		Oracle.InsertCompany(tem_weibo_word_tag);
 
 	}
 
@@ -1123,16 +1151,16 @@ public class WeBoDajiewang {
 		JSONObject objectkeyworduser = JSONObject.fromObject(objectkeywordzones.get("user"));
 		// 用户热议度
 		keywordzoneuser(objectkeyworduser, data_type, data_id, urlair);
-		
-		String urlString="http://data.weibo.com/index/attribute";
-//		String htmlsStrnig="";
-		
-		String htmlsStrnig=DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8",null, null);
-//		System.out.println(htmlsStrnig);
-		
-		String timeString=HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
+
+		String urlString = "http://data.weibo.com/index/attribute";
+		// String htmlsStrnig="";
+
+		String htmlsStrnig = DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8", null, null);
+		// System.out.println(htmlsStrnig);
+
+		String timeString = HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
 		if (!timeString.equals("")) {
-			timeString=timeString.replace("-", "");
+			timeString = timeString.replace("-", "");
 		}
 
 		String getdefaultattributealldata = Weibo(
@@ -1143,7 +1171,7 @@ public class WeBoDajiewang {
 
 		Tem_weibo_word_age_sex tem_weibo_word_age_sex = new Tem_weibo_word_age_sex();
 		tem_weibo_word_age_sex.setUrl(url);
-//		tem_weibo_word_age_sex.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+		// tem_weibo_word_age_sex.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
 		tem_weibo_word_age_sex.setDataDate(timeString);
 		tem_weibo_word_age_sex.setDataId(data_id);
 		tem_weibo_word_age_sex.setWord(keywordnames);
@@ -1206,7 +1234,7 @@ public class WeBoDajiewang {
 		Oracle.InsertCompany(tem_weibo_word_age_sex);
 
 		Tem_weibo_word_tag tem_weibo_word_tag = new Tem_weibo_word_tag();
-//		tem_weibo_word_tag.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+		// tem_weibo_word_tag.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
 		tem_weibo_word_tag.setDataDate(timeString);
 		tem_weibo_word_tag.setDataId(data_id);
 		tem_weibo_word_tag.setWord(keywordnames);
@@ -1358,16 +1386,16 @@ public class WeBoDajiewang {
 		String index = "";
 		String wname = "";
 		String stateInitColor = "";
-		
-		String urlString="http://data.weibo.com/index/attribute";
-//		String htmlsStrnig="";
-		
-		String htmlsStrnig=DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8",null, null);
-//		System.out.println(htmlsStrnig);
-		
-		String timeString=HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
+
+		String urlString = "http://data.weibo.com/index/attribute";
+		// String htmlsStrnig="";
+
+		String htmlsStrnig = DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8", null, null);
+		// System.out.println(htmlsStrnig);
+
+		String timeString = HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
 		if (!timeString.equals("")) {
-			timeString=timeString.replace("-", "");
+			timeString = timeString.replace("-", "");
 		}
 
 		String[][] numsix = { { "chongqing", "重庆" }, { "zhejiang", "浙江" }, { "yunnan", "云南" }, { "xinjiang", "新疆" },
@@ -1387,9 +1415,9 @@ public class WeBoDajiewang {
 				Tem_weibo_word_area tem_weibo_word_area = new Tem_weibo_word_area();
 				JSONObject objectkeywordzones = JSONObject.fromObject(objectkeywordzone.get(pingyin));
 				// {"value":"9.16%","ct":"7055","index":"2","wname":"邓超","stateInitColor":"61B6FD"}
-//				tem_weibo_word_area.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+				// tem_weibo_word_area.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
 				tem_weibo_word_area.setDataDate(timeString);
-				
+
 				tem_weibo_word_area.setDataType(data_type);
 				tem_weibo_word_area.setDataId(data_id);
 				tem_weibo_word_area.setAreaNameEn(pingyin);
@@ -1420,19 +1448,18 @@ public class WeBoDajiewang {
 
 	//// 用户热议度
 	public static void keywordzoneuser(JSONObject objectkeywordzone, int data_type, String data_id, String urlair) {
-		
-		String urlString="http://data.weibo.com/index/attribute";
-//		String htmlsStrnig="";
-		
-		String htmlsStrnig=DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8",null, null);
-//		System.out.println(htmlsStrnig);
-		
-		String timeString=HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
+
+		String urlString = "http://data.weibo.com/index/attribute";
+		// String htmlsStrnig="";
+
+		String htmlsStrnig = DownloadUtil.getHtmlText(urlString, 1000 * 30, "UTF-8", null, null);
+		// System.out.println(htmlsStrnig);
+
+		String timeString = HtmlAnalyze.getTagText(htmlsStrnig, "class=\"rg\">", "<");
 		if (!timeString.equals("")) {
-			timeString=timeString.replace("-", "");
+			timeString = timeString.replace("-", "");
 		}
-		
-		
+
 		String pingyin = "";
 		String address = "";
 		String value = "";
@@ -1456,7 +1483,7 @@ public class WeBoDajiewang {
 			System.out.println(pingyin + address);
 			try {
 				Tem_weibo_word_area tem_weibo_word_area = new Tem_weibo_word_area();
-//				tem_weibo_word_area.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
+				// tem_weibo_word_area.setDataDate(TimeTest.getNowTime("yyyyMMdd"));
 				tem_weibo_word_area.setDataDate(timeString);
 				tem_weibo_word_area.setDataType(data_type);
 				tem_weibo_word_area.setDataId(data_id);
@@ -1526,6 +1553,127 @@ public class WeBoDajiewang {
 		}
 	}
 
+	public static void webopeopleTime(String name, int data_type, String data_id, String key5, String key6) {
+		// String name = "范冰冰";
+		String URLEncodername = "";
+		String codeString = "";
+		try {
+			System.out.println(
+					URLEncodername = java.net.URLEncoder.encode(java.net.URLEncoder.encode(name, "utf-8"), "utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String strHtml = DownloadUtil.getHtmlText(
+				"http://data.weibo.com/index/hotword?wid=1091324101491&wname=%E4%BD%A0%E5%A5%BD", 1000 * 30, "UTF-8",
+				null, null);
+		String timeDiff = HtmlAnalyze.getTagText(strHtml, "server_time': '", "'");
+		System.out.println(new Date());
+		// System.out.println(Weibo("http://data.weibo.com/index/ajax/contrast?key2=%25E6%259D%258E%25E6%2599%25A8&key3=&key4=&key5=&key6=&_t=0&__rnd=1450260534657"));
+		System.out.println(timeDiff);
+
+		Date date = new Date(System.currentTimeMillis());
+		int s = 0;
+		System.out.println(s = (int) (date.getTime() - Integer.parseInt(timeDiff)));
+
+		String codeStringhtml = "";
+		String url = "";
+		try {
+			// http://data.weibo.com/index/ajax/getchartdata?wid=1091324464527&sdate=2016-03-01&edate=2016-04-30&__rnd=1490257777797
+
+			System.out.println(codeString = Weibo("http://data.weibo.com/index/ajax/contrast?key2=" + URLEncodername
+					+ "&key3=&key4=&key5=" + key5 + "&key6=" + key6 + "&_t=0&__rnd=1450262484071"));
+
+			String id = HtmlAnalyze.getTagText(codeString, "id\":\"", "\"");
+			// http://data.weibo.com/index/ajax/contrast?key2=%25E5%2588%2598%25E6%2581%25BA%25E5%25A8%2581&key3=&key4=&key5=2017-03-01&key6=2017-03-22&_t=0&__rnd=1490258665204
+			url = "http://data.weibo.com/index/ajax/getchartdata?wid=" + id + "&sdate=" + key5 + "&edate=" + key6
+					+ "&__rnd=" + s;
+			System.out.println(codeStringhtml = Weibo(url));
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			String hostnum = codeStringhtml;
+			System.out.println(hostnum = DownloadUtil.decodeUnicode(hostnum));
+			JSONObject objectobject = JSONObject.fromObject(hostnum);
+			// objectobject=JSONObject.fromObject(object);
+			// System.out.println( objectobject.get("keyword"));
+			// String keywordnames = HtmlAnalyze.getTagText(hostnum,
+			// "keyword\":[\"", "\"]}");
+
+			// if (!names.equals(keywordnames)) {
+			// return;
+			// }
+			// System.out.println(objectobject.get("data"));
+			// JSONArray authors = new JSONArray();
+			// authors = (JSONArray) objectobject.get("data");
+			// for (Object object : authors) {
+			JSONObject objectobjects = JSONObject.fromObject(objectobject);
+			// objectobject=JSONObject.fromObject(object);
+			// String ANIMATION_NAME="";
+			// System.out.println(ANIMATION_NAME=(String)
+			// objectobjects.get("name"));
+			JSONArray arrayjsonname = new JSONArray();
+			arrayjsonname = (JSONArray) objectobjects.get("zt");
+			String NEWS_NUM = "";
+			String DATA_DATE = "";
+			for (Object object2 : arrayjsonname) {
+				tem_weibo_word_num tem_weibo_word_num = new tem_weibo_word_num();
+				tem_weibo_word_num.setWord(name);
+				tem_weibo_word_num.setDataId(data_id);
+				System.out.println(object2);
+				JSONObject objectobjects2 = JSONObject.fromObject(object2);
+				System.out.println(DATA_DATE = (String) objectobjects2.get("day_key"));
+				if (DATA_DATE != null && !DATA_DATE.equals("")) {
+					DATA_DATE = DATA_DATE.replace("-", "");
+					tem_weibo_word_num.setDataDate(DATA_DATE);
+					System.out.println(objectobjects2.get("wid"));
+					System.out.println(NEWS_NUM = (String) objectobjects2.get("value"));
+					tem_weibo_word_num.setNewsNum(Integer.valueOf(NEWS_NUM));
+					tem_weibo_word_num.setDimensionType(1);
+					tem_weibo_word_num.setDataType(data_type);
+					tem_weibo_word_num.setUrl(url);
+					Oracle.InsertCompany(tem_weibo_word_num);
+				}
+
+			}
+
+			JSONArray arrayjsonnameyd = new JSONArray();
+			arrayjsonnameyd = (JSONArray) objectobjects.get("yd");
+			for (Object object2 : arrayjsonnameyd) {
+				tem_weibo_word_num tem_weibo_word_num = new tem_weibo_word_num();
+				tem_weibo_word_num.setWord(name);
+				// System.out.println(object2);
+				String pc = "";
+				JSONObject objectobjects2 = JSONObject.fromObject(object2);
+				System.out.println(DATA_DATE = (String) objectobjects2.get("daykey").toString().replace("-", ""));
+				tem_weibo_word_num.setDataDate(DATA_DATE);
+				System.out.println(pc = (String) objectobjects2.get("pc"));
+				tem_weibo_word_num.setDataType(data_type);
+				// tem_weibo_word_num.setDimensionType(1);
+				tem_weibo_word_num.setDimensionType(2);
+				tem_weibo_word_num.setNewsNum(Integer.valueOf(pc));
+				tem_weibo_word_num.setDataId(data_id);
+				tem_weibo_word_num.setUrl(url);
+				Oracle.InsertCompany(tem_weibo_word_num);
+				String mobile = "";
+				System.out.println(mobile = (String) objectobjects2.get("mobile"));
+				tem_weibo_word_num.setDimensionType(3);
+				tem_weibo_word_num.setNewsNum(Integer.valueOf(mobile));
+				Oracle.InsertCompany(tem_weibo_word_num);
+			}
+
+			// }
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 人的数据的采集
 	 */
@@ -1550,6 +1698,8 @@ public class WeBoDajiewang {
 			 */
 			try {
 				webopeople(listTemp.get(1), 1, listTemp.get(0));
+				// webopeopleTime(listTemp.get(1), 1,
+				// listTemp.get(0),"2016-09-07","2016-10-23");
 
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -1597,14 +1747,13 @@ public class WeBoDajiewang {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 
-	
-	//进行数据的更新
+	// 进行数据的更新
 	public static void people(String names, int data_type, String data_id) throws Exception {
 
-//		// 微指数 搜索指数
-//		Companynum(names, data_type, data_id);
-//		// 除了搜索指数
-//		Companynum_other(names, data_type, data_id);
+		// // 微指数 搜索指数
+		// Companynum(names, data_type, data_id);
+		// // 除了搜索指数
+		// Companynum_other(names, data_type, data_id);
 		// 全部搜索指数数据
 		allCompanynum(names, data_type, data_id);
 
@@ -1641,14 +1790,16 @@ public class WeBoDajiewang {
 
 		// Weiboall("http://data.weibo.com/index/ajax/getdefaultattributealldata?__rnd=1465910360625");
 
-		rundingshitime(1, 00, 00);
-		
-		
+		//
+//		 runstatic();
+		 rundingshitime(1, 00, 00);
+
 //		 runstatic();
 		/**
 		 * 名称 data_type 类型 1 人 2 电视剧 3 电影 data_id 人物id
 		 */
-//		 webopeople("郭德纲",1,"3806");
+//		 webopeople("郭德纲", 1, "3806");
+//		webopeople("范冰冰", 1, "1280");
 		// daJeWang();
 		// System.out.println("运行网吧");
 		// methodPost();

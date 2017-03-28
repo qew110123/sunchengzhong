@@ -302,7 +302,7 @@ public class DownCboooZhongGuoDetails {
 //			System.out.println(area=element.text());
 			if (!ateaid.equals("")&&ateaid!=null) {
 				String url="http://www.cbooo.cn/m/"+ateaid;
-				zhongguopiaofangwang_xunzhe.xuanzheng(url);
+				zhongguopiaofangwang_xunzhe.xuanzheng("",url);
 			}
 		}
 		

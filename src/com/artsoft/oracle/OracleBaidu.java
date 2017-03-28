@@ -97,6 +97,39 @@ public class OracleBaidu {
 	
 	
 	/**
+	 * 百度数据的中的
+	 * 2017年3月27日16:07:29
+	 * @return
+	 */
+	public static List selecthuoqumingchengurl(String sql) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+//		String sql = "  select max(p.person_url) person_url,      max(t.person_id) person_id,max(t.person_name) person_name  from ods.tem_play_person p  left join ods.dim_person t on p.person_name = t.person_name  where t.sex = 0  and p.person_url is not null  group by p.person_name order by person_id";
+		if (sql.equals("")) {
+			
+		
+			sql="select max(p.person_id) as person_id,t.person_name,max(t.person_url) as person_url,max(p.person_url) as person_urls  from ODS.DEL_DIM_PERSON t left join ods.dim_person p on t.person_name = p.person_name where p.person_url is null and t.person_name is not null and p.person_id is not null group by t.person_name";
+			sql="select t.person_id,t.person_name,t.person_url from edw.dim_person t where t.person_url is not null and t.person_url !='无'";
+			sql="select t.person_id,t.person_name,t.person_url from edw.dim_person t where t.person_url is not null and t.person_url !='无' and t.person_url not  like '%，%' ";
+			sql="select p.person_id,p.person_name,p.person_url from edw.dim_person p where p.person_id not in(select t.person_id from ods.tem_dim_person t ) and  p.person_url is not null and p.person_url !='无' and p.person_url not  like '%，%'";
+			
+			sql="select t.person_id,t.person_name,t.person_url from EDW.Dim_Person t where t.update_date >='20161116'";
+			sql="select t.person_id,t.person_name,t.person_url from EDW.DIM_PERSON t where t.update_date >='20161121' and t.person_url !='无'";
+			
+			sql="select t.person_id,t.person_name,t.person_url from EDW.DIM_PERSON t where t.update_date >='20161122' and t.person_url !='无'";
+			
+			sql="select t.person_id,t.person_name,t.person_url from EDW.DIM_PERSON t where t.update_date >='20161124' and t.person_url !='无'";
+			sql="select t.person_id,t.person_name,t.person_url from EDW.DIM_PERSON t  where t.person_name in('范伟' ,'张歆艺','周冬雨','马思纯') ";
+		}
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+
+	}
+	
+	
+	
+	/**
 	 * 百度数据的中的电视剧补充
 	 * 2015年12月2日18:11:49
 	 * @return
@@ -209,6 +242,23 @@ public class OracleBaidu {
 	 * @return
 	 */
 	public static List selectbaidudianshijuTVplay(String sql) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		
+//		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where   t.tvplay_name='多情江山'";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+	/**
+	 * 电影信息数据的整体数据的替补
+	 * 2017年3月24日14:27:40
+	 * @return
+	 */
+	public static List selectmovesql(String sql) {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		
 //		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where   t.tvplay_name='多情江山'";
@@ -483,6 +533,31 @@ public class OracleBaidu {
 		sql = "select t.person_id,t.person_url,PERSON_NAME from edw.dim_person t  where t.person_url is not null order by t.person_id";
 		
 		sql=" select t.person_id,t.person_url,t.person_name from EDW.DIM_PERSON t where t.update_date >='20161205' and t.person_url is not null and t.person_url !='无'";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+	/**
+	 * 百度数据的中的电视剧补充
+	 * 2015年12月2日18:11:49
+	 * @return
+	 */
+	public static List selectpeople(String sql) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+//		String sql = "select t.person_id,t.person_url,PERSON_NAME from ODS.DIM_PERSON t  where t.person_url is not null";
+		/**
+		 * 2016年5月10日11:33:58
+		 */
+		if (sql.equals("")) {
+			
+			sql = "select t.person_id,t.person_url,PERSON_NAME from edw.dim_person t  where t.person_url is not null order by t.person_id";
+			
+			sql=" select t.person_id,t.person_url,t.person_name from EDW.DIM_PERSON t where t.update_date >='20161205' and t.person_url is not null and t.person_url !='无'";
+		}
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);

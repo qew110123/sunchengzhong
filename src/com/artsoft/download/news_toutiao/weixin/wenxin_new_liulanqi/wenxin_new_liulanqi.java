@@ -88,7 +88,11 @@ public class wenxin_new_liulanqi {
 		// Data/Default”);
 		// WebDriver driver = new ChromeDriver(options);
 
-		webDriver.get(url);
+		
+//		if (iiii % 3 == 1) {
+			webDriver.get(url);
+			
+//		}
 		// 获取标题元素值
 		webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		try {
@@ -133,7 +137,7 @@ public class wenxin_new_liulanqi {
 			//
 			// System.out.println(atrpstarnum.getText());
 			num = HtmlAnalyze.getTagText(atr.getText(), "找到约", "条结果");
-			if (iiii % 3 == 0) {
+//			if (iiii % 3 == 0) {
 				try {
 					seleepTime(5);
 					WebElement scrollheader = webDriver.findElement(By.xpath("//*[@id=\"scroll-header\"]"));
@@ -148,14 +152,67 @@ public class wenxin_new_liulanqi {
 					WebElement swz = querybox.findElement(By.xpath("input"));
 					System.out.println(swz.getClass());
 					swz.click();
+					
+					
+					
+					
 
 					System.out.println("单击成功！");
+					
+					
+					
+					
+					
+					 title = webDriver.getTitle();
+					System.out.println("标题: " + title);
+					// 获取淘宝价格
+					// WebElement detail =
+					// webDriver.findElement(By.xpath("//*[@id=\"pl_weibo_directtop\"]"));
+					// System.out.println(detail.getText());
+					// WebElement atr = detail.findElement(By.xpath("div"));
+					// WebElement atr1 = atr.findElement(By.xpath("div"));
+					// WebElement atr2 = atr1.findElement(By.xpath("div"));
+					// WebElement atr3 = atr2.findElement(By.xpath("div"));
+					// WebElement atr4 = atr3.findElement(By.xpath("a"));
+					// String urlBranch = "";
+					// System.out.println(atr4);
+					// System.out.println(urlBranch = atr4.getAttribute("href"));
+					// WebElement atrpstarnum;
+					// System.out.println(atr2);
+					// System.out.println(atrpstarnum =
+					// atr2.findElement(By.xpath(("div[@class='star_detail']"))));
+					// WebElement atrpstarnum1;
+					// System.out.println(atrpstarnum1 =
+					// atrpstarnum.findElement(By.xpath(("p[@class='star_num']"))));
+					// List<WebElement> liList;
+					// System.out.println(liList =
+					// atrpstarnum1.findElements(By.xpath(("span"))));
+
+
+					detail = webDriver.findElement(By.xpath("//*[@id=\"wrapper\"]"));
+					System.out.println(detail.getText());
+
+					 atr = detail.findElement(By.xpath("div"));
+					System.out.println(atr.getText());
+					// WebElement atr1 = atr.findElement(By.xpath("div"));
+					// System.out.println(atr1.getText());
+					// WebElement atr2 = atr1.findElement(By.xpath("div"));
+					// System.out.println(atr2.getText());
+					// WebElement atr3 = atr2.findElement(By.xpath("div"));
+
+					// WebElement atrpstarnum =
+					// atr.findElement(By.xpath(("div[@class=\"mun\"]")));
+					//
+					// System.out.println(atrpstarnum.getText());
+//					num = HtmlAnalyze.getTagText(atr.getText(), "找到约", "条结果");
 				} catch (Exception e) {
 					// TODO: handle exception
 					System.out.println("单击失败！");
 				}
 
-			}
+//			}
+				
+				
 			if (iiii % 5 == 0) {
 				try {
 

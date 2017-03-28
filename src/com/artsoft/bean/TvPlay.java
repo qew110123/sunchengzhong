@@ -149,6 +149,8 @@ public class TvPlay {
 //	int SOURCE=1;
 	int source_class=1;
 	
+	private String id="";
+	
 	public int getDATA_TYPE() {
 		return DATA_TYPE;
 	}
@@ -714,6 +716,14 @@ public class TvPlay {
 
 	public void setSource_class(int source_class) {
 		this.source_class = source_class;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 

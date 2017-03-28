@@ -47,6 +47,9 @@ public class DownloadSohu {
 			String strmainurl = "";
 			String strmaintitle = "";
 			System.out.println(strmainurl = link.select("div.pic a").attr("href"));
+			if (!strmainurl.contains("http://")) {
+				strmainurl=strmainurl.replace("//", "http://");
+			}
 			System.out.println(strmaintitle = link.select("div.pic a").attr("title").replaceAll(name, ""));
 			sohuDetailed(strmainurl, strmaintitle);
 
@@ -61,6 +64,9 @@ public class DownloadSohu {
 	 * @param name
 	 */
 	public static void sohuDetailedfirst(String urlerer, String name) {
+		if (!urlerer.contains("http://")) {
+			urlerer=urlerer.replace("//", "http://");
+		}
 		String strHtmls = DownloadUtil.getHtmlText(urlerer, 1000 * 30, "UTF-8", null, null);
 		String strvid = HtmlAnalyze.getTagText(strHtmls, "var vid=\"", "\"");
 		String strvplaylistId = HtmlAnalyze.getTagText(strHtmls, "var playlistId=\"", "\"");

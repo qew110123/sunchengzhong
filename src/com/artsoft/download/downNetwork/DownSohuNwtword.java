@@ -61,6 +61,10 @@ public class DownSohuNwtword {
 	 * @param name
 	 */
 	public static void sohuDetailedfirst(String urlerer, String name) {
+		
+		if (!urlerer.contains("http://")) {
+			urlerer=urlerer.replace("//", "http://");
+		}
 		String strHtmls = DownloadUtil.getHtmlText(urlerer, 1000 * 30, "UTF-8", null, null);
 		String strvid = HtmlAnalyze.getTagText(strHtmls, "var vid=\"", "\"");
 		String strvplaylistId = HtmlAnalyze.getTagText(strHtmls, "var playlistId=\"", "\"");

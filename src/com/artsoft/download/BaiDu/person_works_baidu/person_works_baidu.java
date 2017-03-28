@@ -720,6 +720,30 @@ public class person_works_baidu {
 			}
 		}
 	}
+	
+	
+	
+	public static void runnewMain(String sql) {
+		List<String> listArray = OracleBaidu.selectpeople(sql);
+		for (Object Objstring : listArray) {
+			System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			String id="";
+			String name="";
+			String url="";
+			System.out.println(id=listTemp.get(0));
+			System.out.println(name=listTemp.get(1));
+			System.out.println(url=listTemp.get(2));
+			try {
+				// if (Integer.valueOf(listTemp.get(0))>4000) {
+
+				mainmore(id, url);
+				// }
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -733,7 +757,14 @@ public class person_works_baidu {
 		// huojiangjilu("0", "",strHtml,doc);
 //		mainmore("0",
 //				"http://baike.baidu.com/link?url=Xv2QRQxuBVmAELJnrSk3rQDCIqWL3XifwSXn0BEtGlaKnQSZuQl0G2PxpIJmgZhnK5xwxk8xLo6zdsJCUpd1GCwx66WYux14aPgKWNm5PV0QXT9GaiceWORRO9-bxhlt#6");
-		 runnewMain();
+		//整体数据的 人物的
+		//2017年3月27日16:31:48
+		runnewMain();
+		
+		//整体数据的 人物的进行sql添加
+		//2017年3月27日16:31:48
+		person_works_baidu.runnewMain("");
+		
 	}
 
 }

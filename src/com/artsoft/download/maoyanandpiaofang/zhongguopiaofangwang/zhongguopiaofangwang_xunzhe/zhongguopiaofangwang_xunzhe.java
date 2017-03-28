@@ -17,7 +17,7 @@ import net.sf.json.JSONObject;
 
 public class zhongguopiaofangwang_xunzhe {
 
-	public static void xuanzheng(String url) {
+	public static void xuanzheng(String name,String url) {
 		// TODO Auto-generated method stub
 		// String url="";
 
@@ -40,8 +40,11 @@ public class zhongguopiaofangwang_xunzhe {
 			}
 		}
 
-		String name = "";
-		name = HtmlAnalyze.getTagText(strHtmllittle, "<title>", "_电影详情");
+//		String name = "";
+		if (name.equals("")) {
+			
+			name = HtmlAnalyze.getTagText(strHtmllittle, "<title>", "_电影详情");
+		}
 		System.out.println(name);
 		playtv.setTvplay_name(name);
 
@@ -97,11 +100,15 @@ public class zhongguopiaofangwang_xunzhe {
 			System.out.println(text = link.select("a").attr("title"));
 
 			System.out.println(link.text());
+			System.out.println(TimeTest.getNowTime("yyyy"));
+			
+			System.out.println(link.text().contains(TimeTest.getNowTime("yyyy")));
+			System.out.println(name.toLowerCase().equals(text.toLowerCase()));
 
-			if (name.equals(text) && link.text().contains(TimeTest.getNowTime("yyyy"))) {
-				// System.out.println("11111");
+			if (name.toLowerCase().equals(text.toLowerCase()) && link.text().contains(TimeTest.getNowTime("yyyy"))) {
+				 System.out.println("11111");
 
-				xuanzheng(urlstr);
+				xuanzheng(name,urlstr);
 
 			}
 			// mainurl(urlstr);
@@ -112,7 +119,7 @@ public class zhongguopiaofangwang_xunzhe {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		shoushuozhongguopiaofangwang("少年");
-		 xuanzheng("http://www.cbooo.cn/m/657204");
+		 xuanzheng("父子雄兵","http://www.cbooo.cn/m/657204");
 	}
 
 }

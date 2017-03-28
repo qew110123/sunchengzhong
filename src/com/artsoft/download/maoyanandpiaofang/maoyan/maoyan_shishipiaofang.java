@@ -410,7 +410,13 @@ public class maoyan_shishipiaofang {
 
 		// runstatic();
 		// openstatic();
+		
 		TimingTime(01, 00, 59);
+		
+		
+//		String str = "12345A";
+//        String s = str.toLowerCase();
+//        System.out.println(s);
 
 	}
 
