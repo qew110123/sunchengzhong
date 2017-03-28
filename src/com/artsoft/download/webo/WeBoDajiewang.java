@@ -1798,6 +1798,7 @@ public class WeBoDajiewang {
 		/**
 		 * 名称 data_type 类型 1 人 2 电视剧 3 电影 data_id 人物id
 		 */
+		 
 //		 webopeople("郭德纲", 1, "3806");
 //		webopeople("范冰冰", 1, "1280");
 		// daJeWang();
