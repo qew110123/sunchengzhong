@@ -1,7 +1,9 @@
 package com.artsoft.download.maoyanandpiaofang.maoyan;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,6 +18,7 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_key.maoyan_key;
+import com.artsoft.oracle.OracleBaidu;
 import com.artsoft.oracle.OracleMovePiaoFang;
 
 public class adminmaoyan {
@@ -29,10 +32,10 @@ public class adminmaoyan {
 			// return;
 			strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
 			
-			maoyan_key.openkey();
+			maoyan_key.openKet();
 			
 			String keturlString ="";
-			System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src: url(//", ");"));
+			System.out.println(keturlString=HtmlAnalyze.getTagText(strHtml, "src:url(", ")"));
 			
 			if (!keturlString.equals("")) {
 				strHtml=maoyan_shishipiaofang.Stringhtml_int(keturlString,strHtml,urlMain);
@@ -44,60 +47,89 @@ public class adminmaoyan {
 //		}
 
 		Document doc = Jsoup.parse(strHtml);
+		String score="";
+		
+		try {
+			score = doc.select("p.score-num  i").first().text();
+			System.out.println(score);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
-		String score = doc.select("hgroup.score-wrap article.score i").first().text();
-		System.out.println(score);
+		
+		
+		String score_num="";
+		try {
+			
+		
 
-		String score_num = doc.select("hgroup.score-wrap article.score").first().text();// 想看人数
+		 score_num = doc.select("span.wish-num i").first().text();// 想看人数
 		System.out.println(score_num = HtmlAnalyze.getTagText(score_num, "(", "人评分)"));
+//		System.out.println(score_num = "");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
-		String want_see_num = doc.select("hgroup.score-wrap article.wish-num i").first().text();//
+		String want_see_num = doc.select("span.wish-num i").first().text();// 想看人数
+		System.out.println(want_see_num = HtmlAnalyze.getTagText(want_see_num, "(", "人评分)"));
 		System.out.println(want_see_num);
 
-		String type = HtmlAnalyze.getTagText(strHtml, "类型：", "</p>");
+		String type = HtmlAnalyze.getTagText(strHtml, "info-category\">", "</p>");
 		System.out.println(type);
 
 		String duration = HtmlAnalyze.getTagText(strHtml, "时长：", "</p>");
 		System.out.println(duration);
+		duration="";
 
 		String standard = HtmlAnalyze.getTagText(strHtml, "制式：", "</p>");
 		System.out.println(standard);
+		standard="";
 
-		String released_date = HtmlAnalyze.getTagText(strHtml, "上映日期：", "</p>");
+		String released_date = HtmlAnalyze.getTagText(strHtml, "info-release\">", "</p>");
 		System.out.println(released_date);
 
-		String total_boxoffice = HtmlAnalyze.getTagText(strHtml, "总票房:", "</span>");
+		String total_boxoffice = HtmlAnalyze.getTagText(strHtml, "累计综合票房", "</span>");
 		System.out.println(total_boxoffice);
 
-		String first_week_boxoffice = HtmlAnalyze.getTagText(strHtml, "首周票房:", "</span>");
+		String first_week_boxoffice = HtmlAnalyze.getTagText(strHtml, "首周综合票房", "</span>");
 		System.out.println(first_week_boxoffice);
 
-		String director = HtmlAnalyze.getTagText(strHtml, "导演：</div>", "</div>");
+		String director = HtmlAnalyze.getTagText(strHtml, "导演", "<div class=\"category\">",false,0);
+		director = HtmlAnalyze.getTagText(strHtml, "class=\"items\">", "<div class=\"category\">");
 		System.out.println(director);
 
-		String actors = HtmlAnalyze.getTagText(strHtml, "主演：</div>", "</div>");
+		String actors = HtmlAnalyze.getTagText(strHtml, "演员", "<div class=\"category\">",false,0);
+		
+		actors = HtmlAnalyze.getTagText(actors, "class=\"items\">", "<div class=\"category\">");
+		actors=actors.replace(" ", "").replace("\r", "").replace("\n", "");
 		System.out.println(actors);
 
-		String PRODUCE_COMPANY = HtmlAnalyze.getTagText(strHtml, "出品公司</div>", "</div>");
-		PRODUCE_COMPANY = PRODUCE_COMPANY.replace("<br>", ",");
+		String PRODUCE_COMPANY = HtmlAnalyze.getTagText(strHtml, "出品", "<div class=\"category\">",false,0);
+		
+		PRODUCE_COMPANY = HtmlAnalyze.getTagText(PRODUCE_COMPANY, "class=\"items\">", "<div class=\"category\">");
+		PRODUCE_COMPANY = PRODUCE_COMPANY.replace("<br>", ",").replace(" ", "").replace("\r", "").replace("\n", "");
 		System.out.println(PRODUCE_COMPANY);
 
-		String ISSUE_company = HtmlAnalyze.getTagText(strHtml, "发行公司</div>", "</div>");
-		ISSUE_company = ISSUE_company.replace("<br>", ",");
+		String ISSUE_company = HtmlAnalyze.getTagText(strHtml, "发行", "<div class=\"category\">",false,0);
+		
+		ISSUE_company = HtmlAnalyze.getTagText(ISSUE_company, "class=\"items\">", "<div class=\"category\">");
+		ISSUE_company = ISSUE_company.replace("<br>", ",").replace("<br>", ",").replace(" ", "").replace("\r", "").replace("\n", "");
 		System.out.println(ISSUE_company);
 
 		String union_ISSUE_company = HtmlAnalyze.getTagText(strHtml, "联合发行公司</div>", "</div>");
-		union_ISSUE_company = union_ISSUE_company.replace("<br>", ",");
+		union_ISSUE_company = union_ISSUE_company.replace("<br>", ",").replace(" ", "").replace("\r", "").replace("\n", "");
 		System.out.println(union_ISSUE_company);
 
 		String times_length = HtmlAnalyze.getTagText(strHtml, "时长：", "\r\n");
 		System.out.println(times_length);
+		times_length="";
 
 		String Color = HtmlAnalyze.getTagText(strHtml, "颜色（Color）：", "<br />");
 		System.out.println(Color);
-
+		Color="";
 		String Aspect_Ratio = HtmlAnalyze.getTagText(strHtml, "幕幅（Aspect Ratio）：", "<br />");
 		System.out.println(Aspect_Ratio);
+		Aspect_Ratio="";
 
 		String DESCRIPTION = HtmlAnalyze.getTagText(strHtml, "影片简介</div>", "</div>");
 		if (DESCRIPTION.length()>1000) {
@@ -921,6 +953,33 @@ public class adminmaoyan {
             } 
         }, time, 1000 * 60 * 60 * 1);// 这里设定将延时每天固定执行  
     }
+	
+	
+	
+	public static void runnewMain(){
+		List<String> listArray = OracleBaidu.selectmaoyanpiaofang();
+		
+		for (Object Objstring : listArray) {
+			System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			String id="";
+			String name="";
+			String url="";
+			System.out.println(id=listTemp.get(0));
+			System.out.println(name=listTemp.get(1));
+			System.out.println(url=listTemp.get(2));
+			if (id != null && !"".equals(id)&&name != null && !"".equals(name)) {
+				
+				try {
+					tem_dim_film_boxoffice(id, name, url);
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -942,10 +1001,15 @@ public class adminmaoyan {
 		// tem_film_daily_boxoffice_other("", "",
 		// "http://piaofang.maoyan.com/movie/246970?_v_=yes");
 		
-		runstatic();
 		
-		rundingshitime(1, 00, 00);
 		
+//		runstatic();
+//		
+//		rundingshitime(1, 00, 00);
+		
+//		tem_dim_film_boxoffice("344451", "绑架者", "http://piaofang.maoyan.com/movie/344451?_v_=yes");
+		
+		runnewMain();
 		
 
 	}

@@ -133,7 +133,9 @@ public class OracleMovePiaoFang {
 		try {
 			
 //			if (Stirngstr.isNumeribaidu(total_boxoffice)) {
-				int xx=Integer.valueOf(score_num);
+				int xx=Integer.valueOf(total_boxoffice);
+			
+				
 				list.add(fid);
 				list.add(title);
 				list.add(score);

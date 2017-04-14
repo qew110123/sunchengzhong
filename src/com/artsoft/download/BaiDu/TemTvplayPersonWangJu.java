@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
 import com.artsoft.oracle.OracleBaidu;
 import com.artsoft.util.DownloadUtil;
 
-public class tem_tvplay_person_WangJu {
+public class TemTvplayPersonWangJu {
 	
 	
 	/**
@@ -56,7 +56,7 @@ public class tem_tvplay_person_WangJu {
 //				tem_tvplay_person.play_people(id, name, url, soutce);
 				// mainmore(id, strUrl);
 //				TEM_DIM_FILM movesfilm = mainmore(id, strUrl, strUrlname);
-				tem_tvplay_person.play_people(id, strname, strUrl, 1);
+				TemTvplayPerson.play_people(id, strname, strUrl, 1);
 //				OracleHaoSou.InsertTVplay(tvplay);// 添加操作
 				
 				// OracleHaoSou.UpdateTVplay(tvplay);//修改操作
@@ -89,7 +89,7 @@ public class tem_tvplay_person_WangJu {
 				if (strUrl!= null && !"".equals(strUrl) ) {
 					try {
 //						BaiduImageyanyuan.mainmore(id, strUrl, strname, 1);
-						tem_tvplay_person.play_people(id, strname, strUrl, 1);
+						TemTvplayPerson.play_people(id, strname, strUrl, 1);
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
@@ -102,6 +102,8 @@ public class tem_tvplay_person_WangJu {
 		// TODO Auto-generated method stub
 		runupdate();
 
+		
+		
 	}
 
 }

@@ -209,7 +209,7 @@ public class BaiDuTeleplayUrlZhongYiScript {
 			if (id != null && !"".equals(id)&&name != null && !"".equals(name)) {
 				String urlBranch = "";
 				try {
-					name=BaiDuTeleplaynext_wangluoju.deletenum(name);
+					name=BaiduWangluojuInfoByUrl.deletenum(name);
 					urlBranch = "http://baike.baidu.com/search?word="
 							+ java.net.URLEncoder.encode(name, "utf-8") + "&pn=0&rn=0&enc=utf8";
 					try {

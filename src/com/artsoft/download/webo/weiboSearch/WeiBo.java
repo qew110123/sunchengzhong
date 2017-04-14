@@ -302,7 +302,7 @@ public class WeiBo {
 					// TODO: handle exception
 				}
 			}
-		}, time, 1000 * 60 * 60 * 12);// 这里设定将延时每天固定执行
+		}, time, 1000 * 60 * 60 * 1);// 这里设定将延时每天固定执行
 	}
 	
 
@@ -311,9 +311,6 @@ public class WeiBo {
 		// new
 		// WeiBo(1,"http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index");
 //		 hunanBranch("http://s.weibo.com/weibo/%25E5%25AD%2599%25E4%25BF%25AA&Refer=focus_index", null, null, null);
-		
-		
-
 //		ConfigManager config = ConfigManager.getInstance();
 //		// driver = config.getConfigValue("driver");
 //		String xx = ConfigManager.getInstance().getConfigValue("IDwebopeople");
@@ -321,7 +318,6 @@ public class WeiBo {
 //		for (int i = xxnum; i < 16871; i = i + 1000) {
 //			// i=15780;
 //			mainweboPeoPle(i, i + 1000);
-//
 //		}
 		
 		

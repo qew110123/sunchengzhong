@@ -81,7 +81,7 @@ public class wenxin_new_liulanqi {
 		WebDriverBranch();
 
 		System.out.println("等待30秒");
-		WeiBo.seleepTime(30);
+		WeiBo.seleepTime(20);
 
 		// ChromeOptions options = new ChromeOptions();
 		// options.addArguments(“–user-data-dir=C:/Users/xxx/AppData/Local/Google/Chrome/User
@@ -242,7 +242,7 @@ public class wenxin_new_liulanqi {
 			System.out.println(i);
 			i += 1;
 
-			seleepTime(20);
+			seleepTime(10);
 		}
 		return num;
 
@@ -281,7 +281,7 @@ public class wenxin_new_liulanqi {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("没有该人的数据");
-			WeiBo.seleepTime(150);
+			WeiBo.seleepTime(20);
 		}
 		// Integer.parseInt( );
 		// Integer.parseInt( )

@@ -428,6 +428,30 @@ public class person_works_baidu {
 
 		String tvplay = HtmlAnalyze.getTagText(strHtml, "</span>参演电视剧</h3>", "<div class=\"pageBtns\">", true, 0);
 		// System.out.println(moves);
+		
+		if (tvplay.contains("参演电影")) {
+			
+			tvplay=HtmlAnalyze.getTagText("###>>"+tvplay, "###>>", "参演电影", true, 0);
+			
+		}
+		
+		if (tvplay.equals("")) {
+			
+			tvplay=HtmlAnalyze.getTagText(strHtml,"</span>参演电视剧</h3>", "参演电影", true, 0);
+			
+		}
+		
+		if (tvplay.equals("")) {
+			tvplay = HtmlAnalyze.getTagText(strHtml, "</span>参演电视剧</h3>", "</table>", true, 0);
+		}
+		
+		
+		if (tvplay.equals("")) {
+			if (strHtml.contains("</span>参演电视剧</h3>")) {
+				tvplay = HtmlAnalyze.getTagText(strHtml, "</span>参演电视剧</h3>", "</li>\r\n</ul>\r\n</ul>\r\n</div>\r\n</div>", true, 0);
+			}
+		}
+		
 
 		Document doctvplay = Jsoup.parse(tvplay);
 		Elements linksdoctvplay = doctvplay.select("div.starMovieAndTvplay ul.starWorksList li.listItem div.info");
@@ -444,9 +468,9 @@ public class person_works_baidu {
 			String data_type = "";
 			System.out.println(name = element.select("b.title").text());
 			personwork.setName(name);
-			if ("导火线".equals(name)) {
-				System.out.println("命运呼叫转移");
-			}
+//			if ("导火线".equals(name)) {
+//				System.out.println("命运呼叫转移");
+//			}
 			System.out.println(name_URL = element.select("b.title a").attr("href"));
 			if (!name_URL.equals("")) {
 				System.out.println(name_URL = "http://baike.baidu.com" + element.select("b.title a").attr("href"));
@@ -757,6 +781,9 @@ public class person_works_baidu {
 		// huojiangjilu("0", "",strHtml,doc);
 //		mainmore("0",
 //				"http://baike.baidu.com/link?url=Xv2QRQxuBVmAELJnrSk3rQDCIqWL3XifwSXn0BEtGlaKnQSZuQl0G2PxpIJmgZhnK5xwxk8xLo6zdsJCUpd1GCwx66WYux14aPgKWNm5PV0QXT9GaiceWORRO9-bxhlt#6");
+		
+		mainmore("0", "http://baike.baidu.com/item/%E6%BB%95%E4%B8%BD%E5%90%8D/482086");
+		
 		//整体数据的 人物的
 		//2017年3月27日16:31:48
 		runnewMain();

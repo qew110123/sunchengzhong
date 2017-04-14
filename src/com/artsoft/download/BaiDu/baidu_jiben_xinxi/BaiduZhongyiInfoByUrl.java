@@ -17,7 +17,7 @@ import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.TimeTest;
 
-public class BaiDuTeleplaynext_zhongyi {
+public class BaiduZhongyiInfoByUrl {
 	
 	/**
 	 * 进行数据的搜索
@@ -223,7 +223,7 @@ public class BaiDuTeleplaynext_zhongyi {
 			if (id != null && !"".equals(id)&&name != null && !"".equals(name)) {
 				String urlBranch = "";
 				try {
-					name=BaiDuTeleplaynext_wangluoju.deletenum(name);
+					name=BaiduWangluojuInfoByUrl.deletenum(name);
 					urlBranch = "http://baike.baidu.com/search?word="
 							+ java.net.URLEncoder.encode(name, "utf-8") + "&pn=0&rn=0&enc=utf8";
 					try {
@@ -333,12 +333,66 @@ public class BaiDuTeleplaynext_zhongyi {
 		
 	}
 	
+	
+	
+	
+	
+	public static void runnewMainurl(String sql){
+		List<String> listArray = OracleBaidu.selectbaidudianshijuzhongyi(sql);
+		
+		for (Object Objstring : listArray) {
+			System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			String id = "";
+			String name="";
+			String url="";
+			System.out.println(id=listTemp.get(0));
+			System.out.println(name=listTemp.get(1));
+			System.out.println(url=listTemp.get(2));
+			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))&&listTemp.get(1) != null && !"".equals(listTemp.get(1))&&listTemp.get(2) != null && !"".equals(listTemp.get(2))) {
+				String urlBranch = "";
+//				url="";
+				if (BaiduImageEntryTVplay.isChineseChar(url)) {
+					
+					url=url.replace("#", "787878788");
+					
+					url=url.replace(":", "909090909090");
+					
+					String url_gai=url.replace("/", "11111111");
+					String urlutf_8="";
+					try {
+						urlutf_8 = java.net.URLEncoder.encode(url_gai, "utf-8");
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					url=urlutf_8.replace("11111111", "/");
+					url=url.replace("909090909090", ":");
+					
+					url=url.replace("787878788","#" );
+					
+				}
+				TvPlay tvplay = BaiDuTeleplayDownload.mainmore(id, url, name);
+//					tvplay.setBaikefilmname(strUrlname);
+//					tvplay.setBAIKE_NAME(strUrlname);
+				tvplay.setType(3);
+				OracleHaoSou.Insertzhongyi(tvplay);// 添加操作
+				
+					CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":" + listTemp.get(0)+","+listTemp.get(1));
+//					}
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//没有url
 //		runnewMain();
 		//有url
 		runnewMainurl();
+		
+		
+		runnewMainurl("sql");
 	}
 
 

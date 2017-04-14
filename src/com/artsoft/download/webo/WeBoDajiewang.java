@@ -95,7 +95,7 @@ public class WeBoDajiewang {
 		// get.addHeader("ContentType", "text/html; charset=utf-8"));
 
 		get.addHeader(new BasicHeader("Cookie",
-				"SINAGLOBAL=8549726845230.907.1445398578667; __gads=ID=46056e51dc6eb672:T=1475908478:S=ALNI_MYvN_Is2kebj2dLegaJvLN0bGJQVw; _s_tentry=finance.sina.com.cn; Apache=8536805170313.9795.1489634179652; ULV=1489634179661:46:1:1:8536805170313.9795.1489634179652:1486707921563; SSOLoginState=1490088832; WEB3=58d2b12dc53cd1764c5a65500ce67947; PHPSESSID=4edukt88jcbb7vbn20l1h3ch60; wvr=6; SCF=AqTzGspM_YKGV5hnw2ZSBX6OX0L5qlEW2MiWPmKhXroNIxRbXlNGvzwHxbHemli-rt7QdWR7q6ZFRFSmEIX47FI.; SUB=_2A2513aQ-DeRxGeVM7FAU-SfIyzuIHXVWqpL2rDV8PUJbmtAKLXbukW9YCqrB6MILzaa1LnIUDc8eDf3Mjw..; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWZw9HKHxaOfTueIzrn7iVw5JpX5o2p5NHD95Q0eoMESK.4Sh5NWs4Dqcjgi--RiKyFiKysi--RiKyFiKysehMpeBtt; SUHB=0cSXEVu0urLYb6; ALF=1522120074; WBStorage=02e13baf68409715|undefined; UOR=picture.youth.cn,widget.weibo.com,login.sina.com.cn"));
+				"PHPSESSID=pjqrrcjoh1h0rq5hhf65vi9su5; WEB3=5a5a4ffe6c5480c798c8f7f6719232cd; _s_tentry=-; Apache=976557069682.1335.1490838469907; SINAGLOBAL=976557069682.1335.1490838469907; ULV=1490838470222:1:1:1:976557069682.1335.1490838469907:; WBStorage=02e13baf68409715|undefined"));
 
 		get.addHeader("Accept", "*/*");
 		// get.addHeader("Accept-Encoding", "gzip, deflate, sdch");
@@ -1792,9 +1792,9 @@ public class WeBoDajiewang {
 
 		//
 //		 runstatic();
-		 rundingshitime(1, 00, 00);
 
 //		 runstatic();
+		 rundingshitime(1, 00, 00);
 		/**
 		 * 名称 data_type 类型 1 人 2 电视剧 3 电影 data_id 人物id
 		 */

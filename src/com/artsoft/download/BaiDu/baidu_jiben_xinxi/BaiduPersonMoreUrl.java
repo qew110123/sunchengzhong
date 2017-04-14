@@ -7,7 +7,7 @@ import com.artsoft.download.BaiDu.BaiDuPeopleDownload;
 import com.artsoft.oracle.OracleBaidu;
 import com.artsoft.oracle.OracleHaoSou;
 
-public class BaiDUPeoplemoreurl {
+public class BaiduPersonMoreUrl {
 	
 	/**
 	 * 进行url数据整体数据的更新
@@ -84,7 +84,7 @@ public class BaiDUPeoplemoreurl {
 	 * @param args
 	 * @return 
 	 */
-	public  static void peopleurlSql(String sql){
+	public  static void personUrlSql(String sql){
 		// TODO Auto-generated method stub
 		
 //		BaiDuPeopleDownload.mainmore("", "http://baike.baidu.com/view/3919236.htm");
@@ -155,8 +155,10 @@ public class BaiDUPeoplemoreurl {
 		
 		//卡斯基本信息数据 sql
 //		System.out.println(Integer.parseInt("104076"));
-		BaiDUPeoplemoreurl.peopleurlSql("");
+//		BaiduPersonMoreUrl.peopleurlSql("");
 		
+		
+		BaiduPersonMoreUrl.personUrlSql("");
 		
 		
 		

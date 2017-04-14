@@ -331,6 +331,23 @@ public class OracleBaidu {
 	
 	
 	/**
+	 * 猫眼票房
+	 * 2017年4月6日15:54:58
+	 * @return
+	 */
+	public static List selectmaoyanpiaofang() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql="select t.fid,max(t.title),max(url) from ODS.TEM_FILM_BOXOFFICE_REALTIME t where t.source=1 group by t.fid";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+	
+	/**
 	 * 百度数据的中的网络剧补充 url
 	 * 单独脚本运行
 	 * 2017年2月20日13:58:42
@@ -339,6 +356,17 @@ public class OracleBaidu {
 	public static List selectbaidudianshijuWangluojuurl_jiaoben() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.networkplay_id,t.networkplay_name,t.networkplay_url from edw.dim_networkplay t where t.actors is null and t.networkplay_url !='无' and t.networkplay_url is not null";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	public static List selectbaidudianshijuWangluojuurl_jiaoben(String sql) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+//		String sql = "select t.networkplay_id,t.networkplay_name,t.networkplay_url from edw.dim_networkplay t where t.actors is null and t.networkplay_url !='无' and t.networkplay_url is not null";
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
@@ -424,6 +452,17 @@ public class OracleBaidu {
 		sql="select t.variety_id,t.variety_name,t.variety_url from EDW.Dim_Variety t where t.update_date >='20161124' and t.variety_url is not null";
 		
 		sql="select t.variety_id,t.variety_name,t.variety_url from EDW.Dim_Variety t where t.update_date >='20161130' and t.variety_url is not null";
+		
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
+	public static List selectbaidudianshijuzhongyi(String sql) {
+		Connection conn = DBOperate218.getInstance().getConnection();
 		
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;

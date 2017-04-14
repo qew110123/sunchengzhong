@@ -23,6 +23,25 @@ public class OracleNetwork {
 	
 	
 	
+	
+	/**
+	 * 豆瓣数据的整体数据名称
+	 * 2017年4月12日16:22:39
+	 * @return
+	 */
+	public static List selectdouban() {
+		Connection conn = DBOperate218.getInstance().getConnection();
+		String sql = "select t.tvplay_name from ODS.DEL_TVPLAY_NAME_TEM t where t.type = 3 group by t.tvplay_name";
+		
+		sql="select t.tvplay_name   from ODS.DEL_TVPLAY_NAME_TEM t  where t.type = 3    and (t.label_name like '%民国%' or t.label_name like '%寻宝%')  group by t.tvplay_name";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 1;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	
 	/**
 	 * 进行腾讯视频数据的再次清洗
 	 * 2016年4月21日17:58:08

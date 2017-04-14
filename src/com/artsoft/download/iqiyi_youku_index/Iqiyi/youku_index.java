@@ -33,71 +33,81 @@ public class youku_index {
 			e.printStackTrace();
 		}
 		String url="http://www.soku.com/search_video/q_"+krywordutf8;
-		caxun(id,name,url);
+//		try {
+			
+			caxun(id,name,url);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 		
 
 	}
 	
-	private static void caxun(String id, String name, String url) {
+	static void caxun(String id, String name, String url) {
 		// TODO Auto-generated method stub
 		String strHtml = Htmlurl(url);
 		Document doc = Jsoup.parse(strHtml);
 		String  url_show = doc.select("span.num a").first().attr("href");
+		//http://index.youku.com/vr_show/showid_zf65e90a030f811e59e2a?type=youku
+		if (!url_show.contains("http")) {
+			url_show="http:"+url_show;
+			
+		}
 		
 		String strHtml_show=Htmlurl(url_show);
 		
 		//播放指数
 		
-//		bofangzishu_youku(id,name,url,strHtml_show);
+		bofangzishu_youku(id,name,url,strHtml_show);
 		
 		//性别
 		
-//		xingbei(id,name,url,strHtml_show);
+		xingbei(id,name,url,strHtml_show);
 		
 		//年龄
 		
-//		nianling(id,name,url,strHtml_show);
+		nianling(id,name,url,strHtml_show);
 		
 		//职业
 		
-//		zhiye(id,name,url,strHtml_show);
+		zhiye(id,name,url,strHtml_show);
 		
 		//学历
 		
-//		xueli(id,name,url,strHtml_show);
+		xueli(id,name,url,strHtml_show);
 		
 		//城市
 		
-//		chengsi(id,name,url,strHtml_show);
+		chengsi(id,name,url,strHtml_show);
 		
 		//播发网站
 		
-//		bofangwangzhan(id,name,url,strHtml_show);
+		bofangwangzhan(id,name,url,strHtml_show);
 		
 		
 		//播发设备
 		
-//		bofangshebei(id,name,url,strHtml_show);
+		bofangshebei(id,name,url,strHtml_show);
 		
 		
 		//剧情分析
-//		juqingfenxi(id,name,url,strHtml_show);
+		juqingfenxi(id,name,url,strHtml_show);
 		
 		
 		
 		
 		//票房指数
-//		bofangzishu_tudou(id,name,url_show,strHtml_show);
+		bofangzishu_tudou(id,name,url_show,strHtml_show);
 		
 		
 		
 		
 		
-//		tudouwang(id, name, url_show, strHtml_show);
+		tudouwang(id, name, url_show, strHtml_show);
 		
 		
 		//全网搜索指数
-//		alldata_wang(id, name, url_show, strHtml_show);
+		alldata_wang(id, name, url_show, strHtml_show);
 		
 		//全网播放量
 		alldata_bofangliang(id, name, url_show, strHtml_show);
@@ -123,6 +133,10 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "vv\":[\"", "\"]]}");
 		System.out.println(youkuDatavvString);
+		
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 		String youkuData = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 		
@@ -165,11 +179,18 @@ public class youku_index {
 		
 		
 		strHtml_show= Htmlurl(url_show);
+		
+		if (strHtml_show.equals("")) {
+			return;
+		}
 
 		// TODO Auto-generated method stub
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "\"search\":[\"", "\"]],");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 		String youkuData = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 		
@@ -217,31 +238,31 @@ public class youku_index {
 		url_show=url_show.replace("youku", "tudou");
 		
 		//土豆播放网站
-//		bofangwangzhan_tudou(id,name,url_show,strHtml_show);
+		bofangwangzhan_tudou(id,name,url_show,strHtml_show);
 		
 		//土豆剧情分析
-//		juqingfenxi_tudou(id,name,url_show,strHtml_show);
+		juqingfenxi_tudou(id,name,url_show,strHtml_show);
 		
 		
 //性别
 		
-//		xingbei_tudou(id,name,url_show,strHtml_show);
+		xingbei_tudou(id,name,url_show,strHtml_show);
 		
 		//年龄
 		
-//		nianling_tudou(id,name,url_show,strHtml_show);
-//		
-//		//职业
-//		
-//		zhiye_tudou(id,name,url_show,strHtml_show);
-//		
-//		//学历
-//		
-//		xueli_tudou(id,name,url_show,strHtml_show);
-//		
-//		//城市
-//		
-//		chengsi_tudou(id,name,url_show,strHtml_show);
+		nianling_tudou(id,name,url_show,strHtml_show);
+		
+		//职业
+		
+		zhiye_tudou(id,name,url_show,strHtml_show);
+		
+		//学历
+		
+		xueli_tudou(id,name,url_show,strHtml_show);
+		
+		//城市
+		
+		chengsi_tudou(id,name,url_show,strHtml_show);
 		
 		
 		bofangshebei_tudou(id,name,url_show,strHtml_show);
@@ -255,6 +276,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "device\":[\"", "\"]}");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 		String pc = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 		
@@ -292,6 +316,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "provinceMap\":[\"", "\"]");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 //		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 //		
@@ -330,6 +357,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "edu\":[\"", "\"]");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 //		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 //		
@@ -401,6 +431,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "occupation\":[\"", "\"]");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 //		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 //		
@@ -462,6 +495,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "age\":[\"", "\"]");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 //		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 //		
@@ -521,6 +557,9 @@ public class youku_index {
 		// TODO Auto-generated method stub
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "sex\":[\"", "\"]}");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 		
@@ -559,6 +598,9 @@ public class youku_index {
 		// TODO Auto-generated method stub
 		String idurl=HtmlAnalyze.getTagText(strHtml_show, "_z", "\"");
 		System.out.println(idurl);
+		if (idurl.equals("")) {
+			return;
+		}
 		//http://index.youku.com/ProAction!getProVideos.action?proId=d56886dc86fc11e3a705&pageIndex=0&pageSize=10&type=main&tag=youku
 		//http://index.youku.com/ProAction!getProVideos.action?proId=d56886dc86fc11e3a705&pageIndex=1&pageSize=10&type=main&tag=youku
 		//http://index.youku.com/ProAction!getProVideos.action?proId=d56886dc86fc11e3a705&pageIndex=2&pageSize=10&type=main&tag=tudou
@@ -661,6 +703,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "domain\":[\"", "\"]");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 //		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 //		
@@ -713,6 +758,10 @@ public class youku_index {
 		
 		strHtml_show =Htmlurl(url);
 		
+		if (strHtml_show==null) {
+			return;
+		}
+		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "vv\":[\"", ",\"name\":");
 		System.out.println(youkuDatavvString);
 		
@@ -747,6 +796,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "device\":[\"", "\"]}");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 		String pc = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 		
@@ -783,6 +835,9 @@ public class youku_index {
 		// TODO Auto-generated method stub
 		String idurl=HtmlAnalyze.getTagText(strHtml_show, "_z", "\"");
 		System.out.println(idurl);
+		if (idurl.equals("")) {
+			return;
+		}
 		//http://index.youku.com/ProAction!getProVideos.action?proId=d56886dc86fc11e3a705&pageIndex=0&pageSize=10&type=main&tag=youku
 		String url_json="http://index.youku.com/ProAction!getProVideos.action?proId="+idurl+"&pageIndex=0&pageSize=10&type=main&tag=youku";
 		String strHtml = Htmlurl(url_json);
@@ -882,6 +937,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "domain\":[\"", "\"]");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 //		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 //		
@@ -923,6 +981,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "provinceMap\":[\"", "\"]");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 //		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 //		
@@ -961,6 +1022,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "edu\":[\"", "\"]");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 //		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 //		
@@ -1032,6 +1096,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "occupation\":[\"", "\"]");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 //		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 //		
@@ -1093,6 +1160,9 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "age\":[\"", "\"]");
 		System.out.println(youkuDatavvString);
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 //		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 //		
@@ -1153,6 +1223,10 @@ public class youku_index {
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "sex\":[\"", "\"]}");
 		System.out.println(youkuDatavvString);
 		
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
+		
 		String nanxing = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 		
 		String nvhai = HtmlAnalyze.getTagText(youkuDatavvString+"#", "\",\"", "#");
@@ -1191,6 +1265,10 @@ public class youku_index {
 		
 		String youkuDatavvString =HtmlAnalyze.getTagText(strHtml_show, "vv\":[\"", ",\"name\":");
 		System.out.println(youkuDatavvString);
+		
+		if (youkuDatavvString.equals("")) {
+			return;
+		}
 		
 		String youkuData = HtmlAnalyze.getTagText("#"+youkuDatavvString, "#", "\",\"");
 		

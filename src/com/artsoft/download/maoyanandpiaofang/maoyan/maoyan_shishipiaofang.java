@@ -1,6 +1,5 @@
 package com.artsoft.download.maoyanandpiaofang.maoyan;
 
-import java.io.IOException;
 import java.net.Proxy;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,6 +15,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.artsoft.bean.TEM_FILM_BOXOFFICE_REALTIME;
+import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_key.maoyan_key;
+import com.artsoft.download.maoyanandpiaofang.zhongguopiaofangwang.zhongguopiaofangwang_xunzhe.zhongguopiaofangwang_xunzhe;
 import com.artsoft.oracle.Oracle;
 import com.artsoft.oracle.OracleMovePiaoFang;
 import com.artsoft.oracle2.DBManager;
@@ -25,9 +26,9 @@ import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
-import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_key.maoyan_key;
-import com.artsoft.download.maoyanandpiaofang.zhongguopiaofangwang.zhongguopiaofangwang_xunzhe.zhongguopiaofangwang_xunzhe;
-import com.artsoft.downloadThreadpool.people.haoSou_thread_admin;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class maoyan_shishipiaofang {
 
@@ -54,9 +55,10 @@ public class maoyan_shishipiaofang {
 					String[] numstaticnum1 = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 					for (int i = 0; i < 10; i++) {
+						System.out.println(htmls_num.contains(numstaticnum[i]));
 						htmls_num = htmls_num.replace(numstaticnum[i], numstaticnum1[i]);
-						// System.out.println(numstaticnum[i]);
-						// System.out.println(numstaticnum1[i]);
+						 System.out.println(numstaticnum[i]);
+						 System.out.println(numstaticnum1[i]);
 						// System.out.println(htmls_num);
 					}
 				}
@@ -127,7 +129,7 @@ public class maoyan_shishipiaofang {
 			System.out.println(keturlString = HtmlAnalyze.getTagText(strHtml, "src:url(", ")"));
 
 			if (!keturlString.equals("")) {
-				maoyan_key.openkey();
+				maoyan_key.openKet();
 				strHtml = Stringhtml_int(keturlString, strHtml, urlMain);
 
 			}
@@ -358,8 +360,349 @@ public class maoyan_shishipiaofang {
 		// String datetext = TimeTest.getNowTime("yyyy-MM-dd");
 		String datetext = TimeTest.getBeforeAfterDate(TimeTest.getNowTime("yyyy-MM-dd"), 0).toString();
 		String urlMain = "http://piaofang.maoyan.com/?date=" + datetext;
+		                //http://piaofang.maoyan.com/?date=2017-03-31
 		// urlMain = "";
+		urlMain="http://piaofang.maoyan.com/?ver=normal";
 		openstaticLiShiShuJu(urlMain, datetext);
+	}
+	
+	
+	
+	
+	public static void openstaticNow() {
+		
+//		String datetext = TimeTest.getBeforeAfterDate(TimeTest.getNowTime("yyyy-MM-dd"), 0).toString();
+//		               //http://piaofang.maoyan.com/dayoffice?date=2017-04-05&cnt=10
+//		String urlMain = "http://piaofang.maoyan.com/dayoffice?date=" + datetext+"&cnt=10";
+//		                //http://piaofang.maoyan.com/?date=2017-03-31
+//		// urlMain = "";
+////		urlMain="http://piaofang.maoyan.com/?ver=normal";
+//		openstaticLiShiShuJuNow(urlMain, datetext);
+	}
+	
+	
+	
+	
+	
+	
+
+	private static void openstaticLiShiShuJuNow(String urlMain, String datetext) {
+		// TODO Auto-generated method stub
+		
+
+		// http://piaofang.maoyan.com/?date=2016-03-15
+		// String urlMain = "http://piaofang.maoyan.com/?date="+timeText;
+		String strHtml = "";
+
+		strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+		
+
+		String REAL_DATE = HtmlAnalyze.getTagText(strHtml, "上次更新", "</div>");
+
+
+		String data_date = HtmlAnalyze.getTagText(strHtml, "data-ymd=\"", "\">");
+		System.out.println(data_date = data_date.replace("-", ""));
+		
+		data_date=datetext;
+		
+		strHtml = HtmlAnalyze.getTagText(strHtml, "ticketList\":\"", "\",\"updateTime",true,0);
+		boolean bb=strHtml.contains("\\&quot;");
+		
+		strHtml=strHtml.replace("\"", "");
+		Document doc = Jsoup.parse(strHtml);
+
+		Elements links = doc.select("ul.canTouch");
+
+		for (Element link : links) {
+
+			TEM_FILM_BOXOFFICE_REALTIME realitme = new TEM_FILM_BOXOFFICE_REALTIME();
+			// realitme
+
+			String strmainurl = "";
+			System.out.println(strmainurl = link.attr("data-com"));
+			System.out.println(strmainurl = "http://piaofang.maoyan.com"
+					+ strmainurl.replace("hrefTo,href:", "").replace("'", ""));
+			String text = "";
+			System.out.println(text = link.select("li.c1 b").text());
+
+			String uid = "";
+			System.out.println(uid = HtmlAnalyze.getTagText(strmainurl, "movie/", "?"));
+			String released_days = "";
+			System.out.println(released_days = HtmlAnalyze.getTagText(link.select("li.c1").text(), "上映", "天"));
+			if (released_days.equals("")) {
+				System.out.println(released_days = "1");
+			}
+
+			String total_boxoffice = "";//
+			// System.out.println(link.select("li.c1").toString());
+			System.out.println(total_boxoffice = HtmlAnalyze.getTagText(link.select("li.c1").toString(), "1rem\">",
+					"</em>", true, 0));
+
+			if (!total_boxoffice.equals("") && total_boxoffice.contains("class")) {
+				total_boxoffice = HtmlAnalyze.getTagText(total_boxoffice.toString(), "\">", "</i>");
+			}
+
+			String real_time_boxoffice = "";
+			System.out.println(real_time_boxoffice = link.select("li.c2").text());
+
+			String boxoffice_rate = "";
+			System.out.println(boxoffice_rate = link.select("li.c3").text());
+
+			String slice_rate = "";
+			System.out.println(slice_rate = link.select("li.c4").text());
+
+			String attendance_rate = "";
+			System.out.println(attendance_rate = link.select("li.c5").text());
+			// intotem_film_total_boxoffice
+
+			String BOXOFFICE_TYPE = "";
+			// System.out.println(BOXOFFICE_TYPE = link.select("li.c5").text());
+			// try {
+			// BOXOFFICE_TYPE = link.select("li.c1 em").text();
+			try {
+				BOXOFFICE_TYPE = link.select("li.c1 i").first().text();
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			if (BOXOFFICE_TYPE.equals("")) {
+				BOXOFFICE_TYPE = link.select("li.c1 em").first().text();
+			}
+			// } catch (Exception e) {
+			// // TODO: handle exception
+			// }
+			// if (BOXOFFICE_TYPE) {
+			//
+			// }
+			if (!BOXOFFICE_TYPE.equals("上映首日")) {
+				if (BOXOFFICE_TYPE.contains("上映")) {
+					BOXOFFICE_TYPE = "正式";
+				}
+				if (BOXOFFICE_TYPE.equals("")) {
+					BOXOFFICE_TYPE = "正式";
+				}
+			}
+
+			System.out.println(BOXOFFICE_TYPE);
+
+			// OracleMovePiaoFang.intotem_film_daily_boxoffice(data_date, text,
+			// strmainurl, uid, released_days,
+			// total_boxoffice, real_time_boxoffice, boxoffice_rate, slice_rate,
+			// attendance_rate, 1, "", urlMain,
+			// BOXOFFICE_TYPE);
+			realitme.setDataDate(data_date);
+			realitme.setTitle(text);
+			realitme.setUrl(strmainurl);
+			realitme.setFid(uid);
+			realitme.setReleasedDays(released_days);
+			realitme.setRealTimeBoxoffice(real_time_boxoffice);
+			realitme.setBoxofficeRate(boxoffice_rate);
+			realitme.setTotalBoxoffice(total_boxoffice);
+
+			realitme.setREAL_DATE(REAL_DATE);
+
+			realitme.setCollectionUrl(urlMain);
+			realitme.setDATA_TYPE(0);
+
+			realitme.setSOURCE(1);
+			String SHOW_DATE = "";
+
+			try {
+				String strHtmlxiangxi = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+				Document docstrHtmlxiangxi = Jsoup.parse(strHtmlxiangxi);
+				// SHOW_DATE =
+
+				String atrxt = docstrHtmlxiangxi.select("p.info-release").first().text();
+				String regEx = "[^0-9]";
+				Pattern p = Pattern.compile(regEx);
+				Matcher m = p.matcher(atrxt);
+				System.out.println(SHOW_DATE = m.replaceAll("").trim());
+				realitme.setSHOW_DATE(SHOW_DATE);
+
+				Thread.sleep(1000);
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			OracleMovePiaoFang.intoTEM_FILM_BOXOFFICE_REALTIME(realitme);
+
+			try {
+				zhongguopiaofangwang_xunzhe.shoushuozhongguopiaofangwang(text);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	
+		
+	}
+	
+	
+	
+	
+	public static void openstaticStatic() {
+		
+		String urlMain="https://box.maoyan.com/promovie/api/box/second.json";
+		String datetext = TimeTest.getBeforeAfterDate(TimeTest.getNowTime("yyyy-MM-dd"), 0).toString();
+		openstaticLiShiShuStatic(urlMain, datetext);
+			
+	}
+
+	private static void openstaticLiShiShuStatic(String urlMain, String datetext) {
+		// TODO Auto-generated method stub
+		String strHtml = "";
+		strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+		System.out.println(strHtml);
+		
+		
+		
+		JSONObject oldbejso = new JSONObject();
+		JSONArray list = new JSONArray();
+		
+		
+		
+
+		oldbejso = JSONObject.fromObject(strHtml);
+//		System.out.println(people);
+		String  success = oldbejso.getString("success");
+		if (!success.equals("true")) {
+			return;
+		}
+		
+		JSONObject data=oldbejso.getJSONObject("data");
+		
+		
+		String REAL_DATE=data.getString("updateInfo");
+		
+		String queryDate=data.getString("queryDate");
+		
+		
+		String data_date = "";
+		System.out.println(data_date = queryDate.replace("-", ""));
+		
+//		data_date=datetext;
+		
+		list = (JSONArray) data.get("list");
+		for (Object object : list) {
+			JSONObject objectobject = JSONObject.fromObject(object);
+			String uid="";
+			System.out.println(uid =objectobject.getString("movieId"));
+			String strmainurl="";
+			//http://piaofang.maoyan.com/movie/249898?_v_=yes
+			System.out.println(strmainurl = "http://piaofang.maoyan.com/movie/"+uid+"?_v_=yes");
+			
+			String text=objectobject.getString("movieName");
+			
+			String released_days = "";
+			System.out.println(released_days = HtmlAnalyze.getTagText(objectobject.getString("releaseInfo"), "上映", "天"));
+			if (released_days.equals("")) {
+				System.out.println(released_days = "1");
+			}
+			
+			String total_boxoffice = objectobject.getString("sumBoxInfo");
+			
+			String real_time_boxoffice = objectobject.getString("boxInfo");
+			
+			
+			String boxoffice_rate =objectobject.getString("boxRate");
+			
+			String slice_rate = objectobject.getString("boxRate");
+			
+			
+			
+			String BOXOFFICE_TYPE = "";
+			
+			
+			
+			if (!BOXOFFICE_TYPE.equals("上映首日")) {
+				if (BOXOFFICE_TYPE.contains("上映")) {
+					BOXOFFICE_TYPE = "正式";
+				}
+				if (BOXOFFICE_TYPE.equals("")) {
+					BOXOFFICE_TYPE = "正式";
+				}
+			}
+
+			System.out.println(BOXOFFICE_TYPE);
+			
+			
+			TEM_FILM_BOXOFFICE_REALTIME realitme = new TEM_FILM_BOXOFFICE_REALTIME();
+			
+			realitme.setDataDate(data_date);
+			realitme.setTitle(text);
+			realitme.setUrl(strmainurl);
+			realitme.setFid(uid);
+			realitme.setReleasedDays(released_days);
+			realitme.setRealTimeBoxoffice(real_time_boxoffice);
+			realitme.setBoxofficeRate(boxoffice_rate);
+			realitme.setTotalBoxoffice(total_boxoffice);
+
+			realitme.setREAL_DATE(REAL_DATE);
+
+			realitme.setCollectionUrl(urlMain);
+			realitme.setDATA_TYPE(0);
+
+			realitme.setSOURCE(1);
+			String SHOW_DATE = "";
+
+			try {
+				String strHtmlxiangxi = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+				Document docstrHtmlxiangxi = Jsoup.parse(strHtmlxiangxi);
+				// SHOW_DATE =
+
+				String atrxt = docstrHtmlxiangxi.select("p.info-release").first().text();
+				String regEx = "[^0-9]";
+				Pattern p = Pattern.compile(regEx);
+				Matcher m = p.matcher(atrxt);
+				System.out.println(SHOW_DATE = m.replaceAll("").trim());
+				realitme.setSHOW_DATE(SHOW_DATE);
+
+				Thread.sleep(1000);
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			OracleMovePiaoFang.intoTEM_FILM_BOXOFFICE_REALTIME(realitme);
+
+			try {
+				zhongguopiaofangwang_xunzhe.shoushuozhongguopiaofangwang(text);
+				
+//				maoyan_key.openKet();
+//				adminmaoyan.tem_dim_film_boxoffice(uid, text, strmainurl);
+				
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			try {
+			adminmaoyan.tem_dim_film_boxoffice(uid, text, strmainurl);
+			
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		
+
 	}
 
 	public static void runstatic() {
@@ -367,8 +710,8 @@ public class maoyan_shishipiaofang {
 		// String strurl = DownYoukuMovie
 		// .youkuMaim("http://www.youku.com/v_olist/c_97_s_1_d_1_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81.html");
 		try {
-			
-			openstatic();
+			openstaticStatic();
+//			openstatic();
 
 			if ((Integer.valueOf(TimeTest.getNowTime("HH")) == 23 && Integer.valueOf(TimeTest.getNowTime("mm")) > 30)
 					|| (Integer.valueOf(TimeTest.getNowTime("HH")) == 0
@@ -404,6 +747,12 @@ public class maoyan_shishipiaofang {
 			}
 		}, time, 1000 * 60 * 30 * 1);// 这里设定将延时每天固定执行
 	}
+	
+	
+	
+	
+	
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -412,6 +761,10 @@ public class maoyan_shishipiaofang {
 		// openstatic();
 		
 		TimingTime(01, 00, 59);
+//		openstaticStatic();
+		
+//		runstatic();
+		
 		
 		
 //		String str = "12345A";

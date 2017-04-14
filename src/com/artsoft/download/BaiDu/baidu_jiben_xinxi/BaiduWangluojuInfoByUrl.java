@@ -1,8 +1,6 @@
 package com.artsoft.download.BaiDu.baidu_jiben_xinxi;
 
 import java.io.UnsupportedEncodingException;
-
-
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -20,14 +18,7 @@ import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
-
-/**
- * 单独脚本运行
- * @author Administrator
- *
- */
-
-public class BaiDuTeleplaynext_wangluoju_jiaoben {
+public class BaiduWangluojuInfoByUrl {
 	
 	/**
 	 * 进行数据的搜索
@@ -179,7 +170,7 @@ public class BaiDuTeleplaynext_wangluoju_jiaoben {
 
 
 	public static void runnewMainurl(){
-		List<String> listArray = OracleBaidu.selectbaidudianshijuWangluojuurl_jiaoben();
+		List<String> listArray = OracleBaidu.selectbaidudianshijuWangluojuurl();
 		
 		for (Object Objstring : listArray) {
 			System.out.println(Objstring);
@@ -224,7 +215,7 @@ public class BaiDuTeleplaynext_wangluoju_jiaoben {
 //		runnewMain();
 //		System.out.println(digitUppercase(2));
 		//有url
-		BaiDuTeleplaynext_wangluoju_jiaoben.runnewMainurl();
+		runnewMainurl();
 		
 	}
 

@@ -38,6 +38,7 @@ public class Iqiyi_index {
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
 				
 				String name=listTemp.get(0);
+				String id=listTemp.get(1);
 				String krywordutf8 = "";
 				try {
 					krywordutf8 = java.net.URLEncoder.encode(name, "utf-8");
@@ -45,7 +46,16 @@ public class Iqiyi_index {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				iqiyiIndex(name,krywordutf8);
+//				iqiyiIndex(name,krywordutf8);
+				
+				
+				String url="http://www.soku.com/search_video/q_"+krywordutf8;
+//				caxun(id,name,url);
+//				try {
+				youku_index.caxun(id, krywordutf8, url);
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
 				
 			}
 		}
@@ -70,7 +80,7 @@ public class Iqiyi_index {
 		//http://uaa.iqiyi.com/video_index/v1/get_user_profile?album_name=%E8%9C%82%E9%B8%9F%E7%89%B9%E6%94%BB&callback=window.Q.__callbacks__.cbs271uf
 		String url_people="http://uaa.iqiyi.com/video_index/v1/get_user_profile?album_name="+krywordutf8+"&callback=window.Q.__callbacks__.cbs271uf";
 		
-//		Iqiyi_people(name,url_people);
+		Iqiyi_people(name,url_people);
 		
 		
 		
@@ -78,7 +88,7 @@ public class Iqiyi_index {
 		//http://uaa.iqiyi.com/video_index/v1/get_province_distribution?album_name=%E8%9C%82%E9%B8%9F%E7%89%B9%E6%94%BB&callback=window.Q.__callbacks__.cbkit375
 		String url_diqi="http://uaa.iqiyi.com/video_index/v1/get_province_distribution?album_name="+krywordutf8+"&callback=window.Q.__callbacks__.cbkit375";
 		
-//		Iqiyi_diqi(name,url_diqi);
+		Iqiyi_diqi(name,url_diqi);
 		
 		
 		
@@ -218,7 +228,7 @@ public class Iqiyi_index {
 				Iqiyi.setLabelRate(object.toString());
 				Iqiyi.setDimensionType(1);
 				Iqiyi.setSource(1);
-//				Oracle.InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(Iqiyi);
+				Oracle.InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(Iqiyi);
 				i+=1;
 			}
 		
@@ -249,7 +259,7 @@ public class Iqiyi_index {
 				Iqiyi.setLabelRate(object.toString());
 				Iqiyi.setDimensionType(2);
 				Iqiyi.setSource(1);
-//				Oracle.InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(Iqiyi);
+				Oracle.InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(Iqiyi);
 				
 				i+=1;
 			}
@@ -278,7 +288,7 @@ public class Iqiyi_index {
 				Iqiyi.setLabelRate(object.toString());
 				Iqiyi.setDimensionType(4);
 				Iqiyi.setSource(1);
-//				Oracle.InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(Iqiyi);
+				Oracle.InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(Iqiyi);
 				
 				i+=1;
 			}
@@ -306,7 +316,7 @@ public class Iqiyi_index {
 				Iqiyi.setLabelRate(object.toString());
 				Iqiyi.setDimensionType(5);
 				Iqiyi.setSource(1);
-//				Oracle.InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(Iqiyi);
+				Oracle.InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(Iqiyi);
 				
 				i+=1;
 			}
@@ -335,7 +345,7 @@ public class Iqiyi_index {
 				Iqiyi.setLabelRate(object.toString());
 				Iqiyi.setDimensionType(6);
 				Iqiyi.setSource(1);
-//				Oracle.InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(Iqiyi);
+				Oracle.InsertTEM_IQIYI_AND_YOUKU_WORD_INDEX(Iqiyi);
 				
 				i+=1;
 			}

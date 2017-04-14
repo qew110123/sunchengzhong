@@ -696,8 +696,12 @@ public class Oracle {
 //		sql="select t.tvplay_id,t.tvplay_name from edw.f_tvplay_record t where t.tvplay_name = '龙珠传奇'";
 		
 //		sql="select t1.tvplay_id,( case when t2.data_type=2  then t1.tvplay_name||'电视剧' else  t1.tvplay_name end  )as tvplatname,t2.* from (select t.tvplay_id,t.tvplay_name from         mart.f_tvplay_index t left join         (select nr.tvplay_id,count( distinct nr.data_type) as counts                 from ods.tem_network_reputation nr               where nr.data_type in (5,6)  and nr.date_date = to_char(sysdate-1,'yyyymmdd') and nr.tv_type = 0              group by nr.tvplay_id              ) n on t.tvplay_id = n.tvplay_id and n.counts = 2             where t.data_date = '29991231' and n.tvplay_id is null    order by nvl(t.complex_index,0) desc ) t1 left JOIN (select data_id,data_name,data_type from edw.del_data_flag where data_type=2 ) t2 on t1.tvplay_id =t2.data_id ";
+		
+		
+		
+		sql="select t.tvplay_name,max(d.tvplay_id) as tvplay_id   from ODS.DEL_TVPLAY_NAME_TEM t left join mart.dim_tvplay d on t.tvplay_name = d.tvplay_name  where t.type = 3    and (t.label_name like '%民国%' or t.label_name like '%寻宝%')  group by t.tvplay_name";
 		ArrayList<String> listname = new ArrayList<String>();
-		int iNum = 1;
+		int iNum = 2;
 		List<String> list =DBOperate218.getResultList(conn, sql, iNum);
 		return (ArrayList<String>) list;
 

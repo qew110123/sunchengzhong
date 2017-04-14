@@ -72,9 +72,7 @@ public class wenxin_new {
 //					runnewMain();
 					runnewMainOracleTanchu(TimeTest.getNowTime("yyyy-MM-dd"));
 //					runnewMainOracleTanchu("2017-03-14");
-					
 //					wenxin_new.runnewMainOracle(TimeTest.getNowTime("yyyy-MM-dd"));
-//
 //					DBManager dbm = DBManager.instance();
 //					dbm.executeCall(TimeTest.getNowTime("yyyyMMdd"));
 				} catch (Exception e) {
@@ -180,7 +178,7 @@ private static void runnewMainOracleTanchu(String data_date) {
 				// TODO: handle exception
 			}
 			finally {
-				seleepTime(25);
+				seleepTime(10);
 			}
 
 		}
@@ -191,7 +189,7 @@ private static void runnewMainOracleTanchu(String data_date) {
 
 public static void seleepTime(int t) {
 	t = (int) (t * Math.random());
-	t = t + 40;
+	t = t + 20;
 	// t = 2;
 	try {
 		System.out.println("当前等待" + t + "秒");
@@ -220,24 +218,6 @@ public static void seleepTime(int t) {
 		String StrUrl = "";
 		StrUrl = HtmlAnalyze.getTagText(strHtml, "article_anti_url = \"", "\";");
 		
-		
-
-//		StrUrl = "http://weixin.sogou.com" + StrUrl;
-//
-//		String StrUrlHtml = DownloadUtil.getHtmlText(StrUrl, 1000 * 30, "UTF-8", null, null);
-//		
-//		
-//
-//		System.out.println(StrUrlHtml);
-//
-//		JSONObject objects = new JSONObject();
-//		// JSONArray list = new JSONArray();
-//		objects = JSONObject.fromObject(StrUrlHtml);
-//
-//		JSONObject msgString = objects.getJSONObject("msg");
-//		System.out.println(msgString);
-		
-		// list=msgString;
 
 		// 找到约
 		String sunnumString = HtmlAnalyze.getTagText(strHtml, "找到约", "条结果");
@@ -248,31 +228,11 @@ public static void seleepTime(int t) {
 		// 总数整体数据为
 		System.out.println(sunnumString);
 
-		// urlmain="http://weixin.sogou.com/websearch/weixin/pc/anti_article.jsp?t=1488527753018&signature=lvPLXjoUqcX*IY9vLIzCS0PQW8kHsTp4dO1jTFSrzN1W1QE3aUZQPLwYJBatJizrgl9JW6qn6kTGtpUgbCgR0fNXSGJLL6OF-tCLJr8ywXzvasyPgXdB-qDaJ8L0YvsNEU3E33KER6*UnCbF9epLpy2GmmcaQzdIFQ4zCU4RQLFiROPpcZ*B-GQSp-oGI3zIdYjVxj9d6TKQcI5k-3ZCwdGR6-hMXPKDkvbmGXbcehXX6EJMkjFAomdTUyZfDzLCiP-4v9Mn5NImCNZ-6gtN9xdu6A7SEVNFhgKnkhnamMa5cmr3PEcJABMKDupED*TzjfqV4wehFrdHT0DyV0IiBTnLJ5gd6ajOshSk*Tt73-C78dlXtaEoJFk1eE5b*jrS02U3u3WCullZCb7Pfjoo4DELRTRhszPoM4K5wMqq1jcesiypjQEra4KT8AMlOgk-pB-pNOuIlLrcp5yQ7M5sdMqODmvxbzMKLeaf2cMfF3E=";
-		// strHtml = DownloadUtil.getHtmlText(urlmain, 1000 * 30, "UTF-8", null,
-		// null);
-		// System.out.println(strHtml);
 
 		Document doc = Jsoup.parse(strHtml);
 
 		Elements links = doc.select("ul.news-list li");
 		for (Element element : links) {
-			// System.out.println(element);
-//			String Stringd = "";
-//			System.out.println(Stringd = element.attr("d"));
-//			String[] listString = Stringd.split("-");
-//			String idDtring = listString[listString.length - 1];
-//			System.out.println(idDtring);
-//			String redingZan = "";
-//			System.out.println(redingZan = msgString.getString(idDtring));
-//			String[] listredingZan = redingZan.split(",");
-//			String reding = "";
-//
-//			System.out.println(reding = listredingZan[0]);
-//
-//			String zan = "";
-//
-//			System.out.println(zan = listredingZan[1]);
 			System.out.println(element.select("h3").text());
 			String weixinurl="";
 			System.out.println(weixinurl=element.select("h3 a").attr("href"));
@@ -307,28 +267,6 @@ public static void seleepTime(int t) {
 		
 		
 		wechat1.setUrls(content_url);
-//		String weixinhao="";
-//		try {
-//			weixinhao=htmlssdoc.getElementById("post-user").text();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		
-//		wechat1.setWeixinhao(weixinhao);
-//		
-//		try {
-//			weixinhao=htmlssdoc.getElementById("post-user").text();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		title = (String) app_msg_ext_infoobject.get("title");
-
-//		digest = (String) app_msg_ext_infoobject.get("digest");
-
-//		cover = (String) app_msg_ext_infoobject.get("cover");
-
-		// htmlss= DownloadUtil.getHtmlText(content_url, 1000 * 30,
-		// "UTF-8", null, null);
 
 		String activity_name = htmlssdoc.getElementById("activity-name").text();
 		System.out.println(activity_name);
@@ -575,46 +513,14 @@ public static void seleepTime(int t) {
 	
 	private static void ipfilerall(String urlMain) {
 		// TODO Auto-generated method stub
-		// String strHtml =
-		// DownloadUtil.getHtmlText("http://dev.kuaidaili.com/api/getproxy?orderid=915195947631121&num=999&area=&area_ex=&port=&port_ex=&ipstart=&carrier=0&an_ha=1&an_an=1&protocol=1&method=2&quality=0&sort=0&b_pcchrome=1&b_pcie=1&b_pcff=1&showtype=1",
-		// 1000 * 30, "UTF-8", null, null);
-
-		// String strproxy = "";
-		// strproxy = "";
 		strproxy = ReadTxtFile.getKeyWordFromFile("proxy.txt");
 		String strHtml = DownloadUtil.getHtmlText(
 				"http://qsrdk.daili666api.com/ip/?tid=559375659838998&num=200&delay=1&category=2&sortby=speed",
 				1000 * 30, "UTF-8", null, null);
-		// System.out.println(strHtml);
 		String[] iplist = strHtml.split("\r\n");
-		// System.out.println(iplist.length);
 		for (String stringip : iplist) {
-			// String strIp = stringip.split(":")[0];
-			// String strPort = stringip.split(":")[1];
 			strproxy = strproxy + stringip + "\r\n";
-
-			// Proxy proxy = proxy(strIp, strPort);
-			// System.out.println(proxy);
-			// //
-			// DownloadUtil.getHtmlText("http://vxer.daili666api.com/ip/?tid=559245058880483&num=1000",
-			// // 1000 * 30, "UTF-8", null, proxy );
-			// // System.out.println(urlreturnHtml(urlMain, proxy));
-			// while (pool.getPoolNum() > 10) {
-			// try {
-			// System.out.println("线程数量大于10，等待5s");
-			// Thread.sleep(5000);
-			// } catch (InterruptedException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
-			// }
-			// System.out.println("当前启动线程thread:" + pool.getPoolNum());
-			// pool.performTask(new IpFilter(urlMain, proxy, stringip));
-			// if (returnboolean(urlMain, proxy)) {
-			// System.out.println("可以使用的text"+strIp+":"+strPort);
-			// }
 		}
-
 		ReadTxtFile.wirterfile("proxy.txt", strproxy);
 
 	}

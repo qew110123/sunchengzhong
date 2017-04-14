@@ -9,7 +9,6 @@ import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.util.DealProxy;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
-import com.artsoft.util.TimeTest;
 
 public class DownloadWeibo {
 	public static void hunanBranch(String mainUrl, String tvplayId, String tyPlayName, String DataType) {
@@ -22,7 +21,6 @@ public class DownloadWeibo {
 			proxy = DealProxy.getInstance().getPoxxy();
 			System.out.println(proxy);
 			strHtml = DownloadUtil.getHtmlText(mainUrl, 1000 * 30, "utf-8", null, null);
-
 			try {
 				int t = (int) (10 * Math.random());
 				Thread.sleep((t + 3) * 1000);
@@ -32,11 +30,9 @@ public class DownloadWeibo {
 			}
 			// ConfigManager.getInstance().setConfigValue("mainUrl",
 			// String.valueOf(mainUrl));
-
 			if (strHtml != null && !"".equals(strHtml)) {
 				strHtml = DownloadUtil.decodeUnicode(strHtml);
 				System.out.println(strHtml);
-
 				System.out.println(strhtmlurl = HtmlAnalyze.getTagText(strHtml, "direct_user_url_nologin:_nologin\">",
 						"person_card"));
 				// String strhtmllittle = "";
@@ -70,9 +66,7 @@ public class DownloadWeibo {
 		// TODO Auto-generated method stub
 		List<String> listArray = OracleHaoSou.selectname(Integer.toString(statnum), Integer.toString(endnum));
 		// CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss")+":"+);
-
 		for (Object Objstring : listArray) {
-
 			System.out.println(Objstring);
 			List<String> listTemp = (List<String>) Objstring;
 			System.out.println(listTemp.get(0));
@@ -81,35 +75,30 @@ public class DownloadWeibo {
 				String urlBranch = "";
 				try {
 					urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode(listTemp.get(1), "utf-8");
-
 					hunanBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 			}
 			// intoPlayAmont("0", "µÁ ”æÁ", "222", "0", "2014-10-15 23:10:10",
 			// "baidu.com", "0", "3", "2014-10-15 23:10:10");
-
 		}
-
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ConfigManager config = ConfigManager.getInstance();
-		// driver = config.getConfigValue("driver");
-		String xx = ConfigManager.getInstance().getConfigValue("IDwebopeople");
-		int xxnum = Integer.parseInt(xx);
-		for (int i = xxnum; i < 16871; i = i + 1000) {
-			// i=15780;
-			mainweboPeoPle(i, i + 1000);
-
+		while (true) {
+			ConfigManager config = ConfigManager.getInstance();
+			// driver = config.getConfigValue("driver");
+			String xx = ConfigManager.getInstance().getConfigValue("IDwebopeople");
+			int xxnum = Integer.parseInt(xx);
+			for (int i = xxnum; i < 16871; i = i + 1000) {
+				// i=15780;
+				mainweboPeoPle(i, i + 1000);
+			}
 		}
-
 		// hunanBranch("http://s.weibo.com/weibo/%E5%AD%94%E7%90%B3");
-
 	}
 
 }

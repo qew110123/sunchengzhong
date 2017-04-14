@@ -10,7 +10,7 @@ import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 
-public class tem_tvplay_person {
+public class TemTvplayPerson {
 	
 	
 	public static void  play_people(String id ,String name,String url ,int soutce){

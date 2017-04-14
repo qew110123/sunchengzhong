@@ -106,7 +106,7 @@ public class zhongguopiaofangwang_xunzhe {
 			System.out.println(name.toLowerCase().equals(text.toLowerCase()));
 
 			if (name.toLowerCase().equals(text.toLowerCase()) && link.text().contains(TimeTest.getNowTime("yyyy"))) {
-				 System.out.println("11111");
+//				 System.out.println("11111");
 
 				xuanzheng(name,urlstr);
 

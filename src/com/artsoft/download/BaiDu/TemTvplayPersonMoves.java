@@ -13,7 +13,7 @@ import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.TimeTest;
 
-public class tem_tvplay_person_moves {
+public class TemTvplayPersonMoves {
 	
 	/**
 	 * 进行数据的搜索
@@ -59,7 +59,7 @@ public class tem_tvplay_person_moves {
 //				tem_tvplay_person.play_people(id, name, url, soutce);
 				// mainmore(id, strUrl);
 //				TEM_DIM_FILM movesfilm = mainmore(id, strUrl, strUrlname);
-				tem_tvplay_person.play_people(id, strname, strUrl, 3);
+				TemTvplayPerson.play_people(id, strname, strUrl, 3);
 //				OracleHaoSou.InsertTVplay(tvplay);// 添加操作
 				
 				// OracleHaoSou.UpdateTVplay(tvplay);//修改操作
@@ -106,7 +106,7 @@ public class tem_tvplay_person_moves {
 					&& !"".equals(listTemp.get(1)) && listTemp.get(2) != null && !"".equals(listTemp.get(2))) {
 //				BaiDuTeleplayDownload.mainmore(id, url, name);
 //				tem_tvplay_person.play_people(id, name, url, 0);
-				tem_tvplay_person.play_people(id, name, url, 3);
+				TemTvplayPerson.play_people(id, name, url, 3);
 			}
 
 		}

@@ -73,6 +73,24 @@ public class kasi_people_url_baidu {
 		String tvplay = HtmlAnalyze.getTagText(strHtml, "</span>参演电视剧</h3>", "<div class=\"pageBtns\">", true, 0);
 		// System.out.println(moves);
 		
+		if (tvplay.contains("参演电影")) {
+			
+			tvplay=HtmlAnalyze.getTagText("###>>"+tvplay, "###>>", "参演电影", true, 0);
+			
+		}
+		
+		if (tvplay.equals("")) {
+			
+			tvplay=HtmlAnalyze.getTagText(strHtml,"</span>参演电视剧</h3>", "参演电影", true, 0);
+			
+		}
+		
+		if (tvplay.equals("")) {
+			tvplay = HtmlAnalyze.getTagText(strHtml, "</span>参演电视剧</h3>", "</table>", true, 0);
+		}
+		
+		
+		
 		if (tvplay.equals("")) {
 			if (strHtml.contains("</span>参演电视剧</h3>")) {
 				tvplay = HtmlAnalyze.getTagText(strHtml, "</span>参演电视剧</h3>", "</li>\r\n</ul>\r\n</ul>\r\n</div>\r\n</div>", true, 0);
