@@ -230,7 +230,7 @@ public class MyEntityUtils_bean {
 	 */
 	public static void main(String[] args) {
 		MyEntityUtils_bean t = new MyEntityUtils_bean();
-		t.tableToEntity("ods.TEM_CHINA_NETWORK_VIDEO_INDEX");
+		t.tableToEntity("ods.TEM_MEIHUA");
 	}
 
 }

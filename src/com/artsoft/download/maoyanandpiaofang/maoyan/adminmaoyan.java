@@ -1,25 +1,31 @@
 package com.artsoft.download.maoyanandpiaofang.maoyan;
 
-import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.apache.poi.hssf.record.formula.functions.Replace;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+
+import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_key.maoyan_key;
+import com.artsoft.oracle.OracleBaidu;
+import com.artsoft.oracle.OracleMovePiaoFang;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
-import com.artsoft.download.maoyanandpiaofang.maoyan.maoyan_key.maoyan_key;
-import com.artsoft.oracle.OracleBaidu;
-import com.artsoft.oracle.OracleMovePiaoFang;
+
+import com.artsoft.bean.TEM_FILM_DAILY_BOXOFFICE_ALL;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class adminmaoyan {
 
@@ -141,6 +147,254 @@ public class adminmaoyan {
 				standard, released_date, total_boxoffice, first_week_boxoffice, director, actors, PRODUCE_COMPANY,
 				ISSUE_company, union_ISSUE_company, times_length, Color, Aspect_Ratio, DESCRIPTION, urlMain, 1);
 
+	}
+	
+	
+	/**
+	 * 进行数据采集
+	 * @param id
+	 * @param title
+	 * @param urlMain
+	 * 2017年4月27日11:19:45
+	 */
+	
+	public static void TEM_FILM_DAILY_BOXOFFICE_ALL(String uid, String text, String urlMain){
+		String strHtml = "";
+		
+		urlMain="http://piaofang.maoyan.com/movie/"+uid+"/boxshow";
+
+		strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+
+		maoyan_key.openKet();
+
+		String keturlString = "";
+		System.out.println(keturlString = HtmlAnalyze.getTagText(strHtml, "src:url(", ")"));
+
+		if (!keturlString.equals("")) {
+			strHtml = maoyan_shishipiaofang.Stringhtml_int(keturlString, strHtml, urlMain);
+		}
+		
+		
+		//日期
+		Document doc = Jsoup.parse(strHtml);
+
+		Elements links = doc.select("div.t-table div.t-main-col span");
+		
+//		ArrayList<ArrayList> Listlistdate = new ArrayList<ArrayList>();
+		
+		HashMap<String , String> map = new HashMap<String , String>();   
+
+		for (Element link : links) {
+//			ArrayList Listdate = new ArrayList();
+			String BOXOFFICE_TYPE=link.select("em").text();
+			
+			if (!BOXOFFICE_TYPE.equals("上映首日")) {
+				if (BOXOFFICE_TYPE.contains("上映")) {
+					BOXOFFICE_TYPE = "正式";
+				}
+				if (BOXOFFICE_TYPE.equals("")) {
+					BOXOFFICE_TYPE = "正式";
+				}
+			}
+//			Listdate.add(BOXOFFICE_TYPE);
+			
+			System.out.println(link.select("b").text());
+//			Listdate.add(link.select("b").text());
+//			Listlistdate.add(Listdate);
+			map.put(link.select("b").text(), BOXOFFICE_TYPE);
+			
+			
+		}
+		
+		
+		
+		//票房 座位 综合【票房---
+		Elements linksheader = doc.select("div.t-table div.t-header div.t-col");
+		
+//		ArrayList<ArrayList> Listlistdate = new ArrayList<ArrayList>();
+		
+		ArrayList Listdateheader = new ArrayList();
+
+		for (Element link : linksheader) {
+			String header=link.select("div").first().text();
+			
+//			if (!BOXOFFICE_TYPE.equals("上映首日")) {
+//				if (BOXOFFICE_TYPE.contains("上映")) {
+//					BOXOFFICE_TYPE = "正式";
+//				}
+//				if (BOXOFFICE_TYPE.equals("")) {
+//					BOXOFFICE_TYPE = "正式";
+//				}
+//			}
+			Listdateheader.add(header);
+			
+//			System.out.println(link.select("b").text());
+//			Listdate.add(link.select("b").text());
+//			Listlistdate.add(Listdate);
+			
+		}
+		
+		
+//		Elements linksRow = doc.select("div.t-table div.t-change div.t-row");
+//		ArrayList ListRow = new ArrayList();
+//		
+//		if (linksRow.size()!=links.size()) {
+//			return;
+//		}
+//		
+//		int bbb=0;
+//		for (Element link : linksRow) {
+//			System.out.println(link);
+////			Listdate.add(link.text());
+//			Elements linksRowList=link.select("div.t-col");
+//			int bbi=0;
+//			
+//			String REAL_TIME_BOXOFFICE=""; //综合单日票房
+//			String BOXOFFICE_RATE=""; //票房占比
+//			String SLICE_RATE="";//拍片占比
+//			String ATTENDANCE_RATE="";//上座率
+//			String FIELD_AVERAGE_PNUM="";//场均人次
+//			String FIELD_AVERAGE_PRICE="";//平均票价
+//			
+//			for (Element element : linksRowList) {
+//				System.out.println(element);
+//				
+//				if (bbi==2) {
+//					REAL_TIME_BOXOFFICE=element.text();
+//				}
+//				
+//				if (bbi==3) {
+//					BOXOFFICE_RATE=element.text();
+//				}
+//				
+//				if (bbi==7) {
+//					SLICE_RATE=element.text();
+//				}
+//				
+//				if (bbi==8) {
+//					FIELD_AVERAGE_PNUM=element.text();
+//				}
+//				
+//				if (bbi==4) {
+//					FIELD_AVERAGE_PRICE=element.text();
+//				}
+//				
+//				
+//				
+//				
+//				
+//				bbi=bbi+1;
+//			}
+//			
+//			String BOXOFFICE_TYPE=(String) Listlistdate.get(bbb).get(0);
+//			
+//			String data_date = (String) Listlistdate.get(bbb).get(1);
+//			System.out.println(data_date = data_date.replace("-", ""));
+//			
+//			
+//			
+//			
+//			
+//			bbb=bbb+1;
+//			
+//		}
+		
+		
+		String json= HtmlAnalyze.getTagText(strHtml, "var boxData = ",	"var chartData");
+		
+		JSONObject jsonboxdata = new JSONObject();
+		JSONArray list = new JSONArray();
+		
+		jsonboxdata = JSONObject.fromObject(json);
+		
+		
+//		String keyword="";
+		list=jsonboxdata.getJSONArray("data");
+		for (Object object : list) {
+			
+			TEM_FILM_DAILY_BOXOFFICE_ALL boxoffice=new TEM_FILM_DAILY_BOXOFFICE_ALL();
+			
+			
+			String real_time_boxoffice=""; //综合单日票房
+			String boxoffice_rate=""; //票房占比
+			String slice_rate="";//拍片占比
+			String ATTENDANCE_RATE="";//上座率
+			String FIELD_AVERAGE_PNUM="";//场均人次
+			String FIELD_AVERAGE_PRICE="";//平均票价
+			String DATA_DATE="";
+			String BOXOFFICE_TYPE="";
+			
+			String BILL_BOXOFFICE="";//分账票房
+			String BILL_BOXOFFICE_RATE="";//分账票房占比
+			String BILL_BOXOFFICE_PRICE="";//分账票房票价
+			String FIELD_AVG_PNUM="";//场均人次
+			String NET_SALE_RATE="";//网售占比
+			String GOLD_FIELD_RATE="";//黄金场占比
+			String FIELD_NUM="";//场次
+			String SEAT_RATE="";//排座占比
+			String SEAT_NUM="";//座位数
+//			String BOXOFFICE_TYPE="";//票房类型 点映 零点场 上映首日 正式 预售
+//			String WOMINDEX="";//口碑指数
+//			String COLLECTION_URL="";//采集链接
+			
+			JSONObject objectobject = JSONObject.fromObject(object);
+			System.out.println(real_time_boxoffice = (String) objectobject.get("boxInfo"));
+			
+			System.out.println(boxoffice_rate = (String) objectobject.get("boxRate"));
+			System.out.println(slice_rate = (String) objectobject.get("showRate"));
+			System.out.println(FIELD_AVERAGE_PNUM = (String) objectobject.get("avgShowView"));
+			System.out.println(FIELD_AVERAGE_PRICE = (String) objectobject.get("avgViewBox"));
+			BOXOFFICE_TYPE=map.get(objectobject.getString("showDate"));
+			System.out.println(DATA_DATE=objectobject.getString("showDate").replace("-", ""));
+			
+			BILL_BOXOFFICE=objectobject.getString("splitBoxInfo");
+			BILL_BOXOFFICE_RATE=objectobject.getString("splitBoxRate");
+			BILL_BOXOFFICE_PRICE=objectobject.getString("avgViewSplitBox");
+			FIELD_AVG_PNUM=objectobject.getString("avgShowView");
+			NET_SALE_RATE=objectobject.getString("onlineBoxRate");
+			GOLD_FIELD_RATE=objectobject.getString("primeShowRate");
+			FIELD_NUM=objectobject.getString("showInfo");
+			SEAT_RATE=objectobject.getString("seatRate");
+			SEAT_NUM=objectobject.getString("seatInfo");
+//			WOMINDEX=objectobject.getString("seatInfo");
+			
+			boxoffice.setDataDate(DATA_DATE);
+			boxoffice.setTitle(text);
+			boxoffice.setUrl(urlMain);
+			boxoffice.setShowDays("");
+			boxoffice.setTotalBoxoffice("");
+			boxoffice.setSliceRate(slice_rate);
+			boxoffice.setDailyBoxoffice(real_time_boxoffice);
+			boxoffice.setDailyBoxofficeRate(boxoffice_rate);
+			boxoffice.setBoxofficePrice(FIELD_AVERAGE_PRICE);
+			boxoffice.setBillBoxoffice(BILL_BOXOFFICE);
+			boxoffice.setBillBoxofficeRate(BILL_BOXOFFICE_RATE);
+			boxoffice.setBillBoxofficePrice(BILL_BOXOFFICE_PRICE);
+			boxoffice.setFieldAvgPnum(FIELD_AVG_PNUM);
+			boxoffice.setNetSaleRate(NET_SALE_RATE);
+			boxoffice.setGoldFieldRate(GOLD_FIELD_RATE);
+			boxoffice.setFieldNum(FIELD_NUM);
+			boxoffice.setSeatRate(SEAT_RATE);
+			boxoffice.setSeatNum(SEAT_NUM);
+			boxoffice.setWomindex("");
+			boxoffice.setCollectionUrl(urlMain);
+			boxoffice.setFid(uid);
+			
+			OracleMovePiaoFang.intotem_film_daily_boxoffice(boxoffice);
+			
+			
+//			try {
+//				
+//				OracleMovePiaoFang.intotem_film_daily_boxoffice(DATA_DATE, text, urlMain, uid, "",
+//						"", real_time_boxoffice, boxoffice_rate, slice_rate, "", 1, "", urlMain,
+//						BOXOFFICE_TYPE,FIELD_AVERAGE_PRICE,FIELD_AVERAGE_PNUM,"");
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+			
+		}
+
+		
 	}
 
 	// 日票房明细
@@ -682,12 +936,139 @@ public class adminmaoyan {
 	 * 
 	 */
 	public static void historyopenstatic() {
-		for (int i = 0; i > -43; i--) {
-			String datetext = TimeTest.getBeforeAfterDate("2016-04-27", i).toString();
+		for (int i = 0; i > -3; i--) {
+			String datetext = TimeTest.getBeforeAfterDate("2017-04-21", i).toString();
 			String urlMain = "http://piaofang.maoyan.com/?date=" + datetext;
+			//http://piaofang.maoyan.com/dayoffice?date=2017-04-20&cnt=10
+			urlMain="http://piaofang.maoyan.com/dayoffice?date="+datetext+"&cnt=10";
 			System.out.println(urlMain);
-			openstaticLiShiShuJu(urlMain, datetext);
+			//老版数据的运行，程序改变了
+			//openstaticLiShiShuJu(urlMain, datetext);
+			
+			//单独数据的运行
+			//2017年4月21日15:20:17
+			openstaticLiShiShuJuNew(urlMain, datetext);
 		}
+	}
+
+	private static void openstaticLiShiShuJuNew(String urlMain, String datetext) {
+		// TODO Auto-generated method stub
+		
+		String strHtml = "";
+		
+//		urlMain="http://piaofang.maoyan.com/movie/"+uid+"/boxshow";
+
+		strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null, null);
+
+		maoyan_key.openKet();
+
+		String keturlString = "";
+		System.out.println(keturlString = HtmlAnalyze.getTagText(strHtml, "src:url(", ")"));
+
+		if (!keturlString.equals("")) {
+			strHtml = maoyan_shishipiaofang.Stringhtml_int(keturlString, strHtml, urlMain);
+		}
+		
+		strHtml=HtmlAnalyze.getTagText(strHtml, "ticketList\":\"", "\",",true,0);
+		strHtml=strHtml.replace("\\\"", "\"");
+		strHtml=strHtml.replace("\\n", "");
+		
+		Document doc = Jsoup.parse(strHtml);
+		
+//		System.out.println(doc);
+		String data_date="";
+		System.out.println(data_date = datetext.replace("-", ""));
+		
+		Elements links = doc.select("ul.canTouch");
+		for (Element link : links) {
+			System.out.println(link);
+			String strmainurl = "";
+			System.out.println(strmainurl = link.attr("data-com"));
+			System.out.println(strmainurl = "http://piaofang.maoyan.com"
+					+ strmainurl.replace("hrefTo,href:", "").replace("'", ""));
+			String text = "";
+			System.out.println(text = link.select("li.c1 b").text());
+
+			String uid = "";
+			System.out.println(uid = HtmlAnalyze.getTagText(strmainurl, "movie/", "?"));
+			String released_days = "";
+			System.out.println(released_days = HtmlAnalyze.getTagText(link.select("li.c1").text(), "上映", "天"));
+			if (released_days.equals("")) {
+				System.out.println(released_days = "1");
+			}
+
+			String total_boxoffice = "";//
+			// System.out.println(link.select("li.c1").toString());
+			System.out.println(total_boxoffice = HtmlAnalyze.getTagText(link.select("li.c1").toString(), "1rem\">",
+					"</em>", true, 0));
+			
+			
+			if (!total_boxoffice.equals("")&&total_boxoffice.contains("class")) {
+				total_boxoffice= HtmlAnalyze.getTagText(total_boxoffice.toString(), "\">",
+						"</i>");
+			}
+
+			String real_time_boxoffice = "";
+			System.out.println(real_time_boxoffice = link.select("li.c2").text());
+			if (!real_time_boxoffice.equals("")) {
+				real_time_boxoffice=real_time_boxoffice.replace(" ", "").replace("\n", "");
+			}
+
+			String boxoffice_rate = "";
+			System.out.println(boxoffice_rate = link.select("li.c3").text());
+
+			String slice_rate = "";
+			System.out.println(slice_rate = link.select("li.c4").text());
+
+			String attendance_rate = "";
+			System.out.println(attendance_rate = link.select("li.c5").text());
+			// intotem_film_total_boxoffice
+
+			String BOXOFFICE_TYPE = "";
+			// System.out.println(BOXOFFICE_TYPE = link.select("li.c5").text());
+			// try {
+			// BOXOFFICE_TYPE = link.select("li.c1 em").text();
+			try {
+				BOXOFFICE_TYPE = link.select("li.c1 i.font-orange").first().text();
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			if (BOXOFFICE_TYPE.equals("")) {
+				BOXOFFICE_TYPE = link.select("li.c1 em").first().text();
+			}
+			// } catch (Exception e) {
+			// // TODO: handle exception
+			// }
+			// if (BOXOFFICE_TYPE) {
+			//
+			// }
+			if (!BOXOFFICE_TYPE.equals("上映首日")) {
+				if (BOXOFFICE_TYPE.contains("上映")) {
+					BOXOFFICE_TYPE = "正式";
+				}
+				if (BOXOFFICE_TYPE.equals("")) {
+					BOXOFFICE_TYPE = "正式";
+				}
+			}
+
+			System.out.println(BOXOFFICE_TYPE);
+			try {
+				
+				OracleMovePiaoFang.intotem_film_daily_boxoffice(data_date, text, strmainurl, uid, released_days,
+						total_boxoffice, real_time_boxoffice, boxoffice_rate, slice_rate, attendance_rate, 1, "", urlMain,
+						BOXOFFICE_TYPE);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				TEM_FILM_DAILY_BOXOFFICE_ALL(uid, text, urlMain);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
+		
 	}
 
 	/**
@@ -922,7 +1303,11 @@ public class adminmaoyan {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 		System.out.println(TimeTest.getNowTime("HH"));
 		if (TimeTest.getNowTime("HH").equals("07") || TimeTest.getNowTime("HH").equals("09") || TimeTest.getNowTime("HH").equals("10")|| TimeTest.getNowTime("HH").equals("12")) {
-			runstatic();
+
+			//老数据
+			
+			//			runstatic();
+			historyopenstatic();
 		}
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
@@ -971,7 +1356,7 @@ public class adminmaoyan {
 			if (id != null && !"".equals(id)&&name != null && !"".equals(name)) {
 				
 				try {
-					tem_dim_film_boxoffice(id, name, url);
+					TEM_FILM_DAILY_BOXOFFICE_ALL(id, name, url);
 					
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -1007,9 +1392,24 @@ public class adminmaoyan {
 //		
 //		rundingshitime(1, 00, 00);
 		
+		
+		//2017年4月27日10:45:47
+		
+		
 //		tem_dim_film_boxoffice("344451", "绑架者", "http://piaofang.maoyan.com/movie/344451?_v_=yes");
 		
-		runnewMain();
+		
+//		TEM_FILM_DAILY_BOXOFFICE_ALL("248700", "数据与激情8", "http://piaofang.maoyan.com/movie/248700/boxshow");
+		
+//		runnewMain();
+		
+//		historyopenstatic();
+		
+		
+//		openstaticLiShiShuJuNew("http://piaofang.maoyan.com/dayoffice?date=2017-03-02&cnt=10", "2017-03-02");
+		
+		//单日排片率和座位比
+		rundingshitime(1, 00, 00);
 		
 
 	}

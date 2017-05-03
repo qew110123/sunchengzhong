@@ -299,6 +299,9 @@ public class HaoSouWordAdmin {
 	}
 
 	public static void runstatic() {
+		
+		
+//		main(null);
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 		IpFilter.mainip("http://index.haosou.com/");
 		CommonUtil.setLog("ip代理时间" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));

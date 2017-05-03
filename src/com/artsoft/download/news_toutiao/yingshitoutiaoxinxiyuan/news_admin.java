@@ -5,14 +5,6 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.artsoft.download.TVPlay.DownloadIqiyi;
-import com.artsoft.download.TVPlay.DownloadLetv;
-import com.artsoft.download.TVPlay.DownloadSohu;
-import com.artsoft.download.TVPlay.DownloadYouku;
-import com.artsoft.download.TVPlay.Downloadkankan;
-import com.artsoft.download.TVPlay.Downloadpptv;
-import com.artsoft.download.TVPlay.Downloadqq;
-import com.artsoft.download.news_toutiao.weixin.weixin;
 import com.artsoft.download.news_toutiao.yingshitoutiaoxinxiyuan.shouhuyule.shouhuyule_1;
 import com.artsoft.download.news_toutiao.yingshitoutiaoxinxiyuan.tengxunyule.tengxunyule_1;
 import com.artsoft.download.news_toutiao.yingshitoutiaoxinxiyuan.tengxunyule.tengxunyule_2;
@@ -24,7 +16,6 @@ import com.artsoft.download.news_toutiao.yingshitoutiaoxinxiyuan.wangyiyule.wang
 import com.artsoft.download.news_toutiao.yingshitoutiaoxinxiyuan.wangyiyule.wangyiyule_3;
 import com.artsoft.download.news_toutiao.yingshitoutiaoxinxiyuan.xinlangyule.xinlangyule_1;
 import com.artsoft.oracle2.DBManager;
-import com.artsoft.oracle2.DateUtil;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.TimeTest;
 

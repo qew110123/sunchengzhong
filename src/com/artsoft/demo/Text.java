@@ -17,6 +17,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.artsoft.downloadThreadpool.people.HaoSouWordAdmin;
 import com.artsoft.util.DownloadUtil;
 
 public class Text {
@@ -70,18 +71,43 @@ public class Text {
 		//
 		// System.out.println(doc);
 
-		try {
-			// 返回给定字符串名的类 Class 对象
-			// 并创建此 Class 对象所表示的类的一个新实例
-			Object object = Class.forName("com.artsoft.demo.Quizzee").newInstance();
-			// 返回方法名为“testMethod”的一个 Method 对象，后面跟的是该方法参数
-			Method method = object.getClass().getMethod("testMethod", new Class[] { String.class, Integer.class });
-			// 执行该方法
-			method.invoke(object, new Object[] { new String("数据1"), 520 });
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+//		try {
+//			// 返回给定字符串名的类 Class 对象
+//			// 并创建此 Class 对象所表示的类的一个新实例
+//			Object object = Class.forName("com.artsoft.demo.Quizzee").newInstance();
+//			// 返回方法名为“testMethod”的一个 Method 对象，后面跟的是该方法参数
+//			Method method = object.getClass().getMethod("testMethod", new Class[] { String.class, Integer.class });
+//			// 执行该方法
+//			method.invoke(object, new Object[] { new String("数据1"), 520 });
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		
+//		try {
+//			// 返回给定字符串名的类 Class 对象
+//			// 并创建此 Class 对象所表示的类的一个新实例
+//			Object object = Class.forName("com.artsoft.downloadThreadpool.people.HaoSouWordAdmin").newInstance();
+//			// 返回方法名为“testMethod”的一个 Method 对象，后面跟的是该方法参数
+//			Method method = object.getClass().getMethod("main" , new Class[] {    });
+//			// 执行该方法
+//			method.invoke(object , null);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		
+		
+//		 HaoSouWordAdmin.main(null);
+		 
+//			String strHtml = "";
+//		 String url="http://zhishu.sogou.com/index/media/wechat?kwdNamesStr=%E6%96%87%E7%AB%A0&timePeriodType=MONTH&dataType=MEDIA_WECHAT&queryType=INPUT";
+//		 strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null,
+//		 null);
+//		 
+//		 System.out.println(strHtml);
+		 
+		
 	}
 
 }

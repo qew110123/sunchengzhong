@@ -1,16 +1,10 @@
 package com.artsoft.download.wangzhan_shousuo_all_www.kasi_people_tvplay_move_url;
 
-import java.util.Iterator;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import com.artsoft.bean.TEM_PERSON_URL_WORKS;
-import com.artsoft.bean.TVPLAY_IQIYI_INDEX;
 import com.artsoft.oracle.Oracle;
-import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
 

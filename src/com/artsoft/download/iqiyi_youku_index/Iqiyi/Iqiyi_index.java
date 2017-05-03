@@ -46,16 +46,16 @@ public class Iqiyi_index {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-//				iqiyiIndex(name,krywordutf8);
+				iqiyiIndex(name,krywordutf8);
 				
 				
-				String url="http://www.soku.com/search_video/q_"+krywordutf8;
-//				caxun(id,name,url);
-//				try {
-				youku_index.caxun(id, krywordutf8, url);
-//				} catch (Exception e) {
-//					// TODO: handle exception
-//				}
+//				String url="http://www.soku.com/search_video/q_"+krywordutf8;
+////				caxun(id,name,url);
+////				try {
+//				youku_index.caxun(id, krywordutf8, url);
+////				} catch (Exception e) {
+////					// TODO: handle exception
+////				}
 				
 			}
 		}

@@ -95,7 +95,7 @@ public class WeBoDajiewang {
 		// get.addHeader("ContentType", "text/html; charset=utf-8"));
 
 		get.addHeader(new BasicHeader("Cookie",
-				"PHPSESSID=pjqrrcjoh1h0rq5hhf65vi9su5; WEB3=5a5a4ffe6c5480c798c8f7f6719232cd; _s_tentry=-; Apache=976557069682.1335.1490838469907; SINAGLOBAL=976557069682.1335.1490838469907; ULV=1490838470222:1:1:1:976557069682.1335.1490838469907:; WBStorage=02e13baf68409715|undefined"));
+				"PHPSESSID=enb32h58mehncq4qhbglh0p624; WEB3=c6bf40b75e3394cc69125b6a8186b749; WBStorage=02e13baf68409715|undefined; _s_tentry=-; Apache=6338495039750.273.1492407553432; SINAGLOBAL=6338495039750.273.1492407553432; ULV=1492407553729:1:1:1:6338495039750.273.1492407553432"));
 
 		get.addHeader("Accept", "*/*");
 		// get.addHeader("Accept-Encoding", "gzip, deflate, sdch");

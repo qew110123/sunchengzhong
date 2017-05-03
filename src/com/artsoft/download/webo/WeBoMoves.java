@@ -1,14 +1,11 @@
 package com.artsoft.download.webo;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.artsoft.download.indexso360.index360pool;
-import com.artsoft.downloadThreadpool.IpFilter;
 import com.artsoft.oracle.OracleHaoSou;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.TimeTest;

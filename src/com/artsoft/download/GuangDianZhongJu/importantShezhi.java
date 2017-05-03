@@ -32,6 +32,20 @@ public class importantShezhi {
 //		mainurl(mainUrl);
 
 	}
+	
+	
+	public static void runstatic(){
+		String mainUrl = "http://dsj.sarft.gov.cn/tims/site/views/applications/importantLixiang/view.shanty?appName=importantLixiang&id=0143d2a261a65a344028819a43aeb279";
+
+		mainUrl = "http://dsj.sarft.gov.cn/tims/site/views/applications.shanty?appName=importantLixiang";
+		// mainurl(mainUrl);
+		for (int i = 0; i < 5; i++) {
+			mainUrl = "http://dsj.sarft.gov.cn/tims/site/views/applications.shanty?appName=importantShezhi&pageIndex="
+					+ i;
+			urlmainall(mainUrl);
+		}
+		
+	}
 
 	/**
 	 * 进行数据的整体数据的

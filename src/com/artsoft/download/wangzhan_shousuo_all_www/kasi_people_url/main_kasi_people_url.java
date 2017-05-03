@@ -45,7 +45,7 @@ public class main_kasi_people_url {
 //					douban.shoushuo(id, name, zhuopin);
 					
 					
-					
+					 
 //					baidu360.shoushuo(id, name, zhuopin);
 					
 				} catch (Exception e) {

@@ -34,6 +34,19 @@ public class Changing {
 
 	}
 	
+	public static void  runstatic(){
+		
+		String mainUrl = "http://dsj.sarft.gov.cn/tims/site/views/applications/importantLixiang/view.shanty?appName=importantLixiang&id=0143d2a261a65a344028819a43aeb279";
+		for (int i = 0; i < 8; i++) {
+			mainUrl = "http://dsj.sarft.gov.cn/tims/site/views/applications.shanty?appName=changing&pageIndex=" + i;
+			urlmainall(mainUrl);
+		}
+		
+	}
+	
+	
+	
+	
 	private static void mainurl1(String mainUrl) {
 		// TODO Auto-generated method stub
 		String strHtml = "";

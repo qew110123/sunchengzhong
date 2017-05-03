@@ -984,6 +984,8 @@ public class weixin {
 		TimingTime(1, 59, 59);
 		
 		
+		
+		
 		//单次运行数据的整体数据
 //		WeiXinOnlyRun();
 		

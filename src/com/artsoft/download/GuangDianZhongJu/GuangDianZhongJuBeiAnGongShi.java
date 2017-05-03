@@ -66,6 +66,15 @@ public class GuangDianZhongJuBeiAnGongShi {
 		
 
 	}
+	public static void runstatic(){
+		String urls = "http://dsj.sarft.gov.cn/tims/site/views/applications.shanty?appName=note&pageIndex=1";
+		for (int i = 1; i <= 9; i++) {
+			urls = "http://dsj.sarft.gov.cn/tims/site/views/applications.shanty?appName=note&pageIndex="+i;
+			urlmainall(urls);
+		}
+		
+	}
+	
 	
 	
 	public static String dateString(String stringdate){

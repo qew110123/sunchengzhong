@@ -1,6 +1,5 @@
 package com.artsoft.download.downNetwork.DanJiBoFangLiang;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -11,12 +10,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.artsoft.download.downNetwork.DownYoukuNetwork;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
 import com.artsoft.util.HtmlAnalyze;
-import com.artsoft.util.ReadTxtFile;
 import com.artsoft.util.TimeTest;
 
 public class DownloadYouku_always_DanJiBoFangLiang {

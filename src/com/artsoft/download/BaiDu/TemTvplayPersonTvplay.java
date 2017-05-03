@@ -31,7 +31,7 @@ public class TemTvplayPersonTvplay {
 
 
 
-	private static void robotrun(String sql) {
+	public static void robotrun(String sql) {
 		// TODO Auto-generated method stub
 		
 		List<String> listArray = OracleBaidu.selectbaidudianshijuTVplay(sql);
@@ -48,7 +48,12 @@ public class TemTvplayPersonTvplay {
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0)) && listTemp.get(1) != null
 					&& !"".equals(listTemp.get(1)) && listTemp.get(2) != null && !"".equals(listTemp.get(2))) {
 //				BaiDuTeleplayDownload.mainmore(id, url, name);
-				TemTvplayPerson.play_people(id, name, url, 0);
+				try {
+					
+					TemTvplayPerson.play_people(id, name, url, 0);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
 
 		}
@@ -60,13 +65,13 @@ public class TemTvplayPersonTvplay {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//电视剧参加主演
-//		runupdate();
+		runupdate();
 		
 		//电视剧参加主演 sql
 		
 //		tem_tvplay_person_tvplay.robotrun("");
 		
-		TemTvplayPersonTvplay.robotrun("sql");
+//		TemTvplayPersonTvplay.robotrun("select t.tvplay_id,t.tvplay_name");
 		
 		
 	}

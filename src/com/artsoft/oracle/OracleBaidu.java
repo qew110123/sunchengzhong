@@ -225,7 +225,7 @@ public class OracleBaidu {
 		
 		sql=" select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where t.update_date >='20161206' and t.tvplay_url is not null";
 		
-		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where t.update_date >='20161206' and t.tvplay_url is not null ";
+		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where t.update_date >='20161206' and t.tvplay_url is not null and t.is_del!=-1 and t.tvplay_url !='无' and t.tvplay_url !='否'and t.tvplay_url !=' 无' and t.tvplay_url !='无 '";
 		
 //		sql="select t.tvplay_id,t.tvplay_name,t.tvplay_url from EDW.DIM_TVPLAY t where   t.tvplay_name='多情江山'";
 		ArrayList<String> listname = new ArrayList<String>();
@@ -631,6 +631,24 @@ public class OracleBaidu {
 		String sql = " select t.film_id,t.film_name,t.FILM_URL from ods.dim_film t order by t.film_id ";
 		
 		sql="select * from edw.dim_film t where t.film_name = '美人鱼'";
+		ArrayList<String> listname = new ArrayList<String>();
+		int iNum = 3;
+		List<String> list = DBOperate218.getResultList(conn, sql, iNum);
+		return (ArrayList<String>) list;
+	}
+	
+	
+	/**
+	 * 百度数据的中的全部电影
+	 * 电影中的数据的图片数据
+	 * 2016年11月1日15:02:35
+	 * @return
+	 */
+	public static List selectmove_zhuyanshujutupianxianzai(String sql) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+//		String sql = " select t.film_id,t.film_name,t.FILM_URL from ods.dim_film t order by t.film_id ";
+//		
+//		sql="select * from edw.dim_film t where t.film_name = '美人鱼'";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 3;
 		List<String> list = DBOperate218.getResultList(conn, sql, iNum);

@@ -119,7 +119,9 @@ public class zhongguopiaofangwang_xunzhe {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		shoushuozhongguopiaofangwang("少年");
-		 xuanzheng("父子雄兵","http://www.cbooo.cn/m/657204");
+//		 xuanzheng("父子雄兵","http://www.cbooo.cn/m/657204");
+		 xuanzheng("拆弹·专家","http://www.cbooo.cn/m/660393");
+		
 	}
 
 }

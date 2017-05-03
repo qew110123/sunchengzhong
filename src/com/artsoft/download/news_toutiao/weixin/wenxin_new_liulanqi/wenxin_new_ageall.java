@@ -62,9 +62,9 @@ public class wenxin_new_ageall {
 		
 		for (int i = 0; i < 74; i++) {
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":¿ª Ê¼");
-			CommonUtil.setLog(TimeTest.getBeforeAfterDate("2017-03-12", -i)+"");
-			System.out.println(TimeTest.getBeforeAfterDate("2017-03-12", -i));
-			runnewMainOracleTanchu(""+TimeTest.getBeforeAfterDate("2017-03-12", -i));
+			CommonUtil.setLog(TimeTest.getBeforeAfterDate("2017-04-18", -i)+"");
+			System.out.println(TimeTest.getBeforeAfterDate("2017-04-18", -i));
+			runnewMainOracleTanchu(""+TimeTest.getBeforeAfterDate("2017-04-18", -i));
 			
 		}
 		

@@ -1,6 +1,7 @@
 package com.artsoft.download.iqiyi_youku_index.Iqiyi;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -41,6 +42,43 @@ public class youku_index {
 //		}
 		
 
+	}
+	
+	
+	
+	private static void runstatic() {
+		// TODO Auto-generated method stub
+		List<String> listArray = Oracle.selec_tvplay();
+		System.out.println(listArray.size());
+		for (Object Objstring : listArray) {
+//			System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+//			System.out.println(listTemp.get(0));
+//			System.out.println(listTemp.get(1));
+			if (listTemp.get(0) != null && !"".equals(listTemp.get(0))) {
+				
+				String name=listTemp.get(0);
+				String id=listTemp.get(1);
+				String krywordutf8 = "";
+				try {
+					krywordutf8 = java.net.URLEncoder.encode(name, "utf-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+//				iqiyiIndex(name,krywordutf8);
+				
+				
+				String url="http://www.soku.com/search_video/q_"+krywordutf8;
+//				caxun(id,name,url);
+//				try {
+				youku_index.caxun(id, krywordutf8, url);
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
+				
+			}
+		}
 	}
 	
 	static void caxun(String id, String name, String url) {

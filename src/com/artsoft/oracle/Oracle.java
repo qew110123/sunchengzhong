@@ -9,6 +9,7 @@ import com.artsoft.bean.MAYAO_KEY;
 import com.artsoft.bean.TEM_BAIDU_NEW;
 import com.artsoft.bean.TEM_CHINA_NETWORK_VIDEO_INDEX;
 import com.artsoft.bean.TEM_IQIYI_AND_YOUKU_WORD_INDEX;
+import com.artsoft.bean.TEM_MEIHUA;
 import com.artsoft.bean.TEM_PERSON_URL;
 import com.artsoft.bean.TEM_PERSON_URL_WORKS;
 import com.artsoft.bean.TEM_TVPLAY_TIDBITS;
@@ -293,6 +294,11 @@ public class Oracle {
 		Connection conn = DBOperate218.getInstance().getConnection();
 
 		String strSql = "INSERT INTO ods.WECHAT_INFORMATION t (t.data_id,t.names,t.dates,t.post_user,t.content_all,t.content_p,t.urls,t.weixinhao,t.data_date,t.weixin_ation,t.original,t.ranking,IMG_BIG_URL,IMG_BIG_NAME,SOURCE,DATA_TYPE,UPDATE_FLAG) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		if (INFORMATION.getContentP().contains("embed")) {
+			return;
+		}
+		
 		List<Comparable> list = new ArrayList();
 		list.add(INFORMATION.getDataId());
 		list.add(INFORMATION.getNames());
@@ -436,6 +442,8 @@ public class Oracle {
 	public static List selectWEIXIN_NUMBER_NEW() {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.person_id,t.person_name from mart.f_person_index t where t.data_date = '29991231' order by t.network_index desc,t.person_id";
+		
+		sql="select a.person_id,        a.person_name   from (select t.person_id,                t.person_name,                row_number() over(partition by 1 order by t.network_index desc, t.person_id) as ranks           from mart.f_person_index t          where t.data_date = '29991231'          order by t.network_index desc, t.person_id) a where a.ranks<=10000"; 
 //		sql=" select t.* from ODS.WEIXIN_NUMBER t where t.public_number='Ó°Í¶ÈË'";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;
@@ -870,6 +878,30 @@ public class Oracle {
 		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
 		System.out.println(bb);
 		
+	}
+
+	public static void InsertTEMMEIHUA(TEM_MEIHUA tEMMEIHUA) {
+		Connection conn = DBOperate218.getInstance().getConnection();
+
+		String strSql = "INSERT INTO ods.TEM_MEIHUA t (t.into_date,t.catchline,t.brandname,t.productname,t.channelname,"
+				+ "t.categoryname,t.language,t.description,t.graphicsmall,t.videotime,t.recordtime,"
+				+ "t.peoples) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+		List<Comparable> list = new ArrayList();
+		list.add(TimeTest.getNowTime("yyyyMMdd"));
+		list.add(tEMMEIHUA.getCatchline());
+		list.add(tEMMEIHUA.getBrandname());
+		list.add(tEMMEIHUA.getProductname());
+		list.add(tEMMEIHUA.getChannelname());
+		list.add(tEMMEIHUA.getCategoryname());
+		list.add(tEMMEIHUA.getLanguage());
+		list.add(tEMMEIHUA.getDescription());
+		list.add(tEMMEIHUA.getGraphicsmall());
+		list.add(tEMMEIHUA.getVideotime());
+		list.add(tEMMEIHUA.getRecordtime());
+		list.add(tEMMEIHUA.getPeoples());
+		System.out.println(list.toString());
+		boolean bb = DBOperate218.insertRecord(conn, strSql, list);
+		System.out.println(bb);
 	}
 
 }

@@ -9,13 +9,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.artsoft.bean.TEM_FILM_BOXOFFICE_REALTIME;
-import com.artsoft.bean.TEM_FILM_DAILY_CINEMA;
 import com.artsoft.bean.TEM_FILM_WEEK_CINEMA;
 import com.artsoft.oracle.OracleMovePiaoFang;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
-import com.artsoft.util.HtmlAnalyze;
 import com.artsoft.util.TimeTest;
 
 import net.sf.json.JSONArray;

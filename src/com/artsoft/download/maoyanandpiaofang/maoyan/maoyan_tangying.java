@@ -13,7 +13,6 @@ import org.jsoup.select.Elements;
 
 import com.artsoft.bean.TEM_FILM_CINEMA;
 import com.artsoft.bean.TEM_FILM_CINEMA_DATE;
-import com.artsoft.bean.TEM_FILM_SCHEDULE;
 import com.artsoft.oracle.OracleMovePiaoFang;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;

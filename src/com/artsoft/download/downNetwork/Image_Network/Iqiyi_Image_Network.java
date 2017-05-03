@@ -5,7 +5,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.artsoft.download.downNetwork.DownIqiyiNetword;
 import com.artsoft.util.DownloadImage;
 import com.artsoft.util.DownloadUtil;
 

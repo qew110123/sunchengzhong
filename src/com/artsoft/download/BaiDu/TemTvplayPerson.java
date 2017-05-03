@@ -1,5 +1,7 @@
 package com.artsoft.download.BaiDu;
 
+import java.io.UnsupportedEncodingException;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,15 +17,69 @@ public class TemTvplayPerson {
 	
 	public static void  play_people(String id ,String name,String url ,int soutce){
 		
-		String strHtml="";
-		boolean bb = true;
-		while (bb) {
+//		String strHtml="";
+//		boolean bb = true;
+//		while (bb) {
+//			strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
+//			if (strHtml != null && !"".equals(strHtml)) {
+//				bb = false;
+//			}
+//		}
+		
+		String strHtml = "";
+		
+			
+		
+//		boolean bb = true;
+//		while (bb) {
 			strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
-			if (strHtml != null && !"".equals(strHtml)) {
-				bb = false;
+//			if (strHtml != null && !"".equals(strHtml)) {
+//				bb = false;
+//			}
+//		}
+			Document doc;	
+		try {
+		 doc = Jsoup.parse(strHtml);
+		
+		
+		//您所访问的页面不存在
+		if (strHtml.contains("您所访问的页面不存在")) {
+			
+			if (BaiDuTeleplayDownload.isChineseChar(url)) {
+				
+				url=url.replace("#", "787878788");
+				
+				url=url.replace(":", "909090909090");
+				
+				String url_gai=url.replace("/", "11111111");
+				String urlutf_8="";
+				try {
+					urlutf_8 = java.net.URLEncoder.encode(url_gai, "utf-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				url=urlutf_8.replace("11111111", "/");
+				url=url.replace("909090909090", ":");
+				
+				url=url.replace("787878788","#" );
+				strHtml = DownloadUtil.getHtmlText(url, 1000 * 30, "UTF-8", null, null);
+				
+				 doc = Jsoup.parse(strHtml);
+				
 			}
+			
 		}
-		Document doc = Jsoup.parse(strHtml);
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+			return;
+		}
+		
+		
+		
+//		Document doc = Jsoup.parse(strHtml);
+		
 		Elements linkli = doc.select("li.pages ul.actorList li.listItem");
 		for (Element elementli : linkli) {
 			TEM_PLAY_PERSON playpeoson=new TEM_PLAY_PERSON();
@@ -77,8 +133,6 @@ public class TemTvplayPerson {
 			System.out.println(DUBBING_NAME=HtmlAnalyze.getTagText(elementli.toString(), "配音&nbsp;&nbsp;</em>", "</dd>"));
 			playpeoson.setDubbingName(DUBBING_NAME);
 			
-//			String 
-//			
 			OracleHaoSou.intoTEM_PLAY_PERSON(playpeoson);
 			
 			// System.out.println(HtmlAnalyze.getTagText(elementli.select("div.role-actor

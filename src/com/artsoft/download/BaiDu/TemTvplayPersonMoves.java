@@ -100,8 +100,32 @@ public class TemTvplayPersonMoves {
 			String name = "";
 			String url = "";
 			System.out.println(id = listTemp.get(0));
-			System.out.println(url = listTemp.get(2));
 			System.out.println(name = listTemp.get(1));
+			System.out.println(url = listTemp.get(2));
+			if (listTemp.get(0) != null && !"".equals(listTemp.get(0)) && listTemp.get(1) != null
+					&& !"".equals(listTemp.get(1)) && listTemp.get(2) != null && !"".equals(listTemp.get(2))) {
+//				BaiDuTeleplayDownload.mainmore(id, url, name);
+//				tem_tvplay_person.play_people(id, name, url, 0);
+				TemTvplayPerson.play_people(id, name, url, 3);
+			}
+
+		}
+		
+	}
+	
+	public static void runnewMainurl(String sql) {
+		// TODO Auto-generated method stub
+		
+		List<String> listArray = OracleBaidu.selectmove_zhuyanshujutupianxianzai(sql);
+		for (Object Objstring : listArray) {
+			System.out.println(Objstring);
+			List<String> listTemp = (List<String>) Objstring;
+			String id = "";
+			String name = "";
+			String url = "";
+			System.out.println(id = listTemp.get(0));
+			System.out.println(name = listTemp.get(1));
+			System.out.println(url = listTemp.get(2));
 			if (listTemp.get(0) != null && !"".equals(listTemp.get(0)) && listTemp.get(1) != null
 					&& !"".equals(listTemp.get(1)) && listTemp.get(2) != null && !"".equals(listTemp.get(2))) {
 //				BaiDuTeleplayDownload.mainmore(id, url, name);
@@ -117,6 +141,8 @@ public class TemTvplayPersonMoves {
 		// TODO Auto-generated method stub
 //		runnewMain();
 		runnewMainurl();
+		
+//		TemTvplayPerson.play_people("0", "Îû¹þËÄÖØ×à", "http://baike.baidu.com/item/%E5%98%BB%E5%93%88%E5%9B%9B%E9%87%8D%E5%A5%8F/3177892", 3);
 	}
 
 	
