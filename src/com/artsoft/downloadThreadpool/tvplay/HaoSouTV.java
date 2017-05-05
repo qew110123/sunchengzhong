@@ -258,7 +258,9 @@ public class HaoSouTV {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				System.out.println("-------设定要指定任务--------");
+				CommonUtil.setLog("type:开始||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:360指数-电视剧 任务开始;");
 				runstatic();
+				CommonUtil.setLog("type:结束||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:360指数-电视剧 任务结束;");
 			}
 		}, time, 1000 * 60 * 60 * 8);// 这里设定将延时每天固定执行
 	}

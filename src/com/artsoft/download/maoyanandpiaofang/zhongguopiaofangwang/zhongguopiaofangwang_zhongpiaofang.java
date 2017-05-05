@@ -256,8 +256,9 @@ public class zhongguopiaofangwang_zhongpiaofang {
 	
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-
+		CommonUtil.setLog("type:开始||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:中国票房网单日票房 任务开始;");
 		openstatic();
+		CommonUtil.setLog("type:结 束||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:中国票房网单日票房 任务结 束;");
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 

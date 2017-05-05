@@ -580,6 +580,8 @@ public class DownloadYouku {
 
 	public static void runstatic() {
 		CommonUtil.setLog("优酷总数" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始");
+		//dispatch_id:1||task_id:2||type:开始||date:2017年4月11日15:42:00||logs:某某任务开始;
+		CommonUtil.setLog("type:开始||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:电视剧-播放量-优酷 任务开始;");
 		openstatic();
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		openordor();
@@ -599,7 +601,7 @@ public class DownloadYouku {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-
+		CommonUtil.setLog("type:结束||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:电视剧-播放量-优酷 任务结束;");
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结束");
 	}
 	

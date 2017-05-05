@@ -936,6 +936,7 @@ public class adminmaoyan {
 	 * 
 	 */
 	public static void historyopenstatic() {
+		CommonUtil.setLog("type:开始||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:猫眼单日票房 任务开始;");
 		for (int i = 0; i > -3; i--) {
 			String datetext = TimeTest.getBeforeAfterDate("2017-04-21", i).toString();
 			String urlMain = "http://piaofang.maoyan.com/?date=" + datetext;
@@ -949,6 +950,8 @@ public class adminmaoyan {
 			//2017年4月21日15:20:17
 			openstaticLiShiShuJuNew(urlMain, datetext);
 		}
+		
+		CommonUtil.setLog("type:结束||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:猫眼单日票房 任务结束;");
 	}
 
 	private static void openstaticLiShiShuJuNew(String urlMain, String datetext) {
@@ -1301,6 +1304,7 @@ public class adminmaoyan {
 	
 	public static void runstaticshijian(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+		
 		System.out.println(TimeTest.getNowTime("HH"));
 		if (TimeTest.getNowTime("HH").equals("07") || TimeTest.getNowTime("HH").equals("09") || TimeTest.getNowTime("HH").equals("10")|| TimeTest.getNowTime("HH").equals("12")) {
 
@@ -1309,6 +1313,7 @@ public class adminmaoyan {
 			//			runstatic();
 			historyopenstatic();
 		}
+		
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
 	

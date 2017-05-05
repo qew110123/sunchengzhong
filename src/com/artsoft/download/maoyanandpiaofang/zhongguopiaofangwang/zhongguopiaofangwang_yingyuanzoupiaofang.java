@@ -33,8 +33,9 @@ public class zhongguopiaofangwang_yingyuanzoupiaofang {
 //
 //		}
 //		try {
-			
+		CommonUtil.setLog("type:开始||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:中国票房网影院周票房数据 任务开始;");
 			numxian("http://www.cbooo.cn/cinemaweek");
+		CommonUtil.setLog("type:结束||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:中国票房网影院周票房数据 任务结束;");
 //		} catch (Exception e) {
 //			// TODO: handle exception
 //		}

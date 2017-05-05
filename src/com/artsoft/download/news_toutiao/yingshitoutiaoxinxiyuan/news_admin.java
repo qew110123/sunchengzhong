@@ -22,7 +22,8 @@ import com.artsoft.util.TimeTest;
 public class news_admin {
 	public static void runstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
-
+		CommonUtil.setLog("type:开始||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:新闻内容采集 任务开始;");
+		
 		try {
 			jinritoutiao.runstaticshijian();
 		} catch (Exception e) {
@@ -214,6 +215,9 @@ public class news_admin {
 		
 		// DownloadHunantv.runstatic();
 
+		
+		CommonUtil.setLog("type:结束||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:新闻内容采集 任务结束;");
+		
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}

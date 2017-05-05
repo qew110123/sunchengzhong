@@ -65,7 +65,9 @@ public class zhongguopioafangwang_diqu {
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
 			System.out.println(TimeTest.getNowTime("HH"));
 			if (TimeTest.getNowTime("HH").equals("12") || TimeTest.getNowTime("HH").equals("09")) {
+				CommonUtil.setLog("type:开始||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:中国票房网票房城市地区 任务开始;");
 				runstatic();
+				CommonUtil.setLog("type:结束||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:中国票房网票房城市地区 任务结束;");
 			}
 			CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 		}

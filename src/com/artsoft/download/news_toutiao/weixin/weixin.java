@@ -49,11 +49,13 @@ public class weixin {
 				System.out.println("-------设定要指定任务--------");
 				// runstatic();
 				try {
-
+					CommonUtil.setLog("type:开始||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:新闻微信公众号采集 任务开始;");
+					
 					runnewMain();
-
 					DBManager dbm = DBManager.instance();
 					dbm.executeCall(TimeTest.getNowTime("yyyyMMdd"));
+					
+					CommonUtil.setLog("type:结束||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:新闻微信公众号采集 任务结束;");
 				} catch (Exception e) {
 					// TODO: handle exception
 				}

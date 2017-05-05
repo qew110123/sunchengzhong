@@ -13,6 +13,7 @@ public class variety_admin {
 	
 	public static void runstatic(){
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开 始");
+		CommonUtil.setLog("type:开始||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:综艺播放量 任务开始;");
 		try {
 			variety_YouKu.runstatic();
 		} catch (Exception e) {
@@ -58,6 +59,9 @@ public class variety_admin {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
+		
+		CommonUtil.setLog("type:结束||date:" + TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + "||logs:综艺播放量 任务结束;");
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
 	}
