@@ -197,7 +197,7 @@ public class wenxin_new_ageall {
 						+ data_date + "&et=" + data_date + "&interation=null&wxid=&usip=null&from=tool";
 
 				String data_date_jian = data_date.replace("-", "");
-				wenxin_new_liulanqi.hunanBranch(urlmain, id, name, "1", data_date_jian);
+//				wenxin_new_liulanqi.hunanBranch(urlmain, id, name, "1", data_date_jian);
 
 			} catch (Exception e) {
 				// TODO: handle exception

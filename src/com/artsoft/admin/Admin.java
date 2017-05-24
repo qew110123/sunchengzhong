@@ -1,6 +1,5 @@
 package com.artsoft.admin;
 
-import com.artsoft.download.downNetwork.DanJiBoFangLiang.DownloadHunantv_DanJiBoFangLiang;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.TimeTest;
 
@@ -12,7 +11,7 @@ public class Admin {
 		// String strurl = DownYoukuMovie
 		// .youkuMaim("http://www.youku.com/v_olist/c_97_s_1_d_1_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81.html");
 		/**
-		 * 百度
+		 * 百度新闻量
 		 */
 		new Thread(new Thread_Main("newsnumthread")).start();
 

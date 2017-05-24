@@ -132,6 +132,21 @@ public class DownloadYouku {
 					strmainxiangxiurl=strmainxiangxiurl.replace("//", "http://");
 				}
 				
+				if (strmainxiangxiurl.equals("http://sports.youku.com/")||strmainxiangxiurl.equals("http://comic.youku.com/")||strmainxiangxiurl.equals("http://zy.youku.com/")||strmainxiangxiurl.equals("")||!strmainxiangxiurl.contains("html")) {
+					
+					Elements strmainxiangxiurls=strmainurlHtmldoc.select("a");
+					for (Element element : strmainxiangxiurls) {
+						if (element.text().equals("节目简介")) {
+							strmainxiangxiurl=element.attr("href");
+							if (!strmainxiangxiurl.contains("http://")) {
+								strmainxiangxiurl=strmainxiangxiurl.replace("//", "http://");
+							}
+						}
+					}
+				}
+				
+				
+				
 				
 				DownloadYouku.youkuBranch(strmainxiangxiurl);
 				
@@ -207,6 +222,7 @@ public class DownloadYouku {
 		String score = ""; // 评分
 		score = HtmlAnalyze.getTagText(strHtml, "<label>评分:</label>", "<style type=\"text/css\">");
 		if (score.equals("")) {
+			//<span class="star-num">
 			score=HtmlAnalyze.getTagText(strHtml, "class=\"star-num\">", "<");
 		}
 		System.out.println(score);
@@ -680,6 +696,8 @@ public class DownloadYouku {
 //						http://list.youku.com/category/show/c_97_a_%E5%8F%A4%E8%A3%85_s_1_d_1_g_%E5%A4%A7%E9%99%86_s_1_d_1_p_1.html?spm=a2h1n.8251845.0.0
 						url = "http://list.youku.com/category/show/c_97_a_" + java.net.URLEncoder.encode(leixingtxt, "utf-8")
 								+ "_a_" + java.net.URLEncoder.encode(diqutxt, "utf-8") + "_s_1_d_1_p_" + i + ".html?spm=a2h1n.8251845.0.0";
+						
+						url="http://list.youku.com/category/show/c_97_g_"+leixingtxt+"_a_"+diqutxt+"_s_1_d_1_p_"+i+".html?spm=a2h1n.8251845.0.0";
 					} catch (UnsupportedEncodingException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

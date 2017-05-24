@@ -107,8 +107,10 @@ public class baidu_newsnum {
 
 	public static void openstatic() {
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始人");
+		//人的百度新闻量
 		peoplenews();
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":开始电视剧");
+		//电视剧的百度新闻量
 		tvplaynews();
 	}
 

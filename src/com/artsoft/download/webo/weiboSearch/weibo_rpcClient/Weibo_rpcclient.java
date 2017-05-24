@@ -61,6 +61,8 @@ public class Weibo_rpcclient {
 //		run_rpc_weibo("64", "快乐大本营", "", 5);
 		
 //		run_rpc_weibo("1", "邓伦", "", 1);
+		
+		run_rpc_weibo("6856695", "龙珠传奇", "", 2);
 	}
 	
 	

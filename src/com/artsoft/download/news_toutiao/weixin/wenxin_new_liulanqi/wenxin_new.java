@@ -170,9 +170,11 @@ private static void runnewMainOracleTanchu(String data_date) {
 //				mainUrlall(id,name, yingshis_utf_8,data_date);
 				String urlmain = "http://weixin.sogou.com/weixin?type=2&s_from=input&query=%E8%8C%83%E5%86%B0%E5%86%B0&ie=utf8&_sug_=y&_sug_type_=&w=01019900&sut=2747&sst0=1488525984844&lkt=1%2C1488525984699%2C1488525984699";
 				urlmain="http://weixin.sogou.com/weixin?type=2&ie=utf8&query="+yingshis_utf_8+"&tsn=5&ft="+data_date+"&et="+data_date+"&interation=null&wxid=&usip=null&from=tool";
-				
+				//http://weixin.sogou.com/weixin?type=2&query=%E5%BC%A0%E4%B8%80%E5%87%A1&ie=utf8&s_from=input&_sug_=y&_sug_type_=&w=01019900&sut=3518&sst0=1494814568461&lkt=1%2C1494814568269%2C1494814568269
+				//http://weixin.sogou.com/weixin?type=2&ie=utf8&query=%E5%BC%A0%E4%B8%80%E5%87%A1&tsn=5&ft=2017-05-15&et=2017-05-15&interation=&wxid=&usip=
+				urlmain="http://weixin.sogou.com/weixin?type=2&query=111&ie=utf8&s_from=input&_sug_=y&_sug_type_=&w=01019900&sut=728&sst0=1494832346912&lkt=4%2C1494832346088%2C1494832346792";
 				String data_date_jian=data_date.replace("-", "");
-				wenxin_new_liulanqi.hunanBranch(urlmain, id, name, "1", data_date_jian);
+				wenxin_new_liulanqi.hunanBranch(urlmain, id, name, "1", data_date_jian,data_date);
 
 			} catch (Exception e) {
 				// TODO: handle exception

@@ -57,7 +57,7 @@ public class wenxin_new_liulanqi {
 
 	static int iiii = 0;
 
-	public static String weiXinBranch(String url) {
+	public static String weiXinBranch(String url,String data_date_jian,String tyPlayName,String data_date) {
 		iiii = +1;
 
 		String num = "";
@@ -81,7 +81,7 @@ public class wenxin_new_liulanqi {
 		WebDriverBranch();
 
 		System.out.println("等待30秒");
-		WeiBo.seleepTime(20);
+//		WeiBo.seleepTime(20);
 
 		// ChromeOptions options = new ChromeOptions();
 		// options.addArguments(“–user-data-dir=C:/Users/xxx/AppData/Local/Google/Chrome/User
@@ -121,25 +121,20 @@ public class wenxin_new_liulanqi {
 			// System.out.println(liList =
 			// atrpstarnum1.findElements(By.xpath(("span"))));
 
-			WebElement detail = webDriver.findElement(By.xpath("//*[@id=\"wrapper\"]"));
-			System.out.println(detail.getText());
-
-			WebElement atr = detail.findElement(By.xpath("div"));
-			System.out.println(atr.getText());
-			// WebElement atr1 = atr.findElement(By.xpath("div"));
-			// System.out.println(atr1.getText());
-			// WebElement atr2 = atr1.findElement(By.xpath("div"));
-			// System.out.println(atr2.getText());
-			// WebElement atr3 = atr2.findElement(By.xpath("div"));
-
-			// WebElement atrpstarnum =
-			// atr.findElement(By.xpath(("div[@class=\"mun\"]")));
-			//
-			// System.out.println(atrpstarnum.getText());
-			num = HtmlAnalyze.getTagText(atr.getText(), "找到约", "条结果");
+			
+			
+			
+			WebElement queryinput = webDriver.findElement(By.xpath("//*[@id=\"query\"]"));
+			queryinput.clear();
+			queryinput.sendKeys(tyPlayName);
+			
+			
+			Thread.sleep(3000);
+			
+			
 //			if (iiii % 3 == 0) {
 				try {
-					seleepTime(5);
+//					seleepTime(5);
 					WebElement scrollheader = webDriver.findElement(By.xpath("//*[@id=\"scroll-header\"]"));
 					System.out.println(scrollheader);
 					System.out.println(scrollheader.getText());
@@ -153,15 +148,12 @@ public class wenxin_new_liulanqi {
 					System.out.println(swz.getClass());
 					swz.click();
 					
-					
-					
-					
 
 					System.out.println("单击成功！");
 					
 					
 					
-					
+					Thread.sleep(1000);
 					
 					 title = webDriver.getTitle();
 					System.out.println("标题: " + title);
@@ -189,7 +181,88 @@ public class wenxin_new_liulanqi {
 					// atrpstarnum1.findElements(By.xpath(("span"))));
 
 
-					detail = webDriver.findElement(By.xpath("//*[@id=\"wrapper\"]"));
+					WebElement detail = webDriver.findElement(By.xpath("//*[@id=\"wrapper\"]"));
+					System.out.println(detail.getText());
+
+					WebElement atr = detail.findElement(By.xpath("div"));
+					System.out.println(atr.getText());
+					// WebElement atr1 = atr.findElement(By.xpath("div"));
+					// System.out.println(atr1.getText());
+					// WebElement atr2 = atr1.findElement(By.xpath("div"));
+					// System.out.println(atr2.getText());
+					// WebElement atr3 = atr2.findElement(By.xpath("div"));
+
+					// WebElement atrpstarnum =
+					// atr.findElement(By.xpath(("div[@class=\"mun\"]")));
+					//
+					// System.out.println(atrpstarnum.getText());
+//					num = HtmlAnalyze.getTagText(atr.getText(), "找到约", "条结果");
+					
+					Thread.sleep(1000);
+					
+					//筛选数据
+					System.out.println("点击工具");
+					WebElement tool_show = webDriver.findElement(By.xpath("//*[@id=\"tool_show\"]"));
+//					queryinput.clear();
+//					queryinput.sendKeys(tyPlayName);
+					tool_show.click();
+					
+					Thread.sleep(500);
+					System.out.println("等待0.5秒");
+					System.out.println("点击时间");
+					
+					WebElement time = webDriver.findElement(By.xpath("//*[@id=\"time\"]"));
+//					queryinput.clear();
+//					queryinput.sendKeys(tyPlayName);
+					time.click();
+					
+					Thread.sleep(500);
+					System.out.println("等待0.5秒");
+					System.out.println("添加开始时间");
+					
+					//date_start
+					WebElement date_start = webDriver.findElement(By.xpath("//*[@id=\"date_start\"]"));
+					date_start.clear();
+					date_start.sendKeys(data_date);
+					
+					Thread.sleep(500);
+					System.out.println("等待0.5秒");
+					System.out.println("添加结束时间");
+					
+					WebElement date_end = webDriver.findElement(By.xpath("//*[@id=\"date_end\"]"));
+					date_end.clear();
+					date_end.sendKeys(data_date);
+					
+					Thread.sleep(500);
+					System.out.println("等待0.5秒");
+					System.out.println("单击确定");
+					
+//					System.out.println("点击工具");
+					WebElement time_enter = webDriver.findElement(By.xpath("//*[@id=\"time_enter\"]"));
+//					queryinput.clear();
+//					queryinput.sendKeys(tyPlayName);
+					time_enter.click();
+					
+					WeiBo.seleepTime(10);
+					
+//					 scrollheader = webDriver.findElement(By.xpath("//*[@id=\"scroll-header\"]"));
+//					System.out.println(scrollheader);
+//					System.out.println(scrollheader.getText());
+//
+//					 form = scrollheader.findElement(By.xpath("form"));
+//					System.out.println(form.getText());
+//
+//					 querybox = form.findElement(By.xpath("div"));
+//					System.out.println(querybox.getText());
+//					 swz = querybox.findElement(By.xpath("input"));
+//					System.out.println(swz.getClass());
+//					swz.click();
+					
+
+					System.out.println("单击成功！");
+					
+					
+					 detail = webDriver.findElement(By.xpath("//*[@id=\"wrapper\"]"));
 					System.out.println(detail.getText());
 
 					 atr = detail.findElement(By.xpath("div"));
@@ -204,7 +277,9 @@ public class wenxin_new_liulanqi {
 					// atr.findElement(By.xpath(("div[@class=\"mun\"]")));
 					//
 					// System.out.println(atrpstarnum.getText());
-//					num = HtmlAnalyze.getTagText(atr.getText(), "找到约", "条结果");
+					num = HtmlAnalyze.getTagText(atr.getText(), "找到约", "条结果");
+					
+					
 				} catch (Exception e) {
 					// TODO: handle exception
 					System.out.println("单击失败！");
@@ -264,12 +339,12 @@ public class wenxin_new_liulanqi {
 	}
 
 	public static void hunanBranch(String mainUrl, String tvplayId, String tyPlayName, String DataType,
-			String data_date_jian) {
+			String data_date_jian,String data_date) {
 		// TODO Auto-generated method stub
 		// new WeiBo(1, mainUrl);
 
 		try {
-			String num = weiXinBranch(mainUrl);
+			String num = weiXinBranch(mainUrl,data_date_jian,tyPlayName,data_date);
 
 			if (!num.equals("")) {
 
@@ -298,7 +373,7 @@ public class wenxin_new_liulanqi {
 
 			hunanBranch(
 					"http://weixin.sogou.com/weixin?type=2&ie=utf8&query=%E8%B5%B5%E4%B8%BD%E9%A2%96&tsn=5&ft=2017-03-10&et=2017-03-10&interation=null&wxid=&usip=null&from=tool",
-					"", "", "3", "20170310");
+					"", "", "3", "20170310","2017-03-10");
 		}
 
 	}

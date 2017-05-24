@@ -1416,6 +1416,8 @@ public class adminmaoyan {
 		//单日排片率和座位比
 		rundingshitime(1, 00, 00);
 		
+//		historyopenstatic();
+		
 
 	}
 

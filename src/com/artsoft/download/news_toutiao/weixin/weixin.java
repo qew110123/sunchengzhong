@@ -334,7 +334,7 @@ public class weixin {
 		String msgList = "";
 		JSONObject objectobjects;
 		try {
-
+			//利用StringEscapeUtils对字符串进行各种转义与反转义（Java）
 			htmls = StringEscapeUtils.unescapeHtml(strHtml);
 
 			//
@@ -448,6 +448,8 @@ public class weixin {
 			int ii = 0;
 			int iii = 0;
 			String leibiaoimg = "";
+			//遍历图片，并上传到ftp
+			
 			for (Element element : js_contentps) {
 				if (ii > 2) {
 					String Stringelement = "";
@@ -989,7 +991,7 @@ public class weixin {
 		
 		
 		//单次运行数据的整体数据
-//		WeiXinOnlyRun();
+		WeiXinOnlyRun();
 		
 		
 		

@@ -1,9 +1,12 @@
 package com.artsoft.download.indexso360;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -396,20 +399,23 @@ public class indexso360 {
 	
 	
 	
+	
 	/**
-	 * 
+	 * 2017年5月10日15:24:48
+	 * 由于数据结构改变数据进行修改
+	 * 备份
 	 * @param person_id
 	 * @param data_date
 	 * @param keyword
 	 * @param krywordutf8
 	 * @param data_type
 	 */
-
-	public static void my360run(String person_id, String data_date, String keyword, String krywordutf8,int data_type) {
+	public static void my360runOld(String person_id, String data_date, String keyword, String krywordutf8,int data_type){
+		
+		
 		try {
 			tem_person_keyword_distrib(person_id, data_date, keyword,
 					"http://index.so.com/index.php?a=radarJson&t=30&q=" + krywordutf8, data_type);
-
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -456,8 +462,336 @@ public class indexso360 {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @param person_id
+	 * @param data_date
+	 * @param keyword
+	 * @param krywordutf8
+	 * @param data_type
+	 */
+
+	public static void my360run(String person_id, String data_date, String keyword, String krywordutf8,int data_type) {
+		//备份数据
+//		my360runOld(person_id, data_date, keyword, krywordutf8, data_type);
+		//http://index.haosou.com/index/radarJson?t=30&q=
+		
+		
+		String urlMain="http://index.haosou.com/index/radarJson?t=30&q=" + krywordutf8;
+		
+//		String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
+//				 "UTF-8", null, null);
+
+		String strHtml = Htmlurl(urlMain);
+		
+		//360需求图谱数据
+		try {
+		tem_person_keyword_distrib_new(person_id, data_date, keyword,
+				urlMain, data_type,strHtml);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		try {
+			tem_person_relevant_keyword_new(person_id, data_date, keyword,
+					urlMain, data_type,strHtml);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			tem_person_relevant_news_new(person_id, data_date, keyword,
+					urlMain, data_type,strHtml);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		
+		
+		try {
+			TEM_360_WORD_AREA(person_id, data_date, keyword, "http://index.so.com/index.php?a=drawAreaJson&t=30&q=" + krywordutf8, data_type);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		try {
+			TEM_360_WORD_AGE_SEX(person_id, data_date, keyword, "http://index.so.com/index.php?a=portrayalJson&t=30&q=" + krywordutf8, data_type);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		try {
+			TEM_360_WORD_TAG(person_id, data_date, keyword, "http://index.so.com/index.php?a=portrayalJson&t=30&q=" + krywordutf8, data_type);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		//地区
+//		 urlMain="http://index.haosou.com/index/indexquerygraph?t=30&area=%E5%85%A8%E5%9B%BD&q=" + krywordutf8;
+//		
+//		 strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
+//				 "UTF-8", null, null);
+
+//				String strHtml = Htmlurl(urlMain);
+//		 
+//		 try {
+//				TEM_360_WORD_AREA_new(person_id, data_date, keyword, urlMain, data_type,strHtml);
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+			
+//			try {
+//				TEM_360_WORD_AGE_SEX_new(person_id, data_date, keyword, urlMain, data_type,strHtml);
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+			
+//			try {
+//				TEM_360_WORD_TAG_new(person_id, data_date, keyword, urlMain, data_type,strHtml);
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+		 
+		
 
 		System.out.println(person_id);
+	}
+
+	private static void TEM_360_WORD_AREA_new(String person_id, String data_date, String keyword, String urlMain,
+			int data_type, String strHtml) {
+
+
+		JSONObject people = new JSONObject();
+		JSONArray list = new JSONArray();
+
+		people = JSONObject.fromObject(strHtml);
+		System.out.println(people);
+
+		JSONObject data = (JSONObject) people.get("data");
+		JSONArray datalist = (JSONArray) data.get("province");
+		
+		String strHtmljs = DownloadUtil.getHtmlText("http://s6.qhmsg.com/static/0fc55c1991185fc9/zhishu/zhishu.js", 1000 * 30, "UTF-8", null, null);
+//	Htmlurl(strHtml);
+	
+		strHtmljs=DownloadUtil.decodeUnicode(strHtmljs);
+		System.out.println(strHtmljs);
+		
+		String arealistString=HtmlAnalyze.getTagText(strHtmljs, "\"use strict\";var r=window.OnlySVG,i={", "}");
+		String[] arealist=arealistString.split(",");
+		Map map = new HashMap();
+		for (String string : arealist) {
+			String areNo=HtmlAnalyze.getTagText("#"+string, "#", ":");
+			String arename=HtmlAnalyze.getTagText(string, ":\"", "\"");
+			map.put(areNo, arename);
+		}
+		
+
+		int bbtop=0;
+		for (Object object : datalist) {
+			JSONObject objectobject = JSONObject.fromObject(object);
+			String entity="";
+			String AREA_RATE="";
+			System.out.println(entity=objectobject.getString("entity"));
+			System.out.println(AREA_RATE=objectobject.getString("percent"));
+			bbtop=bbtop+1;
+			
+
+			String AREA_TOP= String.valueOf(bbtop);
+			String AREA_NAME_CN= "";
+			
+			AREA_NAME_CN=(String) map.get(entity);
+			
+//			String AREA_RATE= (String) objectobject.getString("perctent");
+			if (AREA_NAME_CN!=null) {
+				
+				OracleHaoSou.intoTEM_360_WORD_AREA(data_date, person_id, keyword, AREA_TOP,AREA_NAME_CN,AREA_RATE, urlMain,data_type);
+			}
+		}
+	}
+
+	private static void TEM_360_WORD_AGE_SEX_new(String person_id, String data_date, String keyword, String urlMain,
+			int data_type, String strHtml) {
+
+		JSONObject people = new JSONObject();
+		JSONArray list = new JSONArray();
+
+		people = JSONObject.fromObject(strHtml);
+		System.out.println(people);
+
+		JSONObject data = (JSONObject) people.get("data");
+		
+		String MAN_RATE="";
+		String WOMAN_RATE="";
+		list=data.getJSONArray("sex");
+		for (Object object : list) {
+			JSONObject objectobject = JSONObject.fromObject(object);
+			String entity="";
+			String percent="";
+			System.out.println(entity=objectobject.getString("entity"));
+			System.out.println(percent=objectobject.getString("percent"));
+			if (entity.equals("01")) {
+				MAN_RATE=percent;
+			}
+			if (entity.equals("02")) {
+				WOMAN_RATE=percent;
+			}
+			
+		}
+		JSONArray age=data.getJSONArray("age");
+		String RATE_19="";
+		String RATE_29="";
+		String RATE_39="";
+		String RATE_49="";
+		String RATE_50="";
+		for (Object object : age) {
+			JSONObject objectobject = JSONObject.fromObject(object);
+			String entity="";
+			String percent="";
+			System.out.println(entity=objectobject.getString("entity"));
+			System.out.println(percent=objectobject.getString("percent"));
+			if (entity.equals("01")) {
+				RATE_19=percent;
+			}
+			if (entity.equals("02")) {
+				RATE_29=percent;
+			}
+			if (entity.equals("03")) {
+				RATE_39=percent;
+			}
+			if (entity.equals("04")) {
+				RATE_49=percent;
+			}
+			if (entity.equals("05")) {
+				RATE_50=percent;
+			}
+			
+		}
+		
+		
+		OracleHaoSou.intoTEM_360_WORD_AGE_SEX(data_date, person_id, keyword, MAN_RATE, WOMAN_RATE, RATE_19, RATE_29, RATE_39, RATE_49, RATE_50, urlMain, data_type);
+		
+	}
+
+	private static void tem_person_relevant_news_new(String person_id, String data_date, String keyword, String urlMain,
+			int data_type, String strHtml) {
+
+
+		JSONObject people = new JSONObject();
+		JSONArray list = new JSONArray();
+
+		people = JSONObject.fromObject(strHtml);
+		System.out.println(people);
+
+		JSONObject data = (JSONObject) people.get("data");
+
+		JSONArray datalist = (JSONArray) data.get("burst_query");
+
+		for (Object object : datalist) {
+			JSONObject objectobject = JSONObject.fromObject(object);
+			String news_title = (String) objectobject.get("query");
+			System.out.println(news_title);
+			
+			String news_url ="https://www.so.com/s?q="+news_title+"&src=zhishu";
+			String news_sitename = "";
+			String news_date = "";
+
+			OracleHaoSou.intotem_person_relevant_news(data_date, person_id, news_date, news_sitename, news_title,
+					news_url, urlMain,data_type);
+		}
+	}
+
+	private static void tem_person_relevant_keyword_new(String person_id, String data_date, String keyword,
+			String urlMain, int data_type,String strHtml) {
+//		 String strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30,
+//		 "UTF-8", null, null);
+		// if (strHtml == null || strHtml.equals("")) {
+		// strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null,
+		// null);
+		// }
+		// if (strHtml == null || strHtml.equals("")) {
+		// // return;
+		// strHtml = DownloadUtil.getHtmlText(urlMain, 1000 * 30, "UTF-8", null,
+		// null);
+		// }
+
+//		String strHtml = Htmlurl(urlMain);
+
+//		JSONArray datalist = (JSONArray) people.get("data");
+		
+		
+		JSONObject people = new JSONObject();
+		JSONArray list = new JSONArray();
+
+		people = JSONObject.fromObject(strHtml);
+		System.out.println(people);
+		JSONObject data = (JSONObject) people.get("data");
+		System.out.println(data);
+		list = (JSONArray) data.get("list");
+
+		for (Object object : list) {
+			JSONObject objectobject = JSONObject.fromObject(object);
+			String recreason = (String) objectobject.get("query");
+//			Object liststring = (Object) objectobject.get("list");
+			// for (Object object2 : listlist) {
+			// System.out.println(object2);
+			// }
+			String trend = "";
+			// System.out.println(liststring);
+//			String[] listkeyword = liststring.toString().split(",");
+//			for (int i = 0; i < listkeyword.length; i++) {
+				// System.out.println(listkeyword[i]);
+//				System.out.println(keyword = HtmlAnalyze.getTagText(listkeyword[i], "\"", "\":\""));
+//				System.out.println(trend = HtmlAnalyze.getTagText(listkeyword[i], "\":\"", "\""));
+				String utf8keyword = "";
+				try {
+					utf8keyword = java.net.URLEncoder.encode(recreason, "utf-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//https://www.so.com/s?q=%E8%83%A1%E6%AD%8C%E8%BD%A6%E7%A5%B8&src=zhishu
+				String keyword_url = "https://www.so.com/s?q=" + utf8keyword + "&src=zhishu";
+				// http://www.so.com/s?ie=utf-8&src=360zhishu&q=%E5%94%90%E5%AB%A3&from=360zhishu
+				OracleHaoSou.intotem_person_relevant_keyword(data_date, person_id, keyword, keyword_url, recreason,
+						trend, urlMain,data_type);
+//			}
+
+		}
+	}
+
+	private static void tem_person_keyword_distrib_new(String person_id, String data_date, String keyword, String urlMain,
+			int data_type,String strHtml) {
+		// TODO Auto-generated method stub
+		
+//		String strHtml="";
+////		String strHtml = Htmlurl(urlMain);
+//		
+//		strHtml=DownloadUtil.getHtmlText(urlMain, 1000 * 10, "UTF-8", null, null);
+
+		JSONObject people = new JSONObject();
+		JSONArray list = new JSONArray();
+
+		people = JSONObject.fromObject(strHtml);
+		System.out.println(people);
+		JSONObject data = (JSONObject) people.get("data");
+		System.out.println(data);
+		list = (JSONArray) data.get("list");
+		int search_index = 0;
+		String trend = "";
+		for (Object object : list) {
+			JSONObject objectobject = JSONObject.fromObject(object);
+			System.out.println(keyword = (String) objectobject.get("query"));
+			System.out.println(search_index = (int) objectobject.get("power"));
+			System.out.println(trend = (String) objectobject.get("trend"));
+			OracleHaoSou.intotem_person_keyword_distrib(data_date, person_id, keyword, search_index, trend, urlMain,data_type);
+		}
 	}
 
 	public static void openstatic() {
@@ -544,6 +878,8 @@ public class indexso360 {
 //		 openstatic();
 		
 		TimingTime(00, 59, 59);
+		
+		
 //		String krywordutf8="";
 //		try {
 //			krywordutf8 = java.net.URLEncoder.encode("王宝强", "utf-8");
@@ -552,7 +888,15 @@ public class indexso360 {
 //			e.printStackTrace();
 //		}
 //		my360run("2346", "20160818", "王宝强", krywordutf8, 1);
+		
+		
+		                                         //http://s6.qhmsg.com/static/0fc55c1991185fc9/zhishu/zhishu.js
+//		String strHtml = DownloadUtil.getHtmlText("http://s6.qhmsg.com/static/0fc55c1991185fc9/zhishu/zhishu.js", 1000 * 30, "UTF-8", null, null);
+////		Htmlurl(strHtml);
 //		
+//		strHtml=DownloadUtil.decodeUnicode(strHtml);
+//		System.out.println(strHtml);
+	
 	}
 
 }

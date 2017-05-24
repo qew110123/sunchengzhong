@@ -272,7 +272,7 @@ public class WeiBo {
 	
 	public static void runMeiRirun(){
 		
-		mainweboPeoPleMeiRi(0,  1000);
+		mainweboPeoPleMeiRi(0,  2000);
 		
 	}
 	
@@ -322,6 +322,22 @@ public class WeiBo {
 		
 		
 //		runMeiRirun();
+		
+		
 		rundingshitime(1, 00, 00);
+		
+		
+//		hunanBranch(urlBranch, listTemp.get(0), listTemp.get(1), "3");
+		
+//		String urlBranch="";
+//		try {
+//			urlBranch = "http://s.weibo.com/weibo/" + java.net.URLEncoder.encode("宋佳", "utf-8")
+//			+ "&Refer=STopic_box";
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		hunanBranch(urlBranch, "0", "宋佳", "3");
 	}
 }

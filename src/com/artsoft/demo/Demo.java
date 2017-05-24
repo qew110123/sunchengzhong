@@ -218,16 +218,21 @@ public class Demo {
 //		System.out.println(c);
 		
 		
-		 Scanner scan = new Scanner(System.in);
-	        while (scan.hasNext()) {
-	            int n = scan.nextInt();
-	            int[] arr = new int[n];
-	            for (int i = 0; i < n; i++) {
-	                arr[i] = scan.nextInt();
-	            }
-	            System.out.println(solve(arr,n));
-	        }
-	        scan.close();
+//		 Scanner scan = new Scanner(System.in);
+//	        while (scan.hasNext()) {
+//	            int n = scan.nextInt();
+//	            int[] arr = new int[n];
+//	            for (int i = 0; i < n; i++) {
+//	                arr[i] = scan.nextInt();
+//	            }
+//	            System.out.println(solve(arr,n));
+//	        }
+//	        scan.close();
+		
+		
+		String strHtml = DownloadUtil.getHtmlText("https://search.weixin.qq.com/cgi-bin/searchweb/clientjump?tag=wxindex_detail&q=%E8%8C%83%E5%86%B0%E5%86%B0&exportkey=AQf44876WvSdEDeiyxYvzYQ%3D&pass_ticket=nWMDGVxg0TigieEIiXKmdTZxLsZUnqFeIJPUXp6fCIo%3D", 1000 * 30, "UTF-8", null, null);
+		
+		System.out.println(strHtml);
 		
 		
 	}

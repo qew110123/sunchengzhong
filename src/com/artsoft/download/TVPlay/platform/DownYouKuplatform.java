@@ -1,8 +1,12 @@
 package com.artsoft.download.TVPlay.platform;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,6 +24,7 @@ import com.artsoft.download.TVPlay.DownloadYouku;
 import com.artsoft.download.TVPlay.Downloadkankan;
 import com.artsoft.download.TVPlay.Downloadpptv;
 import com.artsoft.download.TVPlay.Downloadqq;
+import com.artsoft.oracle.OracleNetwork;
 import com.artsoft.oracle.OracleOpreater;
 import com.artsoft.util.CommonUtil;
 import com.artsoft.util.DownloadUtil;
@@ -48,18 +53,47 @@ public class DownYouKuplatform {
 			}
 
 			Document doc = Jsoup.parse(strHtml);
-			Elements links = doc.select("div.yk-col3");
+			Elements links = doc.select("div.box-series div.p-thumb");
 			for (Element link : links) {
 				System.out.println("进行数据的采集" + (++i));
 				if (i <= 0) {
 					continue;
 				}
 				String strmainurl = "";
-				System.out.println(strmainurl = link.select("div.p-meta-title a").attr("href"));
-				System.out.println(link.select("div.p-meta-title a").attr("title"));
-				System.out.println(link.select("span.p-actor").text());
-				System.out.println(link.select("span.p-num").text());
-				DownYouKuplatform.youkuBranch(strmainurl);
+				strmainurl = link.select("a").attr("href");
+				if (!strmainurl.contains("http://")) {
+					strmainurl=strmainurl.replace("//", "http://");
+				}
+				System.out.println(strmainurl);
+				
+				String strHtml1 = DownloadUtil.getHtmlText(strmainurl, 1000 * 30, "UTF-8", null, null);
+				Document strmainurlHtmldoc = Jsoup.parse(strHtml1);
+//				Document strmainurlHtmldoc = Jsoup.connect(strmainurl).get();
+				
+				String strmainxiangxiurl=strmainurlHtmldoc.select("h1.title a").attr("href");
+				if (strmainxiangxiurl==null||strmainxiangxiurl.equals("")||strmainxiangxiurl.equals("http://tv.youku.com/")||strmainxiangxiurl.equals("//tv.youku.com/")) {
+//					System.out.println(strmainurlHtmldoc);
+					strmainxiangxiurl=HtmlAnalyze.getTagText(strmainurlHtmldoc.toString(), "desc-link\" href=\"","\"");
+				}
+				if (!strmainxiangxiurl.contains("http://")) {
+					strmainxiangxiurl=strmainxiangxiurl.replace("//", "http://");
+				}
+				
+				if (strmainxiangxiurl.equals("http://sports.youku.com/")||strmainxiangxiurl.equals("http://comic.youku.com/")||strmainxiangxiurl.equals("http://zy.youku.com/")||strmainxiangxiurl.equals("")||!strmainxiangxiurl.contains("html")) {
+					
+					Elements strmainxiangxiurls=strmainurlHtmldoc.select("a");
+					for (Element element : strmainxiangxiurls) {
+						if (element.text().equals("节目简介")) {
+							strmainxiangxiurl=element.attr("href");
+							if (!strmainxiangxiurl.contains("http://")) {
+								strmainxiangxiurl=strmainxiangxiurl.replace("//", "http://");
+							}
+						}
+					}
+				}
+				DownYouKuplatform.youkuBranch("",strmainxiangxiurl);
+				
+				Thread.sleep(1000);
 			}
 
 			// 进行下一页数据的判断
@@ -70,6 +104,8 @@ public class DownYouKuplatform {
 				strnexturl = "http://www.youku.com" + strnexturl;
 				return strnexturl;
 			}
+			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -82,7 +118,7 @@ public class DownYouKuplatform {
 	 * @param urlBranch
 	 *            ///////////////////////////////
 	 */
-	public static void youkuBranch(String urlBranch) {
+	public static void youkuBranch(String name, String urlBranch) {
 		TvPlay playtv = new TvPlay();
 		playtv.setTvplay_url(urlBranch);
 		// urlBranch="http://www.youku.com/show_page/id_zd56886dc86fc11e3a705.html";
@@ -100,21 +136,45 @@ public class DownYouKuplatform {
 		 * 总播放: 评论: 顶:
 		 */
 
-		String name = "";// 名称
-		System.out.println(name = doc.select("span.name").text());
+//		String name = "";// 名称
+		if (name.equals("")) {
+			
+		
+			name = doc.select("span.name").text();
+			
+			if (name.equals("")) {
+				name=HtmlAnalyze.getTagText(strHtml, "<a title=\"", "\"");
+			}
+			System.out.println(name);
+			
+			if (name.equals("原创")) {
+				return;
+			}
+		}
 		playtv.setTvplay_name(name);
 		String Amount = "";// 播放量
-		System.out.println(Amount = doc.select("span.play").text());
+		Amount = doc.select("span.play").text();
+		if (Amount.equals("")) {
+			Amount=HtmlAnalyze.getTagText(strHtml, "总播放数：", "<");
+		}
+		System.out.println(Amount);
 		Amount = Amount.replaceAll("总播放:", "").replaceAll(",", "");
 
 		String comment = ""; // 评论
-		System.out.println(comment = doc.select("span.comment").text());
+		comment = doc.select("span.comment").text();
+		if (comment.equals("")) {
+			comment=HtmlAnalyze.getTagText(strHtml, "评论：", "<");
+		}
 		comment = comment.replaceAll("评论:", "").replaceAll(",", "");
-
+		System.out.println(comment);
+		
 		String answer = ""; // 顶
-		System.out.println(answer = doc.select("span.increm").text());
+		answer = doc.select("span.increm").text();
 		answer = answer.replaceAll("顶:", "").replaceAll(",", "");
-
+		if (answer.equals("")) {
+			answer=HtmlAnalyze.getTagText(strHtml, "顶：", "<");
+		}
+		System.out.println(answer);
 		String score = ""; // 评分
 
 		score = HtmlAnalyze.getTagText(strHtml, "<label>评分:</label>", "<style type=\"text/css\">");
@@ -124,6 +184,9 @@ public class DownYouKuplatform {
 		if (score.contains("\r")) {
 			score = HtmlAnalyze.getTagText("#" + score, "#", "\r");
 		}
+		if (score.equals("")) {
+			score=HtmlAnalyze.getTagText(strHtml, "class=\"star-num\">", "<");
+		}
 		// if (!isNum.matches()) {
 		// score=doc.select("span.ratingstar").text().replace("评分:", "");
 		// }
@@ -132,37 +195,43 @@ public class DownYouKuplatform {
 		String bieming = "";// 别名
 
 		bieming = HtmlAnalyze.getTagText(strHtml, "<label>别名:</label>", "</span>");
-		System.out.println(bieming = bieming.replace("	", ""));
+		bieming = bieming.replace("	", "");
+		if (bieming.equals("")) {
+			bieming = HtmlAnalyze.getTagText(strHtml, "别名：", "</li>");
+		}
+		System.out.println(bieming);
 		playtv.setAlias_en(bieming);
 		String shichang = ""; // 时长
-		shichang = HtmlAnalyze.getTagText(strHtml, "<label>时长:</label>", "</span>");
+		shichang = HtmlAnalyze.getTagText(strHtml, "时长:", "</");
 		playtv.setTime_length(shichang);
 
 		String times = ""; // 上映:
-		times = HtmlAnalyze.getTagText(strHtml, "上映:</label>", "</span>");
+		times = HtmlAnalyze.getTagText(strHtml, "上映：", "</span>");
 		// System.out.println(times=times.replaceAll("-", ""));
 		playtv.setShow_date(times);
 
 		String niandai = ""; // 年代
-		niandai = HtmlAnalyze.getTagText(strHtml, "class=\"pub\">", "</span>");
+		niandai = HtmlAnalyze.getTagText(strHtml, "年代：", "</span>");
 		playtv.setShoot_time(niandai);
 
 		String diqu = ""; // 地区
-		diqu = HtmlAnalyze.getTagText(strHtml, "<label>地区:</label>", "</span>");
+		diqu = HtmlAnalyze.getTagText(strHtml, "地区：", "</li>");
 		playtv.setProduction_area(diqu);
 
 		String classstr = ""; // 类型:
-		classstr = HtmlAnalyze.getTagText(strHtml, "<label>类型:</label>", "导演");
+		classstr = HtmlAnalyze.getTagText(strHtml, "类型：", "</li>");
 		System.out.println(classstr = classstr.replaceAll(" 					", ""));
 		playtv.setSubject(classstr);
 
 		String peopleste = ""; // ren:
-		peopleste = HtmlAnalyze.getTagText(strHtml, "<label>主演:</label>", "总播放:");
+		peopleste = HtmlAnalyze.getTagText(strHtml, "主演：", "</li>");
 		System.out.println(peopleste = peopleste.replaceAll(" 					", ""));
 
 		String daoyan = "";// 导演
-		String daoyanAll = HtmlAnalyze.getTagText(strHtml, "<label>导演:</label>", "</span>", true, 0);
+		String daoyanAll = HtmlAnalyze.getTagText(strHtml, "导演:", "</li>", true, 0);
 		String[] daoyanlist = daoyanAll.split(" /");
+		if (daoyanlist.length!=0) {
+		
 		int i = 0;
 		for (String stringtext : daoyanlist) {
 			String urlss = HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
@@ -174,15 +243,23 @@ public class DownYouKuplatform {
 
 			i += 1;
 		}
+		}
+		if (daoyan.equals("|")) {
+			daoyan="";
+		}
 		System.out.println(daoyan);
 		playtv.setDirector(daoyan);
 
 		String yanyuan = "";// 演员
-		String yanyuanAll = HtmlAnalyze.getTagText(strHtml, "<label>主演:</label>", "</span>", true, 0);
-		String[] yanyuanlist = yanyuanAll.split(" /");
+		String yanyuanAll = HtmlAnalyze.getTagText(strHtml, "主演：", "</li>", true, 0);
+		String[] yanyuanlist = yanyuanAll.split("/</i>");
 		i = 0;
 		for (String stringtext : yanyuanlist) {
 			String urlss = HtmlAnalyze.getTagText(stringtext, "href=\"", "\"");
+			
+			if (!urlss.contains("http://")) {
+				urlss=urlss.replace("//", "http://");
+			}
 			String textss = HtmlAnalyze.getTagText(stringtext, ">", "<");
 			yanyuan = yanyuan + textss + "|" + urlss;
 			if (yanyuanlist.length != 1 && i + 1 < yanyuanlist.length) {
@@ -195,7 +272,7 @@ public class DownYouKuplatform {
 		playtv.setMajor_actors(yanyuan);
 
 		String detail = "";
-		detail = HtmlAnalyze.getTagText(strHtml, "<span class=\"long\" style=\"display:none;\">", "</span>");
+		detail = HtmlAnalyze.getTagText(strHtml, "简介：", "</span>");
 		System.out.println(detail);
 		if (detail == null || detail.equals("") || detail.equals("null")) {
 			detail = HtmlAnalyze.getTagText(strHtml, "<span class=\"short\" style=\"display:none;\">", "</span>");
@@ -221,23 +298,20 @@ public class DownYouKuplatform {
 		for (String diqutxt : diqu) {
 			for (String leixingtxt : leixing) {
 				System.out.println(diqutxt + leixingtxt);
-				// http://www.youku.com/v_olist/c_96_g_%E6%81%90%E6%80%96_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_4.html
-				// http://www.youku.com/v_olist/c_96_g_%E6%AD%A6%E4%BE%A0_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_3.html
-				// http://www.youku.com/v_olist/c_96_g_%E6%AD%A6%E4%BE%A0_a_%E5%A4%A7%E9%99%86_sg__mt__lg__q__s_1_r_0_u_0_pt_0_av_0_ag_0_sg__pr__h__d_1_p_1.html
-				try {
-					for (int i = 1; i < 30; i++) {
-						url = "http://www.youku.com/v_olist/c_97_g_" + java.net.URLEncoder.encode(leixingtxt, "utf-8")
-								+ "_a_" + java.net.URLEncoder.encode(diqutxt, "utf-8") + "_s_1_d_1_p_" + i + ".html";
-						System.out.println(url);
-						String urlnext = DownYouKuplatform.youkuMaim(url);
-						if (urlnext.equals("") || urlnext == "" || urlnext == null) {
-							break;
-						}
+				for (int i = 1; i < 30; i++) {
+					
+					//http://list.youku.com/category/show/c_97_g_%E5%86%9B%E4%BA%8B_a_%E5%A4%A7%E9%99%86_s_1_d_1_p_2.html?spm=a2h1n.8251845.0.0
+					
+//						url = "http://www.youku.com/v_olist/c_97_g_" + java.net.URLEncoder.encode(leixingtxt, "utf-8")
+//								+ "_a_" + java.net.URLEncoder.encode(diqutxt, "utf-8") + "_s_1_d_1_p_" + i + ".html";
+					   //http://list.youku.com/category/show/c_97_g_%E6%AD%A6%E4%BE%A0_a_%E9%A6%99%E6%B8%AF_s_1_d_1.html?spm=a2h1n.8251845.filterPanel.5!3~1~3!3~A
+					url="http://list.youku.com/category/show/c_97_g_"+leixingtxt+"_a_"+diqutxt+"_s_1_d_1_p_"+i+".html?spm=a2h1n.8251845.0.0";
+					
+					System.out.println(url);
+					String urlnext = DownYouKuplatform.youkuMaim(url);
+					if (urlnext.equals("") || urlnext == "" || urlnext == null) {
+						break;
 					}
-
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
 
@@ -249,6 +323,61 @@ public class DownYouKuplatform {
 		openstatic();
 		System.out.println(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss"));
 		CommonUtil.setLog(TimeTest.getNowTime("yyyy-MM-dd HH:mm:ss") + ":结 束");
+	}
+	
+	/**
+	 * 
+	 * @param datestr
+	 *            日期字符串
+	 * @param day
+	 *            相对天数，为正数表示之后，为负数表示之前
+	 * @return 指定日期字符串n天之前或者之后的日期
+	 */
+	public static String getBeforeAfterDate(String datestr, int day) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		java.sql.Date olddate = null;
+		try {
+			df.setLenient(false);
+			olddate = new java.sql.Date(df.parse(datestr).getTime());
+		} catch (ParseException e) {
+			throw new RuntimeException("日期转换错误");
+		}
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(olddate);
+
+		int Year = cal.get(Calendar.YEAR);
+		int Month = cal.get(Calendar.MONTH);
+		int Day = cal.get(Calendar.DAY_OF_MONTH);
+
+		int NewDay = Day + day;
+
+		cal.set(Calendar.YEAR, Year);
+		cal.set(Calendar.MONTH, Month);
+		cal.set(Calendar.DAY_OF_MONTH, NewDay);
+		// System.out.println(df.format(cal.getTimeInMillis()));
+
+		return df.format(cal.getTimeInMillis());
+	}
+	
+	private static void openordor() {
+		// TODO Auto-generated method stub
+		TimeTest tt = new TimeTest();
+		String newtime = tt.getNowTime("yyyyMMdd");
+		System.out.println(newtime);
+		String date_date = getBeforeAfterDate(newtime, -30);
+		List<String> listArray =OracleNetwork.selectyoukuTVplay(date_date);
+		for (Object Objstring : listArray) {
+			List<String> listTemp = (List<String>) Objstring;
+			System.out.println(listTemp.get(0));
+			try {
+				
+//				DownloadYouku.youkuBranch(listTemp.get(1));
+				DownYouKuplatform.youkuBranch(listTemp.get(0),listTemp.get(1));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
 	}
 
 	// 判断数据开始时间
@@ -271,7 +400,10 @@ public class DownYouKuplatform {
 
 	public static void main(String[] args) {
 		// openstatic();
-		TimingTime(4, 00, 00);
+//		TimingTime(4, 00, 00);
+//		runstatic();
+		
+		openordor();
 	}
 
 }

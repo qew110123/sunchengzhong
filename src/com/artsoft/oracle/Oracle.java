@@ -443,7 +443,7 @@ public class Oracle {
 		Connection conn = DBOperate218.getInstance().getConnection();
 		String sql = "select t.person_id,t.person_name from mart.f_person_index t where t.data_date = '29991231' order by t.network_index desc,t.person_id";
 		
-		sql="select a.person_id,        a.person_name   from (select t.person_id,                t.person_name,                row_number() over(partition by 1 order by t.network_index desc, t.person_id) as ranks           from mart.f_person_index t          where t.data_date = '29991231'          order by t.network_index desc, t.person_id) a where a.ranks<=10000"; 
+		sql="select a.person_id,        a.person_name   from (select t.person_id,                t.person_name,                row_number() over(partition by 1 order by t.network_index desc, t.person_id) as ranks           from mart.f_person_index t          where t.data_date = '29991231'          order by t.network_index desc, t.person_id) a where a.ranks<=1000"; 
 //		sql=" select t.* from ODS.WEIXIN_NUMBER t where t.public_number='Ó°Í¶ÈË'";
 		ArrayList<String> listname = new ArrayList<String>();
 		int iNum = 2;

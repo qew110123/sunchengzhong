@@ -891,7 +891,7 @@ public class maoyan_shishipiaofang {
 		// .youkuMaim("http://www.youku.com/v_olist/c_97_s_1_d_1_g_%E4%BC%98%E9%85%B7%E5%87%BA%E5%93%81.html");
 		try {
 			openstaticStatic();
-			// openstatic();
+//			 openstatic();
 
 			if ((Integer.valueOf(TimeTest.getNowTime("HH")) == 23 && Integer.valueOf(TimeTest.getNowTime("mm")) > 30)
 					|| (Integer.valueOf(TimeTest.getNowTime("HH")) == 0
